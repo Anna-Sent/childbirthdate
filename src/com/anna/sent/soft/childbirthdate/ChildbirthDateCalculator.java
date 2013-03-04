@@ -1,7 +1,6 @@
 package com.anna.sent.soft.childbirthdate;
 
 import java.util.Calendar;
-
 import android.content.Context;
 
 public class ChildbirthDateCalculator {
@@ -14,51 +13,63 @@ public class ChildbirthDateCalculator {
 	public final static int MIN_LUTEAL_PHASE_LEN = 10;
 	public final static int MAX_LUTEAL_PHASE_LEN = 16;
 
+	public final static int OBSTETIC_PREGNANCY_PERIOD = 40;
+	public final static int FETAL_PREGNANCY_PERIOD = 38;
+	public final static int DAYS_IN_A_WEEK = 7;
+
 	private String message = "";
 	private Context mContext;
 
+	/**
+	 * 
+	 * @param context
+	 */
 	public ChildbirthDateCalculator(Context context) {
 		mContext = context;
 	}
 
+	/**
+	 * 
+	 * @param menstrualCycleLen
+	 * @param lutealPhaseLen
+	 * @param date
+	 * @return
+	 */
 	public Calendar getByLastMenstruationDate(int menstrualCycleLen,
 			int lutealPhaseLen, Calendar date) {
-		date.add(Calendar.DAY_OF_MONTH, menstrualCycleLen - lutealPhaseLen + 38
-				* 7);
+		date.add(Calendar.DAY_OF_MONTH, menstrualCycleLen - lutealPhaseLen
+				+ FETAL_PREGNANCY_PERIOD * DAYS_IN_A_WEEK);
 		return date;
 	}
 
-	public Calendar _getByOvulationDate(Calendar date) {
-		date.add(Calendar.DAY_OF_MONTH, 38 * 7);
+	public Calendar getByOvulationDate(Calendar date) {
+		date.add(Calendar.DAY_OF_MONTH, FETAL_PREGNANCY_PERIOD * DAYS_IN_A_WEEK);
 		return date;
 	}
 
-	private Calendar _getByUltrasound(Calendar date, int weeks, int days,
-			boolean isFetal) {
-		int pregnancyPeriod = isFetal ? 38 * 7 : 40 * 7;
-		date.add(Calendar.DAY_OF_MONTH, pregnancyPeriod - weeks * 7 - days);
-		return date;
-	}
-
+	/**
+	 * 
+	 * @param date
+	 * @param weeks
+	 *            must be >= 0 and (< OBSTETIC_PREGNANCY_PERIOD if isFetal is
+	 *            false or < FETAL_PREGNANCY_PERIOD if isFetal is true)
+	 * @param days
+	 *            must be >= 0 and < DAYS_IN_A_WEEK
+	 * @param isFetal
+	 * @return
+	 */
 	public Calendar getByUltrasound(Calendar date, int weeks, int days,
 			boolean isFetal) {
-		if (weeks >= 0 && weeks <= 14 && days >= 0 && days <= 6) {
+		if (weeks <= 14 && !isFetal || weeks <= 12 && isFetal) {
 			message = mContext.getString(R.string.message1);
-			return _getByUltrasound(date, weeks, days, isFetal);
 		}
 
-		if (weeks < 38) {
-			message = mContext.getString(R.string.message2);
-			return _getByUltrasound(date, weeks, days, isFetal);
-		}
+		message = mContext.getString(R.string.message2);
 
-		if (weeks <= 42) {
-			message = mContext.getString(R.string.message3);
-			return null;
-		}
-
-		message = mContext.getString(R.string.message4);
-		return null;
+		int pregnancyPeriod = isFetal ? FETAL_PREGNANCY_PERIOD * DAYS_IN_A_WEEK
+				: OBSTETIC_PREGNANCY_PERIOD * DAYS_IN_A_WEEK;
+		date.add(Calendar.DAY_OF_MONTH, pregnancyPeriod - weeks * DAYS_IN_A_WEEK - days);
+		return date;
 	}
 
 	public String getMessage() {

@@ -12,8 +12,7 @@
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </TabWidget>
+            android:layout_height="wrap_content" />
 
         <FrameLayout
             android:id="@android:id/tabcontent"
@@ -59,8 +58,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:ems="10"
-                            android:inputType="number"
-                            android:orientation="vertical" />
+                            android:inputType="number" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -218,7 +216,7 @@
                                 android:layout_height="match_parent"
                                 android:text="" />
 
-                            <EditText
+                            <NumberPicker
                                 android:id="@+id/editTextWeeks"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -226,28 +224,29 @@
                                 android:ems="10"
                                 android:inputType="number"
                                 android:nextFocusDown="@+id/editTextDays"
-                                android:paddingLeft="20dp" >
-                            </EditText>
+                                android:orientation="vertical"
+                                android:paddingLeft="20dp" />
 
                             <TextView
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
                                 android:text="@string/mWeek"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                            <EditText
+                            <NumberPicker
                                 android:id="@id/editTextDays"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
                                 android:ems="10"
-                                android:inputType="number" />
+                                android:inputType="number"
+                                android:orientation="vertical" />
 
                             <TextView
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
                                 android:text="@string/mDay"
@@ -264,6 +263,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
+                                android:onClick="radioClick"
                                 android:text="@string/mObsteticPeriod"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -271,6 +271,7 @@
                                 android:id="@+id/radioFetal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:onClick="radioClick"
                                 android:text="@string/mFetalPeriod"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </RadioGroup>

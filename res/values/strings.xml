@@ -6,8 +6,6 @@
     <string name="tab3">Справка</string>
     <string name="message1">По результатам УЗИ ПДР наиболее точная.</string>
     <string name="message2">По результатам УЗИ ПДР неточная, так как срок беременности велик.</string>
-    <string name="message3">Пора рожать!</string>
-    <string name="message4">Некорректное значение срока беременности.</string>
     <string name="app_name">Дата родов</string>
     <string name="value">result</string>
     
@@ -33,11 +31,13 @@
     <string name="mDay">д.</string>
     <string name="mCalculate">Рассчитать</string>
     
+    <string name="error0">Не выбран способ расчета</string>
+    <string name="error00">Обратитесь в женскую консультацию для уточнения срока беременности</string>
     <string name="r0">Предполагаемая дата родов</string>
     <string name="r1">по дате последней менструации</string>
     <string name="r2">по дате овуляции (зачатия)</string>
     <string name="r3">по результатам УЗИ</string>
-    <string name="r4">Помните, что роды могут начаться на две недели раньше или на две недели позже ПДР.</string>
-    <string name="r5">Оценить приложение</string>
+    <string name="r00">Помните, что роды могут начаться на две недели раньше или на две недели позже ПДР.</string>
+    <string name="r">Оценить приложение</string>
 
 </resources>
