@@ -60,12 +60,12 @@ public class ChildbirthDateCalculator {
 	 */
 	public Calendar getByUltrasound(Calendar date, int weeks, int days,
 			boolean isFetal) {
-		if (weeks <= 14 && !isFetal || weeks <= 12 && isFetal) {
+		if (weeks <= 13 && !isFetal || weeks <= 11 && isFetal) {
 			message = mContext.getString(R.string.message1);
+		} else {
+			message = mContext.getString(R.string.message2);
 		}
-
-		message = mContext.getString(R.string.message2);
-
+		
 		int pregnancyPeriod = isFetal ? FETAL_PREGNANCY_PERIOD * DAYS_IN_A_WEEK
 				: OBSTETIC_PREGNANCY_PERIOD * DAYS_IN_A_WEEK;
 		date.add(Calendar.DAY_OF_MONTH, pregnancyPeriod - weeks * DAYS_IN_A_WEEK - days);

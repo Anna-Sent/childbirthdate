@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ public class ResultActivity extends Activity {
 		setContentView(R.layout.activity_result);
 
 		mContext = getApplicationContext();
-		
+
 		textView0 = (TextView) findViewById(R.id.textView0);
 		textView00 = (TextView) findViewById(R.id.textView00);
 		textView1 = (TextView) findViewById(R.id.textView1);
@@ -68,41 +69,45 @@ public class ResultActivity extends Activity {
 		boolean isFetal = intent.getBooleanExtra(MainActivity.EXTRA_IS_FETAL,
 				false);
 
-		if (byMenstruationDate || byOvulationDate || byUltrasound) {
-			ChildbirthDateCalculator calculator = new ChildbirthDateCalculator(mContext);
+		boolean doCalculation = byMenstruationDate || byOvulationDate
+				|| byUltrasound;
+
+		textView0.setText(doCalculation ? mContext.getString(R.string.r0)
+				: mContext.getString(R.string.error0));
+		textView00.setText(doCalculation ? mContext.getString(R.string.r00)
+				: mContext.getString(R.string.error00));
+		textView1.setVisibility(byMenstruationDate ? View.VISIBLE : View.GONE);
+		textView2.setVisibility(byOvulationDate ? View.VISIBLE : View.GONE);
+		textView3.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
+		result1.setVisibility(byMenstruationDate ? View.VISIBLE : View.GONE);
+		result2.setVisibility(byOvulationDate ? View.VISIBLE : View.GONE);
+		result3.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
+		message3.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
+
+		if (doCalculation) {
+			ChildbirthDateCalculator calculator = new ChildbirthDateCalculator(
+					mContext);
 			if (byMenstruationDate) {
 				Calendar result = calculator
 						.getByLastMenstruationDate(menstrualCycleLen,
 								lutealPhaseLen, lastMenstruationDate);
-				result1.setText(result.toString());
-			} else {
-				//
+				result1.setText(DateFormat.getDateFormat(mContext).format(
+						result.getTime()));
 			}
 
 			if (byOvulationDate) {
 				Calendar result = calculator.getByOvulationDate(ovulationDate);
-				result2.setText(result.toString());
-			} else {
-				//
+				result2.setText(DateFormat.getDateFormat(mContext).format(
+						result.getTime()));
 			}
 
 			if (byUltrasound) {
 				Calendar result = calculator.getByUltrasound(ultrasoundDate,
 						weeks, days, isFetal);
-				result3.setText(result.toString());
-			} else {
-				//
+				result3.setText(DateFormat.getDateFormat(mContext).format(
+						result.getTime()));
+				message3.setText(calculator.getMessage());
 			}
-		} else {
-			textView0.setText(mContext.getString(R.string.error0));
-			textView00.setText(mContext.getString(R.string.error00));
-			textView1.setVisibility(View.GONE);
-			textView2.setVisibility(View.GONE);
-			textView3.setVisibility(View.GONE);
-			result1.setVisibility(View.GONE);
-			result2.setVisibility(View.GONE);
-			result3.setVisibility(View.GONE);
-			message3.setVisibility(View.GONE);
 		}
 	}
 }
