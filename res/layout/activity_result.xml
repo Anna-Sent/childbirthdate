@@ -99,10 +99,12 @@
             android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
+        <Button
+            android:id="@+id/rateButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:onClick="rate"
             android:text="@string/r"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>

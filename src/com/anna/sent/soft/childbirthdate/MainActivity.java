@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {
@@ -27,6 +29,7 @@ public class MainActivity extends TabActivity {
 	private DatePicker datePickerLastMenstruationDate, datePickerOvulationDate,
 			datePickerUltrasoundDate;
 	private RadioButton radioButtonObstetic;
+	private TextView textViewHelp;
 
 	public static final String EXTRA_MENSTRUAL_CYCLE_LEN = "com.anna.sent.soft.childbirthdate.menstrualcyclelen";
 	public static final String EXTRA_LUTEAL_PHASE_LEN = "com.anna.sent.soft.childbirthdate.lutealphaselen";
@@ -100,6 +103,9 @@ public class MainActivity extends TabActivity {
 		numberPickerDays.setMinValue(0);
 		numberPickerDays
 				.setMaxValue(ChildbirthDateCalculator.DAYS_IN_A_WEEK - 1);
+		
+		textViewHelp = (TextView) findViewById(R.id.textViewHelp);
+		textViewHelp.setText(Html.fromHtml(getString(R.string.help)));
 	}
 
 	@Override

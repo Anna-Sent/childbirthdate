@@ -299,11 +299,11 @@
                     android:orientation="vertical" >
 
                     <TextView
+                        android:id="@+id/textViewHelp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:paddingLeft="20dp"
-                        android:text="@string/help"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
                 </LinearLayout>
             </ScrollView>
