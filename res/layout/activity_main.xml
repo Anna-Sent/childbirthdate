@@ -223,7 +223,6 @@
                                 android:layout_weight="2"
                                 android:ems="10"
                                 android:inputType="number"
-                                android:nextFocusDown="@+id/editTextDays"
                                 android:orientation="vertical"
                                 android:paddingLeft="20dp" />
 
@@ -236,7 +235,7 @@
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
                             <NumberPicker
-                                android:id="@id/editTextDays"
+                                android:id="@+id/editTextDays"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
