@@ -28,7 +28,7 @@ public class MainActivity extends TabActivity {
 			numberPcikerLutealPhaseLen, numberPickerWeeks, numberPickerDays;
 	private DatePicker datePickerLastMenstruationDate, datePickerOvulationDate,
 			datePickerUltrasoundDate;
-	private RadioButton radioButtonObstetic;
+	private RadioButton radioButtonObstetic, radioButtonFetal;
 	private TextView textViewHelp;
 
 	public static final String EXTRA_MENSTRUAL_CYCLE_LEN = "com.anna.sent.soft.childbirthdate.menstrualcyclelen";
@@ -95,6 +95,7 @@ public class MainActivity extends TabActivity {
 		datePickerUltrasoundDate = (DatePicker) findViewById(R.id.datePickerUltrasoundDate);
 
 		radioButtonObstetic = (RadioButton) findViewById(R.id.radioObstetic);
+		radioButtonFetal = (RadioButton) findViewById(R.id.radioFetal);
 
 		numberPickerWeeks = (NumberPicker) findViewById(R.id.editTextWeeks);
 		numberPickerWeeks.setMinValue(0);
@@ -132,10 +133,6 @@ public class MainActivity extends TabActivity {
 		days = settings.getInt(EXTRA_DAYS, 0);
 		isFetal = settings.getBoolean(EXTRA_IS_FETAL, isFetal);
 		writeValues();
-		checkVisibility(checkBox1, linearLayout1);
-		checkVisibility(checkBox2, linearLayout2);
-		checkVisibility(checkBox3, linearLayout3);
-		radioClick(null);
 	}
 
 	@Override
@@ -161,12 +158,6 @@ public class MainActivity extends TabActivity {
 		editor.commit();
 	}
 
-	public void radioClick(View view) {
-		numberPickerWeeks
-				.setMaxValue((radioButtonObstetic.isChecked() ? ChildbirthDateCalculator.OBSTETIC_PREGNANCY_PERIOD
-						: ChildbirthDateCalculator.FETAL_PREGNANCY_PERIOD) - 1);
-	}
-
 	private Calendar getDate(DatePicker datePicker) {
 		Calendar date = Calendar.getInstance();
 		date.set(datePicker.getYear(), datePicker.getMonth(),
@@ -182,7 +173,7 @@ public class MainActivity extends TabActivity {
 		ultrasoundDate = getDate(datePickerUltrasoundDate);
 		weeks = numberPickerWeeks.getValue();
 		days = numberPickerDays.getValue();
-		isFetal = !radioButtonObstetic.isChecked();
+		isFetal = radioButtonFetal.isChecked();
 	}
 
 	private void setDate(DatePicker datePicker, Calendar date) {
@@ -196,9 +187,22 @@ public class MainActivity extends TabActivity {
 		setDate(datePickerLastMenstruationDate, lastMenstruationDate);
 		setDate(datePickerOvulationDate, ovulationDate);
 		setDate(datePickerUltrasoundDate, ultrasoundDate);
+		// first: set radio button state
+		if (isFetal) {
+			radioButtonFetal.setChecked(true);
+		} else{
+			radioButtonObstetic.setChecked(true);
+		}
+		
+		// second: set max value for weeks number picker
+		radioClick(null);
+		
+		// third: set value for weeks number picker
 		numberPickerWeeks.setValue(weeks);
 		numberPickerDays.setValue(days);
-		radioButtonObstetic.setChecked(!isFetal);
+		checkVisibility(checkBox1, linearLayout1);
+		checkVisibility(checkBox2, linearLayout2);
+		checkVisibility(checkBox3, linearLayout3);
 	}
 
 	public void restoreDefaultValues(View view) {
@@ -223,6 +227,12 @@ public class MainActivity extends TabActivity {
 		intent.putExtra(EXTRA_DAYS, days);
 		intent.putExtra(EXTRA_IS_FETAL, isFetal);
 		startActivity(intent);
+	}
+	
+	public void radioClick(View view) {
+		numberPickerWeeks
+				.setMaxValue((radioButtonObstetic.isChecked() ? ChildbirthDateCalculator.OBSTETIC_PREGNANCY_PERIOD
+						: ChildbirthDateCalculator.FETAL_PREGNANCY_PERIOD) - 1);
 	}
 
 	private void checkVisibility(CheckBox checkBox, LinearLayout linearLayout) {
