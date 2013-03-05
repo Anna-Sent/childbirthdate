@@ -8,14 +8,22 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 
 public class ResultActivity extends Activity {
 
 	private TextView textView0, textView00, textView1, textView2, textView3,
 			result1, result2, result3, message3;
 	private Context mContext;
+	private AdView adView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,11 +118,30 @@ public class ResultActivity extends Activity {
 				message3.setText(calculator.getMessage());
 			}
 		}
+
+		// AdView adView = (AdView) findViewById(R.id.adView);
+		adView = new AdView(this, AdSize.BANNER, "a1513549e3d3050");
+		adView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		adView.setGravity(Gravity.CENTER);
+		LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+		linearLayout.addView(adView);
+		
+		AdRequest request = new AdRequest();
+		//request.addTestDevice(AdRequest.TEST_EMULATOR);
+		//request.addTestDevice("2600D922057328C48F2E6DBAB33639C1"); 
+		//request.setGender(AdRequest.Gender.FEMALE);
+		adView.loadAd(request);
 	}
 
 	public void rate(View view) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setData(Uri.parse("market://details?id=com.anna.sent.soft.childbirthdate"));
+		intent.setData(Uri.parse("market://details?id=" + getPackageName()));
 		startActivity(intent);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		adView.destroy();
+		super.onDestroy();
 	}
 }

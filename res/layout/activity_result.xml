@@ -5,7 +5,10 @@
     android:orientation="vertical"
     tools:context=".ResultActivity" >
 
+    <!-- xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads" -->
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
@@ -107,6 +110,23 @@
             android:onClick="rate"
             android:text="@string/r"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <!--
+             com.google.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="a1513549e3d3050"
+            ads:loadAdOnCreate="false"
+            ads:testDevices="TEST_EMULATOR, 2600D922057328C48F2E6DBAB33639C1" /
+        -->
     </LinearLayout>
 
 </ScrollView>
