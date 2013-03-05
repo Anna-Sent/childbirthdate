@@ -65,10 +65,11 @@ public class ChildbirthDateCalculator {
 		} else {
 			message = mContext.getString(R.string.message2);
 		}
-		
+
 		int pregnancyPeriod = isFetal ? FETAL_PREGNANCY_PERIOD * DAYS_IN_A_WEEK
 				: OBSTETIC_PREGNANCY_PERIOD * DAYS_IN_A_WEEK;
-		date.add(Calendar.DAY_OF_MONTH, pregnancyPeriod - weeks * DAYS_IN_A_WEEK - days);
+		date.add(Calendar.DAY_OF_MONTH, pregnancyPeriod - weeks
+				* DAYS_IN_A_WEEK - days);
 		return date;
 	}
 
