@@ -103,7 +103,7 @@ public class MainActivity extends TabActivity {
 		numberPickerDays.setMinValue(0);
 		numberPickerDays
 				.setMaxValue(ChildbirthDateCalculator.DAYS_IN_A_WEEK - 1);
-		
+
 		textViewHelp = (TextView) findViewById(R.id.textViewHelp);
 		textViewHelp.setText(Html.fromHtml(getString(R.string.help)));
 	}
@@ -199,6 +199,13 @@ public class MainActivity extends TabActivity {
 		numberPickerWeeks.setValue(weeks);
 		numberPickerDays.setValue(days);
 		radioButtonObstetic.setChecked(!isFetal);
+	}
+
+	public void restoreDefaultValues(View view) {
+		numberPickerMenstrualCycleLen
+				.setValue(ChildbirthDateCalculator.MENSTRUAL_CYCLE_AVG_LENGTH);
+		numberPcikerLutealPhaseLen
+				.setValue(ChildbirthDateCalculator.LUTEAL_PHASE_AVG_LENGTH);
 	}
 
 	public void calculate(View view) {
