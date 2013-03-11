@@ -3,6 +3,7 @@ package com.anna.sent.soft.childbirthdate;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -121,24 +123,30 @@ public class ResultActivity extends Activity {
 
 		// AdView adView = (AdView) findViewById(R.id.adView);
 		adView = new AdView(this, AdSize.BANNER, "a1513549e3d3050");
-		adView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		adView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.WRAP_CONTENT));
 		adView.setGravity(Gravity.CENTER);
 		LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
 		linearLayout.addView(adView);
-		
+
 		AdRequest request = new AdRequest();
-		//request.addTestDevice(AdRequest.TEST_EMULATOR);
-		//request.addTestDevice("2600D922057328C48F2E6DBAB33639C1"); 
-		//request.setGender(AdRequest.Gender.FEMALE);
+		// request.addTestDevice(AdRequest.TEST_EMULATOR);
+		// request.addTestDevice("2600D922057328C48F2E6DBAB33639C1");
+		// request.setGender(AdRequest.Gender.FEMALE);
 		adView.loadAd(request);
 	}
 
 	public void rate(View view) {
-		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setData(Uri.parse("market://details?id=" + getPackageName()));
-		startActivity(intent);
+		try {
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setData(Uri.parse("market://details?id=" + getPackageName()));
+			startActivity(intent);
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(this, R.string.marketNotFound, Toast.LENGTH_SHORT)
+					.show();
+		}
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		adView.destroy();

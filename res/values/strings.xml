@@ -8,7 +8,6 @@
     <string name="message2">По результатам УЗИ ПДР неточная, так как срок беременности велик.</string>
     <string name="app_name">Дата родов</string>
     <string name="value">result</string>
-    
     <string name="help">
 <![CDATA[
 <b>Вкладка Настройки</b><br/><br/>
@@ -58,8 +57,7 @@
 
  Обратитесь в женскую консультацию для уточнения срока беременности и ПДР.<br/><br/>
 ]]>
- </string>
- 
+    </string>
     <string name="mAcceptDefaults">Оставьте значения по умолчанию, если не можете их уточнить.</string>
     <string name="mMenstrualCycleLen">Продолжительность менструального цикла</string>
     <string name="mLutealPhaseLen">Продолжительность лютеиновой фазы</string>
@@ -74,7 +72,6 @@
     <string name="mWeek">нед.</string>
     <string name="mDay">д.</string>
     <string name="mCalculate">Рассчитать</string>
-    
     <string name="error0">Не выбран способ расчета</string>
     <string name="error00">Обратитесь в женскую консультацию для уточнения срока беременности</string>
     <string name="r0">Предполагаемая дата родов</string>
@@ -83,5 +80,6 @@
     <string name="r3">по результатам УЗИ</string>
     <string name="r00">Помните, что роды могут начаться на две недели раньше или на две недели позже ПДР.</string>
     <string name="r">Оценить приложение</string>
+    <string name="marketNotFound">Приложение market не найдено</string>
 
 </resources>
