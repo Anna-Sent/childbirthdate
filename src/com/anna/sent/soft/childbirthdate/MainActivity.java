@@ -13,10 +13,11 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {

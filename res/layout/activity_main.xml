@@ -5,9 +5,7 @@
     android:layout_height="match_parent" >
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        style="@style/LinearLayoutVerticalStyle" >
 
         <TabWidget
             android:id="@android:id/tabs"
@@ -21,14 +19,10 @@
 
             <ScrollView
                 android:id="@+id/tab1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
+                style="@style/ScrollViewStyle" >
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    style="@style/LinearLayoutVerticalStyle" >
 
                     <TextView
                         android:layout_width="match_parent"
@@ -39,9 +33,7 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+                        style="@style/LinearLayoutHorizontalStyle" >
 
                         <TextView
                             android:layout_width="0dp"
@@ -52,14 +44,9 @@
                             android:text="@string/mMenstrualCycleLen"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                        <NumberPicker
+                        <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                             android:id="@+id/editTextMenstrualCycleLen"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:ems="10"
-                            android:inputType="number"
-                            android:orientation="vertical" />
+                            style="@style/NumberPickerStyle" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -71,9 +58,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+                        style="@style/LinearLayoutHorizontalStyle" >
 
                         <TextView
                             android:layout_width="0dp"
@@ -84,14 +69,9 @@
                             android:text="@string/mLutealPhaseLen"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                        <NumberPicker
+                        <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                             android:id="@+id/editTextLutealPhaseLen"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:ems="10"
-                            android:inputType="number"
-                            android:orientation="vertical" />
+                            style="@style/NumberPickerStyle" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -114,75 +94,47 @@
 
             <ScrollView
                 android:id="@+id/tab2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
+                style="@style/ScrollViewStyle" >
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    style="@style/LinearLayoutVerticalStyle" >
 
                     <CheckBox
                         android:id="@+id/checkBox1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:onClick="check"
-                        android:text="@string/mLastMenstruationDate"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        style="@style/CheckBoxStyle"
+                        android:text="@string/mLastMenstruationDate" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+                        style="@style/LinearLayoutHorizontalStyle" >
 
                         <DatePicker
                             android:id="@+id/datePickerLastMenstruationDate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:calendarViewShown="false"
-                            android:paddingLeft="20dp" />
+                            style="@style/DatePickerStyle" />
                     </LinearLayout>
 
                     <CheckBox
                         android:id="@+id/checkBox2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:onClick="check"
-                        android:text="@string/mOvulationDate"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        style="@style/CheckBoxStyle"
+                        android:text="@string/mOvulationDate" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+                        style="@style/LinearLayoutHorizontalStyle" >
 
                         <DatePicker
                             android:id="@+id/datePickerOvulationDate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:calendarViewShown="false"
-                            android:paddingLeft="20dp" />
+                            style="@style/DatePickerStyle" />
                     </LinearLayout>
 
                     <CheckBox
                         android:id="@+id/checkBox3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:onClick="check"
-                        android:text="@string/mUltrasoundResults"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        style="@style/CheckBoxStyle"
+                        android:text="@string/mUltrasoundResults" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" >
+                        style="@style/LinearLayoutVerticalStyle" >
 
                         <TextView
                             android:layout_width="match_parent"
@@ -194,10 +146,7 @@
 
                         <DatePicker
                             android:id="@+id/datePickerUltrasoundDate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:calendarViewShown="false"
-                            android:paddingLeft="20dp" />
+                            style="@style/DatePickerStyle" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -208,24 +157,16 @@
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal" >
+                            style="@style/LinearLayoutHorizontalStyle" >
 
                             <TextView
                                 android:layout_width="20dp"
                                 android:layout_height="match_parent"
                                 android:text="" />
 
-                            <NumberPicker
+                            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                                 android:id="@+id/editTextWeeks"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:ems="10"
-                                android:inputType="number"
-                                android:orientation="vertical"
-                                android:paddingLeft="20dp" />
+                                style="@style/NumberPickerStyle" />
 
                             <TextView
                                 android:layout_width="0dp"
@@ -235,14 +176,9 @@
                                 android:text="@string/mWeek"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                            <NumberPicker
+                            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                                 android:id="@+id/editTextDays"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:ems="10"
-                                android:inputType="number"
-                                android:orientation="vertical" />
+                                style="@style/NumberPickerStyle" />
 
                             <TextView
                                 android:layout_width="0dp"
@@ -290,14 +226,10 @@
 
             <ScrollView
                 android:id="@+id/tab3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
+                style="@style/ScrollViewStyle" >
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    style="@style/LinearLayoutVerticalStyle" >
 
                     <TextView
                         android:id="@+id/textViewHelp"

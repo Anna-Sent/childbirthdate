@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="numberPickerStyle">@style/Widget.Holo.Light.NumberPicker</item>
+    </style>
+
+</resources>

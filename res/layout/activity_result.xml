@@ -2,105 +2,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ResultActivity" >
+    android:orientation="vertical" >
 
     <!-- xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads" -->
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        style="@style/LinearLayoutVerticalStyle" >
 
         <TextView
             android:id="@+id/textView0"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/r0"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            style="@style/HelpTextViewStyle.Large"
+            android:text="@string/r0" />
 
         <TextView
             android:id="@+id/textView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/r1"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            style="@style/HelpTextViewStyle.Medium"
+            android:text="@string/r1" />
 
         <TextView
             android:id="@+id/result1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/value"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#ff0000" />
+            style="@style/HelpTextViewStyle.Medium.Red"
+            android:text="@string/value" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/r2"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            style="@style/HelpTextViewStyle.Medium"
+            android:text="@string/r2" />
 
         <TextView
             android:id="@+id/result2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/value"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#ff0000" />
+            style="@style/HelpTextViewStyle.Medium.Red"
+            android:text="@string/value" />
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/r3"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            style="@style/HelpTextViewStyle.Medium"
+            android:text="@string/r3" />
 
         <TextView
             android:id="@+id/result3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/value"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#ff0000" />
+            style="@style/HelpTextViewStyle.Medium.Red"
+            android:text="@string/value" />
 
         <TextView
             android:id="@+id/message3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/value"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#0000ff" />
+            style="@style/HelpTextViewStyle.Medium.Blue"
+            android:text="@string/value" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView style="@style/HelpTextViewStyle.Medium" />
 
         <TextView
             android:id="@+id/textView00"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/r00"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            style="@style/HelpTextViewStyle.Medium"
+            android:text="@string/r00" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text=""
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView style="@style/HelpTextViewStyle.Medium" />
 
         <Button
             android:id="@+id/rateButton"
@@ -111,14 +68,10 @@
             android:text="@string/r"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView style="@style/HelpTextViewStyle.Medium" />
 
         <!--
-             com.google.ads.AdView
+            com.google.ads.AdView
             android:id="@+id/adView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
