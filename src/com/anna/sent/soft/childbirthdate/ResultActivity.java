@@ -77,16 +77,18 @@ public class ResultActivity extends Activity {
 
 		int weeks = intent.getIntExtra(MainActivity.EXTRA_WEEKS, 0);
 		int days = intent.getIntExtra(MainActivity.EXTRA_DAYS, 0);
-		boolean isEmbryonicAge = intent.getBooleanExtra(MainActivity.EXTRA_IS_EMBRYONIC_AGE,
-				false);
+		boolean isEmbryonicAge = intent.getBooleanExtra(
+				MainActivity.EXTRA_IS_EMBRYONIC_AGE, false);
 
 		boolean doCalculation = byMenstruationDate || byOvulationDate
 				|| byUltrasound;
 
-		textView0.setText(doCalculation ? mContext.getString(R.string.r0)
-				: mContext.getString(R.string.error0));
-		textView00.setText(doCalculation ? mContext.getString(R.string.r00)
-				: mContext.getString(R.string.error00));
+		textView0.setText(doCalculation ? mContext
+				.getString(R.string.estimatedChildbirthDate) : mContext
+				.getString(R.string.errorNotSelectedCalculationMethod));
+		textView00.setText(doCalculation ? mContext
+				.getString(R.string.remember) : mContext
+				.getString(R.string.errorConsultADoctor));
 		textView1.setVisibility(byMenstruationDate ? View.VISIBLE : View.GONE);
 		textView2.setVisibility(byOvulationDate ? View.VISIBLE : View.GONE);
 		textView3.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
@@ -96,25 +98,26 @@ public class ResultActivity extends Activity {
 		message3.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
 
 		if (doCalculation) {
-			PregnancyCalculator calculator = new PregnancyCalculator(
-					mContext);
+			PregnancyCalculator calculator = new PregnancyCalculator(mContext);
 			if (byMenstruationDate) {
 				Calendar result = calculator
-						.getChildbirthDateByLastMenstruationDate(menstrualCycleLen,
-								lutealPhaseLen, lastMenstruationDate);
+						.getChildbirthDateByLastMenstruationDate(
+								menstrualCycleLen, lutealPhaseLen,
+								lastMenstruationDate);
 				result1.setText(DateFormat.getDateFormat(mContext).format(
 						result.getTime()));
 			}
 
 			if (byOvulationDate) {
-				Calendar result = calculator.getChildbirthDateByOvulationDate(ovulationDate);
+				Calendar result = calculator
+						.getChildbirthDateByOvulationDate(ovulationDate);
 				result2.setText(DateFormat.getDateFormat(mContext).format(
 						result.getTime()));
 			}
 
 			if (byUltrasound) {
-				Calendar result = calculator.getChildbirthDateByUltrasound(ultrasoundDate,
-						weeks, days, isEmbryonicAge);
+				Calendar result = calculator.getChildbirthDateByUltrasound(
+						ultrasoundDate, weeks, days, isEmbryonicAge);
 				result3.setText(DateFormat.getDateFormat(mContext).format(
 						result.getTime()));
 				message3.setText(calculator.getMessage());

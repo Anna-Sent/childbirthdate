@@ -114,15 +114,15 @@ public class PregnancyCalculator {
 	public Calendar getChildbirthDateByUltrasound(Calendar date, int weeks,
 			int days, boolean isEmbryonicAge) {
 		if (weeks <= 13 && !isEmbryonicAge || weeks <= 11 && isEmbryonicAge) {
-			message = mContext.getString(R.string.message1);
+			message = mContext.getString(R.string.messageAccurate);
 		} else {
-			message = mContext.getString(R.string.message2);
+			message = mContext.getString(R.string.messageInaccurate);
 		}
 
-		int pregnancyPeriod = isEmbryonicAge ? FULL_EMBRYONIC_AGE
+		int fullPregnancyAge = isEmbryonicAge ? FULL_EMBRYONIC_AGE
 				* DAYS_IN_A_WEEK : FULL_GESTATIONAL_AGE * DAYS_IN_A_WEEK;
 
-		date.add(Calendar.DAY_OF_MONTH, pregnancyPeriod - weeks
+		date.add(Calendar.DAY_OF_MONTH, fullPregnancyAge - weeks
 				* DAYS_IN_A_WEEK - days);
 		return date;
 	}
@@ -266,14 +266,14 @@ public class PregnancyCalculator {
 	public PregnancyAge getPregnancyAgeByUltrasound(Calendar ultrasoundDate,
 			int weeks, int days, boolean isEmbryonicAge, Calendar date) {
 		if (weeks <= 13 && !isEmbryonicAge || weeks <= 11 && isEmbryonicAge) {
-			message = mContext.getString(R.string.message1);
+			message = mContext.getString(R.string.messageAccurate);
 		} else {
-			message = mContext.getString(R.string.message2);
+			message = mContext.getString(R.string.messageInaccurate);
 		}
 
-		int pregnancyPeriod = (isEmbryonicAge ? weeks : weeks + 2)
+		int pregnancyAge = (isEmbryonicAge ? weeks : weeks + 2)
 				* DAYS_IN_A_WEEK + days;
-		ultrasoundDate.add(Calendar.DAY_OF_MONTH, -pregnancyPeriod);
+		ultrasoundDate.add(Calendar.DAY_OF_MONTH, -pregnancyAge);
 		return new PregnancyAge();
 	}
 }

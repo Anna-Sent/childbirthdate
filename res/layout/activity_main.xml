@@ -29,7 +29,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:paddingLeft="20dp"
-                        android:text="@string/mAcceptDefaults"
+                        android:text="@string/acceptDefaults"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <LinearLayout
@@ -41,7 +41,7 @@
                             android:layout_weight="3"
                             android:gravity="center_vertical"
                             android:paddingLeft="20dp"
-                            android:text="@string/mMenstrualCycleLen"
+                            android:text="@string/menstrualCycleLen"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
                         <com.anna.sent.soft.numberpickerlibrary.NumberPicker
@@ -53,7 +53,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="@string/mDay"
+                            android:text="@string/days"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
                     </LinearLayout>
 
@@ -66,7 +66,7 @@
                             android:layout_weight="3"
                             android:gravity="center_vertical"
                             android:paddingLeft="20dp"
-                            android:text="@string/mLutealPhaseLen"
+                            android:text="@string/lutealPhaseLen"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
                         <com.anna.sent.soft.numberpickerlibrary.NumberPicker
@@ -78,7 +78,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="@string/mDay"
+                            android:text="@string/days"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
                     </LinearLayout>
 
@@ -87,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:onClick="restoreDefaultValues"
-                        android:text="@string/mRestoreDefaultValues"
+                        android:text="@string/restoreDefaultValues"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
                 </LinearLayout>
             </ScrollView>
@@ -102,7 +102,7 @@
                     <CheckBox
                         android:id="@+id/checkBox1"
                         style="@style/CheckBoxStyle"
-                        android:text="@string/mLastMenstruationDate" />
+                        android:text="@string/lastMenstruationDate" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout1"
@@ -116,7 +116,7 @@
                     <CheckBox
                         android:id="@+id/checkBox2"
                         style="@style/CheckBoxStyle"
-                        android:text="@string/mOvulationDate" />
+                        android:text="@string/ovulationDate" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout2"
@@ -130,7 +130,7 @@
                     <CheckBox
                         android:id="@+id/checkBox3"
                         style="@style/CheckBoxStyle"
-                        android:text="@string/mUltrasoundResults" />
+                        android:text="@string/ultrasoundResults" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout3"
@@ -141,7 +141,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:paddingLeft="20dp"
-                            android:text="@string/mUltrasoundDate"
+                            android:text="@string/ultrasoundDate"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
                         <DatePicker
@@ -153,7 +153,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:paddingLeft="20dp"
-                            android:text="@string/mPregnancyPeriod"
+                            android:text="@string/pregnancyAge"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
                         <LinearLayout
@@ -173,7 +173,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="@string/mWeek"
+                                android:text="@string/weeks"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
                             <com.anna.sent.soft.numberpickerlibrary.NumberPicker
@@ -185,7 +185,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="@string/mDay"
+                                android:text="@string/days"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </LinearLayout>
 
@@ -200,7 +200,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="true"
                                 android:onClick="radioClick"
-                                android:text="@string/mIsGestationalAge"
+                                android:text="@string/isGestationalAge"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
                             <RadioButton
@@ -208,7 +208,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:onClick="radioClick"
-                                android:text="@string/mIsEmbryonicAge"
+                                android:text="@string/isEmbryonicAge"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </RadioGroup>
                     </LinearLayout>
@@ -219,7 +219,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:onClick="calculate"
-                        android:text="@string/mCalculate"
+                        android:text="@string/calculate"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
                 </LinearLayout>
             </ScrollView>

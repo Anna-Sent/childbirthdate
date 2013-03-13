@@ -62,12 +62,12 @@ public class MainActivity extends TabActivity {
 
 		mTabHost = getTabHost();
 
-		mTabHost.addTab(mTabHost.newTabSpec("tab_test1")
-				.setIndicator(getString(R.string.tab1)).setContent(R.id.tab1));
-		mTabHost.addTab(mTabHost.newTabSpec("tab_test2")
-				.setIndicator(getString(R.string.tab2)).setContent(R.id.tab2));
-		mTabHost.addTab(mTabHost.newTabSpec("tab_test3")
-				.setIndicator(getString(R.string.tab3)).setContent(R.id.tab3));
+		mTabHost.addTab(mTabHost.newTabSpec("tab_settings")
+				.setIndicator(getString(R.string.settings)).setContent(R.id.tab1));
+		mTabHost.addTab(mTabHost.newTabSpec("tab_calculation")
+				.setIndicator(getString(R.string.calculation)).setContent(R.id.tab2));
+		mTabHost.addTab(mTabHost.newTabSpec("tab_help")
+				.setIndicator(getString(R.string.help)).setContent(R.id.tab3));
 
 		mTabHost.setCurrentTab(1);
 
