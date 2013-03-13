@@ -29,7 +29,7 @@ public class MainActivity extends TabActivity {
 			numberPcikerLutealPhaseLen, numberPickerWeeks, numberPickerDays;
 	private DatePicker datePickerLastMenstruationDate, datePickerOvulationDate,
 			datePickerUltrasoundDate;
-	private RadioButton radioButtonObstetic, radioButtonFetal;
+	private RadioButton radioButtonIsGestationalAge, radioButtonIsEmbryonicAge;
 	private TextView textViewHelp;
 
 	public static final String EXTRA_MENSTRUAL_CYCLE_LEN = "com.anna.sent.soft.childbirthdate.menstrualcyclelen";
@@ -42,7 +42,7 @@ public class MainActivity extends TabActivity {
 	public static final String EXTRA_ULTRASOUND_DATE = "com.anna.sent.soft.childbirthdate.ultrasounddate";
 	public static final String EXTRA_WEEKS = "com.anna.sent.soft.childbirthdate.weeks";
 	public static final String EXTRA_DAYS = "com.anna.sent.soft.childbirthdate.days";
-	public static final String EXTRA_IS_FETAL = "com.anna.sent.soft.childbirthdate.isfetal";
+	public static final String EXTRA_IS_EMBRYONIC_AGE = "com.anna.sent.soft.childbirthdate.isfetal"; // rename to isembryonicage somehow
 
 	public static final String SETTINGS_FILE = "childbirthdatesettings";
 
@@ -53,7 +53,7 @@ public class MainActivity extends TabActivity {
 	private Calendar ultrasoundDate = Calendar.getInstance();
 	private int weeks;
 	private int days;
-	private boolean isFetal;
+	private boolean isEmbryonicAge;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,15 +73,15 @@ public class MainActivity extends TabActivity {
 
 		numberPickerMenstrualCycleLen = (NumberPicker) findViewById(R.id.editTextMenstrualCycleLen);
 		numberPickerMenstrualCycleLen
-				.setMinValue(ChildbirthDateCalculator.MIN_MENSTRUAL_CYCLE_LEN);
+				.setMinValue(PregnancyCalculator.MIN_MENSTRUAL_CYCLE_LEN);
 		numberPickerMenstrualCycleLen
-				.setMaxValue(ChildbirthDateCalculator.MAX_MENSTRUAL_CYCLE_LEN);
+				.setMaxValue(PregnancyCalculator.MAX_MENSTRUAL_CYCLE_LEN);
 
 		numberPcikerLutealPhaseLen = (NumberPicker) findViewById(R.id.editTextLutealPhaseLen);
 		numberPcikerLutealPhaseLen
-				.setMinValue(ChildbirthDateCalculator.MIN_LUTEAL_PHASE_LEN);
+				.setMinValue(PregnancyCalculator.MIN_LUTEAL_PHASE_LEN);
 		numberPcikerLutealPhaseLen
-				.setMaxValue(ChildbirthDateCalculator.MAX_LUTEAL_PHASE_LEN);
+				.setMaxValue(PregnancyCalculator.MAX_LUTEAL_PHASE_LEN);
 
 		checkBox1 = (CheckBox) findViewById(R.id.checkBox1);
 		linearLayout1 = (LinearLayout) findViewById(R.id.linearLayout1);
@@ -95,8 +95,8 @@ public class MainActivity extends TabActivity {
 		linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
 		datePickerUltrasoundDate = (DatePicker) findViewById(R.id.datePickerUltrasoundDate);
 
-		radioButtonObstetic = (RadioButton) findViewById(R.id.radioObstetic);
-		radioButtonFetal = (RadioButton) findViewById(R.id.radioFetal);
+		radioButtonIsGestationalAge = (RadioButton) findViewById(R.id.radioIsGestationalAge);
+		radioButtonIsEmbryonicAge = (RadioButton) findViewById(R.id.radioIsEmbryonicAge);
 
 		numberPickerWeeks = (NumberPicker) findViewById(R.id.editTextWeeks);
 		numberPickerWeeks.setMinValue(0);
@@ -104,7 +104,7 @@ public class MainActivity extends TabActivity {
 		numberPickerDays = (NumberPicker) findViewById(R.id.editTextDays);
 		numberPickerDays.setMinValue(0);
 		numberPickerDays
-				.setMaxValue(ChildbirthDateCalculator.DAYS_IN_A_WEEK - 1);
+				.setMaxValue(PregnancyCalculator.DAYS_IN_A_WEEK - 1);
 
 		textViewHelp = (TextView) findViewById(R.id.textViewHelp);
 		textViewHelp.setText(Html.fromHtml(getString(R.string.help)));
@@ -116,9 +116,9 @@ public class MainActivity extends TabActivity {
 		SharedPreferences settings = getApplicationContext()
 				.getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE);
 		menstrualCycleLen = settings.getInt(EXTRA_MENSTRUAL_CYCLE_LEN,
-				ChildbirthDateCalculator.MENSTRUAL_CYCLE_AVG_LENGTH);
+				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
 		lutealPhaseLen = settings.getInt(EXTRA_LUTEAL_PHASE_LEN,
-				ChildbirthDateCalculator.LUTEAL_PHASE_AVG_LENGTH);
+				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
 		checkBox1.setChecked(settings.getBoolean(
 				EXTRA_BY_LAST_MENSTRUATION_DATE, false));
 		lastMenstruationDate.setTimeInMillis(settings.getLong(
@@ -132,7 +132,7 @@ public class MainActivity extends TabActivity {
 				System.currentTimeMillis()));
 		weeks = settings.getInt(EXTRA_WEEKS, 0);
 		days = settings.getInt(EXTRA_DAYS, 0);
-		isFetal = settings.getBoolean(EXTRA_IS_FETAL, isFetal);
+		isEmbryonicAge = settings.getBoolean(EXTRA_IS_EMBRYONIC_AGE, isEmbryonicAge);
 		writeValues();
 	}
 
@@ -155,7 +155,7 @@ public class MainActivity extends TabActivity {
 		editor.putLong(EXTRA_ULTRASOUND_DATE, ultrasoundDate.getTimeInMillis());
 		editor.putInt(EXTRA_WEEKS, weeks);
 		editor.putInt(EXTRA_DAYS, days);
-		editor.putBoolean(EXTRA_IS_FETAL, isFetal);
+		editor.putBoolean(EXTRA_IS_EMBRYONIC_AGE, isEmbryonicAge);
 		editor.commit();
 	}
 
@@ -174,7 +174,7 @@ public class MainActivity extends TabActivity {
 		ultrasoundDate = getDate(datePickerUltrasoundDate);
 		weeks = numberPickerWeeks.getValue();
 		days = numberPickerDays.getValue();
-		isFetal = radioButtonFetal.isChecked();
+		isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
 	}
 
 	private void setDate(DatePicker datePicker, Calendar date) {
@@ -189,10 +189,10 @@ public class MainActivity extends TabActivity {
 		setDate(datePickerOvulationDate, ovulationDate);
 		setDate(datePickerUltrasoundDate, ultrasoundDate);
 		// first: set radio button state
-		if (isFetal) {
-			radioButtonFetal.setChecked(true);
+		if (isEmbryonicAge) {
+			radioButtonIsEmbryonicAge.setChecked(true);
 		} else{
-			radioButtonObstetic.setChecked(true);
+			radioButtonIsGestationalAge.setChecked(true);
 		}
 		
 		// second: set max value for weeks number picker
@@ -208,9 +208,9 @@ public class MainActivity extends TabActivity {
 
 	public void restoreDefaultValues(View view) {
 		numberPickerMenstrualCycleLen
-				.setValue(ChildbirthDateCalculator.MENSTRUAL_CYCLE_AVG_LENGTH);
+				.setValue(PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
 		numberPcikerLutealPhaseLen
-				.setValue(ChildbirthDateCalculator.LUTEAL_PHASE_AVG_LENGTH);
+				.setValue(PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
 	}
 
 	public void calculate(View view) {
@@ -226,14 +226,14 @@ public class MainActivity extends TabActivity {
 		intent.putExtra(EXTRA_ULTRASOUND_DATE, ultrasoundDate);
 		intent.putExtra(EXTRA_WEEKS, weeks);
 		intent.putExtra(EXTRA_DAYS, days);
-		intent.putExtra(EXTRA_IS_FETAL, isFetal);
+		intent.putExtra(EXTRA_IS_EMBRYONIC_AGE, isEmbryonicAge);
 		startActivity(intent);
 	}
 	
 	public void radioClick(View view) {
 		numberPickerWeeks
-				.setMaxValue((radioButtonObstetic.isChecked() ? ChildbirthDateCalculator.OBSTETIC_PREGNANCY_PERIOD
-						: ChildbirthDateCalculator.FETAL_PREGNANCY_PERIOD) - 1);
+				.setMaxValue((radioButtonIsGestationalAge.isChecked() ? PregnancyCalculator.FULL_GESTATIONAL_AGE
+						: PregnancyCalculator.FULL_EMBRYONIC_AGE) - 1);
 	}
 
 	private void checkVisibility(CheckBox checkBox, LinearLayout linearLayout) {

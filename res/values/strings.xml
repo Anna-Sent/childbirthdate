@@ -67,8 +67,8 @@
     <string name="mUltrasoundResults">Результаты УЗИ</string>
     <string name="mUltrasoundDate">Дата проведения исследования</string>
     <string name="mPregnancyPeriod">Диагностированный срок беременности</string>
-    <string name="mObsteticPeriod">Указан акушерский срок (как правило)</string>
-    <string name="mFetalPeriod">Указан эмбриональный срок</string>
+    <string name="mIsGestationalAge">Указан акушерский срок (как правило)</string>
+    <string name="mIsEmbryonicAge">Указан эмбриональный срок</string>
     <string name="mWeek">нед.</string>
     <string name="mDay">д.</string>
     <string name="mCalculate">Рассчитать</string>

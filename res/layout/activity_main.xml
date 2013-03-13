@@ -195,20 +195,20 @@
                             android:paddingLeft="20dp" >
 
                             <RadioButton
-                                android:id="@+id/radioObstetic"
+                                android:id="@+id/radioIsGestationalAge"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
                                 android:onClick="radioClick"
-                                android:text="@string/mObsteticPeriod"
+                                android:text="@string/mIsGestationalAge"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
                             <RadioButton
-                                android:id="@+id/radioFetal"
+                                android:id="@+id/radioIsEmbryonicAge"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:onClick="radioClick"
-                                android:text="@string/mFetalPeriod"
+                                android:text="@string/mIsEmbryonicAge"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </RadioGroup>
                     </LinearLayout>
