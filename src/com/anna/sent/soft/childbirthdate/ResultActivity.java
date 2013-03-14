@@ -211,9 +211,9 @@ public class ResultActivity extends Activity {
 		linearLayout.addView(adView);
 
 		AdRequest request = new AdRequest();
-		// request.addTestDevice(AdRequest.TEST_EMULATOR);
-		// request.addTestDevice("2600D922057328C48F2E6DBAB33639C1");
-		// request.setGender(AdRequest.Gender.FEMALE);
+		/*request.addTestDevice(AdRequest.TEST_EMULATOR);
+		request.addTestDevice("2600D922057328C48F2E6DBAB33639C1");*/
+		request.setGender(AdRequest.Gender.FEMALE);
 		adView.loadAd(request);
 	}
 
