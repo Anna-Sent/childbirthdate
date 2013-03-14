@@ -31,11 +31,11 @@ public class PregnancyCalculator {
 	public final static int MAX_MENSTRUAL_CYCLE_LEN = 46;
 
 	/**
-	 * The length of the luteal phase ranges from 10 to 16 days in 95% of
+	 * The length of the luteal phase ranges from 11 to 16 days in 95% of
 	 * normally ovulating women.
 	 */
 	public final static int MIN_LUTEAL_PHASE_LEN = 10;
-	public final static int MAX_LUTEAL_PHASE_LEN = 16;
+	public final static int MAX_LUTEAL_PHASE_LEN = 17;
 
 	/**
 	 * Average duration of pregnancy is actually about 40 weeks. On average, it
@@ -45,15 +45,53 @@ public class PregnancyCalculator {
 	public final static int FULL_EMBRYONIC_AGE = 38;
 
 	/**
+	 * Assuming that 44 weeks is maximal possible value, because of incorrect
+	 * estimation of gestational age (for example, for woman who have an
+	 * irregular period).
+	 */
+	public final static int MAX_GESTATIONAL_AGE = 44;
+
+	/**
+	 * The calculation by using ultrasound method is the very accurate at
+	 * gestational age of the 11-14 and embryonic age of the 9-12 weeks.
+	 */
+	public final static int MAX_GESTATIONAL_ULTRASOUND_ACCURACY = 14;
+	public final static int MAX_EMBRYONIC_ULTRASOUND_ACCURACY = 12;
+	
+	/**
+	 * Trimesters' ranges.
+	 */
+	public final static int FIRST_TRIMESTER_END_INCLUSIVE = 12;
+	public final static int SECOND_TRIMESTER_END_INCLUSIVE = 28;
+
+	/**
 	 * There is 7 days in a week.
 	 */
 	public final static int DAYS_IN_A_WEEK = 7;
 
-	private String message = "";
+	/**
+	 * Some countries count gestational age from fertilization instead of LMP.
+	 * This method of counting is also known as fertilization age, embryonic
+	 * age, fertilizational age or (intrauterine) developmental (IUD) age. This
+	 * method is more prevalent in descriptions of prenatal development of the
+	 * embryo or fetus. The LMP gestational age is usually greater by about two
+	 * weeks. Pregnancy often is defined as beginning with implantation, which
+	 * happens about three weeks after the LMP (see the beginning of pregnancy
+	 * controversy).
+	 * 
+	 * @author Anna
+	 * 
+	 */
+	public enum CountingMethod {
+		EmbryonicAge, GestationalAge
+	};
+
+	private String accuracyMessage = "";
 	private Context mContext;
 
 	/**
-	 * Constructor of the class {@link PregnancyCalculator}.
+	 * Constructor of the class {@code PregnancyCalculator} gets {@code Context}
+	 * of the application.
 	 * 
 	 * @param context
 	 */
@@ -68,11 +106,11 @@ public class PregnancyCalculator {
 	 * @param menstrualCycleLen
 	 *            average length of cycles (from the first day of your one
 	 *            period to the first day of your next period), must be in range
-	 *            from MIN_MENSTRUAL_CYCLE_LEN to MAX_MENSTRUAL_CYCLE_LEN
-	 *            inclusive
+	 *            from {@code MIN_MENSTRUAL_CYCLE_LEN} to
+	 *            {@code MAX_MENSTRUAL_CYCLE_LEN} inclusive
 	 * @param lutealPhaseLen
-	 *            must be in range from MIN_LUTEAL_PHASE_LEN to
-	 *            MAX_LUTEAL_PHASE_LEN inclusive
+	 *            must be in range from {@code MIN_LUTEAL_PHASE_LEN} to
+	 *            {@code MAX_LUTEAL_PHASE_LEN} inclusive
 	 * @param date
 	 *            first day of last menstrual period (first day of bleeding)
 	 * @return estimated childbirth date
@@ -96,61 +134,80 @@ public class PregnancyCalculator {
 		return date;
 	}
 
+	private void setAccuracyMessage(int weeks, int days, CountingMethod countingMethod) {
+		int maxAccuracy;
+		switch (countingMethod) {
+		case EmbryonicAge:
+			maxAccuracy = MAX_EMBRYONIC_ULTRASOUND_ACCURACY;
+		case GestationalAge:
+		default:
+			maxAccuracy = MAX_GESTATIONAL_ULTRASOUND_ACCURACY;
+		}
+		
+		accuracyMessage = "";
+		if (weeks < maxAccuracy) {
+			accuracyMessage = mContext.getString(R.string.messageAccurate);
+		} else {
+			accuracyMessage = mContext.getString(R.string.messageInaccurate);
+		}
+	}
+		
+	private int getFullAge(CountingMethod countingMethod) {
+		switch (countingMethod) {
+		case EmbryonicAge:
+			return FULL_EMBRYONIC_AGE * DAYS_IN_A_WEEK;
+		case GestationalAge:
+		default:
+			return FULL_GESTATIONAL_AGE * DAYS_IN_A_WEEK;
+		}
+	}
+	
 	/**
-	 * Calculates childbirth date by the ultrasound. The method is the very
-	 * accurate at gestational age of the 11-14 weeks.
+	 * Calculates childbirth date by the ultrasound.
 	 * 
 	 * @param date
 	 *            date of the screening
 	 * @param weeks
-	 *            count of weeks of pregnancy, must be >= 0 and (<
-	 *            FULL_EMBRYONIC_AGE if isEmbryonicAge is false or <
-	 *            FULL_GESTATIONAL_AGE if isEmbryonicAge is true)
+	 *            count of weeks of embryonic/gestational age, must be >= 0 and
+	 *            < {@code FULL_EMBRYONIC_AGE}/{@code FULL_GESTATIONAL_AGE}
 	 * @param days
-	 *            must be >= 0 and < DAYS_IN_A_WEEK
-	 * @param isEmbryonicAge
+	 *            count of days, must be >= 0 and < {@code DAYS_IN_A_WEEK}
+	 * @param countingMethod
+	 *            gestational age, embryonic age
 	 * @return estimated childbirth date
 	 */
 	public Calendar getChildbirthDateByUltrasound(Calendar date, int weeks,
-			int days, boolean isEmbryonicAge) {
-		if (weeks <= 13 && !isEmbryonicAge || weeks <= 11 && isEmbryonicAge) {
-			message = mContext.getString(R.string.messageAccurate);
-		} else {
-			message = mContext.getString(R.string.messageInaccurate);
-		}
-
-		int fullPregnancyAge = isEmbryonicAge ? FULL_EMBRYONIC_AGE
-				* DAYS_IN_A_WEEK : FULL_GESTATIONAL_AGE * DAYS_IN_A_WEEK;
-
-		date.add(Calendar.DAY_OF_MONTH, fullPregnancyAge - weeks
-				* DAYS_IN_A_WEEK - days);
+			int days, CountingMethod countingMethod) {
+		setAccuracyMessage(weeks, days, countingMethod);
+		int fullAge = getFullAge(countingMethod);
+		date.add(Calendar.DAY_OF_MONTH, fullAge - weeks * DAYS_IN_A_WEEK - days);
 		return date;
 	}
 
 	/**
-	 * Use after call getChildbirthDateByUltrasound() or
-	 * getPregnancyAgeByUltrasound().
+	 * Use after call {@code getChildbirthDateByUltrasound()} or
+	 * {@code getGestationalAgeByUltrasound()}.
 	 * 
 	 * @return message about the accuracy of method
 	 */
 	public String getMessage() {
-		return message;
+		return accuracyMessage;
 	}
 
 	/**
-	 * The class represents pregnancy age as count of weeks and count of days.
+	 * The class represents gestational age in weeks and days.
 	 * 
 	 * @author Anna
 	 * 
 	 */
-	public class PregnancyAge {
+	public class GestationalAge {
 		private int weeks = 0;
 		private int days = 0;
 
-		public PregnancyAge() {
+		public GestationalAge() {
 		}
 
-		public PregnancyAge(int weeks, int days) {
+		public GestationalAge(int weeks, int days) {
 			this.weeks = weeks;
 			this.days = days;
 		}
@@ -158,28 +215,48 @@ public class PregnancyCalculator {
 		/**
 		 * Checker for the correctness of values of weeks and days.
 		 * 
-		 * @return {@code true}, if pregnancy age is correct, {@code false}
+		 * @return {@code true}, if gestational age is correct, {@code false}
 		 *         otherwise
 		 */
 		public boolean isCorrect() {
-			int due = weeks * 7 + days;
-			return due >= 0 && due <= 42 * 7;
+			int due = weeks * DAYS_IN_A_WEEK + days;
+			return due >= 0 && due <= MAX_GESTATIONAL_AGE * DAYS_IN_A_WEEK;
+		}
+
+		public static final int FIRST_TRIMESTER = 1;
+		public static final int SECOND_TRIMESTER = 2;
+		public static final int THIRD_TRIMESTER = 3;
+
+		/**
+		 * Gestational age must be correct before call of this method. So, call
+		 * {@code isCorrect()} before using of this method.
+		 * 
+		 * @return number of trimester
+		 */
+		public int getTrimesterNumber() {
+			if (weeks <= FIRST_TRIMESTER_END_INCLUSIVE) {
+				return FIRST_TRIMESTER;
+			} else if (weeks <= SECOND_TRIMESTER_END_INCLUSIVE) {
+				return SECOND_TRIMESTER;
+			}
+
+			return THIRD_TRIMESTER;
 		}
 
 		/**
-		 * Pregnancy age must be correct before call of this method. So, call
-		 * isCorrect() before using of this method.
+		 * Gestational age must be correct before call of this method. So, call
+		 * {@code isCorrect()} before using of this method.
 		 * 
-		 * @return
+		 * @return string representation of trimester number
 		 */
-		public int getTrimester() {
-			if (weeks <= 12) {
-				return 1;
-			} else if (weeks <= 28) {
-				return 2;
+		public String getTrimesterString() {
+			if (weeks <= FIRST_TRIMESTER_END_INCLUSIVE) {
+				return mContext.getString(R.string.firstTrimester);
+			} else if (weeks <= SECOND_TRIMESTER_END_INCLUSIVE) {
+				return mContext.getString(R.string.secondTrimester);
 			}
 
-			return 3;
+			return mContext.getString(R.string.thirdTrimester);
 		}
 
 		public int getWeeks() {
@@ -199,81 +276,89 @@ public class PregnancyCalculator {
 		return date.getTimeInMillis();
 	}
 
-	private PregnancyAge getPregnancyDue(long current, long begin) {
+	private GestationalAge getGestationalAge(long current, long begin) {
 		long difference = current - begin;
 		int days = (int) (difference / (1000 * 3600 * 24));
-		int weeks = days / 7;
-		days = days - weeks * 7;
-		return new PregnancyAge(weeks, days);
+		int weeks = days / DAYS_IN_A_WEEK;
+		days = days - weeks * DAYS_IN_A_WEEK;
+		return new GestationalAge(weeks, days);
 	}
 
 	/**
-	 * Calculates pregnancy age by the first day of the woman's last menstrual
+	 * Calculates gestational age by the first day of the woman's last menstrual
 	 * period.
 	 * 
 	 * @param lastMenstrualPeriodDate
 	 *            first day of last menstrual period (first day of bleeding)
 	 * @param date
-	 * @return estimated pregnancy age
+	 * @return estimated gestational age
 	 */
-	public PregnancyAge getPregnancyAgeByLastMenstruationDate(
+	public GestationalAge getGestationalAgeByLastMenstruationDate(
 			Calendar lastMenstrualPeriodDate, Calendar date) {
 		long current = getTimeInMillis(date);
 		long begin = getTimeInMillis(lastMenstrualPeriodDate);
-		return getPregnancyDue(current, begin);
+		return getGestationalAge(current, begin);
 	}
 
 	/**
-	 * Calculates pregnancy age by the ovulation (conception) date.
+	 * Calculates gestational age by the ovulation (conception) date.
 	 * 
 	 * @param menstrualCycleLen
 	 *            average length of cycles (from first day of your period to the
 	 *            first day of your next period) must be in range from
-	 *            MIN_MENSTRUAL_CYCLE_LEN to MAX_MENSTRUAL_CYCLE_LEN inclusive
+	 *            {@code MIN_MENSTRUAL_CYCLE_LEN} to
+	 *            {@code MAX_MENSTRUAL_CYCLE_LEN} inclusive
 	 * @param lutealPhaseLen
-	 *            must be in range from MIN_LUTEAL_PHASE_LEN to
-	 *            MAX_LUTEAL_PHASE_LEN inclusive
+	 *            must be in range from {@code MIN_LUTEAL_PHASE_LEN} to
+	 *            {@code MAX_LUTEAL_PHASE_LEN} inclusive
 	 * @param ovulationDate
 	 *            probable ovulation (conception) date
 	 * @param date
-	 * @return estimated pregnancy age
+	 * @return estimated gestational age
 	 */
-	public PregnancyAge getPregnancyAgeByOvulationDate(int menstrualCycleLen,
-			int lutealPhaseLen, Calendar ovulationDate, Calendar date) {
+	public GestationalAge getGestationalAgeByOvulationDate(
+			int menstrualCycleLen, int lutealPhaseLen, Calendar ovulationDate,
+			Calendar date) {
 		int follicularPhaseLen = menstrualCycleLen - lutealPhaseLen;
 		ovulationDate.add(Calendar.DAY_OF_MONTH, -follicularPhaseLen);
 		long current = getTimeInMillis(date);
 		long begin = getTimeInMillis(ovulationDate);
-		return getPregnancyDue(current, begin);
+		return getGestationalAge(current, begin);
 	}
 
+	private int getCurrentGestationalAge(int weeks, int days, CountingMethod countingMethod) {
+		switch (countingMethod) {
+		case EmbryonicAge:
+			return (weeks + 2) * DAYS_IN_A_WEEK + days;
+		case GestationalAge:
+		default:
+			return weeks * DAYS_IN_A_WEEK + days;
+		}
+	}
+	
 	/**
-	 * Calculates pregnancy age by the ultrasound. The method is the very
-	 * accurate at gestational age of the 11-14 weeks.
+	 * Calculates gestational age by the ultrasound.
 	 * 
 	 * @param ultrasoundDate
 	 *            date of the screening
 	 * @param weeks
-	 *            count of weeks of pregnancy, must be >= 0 and (<
-	 *            FULL_EMBRYONIC_AGE if isEmbryonicAge is false or <
-	 *            FULL_GESTATIONAL_AGE if isEmbryonicAge is true)
+	 *            count of weeks of embryonic/gestational age, must be >= 0 and
+	 *            < {@code FULL_EMBRYONIC_AGE}/{@code FULL_GESTATIONAL_AGE}
 	 * @param days
-	 *            must be >= 0 and < DAYS_IN_A_WEEK
-	 * @param isEmbryonicAge
+	 *            count of days, must be >= 0 and < {@code DAYS_IN_A_WEEK}
+	 * @param countingMethod
+	 *            gestational age, embryonic age
 	 * @param date
 	 * @return estimated gestational age of pregnancy
 	 */
-	public PregnancyAge getPregnancyAgeByUltrasound(Calendar ultrasoundDate,
-			int weeks, int days, boolean isEmbryonicAge, Calendar date) {
-		if (weeks <= 13 && !isEmbryonicAge || weeks <= 11 && isEmbryonicAge) {
-			message = mContext.getString(R.string.messageAccurate);
-		} else {
-			message = mContext.getString(R.string.messageInaccurate);
-		}
-
-		int pregnancyAge = (isEmbryonicAge ? weeks : weeks + 2)
-				* DAYS_IN_A_WEEK + days;
-		ultrasoundDate.add(Calendar.DAY_OF_MONTH, -pregnancyAge);
-		return new PregnancyAge();
+	public GestationalAge getGestationalAgeByUltrasound(
+			Calendar ultrasoundDate, int weeks, int days,
+			CountingMethod countingMethod, Calendar date) {
+		setAccuracyMessage(weeks, days, countingMethod);
+		int currentGestationalAge = getCurrentGestationalAge(weeks, days, countingMethod);
+		ultrasoundDate.add(Calendar.DAY_OF_MONTH, -currentGestationalAge);
+		long current = getTimeInMillis(date);
+		long begin = getTimeInMillis(ultrasoundDate);
+		return getGestationalAge(current, begin);
 	}
 }

@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <LinearLayout
-        style="@style/LinearLayoutVerticalStyle" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 
         <TabWidget
             android:id="@android:id/tabs"
@@ -21,26 +20,24 @@
                 android:id="@+id/tab1"
                 style="@style/ScrollViewStyle" >
 
-                <LinearLayout
-                    style="@style/LinearLayoutVerticalStyle" >
+                <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="@dimen/shift"
                         android:text="@string/acceptDefaults"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                    <LinearLayout
-                        style="@style/LinearLayoutHorizontalStyle" >
+                    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:gravity="center_vertical"
-                            android:paddingLeft="20dp"
+                            android:paddingLeft="@dimen/shift"
                             android:text="@string/menstrualCycleLen"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -57,15 +54,14 @@
                             android:textAppearance="?android:attr/textAppearanceSmall" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        style="@style/LinearLayoutHorizontalStyle" >
+                    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:gravity="center_vertical"
-                            android:paddingLeft="20dp"
+                            android:paddingLeft="@dimen/shift"
                             android:text="@string/lutealPhaseLen"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -82,13 +78,17 @@
                             android:textAppearance="?android:attr/textAppearanceSmall" />
                     </LinearLayout>
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:onClick="restoreDefaultValues"
-                        android:text="@string/restoreDefaultValues"
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+
+                        <TextView style="@style/ButtonSpace" />
+
+                        <Button
+                            style="@style/ButtonStyle.SmallText"
+                            android:onClick="restoreDefaultValues"
+                            android:text="@string/restoreDefaultValues" />
+
+                        <TextView style="@style/ButtonSpace" />
+                    </LinearLayout>
                 </LinearLayout>
             </ScrollView>
 
@@ -96,8 +96,7 @@
                 android:id="@+id/tab2"
                 style="@style/ScrollViewStyle" >
 
-                <LinearLayout
-                    style="@style/LinearLayoutVerticalStyle" >
+                <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 
                     <CheckBox
                         android:id="@+id/checkBox1"
@@ -140,7 +139,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:paddingLeft="20dp"
+                            android:paddingLeft="@dimen/shift"
                             android:text="@string/ultrasoundDate"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -152,17 +151,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:paddingLeft="20dp"
-                            android:text="@string/pregnancyAge"
+                            android:paddingLeft="@dimen/shift"
+                            android:text="@string/embryonicAge"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                        <LinearLayout
-                            style="@style/LinearLayoutHorizontalStyle" >
+                        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
-                            <TextView
-                                android:layout_width="20dp"
-                                android:layout_height="match_parent"
-                                android:text="" />
+                            <TextView style="@style/FixedSpace" />
 
                             <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                                 android:id="@+id/editTextWeeks"
@@ -192,7 +187,7 @@
                         <RadioGroup
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="20dp" >
+                            android:paddingLeft="@dimen/shift" >
 
                             <RadioButton
                                 android:id="@+id/radioIsGestationalAge"
@@ -213,14 +208,45 @@
                         </RadioGroup>
                     </LinearLayout>
 
-                    <Button
-                        android:id="@+id/calculateButton"
+                    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+
+                        <TextView style="@style/ButtonSpace" />
+
+                        <Button
+                            android:id="@+id/buttonCalculateEstimatedChildbirthDate"
+                            style="@style/ButtonStyle.SmallText"
+                            android:onClick="calculate"
+                            android:text="@string/calculateEstimatedChildbirthDate" />
+
+                        <TextView style="@style/ButtonSpace" />
+                    </LinearLayout>
+
+                    <TextView style="@style/HelpTextViewStyle.Medium" />
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:onClick="calculate"
-                        android:text="@string/calculate"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/shift"
+                        android:text="@string/currentDate"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <DatePicker
+                        android:id="@+id/datePickerCurrentDate"
+                        style="@style/DatePickerStyle" />
+
+                    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+
+                        <TextView style="@style/ButtonSpace" />
+
+                        <Button
+                            android:id="@+id/buttonCalculateEstimatedGestationalAge"
+                            style="@style/ButtonStyle.SmallText"
+                            android:onClick="calculate"
+                            android:text="@string/calculateEstimatedGestationalAge" />
+
+                        <TextView style="@style/ButtonSpace" />
+                    </LinearLayout>
                 </LinearLayout>
             </ScrollView>
 
@@ -228,15 +254,14 @@
                 android:id="@+id/tab3"
                 style="@style/ScrollViewStyle" >
 
-                <LinearLayout
-                    style="@style/LinearLayoutVerticalStyle" >
+                <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 
                     <TextView
                         android:id="@+id/textViewHelp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="@dimen/shift"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
                 </LinearLayout>
             </ScrollView>

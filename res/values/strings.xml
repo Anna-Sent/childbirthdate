@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="emptyString">empty</string>
     <string name="settings">Настройки</string>
     <string name="calculation">Расчет</string>
     <string name="help">Справка</string>
-    <string name="messageAccurate">По результатам УЗИ ПДР наиболее точная.</string>
-    <string name="messageInaccurate">По результатам УЗИ ПДР неточная, так как срок беременности велик.</string>
+    <string name="messageAccurate">Высокая точность.</string>
+    <string name="messageInaccurate">Низкая точность.</string>
     <string name="app_name">Дата родов</string>
-    <string name="result">result</string>
-    <string name="help">
+    <string name="bigHelp">
 <![CDATA[
 <b>Вкладка Настройки</b><br/><br/>
 
@@ -53,8 +52,6 @@
 
 <b>Важно</b><br/><br/>
 
- Помните, что роды могут начаться на две недели раньше или на две недели позже ПДР. (Нормально протекающая беременность длится от 38 до 42 недель.)<br/><br/>
-
  Обратитесь в женскую консультацию для уточнения срока беременности и ПДР.<br/><br/>
 ]]>
     </string>
@@ -66,20 +63,28 @@
     <string name="ovulationDate">Дата овуляции (предполагаемая дата зачатия)</string>
     <string name="ultrasoundResults">Результаты УЗИ</string>
     <string name="ultrasoundDate">Дата проведения исследования</string>
-    <string name="pregnancyAge">Диагностированный срок беременности</string>
+    <string name="embryonicAge">Диагностированный срок беременности</string>
     <string name="isGestationalAge">Указан акушерский срок (как правило)</string>
     <string name="isEmbryonicAge">Указан эмбриональный срок</string>
     <string name="weeks">нед.</string>
     <string name="days">д.</string>
-    <string name="calculate">Рассчитать</string>
+    <string name="calculateEstimatedChildbirthDate">Рассчитать дату родов</string>
+    <string name="calculateEstimatedGestationalAge">Рассчитать срок беременности</string>
     <string name="errorNotSelectedCalculationMethod">Не выбран способ расчета</string>
-    <string name="errorConsultADoctor">Обратитесь в женскую консультацию для уточнения срока беременности</string>
+    <string name="consultADoctor">Обратитесь в женскую консультацию для уточнения срока беременности</string>
     <string name="estimatedChildbirthDate">Предполагаемая дата родов</string>
     <string name="byLMP">по дате последней менструации</string>
     <string name="byOvulation">по дате овуляции (зачатия)</string>
     <string name="byUltrasound">по результатам УЗИ</string>
-    <string name="remember">Помните, что роды могут начаться на две недели раньше или на две недели позже ПДР.</string>
+    <string name="rememberECD">Помните, что роды могут начаться на две недели раньше или на две недели позже ПДР.</string>
+    <string name="rememberEGA">Помните, что нормально протекающая беременность длится от 38 до 42 недель.</string>
     <string name="rateApplication">Оценить приложение</string>
     <string name="marketNotFound">Приложение market не найдено</string>
+    <string name="estimatedGestationAge">Предполагаемый срок беременности</string>
+    <string name="currentDate">Дата для расчета срока беременности</string>
+    <string name="errorIncorrectCurrentDate">Указана некорректная дата расчета срока беременности</string>
+    <string name="firstTrimester">Первый триместр</string>
+    <string name="secondTrimester">Второй триместр</string>
+    <string name="thirdTrimester">Третий триместр</string>
 
 </resources>

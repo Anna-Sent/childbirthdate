@@ -28,7 +28,7 @@ public class MainActivity extends TabActivity {
 	private NumberPicker numberPickerMenstrualCycleLen,
 			numberPcikerLutealPhaseLen, numberPickerWeeks, numberPickerDays;
 	private DatePicker datePickerLastMenstruationDate, datePickerOvulationDate,
-			datePickerUltrasoundDate;
+			datePickerUltrasoundDate, datePickerCurrentDate;
 	private RadioButton radioButtonIsGestationalAge, radioButtonIsEmbryonicAge;
 	private TextView textViewHelp;
 
@@ -42,7 +42,13 @@ public class MainActivity extends TabActivity {
 	public static final String EXTRA_ULTRASOUND_DATE = "com.anna.sent.soft.childbirthdate.ultrasounddate";
 	public static final String EXTRA_WEEKS = "com.anna.sent.soft.childbirthdate.weeks";
 	public static final String EXTRA_DAYS = "com.anna.sent.soft.childbirthdate.days";
-	public static final String EXTRA_IS_EMBRYONIC_AGE = "com.anna.sent.soft.childbirthdate.isfetal"; // rename to isembryonicage somehow
+	public static final String EXTRA_IS_EMBRYONIC_AGE = "com.anna.sent.soft.childbirthdate.isfetal"; // rename
+
+	public static final String EXTRA_WHAT_TO_DO = "com.anna.sent.soft.childbirthdate.whattodo";
+	public static final int CALCULATE_NOTHING = 0;
+	public static final int CALCULATE_EGA = 1;
+	public static final int CALCULATE_ECD = 2;
+	public static final String EXTRA_CURRENT_DATE = "com.anna.sent.soft.childbirthdate.currentdate";
 
 	public static final String SETTINGS_FILE = "childbirthdatesettings";
 
@@ -63,9 +69,11 @@ public class MainActivity extends TabActivity {
 		mTabHost = getTabHost();
 
 		mTabHost.addTab(mTabHost.newTabSpec("tab_settings")
-				.setIndicator(getString(R.string.settings)).setContent(R.id.tab1));
+				.setIndicator(getString(R.string.settings))
+				.setContent(R.id.tab1));
 		mTabHost.addTab(mTabHost.newTabSpec("tab_calculation")
-				.setIndicator(getString(R.string.calculation)).setContent(R.id.tab2));
+				.setIndicator(getString(R.string.calculation))
+				.setContent(R.id.tab2));
 		mTabHost.addTab(mTabHost.newTabSpec("tab_help")
 				.setIndicator(getString(R.string.help)).setContent(R.id.tab3));
 
@@ -95,6 +103,8 @@ public class MainActivity extends TabActivity {
 		linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
 		datePickerUltrasoundDate = (DatePicker) findViewById(R.id.datePickerUltrasoundDate);
 
+		datePickerCurrentDate = (DatePicker) findViewById(R.id.datePickerCurrentDate);
+
 		radioButtonIsGestationalAge = (RadioButton) findViewById(R.id.radioIsGestationalAge);
 		radioButtonIsEmbryonicAge = (RadioButton) findViewById(R.id.radioIsEmbryonicAge);
 
@@ -103,11 +113,10 @@ public class MainActivity extends TabActivity {
 
 		numberPickerDays = (NumberPicker) findViewById(R.id.editTextDays);
 		numberPickerDays.setMinValue(0);
-		numberPickerDays
-				.setMaxValue(PregnancyCalculator.DAYS_IN_A_WEEK - 1);
+		numberPickerDays.setMaxValue(PregnancyCalculator.DAYS_IN_A_WEEK - 1);
 
 		textViewHelp = (TextView) findViewById(R.id.textViewHelp);
-		textViewHelp.setText(Html.fromHtml(getString(R.string.help)));
+		textViewHelp.setText(Html.fromHtml(getString(R.string.bigHelp)));
 	}
 
 	@Override
@@ -132,7 +141,8 @@ public class MainActivity extends TabActivity {
 				System.currentTimeMillis()));
 		weeks = settings.getInt(EXTRA_WEEKS, 0);
 		days = settings.getInt(EXTRA_DAYS, 0);
-		isEmbryonicAge = settings.getBoolean(EXTRA_IS_EMBRYONIC_AGE, isEmbryonicAge);
+		isEmbryonicAge = settings.getBoolean(EXTRA_IS_EMBRYONIC_AGE,
+				isEmbryonicAge);
 		writeValues();
 	}
 
@@ -191,13 +201,13 @@ public class MainActivity extends TabActivity {
 		// first: set radio button state
 		if (isEmbryonicAge) {
 			radioButtonIsEmbryonicAge.setChecked(true);
-		} else{
+		} else {
 			radioButtonIsGestationalAge.setChecked(true);
 		}
-		
+
 		// second: set max value for weeks number picker
 		radioClick(null);
-		
+
 		// third: set value for weeks number picker
 		numberPickerWeeks.setValue(weeks);
 		numberPickerDays.setValue(days);
@@ -227,9 +237,18 @@ public class MainActivity extends TabActivity {
 		intent.putExtra(EXTRA_WEEKS, weeks);
 		intent.putExtra(EXTRA_DAYS, days);
 		intent.putExtra(EXTRA_IS_EMBRYONIC_AGE, isEmbryonicAge);
+
+		int viewId = view.getId();
+		if (view.getId() == R.id.buttonCalculateEstimatedChildbirthDate) {
+			intent.putExtra(EXTRA_WHAT_TO_DO, CALCULATE_ECD);
+		} else if (viewId == R.id.buttonCalculateEstimatedGestationalAge) {
+			intent.putExtra(EXTRA_WHAT_TO_DO, CALCULATE_EGA);
+			intent.putExtra(EXTRA_CURRENT_DATE, getDate(datePickerCurrentDate));
+		}
+
 		startActivity(intent);
 	}
-	
+
 	public void radioClick(View view) {
 		numberPickerWeeks
 				.setMaxValue((radioButtonIsGestationalAge.isChecked() ? PregnancyCalculator.FULL_GESTATIONAL_AGE

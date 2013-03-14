@@ -13,7 +13,7 @@
         <TextView
             android:id="@+id/textView0"
             style="@style/HelpTextViewStyle.Large"
-            android:text="@string/byLMP" />
+            android:text="@string/emptyString" />
 
         <TextView
             android:id="@+id/textView1"
@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/result1"
             style="@style/HelpTextViewStyle.Medium.Red"
-            android:text="@string/result" />
+            android:text="@string/emptyString" />
 
         <TextView
             android:id="@+id/textView2"
@@ -33,7 +33,7 @@
         <TextView
             android:id="@+id/result2"
             style="@style/HelpTextViewStyle.Medium.Red"
-            android:text="@string/result" />
+            android:text="@string/emptyString" />
 
         <TextView
             android:id="@+id/textView3"
@@ -43,19 +43,19 @@
         <TextView
             android:id="@+id/result3"
             style="@style/HelpTextViewStyle.Medium.Red"
-            android:text="@string/result" />
+            android:text="@string/emptyString" />
 
         <TextView
             android:id="@+id/message3"
             style="@style/HelpTextViewStyle.Medium.Blue"
-            android:text="@string/result" />
+            android:text="@string/emptyString" />
 
         <TextView style="@style/HelpTextViewStyle.Medium" />
 
         <TextView
             android:id="@+id/textView00"
             style="@style/HelpTextViewStyle.Medium"
-            android:text="@string/remember" />
+            android:text="@string/emptyString" />
 
         <TextView style="@style/HelpTextViewStyle.Medium" />
 
