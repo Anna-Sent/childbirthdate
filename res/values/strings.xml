@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="emptyString">empty</string>
+
+    <string name="emptyString">empty</string>
     <string name="settings">Настройки</string>
     <string name="calculation">Расчет</string>
     <string name="help">Справка</string>
@@ -63,7 +64,7 @@
     <string name="ovulationDate">Дата овуляции (предполагаемая дата зачатия)</string>
     <string name="ultrasoundResults">Результаты УЗИ</string>
     <string name="ultrasoundDate">Дата проведения исследования</string>
-    <string name="embryonicAge">Диагностированный срок беременности</string>
+    <string name="diagnosedAge">Диагностированный срок беременности</string>
     <string name="isGestationalAge">Указан акушерский срок (как правило)</string>
     <string name="isEmbryonicAge">Указан эмбриональный срок</string>
     <string name="weeks">нед.</string>
@@ -81,10 +82,44 @@
     <string name="rateApplication">Оценить приложение</string>
     <string name="marketNotFound">Приложение market не найдено</string>
     <string name="estimatedGestationAge">Предполагаемый срок беременности</string>
-    <string name="currentDate">Дата для расчета срока беременности</string>
+    <string name="currentDate">Дата расчета срока беременности</string>
     <string name="errorIncorrectCurrentDate">Указана некорректная дата расчета срока беременности</string>
     <string name="firstTrimester">Первый триместр</string>
     <string name="secondTrimester">Второй триместр</string>
     <string name="thirdTrimester">Третий триместр</string>
+    <!-- Default = 28. Optional: Leave 28 if unsure. -->
+    <!-- Conception -->
+    <!-- gestational age, embryonic age, full term -->
+    <!-- Sonogram, LMP -->
+    <!--
+    As measured on a reference group of women with a menstrual cycle of
+    exactly 28-days prior to pregnancy, and who had spontaneous onset of
+    labor, the mean pregnancy length has been estimated to be 283.4 days
+    of gestational age as timed from the first day of the last menstrual
+    period as recalled by the mother, and 280.6 days when the gestational
+    age was retrospectively estimated by obstetric ultrasound measurement
+    of the fetal biparietal diameter (BPD) in the second trimester. Other
+    algorithms take into account a variety of other variables, such as whether
+    this is the first or subsequent child (i.e., pregnant woman is a primipara
+    or a multipara, respectively), the mother's race, parental age, length of
+    menstrual cycle, and menstrual regularity), but these are rarely used by
+    healthcare professionals. In order to have a standard reference point, the
+    normal pregnancy duration is generally assumed to be 280 days (or 40 weeks)
+    of gestational age.
+    -->
+    <!-- estimated gestational age, estimated due date -->
+    <!--
+    The term "conception date" may sometimes be used when that date is more
+    certain, though even medical professionals can be imprecise with their use of
+    the two distinct terms. The due date can be calculated by using Naegele's rule.
+    The LMP gestational age is usually greater by about two weeks.
+    -->
+    <!-- obstetric ultrasound, акушеры гинекологи ключевые слова -->
+    <!--
+    Calculations of gestational age from LMP are sometimes incorrect due to
+    normal variation from the average ovulation date.
+    The expected date of delivery may also be calculated from sonogram measurement
+    of the fetus. This method is slightly more accurate than methods based on LMP
+    -->
 
 </resources>

@@ -4,7 +4,8 @@ import java.util.Calendar;
 import android.content.Context;
 
 /**
- * Pregnancy due date calculator, pregnancy due date predictor.</br>
+ * Gestational age, childbirth date calculator, predictor (calculation,
+ * prediction). Pregnancy due date calculator, pregnancy due date predictor.<br>
  * 
  * It's features: estimated childbirth date calculation and gestational age
  * calculation - by using different methods: by the date of last menstrual
@@ -57,7 +58,7 @@ public class PregnancyCalculator {
 	 */
 	public final static int MAX_GESTATIONAL_ULTRASOUND_ACCURACY = 14;
 	public final static int MAX_EMBRYONIC_ULTRASOUND_ACCURACY = 12;
-	
+
 	/**
 	 * Trimesters' ranges.
 	 */
@@ -70,6 +71,17 @@ public class PregnancyCalculator {
 	public final static int DAYS_IN_A_WEEK = 7;
 
 	/**
+	 * Healthcare professionals name three different dates as the start of
+	 * pregnancy:<br>
+	 * 1. the first day of the woman's last normal menstrual period, and the
+	 * resulting fetal age is called the gestational age;<br>
+	 * 2. the date of conception (about two weeks before her next expected
+	 * menstrual period),<br>
+	 * 3. with the age called fertilization age the date of implantation (about
+	 * one week after conception).<br>
+	 * Since these are spread over a significant period of time, the duration of
+	 * pregnancy necessarily depends on the date selected as the starting point
+	 * chosen.<br>
 	 * Some countries count gestational age from fertilization instead of LMP.
 	 * This method of counting is also known as fertilization age, embryonic
 	 * age, fertilizational age or (intrauterine) developmental (IUD) age. This
@@ -134,7 +146,8 @@ public class PregnancyCalculator {
 		return date;
 	}
 
-	private void setAccuracyMessage(int weeks, int days, CountingMethod countingMethod) {
+	private void setAccuracyMessage(int weeks, int days,
+			CountingMethod countingMethod) {
 		int maxAccuracy;
 		switch (countingMethod) {
 		case EmbryonicAge:
@@ -143,7 +156,7 @@ public class PregnancyCalculator {
 		default:
 			maxAccuracy = MAX_GESTATIONAL_ULTRASOUND_ACCURACY;
 		}
-		
+
 		accuracyMessage = "";
 		if (weeks < maxAccuracy) {
 			accuracyMessage = mContext.getString(R.string.messageAccurate);
@@ -151,8 +164,8 @@ public class PregnancyCalculator {
 			accuracyMessage = mContext.getString(R.string.messageInaccurate);
 		}
 	}
-		
-	private int getFullAge(CountingMethod countingMethod) {
+
+	private int getFullTerm(CountingMethod countingMethod) {
 		switch (countingMethod) {
 		case EmbryonicAge:
 			return FULL_EMBRYONIC_AGE * DAYS_IN_A_WEEK;
@@ -161,7 +174,7 @@ public class PregnancyCalculator {
 			return FULL_GESTATIONAL_AGE * DAYS_IN_A_WEEK;
 		}
 	}
-	
+
 	/**
 	 * Calculates childbirth date by the ultrasound.
 	 * 
@@ -179,8 +192,9 @@ public class PregnancyCalculator {
 	public Calendar getChildbirthDateByUltrasound(Calendar date, int weeks,
 			int days, CountingMethod countingMethod) {
 		setAccuracyMessage(weeks, days, countingMethod);
-		int fullAge = getFullAge(countingMethod);
-		date.add(Calendar.DAY_OF_MONTH, fullAge - weeks * DAYS_IN_A_WEEK - days);
+		int fullTerm = getFullTerm(countingMethod);
+		date.add(Calendar.DAY_OF_MONTH, fullTerm - weeks * DAYS_IN_A_WEEK
+				- days);
 		return date;
 	}
 
@@ -326,7 +340,8 @@ public class PregnancyCalculator {
 		return getGestationalAge(current, begin);
 	}
 
-	private int getCurrentGestationalAge(int weeks, int days, CountingMethod countingMethod) {
+	private int getCurrentGestationalAge(int weeks, int days,
+			CountingMethod countingMethod) {
 		switch (countingMethod) {
 		case EmbryonicAge:
 			return (weeks + 2) * DAYS_IN_A_WEEK + days;
@@ -335,7 +350,7 @@ public class PregnancyCalculator {
 			return weeks * DAYS_IN_A_WEEK + days;
 		}
 	}
-	
+
 	/**
 	 * Calculates gestational age by the ultrasound.
 	 * 
@@ -355,7 +370,8 @@ public class PregnancyCalculator {
 			Calendar ultrasoundDate, int weeks, int days,
 			CountingMethod countingMethod, Calendar date) {
 		setAccuracyMessage(weeks, days, countingMethod);
-		int currentGestationalAge = getCurrentGestationalAge(weeks, days, countingMethod);
+		int currentGestationalAge = getCurrentGestationalAge(weeks, days,
+				countingMethod);
 		ultrasoundDate.add(Calendar.DAY_OF_MONTH, -currentGestationalAge);
 		long current = getTimeInMillis(date);
 		long begin = getTimeInMillis(ultrasoundDate);
