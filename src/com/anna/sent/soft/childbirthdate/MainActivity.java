@@ -42,7 +42,7 @@ public class MainActivity extends TabActivity {
 	public static final String EXTRA_ULTRASOUND_DATE = "com.anna.sent.soft.childbirthdate.ultrasounddate";
 	public static final String EXTRA_WEEKS = "com.anna.sent.soft.childbirthdate.weeks";
 	public static final String EXTRA_DAYS = "com.anna.sent.soft.childbirthdate.days";
-	public static final String EXTRA_IS_EMBRYONIC_AGE = "com.anna.sent.soft.childbirthdate.isfetal"; // rename
+	public static final String EXTRA_IS_EMBRYONIC_AGE = "com.anna.sent.soft.childbirthdate.isfetal"; // rename, compatibility with old version
 
 	public static final String EXTRA_WHAT_TO_DO = "com.anna.sent.soft.childbirthdate.whattodo";
 	public static final int CALCULATE_NOTHING = 0;
