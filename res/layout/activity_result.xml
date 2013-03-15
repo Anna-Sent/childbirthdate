@@ -26,6 +26,11 @@
             android:text="@string/emptyString" />
 
         <TextView
+            android:id="@+id/message1"
+            style="@style/TextViewStyle.LeftPadding"
+            android:text="@string/emptyString" />
+
+        <TextView
             android:id="@+id/textView2"
             style="@style/TextViewStyle.Center.Medium"
             android:text="@string/byOvulation" />
@@ -33,6 +38,11 @@
         <TextView
             android:id="@+id/result2"
             style="@style/TextViewStyle.Center.Medium.Red"
+            android:text="@string/emptyString" />
+
+        <TextView
+            android:id="@+id/message2"
+            style="@style/TextViewStyle.LeftPadding"
             android:text="@string/emptyString" />
 
         <TextView
@@ -47,7 +57,7 @@
 
         <TextView
             android:id="@+id/message3"
-            style="@style/TextViewStyle.Center.Medium.Blue"
+            style="@style/TextViewStyle.LeftPadding"
             android:text="@string/emptyString" />
 
         <TextView style="@style/TextViewStyle.Center.Medium" />
@@ -81,7 +91,7 @@
             ads:adSize="BANNER"
             ads:adUnitId="a1513549e3d3050"
             ads:loadAdOnCreate="false"
-            ads:testDevices="TEST_EMULATOR, 2600D922057328C48F2E6DBAB33639C1" /S
+            ads:testDevices="TEST_EMULATOR, 2600D922057328C48F2E6DBAB33639C1" /
         -->
     </LinearLayout>
 
