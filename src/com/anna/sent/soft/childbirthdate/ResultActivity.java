@@ -16,168 +16,368 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anna.sent.soft.childbirthdate.PregnancyCalculator.CountingMethod;
-import com.anna.sent.soft.childbirthdate.PregnancyCalculator.GestationalAge;
+import com.anna.sent.soft.childbirthdate.pregnancy.CorrectedAge;
+import com.anna.sent.soft.childbirthdate.pregnancy.EmbryonicAge;
+import com.anna.sent.soft.childbirthdate.pregnancy.GestationalAge;
+import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
+import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
+import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator.CountingMethod;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
 
 public class ResultActivity extends Activity {
 
-	private TextView textView0, textView00, textView1, textView2, textView3,
-			result1, result2, result3, message1, message2, message3;
 	private Context mContext;
+
+	private TextView textView0, textView00;
+
+	private TextView[] textViews;
+	private TextView[] results;
+	private TextView[] messages;
+	private Pregnancy[] gas;
+
+	int whatToDo;
+	Calendar currentDate;
+	int menstrualCycleLen, lutealPhaseLen;
+	boolean[] byMethod;
+	Calendar lastMenstruationDate, ovulationDate, ultrasoundDate;
+	int weeks, days;
+	boolean isEmbryonicAge;
+
 	private AdView adView;
+
+	private final static int undefined = 1;
+	private final static int accurate = 2;
+	private final static int inaccurate = 3;
+	private int isAccurateForUltrasound = undefined;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result);
 
-		mContext = getApplicationContext();
+		setMembers();
 
-		textView0 = (TextView) findViewById(R.id.textView0);
-		textView00 = (TextView) findViewById(R.id.textView00);
-		textView1 = (TextView) findViewById(R.id.textView1);
-		textView2 = (TextView) findViewById(R.id.textView2);
-		textView3 = (TextView) findViewById(R.id.textView3);
-		result1 = (TextView) findViewById(R.id.result1);
-		result2 = (TextView) findViewById(R.id.result2);
-		result3 = (TextView) findViewById(R.id.result3);
-		message1 = (TextView) findViewById(R.id.message1);
-		message2 = (TextView) findViewById(R.id.message2);
-		message3 = (TextView) findViewById(R.id.message3);
+		setMembersFromIntent();
 
-		Intent intent = getIntent();
-		int whatToDo = intent.getIntExtra(MainActivity.EXTRA_WHAT_TO_DO,
-				MainActivity.CALCULATE_NOTHING);
-		if (MainActivity.CALCULATE_NOTHING == whatToDo) {
-			finish();
-		}
+		setAdView();
 
-		Calendar currentDate = (Calendar) intent
-				.getSerializableExtra(MainActivity.EXTRA_CURRENT_DATE);
-		if (currentDate == null) {
-			currentDate = Calendar.getInstance();
-		}
+		clearViews();
 
-		int menstrualCycleLen = intent.getIntExtra(
-				MainActivity.EXTRA_MENSTRUAL_CYCLE_LEN,
-				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
-		int lutealPhaseLen = intent.getIntExtra(
-				MainActivity.EXTRA_LUTEAL_PHASE_LEN,
-				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
+		calculate();
+	}
 
-		boolean byMenstruationDate = intent.getBooleanExtra(
-				MainActivity.EXTRA_BY_LAST_MENSTRUATION_DATE, false);
-		Calendar lastMenstruationDate = (Calendar) intent
-				.getSerializableExtra(MainActivity.EXTRA_LAST_MENSTRUATION_DATE);
-		if (lastMenstruationDate == null) {
-			lastMenstruationDate = Calendar.getInstance();
-		}
-
-		boolean byOvulationDate = intent.getBooleanExtra(
-				MainActivity.EXTRA_BY_OVULATION_DATE, false);
-		Calendar ovulationDate = (Calendar) intent
-				.getSerializableExtra(MainActivity.EXTRA_OVULATION_DATE);
-		if (ovulationDate == null) {
-			ovulationDate = Calendar.getInstance();
-		}
-
-		boolean byUltrasound = intent.getBooleanExtra(
-				MainActivity.EXTRA_BY_ULTRASOUND, false);
-		Calendar ultrasoundDate = (Calendar) intent
-				.getSerializableExtra(MainActivity.EXTRA_ULTRASOUND_DATE);
-		if (ultrasoundDate == null) {
-			ultrasoundDate = Calendar.getInstance();
-		}
-
-		int weeks = intent.getIntExtra(MainActivity.EXTRA_WEEKS, 0);
-		int days = intent.getIntExtra(MainActivity.EXTRA_DAYS, 0);
-		boolean isEmbryonicAge = intent.getBooleanExtra(
-				MainActivity.EXTRA_IS_EMBRYONIC_AGE, false);
-
-		boolean doCalculation = byMenstruationDate || byOvulationDate
-				|| byUltrasound;
-
-		textView0.setText(doCalculation ? "" : mContext
-				.getString(R.string.errorNotSelectedCalculationMethod));
-		textView00.setText(doCalculation ? "" : mContext
-				.getString(R.string.consultADoctor));
-		textView1.setVisibility(byMenstruationDate ? View.VISIBLE : View.GONE);
-		textView2.setVisibility(byOvulationDate ? View.VISIBLE : View.GONE);
-		textView3.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
-		result1.setVisibility(byMenstruationDate ? View.VISIBLE : View.GONE);
-		message1.setVisibility(byMenstruationDate ? View.VISIBLE : View.GONE);
-		result2.setVisibility(byOvulationDate ? View.VISIBLE : View.GONE);
-		message2.setVisibility(byOvulationDate ? View.VISIBLE : View.GONE);
-		result3.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
-		message3.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
-
-		if (doCalculation) {
-			PregnancyCalculator calculator = new PregnancyCalculator(mContext);
+	private void clearViews() {
+		if (byMethod[0] || byMethod[1] || byMethod[2]) {
 			if (MainActivity.CALCULATE_ECD == whatToDo) {
 				textView0.setText(mContext
 						.getString(R.string.estimatedChildbirthDate));
 				textView00.setText(mContext.getString(R.string.rememberECD));
-
-				if (byMenstruationDate) {
-					Calendar result = calculator
-							.getChildbirthDateByLastMenstruationDate(
-									menstrualCycleLen, lutealPhaseLen,
-									lastMenstruationDate);
-					setTexts(result, result1, message1, calculator.getMessage());
-				}
-
-				if (byOvulationDate) {
-					Calendar result = calculator
-							.getChildbirthDateByOvulationDate(ovulationDate);
-					setTexts(result, result2, message2, calculator.getMessage());
-				}
-
-				if (byUltrasound) {
-					Calendar result = calculator.getChildbirthDateByUltrasound(
-							ultrasoundDate, weeks, days,
-							isEmbryonicAge ? CountingMethod.EmbryonicAge
-									: CountingMethod.GestationalAge);
-					setTexts(result, result3, message3, calculator.getMessage());
-				}
-			} else if (MainActivity.CALCULATE_EGA == whatToDo) {
+			} else if (MainActivity.CALCULATE_EGA == whatToDo
+					&& currentDate != null) {
 				textView0.setText(mContext
 						.getString(R.string.estimatedGestationAge)
 						+ " ("
 						+ DateFormat.getDateFormat(mContext).format(
 								currentDate.getTime()) + ")");
 				textView00.setText(mContext.getString(R.string.rememberEGA));
+			} else {
+				textView0.setText("");
+				textView00.setText("");
+			}
+		} else {
+			textView0.setText(mContext
+					.getString(R.string.errorNotSelectedCalculationMethod));
+			textView00.setText(mContext.getString(R.string.consultADoctor));
+		}
 
-				if (byMenstruationDate) {
-					GestationalAge result = calculator
-							.getGestationalAgeByLastMenstruationDate(
-									lastMenstruationDate, currentDate);
-					setTexts(result, result1, message1, calculator.getMessage());
+		for (int i = 0; i < 3; ++i) {
+			results[i].setText("");
+			messages[i].setText("");
+			int visibility = byMethod[i] ? View.VISIBLE : View.GONE;
+			textViews[i].setVisibility(visibility);
+			results[i].setVisibility(visibility);
+			messages[i].setVisibility(visibility);
+		}
+	}
+
+	private void calculate() {
+		for (int i = 0; i < 3; ++i) {
+			if (byMethod[i]) {
+				switch (i) {
+				case 0:
+					if (lastMenstruationDate != null) {
+						gas[i] = new CorrectedAge(lastMenstruationDate,
+								menstrualCycleLen, lutealPhaseLen);
+					}
+
+					break;
+				case 1:
+					if (ovulationDate != null) {
+						gas[i] = new EmbryonicAge(ovulationDate);
+					}
+
+					break;
+				case 2:
+					if (ultrasoundDate != null) {
+						CountingMethod countingMethod = isEmbryonicAge ? CountingMethod.EmbryonicAge
+								: CountingMethod.GestationalAge;
+						switch (countingMethod) {
+						case EmbryonicAge:
+							gas[i] = new EmbryonicAge(weeks, days,
+									ultrasoundDate);
+							break;
+						case GestationalAge:
+							gas[i] = new GestationalAge(weeks, days,
+									ultrasoundDate);
+							break;
+						}
+					}
+
+					isAccurateForUltrasound = gas[i].isAccurateForUltrasound() ? accurate
+							: inaccurate;
+					break;
 				}
 
-				if (byOvulationDate) {
-					GestationalAge result = calculator
-							.getGestationalAgeByOvulationDate(ovulationDate,
-									currentDate);
-					setTexts(result, result2, message2, calculator.getMessage());
+				if (gas[i] != null && whatToDo == MainActivity.CALCULATE_EGA) {
+					gas[i].setCurrentPoint(currentDate);
 				}
 
-				if (byUltrasound) {
-					GestationalAge result = calculator
-							.getGestationalAgeByUltrasound(
-									ultrasoundDate,
-									weeks,
-									days,
-									isEmbryonicAge ? CountingMethod.EmbryonicAge
-											: CountingMethod.GestationalAge,
-									currentDate);
-					setTexts(result, result3, message3, calculator.getMessage());
+				switch (whatToDo) {
+				case MainActivity.CALCULATE_ECD:
+					setEdcTexts(i);
+					break;
+				case MainActivity.CALCULATE_EGA:
+					setEgaTexts(i);
+					break;
+				}
+
+				setLast(i);
+			}
+		}
+	}
+
+	private String getStringRepresentation(int weeks, int days) {
+		String result = "";
+		if (weeks > 0) {
+			result += weeks + " " + mContext.getString(R.string.weeks)
+					+ (days > 0 ? " " : "");
+		}
+
+		if (days > 0) {
+			result += days + " " + mContext.getString(R.string.days);
+		}
+
+		return result;
+	}
+
+	private String getStringRepresentation(Pregnancy ga) {
+		String result = mContext.getString(R.string.trimesteris)
+				+ " "
+				+ ga.getTrimesterNumber()
+				+ "; "
+				+ mContext.getString(R.string.fulltermis)
+				+ " "
+				+ getStringRepresentation(ga.getFullDurationWeeks(),
+						ga.getFullDurationDays());
+		int rest = ga.getRestInDays();
+		if (rest > 0) {
+			result += "; "
+					+ mContext.getString(R.string.rest)
+					+ " "
+					+ getStringRepresentation(ga.getRestWeeks(),
+							ga.getRestDays());
+		} else if (rest == 0) {
+			result += "; " + mContext.getString(R.string.ECD);
+		}
+
+		return result;
+	}
+
+	private void setEgaTexts(int i) {
+		if (results.length == 3 && messages.length == 3 && gas.length == 3
+				&& i < 3 && i >= 0) {
+			TextView result = results[i], message = messages[i];
+			Pregnancy ga = gas[i];
+			if (ga != null) {
+				Calendar start = ga.getStartPoint();
+				Calendar end = ga.getEndPoint();
+				if (start != null && end != null && currentDate != null) {
+					if (ga.isCorrect()) {
+						if (result != null) {
+							result.setText(ga.getWeeks() + " "
+									+ mContext.getString(R.string.weeks) + " "
+									+ ga.getDays() + " "
+									+ mContext.getString(R.string.days));
+						}
+						if (message != null) {
+							message.setText(getStringRepresentation(ga));
+						}
+					} else {
+						if (result != null) {
+							result.setText(mContext
+									.getString(R.string.errorIncorrectGestationAge));
+						}
+
+						if (message != null) {
+							if (currentDate.before(start)) {
+								message.setText(mContext
+										.getString(R.string.errorIncorrectCurrentDateSmaller));
+							} else if (currentDate.after(end)) {
+								message.setText(mContext
+										.getString(R.string.errorIncorrectCurrentDateGreater));
+							}
+						}
+					}
 				}
 			}
 		}
+	}
 
+	private void setEdcTexts(int i) {
+		if (results.length == 3 && messages.length == 3 && gas.length == 3
+				&& i < 3 && i >= 0) {
+			TextView result = results[i];
+			Pregnancy ga = gas[i];
+			if (ga != null && result != null) {
+				Calendar childbirthDate = ga.getEndPoint();
+				if (childbirthDate != null) {
+					result.setText(DateFormat.getDateFormat(mContext).format(
+							childbirthDate.getTime()));
+				}
+			}
+		}
+	}
+
+	private void setLast(int i) {
+		if (results.length == 3 && messages.length == 3 && gas.length == 3
+				&& i >= 0 && i < 3) {
+			TextView message = messages[i];
+			Pregnancy ga = gas[i];
+			if (message != null && ga != null) {
+				if (i == 2 && ga.isCorrect()) {
+					CharSequence old = message.getText();
+					if (isAccurateForUltrasound == accurate) {
+						message.setText((old.equals("") ? "" : old + "\n")
+								+ mContext
+										.getString(R.string.accurateUltrasoundResults));
+					} else if (isAccurateForUltrasound == inaccurate) {
+						message.setText((old.equals("") ? "" : old + "\n")
+								+ mContext
+										.getString(R.string.inaccurateUltrasoundResults));
+					}
+				}
+
+				if (message.getText().equals("")) {
+					message.setVisibility(View.GONE);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Gestational age must be correct before call of this method. So, call
+	 * {@code isCorrect()} before using of this method.
+	 * 
+	 * @return string representation of trimester number
+	 */
+	public String getTrimesterString(Pregnancy gestationalAge) {
+		int trimester = gestationalAge.getTrimesterNumber();
+		switch (trimester) {
+		case Pregnancy.FIRST_TRIMESTER:
+			return mContext.getString(R.string.firstTrimester);
+		case Pregnancy.SECOND_TRIMESTER:
+			return mContext.getString(R.string.secondTrimester);
+		case Pregnancy.THIRD_TRIMESTER:
+			return mContext.getString(R.string.thirdTrimester);
+		}
+
+		return "?";
+	}
+
+	public void rate(View view) {
+		try {
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setData(Uri.parse("market://details?id=" + getPackageName()));
+			startActivity(intent);
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(this, R.string.marketNotFound, Toast.LENGTH_SHORT)
+					.show();
+		}
+	}
+
+	private void setMembers() {
+		mContext = getApplicationContext();
+		textView0 = (TextView) findViewById(R.id.textView0);
+		textView00 = (TextView) findViewById(R.id.textView00);
+		gas = new Pregnancy[] { null, null, null };
+		textViews = new TextView[] { (TextView) findViewById(R.id.textView1),
+				(TextView) findViewById(R.id.textView2),
+				(TextView) findViewById(R.id.textView3) };
+		results = new TextView[] { (TextView) findViewById(R.id.result1),
+				(TextView) findViewById(R.id.result2),
+				(TextView) findViewById(R.id.result3) };
+		messages = new TextView[] { (TextView) findViewById(R.id.message1),
+				(TextView) findViewById(R.id.message2),
+				(TextView) findViewById(R.id.message3) };
+	}
+
+	private Calendar getCalendarValue(Calendar date) {
+		if (date == null) {
+			date = Calendar.getInstance();
+		}
+
+		date.set(Calendar.HOUR, 0);
+		date.set(Calendar.MINUTE, 0);
+		date.set(Calendar.SECOND, 0);
+		date.set(Calendar.MILLISECOND, 0);
+
+		return date;
+	}
+
+	private void setMembersFromIntent() {
+		Intent intent = getIntent();
+		whatToDo = intent.getIntExtra(MainActivity.EXTRA_WHAT_TO_DO,
+				MainActivity.CALCULATE_NOTHING);
+		if (MainActivity.CALCULATE_NOTHING == whatToDo) {
+			finish();
+		}
+
+		menstrualCycleLen = intent.getIntExtra(
+				MainActivity.EXTRA_MENSTRUAL_CYCLE_LEN,
+				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
+		lutealPhaseLen = intent.getIntExtra(
+				MainActivity.EXTRA_LUTEAL_PHASE_LEN,
+				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
+
+		byMethod = new boolean[3];
+		byMethod[0] = intent.getBooleanExtra(
+				MainActivity.EXTRA_BY_LAST_MENSTRUATION_DATE, false);
+		byMethod[1] = intent.getBooleanExtra(
+				MainActivity.EXTRA_BY_OVULATION_DATE, false);
+		byMethod[2] = intent.getBooleanExtra(MainActivity.EXTRA_BY_ULTRASOUND,
+				false);
+		currentDate = (Calendar) intent
+				.getSerializableExtra(MainActivity.EXTRA_CURRENT_DATE);
+		currentDate = getCalendarValue(currentDate);
+		lastMenstruationDate = (Calendar) intent
+				.getSerializableExtra(MainActivity.EXTRA_LAST_MENSTRUATION_DATE);
+		lastMenstruationDate = getCalendarValue(lastMenstruationDate);
+		ovulationDate = (Calendar) intent
+				.getSerializableExtra(MainActivity.EXTRA_OVULATION_DATE);
+		ovulationDate = getCalendarValue(ovulationDate);
+		ultrasoundDate = (Calendar) intent
+				.getSerializableExtra(MainActivity.EXTRA_ULTRASOUND_DATE);
+		ultrasoundDate = getCalendarValue(ultrasoundDate);
+
+		weeks = intent.getIntExtra(MainActivity.EXTRA_WEEKS, 0);
+		days = intent.getIntExtra(MainActivity.EXTRA_DAYS, 0);
+		isEmbryonicAge = intent.getBooleanExtra(
+				MainActivity.EXTRA_IS_EMBRYONIC_AGE, false);
+	}
+
+	void setAdView() {
 		// AdView adView = (AdView) findViewById(R.id.adView);
 		adView = new AdView(this, AdSize.BANNER, "a1513549e3d3050");
 		adView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
@@ -193,47 +393,6 @@ public class ResultActivity extends Activity {
 		 */
 		request.setGender(AdRequest.Gender.FEMALE);
 		adView.loadAd(request);
-	}
-
-	private void setTexts(GestationalAge result, TextView resultTextView,
-			TextView messageTextView, String message) {
-		if (result.isCorrect()) {
-			resultTextView.setText(result.getWeeks() + " "
-					+ mContext.getString(R.string.weeks) + " "
-					+ result.getDays() + " "
-					+ mContext.getString(R.string.days));
-		} else {
-			resultTextView.setText(mContext
-					.getString(R.string.errorIncorrectCurrentDate));
-		}
-
-		if (!message.equals("")) {
-			messageTextView.setText(message);
-		} else {
-			messageTextView.setVisibility(View.GONE);
-		}
-	}
-
-	private void setTexts(Calendar result, TextView resultTextView,
-			TextView messageTextView, String message) {
-		resultTextView.setText(DateFormat.getDateFormat(mContext).format(
-				result.getTime()));
-		if (!message.equals("")) {
-			messageTextView.setText(message);
-		} else {
-			messageTextView.setVisibility(View.GONE);
-		}
-	}
-
-	public void rate(View view) {
-		try {
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setData(Uri.parse("market://details?id=" + getPackageName()));
-			startActivity(intent);
-		} catch (ActivityNotFoundException e) {
-			Toast.makeText(this, R.string.marketNotFound, Toast.LENGTH_SHORT)
-					.show();
-		}
 	}
 
 	@Override

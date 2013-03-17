@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 @SuppressWarnings("deprecation")
@@ -42,7 +43,9 @@ public class MainActivity extends TabActivity {
 	public static final String EXTRA_ULTRASOUND_DATE = "com.anna.sent.soft.childbirthdate.ultrasounddate";
 	public static final String EXTRA_WEEKS = "com.anna.sent.soft.childbirthdate.weeks";
 	public static final String EXTRA_DAYS = "com.anna.sent.soft.childbirthdate.days";
-	public static final String EXTRA_IS_EMBRYONIC_AGE = "com.anna.sent.soft.childbirthdate.isfetal"; // rename, compatibility with old version
+
+	// rename to COUNTING_METHOD, compatibility with old version
+	public static final String EXTRA_IS_EMBRYONIC_AGE = "com.anna.sent.soft.childbirthdate.isfetal";
 
 	public static final String EXTRA_WHAT_TO_DO = "com.anna.sent.soft.childbirthdate.whattodo";
 	public static final int CALCULATE_NOTHING = 0;
@@ -113,7 +116,7 @@ public class MainActivity extends TabActivity {
 
 		numberPickerDays = (NumberPicker) findViewById(R.id.editTextDays);
 		numberPickerDays.setMinValue(0);
-		numberPickerDays.setMaxValue(PregnancyCalculator.DAYS_IN_A_WEEK - 1);
+		numberPickerDays.setMaxValue(6);
 
 		textViewHelp = (TextView) findViewById(R.id.textViewHelp);
 		textViewHelp.setText(Html.fromHtml(getString(R.string.bigHelp)));
@@ -251,8 +254,8 @@ public class MainActivity extends TabActivity {
 
 	public void radioClick(View view) {
 		numberPickerWeeks
-				.setMaxValue((radioButtonIsGestationalAge.isChecked() ? PregnancyCalculator.FULL_GESTATIONAL_AGE
-						: PregnancyCalculator.FULL_EMBRYONIC_AGE) - 1);
+				.setMaxValue((radioButtonIsGestationalAge.isChecked() ? PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS
+						: PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS) - 1);
 	}
 
 	private void checkVisibility(CheckBox checkBox, LinearLayout linearLayout) {
