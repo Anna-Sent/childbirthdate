@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class MainActivity extends TabActivity {
 			datePickerUltrasoundDate, datePickerCurrentDate;
 	private RadioButton radioButtonIsGestationalAge, radioButtonIsEmbryonicAge;
 	private TextView textViewHelp;
+	private ScrollView tab1, tab2, tab3;
 
 	public static final String EXTRA_MENSTRUAL_CYCLE_LEN = "com.anna.sent.soft.childbirthdate.menstrualcyclelen";
 	public static final String EXTRA_LUTEAL_PHASE_LEN = "com.anna.sent.soft.childbirthdate.lutealphaselen";
@@ -120,6 +122,10 @@ public class MainActivity extends TabActivity {
 
 		textViewHelp = (TextView) findViewById(R.id.textViewHelp);
 		textViewHelp.setText(Html.fromHtml(getString(R.string.bigHelp)));
+
+		tab1 = (ScrollView) findViewById(R.id.tab1);
+		tab2 = (ScrollView) findViewById(R.id.tab2);
+		tab3 = (ScrollView) findViewById(R.id.tab3);
 	}
 
 	@Override
@@ -275,5 +281,51 @@ public class MainActivity extends TabActivity {
 		if (view.equals(checkBox3)) {
 			checkVisibility(checkBox3, linearLayout3);
 		}
+	}
+
+	private final String scrollVerticalPosition = "scrollVerticalPosition";
+
+	private ScrollView getCurrentTab() {
+		ScrollView currentTab = null;
+		switch (mTabHost.getCurrentTab()) {
+		case 0:
+			currentTab = tab1;
+			break;
+		case 1:
+			currentTab = tab2;
+			break;
+		case 2:
+			currentTab = tab3;
+			break;
+		}
+
+		return currentTab;
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		ScrollView currentTab = getCurrentTab();
+		if (currentTab != null) {
+			int y = currentTab.getScrollY();
+			outState.putInt(scrollVerticalPosition, y);
+		}
+
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle state) {
+		super.onRestoreInstanceState(state);
+		
+		final int y = state.getInt(scrollVerticalPosition, 0);
+		mTabHost.post(new Runnable() {
+			@Override
+			public void run() {
+				ScrollView currentTab = getCurrentTab();
+				if (currentTab != null) {
+					currentTab.scrollTo(0, y);
+				}
+			}
+		});
 	}
 }
