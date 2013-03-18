@@ -80,13 +80,11 @@ public class MainActivity extends TabActivity implements StateSaver {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
 		settings = getApplicationContext().getSharedPreferences(SETTINGS_FILE,
 				Context.MODE_PRIVATE);
 		int themeId = settings.getInt(EXTRA_GUI_THEME_ID, Utils.DARK_THEME);
-
 		Utils.onActivityCreateSetTheme(this, themeId);
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		mTabHost = getTabHost();
