@@ -132,5 +132,7 @@
     <string name="trimesteris">триместр:</string>
     <string name="rest">осталось до ПДР:</string>
     <string name="ECD">ПДР</string>
+    <string name="lighttheme">Светлая тема</string>
+    <string name="darktheme">Темная тема</string>
 
 </resources>

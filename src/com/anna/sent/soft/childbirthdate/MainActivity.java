@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -20,7 +22,8 @@ import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
-import com.anna.sent.soft.utils.*;
+import com.anna.sent.soft.utils.StateSaver;
+import com.anna.sent.soft.utils.Utils;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity implements StateSaver {
@@ -67,13 +70,23 @@ public class MainActivity extends TabActivity implements StateSaver {
 	private int days;
 	private boolean isEmbryonicAge;
 
-	private static final String EXTRA_GUI_SCROLL_Y = "scrollY";
-	private static final String EXTRA_GUI_CURRENT_DATE = "currentDate";
+	private SharedPreferences settings;
+
+	private static final String EXTRA_GUI_SCROLL_Y = "com.anna.sent.soft.childbirthdate.scrolly";
+	private static final String EXTRA_GUI_CURRENT_DATE = "com.anna.sent.soft.childbirthdate.currentdate";
+	private static final String EXTRA_GUI_CURRENT_TAB = "com.anna.sent.soft.childbirthdate.currenttab";
+
+	private static final String EXTRA_GUI_THEME_ID = "com.anna.sent.soft.childbirthdate.themeid";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Utils.onActivityCreateSetTheme(this);
+
+		settings = getApplicationContext().getSharedPreferences(SETTINGS_FILE,
+				Context.MODE_PRIVATE);
+		int themeId = settings.getInt(EXTRA_GUI_THEME_ID, Utils.DARK_THEME);
+
+		Utils.onActivityCreateSetTheme(this, themeId);
 		setContentView(R.layout.activity_main);
 
 		mTabHost = getTabHost();
@@ -86,8 +99,6 @@ public class MainActivity extends TabActivity implements StateSaver {
 				.setContent(R.id.tab2));
 		mTabHost.addTab(mTabHost.newTabSpec("tab_help")
 				.setIndicator(getString(R.string.help)).setContent(R.id.tab3));
-
-		mTabHost.setCurrentTab(1);
 
 		numberPickerMenstrualCycleLen = (NumberPicker) findViewById(R.id.editTextMenstrualCycleLen);
 		numberPickerMenstrualCycleLen
@@ -133,24 +144,23 @@ public class MainActivity extends TabActivity implements StateSaver {
 		tab3 = (ScrollView) findViewById(R.id.tab3);
 
 		Intent intent = getIntent();
-		if (intent.hasExtra(EXTRA_GUI_SCROLL_Y)) {
-			int y = intent.getIntExtra(EXTRA_GUI_SCROLL_Y, 0);
-			setScrollY(y);
-		}
+		int currentTab = intent.getIntExtra(EXTRA_GUI_CURRENT_TAB, 1);
+		mTabHost.setCurrentTab(currentTab);
 
-		if (intent.hasExtra(EXTRA_GUI_CURRENT_DATE)) {
-			Calendar value = Calendar.getInstance();
-			value.setTimeInMillis(intent.getLongExtra(EXTRA_GUI_CURRENT_DATE,
-					System.currentTimeMillis()));
-			setDate(datePickerCurrentDate, value);
-		}
+		int y = intent.getIntExtra(EXTRA_GUI_SCROLL_Y, 0);
+		setScrollY(y);
+
+		Calendar value = Calendar.getInstance();
+		value.setTimeInMillis(intent.getLongExtra(EXTRA_GUI_CURRENT_DATE,
+				System.currentTimeMillis()));
+		setDate(datePickerCurrentDate, value);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		SharedPreferences settings = getApplicationContext()
-				.getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE);
+		// settings = getApplicationContext()
+		// .getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE);
 		menstrualCycleLen = settings.getInt(EXTRA_MENSTRUAL_CYCLE_LEN,
 				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
 		lutealPhaseLen = settings.getInt(EXTRA_LUTEAL_PHASE_LEN,
@@ -176,8 +186,8 @@ public class MainActivity extends TabActivity implements StateSaver {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		SharedPreferences settings = getApplicationContext()
-				.getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE);
+		// SharedPreferences settings = getApplicationContext()
+		// .getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE);
 		Editor editor = settings.edit();
 		readValues();
 		editor.putInt(EXTRA_MENSTRUAL_CYCLE_LEN, menstrualCycleLen);
@@ -193,6 +203,9 @@ public class MainActivity extends TabActivity implements StateSaver {
 		editor.putInt(EXTRA_WEEKS, weeks);
 		editor.putInt(EXTRA_DAYS, days);
 		editor.putBoolean(EXTRA_IS_EMBRYONIC_AGE, isEmbryonicAge);
+
+		editor.putInt(EXTRA_GUI_THEME_ID, Utils.getThemeId());
+
 		editor.commit();
 	}
 
@@ -322,6 +335,7 @@ public class MainActivity extends TabActivity implements StateSaver {
 		outState.putExtra(EXTRA_GUI_CURRENT_DATE,
 				getDate(datePickerCurrentDate).getTimeInMillis());
 		outState.putExtra(EXTRA_GUI_SCROLL_Y, getScrollY());
+		outState.putExtra(EXTRA_GUI_CURRENT_TAB, mTabHost.getCurrentTab());
 	}
 
 	private void setScrollY(final int y) {
@@ -354,5 +368,36 @@ public class MainActivity extends TabActivity implements StateSaver {
 		}
 
 		return currentTab;
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		switch (Utils.getThemeId()) {
+		case Utils.LIGHT_THEME:
+			menu.findItem(R.id.lighttheme).setChecked(true);
+			break;
+		case Utils.DARK_THEME:
+		default:
+			menu.findItem(R.id.darktheme).setChecked(true);
+			break;
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.lighttheme:
+			Utils.changeToTheme(this, Utils.LIGHT_THEME);
+			return true;
+		case R.id.darktheme:
+			Utils.changeToTheme(this, Utils.DARK_THEME);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }

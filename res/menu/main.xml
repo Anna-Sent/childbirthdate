@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/lighttheme"
+            android:checkable="true"
+            android:title="@string/lighttheme"/>
+        <item
+            android:id="@+id/darktheme"
+            android:checkable="true"
+            android:title="@string/darktheme"/>
+    </group>
+
+</menu>
