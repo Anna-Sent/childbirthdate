@@ -4,7 +4,12 @@
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
     </style>
 
-    <style name="AppTheme" parent="AppBaseTheme">
+    <style name="AppBaseThemeLight" parent="android:Theme.Light">
+        <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
     </style>
+
+    <style name="AppTheme" parent="AppBaseTheme"></style>
+
+    <style name="AppThemeLight" parent="AppBaseThemeLight"></style>
 
 </resources>

@@ -22,6 +22,7 @@ import com.anna.sent.soft.childbirthdate.pregnancy.GestationalAge;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator.CountingMethod;
+import com.anna.sent.soft.utils.Utils;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
@@ -55,6 +56,7 @@ public class ResultActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Utils.onActivityCreateSetTheme(this);
 		setContentView(R.layout.activity_result);
 
 		setMembers();

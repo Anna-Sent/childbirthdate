@@ -20,9 +20,10 @@ import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
+import com.anna.sent.soft.utils.*;
 
 @SuppressWarnings("deprecation")
-public class MainActivity extends TabActivity {
+public class MainActivity extends TabActivity implements StateSaver {
 
 	private CheckBox checkBox1, checkBox2, checkBox3;
 	private LinearLayout linearLayout1, linearLayout2, linearLayout3;
@@ -66,9 +67,13 @@ public class MainActivity extends TabActivity {
 	private int days;
 	private boolean isEmbryonicAge;
 
+	private static final String EXTRA_GUI_SCROLL_Y = "scrollY";
+	private static final String EXTRA_GUI_CURRENT_DATE = "currentDate";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Utils.onActivityCreateSetTheme(this);
 		setContentView(R.layout.activity_main);
 
 		mTabHost = getTabHost();
@@ -126,6 +131,19 @@ public class MainActivity extends TabActivity {
 		tab1 = (ScrollView) findViewById(R.id.tab1);
 		tab2 = (ScrollView) findViewById(R.id.tab2);
 		tab3 = (ScrollView) findViewById(R.id.tab3);
+
+		Intent intent = getIntent();
+		if (intent.hasExtra(EXTRA_GUI_SCROLL_Y)) {
+			int y = intent.getIntExtra(EXTRA_GUI_SCROLL_Y, 0);
+			setScrollY(y);
+		}
+
+		if (intent.hasExtra(EXTRA_GUI_CURRENT_DATE)) {
+			Calendar value = Calendar.getInstance();
+			value.setTimeInMillis(intent.getLongExtra(EXTRA_GUI_CURRENT_DATE,
+					System.currentTimeMillis()));
+			setDate(datePickerCurrentDate, value);
+		}
 	}
 
 	@Override
@@ -283,7 +301,43 @@ public class MainActivity extends TabActivity {
 		}
 	}
 
-	private final String scrollVerticalPosition = "scrollVerticalPosition";
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		int y = getScrollY();
+		outState.putInt(EXTRA_GUI_SCROLL_Y, y);
+
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle state) {
+		super.onRestoreInstanceState(state);
+
+		int y = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
+		setScrollY(y);
+	}
+
+	@Override
+	public void onSaveState(Intent outState) {
+		outState.putExtra(EXTRA_GUI_CURRENT_DATE,
+				getDate(datePickerCurrentDate).getTimeInMillis());
+		outState.putExtra(EXTRA_GUI_SCROLL_Y, getScrollY());
+	}
+
+	private void setScrollY(final int y) {
+		mTabHost.post(new Runnable() {
+			@Override
+			public void run() {
+				ScrollView currentTab = getCurrentTab();
+				currentTab.scrollTo(0, y);
+			}
+		});
+	}
+
+	private int getScrollY() {
+		ScrollView currentTab = getCurrentTab();
+		return currentTab.getScrollY();
+	}
 
 	private ScrollView getCurrentTab() {
 		ScrollView currentTab = null;
@@ -300,32 +354,5 @@ public class MainActivity extends TabActivity {
 		}
 
 		return currentTab;
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		ScrollView currentTab = getCurrentTab();
-		if (currentTab != null) {
-			int y = currentTab.getScrollY();
-			outState.putInt(scrollVerticalPosition, y);
-		}
-
-		super.onSaveInstanceState(outState);
-	}
-
-	@Override
-	protected void onRestoreInstanceState(Bundle state) {
-		super.onRestoreInstanceState(state);
-		
-		final int y = state.getInt(scrollVerticalPosition, 0);
-		mTabHost.post(new Runnable() {
-			@Override
-			public void run() {
-				ScrollView currentTab = getCurrentTab();
-				if (currentTab != null) {
-					currentTab.scrollTo(0, y);
-				}
-			}
-		});
 	}
 }
