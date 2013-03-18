@@ -55,8 +55,8 @@ public class ResultActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		Utils.onActivityCreateSetTheme(this);
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result);
 
 		setMembers();
