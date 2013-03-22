@@ -59,17 +59,18 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		mTabsAdapter.addTab(
 				mTabHost.newTabSpec(tab_help).setIndicator(
 						getString(R.string.help)), TabHelpFragment.class, null);
-
-		if (savedInstanceState == null) {
-			savedInstanceState = getIntent().getExtras();
-		}
-
-		if (savedInstanceState != null
-				&& savedInstanceState.containsKey(EXTRA_GUI_CURRENT_TAB)) {
+		
+		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
 			mTabHost.setCurrentTabByTag(savedInstanceState
 					.getString(EXTRA_GUI_CURRENT_TAB));
 		} else {
-			mTabHost.setCurrentTabByTag(tab_calculation);
+			savedInstanceState = getIntent().getExtras();
+			if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
+				mTabHost.setCurrentTabByTag(savedInstanceState
+						.getString(EXTRA_GUI_CURRENT_TAB));
+			} else {
+				mTabHost.setCurrentTabByTag(tab_calculation);
+			}
 		}
 	}
 
