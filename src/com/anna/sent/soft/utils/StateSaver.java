@@ -1,7 +1,7 @@
 package com.anna.sent.soft.utils;
 
-import android.content.Intent;
+import android.os.Bundle;
 
 public interface StateSaver {
-	public void onSaveState(Intent outState);
+	public void onSaveInstanceState(Bundle outState);
 }

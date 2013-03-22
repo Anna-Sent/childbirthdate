@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,10 +60,14 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 				mTabHost.newTabSpec(tab_help).setIndicator(
 						getString(R.string.help)), TabHelpFragment.class, null);
 
-		Intent intent = getIntent();
-		if (intent.hasExtra(EXTRA_GUI_CURRENT_TAB)) {
-			mTabHost.setCurrentTabByTag(intent
-					.getStringExtra(EXTRA_GUI_CURRENT_TAB));
+		if (savedInstanceState == null) {
+			savedInstanceState = getIntent().getExtras();
+		}
+
+		if (savedInstanceState != null
+				&& savedInstanceState.containsKey(EXTRA_GUI_CURRENT_TAB)) {
+			mTabHost.setCurrentTabByTag(savedInstanceState
+					.getString(EXTRA_GUI_CURRENT_TAB));
 		} else {
 			mTabHost.setCurrentTabByTag(tab_calculation);
 		}
@@ -79,7 +81,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		return (TabSettingsFragment) mTabsAdapter.getFragment(0);
 	}
 
-	@SuppressWarnings("unused")
 	private TabHelpFragment getTabHelpFragment() {
 		return (TabHelpFragment) mTabsAdapter.getFragment(2);
 	}
@@ -129,44 +130,23 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-	}
-
-	@Override
-	protected void onRestoreInstanceState(Bundle state) {
-		super.onRestoreInstanceState(state);
-		mTabHost.setCurrentTabByTag(state.getString(EXTRA_GUI_CURRENT_TAB));
-	}
-
-	@Override
-	public void onSaveState(Intent outState) {
-		outState.putExtra(EXTRA_GUI_CURRENT_TAB, mTabHost.getCurrentTabTag());
-		/*
-		 * Fragment f = mTabsAdapter.getFragment(mTabHost.getCurrentTab()); if
-		 * (f instanceof StateSaver) { ((StateSaver) f).onSaveState(outState); }
-		 */
-
-		Log.d("moo", getTabCalculationFragment() == null ? "calc null"
-				: "calc not null");
-		Log.d("moo", getTabSettingsFragment() == null ? "set null"
-				: "set not null");
-		Log.d("moo", getTabHelpFragment() == null ? "help null"
-				: "help not null");
+		outState.putString(EXTRA_GUI_CURRENT_TAB, mTabHost.getCurrentTabTag());
 
 		TabCalculationFragment tabCalculationFragment = getTabCalculationFragment();
 		if (tabCalculationFragment != null) {
-			getTabCalculationFragment().onSaveState(outState);
+			getTabCalculationFragment().onSaveInstanceState(outState);
 		}
 
 		TabSettingsFragment tabSettingsFragment = getTabSettingsFragment();
 		if (tabSettingsFragment != null) {
-			tabSettingsFragment.onSaveState(outState);
+			tabSettingsFragment.onSaveInstanceState(outState);
 		}
 
 		TabHelpFragment tabHelpFragment = getTabHelpFragment();
 		if (tabHelpFragment != null) {
-			tabHelpFragment.onSaveState(outState);
+			tabHelpFragment.onSaveInstanceState(outState);
 		}
 	}
 

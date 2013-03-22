@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -37,36 +36,24 @@ public class TabHelpFragment extends Fragment implements StateSaver {
 
 		scrollView = (ScrollView) getActivity().findViewById(R.id.tabHelp);
 
-		Intent intent = getActivity().getIntent();
+		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
+			restoreState(savedInstanceState);
+		} else {
+			savedInstanceState = getActivity().getIntent().getExtras();
+			if (savedInstanceState != null) {
+				restoreState(savedInstanceState);
+			}
+		}
+	}
 
-		final int y = intent.getIntExtra(EXTRA_GUI_SCROLL_Y, 0);
+	private void restoreState(Bundle state) {
+		final int y = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
 		scrollView.post(new Runnable() {
 			@Override
 			public void run() {
 				scrollView.scrollTo(0, y);
 			}
 		});
-	}
-
-	@Override
-	public void onSaveState(Intent outState) {
-		if (scrollView != null) {
-			outState.putExtra(EXTRA_GUI_SCROLL_Y, scrollView.getScrollY());
-		}
-	}
-
-	@Override
-	public void onViewStateRestored(Bundle savedInstanceState) {
-		super.onViewStateRestored(savedInstanceState);
-		if (savedInstanceState != null) {
-			final int y = savedInstanceState.getInt(EXTRA_GUI_SCROLL_Y, 0);
-			scrollView.post(new Runnable() {
-				@Override
-				public void run() {
-					scrollView.scrollTo(0, y);
-				}
-			});
-		}
 	}
 
 	@Override

@@ -1,16 +1,17 @@
 package com.anna.sent.soft.utils;
 
-import com.anna.sent.soft.utils.StateSaver;
-import com.anna.sent.soft.childbirthdate.R;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+
+import com.anna.sent.soft.childbirthdate.R;
 
 public class Utils {
 	public final static int DARK_THEME = 0;
 	public final static int LIGHT_THEME = 1;
 
 	private static int themeId = DARK_THEME;
+	private static Bundle state = new Bundle();
 
 	public static int getThemeId() {
 		return themeId;
@@ -24,12 +25,15 @@ public class Utils {
 		if (themeId != Utils.themeId) {
 			Utils.themeId = themeId;
 
-			Intent intent = new Intent(activity, activity.getClass());
 			if (activity instanceof StateSaver) {
-				((StateSaver) activity).onSaveState(intent);
+				state.clear();
+				((StateSaver) activity).onSaveInstanceState(state);
 			}
 
 			activity.finish();
+
+			Intent intent = new Intent(activity, activity.getClass());
+			intent.putExtras(state);
 			activity.startActivity(intent);
 		}
 	}

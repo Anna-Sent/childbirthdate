@@ -91,20 +91,29 @@ public class TabCalculationFragment extends Fragment implements StateSaver {
 		scrollView = (ScrollView) getActivity().findViewById(
 				R.id.tabCalculation);
 
-		Intent intent = getActivity().getIntent();
+		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
+			restoreState(savedInstanceState);
+		} else {
+			savedInstanceState = getActivity().getIntent().getExtras();
+			if (savedInstanceState != null) {
+				restoreState(savedInstanceState);
+			}
+		}
+	}
 
-		Calendar value = Calendar.getInstance();
-		value.setTimeInMillis(intent.getLongExtra(EXTRA_GUI_CURRENT_DATE,
-				System.currentTimeMillis()));
-		setDate(datePickerCurrentDate, value);
-
-		final int y = intent.getIntExtra(EXTRA_GUI_SCROLL_Y, 0);
+	private void restoreState(Bundle state) {
+		final int y = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
 		scrollView.post(new Runnable() {
 			@Override
 			public void run() {
 				scrollView.scrollTo(0, y);
 			}
 		});
+
+		Calendar value = Calendar.getInstance();
+		value.setTimeInMillis(state.getLong(EXTRA_GUI_CURRENT_DATE,
+				System.currentTimeMillis()));
+		setDate(datePickerCurrentDate, value);
 	}
 
 	@Override
@@ -205,36 +214,15 @@ public class TabCalculationFragment extends Fragment implements StateSaver {
 	}
 
 	@Override
-	public void onSaveState(Intent outState) {
-		if (scrollView != null) {
-			outState.putExtra(EXTRA_GUI_SCROLL_Y, scrollView.getScrollY());
-		}
-
-		if (datePickerCurrentDate != null) {
-			outState.putExtra(EXTRA_GUI_CURRENT_DATE,
-					getDate(datePickerCurrentDate).getTimeInMillis());
-		}
-	}
-
-	@Override
-	public void onViewStateRestored(Bundle savedInstanceState) {
-		super.onViewStateRestored(savedInstanceState);
-		if (savedInstanceState != null) {
-			final int y = savedInstanceState.getInt(EXTRA_GUI_SCROLL_Y, 0);
-			scrollView.post(new Runnable() {
-				@Override
-				public void run() {
-					scrollView.scrollTo(0, y);
-				}
-			});
-		}
-	}
-
-	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		if (scrollView != null) {
 			outState.putInt(EXTRA_GUI_SCROLL_Y, scrollView.getScrollY());
+		}
+
+		if (datePickerCurrentDate != null) {
+			outState.putLong(EXTRA_GUI_CURRENT_DATE,
+					getDate(datePickerCurrentDate).getTimeInMillis());
 		}
 	}
 
