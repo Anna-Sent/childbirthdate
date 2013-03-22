@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,8 +75,6 @@ public class TabsAdapter extends FragmentPagerAdapter implements
 	public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args) {
 		tabSpec.setContent(new DummyTabFactory(mContext));
 		String tag = tabSpec.getTag();
-		Log.d("moo", tag);
-
 		TabInfo info = new TabInfo(tag, clss, args);
 		mTabs.add(info);
 		mTabHost.addTab(tabSpec);
