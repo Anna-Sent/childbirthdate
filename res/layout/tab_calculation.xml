@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tabCalculation"
+    style="@style/ScrollViewStyle" >
+
+    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
+
+        <!-- new line -->
+
+        <CheckBox
+            android:id="@+id/checkBox1"
+            style="@style/CheckBoxStyle"
+            android:text="@string/lastMenstruationDate" />
+
+        <!-- new line -->
+
+        <fragment
+            android:id="@+id/lmpMethodFragment"
+            android:name="com.anna.sent.soft.childbirthdate.fragments.CalculationPageLmpMethodFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- new line -->
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            style="@style/CheckBoxStyle"
+            android:text="@string/ovulationDate" />
+
+        <!-- new line -->
+
+        <fragment
+            android:id="@+id/ovulationDateMethodFragment"
+            android:name="com.anna.sent.soft.childbirthdate.fragments.CalculationPageOvulationDateMethodFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- new line -->
+
+        <CheckBox
+            android:id="@+id/checkBox3"
+            style="@style/CheckBoxStyle"
+            android:text="@string/ultrasoundResults" />
+
+        <!-- new line -->
+
+        <fragment
+            android:id="@+id/ultrasoundMethodFragment"
+            android:name="com.anna.sent.soft.childbirthdate.fragments.CalculationPageUltrasoundMethodFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- new line -->
+
+        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+
+            <RelativeLayout style="@style/ButtonSpace" />
+
+            <Button
+                android:id="@+id/buttonCalculateEstimatedChildbirthDate"
+                style="@style/ButtonStyle.SmallText"
+                android:onClick="calculate"
+                android:text="@string/calculateEstimatedChildbirthDate" />
+
+            <RelativeLayout style="@style/ButtonSpace" />
+        </LinearLayout>
+
+        <!-- new line -->
+
+        <TextView style="@style/TextViewStyle" />
+
+        <!-- new line -->
+
+        <TextView style="@style/TextViewStyle" />
+
+        <!-- new line -->
+
+        <TextView
+            style="@style/TextViewStyle.LeftPadding.Medium"
+            android:text="@string/currentDate" />
+
+        <!-- new line -->
+
+        <DatePicker
+            android:id="@+id/datePickerCurrentDate"
+            style="@style/DatePickerStyle" />
+
+        <!-- new line -->
+
+        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+
+            <RelativeLayout style="@style/ButtonSpace" />
+
+            <Button
+                android:id="@+id/buttonCalculateEstimatedGestationalAge"
+                style="@style/ButtonStyle.SmallText"
+                android:onClick="calculate"
+                android:text="@string/calculateEstimatedGestationalAge" />
+
+            <RelativeLayout style="@style/ButtonSpace" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
