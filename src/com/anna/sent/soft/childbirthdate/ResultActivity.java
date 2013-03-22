@@ -26,6 +26,7 @@ import com.anna.sent.soft.utils.Utils;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
+import com.anna.sent.soft.childbirthdate.shared.Constants;
 
 public class ResultActivity extends Activity {
 
@@ -72,11 +73,11 @@ public class ResultActivity extends Activity {
 
 	private void clearViews() {
 		if (byMethod[0] || byMethod[1] || byMethod[2]) {
-			if (MainActivity.CALCULATE_ECD == whatToDo) {
+			if (Constants.CALCULATE_ECD == whatToDo) {
 				textView0.setText(mContext
 						.getString(R.string.estimatedChildbirthDate));
 				textView00.setText(mContext.getString(R.string.rememberECD));
-			} else if (MainActivity.CALCULATE_EGA == whatToDo
+			} else if (Constants.CALCULATE_EGA == whatToDo
 					&& currentDate != null) {
 				textView0.setText(mContext
 						.getString(R.string.estimatedGestationAge)
@@ -142,15 +143,15 @@ public class ResultActivity extends Activity {
 					break;
 				}
 
-				if (gas[i] != null && whatToDo == MainActivity.CALCULATE_EGA) {
+				if (gas[i] != null && whatToDo == Constants.CALCULATE_EGA) {
 					gas[i].setCurrentPoint(currentDate);
 				}
 
 				switch (whatToDo) {
-				case MainActivity.CALCULATE_ECD:
+				case Constants.CALCULATE_ECD:
 					setEdcTexts(i);
 					break;
-				case MainActivity.CALCULATE_EGA:
+				case Constants.CALCULATE_EGA:
 					setEgaTexts(i);
 					break;
 				}
@@ -340,43 +341,42 @@ public class ResultActivity extends Activity {
 
 	private void setMembersFromIntent() {
 		Intent intent = getIntent();
-		whatToDo = intent.getIntExtra(MainActivity.EXTRA_WHAT_TO_DO,
-				MainActivity.CALCULATE_NOTHING);
-		if (MainActivity.CALCULATE_NOTHING == whatToDo) {
+		whatToDo = intent.getIntExtra(Constants.EXTRA_WHAT_TO_DO,
+				Constants.CALCULATE_NOTHING);
+		if (Constants.CALCULATE_NOTHING == whatToDo) {
 			finish();
 		}
 
 		menstrualCycleLen = intent.getIntExtra(
-				MainActivity.EXTRA_MENSTRUAL_CYCLE_LEN,
+				Constants.EXTRA_MENSTRUAL_CYCLE_LEN,
 				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
-		lutealPhaseLen = intent.getIntExtra(
-				MainActivity.EXTRA_LUTEAL_PHASE_LEN,
+		lutealPhaseLen = intent.getIntExtra(Constants.EXTRA_LUTEAL_PHASE_LEN,
 				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
 
 		byMethod = new boolean[3];
 		byMethod[0] = intent.getBooleanExtra(
-				MainActivity.EXTRA_BY_LAST_MENSTRUATION_DATE, false);
-		byMethod[1] = intent.getBooleanExtra(
-				MainActivity.EXTRA_BY_OVULATION_DATE, false);
-		byMethod[2] = intent.getBooleanExtra(MainActivity.EXTRA_BY_ULTRASOUND,
+				Constants.EXTRA_BY_LAST_MENSTRUATION_DATE, false);
+		byMethod[1] = intent.getBooleanExtra(Constants.EXTRA_BY_OVULATION_DATE,
+				false);
+		byMethod[2] = intent.getBooleanExtra(Constants.EXTRA_BY_ULTRASOUND,
 				false);
 		currentDate = (Calendar) intent
-				.getSerializableExtra(MainActivity.EXTRA_CURRENT_DATE);
+				.getSerializableExtra(Constants.EXTRA_CURRENT_DATE);
 		currentDate = getCalendarValue(currentDate);
 		lastMenstruationDate = (Calendar) intent
-				.getSerializableExtra(MainActivity.EXTRA_LAST_MENSTRUATION_DATE);
+				.getSerializableExtra(Constants.EXTRA_LAST_MENSTRUATION_DATE);
 		lastMenstruationDate = getCalendarValue(lastMenstruationDate);
 		ovulationDate = (Calendar) intent
-				.getSerializableExtra(MainActivity.EXTRA_OVULATION_DATE);
+				.getSerializableExtra(Constants.EXTRA_OVULATION_DATE);
 		ovulationDate = getCalendarValue(ovulationDate);
 		ultrasoundDate = (Calendar) intent
-				.getSerializableExtra(MainActivity.EXTRA_ULTRASOUND_DATE);
+				.getSerializableExtra(Constants.EXTRA_ULTRASOUND_DATE);
 		ultrasoundDate = getCalendarValue(ultrasoundDate);
 
-		weeks = intent.getIntExtra(MainActivity.EXTRA_WEEKS, 0);
-		days = intent.getIntExtra(MainActivity.EXTRA_DAYS, 0);
+		weeks = intent.getIntExtra(Constants.EXTRA_WEEKS, 0);
+		days = intent.getIntExtra(Constants.EXTRA_DAYS, 0);
 		isEmbryonicAge = intent.getBooleanExtra(
-				MainActivity.EXTRA_IS_EMBRYONIC_AGE, false);
+				Constants.EXTRA_IS_EMBRYONIC_AGE, false);
 	}
 
 	void setAdView() {
