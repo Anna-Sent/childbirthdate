@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,9 +18,9 @@ import com.anna.sent.soft.childbirthdate.fragments.TabCalculationFragment;
 import com.anna.sent.soft.childbirthdate.fragments.TabHelpFragment;
 import com.anna.sent.soft.childbirthdate.fragments.TabSettingsFragment;
 import com.anna.sent.soft.childbirthdate.gui.TabsAdapter;
+import com.anna.sent.soft.childbirthdate.shared.Constants;
 import com.anna.sent.soft.utils.StateSaver;
 import com.anna.sent.soft.utils.Utils;
-import com.anna.sent.soft.childbirthdate.shared.Constants;
 
 public class MainActivity extends FragmentActivity implements StateSaver {
 
@@ -141,13 +142,32 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	@Override
 	public void onSaveState(Intent outState) {
 		outState.putExtra(EXTRA_GUI_CURRENT_TAB, mTabHost.getCurrentTabTag());
-		Fragment f = mTabsAdapter.getFragment(mTabHost.getCurrentTab());
-		if (f instanceof StateSaver) {
-			((StateSaver) f).onSaveState(outState);
+		/*
+		 * Fragment f = mTabsAdapter.getFragment(mTabHost.getCurrentTab()); if
+		 * (f instanceof StateSaver) { ((StateSaver) f).onSaveState(outState); }
+		 */
+
+		Log.d("moo", getTabCalculationFragment() == null ? "calc null"
+				: "calc not null");
+		Log.d("moo", getTabSettingsFragment() == null ? "set null"
+				: "set not null");
+		Log.d("moo", getTabHelpFragment() == null ? "help null"
+				: "help not null");
+
+		TabCalculationFragment tabCalculationFragment = getTabCalculationFragment();
+		if (tabCalculationFragment != null) {
+			getTabCalculationFragment().onSaveState(outState);
 		}
-		/*getTabCalculationFragment().onSaveState(outState);
-		getTabSettingsFragment().onSaveState(outState);
-		getTabHelpFragment().onSaveState(outState);*/
+
+		TabSettingsFragment tabSettingsFragment = getTabSettingsFragment();
+		if (tabSettingsFragment != null) {
+			tabSettingsFragment.onSaveState(outState);
+		}
+
+		TabHelpFragment tabHelpFragment = getTabHelpFragment();
+		if (tabHelpFragment != null) {
+			tabHelpFragment.onSaveState(outState);
+		}
 	}
 
 	@Override

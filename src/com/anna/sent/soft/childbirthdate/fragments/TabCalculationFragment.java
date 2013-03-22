@@ -159,7 +159,7 @@ public class TabCalculationFragment extends Fragment implements StateSaver {
 	@Override
 	public void onPause() {
 		super.onPause();
-		
+
 		Calendar lastMenstruationDate = getDate(datePickerLastMenstruationDate);
 		Calendar ovulationDate = getDate(datePickerOvulationDate);
 		Calendar ultrasoundDate = getDate(datePickerUltrasoundDate);
@@ -206,9 +206,14 @@ public class TabCalculationFragment extends Fragment implements StateSaver {
 
 	@Override
 	public void onSaveState(Intent outState) {
-		outState.putExtra(EXTRA_GUI_SCROLL_Y, scrollView.getScrollY());
-		outState.putExtra(EXTRA_GUI_CURRENT_DATE,
-				getDate(datePickerCurrentDate).getTimeInMillis());
+		if (scrollView != null) {
+			outState.putExtra(EXTRA_GUI_SCROLL_Y, scrollView.getScrollY());
+		}
+
+		if (datePickerCurrentDate != null) {
+			outState.putExtra(EXTRA_GUI_CURRENT_DATE,
+					getDate(datePickerCurrentDate).getTimeInMillis());
+		}
 	}
 
 	@Override

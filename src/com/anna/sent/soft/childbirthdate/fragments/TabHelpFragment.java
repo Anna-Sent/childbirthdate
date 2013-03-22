@@ -50,7 +50,9 @@ public class TabHelpFragment extends Fragment implements StateSaver {
 
 	@Override
 	public void onSaveState(Intent outState) {
+		if (scrollView != null) {
 			outState.putExtra(EXTRA_GUI_SCROLL_Y, scrollView.getScrollY());
+		}
 	}
 
 	@Override
