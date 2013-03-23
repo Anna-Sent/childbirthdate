@@ -27,7 +27,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	TabsAdapter mTabsAdapter;
 
 	private static final String EXTRA_GUI_CURRENT_TAB = "com.anna.sent.soft.childbirthdate.currenttab";
-
 	private static final String EXTRA_GUI_THEME_ID = "com.anna.sent.soft.childbirthdate.themeid";
 
 	@Override
@@ -103,10 +102,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		editor.commit();
 	}
 
-	public void restoreDefaultValues(View view) {
-		getTabSettingsFragment().restoreDefaultValues(view);
-	}
-
 	public void calculate(View view) {
 		Intent intent = new Intent(this,
 				com.anna.sent.soft.childbirthdate.ResultActivity.class);
@@ -121,14 +116,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		}
 
 		startActivity(intent);
-	}
-
-	public void radioClick(View view) {
-		getTabCalculationFragment().radioClick(view);
-	}
-
-	public void check(View view) {
-		getTabCalculationFragment().check(view);
 	}
 
 	@Override

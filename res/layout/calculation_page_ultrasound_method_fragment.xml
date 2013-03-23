@@ -55,7 +55,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:onClick="radioClick"
             android:text="@string/isGestationalAge"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -63,7 +62,6 @@
             android:id="@+id/radioIsEmbryonicAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="radioClick"
             android:text="@string/isEmbryonicAge"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </RadioGroup>

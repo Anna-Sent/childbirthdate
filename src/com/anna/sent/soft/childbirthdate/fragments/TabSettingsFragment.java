@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
@@ -13,7 +15,7 @@ import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 import com.anna.sent.soft.utils.StateSaver;
 
 public class TabSettingsFragment extends ScrollViewFragment implements
-		StateSaver {
+		StateSaver, OnClickListener {
 	private NumberPicker numberPickerMenstrualCycleLen,
 			numberPcikerLutealPhaseLen;
 
@@ -46,6 +48,10 @@ public class TabSettingsFragment extends ScrollViewFragment implements
 				.setMinValue(PregnancyCalculator.MIN_LUTEAL_PHASE_LEN);
 		numberPcikerLutealPhaseLen
 				.setMaxValue(PregnancyCalculator.MAX_LUTEAL_PHASE_LEN);
+
+		Button button = (Button) getActivity().findViewById(
+				R.id.buttonRestoreDefaultValues);
+		button.setOnClickListener(this);
 	}
 
 	@Override
@@ -91,5 +97,14 @@ public class TabSettingsFragment extends ScrollViewFragment implements
 				.setValue(PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
 		numberPcikerLutealPhaseLen
 				.setValue(PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.buttonRestoreDefaultValues:
+			restoreDefaultValues(v);
+			break;
+		}
 	}
 }

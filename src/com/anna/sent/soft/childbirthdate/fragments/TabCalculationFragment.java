@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
@@ -22,7 +23,7 @@ import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 import com.anna.sent.soft.utils.StateSaver;
 
 public class TabCalculationFragment extends ScrollViewFragment implements
-		StateSaver {
+		StateSaver, OnClickListener {
 	private static final String EXTRA_GUI_CURRENT_DATE = "com.anna.sent.soft.childbirthdate.currentdate";
 
 	private CheckBox checkBox1, checkBox2, checkBox3;
@@ -53,18 +54,21 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		FragmentManager fm = getFragmentManager();
 
 		checkBox1 = (CheckBox) getActivity().findViewById(R.id.checkBox1);
+		checkBox1.setOnClickListener(this);
 		lmpMethodFragment = (CalculationPageLmpMethodFragment) fm
 				.findFragmentById(R.id.lmpMethodFragment);
 		datePickerLastMenstruationDate = (DatePicker) getActivity()
 				.findViewById(R.id.datePickerLastMenstruationDate);
 
 		checkBox2 = (CheckBox) getActivity().findViewById(R.id.checkBox2);
+		checkBox2.setOnClickListener(this);
 		ovulationDateFragment = (CalculationPageOvulationDateMethodFragment) fm
 				.findFragmentById(R.id.ovulationDateMethodFragment);
 		datePickerOvulationDate = (DatePicker) getActivity().findViewById(
 				R.id.datePickerOvulationDate);
 
 		checkBox3 = (CheckBox) getActivity().findViewById(R.id.checkBox3);
+		checkBox3.setOnClickListener(this);
 		ultrasoundFragment = (CalculationPageUltrasoundMethodFragment) fm
 				.findFragmentById(R.id.ultrasoundMethodFragment);
 		datePickerUltrasoundDate = (DatePicker) getActivity().findViewById(
@@ -72,8 +76,10 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 
 		radioButtonIsGestationalAge = (RadioButton) getActivity().findViewById(
 				R.id.radioIsGestationalAge);
+		radioButtonIsGestationalAge.setOnClickListener(this);
 		radioButtonIsEmbryonicAge = (RadioButton) getActivity().findViewById(
 				R.id.radioIsEmbryonicAge);
+		radioButtonIsEmbryonicAge.setOnClickListener(this);
 
 		numberPickerWeeks = (NumberPicker) getActivity().findViewById(
 				R.id.editTextWeeks);
@@ -214,14 +220,14 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 				date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
 	}
 
-	public void radioClick(View view) {
+	private void radioClick(View view) {
 		numberPickerWeeks
 				.setMaxValue((radioButtonIsGestationalAge.isChecked() ? PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS
 						: PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS) - 1);
 
 	}
 
-	public void check(View view) {
+	private void check(View view) {
 		if (view.equals(checkBox1)) {
 			checkVisibility(checkBox1, lmpMethodFragment);
 		}
@@ -257,5 +263,19 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		intent.putExtra(Constants.EXTRA_IS_EMBRYONIC_AGE, isEmbryonicAge);
 		intent.putExtra(Constants.EXTRA_CURRENT_DATE,
 				getDate(datePickerCurrentDate));
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.checkBox1:
+		case R.id.checkBox2:
+		case R.id.checkBox3:
+			check(v);
+			break;
+		case R.id.radioIsEmbryonicAge:
+		case R.id.radioIsGestationalAge:
+			radioClick(v);
+		}
 	}
 }

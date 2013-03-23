@@ -52,8 +52,8 @@
             <RelativeLayout style="@style/ButtonSpace" />
 
             <Button
+                android:id="@+id/buttonRestoreDefaultValues"
                 style="@style/ButtonStyle.SmallText"
-                android:onClick="restoreDefaultValues"
                 android:text="@string/restoreDefaultValues" />
 
             <RelativeLayout style="@style/ButtonSpace" />
