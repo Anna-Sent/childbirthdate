@@ -191,7 +191,7 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 
 	private void checkVisibility(CheckBox checkBox, Fragment fragment) {
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
-		ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+		ft.setCustomAnimations(android.R.anim.fade_in, 0);
 
 		if (checkBox.isChecked()) {
 			ft.show(fragment);
