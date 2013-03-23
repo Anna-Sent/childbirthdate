@@ -10,22 +10,19 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
-import android.widget.ScrollView;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
+import com.anna.sent.soft.childbirthdate.shared.Constants;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 import com.anna.sent.soft.utils.StateSaver;
-import com.anna.sent.soft.childbirthdate.shared.Constants;
 
-public class TabCalculationFragment extends Fragment implements StateSaver {
-	private static final String EXTRA_GUI_SCROLL_Y = "com.anna.sent.soft.childbirthdate.tabcalculation.scrolly";
+public class TabCalculationFragment extends ScrollViewFragment implements
+		StateSaver {
 	private static final String EXTRA_GUI_CURRENT_DATE = "com.anna.sent.soft.childbirthdate.currentdate";
 
 	private CheckBox checkBox1, checkBox2, checkBox3;
@@ -36,22 +33,23 @@ public class TabCalculationFragment extends Fragment implements StateSaver {
 	private CalculationPageLmpMethodFragment lmpMethodFragment;
 	private CalculationPageOvulationDateMethodFragment ovulationDateFragment;
 	private CalculationPageUltrasoundMethodFragment ultrasoundFragment;
-	private ScrollView scrollView;
 
 	public TabCalculationFragment() {
 		super();
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.tab_calculation, container, false);
-		return v;
+	protected int getLayoutResourceId() {
+		return R.layout.tab_calculation;
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+	protected int getScrollViewResourceId() {
+		return R.id.tabCalculation;
+	}
+
+	@Override
+	protected void setViews() {
 		FragmentManager fm = getFragmentManager();
 
 		checkBox1 = (CheckBox) getActivity().findViewById(R.id.checkBox1);
@@ -87,33 +85,24 @@ public class TabCalculationFragment extends Fragment implements StateSaver {
 		numberPickerDays.setMaxValue(6);
 		datePickerCurrentDate = (DatePicker) getActivity().findViewById(
 				R.id.datePickerCurrentDate);
-
-		scrollView = (ScrollView) getActivity().findViewById(
-				R.id.tabCalculation);
-
-		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
-			restoreState(savedInstanceState);
-		} else {
-			savedInstanceState = getActivity().getIntent().getExtras();
-			if (savedInstanceState != null) {
-				restoreState(savedInstanceState);
-			}
-		}
 	}
 
-	private void restoreState(Bundle state) {
-		final int y = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
-		scrollView.post(new Runnable() {
-			@Override
-			public void run() {
-				scrollView.scrollTo(0, y);
-			}
-		});
-
+	@Override
+	protected void restoreState(Bundle state) {
+		super.restoreState(state);
 		Calendar value = Calendar.getInstance();
 		value.setTimeInMillis(state.getLong(EXTRA_GUI_CURRENT_DATE,
 				System.currentTimeMillis()));
 		setDate(datePickerCurrentDate, value);
+	}
+
+	@Override
+	protected void saveState(Bundle state) {
+		super.saveState(state);
+		if (datePickerCurrentDate != null) {
+			state.putLong(EXTRA_GUI_CURRENT_DATE,
+					getDate(datePickerCurrentDate).getTimeInMillis());
+		}
 	}
 
 	@Override
@@ -211,19 +200,6 @@ public class TabCalculationFragment extends Fragment implements StateSaver {
 		}
 
 		ft.commit();
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		if (scrollView != null) {
-			outState.putInt(EXTRA_GUI_SCROLL_Y, scrollView.getScrollY());
-		}
-
-		if (datePickerCurrentDate != null) {
-			outState.putLong(EXTRA_GUI_CURRENT_DATE,
-					getDate(datePickerCurrentDate).getTimeInMillis());
-		}
 	}
 
 	private Calendar getDate(DatePicker datePicker) {
