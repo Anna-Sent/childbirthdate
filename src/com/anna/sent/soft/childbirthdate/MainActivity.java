@@ -46,6 +46,7 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		mTabHost.setup();
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
+		mViewPager.setOffscreenPageLimit(2);
 
 		mTabsAdapter = new TabsAdapter(this, mTabHost, mViewPager);
 		mTabsAdapter.addTab(
@@ -59,7 +60,7 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		mTabsAdapter.addTab(
 				mTabHost.newTabSpec(tab_help).setIndicator(
 						getString(R.string.help)), TabHelpFragment.class, null);
-		
+
 		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
 			mTabHost.setCurrentTabByTag(savedInstanceState
 					.getString(EXTRA_GUI_CURRENT_TAB));
@@ -134,21 +135,9 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(EXTRA_GUI_CURRENT_TAB, mTabHost.getCurrentTabTag());
-
-		TabCalculationFragment tabCalculationFragment = getTabCalculationFragment();
-		if (tabCalculationFragment != null) {
-			getTabCalculationFragment().onSaveInstanceState(outState);
-		}
-
-		TabSettingsFragment tabSettingsFragment = getTabSettingsFragment();
-		if (tabSettingsFragment != null) {
-			tabSettingsFragment.onSaveInstanceState(outState);
-		}
-
-		TabHelpFragment tabHelpFragment = getTabHelpFragment();
-		if (tabHelpFragment != null) {
-			tabHelpFragment.onSaveInstanceState(outState);
-		}
+		getTabCalculationFragment().onSaveInstanceState(outState);
+		getTabSettingsFragment().onSaveInstanceState(outState);
+		getTabHelpFragment().onSaveInstanceState(outState);
 	}
 
 	@Override
