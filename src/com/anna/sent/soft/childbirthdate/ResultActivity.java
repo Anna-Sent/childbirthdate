@@ -22,11 +22,11 @@ import com.anna.sent.soft.childbirthdate.pregnancy.GestationalAge;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator.CountingMethod;
+import com.anna.sent.soft.childbirthdate.shared.Constants;
 import com.anna.sent.soft.utils.Utils;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
-import com.anna.sent.soft.childbirthdate.shared.Constants;
 
 public class ResultActivity extends Activity {
 
@@ -47,7 +47,7 @@ public class ResultActivity extends Activity {
 	int weeks, days;
 	boolean isEmbryonicAge;
 
-	private AdView adView;
+	private AdView adView = null;
 
 	private final static int undefined = 1;
 	private final static int accurate = 2;
@@ -399,7 +399,11 @@ public class ResultActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		adView.destroy();
+		if (adView != null) {
+			adView.removeAllViews();
+			adView.destroy();
+		}
+
 		super.onDestroy();
 	}
 }
