@@ -105,8 +105,15 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	public void calculate(View view) {
 		Intent intent = new Intent(this,
 				com.anna.sent.soft.childbirthdate.ResultActivity.class);
-		getTabCalculationFragment().putExtras(intent);
-		getTabSettingsFragment().putExtras(intent);
+		TabCalculationFragment tabCalculationFragment = getTabCalculationFragment();
+		if (tabCalculationFragment != null) {
+			tabCalculationFragment.putExtras(intent);
+		}
+
+		TabSettingsFragment tabSettingsFragment = getTabSettingsFragment();
+		if (tabSettingsFragment != null) {
+			tabSettingsFragment.putExtras(intent);
+		}
 
 		int viewId = view.getId();
 		if (view.getId() == R.id.buttonCalculateEstimatedChildbirthDate) {
@@ -121,10 +128,23 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+
 		outState.putString(EXTRA_GUI_CURRENT_TAB, mTabHost.getCurrentTabTag());
-		getTabCalculationFragment().onSaveInstanceState(outState);
-		getTabSettingsFragment().onSaveInstanceState(outState);
-		getTabHelpFragment().onSaveInstanceState(outState);
+
+		TabCalculationFragment tabCalculationFragment = getTabCalculationFragment();
+		if (tabCalculationFragment != null) {
+			tabCalculationFragment.onSaveInstanceState(outState);
+		}
+
+		TabSettingsFragment tabSettingsFragment = getTabSettingsFragment();
+		if (tabSettingsFragment != null) {
+			tabSettingsFragment.onSaveInstanceState(outState);
+		}
+
+		TabHelpFragment tabHelpFragment = getTabHelpFragment();
+		if (tabHelpFragment != null) {
+			tabHelpFragment.onSaveInstanceState(outState);
+		}
 	}
 
 	@Override
