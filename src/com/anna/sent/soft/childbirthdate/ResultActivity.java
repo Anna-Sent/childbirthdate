@@ -37,7 +37,7 @@ public class ResultActivity extends Activity {
 	private TextView[] textViews;
 	private TextView[] results;
 	private TextView[] messages;
-	private Pregnancy[] gas;
+	private Pregnancy[] pregnancies;
 
 	int whatToDo;
 	Calendar currentDate;
@@ -111,14 +111,14 @@ public class ResultActivity extends Activity {
 				switch (i) {
 				case 0:
 					if (lastMenstruationDate != null) {
-						gas[i] = new CorrectedAge(lastMenstruationDate,
+						pregnancies[i] = new CorrectedAge(lastMenstruationDate,
 								menstrualCycleLen, lutealPhaseLen);
 					}
 
 					break;
 				case 1:
 					if (ovulationDate != null) {
-						gas[i] = new EmbryonicAge(ovulationDate);
+						pregnancies[i] = new EmbryonicAge(ovulationDate);
 					}
 
 					break;
@@ -128,23 +128,23 @@ public class ResultActivity extends Activity {
 								: CountingMethod.GestationalAge;
 						switch (countingMethod) {
 						case EmbryonicAge:
-							gas[i] = new EmbryonicAge(weeks, days,
+							pregnancies[i] = new EmbryonicAge(weeks, days,
 									ultrasoundDate);
 							break;
 						case GestationalAge:
-							gas[i] = new GestationalAge(weeks, days,
+							pregnancies[i] = new GestationalAge(weeks, days,
 									ultrasoundDate);
 							break;
 						}
 					}
 
-					isAccurateForUltrasound = gas[i].isAccurateForUltrasound() ? accurate
+					isAccurateForUltrasound = pregnancies[i].isAccurateForUltrasound() ? accurate
 							: inaccurate;
 					break;
 				}
 
-				if (gas[i] != null && whatToDo == Constants.CALCULATE_EGA) {
-					gas[i].setCurrentPoint(currentDate);
+				if (pregnancies[i] != null && whatToDo == Constants.CALCULATE_EGA) {
+					pregnancies[i].setCurrentPoint(currentDate);
 				}
 
 				switch (whatToDo) {
@@ -175,22 +175,22 @@ public class ResultActivity extends Activity {
 		return result;
 	}
 
-	private String getStringRepresentation(Pregnancy ga) {
+	private String getStringRepresentation(Pregnancy pregnancy) {
 		String result = mContext.getString(R.string.trimesteris)
 				+ " "
-				+ ga.getTrimesterNumber()
+				+ pregnancy.getTrimesterNumber()
 				+ "; "
 				+ mContext.getString(R.string.fulltermis)
 				+ " "
-				+ getStringRepresentation(ga.getFullDurationWeeks(),
-						ga.getFullDurationDays());
-		int rest = ga.getRestInDays();
+				+ getStringRepresentation(pregnancy.getFullDurationWeeks(),
+						pregnancy.getFullDurationDays());
+		int rest = pregnancy.getRestInDays();
 		if (rest > 0) {
 			result += "; "
 					+ mContext.getString(R.string.rest)
 					+ " "
-					+ getStringRepresentation(ga.getRestWeeks(),
-							ga.getRestDays());
+					+ getStringRepresentation(pregnancy.getRestWeeks(),
+							pregnancy.getRestDays());
 		} else if (rest == 0) {
 			result += "; " + mContext.getString(R.string.ECD);
 		}
@@ -199,23 +199,23 @@ public class ResultActivity extends Activity {
 	}
 
 	private void setEgaTexts(int i) {
-		if (results.length == 3 && messages.length == 3 && gas.length == 3
+		if (results.length == 3 && messages.length == 3 && pregnancies.length == 3
 				&& i < 3 && i >= 0) {
 			TextView result = results[i], message = messages[i];
-			Pregnancy ga = gas[i];
-			if (ga != null) {
-				Calendar start = ga.getStartPoint();
-				Calendar end = ga.getEndPoint();
+			Pregnancy pregnancy = pregnancies[i];
+			if (pregnancy != null) {
+				Calendar start = pregnancy.getStartPoint();
+				Calendar end = pregnancy.getEndPoint();
 				if (start != null && end != null && currentDate != null) {
-					if (ga.isCorrect()) {
+					if (pregnancy.isCorrect()) {
 						if (result != null) {
-							result.setText(ga.getWeeks() + " "
+							result.setText(pregnancy.getWeeks() + " "
 									+ mContext.getString(R.string.weeks) + " "
-									+ ga.getDays() + " "
+									+ pregnancy.getDays() + " "
 									+ mContext.getString(R.string.days));
 						}
 						if (message != null) {
-							message.setText(getStringRepresentation(ga));
+							message.setText(getStringRepresentation(pregnancy));
 						}
 					} else {
 						if (result != null) {
@@ -239,12 +239,12 @@ public class ResultActivity extends Activity {
 	}
 
 	private void setEdcTexts(int i) {
-		if (results.length == 3 && messages.length == 3 && gas.length == 3
+		if (results.length == 3 && messages.length == 3 && pregnancies.length == 3
 				&& i < 3 && i >= 0) {
 			TextView result = results[i];
-			Pregnancy ga = gas[i];
-			if (ga != null && result != null) {
-				Calendar childbirthDate = ga.getEndPoint();
+			Pregnancy pregnancy = pregnancies[i];
+			if (pregnancy != null && result != null) {
+				Calendar childbirthDate = pregnancy.getEndPoint();
 				if (childbirthDate != null) {
 					result.setText(DateFormat.getDateFormat(mContext).format(
 							childbirthDate.getTime()));
@@ -254,12 +254,12 @@ public class ResultActivity extends Activity {
 	}
 
 	private void setLast(int i) {
-		if (results.length == 3 && messages.length == 3 && gas.length == 3
+		if (results.length == 3 && messages.length == 3 && pregnancies.length == 3
 				&& i >= 0 && i < 3) {
 			TextView message = messages[i];
-			Pregnancy ga = gas[i];
-			if (message != null && ga != null) {
-				if (i == 2 && ga.isCorrect()) {
+			Pregnancy pregnancy = pregnancies[i];
+			if (message != null && pregnancy != null) {
+				if (i == 2 && pregnancy.isCorrect()) {
 					CharSequence old = message.getText();
 					if (isAccurateForUltrasound == accurate) {
 						message.setText((old.equals("") ? "" : old + "\n")
@@ -279,14 +279,7 @@ public class ResultActivity extends Activity {
 		}
 	}
 
-	/**
-	 * Gestational age must be correct before call of this method. So, call
-	 * {@code isCorrect()} before using of this method.
-	 * 
-	 * @return string representation of trimester number
-	 */
-	public String getTrimesterString(Pregnancy gestationalAge) {
-		int trimester = gestationalAge.getTrimesterNumber();
+	public String getTrimesterString(int trimester) {
 		switch (trimester) {
 		case Pregnancy.FIRST_TRIMESTER:
 			return mContext.getString(R.string.firstTrimester);
@@ -314,7 +307,7 @@ public class ResultActivity extends Activity {
 		mContext = getApplicationContext();
 		textView0 = (TextView) findViewById(R.id.textView0);
 		textView00 = (TextView) findViewById(R.id.textView00);
-		gas = new Pregnancy[] { null, null, null };
+		pregnancies = new Pregnancy[] { null, null, null };
 		textViews = new TextView[] { (TextView) findViewById(R.id.textView1),
 				(TextView) findViewById(R.id.textView2),
 				(TextView) findViewById(R.id.textView3) };
