@@ -83,7 +83,7 @@ public abstract class Pregnancy {
 
 	/**
 	 * 
-	 * @return number of trimester, if weeks value is correct; -1, otherwise
+	 * @return number of trimester, if weeks value is correct; -1 otherwise
 	 */
 	public int getTrimesterNumber() {
 		if (weeks >= 0) {
