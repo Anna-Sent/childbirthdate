@@ -61,14 +61,14 @@
             style="@style/TextViewStyle.LeftPadding"
             android:text="@string/emptyString" />
 
-        <TextView style="@style/TextViewStyle.Center.Medium" />
+        <RelativeLayout style="@style/VerticalSpace" />
 
         <TextView
             android:id="@+id/textView00"
             style="@style/TextViewStyle.LeftPadding.Medium"
             android:text="@string/emptyString" />
 
-        <TextView style="@style/TextViewStyle.Center.Medium" />
+        <RelativeLayout style="@style/VerticalSpace" />
 
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
@@ -82,7 +82,7 @@
             <RelativeLayout style="@style/ButtonSpace" />
         </LinearLayout>
 
-        <TextView style="@style/TextViewStyle.Center.Medium" />
+        <RelativeLayout style="@style/VerticalSpace" />
 
         <!--
             com.google.ads.AdView

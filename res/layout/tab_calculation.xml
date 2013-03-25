@@ -67,11 +67,7 @@
 
         <!-- new line -->
 
-        <TextView style="@style/TextViewStyle" />
-
-        <!-- new line -->
-
-        <TextView style="@style/TextViewStyle" />
+        <RelativeLayout style="@style/VerticalSpace" />
 
         <!-- new line -->
 
