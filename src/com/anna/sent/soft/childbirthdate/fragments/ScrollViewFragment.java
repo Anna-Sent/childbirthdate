@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 
-public abstract class ScrollViewFragment extends Fragment {
+import com.anna.sent.soft.utils.StateSaver;
+
+public abstract class ScrollViewFragment extends Fragment implements StateSaver {
 	private ScrollView scrollView;
 
 	public ScrollViewFragment() {

@@ -20,10 +20,9 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Constants;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
-import com.anna.sent.soft.utils.StateSaver;
 
 public class TabCalculationFragment extends ScrollViewFragment implements
-		StateSaver, OnClickListener {
+		OnClickListener {
 	private static final String EXTRA_GUI_CURRENT_DATE = "com.anna.sent.soft.childbirthdate.currentdate";
 
 	private CheckBox checkBox1, checkBox2, checkBox3;

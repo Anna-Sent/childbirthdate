@@ -4,9 +4,8 @@ import android.text.Html;
 import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.utils.StateSaver;
 
-public class TabHelpFragment extends ScrollViewFragment implements StateSaver {
+public class TabHelpFragment extends ScrollViewFragment {
 	private TextView textViewHelp;
 
 	public TabHelpFragment() {

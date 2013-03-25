@@ -12,10 +12,9 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Constants;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
-import com.anna.sent.soft.utils.StateSaver;
 
 public class TabSettingsFragment extends ScrollViewFragment implements
-		StateSaver, OnClickListener {
+		OnClickListener {
 	private NumberPicker numberPickerMenstrualCycleLen,
 			numberPcikerLutealPhaseLen;
 
