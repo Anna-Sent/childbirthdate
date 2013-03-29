@@ -15,9 +15,27 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
-        <!-- android:theme="@style/AppTheme" -->
+        <receiver
+            android:name=".MyPregnancyWidget"
+            android:label="@string/widget_name" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/my_pregnancy_widget_provider_info" />
+        </receiver>
+
         <activity
-            android:name="com.anna.sent.soft.childbirthdate.MainActivity"
+            android:name=".MyPregnancyWidgetConfigure"
+            android:label="@string/widget_name" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,16 +44,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.anna.sent.soft.childbirthdate.ResultActivity"
-            android:label="@string/app_name" >
-
-            <!-- android:parentActivityName="com.anna.sent.soft.childbirthdate.MainActivity" -->
-            <!--
-                meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.anna.sent.soft.childbirthdate.MainActivity" /
-            -->
-        </activity>
+            android:name=".ResultActivity"
+            android:label="@string/app_name" />
         <activity
             android:name="com.google.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />

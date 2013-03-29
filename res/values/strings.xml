@@ -8,6 +8,7 @@
     <string name="accurateUltrasoundResults">Высокая точность расчета по результатам УЗИ.</string>
     <string name="inaccurateUltrasoundResults">Низкая точность расчета, так как срок беременности при проведении УЗИ велик.</string>
     <string name="app_name">Дата родов</string>
+    <string name="widget_name">Дата родов (виджет)</string>
     <string name="bigHelp">
 <![CDATA[
  <b>Используемые сокращения</b><br/><br/>
@@ -137,5 +138,9 @@
     <string name="ECD">ПДР</string>
     <string name="lighttheme">Светлая тема</string>
     <string name="darktheme">Темная тема</string>
-
-</resources>
+    <string name="errorInvalidAppWidgetId">Некорректный идентификатор виджета.</string>
+    <string name="widgetSpecifyTheMethodOfCalculation">Задайте предпочтительный метод расчета:</string>
+    <string name="widgetAddWidget">Добавить виджет</string>
+    <string name="widgetStartTheApplicationToSpecifyNecessaryData">Запустите приложение и заполните необходимые для расчета данные</string>
+    <string name="widgetStartTheApplication">Запустить приложение</string>
+</resources>

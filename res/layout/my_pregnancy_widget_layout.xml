@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LinearLayoutVerticalStyle" >
+
+    <TextView
+        style="@style/TextViewStyle.Center.Medium"
+        android:text="Your pregnancy due date is" />
+
+    <TextView
+        style="@style/TextViewStyle.Center.Medium.Red"
+        android:text="15 . 03 . 2011" />
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LinearLayoutVerticalStyle" >
+
+    <TextView
+        android:id="@+id/widgetConfigureTextView"
+        style="@style/TextViewStyle.LeftPadding.Medium"
+        android:text="@string/widgetSpecifyTheMethodOfCalculation" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/shift" >
+
+        <RadioButton
+            android:id="@+id/radioByLMP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/byLMP"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <RadioButton
+            android:id="@+id/radioByOvulation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/byOvulation"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <RadioButton
+            android:id="@+id/radioByUltrasound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/byUltrasound"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RadioGroup>
+
+    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+
+        <RelativeLayout style="@style/ButtonSpace" />
+
+        <Button
+            android:id="@+id/widgetConfigureButton"
+            style="@style/ButtonStyle.SmallText"
+            android:onClick="click"
+            android:text="@string/widgetAddWidget" />
+
+        <RelativeLayout style="@style/ButtonSpace" />
+    </LinearLayout>
+
+</LinearLayout>
