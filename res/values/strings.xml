@@ -143,4 +143,6 @@
     <string name="widgetAddWidget">Добавить виджет</string>
     <string name="widgetStartTheApplicationToSpecifyNecessaryData">Запустите приложение и заполните необходимые для расчета данные</string>
     <string name="widgetStartTheApplication">Запустить приложение</string>
-</resources>
+    <string name="countdown">Обратный отсчет</string>
+
+</resources>

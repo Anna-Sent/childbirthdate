@@ -35,6 +35,11 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </RadioGroup>
 
+    <CheckBox
+        android:id="@+id/checkBoxCountdown"
+        style="@style/CheckBoxStyle"
+        android:text="@string/countdown" />
+
     <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
         <RelativeLayout style="@style/ButtonSpace" />
