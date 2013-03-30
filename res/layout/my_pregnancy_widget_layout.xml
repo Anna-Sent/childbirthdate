@@ -4,11 +4,18 @@
     style="@style/LinearLayoutVerticalStyle" >
 
     <TextView
+        android:id="@+id/tv1"
         style="@style/TextViewStyle.Center.Medium"
-        android:text="Your pregnancy due date is" />
+        android:text="Your pregnancy gestational age is" />
 
     <TextView
+        android:id="@+id/tv2"
         style="@style/TextViewStyle.Center.Medium.Red"
-        android:text="15 . 03 . 2011" />
+        android:text="1 weeks, 2 days" />
+
+    <TextView
+        android:id="@+id/tv3"
+        style="@style/TextViewStyle.LeftPadding"
+        android:text="Calculating method is by LMP" />
 
 </LinearLayout>
