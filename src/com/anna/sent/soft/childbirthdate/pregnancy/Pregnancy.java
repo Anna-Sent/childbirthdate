@@ -2,6 +2,10 @@ package com.anna.sent.soft.childbirthdate.pregnancy;
 
 import java.util.Calendar;
 
+import android.content.Context;
+
+import com.anna.sent.soft.childbirthdate.R;
+
 public abstract class Pregnancy {
 	public static final int FIRST_TRIMESTER = 1;
 	public static final int SECOND_TRIMESTER = 2;
@@ -139,4 +143,58 @@ public abstract class Pregnancy {
 	protected abstract int getFirstTrimesterEndInclusive();
 
 	protected abstract int getSecondTrimesterEndInclusive();
+
+	private String getStringRepresentation(Context context, int weeks, int days) {
+		String result = "";
+		if (weeks > 0) {
+			result += weeks + " " + context.getString(R.string.weeks)
+					+ (days > 0 ? " " : "");
+		}
+
+		if (days > 0) {
+			result += days + " " + context.getString(R.string.days);
+		}
+
+		return result;
+	}
+
+	public String getInfo(Context context) {
+		return getStringRepresentation(context, weeks, days);
+	}
+
+	public String getAdditionalInfo(Context context) {
+		String result = context.getString(R.string.trimesteris)
+				+ " "
+				+ getTrimesterNumber()
+				+ "; "
+				+ context.getString(R.string.fulltermis)
+				+ " "
+				+ getStringRepresentation(context, getFullDurationWeeks(),
+						getFullDurationDays());
+		int rest = getRestInDays();
+		if (rest > 0) {
+			result += "; "
+					+ context.getString(R.string.rest)
+					+ " "
+					+ getStringRepresentation(context, getRestWeeks(),
+							getRestDays());
+		} else if (rest == 0) {
+			result += "; " + context.getString(R.string.ECD);
+		}
+
+		return result;
+	}
+
+	public String getTrimesterString(Context context, int trimester) {
+		switch (trimester) {
+		case Pregnancy.FIRST_TRIMESTER:
+			return context.getString(R.string.firstTrimester);
+		case Pregnancy.SECOND_TRIMESTER:
+			return context.getString(R.string.secondTrimester);
+		case Pregnancy.THIRD_TRIMESTER:
+			return context.getString(R.string.thirdTrimester);
+		}
+
+		return "?";
+	}
 }

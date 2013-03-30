@@ -138,12 +138,13 @@ public class ResultActivity extends Activity {
 						}
 					}
 
-					isAccurateForUltrasound = pregnancies[i].isAccurateForUltrasound() ? accurate
-							: inaccurate;
+					isAccurateForUltrasound = pregnancies[i]
+							.isAccurateForUltrasound() ? accurate : inaccurate;
 					break;
 				}
 
-				if (pregnancies[i] != null && whatToDo == Constants.CALCULATE_EGA) {
+				if (pregnancies[i] != null
+						&& whatToDo == Constants.CALCULATE_EGA) {
 					pregnancies[i].setCurrentPoint(currentDate);
 				}
 
@@ -161,46 +162,9 @@ public class ResultActivity extends Activity {
 		}
 	}
 
-	private String getStringRepresentation(int weeks, int days) {
-		String result = "";
-		if (weeks > 0) {
-			result += weeks + " " + mContext.getString(R.string.weeks)
-					+ (days > 0 ? " " : "");
-		}
-
-		if (days > 0) {
-			result += days + " " + mContext.getString(R.string.days);
-		}
-
-		return result;
-	}
-
-	private String getStringRepresentation(Pregnancy pregnancy) {
-		String result = mContext.getString(R.string.trimesteris)
-				+ " "
-				+ pregnancy.getTrimesterNumber()
-				+ "; "
-				+ mContext.getString(R.string.fulltermis)
-				+ " "
-				+ getStringRepresentation(pregnancy.getFullDurationWeeks(),
-						pregnancy.getFullDurationDays());
-		int rest = pregnancy.getRestInDays();
-		if (rest > 0) {
-			result += "; "
-					+ mContext.getString(R.string.rest)
-					+ " "
-					+ getStringRepresentation(pregnancy.getRestWeeks(),
-							pregnancy.getRestDays());
-		} else if (rest == 0) {
-			result += "; " + mContext.getString(R.string.ECD);
-		}
-
-		return result;
-	}
-
 	private void setEgaTexts(int i) {
-		if (results.length == 3 && messages.length == 3 && pregnancies.length == 3
-				&& i < 3 && i >= 0) {
+		if (results.length == 3 && messages.length == 3
+				&& pregnancies.length == 3 && i < 3 && i >= 0) {
 			TextView result = results[i], message = messages[i];
 			Pregnancy pregnancy = pregnancies[i];
 			if (pregnancy != null) {
@@ -209,13 +173,11 @@ public class ResultActivity extends Activity {
 				if (start != null && end != null && currentDate != null) {
 					if (pregnancy.isCorrect()) {
 						if (result != null) {
-							result.setText(pregnancy.getWeeks() + " "
-									+ mContext.getString(R.string.weeks) + " "
-									+ pregnancy.getDays() + " "
-									+ mContext.getString(R.string.days));
+							result.setText(pregnancy.getInfo(mContext));
 						}
 						if (message != null) {
-							message.setText(getStringRepresentation(pregnancy));
+							message.setText(pregnancy
+									.getAdditionalInfo(mContext));
 						}
 					} else {
 						if (result != null) {
@@ -239,8 +201,8 @@ public class ResultActivity extends Activity {
 	}
 
 	private void setEdcTexts(int i) {
-		if (results.length == 3 && messages.length == 3 && pregnancies.length == 3
-				&& i < 3 && i >= 0) {
+		if (results.length == 3 && messages.length == 3
+				&& pregnancies.length == 3 && i < 3 && i >= 0) {
 			TextView result = results[i];
 			Pregnancy pregnancy = pregnancies[i];
 			if (pregnancy != null && result != null) {
@@ -254,8 +216,8 @@ public class ResultActivity extends Activity {
 	}
 
 	private void setLast(int i) {
-		if (results.length == 3 && messages.length == 3 && pregnancies.length == 3
-				&& i >= 0 && i < 3) {
+		if (results.length == 3 && messages.length == 3
+				&& pregnancies.length == 3 && i >= 0 && i < 3) {
 			TextView message = messages[i];
 			Pregnancy pregnancy = pregnancies[i];
 			if (message != null && pregnancy != null) {
@@ -277,19 +239,6 @@ public class ResultActivity extends Activity {
 				}
 			}
 		}
-	}
-
-	public String getTrimesterString(int trimester) {
-		switch (trimester) {
-		case Pregnancy.FIRST_TRIMESTER:
-			return mContext.getString(R.string.firstTrimester);
-		case Pregnancy.SECOND_TRIMESTER:
-			return mContext.getString(R.string.secondTrimester);
-		case Pregnancy.THIRD_TRIMESTER:
-			return mContext.getString(R.string.thirdTrimester);
-		}
-
-		return "?";
 	}
 
 	public void rate(View view) {
@@ -372,7 +321,7 @@ public class ResultActivity extends Activity {
 				Constants.EXTRA_IS_EMBRYONIC_AGE, false);
 	}
 
-	void setAdView() {
+	private void setAdView() {
 		// AdView adView = (AdView) findViewById(R.id.adView);
 		adView = new AdView(this, AdSize.BANNER, "a1513549e3d3050");
 		adView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
