@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -56,25 +55,35 @@ public class MyPregnancyWidgetConfigure extends Activity implements
 	}
 
 	public void addWidget() {
-		// When the configuration is complete, get an instance of the
-		// AppWidgetManager
-		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+		if (radioByLMP.isChecked() || radiobyByOvulation.isChecked()
+				|| radioByUltrasound.isChecked()) {
+			// When the configuration is complete, get an instance of the
+			// AppWidgetManager
+			AppWidgetManager appWidgetManager = AppWidgetManager
+					.getInstance(this);
 
-		// First
-		saveWidgetParams();
+			// First
+			saveWidgetParams();
 
-		// Second. Update the App Widget with a RemoteViews layout
-		RemoteViews views = MyPregnancyWidget.buildViews(this,
-				Calendar.getInstance(), mAppWidgetId);
-		appWidgetManager.updateAppWidget(mAppWidgetId, views);
+			// Second. Update the App Widget with a RemoteViews layout
+			RemoteViews views = MyPregnancyWidget.buildViews(this,
+					Calendar.getInstance(), mAppWidgetId);
+			appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
-		// Finally, create the return Intent, set it with the Activity
-		// result, and finish the Activity:
-		Intent resultValue = new Intent();
-		resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
-		setResult(RESULT_OK, resultValue);
+			// Finally, create the return Intent, set it with the Activity
+			// result, and finish the Activity:
+			Intent resultValue = new Intent();
+			resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+					mAppWidgetId);
+			setResult(RESULT_OK, resultValue);
 
-		finish();
+			finish();
+		} else {
+			Toast.makeText(
+					this,
+					getString(R.string.widgetToastSpecifyTheMethodOfCalculation),
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	public void startTheApplication() {

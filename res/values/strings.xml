@@ -140,6 +140,7 @@
     <string name="darktheme">Темная тема</string>
     <string name="errorInvalidAppWidgetId">Некорректный идентификатор виджета.</string>
     <string name="widgetSpecifyTheMethodOfCalculation">Задайте предпочтительный метод расчета:</string>
+    <string name="widgetToastSpecifyTheMethodOfCalculation">Выберите метод расчета</string>
     <string name="widgetAddWidget">Добавить виджет</string>
     <string name="widgetStartTheApplicationToSpecifyNecessaryData">Запустите приложение и заполните необходимые для расчета данные</string>
     <string name="widgetStartTheApplication">Запустить приложение</string>
