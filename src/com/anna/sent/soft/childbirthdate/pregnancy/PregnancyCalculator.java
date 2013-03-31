@@ -48,7 +48,7 @@ public class PregnancyCalculator {
 	public final static int GESTATIONAL_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS = 28;
 	public final static int EMBRYONIC_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS = GESTATIONAL_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS - 2;
 
-	public enum CountingMethod {
-		EmbryonicAge, GestationalAge
+	public static class CountingMethod {
+		public static final int EmbryonicAge = 0, GestationalAge = 1;
 	};
 }

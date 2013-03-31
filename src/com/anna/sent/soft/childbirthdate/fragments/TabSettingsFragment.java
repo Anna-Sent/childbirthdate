@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -10,7 +9,7 @@ import android.widget.Button;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
-import com.anna.sent.soft.childbirthdate.shared.Constants;
+import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 public class TabSettingsFragment extends ScrollViewFragment implements
@@ -56,13 +55,12 @@ public class TabSettingsFragment extends ScrollViewFragment implements
 	@Override
 	public void onResume() {
 		super.onResume();
-		SharedPreferences settings = getActivity().getApplicationContext()
-				.getSharedPreferences(Constants.SETTINGS_FILE,
-						Context.MODE_PRIVATE);
+		SharedPreferences settings = Shared.getSettings(getActivity());
 		int menstrualCycleLen = settings.getInt(
-				Constants.EXTRA_MENSTRUAL_CYCLE_LEN,
+				Shared.Saved.Settings.EXTRA_MENSTRUAL_CYCLE_LEN,
 				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
-		int lutealPhaseLen = settings.getInt(Constants.EXTRA_LUTEAL_PHASE_LEN,
+		int lutealPhaseLen = settings.getInt(
+				Shared.Saved.Settings.EXTRA_LUTEAL_PHASE_LEN,
 				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
 		numberPickerMenstrualCycleLen.setValue(menstrualCycleLen);
 		numberPcikerLutealPhaseLen.setValue(lutealPhaseLen);
@@ -73,13 +71,13 @@ public class TabSettingsFragment extends ScrollViewFragment implements
 		super.onPause();
 		int menstrualCycleLen = numberPickerMenstrualCycleLen.getValue();
 		int lutealPhaseLen = numberPcikerLutealPhaseLen.getValue();
-		SharedPreferences settings = getActivity().getApplicationContext()
-				.getSharedPreferences(Constants.SETTINGS_FILE,
-						Context.MODE_PRIVATE);
+		SharedPreferences settings = Shared.getSettings(getActivity());
 
 		Editor editor = settings.edit();
-		editor.putInt(Constants.EXTRA_MENSTRUAL_CYCLE_LEN, menstrualCycleLen);
-		editor.putInt(Constants.EXTRA_LUTEAL_PHASE_LEN, lutealPhaseLen);
+		editor.putInt(Shared.Saved.Settings.EXTRA_MENSTRUAL_CYCLE_LEN,
+				menstrualCycleLen);
+		editor.putInt(Shared.Saved.Settings.EXTRA_LUTEAL_PHASE_LEN,
+				lutealPhaseLen);
 		editor.commit();
 	}
 
@@ -87,8 +85,10 @@ public class TabSettingsFragment extends ScrollViewFragment implements
 		int menstrualCycleLen = numberPickerMenstrualCycleLen.getValue();
 		int lutealPhaseLen = numberPcikerLutealPhaseLen.getValue();
 
-		intent.putExtra(Constants.EXTRA_MENSTRUAL_CYCLE_LEN, menstrualCycleLen);
-		intent.putExtra(Constants.EXTRA_LUTEAL_PHASE_LEN, lutealPhaseLen);
+		intent.putExtra(Shared.Saved.Settings.EXTRA_MENSTRUAL_CYCLE_LEN,
+				menstrualCycleLen);
+		intent.putExtra(Shared.Saved.Settings.EXTRA_LUTEAL_PHASE_LEN,
+				lutealPhaseLen);
 	}
 
 	public void restoreDefaultValues(View view) {

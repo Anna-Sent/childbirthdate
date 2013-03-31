@@ -2,7 +2,6 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import java.util.Calendar;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -18,7 +17,7 @@ import android.widget.RadioButton;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
-import com.anna.sent.soft.childbirthdate.shared.Constants;
+import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 public class TabCalculationFragment extends ScrollViewFragment implements
@@ -114,29 +113,32 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 	public void onResume() {
 		super.onResume();
 
-		SharedPreferences settings = getActivity().getApplicationContext()
-				.getSharedPreferences(Constants.SETTINGS_FILE,
-						Context.MODE_PRIVATE);
-		checkBox1.setChecked(settings.getBoolean(
-				Constants.EXTRA_BY_LAST_MENSTRUATION_DATE, false));
+		SharedPreferences settings = Shared.getSettings(getActivity());
+		checkBox1
+				.setChecked(settings
+						.getBoolean(
+								Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
+								false));
 		Calendar lastMenstruationDate = Calendar.getInstance();
 		lastMenstruationDate.setTimeInMillis(settings.getLong(
-				Constants.EXTRA_LAST_MENSTRUATION_DATE,
+				Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
 				System.currentTimeMillis()));
 		checkBox2.setChecked(settings.getBoolean(
-				Constants.EXTRA_BY_OVULATION_DATE, false));
+				Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE, false));
 		Calendar ovulationDate = Calendar.getInstance();
 		ovulationDate.setTimeInMillis(settings.getLong(
-				Constants.EXTRA_OVULATION_DATE, System.currentTimeMillis()));
-		checkBox3.setChecked(settings.getBoolean(Constants.EXTRA_BY_ULTRASOUND,
-				false));
+				Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
+				System.currentTimeMillis()));
+		checkBox3.setChecked(settings.getBoolean(
+				Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND, false));
 		Calendar ultrasoundDate = Calendar.getInstance();
 		ultrasoundDate.setTimeInMillis(settings.getLong(
-				Constants.EXTRA_ULTRASOUND_DATE, System.currentTimeMillis()));
-		int weeks = settings.getInt(Constants.EXTRA_WEEKS, 0);
-		int days = settings.getInt(Constants.EXTRA_DAYS, 0);
+				Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
+				System.currentTimeMillis()));
+		int weeks = settings.getInt(Shared.Saved.Calculation.EXTRA_WEEKS, 0);
+		int days = settings.getInt(Shared.Saved.Calculation.EXTRA_DAYS, 0);
 		boolean isEmbryonicAge = settings.getBoolean(
-				Constants.EXTRA_IS_EMBRYONIC_AGE, false);
+				Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE, false);
 		setDate(datePickerLastMenstruationDate, lastMenstruationDate);
 		setDate(datePickerOvulationDate, ovulationDate);
 		setDate(datePickerUltrasoundDate, ultrasoundDate);
@@ -170,26 +172,27 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		int days = numberPickerDays.getValue();
 		boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
 
-		SharedPreferences settings = getActivity().getApplicationContext()
-				.getSharedPreferences(Constants.SETTINGS_FILE,
-						Context.MODE_PRIVATE);
+		SharedPreferences settings = Shared.getSettings(getActivity());
 
 		Editor editor = settings.edit();
 
-		editor.putBoolean(Constants.EXTRA_BY_LAST_MENSTRUATION_DATE,
+		editor.putBoolean(
+				Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
 				checkBox1.isChecked());
-		editor.putLong(Constants.EXTRA_LAST_MENSTRUATION_DATE,
+		editor.putLong(Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
 				lastMenstruationDate.getTimeInMillis());
-		editor.putBoolean(Constants.EXTRA_BY_OVULATION_DATE,
+		editor.putBoolean(Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE,
 				checkBox2.isChecked());
-		editor.putLong(Constants.EXTRA_OVULATION_DATE,
+		editor.putLong(Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
 				ovulationDate.getTimeInMillis());
-		editor.putBoolean(Constants.EXTRA_BY_ULTRASOUND, checkBox3.isChecked());
-		editor.putLong(Constants.EXTRA_ULTRASOUND_DATE,
+		editor.putBoolean(Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND,
+				checkBox3.isChecked());
+		editor.putLong(Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
 				ultrasoundDate.getTimeInMillis());
-		editor.putInt(Constants.EXTRA_WEEKS, weeks);
-		editor.putInt(Constants.EXTRA_DAYS, days);
-		editor.putBoolean(Constants.EXTRA_IS_EMBRYONIC_AGE, isEmbryonicAge);
+		editor.putInt(Shared.Saved.Calculation.EXTRA_WEEKS, weeks);
+		editor.putInt(Shared.Saved.Calculation.EXTRA_DAYS, days);
+		editor.putBoolean(Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE,
+				isEmbryonicAge);
 
 		editor.commit();
 	}
@@ -248,19 +251,24 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		int days = numberPickerDays.getValue();
 		boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
 
-		intent.putExtra(Constants.EXTRA_BY_LAST_MENSTRUATION_DATE,
+		intent.putExtra(
+				Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
 				checkBox1.isChecked());
-		intent.putExtra(Constants.EXTRA_LAST_MENSTRUATION_DATE,
+		intent.putExtra(Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
 				lastMenstruationDate);
-		intent.putExtra(Constants.EXTRA_BY_OVULATION_DATE,
+		intent.putExtra(Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE,
 				checkBox2.isChecked());
-		intent.putExtra(Constants.EXTRA_OVULATION_DATE, ovulationDate);
-		intent.putExtra(Constants.EXTRA_BY_ULTRASOUND, checkBox3.isChecked());
-		intent.putExtra(Constants.EXTRA_ULTRASOUND_DATE, ultrasoundDate);
-		intent.putExtra(Constants.EXTRA_WEEKS, weeks);
-		intent.putExtra(Constants.EXTRA_DAYS, days);
-		intent.putExtra(Constants.EXTRA_IS_EMBRYONIC_AGE, isEmbryonicAge);
-		intent.putExtra(Constants.EXTRA_CURRENT_DATE,
+		intent.putExtra(Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
+				ovulationDate);
+		intent.putExtra(Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND,
+				checkBox3.isChecked());
+		intent.putExtra(Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
+				ultrasoundDate);
+		intent.putExtra(Shared.Saved.Calculation.EXTRA_WEEKS, weeks);
+		intent.putExtra(Shared.Saved.Calculation.EXTRA_DAYS, days);
+		intent.putExtra(Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE,
+				isEmbryonicAge);
+		intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE,
 				getDate(datePickerCurrentDate));
 	}
 

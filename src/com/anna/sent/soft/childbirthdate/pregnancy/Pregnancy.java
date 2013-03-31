@@ -70,7 +70,7 @@ public abstract class Pregnancy {
 	 * @return {@code true}, if value of weeks is less than
 	 *         {@code getMaxUltrasoundAccuracy()}; {@code false} otherwise
 	 */
-	public boolean isAccurateForUltrasound() {
+	public boolean isAccurateForUltrasound(int weeks) {
 		return weeks < getMaxUltrasoundAccuracy();
 	}
 

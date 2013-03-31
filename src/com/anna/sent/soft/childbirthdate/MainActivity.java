@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -16,7 +15,7 @@ import com.anna.sent.soft.childbirthdate.fragments.TabCalculationFragment;
 import com.anna.sent.soft.childbirthdate.fragments.TabHelpFragment;
 import com.anna.sent.soft.childbirthdate.fragments.TabSettingsFragment;
 import com.anna.sent.soft.childbirthdate.gui.TabsAdapter;
-import com.anna.sent.soft.childbirthdate.shared.Constants;
+import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.StateSaver;
 import com.anna.sent.soft.utils.Utils;
 
@@ -31,9 +30,7 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		SharedPreferences settings = getApplicationContext()
-				.getSharedPreferences(Constants.SETTINGS_FILE,
-						Context.MODE_PRIVATE);
+		SharedPreferences settings = Shared.getSettings(this);
 		int themeId = settings.getInt(EXTRA_GUI_THEME_ID, Utils.DARK_THEME);
 		Utils.onActivityCreateSetTheme(this, themeId);
 		super.onCreate(savedInstanceState);
@@ -94,9 +91,7 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		SharedPreferences settings = getApplicationContext()
-				.getSharedPreferences(Constants.SETTINGS_FILE,
-						Context.MODE_PRIVATE);
+		SharedPreferences settings = Shared.getSettings(this);
 		Editor editor = settings.edit();
 		editor.putInt(EXTRA_GUI_THEME_ID, Utils.getThemeId());
 		editor.commit();
@@ -117,9 +112,11 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 
 		int viewId = view.getId();
 		if (view.getId() == R.id.buttonCalculateEstimatedChildbirthDate) {
-			intent.putExtra(Constants.EXTRA_WHAT_TO_DO, Constants.CALCULATE_ECD);
+			intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
+					Shared.ResultParam.Calculate.ECD);
 		} else if (viewId == R.id.buttonCalculateEstimatedGestationalAge) {
-			intent.putExtra(Constants.EXTRA_WHAT_TO_DO, Constants.CALCULATE_EGA);
+			intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
+					Shared.ResultParam.Calculate.EGA);
 		}
 
 		startActivity(intent);

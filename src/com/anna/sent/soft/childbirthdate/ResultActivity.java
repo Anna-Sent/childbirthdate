@@ -21,8 +21,7 @@ import com.anna.sent.soft.childbirthdate.pregnancy.EmbryonicAge;
 import com.anna.sent.soft.childbirthdate.pregnancy.GestationalAge;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
-import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator.CountingMethod;
-import com.anna.sent.soft.childbirthdate.shared.Constants;
+import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.Utils;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -49,11 +48,6 @@ public class ResultActivity extends Activity {
 
 	private AdView adView = null;
 
-	private final static int undefined = 1;
-	private final static int accurate = 2;
-	private final static int inaccurate = 3;
-	private int isAccurateForUltrasound = undefined;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Utils.onActivityCreateSetTheme(this);
@@ -73,11 +67,11 @@ public class ResultActivity extends Activity {
 
 	private void clearViews() {
 		if (byMethod[0] || byMethod[1] || byMethod[2]) {
-			if (Constants.CALCULATE_ECD == whatToDo) {
+			if (Shared.ResultParam.Calculate.ECD == whatToDo) {
 				textView0.setText(mContext
 						.getString(R.string.estimatedChildbirthDate));
 				textView00.setText(mContext.getString(R.string.rememberECD));
-			} else if (Constants.CALCULATE_EGA == whatToDo
+			} else if (Shared.ResultParam.Calculate.EGA == whatToDo
 					&& currentDate != null) {
 				textView0.setText(mContext
 						.getString(R.string.estimatedGestationAge)
@@ -124,35 +118,33 @@ public class ResultActivity extends Activity {
 					break;
 				case 2:
 					if (ultrasoundDate != null) {
-						CountingMethod countingMethod = isEmbryonicAge ? CountingMethod.EmbryonicAge
-								: CountingMethod.GestationalAge;
+						int countingMethod = isEmbryonicAge ? PregnancyCalculator.CountingMethod.EmbryonicAge
+								: PregnancyCalculator.CountingMethod.GestationalAge;
 						switch (countingMethod) {
-						case EmbryonicAge:
+						case PregnancyCalculator.CountingMethod.EmbryonicAge:
 							pregnancies[i] = new EmbryonicAge(weeks, days,
 									ultrasoundDate);
 							break;
-						case GestationalAge:
+						case PregnancyCalculator.CountingMethod.GestationalAge:
 							pregnancies[i] = new GestationalAge(weeks, days,
 									ultrasoundDate);
 							break;
 						}
 					}
 
-					isAccurateForUltrasound = pregnancies[i]
-							.isAccurateForUltrasound() ? accurate : inaccurate;
 					break;
 				}
 
 				if (pregnancies[i] != null
-						&& whatToDo == Constants.CALCULATE_EGA) {
+						&& whatToDo == Shared.ResultParam.Calculate.EGA) {
 					pregnancies[i].setCurrentPoint(currentDate);
 				}
 
 				switch (whatToDo) {
-				case Constants.CALCULATE_ECD:
+				case Shared.ResultParam.Calculate.ECD:
 					setEdcTexts(i);
 					break;
-				case Constants.CALCULATE_EGA:
+				case Shared.ResultParam.Calculate.EGA:
 					setEgaTexts(i);
 					break;
 				}
@@ -223,11 +215,11 @@ public class ResultActivity extends Activity {
 			if (message != null && pregnancy != null) {
 				if (i == 2 && pregnancy.isCorrect()) {
 					CharSequence old = message.getText();
-					if (isAccurateForUltrasound == accurate) {
+					if (pregnancy.isAccurateForUltrasound(weeks)) {
 						message.setText((old.equals("") ? "" : old + "\n")
 								+ mContext
 										.getString(R.string.accurateUltrasoundResults));
-					} else if (isAccurateForUltrasound == inaccurate) {
+					} else {
 						message.setText((old.equals("") ? "" : old + "\n")
 								+ mContext
 										.getString(R.string.inaccurateUltrasoundResults));
@@ -283,42 +275,45 @@ public class ResultActivity extends Activity {
 
 	private void setMembersFromIntent() {
 		Intent intent = getIntent();
-		whatToDo = intent.getIntExtra(Constants.EXTRA_WHAT_TO_DO,
-				Constants.CALCULATE_NOTHING);
-		if (Constants.CALCULATE_NOTHING == whatToDo) {
+		whatToDo = intent.getIntExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
+				Shared.ResultParam.Calculate.NOTHING);
+		if (Shared.ResultParam.Calculate.NOTHING == whatToDo) {
 			finish();
 		}
 
 		menstrualCycleLen = intent.getIntExtra(
-				Constants.EXTRA_MENSTRUAL_CYCLE_LEN,
+				Shared.Saved.Settings.EXTRA_MENSTRUAL_CYCLE_LEN,
 				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
-		lutealPhaseLen = intent.getIntExtra(Constants.EXTRA_LUTEAL_PHASE_LEN,
+		lutealPhaseLen = intent.getIntExtra(
+				Shared.Saved.Settings.EXTRA_LUTEAL_PHASE_LEN,
 				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
 
 		byMethod = new boolean[3];
-		byMethod[0] = intent.getBooleanExtra(
-				Constants.EXTRA_BY_LAST_MENSTRUATION_DATE, false);
-		byMethod[1] = intent.getBooleanExtra(Constants.EXTRA_BY_OVULATION_DATE,
-				false);
-		byMethod[2] = intent.getBooleanExtra(Constants.EXTRA_BY_ULTRASOUND,
-				false);
+		byMethod[0] = intent
+				.getBooleanExtra(
+						Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
+						false);
+		byMethod[1] = intent.getBooleanExtra(
+				Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE, false);
+		byMethod[2] = intent.getBooleanExtra(
+				Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND, false);
 		currentDate = (Calendar) intent
-				.getSerializableExtra(Constants.EXTRA_CURRENT_DATE);
+				.getSerializableExtra(Shared.ResultParam.EXTRA_CURRENT_DATE);
 		currentDate = getCalendarValue(currentDate);
 		lastMenstruationDate = (Calendar) intent
-				.getSerializableExtra(Constants.EXTRA_LAST_MENSTRUATION_DATE);
+				.getSerializableExtra(Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE);
 		lastMenstruationDate = getCalendarValue(lastMenstruationDate);
 		ovulationDate = (Calendar) intent
-				.getSerializableExtra(Constants.EXTRA_OVULATION_DATE);
+				.getSerializableExtra(Shared.Saved.Calculation.EXTRA_OVULATION_DATE);
 		ovulationDate = getCalendarValue(ovulationDate);
 		ultrasoundDate = (Calendar) intent
-				.getSerializableExtra(Constants.EXTRA_ULTRASOUND_DATE);
+				.getSerializableExtra(Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE);
 		ultrasoundDate = getCalendarValue(ultrasoundDate);
 
-		weeks = intent.getIntExtra(Constants.EXTRA_WEEKS, 0);
-		days = intent.getIntExtra(Constants.EXTRA_DAYS, 0);
+		weeks = intent.getIntExtra(Shared.Saved.Calculation.EXTRA_WEEKS, 0);
+		days = intent.getIntExtra(Shared.Saved.Calculation.EXTRA_DAYS, 0);
 		isEmbryonicAge = intent.getBooleanExtra(
-				Constants.EXTRA_IS_EMBRYONIC_AGE, false);
+				Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE, false);
 	}
 
 	private void setAdView() {
