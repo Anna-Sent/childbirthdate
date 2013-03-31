@@ -45,21 +45,24 @@ public class MyPregnancyWidget extends AppWidgetProvider {
 
 		// Update each of the widgets with the remote adapter
 		for (int i = 0; i < appWidgetIds.length; ++i) {
-			RemoteViews views = buildViews(context, today);
+			RemoteViews views = buildViews(context, today, appWidgetIds[i]);
 			appWidgetManager.updateAppWidget(appWidgetIds[i], views);
 		}
 
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
 	}
 
-	public static RemoteViews buildViews(Context context, Calendar today) {
+	public static RemoteViews buildViews(Context context, Calendar today,
+			int appWidgetId) {
 		RemoteViews views = new RemoteViews(context.getPackageName(),
 				R.layout.my_pregnancy_widget_layout);
 
 		SharedPreferences settings = Shared.getSettings(context);
-		int calculatingMethod = MyPregnancyWidgetConfigure
-				.loadCalculatingMethod();
-		boolean countdown = MyPregnancyWidgetConfigure.loadCountdown();
+		int calculatingMethod = settings.getInt(
+				Shared.Saved.Widget.EXTRA_CALCULATING_METHOD + appWidgetId,
+				Shared.Saved.Widget.Calculate.UNKNOWN);
+		boolean countdown = settings.getBoolean(
+				Shared.Saved.Widget.EXTRA_COUNTDOWN + appWidgetId, false);
 		Pregnancy p = null;
 		String calculatingMethodString = "";
 		switch (calculatingMethod) {

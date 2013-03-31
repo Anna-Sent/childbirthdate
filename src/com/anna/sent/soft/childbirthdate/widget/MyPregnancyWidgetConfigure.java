@@ -6,16 +6,29 @@ import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
-public class MyPregnancyWidgetConfigure extends Activity {
-	int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+public class MyPregnancyWidgetConfigure extends Activity implements
+		OnClickListener {
+	private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+	private TextView textView;
+	private RadioButton radioByLMP, radiobyByOvulation, radioByUltrasound;
+	private CheckBox checkBoxCountdown;
+	private Button button;
+	private boolean doCalculation = false;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -30,9 +43,6 @@ public class MyPregnancyWidgetConfigure extends Activity {
 		if (extras != null) {
 			mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
 					AppWidgetManager.INVALID_APPWIDGET_ID);
-
-			// Perform App Widget configuration.
-			init();
 		}
 
 		if (mAppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
@@ -40,9 +50,12 @@ public class MyPregnancyWidgetConfigure extends Activity {
 					Toast.LENGTH_SHORT).show();
 			finish();
 		}
+
+		// Perform App Widget configuration.
+		init();
 	}
 
-	public void click(View v) {
+	public void addWidget() {
 		Context context = MyPregnancyWidgetConfigure.this;
 
 		// When the configuration is complete, get an instance of the
@@ -50,9 +63,12 @@ public class MyPregnancyWidgetConfigure extends Activity {
 		AppWidgetManager appWidgetManager = AppWidgetManager
 				.getInstance(context);
 
-		// Update the App Widget with a RemoteViews layout
+		// First
+		saveWidgetParams();
+
+		// Second. Update the App Widget with a RemoteViews layout
 		RemoteViews views = MyPregnancyWidget.buildViews(context,
-				Calendar.getInstance());
+				Calendar.getInstance(), mAppWidgetId);
 		appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
 		// Finally, create the return Intent, set it with the Activity
@@ -61,32 +77,74 @@ public class MyPregnancyWidgetConfigure extends Activity {
 		resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
 		setResult(RESULT_OK, resultValue);
 
-		saveCalculatingMethod();
-		saveCountdown();
-
 		finish();
 	}
 
+	public void startTheApplication() {
+		Intent intent = new Intent(this,
+				com.anna.sent.soft.childbirthdate.MainActivity.class);
+		startActivity(intent);
+		finish();
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		if (arg0.getId() == R.id.widgetConfigureButton) {
+			if (doCalculation) {
+				addWidget();
+			} else {
+				startTheApplication();
+			}
+		}
+	}
+
 	private void init() {
-		// TODO read extras by..., init radio
-		// if there is no by...: other text and button show, radio hide
+		SharedPreferences settings = Shared.getSettings(this);
+		boolean byLMP = settings
+				.getBoolean(
+						Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
+						false);
+		boolean byOvulation = settings.getBoolean(
+				Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE, false);
+		boolean byUltrasound = settings.getBoolean(
+				Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND, false);
+		doCalculation = byLMP || byOvulation || byUltrasound;
+		textView = (TextView) findViewById(R.id.widgetConfigureTextView);
+		textView.setText(doCalculation ? getString(R.string.widgetSpecifyTheMethodOfCalculation)
+				: getString(R.string.widgetStartTheApplicationToSpecifyNecessaryData));
+		radioByLMP = (RadioButton) findViewById(R.id.radioByLMP);
+		radioByLMP.setVisibility(byLMP ? View.VISIBLE : View.GONE);
+		radiobyByOvulation = (RadioButton) findViewById(R.id.radioByOvulation);
+		radiobyByOvulation
+				.setVisibility(byOvulation ? View.VISIBLE : View.GONE);
+		radioByUltrasound = (RadioButton) findViewById(R.id.radioByUltrasound);
+		radioByUltrasound
+				.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
+		checkBoxCountdown = (CheckBox) findViewById(R.id.checkBoxCountdown);
+		checkBoxCountdown.setVisibility(doCalculation ? View.VISIBLE
+				: View.GONE);
+		button = (Button) findViewById(R.id.widgetConfigureButton);
+		button.setText(doCalculation ? getString(R.string.widgetAddWidget)
+				: getString(R.string.widgetStartTheApplication));
+		button.setOnClickListener(this);
 	}
 
-	private void saveCalculatingMethod() {
-		// TODO radio state save to settings
-	}
+	private void saveWidgetParams() {
+		SharedPreferences settings = Shared.getSettings(this);
+		Editor editor = settings.edit();
+		int calculatingMethod = Shared.Saved.Widget.Calculate.UNKNOWN;
+		if (radioByLMP.isChecked()) {
+			calculatingMethod = Shared.Saved.Widget.Calculate.BY_LMP;
+		} else if (radiobyByOvulation.isChecked()) {
+			calculatingMethod = Shared.Saved.Widget.Calculate.BY_OVULATION_DAY;
+		} else if (radioByUltrasound.isChecked()) {
+			calculatingMethod = Shared.Saved.Widget.Calculate.BY_ULTRASOUND;
+		}
 
-	private void saveCountdown() {
-		// TODO checkbox state save to settings
-	}
-
-	public static int loadCalculatingMethod() {
-		// TODO read from settings
-		return Shared.Saved.Widget.Calculate.UNKNOWN;
-	}
-
-	public static boolean loadCountdown() {
-		// TODO read from settings
-		return false;
+		editor.putInt(Shared.Saved.Widget.EXTRA_CALCULATING_METHOD
+				+ mAppWidgetId, calculatingMethod);
+		editor.putBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN + mAppWidgetId,
+				checkBoxCountdown.isChecked());
+		editor.commit();
 	}
 }

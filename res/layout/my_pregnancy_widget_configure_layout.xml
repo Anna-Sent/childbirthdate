@@ -47,7 +47,6 @@
         <Button
             android:id="@+id/widgetConfigureButton"
             style="@style/ButtonStyle.SmallText"
-            android:onClick="click"
             android:text="@string/widgetAddWidget" />
 
         <RelativeLayout style="@style/ButtonSpace" />
