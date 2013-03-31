@@ -158,7 +158,7 @@ public abstract class Pregnancy {
 		return result;
 	}
 
-	public String getRest(Context context) {
+	public String getRestInfo(Context context) {
 		return getStringRepresentation(context, getRestWeeks(), getRestDays());
 	}
 

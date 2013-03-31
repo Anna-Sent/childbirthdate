@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import com.anna.sent.soft.childbirthdate.R;
@@ -105,10 +106,12 @@ public class MyPregnancyWidget extends AppWidgetProvider {
 			break;
 		}
 
+		views.setViewVisibility(R.id.tv1, View.VISIBLE);
 		views.setTextViewText(R.id.tv1,
 				countdown ? context.getString(R.string.widgetTextRest)
 						: context.getString(R.string.widgetTextInfo));
 		if (p == null) {
+			views.setViewVisibility(R.id.tv1, View.GONE);
 			views.setTextViewText(R.id.tv2,
 					context.getString(R.string.errorIncorrectGestationAge));
 			views.setTextViewText(R.id.tv3, context
@@ -117,12 +120,13 @@ public class MyPregnancyWidget extends AppWidgetProvider {
 			Calendar currentDate = Calendar.getInstance();
 			p.setCurrentPoint(currentDate);
 			if (p.isCorrect()) {
-				views.setTextViewText(R.id.tv2, countdown ? p.getRest(context)
-						: p.getInfo(context));
+				views.setTextViewText(R.id.tv2,
+						countdown ? p.getRestInfo(context) : p.getInfo(context));
 				views.setTextViewText(R.id.tv3, context.getString(
 						R.string.widgetCalculatingMethod,
 						calculatingMethodString));
 			} else {
+				views.setViewVisibility(R.id.tv1, View.GONE);
 				views.setTextViewText(R.id.tv2,
 						context.getString(R.string.errorIncorrectGestationAge));
 				Calendar start = p.getStartPoint(), end = p.getEndPoint();
