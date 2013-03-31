@@ -56,18 +56,15 @@ public class MyPregnancyWidgetConfigure extends Activity implements
 	}
 
 	public void addWidget() {
-		Context context = MyPregnancyWidgetConfigure.this;
-
 		// When the configuration is complete, get an instance of the
 		// AppWidgetManager
-		AppWidgetManager appWidgetManager = AppWidgetManager
-				.getInstance(context);
+		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
 
 		// First
 		saveWidgetParams();
 
 		// Second. Update the App Widget with a RemoteViews layout
-		RemoteViews views = MyPregnancyWidget.buildViews(context,
+		RemoteViews views = MyPregnancyWidget.buildViews(this,
 				Calendar.getInstance(), mAppWidgetId);
 		appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
