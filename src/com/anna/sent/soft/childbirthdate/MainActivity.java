@@ -1,5 +1,7 @@
 package com.anna.sent.soft.childbirthdate;
 
+import android.app.PendingIntent;
+import android.app.PendingIntent.CanceledException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -16,6 +18,7 @@ import com.anna.sent.soft.childbirthdate.fragments.TabHelpFragment;
 import com.anna.sent.soft.childbirthdate.fragments.TabSettingsFragment;
 import com.anna.sent.soft.childbirthdate.gui.TabsAdapter;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 import com.anna.sent.soft.utils.StateSaver;
 import com.anna.sent.soft.utils.Utils;
 
@@ -95,6 +98,18 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		Editor editor = settings.edit();
 		editor.putInt(EXTRA_GUI_THEME_ID, Utils.getThemeId());
 		editor.commit();
+
+		// update widgets
+		Intent updateWidget = new Intent(this, MyPregnancyWidget.class);
+		updateWidget.setAction(MyPregnancyWidget.UPDATE_ACTION);
+		PendingIntent pending = PendingIntent.getBroadcast(this, 0,
+				updateWidget, PendingIntent.FLAG_CANCEL_CURRENT);
+		try {
+			pending.send();
+		} catch (CanceledException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void calculate(View view) {
