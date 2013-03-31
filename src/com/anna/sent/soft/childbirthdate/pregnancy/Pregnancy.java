@@ -158,6 +158,10 @@ public abstract class Pregnancy {
 		return result;
 	}
 
+	public String getRest(Context context) {
+		return getStringRepresentation(context, getRestWeeks(), getRestDays());
+	}
+
 	public String getInfo(Context context) {
 		return getStringRepresentation(context, weeks, days);
 	}

@@ -50,10 +50,6 @@ public class PregnancyCalculator {
 	public final static int GESTATIONAL_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS = 28;
 	public final static int EMBRYONIC_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS = GESTATIONAL_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS - 2;
 
-	public static class CountingMethod {
-		public static final int EmbryonicAge = 0, GestationalAge = 1;
-	};
-
 	public static class Factory {
 		public static Pregnancy get(Calendar lastMenstruationDate,
 				int menstrualCycleLen, int lutealPhaseLen) {
@@ -65,19 +61,13 @@ public class PregnancyCalculator {
 			return new EmbryonicAge(ovulationDate);
 		}
 
-		// TODO replace isEmbryonicAge with countingMethod
 		public static Pregnancy get(Calendar ultrasoundDate, int weeks,
 				int days, boolean isEmbryonicAge) {
-			int countingMethod = isEmbryonicAge ? PregnancyCalculator.CountingMethod.EmbryonicAge
-					: PregnancyCalculator.CountingMethod.GestationalAge;
-			switch (countingMethod) {
-			case PregnancyCalculator.CountingMethod.EmbryonicAge:
+			if (isEmbryonicAge) {
 				return new EmbryonicAge(weeks, days, ultrasoundDate);
-			case PregnancyCalculator.CountingMethod.GestationalAge:
+			} else {
 				return new GestationalAge(weeks, days, ultrasoundDate);
 			}
-
-			return null;
 		}
 	}
 }

@@ -26,8 +26,18 @@ public class Shared {
 			public static final String EXTRA_ULTRASOUND_DATE = "com.anna.sent.soft.childbirthdate.ultrasounddate";
 			public static final String EXTRA_WEEKS = "com.anna.sent.soft.childbirthdate.weeks";
 			public static final String EXTRA_DAYS = "com.anna.sent.soft.childbirthdate.days";
-			// TODO rename to COUNTING_METHOD, compatibility with old version
 			public static final String EXTRA_IS_EMBRYONIC_AGE = "com.anna.sent.soft.childbirthdate.isfetal";
+		}
+
+		public static class Widget {
+			public static final String EXTRA_CALCULATING_METHOD = "com.anna.sent.soft.childbirthdate.widget.calculatingmethod";
+
+			public static class Calculate {
+				public static final int UNKNOWN = 0, BY_LMP = 1,
+						BY_OVULATION_DAY = 2, BY_ULTRASOUND = 3;
+			}
+			
+			public static final String EXTRA_COUNTDOWN = "com.anna.sent.soft.childbirthdate.widget.countdown";
 		}
 	}
 
