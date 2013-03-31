@@ -16,9 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anna.sent.soft.childbirthdate.pregnancy.CorrectedAge;
-import com.anna.sent.soft.childbirthdate.pregnancy.EmbryonicAge;
-import com.anna.sent.soft.childbirthdate.pregnancy.GestationalAge;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
@@ -105,31 +102,23 @@ public class ResultActivity extends Activity {
 				switch (i) {
 				case 0:
 					if (lastMenstruationDate != null) {
-						pregnancies[i] = new CorrectedAge(lastMenstruationDate,
-								menstrualCycleLen, lutealPhaseLen);
+						pregnancies[i] = PregnancyCalculator.Factory.get(
+								lastMenstruationDate, menstrualCycleLen,
+								lutealPhaseLen);
 					}
 
 					break;
 				case 1:
 					if (ovulationDate != null) {
-						pregnancies[i] = new EmbryonicAge(ovulationDate);
+						pregnancies[i] = PregnancyCalculator.Factory
+								.get(ovulationDate);
 					}
 
 					break;
 				case 2:
 					if (ultrasoundDate != null) {
-						int countingMethod = isEmbryonicAge ? PregnancyCalculator.CountingMethod.EmbryonicAge
-								: PregnancyCalculator.CountingMethod.GestationalAge;
-						switch (countingMethod) {
-						case PregnancyCalculator.CountingMethod.EmbryonicAge:
-							pregnancies[i] = new EmbryonicAge(weeks, days,
-									ultrasoundDate);
-							break;
-						case PregnancyCalculator.CountingMethod.GestationalAge:
-							pregnancies[i] = new GestationalAge(weeks, days,
-									ultrasoundDate);
-							break;
-						}
+						pregnancies[i] = PregnancyCalculator.Factory.get(
+								ultrasoundDate, weeks, days, isEmbryonicAge);
 					}
 
 					break;

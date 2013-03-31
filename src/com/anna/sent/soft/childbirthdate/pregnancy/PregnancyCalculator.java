@@ -1,5 +1,7 @@
 package com.anna.sent.soft.childbirthdate.pregnancy;
 
+import java.util.Calendar;
+
 public class PregnancyCalculator {
 	/**
 	 * The average menstrual cycle length is 28 days.
@@ -51,4 +53,31 @@ public class PregnancyCalculator {
 	public static class CountingMethod {
 		public static final int EmbryonicAge = 0, GestationalAge = 1;
 	};
+
+	public static class Factory {
+		public static Pregnancy get(Calendar lastMenstruationDate,
+				int menstrualCycleLen, int lutealPhaseLen) {
+			return new CorrectedAge(lastMenstruationDate, menstrualCycleLen,
+					lutealPhaseLen);
+		}
+
+		public static Pregnancy get(Calendar ovulationDate) {
+			return new EmbryonicAge(ovulationDate);
+		}
+
+		// TODO replace isEmbryonicAge with countingMethod
+		public static Pregnancy get(Calendar ultrasoundDate, int weeks,
+				int days, boolean isEmbryonicAge) {
+			int countingMethod = isEmbryonicAge ? PregnancyCalculator.CountingMethod.EmbryonicAge
+					: PregnancyCalculator.CountingMethod.GestationalAge;
+			switch (countingMethod) {
+			case PregnancyCalculator.CountingMethod.EmbryonicAge:
+				return new EmbryonicAge(weeks, days, ultrasoundDate);
+			case PregnancyCalculator.CountingMethod.GestationalAge:
+				return new GestationalAge(weeks, days, ultrasoundDate);
+			}
+
+			return null;
+		}
+	}
 }
