@@ -23,7 +23,8 @@ public class MyPregnancyWidget extends AppWidgetProvider {
 		String action = intent.getAction();
 		if (action.equals(UPDATE_ACTION)
 				|| action.equals(Intent.ACTION_TIME_CHANGED)
-				|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
+				|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
+				|| action.equals(Intent.ACTION_DATE_CHANGED)) {
 			AppWidgetManager appWidgetManager = AppWidgetManager
 					.getInstance(context);
 			int[] appWidgetIds = appWidgetManager

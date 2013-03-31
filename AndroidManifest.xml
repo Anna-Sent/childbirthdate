@@ -20,12 +20,16 @@
             android:label="@string/widget_name" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/my_pregnancy_widget_provider_info" />
         </receiver>
+
         <activity
             android:name=".widget.MyPregnancyWidgetConfigure"
             android:label="@string/widget_name" >
