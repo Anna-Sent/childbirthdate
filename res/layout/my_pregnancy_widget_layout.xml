@@ -6,16 +6,16 @@
     <TextView
         android:id="@+id/tv1"
         style="@style/TextViewStyle.Center.Medium"
-        android:text="Your pregnancy gestational age is" />
+        android:text="@string/emptyString" />
 
     <TextView
         android:id="@+id/tv2"
         style="@style/TextViewStyle.Center.Medium.Red"
-        android:text="1 weeks, 2 days" />
+        android:text="@string/emptyString" />
 
     <TextView
         android:id="@+id/tv3"
         style="@style/TextViewStyle.LeftPadding"
-        android:text="Calculating method is by LMP" />
+        android:text="@string/emptyString" />
 
 </LinearLayout>
