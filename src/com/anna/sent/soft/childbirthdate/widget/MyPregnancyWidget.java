@@ -1,6 +1,9 @@
-package com.anna.sent.soft.childbirthdate;
+package com.anna.sent.soft.childbirthdate.widget;
 
 import java.util.Calendar;
+
+import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.R.layout;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
