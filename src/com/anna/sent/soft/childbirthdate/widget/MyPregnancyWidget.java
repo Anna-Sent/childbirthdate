@@ -106,30 +106,36 @@ public class MyPregnancyWidget extends AppWidgetProvider {
 			break;
 		}
 
-		views.setViewVisibility(R.id.tv1, View.VISIBLE);
-		views.setTextViewText(R.id.tv1,
-				countdown ? context.getString(R.string.widgetTextRest)
-						: context.getString(R.string.widgetTextInfo));
 		if (p == null) {
 			views.setViewVisibility(R.id.tv1, View.GONE);
 			views.setTextViewText(R.id.tv2,
 					context.getString(R.string.errorIncorrectGestationAge));
-			views.setTextViewText(R.id.tv3, context
+			views.setViewVisibility(R.id.tv3, View.GONE);
+			views.setTextViewText(R.id.tv4, context
 					.getString(R.string.errorNotSelectedCalculationMethod));
 		} else {
 			Calendar currentDate = Calendar.getInstance();
 			p.setCurrentPoint(currentDate);
 			if (p.isCorrect()) {
+				views.setViewVisibility(R.id.tv1, View.VISIBLE);
+				views.setTextViewText(R.id.tv1,
+						countdown ? context.getString(R.string.widgetTextRest)
+								: context.getString(R.string.widgetTextInfo));
 				views.setTextViewText(R.id.tv2,
 						countdown ? p.getRestInfo(context) : p.getInfo(context));
-				views.setTextViewText(R.id.tv3, context.getString(
-						R.string.widgetCalculatingMethod,
-						calculatingMethodString));
+				if (countdown) {
+					views.setViewVisibility(R.id.tv3, View.GONE);
+				} else {
+					views.setViewVisibility(R.id.tv3, View.VISIBLE);
+					views.setTextViewText(R.id.tv3,
+							p.getAdditionalInfo(context));
+				}
 			} else {
 				views.setViewVisibility(R.id.tv1, View.GONE);
 				views.setTextViewText(R.id.tv2,
 						context.getString(R.string.errorIncorrectGestationAge));
 				Calendar start = p.getStartPoint(), end = p.getEndPoint();
+				views.setViewVisibility(R.id.tv3, View.VISIBLE);
 				if (currentDate.before(start)) {
 					views.setTextViewText(
 							R.id.tv3,
@@ -140,6 +146,9 @@ public class MyPregnancyWidget extends AppWidgetProvider {
 							context.getString(R.string.errorIncorrectCurrentDateGreater));
 				}
 			}
+
+			views.setTextViewText(R.id.tv4, context.getString(
+					R.string.widgetCalculatingMethod, calculatingMethodString));
 		}
 
 		return views;
