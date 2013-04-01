@@ -22,8 +22,7 @@ public abstract class Pregnancy {
 	 */
 	public Pregnancy(Calendar start) {
 		this.startPoint = start;
-		currentPoint = Calendar.getInstance();
-		currentPoint.setTimeInMillis(start.getTimeInMillis());
+		currentPoint = (Calendar) start.clone();
 	}
 
 	/**
