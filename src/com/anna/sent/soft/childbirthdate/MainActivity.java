@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate;
 
-import android.app.PendingIntent;
-import android.app.PendingIntent.CanceledException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -99,17 +97,8 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		editor.putInt(EXTRA_GUI_THEME_ID, Utils.getThemeId());
 		editor.commit();
 
-		// update widgets
-		Intent updateWidget = new Intent(this, MyPregnancyWidget.class);
-		updateWidget.setAction(MyPregnancyWidget.UPDATE_ACTION);
-		PendingIntent pending = PendingIntent.getBroadcast(this, 0,
-				updateWidget, PendingIntent.FLAG_CANCEL_CURRENT);
-		try {
-			pending.send();
-		} catch (CanceledException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// update all widgets
+		MyPregnancyWidget.updateAllWidgets(this);
 	}
 
 	public void calculate(View view) {

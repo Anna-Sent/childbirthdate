@@ -2,6 +2,8 @@ package com.anna.sent.soft.childbirthdate.widget;
 
 import java.util.Calendar;
 
+import android.app.PendingIntent;
+import android.app.PendingIntent.CanceledException;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -48,4 +50,23 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	}
 
 	protected abstract Builder getBuilder();
+
+	public static void updateAllWidgets(Context context) {
+		updateWidgets(context, MyPregnancyWidgetSmall.class);
+		updateWidgets(context, MyPregnancyWidgetSimple.class);
+		updateWidgets(context, MyPregnancyWidgetAdditional.class);
+	}
+
+	private static void updateWidgets(Context context, Class<?> cls) {
+		Intent updateWidget = new Intent(context, cls);
+		updateWidget.setAction(MyPregnancyWidget.UPDATE_ACTION);
+		PendingIntent pending = PendingIntent.getBroadcast(context, 0,
+				updateWidget, PendingIntent.FLAG_CANCEL_CURRENT);
+		try {
+			pending.send();
+		} catch (CanceledException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
