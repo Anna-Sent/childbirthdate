@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LinearLayoutVerticalStyle" >
+
+    <TextView
+        android:id="@+id/tv341"
+        style="@style/TextViewStyle.Center.Medium"
+        android:text="@string/emptyString" />
+
+    <TextView
+        android:id="@+id/tv342"
+        style="@style/TextViewStyle.Center.Medium.Red"
+        android:text="@string/emptyString" />
+
+    <TextView
+        android:id="@+id/tv343"
+        style="@style/TextViewStyle.LeftPadding"
+        android:text="@string/emptyString" />
+
+    <TextView
+        android:id="@+id/tv344"
+        style="@style/TextViewStyle.LeftPadding"
+        android:text="@string/emptyString" />
+
+</LinearLayout>

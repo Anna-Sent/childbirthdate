@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
-public class MyPregnancyWidgetConfigure extends Activity implements
+public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		OnClickListener {
 	private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 	private TextView textView;
@@ -29,11 +29,13 @@ public class MyPregnancyWidgetConfigure extends Activity implements
 	private Button button;
 	private boolean doCalculation = false;
 
+	protected abstract int getLayoutId();
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setResult(RESULT_CANCELED);
-		setContentView(R.layout.my_pregnancy_widget_configure_layout);
+		setContentView(getLayoutId());
 
 		// First, get the App Widget ID from the Intent that launched the
 		// Activity:
@@ -66,7 +68,7 @@ public class MyPregnancyWidgetConfigure extends Activity implements
 			saveWidgetParams();
 
 			// Second. Update the App Widget with a RemoteViews layout
-			RemoteViews views = MyPregnancyWidget.buildViews(this,
+			RemoteViews views = getBuilder().buildViews(this,
 					Calendar.getInstance(), mAppWidgetId);
 			appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
@@ -86,6 +88,8 @@ public class MyPregnancyWidgetConfigure extends Activity implements
 		}
 	}
 
+	protected abstract Builder getBuilder();
+
 	public void startTheApplication() {
 		Intent intent = new Intent(this,
 				com.anna.sent.soft.childbirthdate.MainActivity.class);
@@ -103,6 +107,8 @@ public class MyPregnancyWidgetConfigure extends Activity implements
 			}
 		}
 	}
+
+	protected abstract boolean hasCountdown();
 
 	private void init() {
 		SharedPreferences settings = Shared.getSettings(this);
@@ -126,9 +132,12 @@ public class MyPregnancyWidgetConfigure extends Activity implements
 		radioByUltrasound = (RadioButton) findViewById(R.id.radioByUltrasound);
 		radioByUltrasound
 				.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
-		checkBoxCountdown = (CheckBox) findViewById(R.id.checkBoxCountdown);
-		checkBoxCountdown.setVisibility(doCalculation ? View.VISIBLE
-				: View.GONE);
+		if (hasCountdown()) {
+			checkBoxCountdown = (CheckBox) findViewById(R.id.checkBoxCountdown);
+			checkBoxCountdown.setVisibility(doCalculation ? View.VISIBLE
+					: View.GONE);
+		}
+
 		button = (Button) findViewById(R.id.widgetConfigureButton);
 		button.setText(doCalculation ? getString(R.string.widgetAddWidget)
 				: getString(R.string.widgetStartTheApplication));
@@ -149,8 +158,11 @@ public class MyPregnancyWidgetConfigure extends Activity implements
 
 		editor.putInt(Shared.Saved.Widget.EXTRA_CALCULATING_METHOD
 				+ mAppWidgetId, calculatingMethod);
-		editor.putBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN + mAppWidgetId,
-				checkBoxCountdown.isChecked());
+		if (hasCountdown()) {
+			editor.putBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN
+					+ mAppWidgetId, checkBoxCountdown.isChecked());
+		}
+
 		editor.commit();
 	}
 }
