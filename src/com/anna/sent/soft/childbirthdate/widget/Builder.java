@@ -13,6 +13,8 @@ import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public abstract class Builder {
+	protected abstract boolean hasTV1();
+
 	protected abstract boolean hasTV3();
 
 	protected abstract int getWidgetLayoutId();
@@ -91,10 +93,16 @@ public abstract class Builder {
 			Calendar currentDate = Calendar.getInstance();
 			p.setCurrentPoint(currentDate);
 			if (p.isCorrect()) {
-				views.setViewVisibility(R.id.tv1, View.VISIBLE);
-				views.setTextViewText(R.id.tv1,
-						countdown ? context.getString(R.string.widgetTextRest)
-								: context.getString(R.string.widgetTextInfo));
+				if (hasTV1()) {
+					views.setViewVisibility(R.id.tv1, View.VISIBLE);
+					views.setTextViewText(
+							R.id.tv1,
+							countdown ? context
+									.getString(R.string.widgetTextRest)
+									: context
+											.getString(R.string.widgetTextInfo));
+				}
+
 				views.setTextViewText(R.id.tv2,
 						countdown ? p.getRestInfo(context) : p.getInfo(context));
 				if (hasTV3()) {
