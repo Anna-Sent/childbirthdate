@@ -145,8 +145,10 @@
     <string name="widgetStartTheApplicationToSpecifyNecessaryData">Запустите приложение и заполните необходимые для расчета данные</string>
     <string name="widgetStartTheApplication">Запустить приложение</string>
     <string name="countdown">Обратный отсчет</string>
+    <string name="showCalculatingMethod">Отображать метод расчета</string>
     <string name="widgetTextInfo">Беременность</string>
     <string name="widgetTextRest">До родов</string>
     <string name="widgetCalculatingMethod">Метод расчета: %s</string>
+    <string name="initialization">Загрузка...</string>
 
 </resources>

@@ -35,6 +35,11 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </RadioGroup>
 
+    <CheckBox
+        android:id="@+id/checkBoxShowCalculatingMethod"
+        style="@style/CheckBoxStyle"
+        android:text="@string/showCalculatingMethod" />
+
     <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
         <RelativeLayout style="@style/ButtonSpace" />

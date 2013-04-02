@@ -16,20 +16,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <receiver
-            android:name=".widget.MyPregnancyWidget00"
-            android:label="@string/widget_name" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.intent.action.DATE_CHANGED" />
-                <action android:name="android.intent.action.TIME_SET" />
-                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/my_pregnancy_widget_provider_info_00" />
-        </receiver>
-        <receiver
             android:name=".widget.MyPregnancyWidget04"
             android:label="@string/widget_name" >
             <intent-filter>
@@ -42,20 +28,6 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/my_pregnancy_widget_provider_info_04" />
-        </receiver>
-        <receiver
-            android:name=".widget.MyPregnancyWidget30"
-            android:label="@string/widget_name" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.intent.action.DATE_CHANGED" />
-                <action android:name="android.intent.action.TIME_SET" />
-                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/my_pregnancy_widget_provider_info_30" />
         </receiver>
         <receiver
             android:name=".widget.MyPregnancyWidget34"
@@ -73,21 +45,7 @@
         </receiver>
 
         <activity
-            android:name=".widget.MyPregnancyWidgetConfigure00"
-            android:label="@string/widget_name" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".widget.MyPregnancyWidgetConfigure04"
-            android:label="@string/widget_name" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".widget.MyPregnancyWidgetConfigure30"
             android:label="@string/widget_name" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />

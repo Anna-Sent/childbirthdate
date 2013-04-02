@@ -15,8 +15,6 @@ import com.anna.sent.soft.childbirthdate.shared.Shared;
 public abstract class Builder {
 	protected abstract boolean hasTV3();
 
-	protected abstract boolean hasTV4();
-
 	protected abstract int getWidgetLayoutId();
 
 	public RemoteViews buildViews(Context context, Calendar today,
@@ -30,6 +28,9 @@ public abstract class Builder {
 				Shared.Saved.Widget.Calculate.UNKNOWN);
 		boolean countdown = settings.getBoolean(
 				Shared.Saved.Widget.EXTRA_COUNTDOWN + appWidgetId, false);
+		boolean showCalculatingMethod = settings
+				.getBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATING_METHOD
+						+ appWidgetId, false);
 		Pregnancy p = null;
 		String calculatingMethodString = "";
 		switch (calculatingMethod) {
@@ -73,78 +74,66 @@ public abstract class Builder {
 		}
 
 		if (p == null) {
-			views.setViewVisibility(getTV1Id(), View.GONE);
-			views.setTextViewText(getTV2Id(),
+			views.setViewVisibility(R.id.tv1, View.GONE);
+			views.setTextViewText(R.id.tv2,
 					context.getString(R.string.errorIncorrectGestationAge));
 			if (hasTV3()) {
-				views.setViewVisibility(getTV3Id(), View.GONE);
+				views.setViewVisibility(R.id.tv3, View.GONE);
 			}
 
-			if (hasTV4()) {
-				views.setTextViewText(getTV4Id(), context
+			views.setViewVisibility(R.id.tv4,
+					showCalculatingMethod ? View.VISIBLE : View.GONE);
+			if (showCalculatingMethod) {
+				views.setTextViewText(R.id.tv4, context
 						.getString(R.string.errorNotSelectedCalculationMethod));
 			}
 		} else {
 			Calendar currentDate = Calendar.getInstance();
 			p.setCurrentPoint(currentDate);
 			if (p.isCorrect()) {
-				views.setViewVisibility(getTV1Id(), View.VISIBLE);
-				views.setTextViewText(getTV1Id(),
+				views.setViewVisibility(R.id.tv1, View.VISIBLE);
+				views.setTextViewText(R.id.tv1,
 						countdown ? context.getString(R.string.widgetTextRest)
 								: context.getString(R.string.widgetTextInfo));
-				views.setTextViewText(getTV2Id(),
+				views.setTextViewText(R.id.tv2,
 						countdown ? p.getRestInfo(context) : p.getInfo(context));
 				if (hasTV3()) {
 					if (countdown) {
-						views.setViewVisibility(getTV3Id(), View.GONE);
+						views.setViewVisibility(R.id.tv3, View.GONE);
 					} else {
-						views.setViewVisibility(getTV3Id(), View.VISIBLE);
-						views.setTextViewText(getTV3Id(),
+						views.setViewVisibility(R.id.tv3, View.VISIBLE);
+						views.setTextViewText(R.id.tv3,
 								p.getAdditionalInfo(context));
 					}
 				}
 			} else {
-				views.setViewVisibility(getTV1Id(), View.GONE);
-				views.setTextViewText(getTV2Id(),
+				views.setViewVisibility(R.id.tv1, View.GONE);
+				views.setTextViewText(R.id.tv2,
 						context.getString(R.string.errorIncorrectGestationAge));
 				if (hasTV3()) {
 					Calendar start = p.getStartPoint(), end = p.getEndPoint();
-					views.setViewVisibility(getTV3Id(), View.VISIBLE);
+					views.setViewVisibility(R.id.tv3, View.VISIBLE);
 					if (currentDate.before(start)) {
 						views.setTextViewText(
-								getTV3Id(),
+								R.id.tv3,
 								context.getString(R.string.errorIncorrectCurrentDateSmaller));
 					} else if (currentDate.after(end)) {
 						views.setTextViewText(
-								getTV3Id(),
+								R.id.tv3,
 								context.getString(R.string.errorIncorrectCurrentDateGreater));
 					}
 				}
 			}
 
-			if (hasTV4()) {
-				views.setTextViewText(getTV4Id(), context.getString(
+			views.setViewVisibility(R.id.tv4,
+					showCalculatingMethod ? View.VISIBLE : View.GONE);
+			if (showCalculatingMethod) {
+				views.setTextViewText(R.id.tv4, context.getString(
 						R.string.widgetCalculatingMethod,
 						calculatingMethodString));
 			}
 		}
 
 		return views;
-	}
-
-	protected int getTV1Id() {
-		return 0;
-	}
-
-	protected int getTV2Id() {
-		return 0;
-	}
-
-	protected int getTV3Id() {
-		return 0;
-	}
-
-	protected int getTV4Id() {
-		return 0;
 	}
 }

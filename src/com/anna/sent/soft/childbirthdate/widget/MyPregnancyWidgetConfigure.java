@@ -25,7 +25,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 	private TextView textView;
 	private RadioButton radioByLMP, radiobyByOvulation, radioByUltrasound;
-	private CheckBox checkBoxCountdown;
+	private CheckBox checkBoxCountdown, checkBoxShowCalculatingMethod;
 	private Button button;
 	private boolean doCalculation = false;
 
@@ -138,6 +138,10 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 					: View.GONE);
 		}
 
+		checkBoxShowCalculatingMethod = (CheckBox) findViewById(R.id.checkBoxShowCalculatingMethod);
+		checkBoxShowCalculatingMethod
+				.setVisibility(doCalculation ? View.VISIBLE : View.GONE);
+
 		button = (Button) findViewById(R.id.widgetConfigureButton);
 		button.setText(doCalculation ? getString(R.string.widgetAddWidget)
 				: getString(R.string.widgetStartTheApplication));
@@ -162,6 +166,9 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 			editor.putBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN
 					+ mAppWidgetId, checkBoxCountdown.isChecked());
 		}
+
+		editor.putBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATING_METHOD
+				+ mAppWidgetId, checkBoxShowCalculatingMethod.isChecked());
 
 		editor.commit();
 	}

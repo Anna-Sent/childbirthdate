@@ -4,22 +4,22 @@
     style="@style/LinearLayoutVerticalStyle" >
 
     <TextView
-        android:id="@+id/tv341"
+        android:id="@+id/tv1"
         style="@style/TextViewStyle.Center.Medium"
         android:text="@string/emptyString" />
 
     <TextView
-        android:id="@+id/tv342"
+        android:id="@+id/tv2"
         style="@style/TextViewStyle.Center.Medium.Red"
         android:text="@string/emptyString" />
 
     <TextView
-        android:id="@+id/tv343"
+        android:id="@+id/tv3"
         style="@style/TextViewStyle.LeftPadding"
         android:text="@string/emptyString" />
 
     <TextView
-        android:id="@+id/tv344"
+        android:id="@+id/tv4"
         style="@style/TextViewStyle.LeftPadding"
         android:text="@string/emptyString" />
 

@@ -36,8 +36,9 @@ public class Shared {
 				public static final int UNKNOWN = 0, BY_LMP = 1,
 						BY_OVULATION_DAY = 2, BY_ULTRASOUND = 3;
 			}
-			
+
 			public static final String EXTRA_COUNTDOWN = "com.anna.sent.soft.childbirthdate.widget.countdown";
+			public static final String EXTRA_SHOW_CALCULATING_METHOD = "com.anna.sent.soft.childbirthdate.widget.showCalculatingMethod";
 		}
 	}
 
