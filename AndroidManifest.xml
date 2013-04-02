@@ -16,6 +16,20 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <receiver
+            android:name=".widget.MyPregnancyWidgetSmall"
+            android:label="@string/widget_name" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/my_pregnancy_widget_provider_info_small" />
+        </receiver>
+        <receiver
             android:name=".widget.MyPregnancyWidgetSimple"
             android:label="@string/widget_name" >
             <intent-filter>
@@ -44,6 +58,13 @@
                 android:resource="@xml/my_pregnancy_widget_provider_info_additional" />
         </receiver>
 
+        <activity
+            android:name=".widget.MyPregnancyWidgetConfigureSmall"
+            android:label="@string/widget_name" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".widget.MyPregnancyWidgetConfigureSimple"
             android:label="@string/widget_name" >

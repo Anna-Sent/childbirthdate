@@ -110,6 +110,8 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 	protected abstract boolean hasCountdown();
 
+	protected abstract boolean hasShowCalculatingMethod();
+
 	private void init() {
 		SharedPreferences settings = Shared.getSettings(this);
 		boolean byLMP = settings
@@ -132,15 +134,18 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		radioByUltrasound = (RadioButton) findViewById(R.id.radioByUltrasound);
 		radioByUltrasound
 				.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
+
 		if (hasCountdown()) {
 			checkBoxCountdown = (CheckBox) findViewById(R.id.checkBoxCountdown);
 			checkBoxCountdown.setVisibility(doCalculation ? View.VISIBLE
 					: View.GONE);
 		}
 
-		checkBoxShowCalculatingMethod = (CheckBox) findViewById(R.id.checkBoxShowCalculatingMethod);
-		checkBoxShowCalculatingMethod
-				.setVisibility(doCalculation ? View.VISIBLE : View.GONE);
+		if (hasShowCalculatingMethod()) {
+			checkBoxShowCalculatingMethod = (CheckBox) findViewById(R.id.checkBoxShowCalculatingMethod);
+			checkBoxShowCalculatingMethod
+					.setVisibility(doCalculation ? View.VISIBLE : View.GONE);
+		}
 
 		button = (Button) findViewById(R.id.widgetConfigureButton);
 		button.setText(doCalculation ? getString(R.string.widgetAddWidget)
@@ -162,13 +167,16 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 		editor.putInt(Shared.Saved.Widget.EXTRA_CALCULATING_METHOD
 				+ mAppWidgetId, calculatingMethod);
+
 		if (hasCountdown()) {
 			editor.putBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN
 					+ mAppWidgetId, checkBoxCountdown.isChecked());
 		}
 
-		editor.putBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATING_METHOD
-				+ mAppWidgetId, checkBoxShowCalculatingMethod.isChecked());
+		if (hasShowCalculatingMethod()) {
+			editor.putBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATING_METHOD
+					+ mAppWidgetId, checkBoxShowCalculatingMethod.isChecked());
+		}
 
 		editor.commit();
 	}

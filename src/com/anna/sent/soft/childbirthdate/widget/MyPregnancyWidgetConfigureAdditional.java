@@ -2,7 +2,8 @@ package com.anna.sent.soft.childbirthdate.widget;
 
 import com.anna.sent.soft.childbirthdate.R;
 
-public final class MyPregnancyWidgetConfigureAdditional extends MyPregnancyWidgetConfigure {
+public final class MyPregnancyWidgetConfigureAdditional extends
+		MyPregnancyWidgetConfigure {
 	@Override
 	protected Builder getBuilder() {
 		return new BuilderAdditional();
@@ -16,5 +17,10 @@ public final class MyPregnancyWidgetConfigureAdditional extends MyPregnancyWidge
 	@Override
 	protected int getLayoutId() {
 		return R.layout.my_pregnancy_widget_configure_layout_additional;
+	}
+
+	@Override
+	protected boolean hasShowCalculatingMethod() {
+		return true;
 	}
 }
