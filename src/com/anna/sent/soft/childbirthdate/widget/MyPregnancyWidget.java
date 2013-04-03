@@ -2,8 +2,6 @@ package com.anna.sent.soft.childbirthdate.widget;
 
 import java.util.Calendar;
 
-import com.anna.sent.soft.childbirthdate.shared.Shared;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.PendingIntent.CanceledException;
@@ -15,6 +13,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.widget.RemoteViews;
+
+import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 /**
  * Define a simple widget that shows a text.
