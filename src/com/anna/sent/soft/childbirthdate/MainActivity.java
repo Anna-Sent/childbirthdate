@@ -1,11 +1,15 @@
 package com.anna.sent.soft.childbirthdate;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +21,9 @@ import com.anna.sent.soft.childbirthdate.fragments.TabSettingsFragment;
 import com.anna.sent.soft.childbirthdate.gui.TabsAdapter;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
+import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetSmall;
+import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetSimple;
+import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetAdditional;
 import com.anna.sent.soft.utils.StateSaver;
 import com.anna.sent.soft.utils.Utils;
 
@@ -29,6 +36,40 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	private static final String EXTRA_GUI_CURRENT_TAB = "com.anna.sent.soft.childbirthdate.currenttab";
 	private static final String EXTRA_GUI_THEME_ID = "com.anna.sent.soft.childbirthdate.themeid";
 
+	private void disableWidgets() {
+		disableWidget(MyPregnancyWidgetSmall.class);
+		disableWidget(MyPregnancyWidgetSimple.class);
+		disableWidget(MyPregnancyWidgetAdditional.class);
+	}
+
+	private void enableWidgets() {
+		enableWidget(MyPregnancyWidgetSmall.class);
+		enableWidget(MyPregnancyWidgetSimple.class);
+		enableWidget(MyPregnancyWidgetAdditional.class);
+	}
+
+	private void disableWidget(Class<?> widgetClass) {
+		ComponentName component = new ComponentName(this, widgetClass);
+		int status = getPackageManager().getComponentEnabledSetting(component);
+		if (status == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+				|| status == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT) {
+			getPackageManager().setComponentEnabledSetting(component,
+					PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+					PackageManager.DONT_KILL_APP);
+		}
+	}
+
+	private void enableWidget(Class<?> widgetClass) {
+		ComponentName component = new ComponentName(this, widgetClass);
+		int status = getPackageManager().getComponentEnabledSetting(component);
+		if (status == PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+				|| status == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT) {
+			getPackageManager().setComponentEnabledSetting(component,
+					PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+					PackageManager.DONT_KILL_APP);
+		}
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		SharedPreferences settings = Shared.getSettings(this);
@@ -36,6 +77,10 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		Utils.onActivityCreateSetTheme(this, themeId);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		/*if (Build.VERSION.SDK_INT == Build.VERSION_CODES.ECLAIR_MR1) {
+			enableWidgets(); // disableWidgets();
+		}*/
 
 		final String tab_settings = "tab_settings", tab_calculation = "tab_calculation", tab_help = "tab_help";
 
