@@ -28,8 +28,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 			AppWidgetManager appWidgetManager = AppWidgetManager
 					.getInstance(context);
 			int[] appWidgetIds = appWidgetManager
-					.getAppWidgetIds(new ComponentName(context,
-							MyPregnancyWidget.class));
+					.getAppWidgetIds(new ComponentName(context, getClass()));
 			onUpdate(context, appWidgetManager, appWidgetIds);
 		}
 	}
