@@ -21,7 +21,7 @@ public abstract class Pregnancy {
 	 *            start point of pregnancy, must be not null
 	 */
 	public Pregnancy(Calendar start) {
-		this.startPoint = start;
+		startPoint = start;
 		currentPoint = (Calendar) start.clone();
 	}
 
