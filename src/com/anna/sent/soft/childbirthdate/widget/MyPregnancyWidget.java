@@ -2,6 +2,9 @@ package com.anna.sent.soft.childbirthdate.widget;
 
 import java.util.Calendar;
 
+import com.anna.sent.soft.childbirthdate.shared.Shared;
+
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.PendingIntent.CanceledException;
 import android.appwidget.AppWidgetManager;
@@ -9,6 +12,8 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.widget.RemoteViews;
 
 /**
@@ -56,16 +61,60 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 		updateWidgets(context, MyPregnancyWidgetAdditional.class);
 	}
 
-	private static void updateWidgets(Context context, Class<?> cls) {
+	private static PendingIntent getPendingIntent(Context context, Class<?> cls) {
 		Intent updateWidget = new Intent(context, cls);
 		updateWidget.setAction(MyPregnancyWidget.UPDATE_ACTION);
-		PendingIntent pending = PendingIntent.getBroadcast(context, 0,
+		PendingIntent result = PendingIntent.getBroadcast(context, 0,
 				updateWidget, PendingIntent.FLAG_CANCEL_CURRENT);
+		return result;
+	}
+
+	private static void updateWidgets(Context context, Class<?> cls) {
 		try {
-			pending.send();
+			getPendingIntent(context, cls).send();
 		} catch (CanceledException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void onDeleted(Context context, int[] appWidgetIds) {
+		super.onDeleted(context, appWidgetIds);
+		SharedPreferences settings = Shared.getSettings(context);
+		Editor editor = settings.edit();
+		for (int i = 0; i < appWidgetIds.length; ++i) {
+			editor.remove(Shared.Saved.Widget.EXTRA_CALCULATING_METHOD
+					+ appWidgetIds[i]);
+			editor.remove(Shared.Saved.Widget.EXTRA_COUNTDOWN + appWidgetIds[i]);
+			editor.remove(Shared.Saved.Widget.EXTRA_SHOW_CALCULATING_METHOD
+					+ appWidgetIds[i]);
+		}
+
+		editor.commit();
+	}
+
+	@Override
+	public void onDisabled(Context context) {
+		super.onDisabled(context);
+		AlarmManager alarmManager = (AlarmManager) context
+				.getSystemService(Context.ALARM_SERVICE);
+		alarmManager.cancel(getPendingIntent(context, getClass()));
+	}
+
+	@Override
+	public void onEnabled(Context context) {
+		super.onEnabled(context);
+		AlarmManager alarmManager = (AlarmManager) context
+				.getSystemService(Context.ALARM_SERVICE);
+		Calendar midnight = Calendar.getInstance();
+		midnight.set(Calendar.HOUR_OF_DAY, 0);
+		midnight.set(Calendar.MINUTE, 0);
+		midnight.set(Calendar.SECOND, 0);
+		midnight.set(Calendar.MILLISECOND, 0);
+		midnight.add(Calendar.DAY_OF_MONTH, 1);
+		alarmManager.setInexactRepeating(AlarmManager.RTC,
+				midnight.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
+				getPendingIntent(context, getClass()));
 	}
 }
