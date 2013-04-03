@@ -29,12 +29,17 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 		if (action.equals(UPDATE_ACTION)
 				|| action.equals(Intent.ACTION_TIME_CHANGED)
 				|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
-				|| action.equals(Intent.ACTION_DATE_CHANGED)) {
+				|| action.equals(Intent.ACTION_DATE_CHANGED)
+				|| action.equals(Intent.ACTION_BOOT_COMPLETED)) {
 			AppWidgetManager appWidgetManager = AppWidgetManager
 					.getInstance(context);
 			int[] appWidgetIds = appWidgetManager
 					.getAppWidgetIds(new ComponentName(context, getClass()));
 			onUpdate(context, appWidgetManager, appWidgetIds);
+
+			if (action.equals(Intent.ACTION_BOOT_COMPLETED)) {
+				installAlarms(context);
+			}
 		}
 	}
 
@@ -105,6 +110,10 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	@Override
 	public void onEnabled(Context context) {
 		super.onEnabled(context);
+		installAlarms(context);
+	}
+
+	private void installAlarms(Context context) {
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		Calendar midnight = Calendar.getInstance();
