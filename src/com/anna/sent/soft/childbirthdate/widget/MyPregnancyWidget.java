@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.anna.sent.soft.childbirthdate.shared.Shared;
@@ -40,6 +41,8 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 			if (action.equals(Intent.ACTION_BOOT_COMPLETED)) {
 				installAlarms(context);
 			}
+
+			Log.d("moo", "on update " + getClass().getSimpleName());
 		}
 	}
 
@@ -97,6 +100,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 		}
 
 		editor.commit();
+		Log.d("moo", "on deleted " + getClass().getSimpleName());
 	}
 
 	@Override
@@ -105,12 +109,14 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(getPendingIntent(context, getClass()));
+		Log.d("moo", "on disabled " + getClass().getSimpleName());
 	}
 
 	@Override
 	public void onEnabled(Context context) {
 		super.onEnabled(context);
 		installAlarms(context);
+		Log.d("moo", "on enabled " + getClass().getSimpleName());
 	}
 
 	private void installAlarms(Context context) {
@@ -122,7 +128,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 		midnight.set(Calendar.SECOND, 0);
 		midnight.set(Calendar.MILLISECOND, 0);
 		midnight.add(Calendar.DAY_OF_MONTH, 1);
-		alarmManager.setInexactRepeating(AlarmManager.RTC,
+		alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
 				midnight.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
 				getPendingIntent(context, getClass()));
 	}
