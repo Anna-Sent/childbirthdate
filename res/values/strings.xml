@@ -147,7 +147,7 @@
     <string name="countdown">Обратный отсчет</string>
     <string name="showCalculatingMethod">Отображать метод расчета</string>
     <string name="widgetTextInfo">Беременность</string>
-    <string name="widgetTextRest">До родов</string>
+    <string name="widgetTextRestInfo">До родов</string>
     <string name="widgetCalculatingMethod">Метод расчета: %s</string>
     <string name="initialization">Загрузка...</string>
 

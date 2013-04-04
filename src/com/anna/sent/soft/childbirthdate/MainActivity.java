@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,12 +34,14 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	private static final String EXTRA_GUI_CURRENT_TAB = "com.anna.sent.soft.childbirthdate.currenttab";
 	private static final String EXTRA_GUI_THEME_ID = "com.anna.sent.soft.childbirthdate.themeid";
 
+	@SuppressWarnings("unused")
 	private void disableWidgets() {
 		disableWidget(MyPregnancyWidgetSmall.class);
 		disableWidget(MyPregnancyWidgetSimple.class);
 		disableWidget(MyPregnancyWidgetAdditional.class);
 	}
 
+	@SuppressWarnings("unused")
 	private void enableWidgets() {
 		enableWidget(MyPregnancyWidgetSmall.class);
 		enableWidget(MyPregnancyWidgetSimple.class);
@@ -77,10 +77,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		Utils.onActivityCreateSetTheme(this, themeId);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		/*if (Build.VERSION.SDK_INT == Build.VERSION_CODES.ECLAIR_MR1) {
-			enableWidgets(); // disableWidgets();
-		}*/
 
 		final String tab_settings = "tab_settings", tab_calculation = "tab_calculation", tab_help = "tab_help";
 

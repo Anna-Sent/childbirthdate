@@ -29,13 +29,11 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	private Button button;
 	private boolean doCalculation = false;
 
-	protected abstract int getLayoutId();
-
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setResult(RESULT_CANCELED);
-		setContentView(getLayoutId());
+		setContentView(R.layout.my_pregnancy_widget_configure_layout);
 
 		// First, get the App Widget ID from the Intent that launched the
 		// Activity:
@@ -135,17 +133,14 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		radioByUltrasound
 				.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
 
-		if (hasCountdown()) {
-			checkBoxCountdown = (CheckBox) findViewById(R.id.checkBoxCountdown);
-			checkBoxCountdown.setVisibility(doCalculation ? View.VISIBLE
-					: View.GONE);
-		}
+		checkBoxCountdown = (CheckBox) findViewById(R.id.checkBoxCountdown);
+		checkBoxCountdown
+				.setVisibility(hasCountdown() && doCalculation ? View.VISIBLE
+						: View.GONE);
 
-		if (hasShowCalculatingMethod()) {
-			checkBoxShowCalculatingMethod = (CheckBox) findViewById(R.id.checkBoxShowCalculatingMethod);
-			checkBoxShowCalculatingMethod
-					.setVisibility(doCalculation ? View.VISIBLE : View.GONE);
-		}
+		checkBoxShowCalculatingMethod = (CheckBox) findViewById(R.id.checkBoxShowCalculatingMethod);
+		checkBoxShowCalculatingMethod.setVisibility(hasShowCalculatingMethod()
+				&& doCalculation ? View.VISIBLE : View.GONE);
 
 		button = (Button) findViewById(R.id.widgetConfigureButton);
 		button.setText(doCalculation ? getString(R.string.widgetAddWidget)

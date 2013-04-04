@@ -42,7 +42,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 				installAlarms(context);
 			}
 
-			Log.d("moo", "on update " + getClass().getSimpleName());
+			Log.d("moo", "on update " + action);
 		}
 	}
 
