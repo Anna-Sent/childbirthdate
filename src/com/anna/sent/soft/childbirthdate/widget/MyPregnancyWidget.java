@@ -44,6 +44,8 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 
 			Log.d("moo", "on update " + action);
 		}
+
+		super.onReceive(context, intent);
 	}
 
 	@Override
