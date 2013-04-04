@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate.widget;
 
-import java.util.Calendar;
-
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
@@ -13,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
-import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,22 +56,29 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 				|| radioByUltrasound.isChecked()) {
 			// When the configuration is complete, get an instance of the
 			// AppWidgetManager
-			AppWidgetManager appWidgetManager = AppWidgetManager
-					.getInstance(this);
+			/*
+			 * AppWidgetManager appWidgetManager = AppWidgetManager
+			 * .getInstance(this);
+			 */
 
 			// First
 			saveWidgetParams();
 
 			// Second. Update the App Widget with a RemoteViews layout
-			RemoteViews views = getBuilder().buildViews(this,
-					Calendar.getInstance(), mAppWidgetId);
-			appWidgetManager.updateAppWidget(mAppWidgetId, views);
+			/*
+			 * RemoteViews views = getBuilder().buildViews(this,
+			 * Calendar.getInstance(), mAppWidgetId);
+			 * appWidgetManager.updateAppWidget(mAppWidgetId, views);
+			 */
+
+			MyPregnancyWidget.installAlarms(this);
 
 			// Finally, create the return Intent, set it with the Activity
 			// result, and finish the Activity:
 			Intent resultValue = new Intent();
 			resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
 					mAppWidgetId);
+
 			setResult(RESULT_OK, resultValue);
 
 			finish();

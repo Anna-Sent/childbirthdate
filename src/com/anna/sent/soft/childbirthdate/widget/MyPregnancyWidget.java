@@ -117,21 +117,29 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	@Override
 	public void onEnabled(Context context) {
 		super.onEnabled(context);
-		installAlarms(context);
 		Log.d("moo", "on enabled " + getClass().getSimpleName());
 	}
 
-	private void installAlarms(Context context) {
+	public static void installAlarms(Context context) {
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		Calendar midnight = Calendar.getInstance();
+
 		midnight.set(Calendar.HOUR_OF_DAY, 0);
 		midnight.set(Calendar.MINUTE, 0);
 		midnight.set(Calendar.SECOND, 0);
 		midnight.set(Calendar.MILLISECOND, 0);
 		midnight.add(Calendar.DAY_OF_MONTH, 1);
-		alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-				midnight.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
-				getPendingIntent(context, getClass()));
+		PendingIntent[] operations = new PendingIntent[] {
+				getPendingIntent(context, MyPregnancyWidgetSmall.class),
+				getPendingIntent(context, MyPregnancyWidgetSimple.class),
+				getPendingIntent(context, MyPregnancyWidgetAdditional.class) };
+		for (int i = 0; i < operations.length; ++i) {
+			PendingIntent operation = operations[i];
+			alarmManager.cancel(operation);
+			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+					midnight.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
+					operation);
+		}
 	}
 }
