@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.text.format.DateFormat;
 import android.view.Gravity;
 import android.view.Menu;
@@ -104,14 +103,12 @@ public class ResultActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			NavUtils.navigateUpFromSameTask(this);
+			Intent intent = new Intent(this,
+					com.anna.sent.soft.childbirthdate.MainActivity.class);
+			intent.putExtras(getIntent().getBundleExtra(
+					MainActivity.EXTRA_MAIN_ACTIVITY_STATE));
+			startActivity(intent);
+			finish();
 			return true;
 		case R.id.lighttheme:
 			Utils.changeToTheme(this, Utils.LIGHT_THEME);
@@ -312,8 +309,7 @@ public class ResultActivity extends Activity {
 	}
 
 	private void setMembersFromIntent() {
-		Intent intent = getIntent();
-		whatToDo = intent.getIntExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
+		whatToDo = getIntent().getIntExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
 				Shared.ResultParam.Calculate.NOTHING);
 		if (Shared.ResultParam.Calculate.NOTHING == whatToDo) {
 			finish();
@@ -349,9 +345,9 @@ public class ResultActivity extends Activity {
 				Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
 				System.currentTimeMillis()));
 
-		weeks = intent.getIntExtra(Shared.Saved.Calculation.EXTRA_WEEKS, 0);
-		days = intent.getIntExtra(Shared.Saved.Calculation.EXTRA_DAYS, 0);
-		isEmbryonicAge = intent.getBooleanExtra(
+		weeks = settings.getInt(Shared.Saved.Calculation.EXTRA_WEEKS, 0);
+		days = settings.getInt(Shared.Saved.Calculation.EXTRA_DAYS, 0);
+		isEmbryonicAge = settings.getBoolean(
 				Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE, false);
 	}
 

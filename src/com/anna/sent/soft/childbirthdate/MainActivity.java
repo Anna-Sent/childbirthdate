@@ -30,6 +30,7 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	TabsAdapter mTabsAdapter;
 
 	private static final String EXTRA_GUI_CURRENT_TAB = "com.anna.sent.soft.childbirthdate.currenttab";
+	public static final String EXTRA_MAIN_ACTIVITY_STATE = "com.anna.sent.soft.childbirthdate.mainactivitystate";
 
 	@SuppressWarnings("unused")
 	private void disableWidgets() {
@@ -145,6 +146,10 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 			intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
 					Shared.ResultParam.Calculate.EGA);
 		}
+
+		Bundle state = new Bundle();
+		onSaveInstanceState(state);
+		intent.putExtra(EXTRA_MAIN_ACTIVITY_STATE, state);
 
 		startActivity(intent);
 	}
