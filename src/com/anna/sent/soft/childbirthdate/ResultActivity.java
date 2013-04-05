@@ -254,11 +254,6 @@ public class ResultActivity extends Activity {
 			date = Calendar.getInstance();
 		}
 
-		date.set(Calendar.HOUR, 0);
-		date.set(Calendar.MINUTE, 0);
-		date.set(Calendar.SECOND, 0);
-		date.set(Calendar.MILLISECOND, 0);
-
 		return date;
 	}
 

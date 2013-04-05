@@ -21,6 +21,7 @@ public abstract class Pregnancy {
 	 *            start point of pregnancy, must be not null
 	 */
 	public Pregnancy(Calendar start) {
+		zeroDate(start);
 		startPoint = start;
 		currentPoint = (Calendar) start.clone();
 	}
@@ -33,6 +34,7 @@ public abstract class Pregnancy {
 	 *            current date, must be not null
 	 */
 	public Pregnancy(int weeks, int days, Calendar current) {
+		zeroDate(current);
 		this.weeks = weeks;
 		this.days = days;
 		startPoint = (Calendar) current.clone();
@@ -41,6 +43,7 @@ public abstract class Pregnancy {
 	}
 
 	public void setCurrentPoint(Calendar current) {
+		zeroDate(current);
 		currentPoint = current;
 		long difference = currentPoint.getTimeInMillis()
 				- startPoint.getTimeInMillis();
@@ -203,5 +206,12 @@ public abstract class Pregnancy {
 		}
 
 		return "?";
+	}
+
+	private void zeroDate(Calendar date) {
+		date.set(Calendar.HOUR, 0);
+		date.set(Calendar.MINUTE, 0);
+		date.set(Calendar.SECOND, 0);
+		date.set(Calendar.MILLISECOND, 0);
 	}
 }
