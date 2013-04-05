@@ -42,7 +42,7 @@ public class ResultActivity extends Activity {
 	private Pregnancy[] pregnancies;
 
 	private int whatToDo;
-	private Calendar currentDate;
+	private Calendar currentDate = Calendar.getInstance();
 	private int menstrualCycleLen, lutealPhaseLen;
 	private boolean[] byMethod;
 	private Calendar lastMenstruationDate = Calendar.getInstance();
