@@ -9,8 +9,12 @@
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
     </style>
 
-    <style name="AppTheme" parent="AppBaseTheme"></style>
+    <style name="AppTheme" parent="AppBaseTheme" />
 
-    <style name="AppThemeLight" parent="AppBaseThemeLight"></style>
+    <style name="AppThemeLight" parent="AppBaseThemeLight" />
+
+    <style name="DialogTheme" parent="android:Theme.Dialog" />
+
+    <style name="DialogThemeLight" parent="android:Theme.Dialog" />
 
 </resources>
