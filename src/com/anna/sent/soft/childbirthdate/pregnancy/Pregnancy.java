@@ -161,6 +161,10 @@ public abstract class Pregnancy {
 			result = "0 " + context.getString(R.string.days);
 		}
 
+		if (weeks < 0 || days < 0) {
+			return "?";
+		}
+
 		return result;
 	}
 
