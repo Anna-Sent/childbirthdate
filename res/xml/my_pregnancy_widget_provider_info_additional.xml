@@ -3,5 +3,5 @@
     android:configure="com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetConfigureAdditional"
     android:initialLayout="@layout/initial_widget_layout"
     android:minHeight="146dip"
-    android:minWidth="214dip"
+    android:minWidth="220dip"
     android:updatePeriodMillis="0" />
