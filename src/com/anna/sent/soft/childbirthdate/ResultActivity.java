@@ -103,8 +103,7 @@ public class ResultActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent intent = new Intent(this,
-					com.anna.sent.soft.childbirthdate.MainActivity.class);
+			Intent intent = new Intent(this, MainActivity.class);
 			intent.putExtras(getIntent().getBundleExtra(
 					MainActivity.EXTRA_MAIN_ACTIVITY_STATE));
 			startActivity(intent);
