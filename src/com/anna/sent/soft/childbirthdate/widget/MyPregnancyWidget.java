@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.anna.sent.soft.childbirthdate.shared.Shared;
@@ -33,8 +32,6 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 			int[] appWidgetIds = appWidgetManager
 					.getAppWidgetIds(new ComponentName(context, getClass()));
 			onUpdate(context, appWidgetManager, appWidgetIds);
-
-			Log.d("moo", "on receive " + action);
 		}
 
 		super.onReceive(context, intent);
