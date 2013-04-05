@@ -2,7 +2,9 @@ package com.anna.sent.soft.childbirthdate.widget;
 
 import java.util.Calendar;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -17,9 +19,22 @@ public abstract class Builder {
 
 	protected abstract boolean hasTV3();
 
+	private void setOnClickPendingIntent(Context context, RemoteViews views) {
+		Intent intent = new Intent(context,
+				com.anna.sent.soft.childbirthdate.ResultActivity.class);
+		intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
+				Shared.ResultParam.Calculate.EGA);
+
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+				intent, 0);
+		views.setOnClickPendingIntent(R.id.widget, pendingIntent);
+	}
+
 	public RemoteViews buildViews(Context context, int appWidgetId) {
 		RemoteViews views = new RemoteViews(context.getPackageName(),
 				R.layout.my_pregnancy_widget_layout);
+
+		setOnClickPendingIntent(context, views);
 
 		SharedPreferences settings = Shared.getSettings(context);
 		int calculatingMethod = settings.getInt(
