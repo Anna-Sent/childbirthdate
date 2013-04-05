@@ -308,11 +308,16 @@ public class ResultActivity extends Activity {
 	}
 
 	private void setMembersFromIntent() {
-		whatToDo = getIntent().getIntExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
+		Intent intent = getIntent();
+		whatToDo = intent.getIntExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
 				Shared.ResultParam.Calculate.NOTHING);
 		if (Shared.ResultParam.Calculate.NOTHING == whatToDo) {
 			finish();
 		}
+
+		currentDate.setTimeInMillis(intent.getLongExtra(
+				Shared.ResultParam.EXTRA_CURRENT_DATE,
+				System.currentTimeMillis()));
 
 		SharedPreferences settings = Shared.getSettings(this);
 		menstrualCycleLen = settings.getInt(
@@ -331,9 +336,6 @@ public class ResultActivity extends Activity {
 				Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE, false);
 		byMethod[2] = settings.getBoolean(
 				Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND, false);
-		currentDate.setTimeInMillis(settings.getLong(
-				Shared.ResultParam.EXTRA_CURRENT_DATE,
-				System.currentTimeMillis()));
 		lastMenstruationDate.setTimeInMillis(settings.getLong(
 				Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
 				System.currentTimeMillis()));
