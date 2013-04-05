@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -83,37 +82,18 @@ public class ResultActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		switch (Utils.getThemeId(this)) {
-		case Utils.LIGHT_THEME:
-			menu.findItem(R.id.lighttheme).setChecked(true);
-			break;
-		case Utils.DARK_THEME:
-		default:
-			menu.findItem(R.id.darktheme).setChecked(true);
-			break;
-		}
-
-		return true;
-	}
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intent = new Intent(this, MainActivity.class);
-			intent.putExtras(getIntent().getBundleExtra(
-					MainActivity.EXTRA_MAIN_ACTIVITY_STATE));
+			Bundle savedState = getIntent().getBundleExtra(
+					MainActivity.EXTRA_MAIN_ACTIVITY_STATE);
+			if (savedState != null) {
+				intent.putExtras(savedState);
+			}
+
 			startActivity(intent);
 			finish();
-			return true;
-		case R.id.lighttheme:
-			Utils.changeToTheme(this, Utils.LIGHT_THEME);
-			return true;
-		case R.id.darktheme:
-			Utils.changeToTheme(this, Utils.DARK_THEME);
 			return true;
 		}
 
