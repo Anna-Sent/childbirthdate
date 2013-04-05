@@ -145,6 +145,7 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	public void calculate(View view) {
 		Intent intent = new Intent(this,
 				com.anna.sent.soft.childbirthdate.ResultActivity.class);
+
 		TabCalculationFragment tabCalculationFragment = getTabCalculationFragment();
 		if (tabCalculationFragment != null) {
 			tabCalculationFragment.putExtras(intent);
