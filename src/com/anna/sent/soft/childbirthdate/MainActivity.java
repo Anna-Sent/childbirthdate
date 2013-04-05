@@ -185,7 +185,7 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		switch (Utils.getThemeId()) {
+		switch (Utils.getThemeId(this)) {
 		case Utils.LIGHT_THEME:
 			menu.findItem(R.id.lighttheme).setChecked(true);
 			break;
