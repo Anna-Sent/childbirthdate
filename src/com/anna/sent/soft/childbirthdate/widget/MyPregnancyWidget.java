@@ -1,8 +1,5 @@
 package com.anna.sent.soft.childbirthdate.widget;
 
-import java.util.Calendar;
-
-import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.PendingIntent.CanceledException;
 import android.appwidget.AppWidgetManager;
@@ -38,11 +35,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 					.getAppWidgetIds(new ComponentName(context, getClass()));
 			onUpdate(context, appWidgetManager, appWidgetIds);
 
-			if (action.equals(Intent.ACTION_BOOT_COMPLETED)) {
-				installAlarms(context);
-			}
-
-			Log.d("moo", "on update " + action);
+			Log.d("moo", "on receive " + action);
 		}
 
 		super.onReceive(context, intent);
@@ -51,11 +44,9 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds) {
-		Calendar today = Calendar.getInstance();
-
 		// Update each of the widgets with the remote adapter
 		for (int i = 0; i < appWidgetIds.length; ++i) {
-			RemoteViews views = getBuilder().buildViews(context, today,
+			RemoteViews views = getBuilder().buildViews(context,
 					appWidgetIds[i]);
 			appWidgetManager.updateAppWidget(appWidgetIds[i], views);
 		}
@@ -102,44 +93,15 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 		}
 
 		editor.commit();
-		Log.d("moo", "on deleted " + getClass().getSimpleName());
 	}
 
 	@Override
 	public void onDisabled(Context context) {
 		super.onDisabled(context);
-		AlarmManager alarmManager = (AlarmManager) context
-				.getSystemService(Context.ALARM_SERVICE);
-		alarmManager.cancel(getPendingIntent(context, getClass()));
-		Log.d("moo", "on disabled " + getClass().getSimpleName());
 	}
 
 	@Override
 	public void onEnabled(Context context) {
 		super.onEnabled(context);
-		Log.d("moo", "on enabled " + getClass().getSimpleName());
-	}
-
-	public static void installAlarms(Context context) {
-		AlarmManager alarmManager = (AlarmManager) context
-				.getSystemService(Context.ALARM_SERVICE);
-		Calendar midnight = Calendar.getInstance();
-
-		midnight.set(Calendar.HOUR_OF_DAY, 0);
-		midnight.set(Calendar.MINUTE, 0);
-		midnight.set(Calendar.SECOND, 0);
-		midnight.set(Calendar.MILLISECOND, 0);
-		midnight.add(Calendar.DAY_OF_MONTH, 1);
-		PendingIntent[] operations = new PendingIntent[] {
-				getPendingIntent(context, MyPregnancyWidgetSmall.class),
-				getPendingIntent(context, MyPregnancyWidgetSimple.class),
-				getPendingIntent(context, MyPregnancyWidgetAdditional.class) };
-		for (int i = 0; i < operations.length; ++i) {
-			PendingIntent operation = operations[i];
-			alarmManager.cancel(operation);
-			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-					midnight.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
-					operation);
-		}
 	}
 }

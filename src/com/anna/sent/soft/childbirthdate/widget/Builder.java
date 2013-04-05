@@ -17,8 +17,7 @@ public abstract class Builder {
 
 	protected abstract boolean hasTV3();
 
-	public RemoteViews buildViews(Context context, Calendar today,
-			int appWidgetId) {
+	public RemoteViews buildViews(Context context, int appWidgetId) {
 		RemoteViews views = new RemoteViews(context.getPackageName(),
 				R.layout.my_pregnancy_widget_layout);
 
