@@ -89,7 +89,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 	protected abstract Builder getBuilder();
 
-	public void startTheApplication() {
+	private void startTheApplication() {
 		Intent intent = new Intent(this,
 				com.anna.sent.soft.childbirthdate.MainActivity.class);
 		startActivity(intent);
