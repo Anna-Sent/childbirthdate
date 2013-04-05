@@ -135,14 +135,19 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	}
 
 	public void calculate(View view) {
-		Intent intent = new Intent(this,
-				com.anna.sent.soft.childbirthdate.ResultActivity.class);
+		Intent intent = new Intent(this, ResultActivity.class);
 
 		int viewId = view.getId();
 		if (view.getId() == R.id.buttonCalculateEstimatedChildbirthDate) {
 			intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
 					Shared.ResultParam.Calculate.ECD);
 		} else if (viewId == R.id.buttonCalculateEstimatedGestationalAge) {
+			TabCalculationFragment tabCalculationFragment = getTabCalculationFragment();
+			if (tabCalculationFragment != null) {
+				intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE,
+						tabCalculationFragment.getCurrentDate());
+			}
+
 			intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
 					Shared.ResultParam.Calculate.EGA);
 		}

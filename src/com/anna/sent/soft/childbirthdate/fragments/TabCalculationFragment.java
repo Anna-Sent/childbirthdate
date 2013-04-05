@@ -209,6 +209,10 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		ft.commit();
 	}
 
+	public Calendar getCurrentDate() {
+		return getDate(datePickerCurrentDate);
+	}
+
 	private Calendar getDate(DatePicker datePicker) {
 		Calendar date = Calendar.getInstance();
 		date.set(datePicker.getYear(), datePicker.getMonth(),
