@@ -145,7 +145,8 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 			TabCalculationFragment tabCalculationFragment = getTabCalculationFragment();
 			if (tabCalculationFragment != null) {
 				intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE,
-						tabCalculationFragment.getCurrentDate().getTimeInMillis());
+						tabCalculationFragment.getCurrentDate()
+								.getTimeInMillis());
 			}
 
 			intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
