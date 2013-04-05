@@ -137,16 +137,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		Intent intent = new Intent(this,
 				com.anna.sent.soft.childbirthdate.ResultActivity.class);
 
-		TabCalculationFragment tabCalculationFragment = getTabCalculationFragment();
-		if (tabCalculationFragment != null) {
-			tabCalculationFragment.putExtras(intent);
-		}
-
-		TabSettingsFragment tabSettingsFragment = getTabSettingsFragment();
-		if (tabSettingsFragment != null) {
-			tabSettingsFragment.putExtras(intent);
-		}
-
 		int viewId = view.getId();
 		if (view.getId() == R.id.buttonCalculateEstimatedChildbirthDate) {
 			intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,

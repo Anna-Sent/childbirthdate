@@ -2,7 +2,6 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import java.util.Calendar;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -241,35 +240,6 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		if (view.equals(checkBox3)) {
 			checkVisibility(checkBox3, ultrasoundFragment);
 		}
-	}
-
-	public void putExtras(Intent intent) {
-		Calendar lastMenstruationDate = getDate(datePickerLastMenstruationDate);
-		Calendar ovulationDate = getDate(datePickerOvulationDate);
-		Calendar ultrasoundDate = getDate(datePickerUltrasoundDate);
-		int weeks = numberPickerWeeks.getValue();
-		int days = numberPickerDays.getValue();
-		boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
-
-		intent.putExtra(
-				Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
-				checkBox1.isChecked());
-		intent.putExtra(Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
-				lastMenstruationDate);
-		intent.putExtra(Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE,
-				checkBox2.isChecked());
-		intent.putExtra(Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
-				ovulationDate);
-		intent.putExtra(Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND,
-				checkBox3.isChecked());
-		intent.putExtra(Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
-				ultrasoundDate);
-		intent.putExtra(Shared.Saved.Calculation.EXTRA_WEEKS, weeks);
-		intent.putExtra(Shared.Saved.Calculation.EXTRA_DAYS, days);
-		intent.putExtra(Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE,
-				isEmbryonicAge);
-		intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE,
-				getDate(datePickerCurrentDate));
 	}
 
 	@Override

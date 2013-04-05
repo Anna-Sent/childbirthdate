@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,13 +41,15 @@ public class ResultActivity extends Activity {
 	private TextView[] messages;
 	private Pregnancy[] pregnancies;
 
-	int whatToDo;
-	Calendar currentDate;
-	int menstrualCycleLen, lutealPhaseLen;
-	boolean[] byMethod;
-	Calendar lastMenstruationDate, ovulationDate, ultrasoundDate;
-	int weeks, days;
-	boolean isEmbryonicAge;
+	private int whatToDo;
+	private Calendar currentDate;
+	private int menstrualCycleLen, lutealPhaseLen;
+	private boolean[] byMethod;
+	private Calendar lastMenstruationDate = Calendar.getInstance();
+	private Calendar ovulationDate = Calendar.getInstance();
+	private Calendar ultrasoundDate = Calendar.getInstance();
+	private int weeks, days;
+	private boolean isEmbryonicAge;
 
 	private AdView adView = null;
 
@@ -308,14 +311,6 @@ public class ResultActivity extends Activity {
 				(TextView) findViewById(R.id.message3) };
 	}
 
-	private Calendar getCalendarValue(Calendar date) {
-		if (date == null) {
-			date = Calendar.getInstance();
-		}
-
-		return date;
-	}
-
 	private void setMembersFromIntent() {
 		Intent intent = getIntent();
 		whatToDo = intent.getIntExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
@@ -324,34 +319,35 @@ public class ResultActivity extends Activity {
 			finish();
 		}
 
-		menstrualCycleLen = intent.getIntExtra(
+		SharedPreferences settings = Shared.getSettings(this);
+		menstrualCycleLen = settings.getInt(
 				Shared.Saved.Settings.EXTRA_MENSTRUAL_CYCLE_LEN,
 				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
-		lutealPhaseLen = intent.getIntExtra(
+		lutealPhaseLen = settings.getInt(
 				Shared.Saved.Settings.EXTRA_LUTEAL_PHASE_LEN,
 				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
 
 		byMethod = new boolean[3];
-		byMethod[0] = intent
-				.getBooleanExtra(
+		byMethod[0] = settings
+				.getBoolean(
 						Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
 						false);
-		byMethod[1] = intent.getBooleanExtra(
+		byMethod[1] = settings.getBoolean(
 				Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE, false);
-		byMethod[2] = intent.getBooleanExtra(
+		byMethod[2] = settings.getBoolean(
 				Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND, false);
-		currentDate = (Calendar) intent
-				.getSerializableExtra(Shared.ResultParam.EXTRA_CURRENT_DATE);
-		currentDate = getCalendarValue(currentDate);
-		lastMenstruationDate = (Calendar) intent
-				.getSerializableExtra(Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE);
-		lastMenstruationDate = getCalendarValue(lastMenstruationDate);
-		ovulationDate = (Calendar) intent
-				.getSerializableExtra(Shared.Saved.Calculation.EXTRA_OVULATION_DATE);
-		ovulationDate = getCalendarValue(ovulationDate);
-		ultrasoundDate = (Calendar) intent
-				.getSerializableExtra(Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE);
-		ultrasoundDate = getCalendarValue(ultrasoundDate);
+		currentDate.setTimeInMillis(settings.getLong(
+				Shared.ResultParam.EXTRA_CURRENT_DATE,
+				System.currentTimeMillis()));
+		lastMenstruationDate.setTimeInMillis(settings.getLong(
+				Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
+				System.currentTimeMillis()));
+		ovulationDate.setTimeInMillis(settings.getLong(
+				Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
+				System.currentTimeMillis()));
+		ultrasoundDate.setTimeInMillis(settings.getLong(
+				Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
+				System.currentTimeMillis()));
 
 		weeks = intent.getIntExtra(Shared.Saved.Calculation.EXTRA_WEEKS, 0);
 		days = intent.getIntExtra(Shared.Saved.Calculation.EXTRA_DAYS, 0);

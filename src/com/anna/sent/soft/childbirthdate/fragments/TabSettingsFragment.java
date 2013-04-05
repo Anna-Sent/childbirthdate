@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.view.View;
@@ -79,16 +78,6 @@ public class TabSettingsFragment extends ScrollViewFragment implements
 		editor.putInt(Shared.Saved.Settings.EXTRA_LUTEAL_PHASE_LEN,
 				lutealPhaseLen);
 		editor.commit();
-	}
-
-	public void putExtras(Intent intent) {
-		int menstrualCycleLen = numberPickerMenstrualCycleLen.getValue();
-		int lutealPhaseLen = numberPcikerLutealPhaseLen.getValue();
-
-		intent.putExtra(Shared.Saved.Settings.EXTRA_MENSTRUAL_CYCLE_LEN,
-				menstrualCycleLen);
-		intent.putExtra(Shared.Saved.Settings.EXTRA_LUTEAL_PHASE_LEN,
-				lutealPhaseLen);
 	}
 
 	public void restoreDefaultValues(View view) {
