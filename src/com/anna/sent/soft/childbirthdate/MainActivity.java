@@ -2,8 +2,6 @@ package com.anna.sent.soft.childbirthdate;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -32,7 +30,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	TabsAdapter mTabsAdapter;
 
 	private static final String EXTRA_GUI_CURRENT_TAB = "com.anna.sent.soft.childbirthdate.currenttab";
-	private static final String EXTRA_GUI_THEME_ID = "com.anna.sent.soft.childbirthdate.themeid";
 
 	@SuppressWarnings("unused")
 	private void disableWidgets() {
@@ -72,9 +69,7 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		SharedPreferences settings = Shared.getSettings(this);
-		int themeId = settings.getInt(EXTRA_GUI_THEME_ID, Utils.DARK_THEME);
-		Utils.onActivityCreateSetTheme(this, themeId);
+		Utils.onActivityCreateSetTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
@@ -133,10 +128,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		SharedPreferences settings = Shared.getSettings(this);
-		Editor editor = settings.edit();
-		editor.putInt(EXTRA_GUI_THEME_ID, Utils.getThemeId());
-		editor.commit();
 
 		// update all widgets
 		MyPregnancyWidget.updateAllWidgets(this);
