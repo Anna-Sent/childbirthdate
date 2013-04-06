@@ -11,7 +11,10 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -90,10 +93,15 @@ public class ResultActivity extends Activity {
 					MainActivity.EXTRA_MAIN_ACTIVITY_STATE);
 			if (savedState != null) {
 				intent.putExtras(savedState);
+				Log.d("moo", "navigate up to");
+				NavUtils.navigateUpTo(this, intent);
+			} else {
+				Log.d("moo", "create task");
+				TaskStackBuilder tsb = TaskStackBuilder.create(this)
+						.addParentStack(this);
+				tsb.startActivities(savedState);
 			}
 
-			startActivity(intent);
-			finish();
 			return true;
 		}
 
