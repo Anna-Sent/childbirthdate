@@ -147,6 +147,10 @@ public abstract class Pregnancy {
 	protected abstract int getSecondTrimesterEndInclusive();
 
 	private String getStringRepresentation(Context context, int weeks, int days) {
+		if (weeks < 0 || days < 0) {
+			return "?";
+		}
+
 		String result = "";
 		if (weeks > 0) {
 			result += weeks + " " + context.getString(R.string.weeks)
@@ -159,10 +163,6 @@ public abstract class Pregnancy {
 
 		if (weeks == 0 && days == 0) {
 			result = "0 " + context.getString(R.string.days);
-		}
-
-		if (weeks < 0 || days < 0) {
-			return "?";
 		}
 
 		return result;
