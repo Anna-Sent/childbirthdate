@@ -125,6 +125,7 @@ public class ResultActivity extends Activity {
 		TaskStackBuilder tsb = TaskStackBuilder.create(this).addParentStack(
 				this);
 		tsb.startActivities();
+		finish();
 	}
 
 	private void clearViews() {
@@ -152,10 +153,10 @@ public class ResultActivity extends Activity {
 		}
 
 		for (int i = 0; i < 3; ++i) {
-			textViews[i].setText("");
 			results[i].setText("");
 			messages[i].setText("");
-			int visibility = byMethod[i] ? View.VISIBLE : View.GONE;
+			int visibility = whatToDo != Shared.ResultParam.Calculate.NOTHING
+					&& byMethod[i] ? View.VISIBLE : View.GONE;
 			textViews[i].setVisibility(visibility);
 			results[i].setVisibility(visibility);
 			messages[i].setVisibility(visibility);
