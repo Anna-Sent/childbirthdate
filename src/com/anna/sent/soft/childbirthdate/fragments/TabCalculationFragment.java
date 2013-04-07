@@ -99,6 +99,14 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		Button buttonToday = (Button) getActivity().findViewById(
 				R.id.buttonToday);
 		buttonToday.setOnClickListener(this);
+
+		Button buttonCalculateEGA = (Button) getActivity().findViewById(
+				R.id.buttonCalculateEstimatedGestationalAge);
+		buttonCalculateEGA.setOnClickListener(this);
+
+		Button buttonCalculateECD = (Button) getActivity().findViewById(
+				R.id.buttonCalculateEstimatedChildbirthDate);
+		buttonCalculateECD.setOnClickListener(this);
 	}
 
 	@Override
