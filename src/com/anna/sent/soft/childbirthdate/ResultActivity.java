@@ -114,7 +114,6 @@ public class ResultActivity extends Activity {
 			if (savedState == null) {
 				// ResultActivity is started from Widget
 				createParentStack();
-				return;
 			}
 		}
 
@@ -125,7 +124,6 @@ public class ResultActivity extends Activity {
 		TaskStackBuilder tsb = TaskStackBuilder.create(this).addParentStack(
 				this);
 		tsb.startActivities();
-		finish();
 	}
 
 	private void clearViews() {
