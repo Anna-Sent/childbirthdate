@@ -1,5 +1,8 @@
 package com.anna.sent.soft.childbirthdate.widget;
 
+import java.util.Calendar;
+
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.PendingIntent.CanceledException;
 import android.appwidget.AppWidgetManager;
@@ -9,6 +12,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.anna.sent.soft.childbirthdate.shared.Shared;
@@ -23,15 +28,26 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	public void onReceive(Context context, Intent intent) {
 		// Manual or automatic widget update started
 		String action = intent.getAction();
+		Log.d("moo", "got action " + action);
 		if (action.equals(UPDATE_ACTION)
 				|| action.equals(Intent.ACTION_TIME_CHANGED)
 				|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
-				|| action.equals(Intent.ACTION_DATE_CHANGED)) {
+				|| action.equals(Intent.ACTION_DATE_CHANGED)
+				|| action.equals(Intent.ACTION_BOOT_COMPLETED)) {
 			AppWidgetManager appWidgetManager = AppWidgetManager
 					.getInstance(context);
 			int[] appWidgetIds = appWidgetManager
 					.getAppWidgetIds(new ComponentName(context, getClass()));
 			onUpdate(context, appWidgetManager, appWidgetIds);
+
+			// Need to reinstall alarm on this events
+			if (action.equals(Intent.ACTION_TIME_CHANGED)
+					|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
+					|| action.equals(Intent.ACTION_DATE_CHANGED)
+					|| action.equals(Intent.ACTION_BOOT_COMPLETED)
+					|| action.equals(Intent.ACTION_BOOT_COMPLETED)) {
+				installAlarms(context);
+			}
 		}
 
 		super.onReceive(context, intent);
@@ -94,10 +110,38 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	@Override
 	public void onDisabled(Context context) {
 		super.onDisabled(context);
+		AlarmManager alarmManager = (AlarmManager) context
+				.getSystemService(Context.ALARM_SERVICE);
+		alarmManager.cancel(getPendingIntent(context, getClass()));
 	}
 
 	@Override
 	public void onEnabled(Context context) {
 		super.onEnabled(context);
+	}
+
+	public static void installAlarms(Context context) {
+		AlarmManager alarmManager = (AlarmManager) context
+				.getSystemService(Context.ALARM_SERVICE);
+		Calendar midnight = Calendar.getInstance();
+
+		midnight.set(Calendar.HOUR_OF_DAY, 0);
+		midnight.set(Calendar.MINUTE, 0);
+		midnight.set(Calendar.SECOND, 0);
+		midnight.set(Calendar.MILLISECOND, 0);
+		midnight.add(Calendar.DAY_OF_MONTH, 1);
+		Log.d("moo", "install alarm to "
+				+ DateFormat.getDateFormat(context).format(midnight.getTime()));
+		PendingIntent[] operations = new PendingIntent[] {
+				getPendingIntent(context, MyPregnancyWidgetSmall.class),
+				getPendingIntent(context, MyPregnancyWidgetSimple.class),
+				getPendingIntent(context, MyPregnancyWidgetAdditional.class) };
+		for (int i = 0; i < operations.length; ++i) {
+			PendingIntent operation = operations[i];
+			alarmManager.cancel(operation);
+			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+					midnight.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
+					operation);
+		}
 	}
 }

@@ -70,6 +70,8 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 			RemoteViews views = getBuilder().buildViews(this, mAppWidgetId);
 			appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
+			MyPregnancyWidget.installAlarms(this);
+
 			// Finally, create the return Intent, set it with the Activity
 			// result, and finish the Activity:
 			Intent resultValue = new Intent();

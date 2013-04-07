@@ -3,6 +3,7 @@ package com.anna.sent.soft.childbirthdate.pregnancy;
 import java.util.Calendar;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.anna.sent.soft.childbirthdate.R;
 
@@ -22,7 +23,11 @@ public abstract class Pregnancy {
 	 */
 	public Pregnancy(Calendar start) {
 		zeroDate(start);
-		startPoint = start;
+		Log.d("moo", "h " + start.get(Calendar.HOUR));
+		Log.d("moo", "m " + start.get(Calendar.MINUTE));
+		Log.d("moo", "s " + start.get(Calendar.SECOND));
+		Log.d("moo", "ms " + start.get(Calendar.MILLISECOND));
+		startPoint = (Calendar) start.clone();
 		currentPoint = (Calendar) start.clone();
 	}
 
@@ -35,16 +40,24 @@ public abstract class Pregnancy {
 	 */
 	public Pregnancy(int weeks, int days, Calendar current) {
 		zeroDate(current);
+		Log.d("moo", "h " + current.get(Calendar.HOUR));
+		Log.d("moo", "m " + current.get(Calendar.MINUTE));
+		Log.d("moo", "s " + current.get(Calendar.SECOND));
+		Log.d("moo", "ms " + current.get(Calendar.MILLISECOND));
 		this.weeks = weeks;
 		this.days = days;
 		startPoint = (Calendar) current.clone();
 		startPoint.add(Calendar.DAY_OF_MONTH, -getDurationInDays());
-		currentPoint = current;
+		currentPoint = (Calendar) current.clone();
 	}
 
 	public void setCurrentPoint(Calendar current) {
 		zeroDate(current);
-		currentPoint = current;
+		Log.d("moo", "h " + current.get(Calendar.HOUR));
+		Log.d("moo", "m " + current.get(Calendar.MINUTE));
+		Log.d("moo", "s " + current.get(Calendar.SECOND));
+		Log.d("moo", "ms " + current.get(Calendar.MILLISECOND));
+		currentPoint = (Calendar) current.clone();
 		long difference = currentPoint.getTimeInMillis()
 				- startPoint.getTimeInMillis();
 		int days = (int) (difference / (1000l * 3600l * 24l));
