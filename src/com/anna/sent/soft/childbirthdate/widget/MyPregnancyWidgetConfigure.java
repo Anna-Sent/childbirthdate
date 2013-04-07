@@ -136,6 +136,14 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		radioByUltrasound
 				.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
 
+		if (radioByLMP.getVisibility() == View.VISIBLE) {
+			radioByLMP.setChecked(true);
+		} else if (radiobyByOvulation.getVisibility() == View.VISIBLE) {
+			radiobyByOvulation.setChecked(true);
+		} else if (radioByUltrasound.getVisibility() == View.VISIBLE) {
+			radioByUltrasound.setChecked(true);
+		}
+
 		checkBoxCountdown = (CheckBox) findViewById(R.id.checkBoxCountdown);
 		checkBoxCountdown
 				.setVisibility(hasCountdown() && doCalculation ? View.VISIBLE
