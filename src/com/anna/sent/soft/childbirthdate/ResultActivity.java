@@ -152,6 +152,7 @@ public class ResultActivity extends Activity {
 		}
 
 		for (int i = 0; i < 3; ++i) {
+			textViews[i].setText("");
 			results[i].setText("");
 			messages[i].setText("");
 			int visibility = byMethod[i] ? View.VISIBLE : View.GONE;
@@ -197,13 +198,13 @@ public class ResultActivity extends Activity {
 				switch (whatToDo) {
 				case Shared.ResultParam.Calculate.ECD:
 					setEdcTexts(i);
+					setLast(i);
 					break;
 				case Shared.ResultParam.Calculate.EGA:
 					setEgaTexts(i);
+					setLast(i);
 					break;
 				}
-
-				setLast(i);
 			}
 		}
 	}
