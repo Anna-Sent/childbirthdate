@@ -152,5 +152,6 @@
     <string name="widgetTextRestInfo">До родов</string>
     <string name="widgetCalculatingMethod">Метод расчета: %s</string>
     <string name="initialization">Загрузка...</string>
+    <string name="today">Сегодня</string>
 
 </resources>

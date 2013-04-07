@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
@@ -88,6 +89,10 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		numberPickerDays.setMaxValue(6);
 		datePickerCurrentDate = (DatePicker) getActivity().findViewById(
 				R.id.datePickerCurrentDate);
+
+		Button buttonToday = (Button) getActivity().findViewById(
+				R.id.buttonToday);
+		buttonToday.setOnClickListener(this);
 	}
 
 	@Override
@@ -246,6 +251,10 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		}
 	}
 
+	private void today() {
+		setDate(datePickerCurrentDate, Calendar.getInstance());
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -257,6 +266,10 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		case R.id.radioIsEmbryonicAge:
 		case R.id.radioIsGestationalAge:
 			radioClick(v);
+			break;
+		case R.id.buttonToday:
+			today();
+			break;
 		}
 	}
 }

@@ -77,9 +77,17 @@
 
         <!-- new line -->
 
-        <DatePicker
-            android:id="@+id/datePickerCurrentDate"
-            style="@style/DatePickerStyle" />
+        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+
+            <DatePicker
+                android:id="@+id/datePickerCurrentDate"
+                style="@style/DatePickerStyle" />
+
+            <Button
+                android:id="@+id/buttonToday"
+                style="@style/SmallButtonStyle"
+                android:text="@string/today" />
+        </LinearLayout>
 
         <!-- new line -->
 
