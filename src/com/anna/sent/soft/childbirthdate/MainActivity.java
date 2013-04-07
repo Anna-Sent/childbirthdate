@@ -1,25 +1,22 @@
 package com.anna.sent.soft.childbirthdate;
 
 import android.content.ComponentName;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TabHost;
 
 import com.anna.sent.soft.childbirthdate.fragments.TabCalculationFragment;
 import com.anna.sent.soft.childbirthdate.fragments.TabHelpFragment;
 import com.anna.sent.soft.childbirthdate.fragments.TabSettingsFragment;
 import com.anna.sent.soft.childbirthdate.gui.TabsAdapter;
-import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
-import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetSmall;
-import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetSimple;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetAdditional;
+import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetSimple;
+import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetSmall;
 import com.anna.sent.soft.utils.StateSaver;
 import com.anna.sent.soft.utils.Utils;
 
@@ -30,7 +27,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	TabsAdapter mTabsAdapter;
 
 	private static final String EXTRA_GUI_CURRENT_TAB = "com.anna.sent.soft.childbirthdate.currenttab";
-	public static final String EXTRA_MAIN_ACTIVITY_STATE = "com.anna.sent.soft.childbirthdate.mainactivitystate";
 
 	@SuppressWarnings("unused")
 	private void disableWidgets() {
@@ -132,32 +128,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 
 		// update all widgets
 		MyPregnancyWidget.updateAllWidgets(this);
-	}
-
-	public void calculate(View view) {
-		Intent intent = new Intent(this, ResultActivity.class);
-
-		int viewId = view.getId();
-		if (view.getId() == R.id.buttonCalculateEstimatedChildbirthDate) {
-			intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
-					Shared.ResultParam.Calculate.ECD);
-		} else if (viewId == R.id.buttonCalculateEstimatedGestationalAge) {
-			TabCalculationFragment tabCalculationFragment = getTabCalculationFragment();
-			if (tabCalculationFragment != null) {
-				intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE,
-						tabCalculationFragment.getCurrentDate()
-								.getTimeInMillis());
-			}
-
-			intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
-					Shared.ResultParam.Calculate.EGA);
-		}
-
-		Bundle state = new Bundle();
-		onSaveInstanceState(state);
-		intent.putExtra(EXTRA_MAIN_ACTIVITY_STATE, state);
-
-		startActivity(intent);
 	}
 
 	@Override

@@ -90,7 +90,7 @@ public class ResultActivity extends Activity {
 		case android.R.id.home:
 			Intent intent = new Intent(this, MainActivity.class);
 			Bundle savedState = getIntent().getBundleExtra(
-					MainActivity.EXTRA_MAIN_ACTIVITY_STATE);
+					Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE);
 			if (savedState != null) {
 				intent.putExtras(savedState);
 				Log.d("moo", "navigate up to");

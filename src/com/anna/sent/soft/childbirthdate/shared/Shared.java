@@ -50,5 +50,7 @@ public class Shared {
 		}
 
 		public static final String EXTRA_CURRENT_DATE = "com.anna.sent.soft.childbirthdate.currentdate";
+
+		public static final String EXTRA_MAIN_ACTIVITY_STATE = "com.anna.sent.soft.childbirthdate.mainactivitystate";
 	}
 }

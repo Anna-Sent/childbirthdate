@@ -59,7 +59,6 @@
             <Button
                 android:id="@+id/buttonCalculateEstimatedChildbirthDate"
                 style="@style/ButtonStyle.SmallText"
-                android:onClick="calculate"
                 android:text="@string/calculateEstimatedChildbirthDate" />
 
             <RelativeLayout style="@style/ButtonSpace" />
@@ -98,7 +97,6 @@
             <Button
                 android:id="@+id/buttonCalculateEstimatedGestationalAge"
                 style="@style/ButtonStyle.SmallText"
-                android:onClick="calculate"
                 android:text="@string/calculateEstimatedGestationalAge" />
 
             <RelativeLayout style="@style/ButtonSpace" />

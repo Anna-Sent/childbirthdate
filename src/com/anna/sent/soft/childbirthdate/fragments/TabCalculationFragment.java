@@ -2,6 +2,8 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import java.util.Calendar;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -16,13 +18,17 @@ import android.widget.DatePicker;
 import android.widget.RadioButton;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.ResultActivity;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
+import com.anna.sent.soft.utils.StateSaver;
 
 public class TabCalculationFragment extends ScrollViewFragment implements
 		OnClickListener {
 	private static final String EXTRA_GUI_CURRENT_DATE = "com.anna.sent.soft.childbirthdate.currentdate";
+
+	private StateSaver mListener;
 
 	private CheckBox checkBox1, checkBox2, checkBox3;
 	private NumberPicker numberPickerWeeks, numberPickerDays;
@@ -214,10 +220,6 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		ft.commit();
 	}
 
-	public Calendar getCurrentDate() {
-		return getDate(datePickerCurrentDate);
-	}
-
 	private Calendar getDate(DatePicker datePicker) {
 		Calendar date = Calendar.getInstance();
 		date.set(datePicker.getYear(), datePicker.getMonth(),
@@ -255,6 +257,31 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		setDate(datePickerCurrentDate, Calendar.getInstance());
 	}
 
+	public void calculate(View view) {
+		Intent intent = new Intent(getActivity(), ResultActivity.class);
+
+		int viewId = view.getId();
+		int whatToDo = Shared.ResultParam.Calculate.NOTHING;
+		if (viewId == R.id.buttonCalculateEstimatedChildbirthDate) {
+			whatToDo = Shared.ResultParam.Calculate.ECD;
+		} else if (viewId == R.id.buttonCalculateEstimatedGestationalAge) {
+			whatToDo = Shared.ResultParam.Calculate.EGA;
+		}
+
+		intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE,
+				getDate(datePickerCurrentDate).getTimeInMillis());
+		intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO, whatToDo);
+
+		// Save MainActivity state
+		if (mListener != null) {
+			Bundle state = new Bundle();
+			mListener.onSaveInstanceState(state);
+			intent.putExtra(Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE, state);
+		}
+
+		startActivity(intent);
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -270,6 +297,16 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		case R.id.buttonToday:
 			today();
 			break;
+		case R.id.buttonCalculateEstimatedChildbirthDate:
+		case R.id.buttonCalculateEstimatedGestationalAge:
+			calculate(v);
+			break;
 		}
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		mListener = (StateSaver) activity;
 	}
 }
