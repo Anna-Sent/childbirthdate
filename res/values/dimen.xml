@@ -3,5 +3,7 @@
 
     <dimen name="shift">20dp</dimen>
     <dimen name="doubleshift">30dp</dimen>
+    <dimen name="widget_padding">4dp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
 
 </resources>

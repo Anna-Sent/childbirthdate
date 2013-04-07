@@ -6,25 +6,22 @@
 
     <TextView
         android:id="@+id/tv1"
-        style="@style/TextViewStyle.Center.Medium"
-        android:text="@string/emptyString"
-        android:textColor="@android:color/primary_text_dark" />
+        style="@style/WidgetTextView1Style"
+        android:text="@string/emptyString" />
 
     <TextView
         android:id="@+id/tv2"
-        style="@style/TextViewStyle.Center.Medium.Red"
+        style="@style/WidgetTextView2Style"
         android:text="@string/emptyString" />
 
     <TextView
         android:id="@+id/tv3"
-        style="@style/TextViewStyle.LeftPadding"
-        android:text="@string/emptyString"
-        android:textColor="@android:color/secondary_text_dark" />
+        style="@style/WidgetTextView34Style"
+        android:text="@string/emptyString" />
 
     <TextView
         android:id="@+id/tv4"
-        style="@style/TextViewStyle.LeftPadding"
-        android:text="@string/emptyString"
-        android:textColor="@android:color/secondary_text_dark" />
+        style="@style/WidgetTextView34Style"
+        android:text="@string/emptyString" />
 
 </LinearLayout>
