@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -88,24 +87,44 @@ public class ResultActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent intent = new Intent(this, MainActivity.class);
 			Bundle savedState = getIntent().getBundleExtra(
 					Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE);
-			if (savedState != null) {
-				intent.putExtras(savedState);
-				Log.d("moo", "navigate up to");
-				NavUtils.navigateUpTo(this, intent);
+			if (savedState == null) {
+				// ResultActivity is started from Widget
+				createParentStack();
 			} else {
-				Log.d("moo", "create task");
-				TaskStackBuilder tsb = TaskStackBuilder.create(this)
-						.addParentStack(this);
-				tsb.startActivities(savedState);
+				// ResultActivity is started from MainActivity
+				Intent intent = new Intent(this, MainActivity.class);
+				intent.putExtras(savedState);
+				NavUtils.navigateUpTo(this, intent);
 			}
 
 			return true;
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+			// Imitate Home-Up button click
+			Bundle savedState = getIntent().getBundleExtra(
+					Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE);
+			if (savedState == null) {
+				// ResultActivity is started from Widget
+				createParentStack();
+				return;
+			}
+		}
+
+		super.onBackPressed();
+	}
+
+	private void createParentStack() {
+		TaskStackBuilder tsb = TaskStackBuilder.create(this).addParentStack(
+				this);
+		tsb.startActivities();
 	}
 
 	private void clearViews() {
