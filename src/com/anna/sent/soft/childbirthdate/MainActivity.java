@@ -3,6 +3,7 @@ package com.anna.sent.soft.childbirthdate;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -25,6 +26,10 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	private TabHost mTabHost;
 	ViewPager mViewPager;
 	TabsAdapter mTabsAdapter;
+
+	private TabCalculationFragment mTabCalculationFragment = null;
+	private TabSettingsFragment mTabSettingsFragment = null;
+	private TabHelpFragment mTabHelpFragment = null;
 
 	private static final String EXTRA_GUI_CURRENT_TAB = "com.anna.sent.soft.childbirthdate.currenttab";
 
@@ -105,14 +110,17 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private TabCalculationFragment getTabCalculationFragment() {
 		return (TabCalculationFragment) mTabsAdapter.getFragment(1);
 	}
 
+	@SuppressWarnings("unused")
 	private TabSettingsFragment getTabSettingsFragment() {
 		return (TabSettingsFragment) mTabsAdapter.getFragment(0);
 	}
 
+	@SuppressWarnings("unused")
 	private TabHelpFragment getTabHelpFragment() {
 		return (TabHelpFragment) mTabsAdapter.getFragment(2);
 	}
@@ -136,19 +144,16 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 
 		outState.putString(EXTRA_GUI_CURRENT_TAB, mTabHost.getCurrentTabTag());
 
-		TabCalculationFragment tabCalculationFragment = getTabCalculationFragment();
-		if (tabCalculationFragment != null) {
-			tabCalculationFragment.onSaveInstanceState(outState);
+		if (mTabCalculationFragment != null) {
+			mTabCalculationFragment.onSaveInstanceState(outState);
 		}
 
-		TabSettingsFragment tabSettingsFragment = getTabSettingsFragment();
-		if (tabSettingsFragment != null) {
-			tabSettingsFragment.onSaveInstanceState(outState);
+		if (mTabSettingsFragment != null) {
+			mTabSettingsFragment.onSaveInstanceState(outState);
 		}
 
-		TabHelpFragment tabHelpFragment = getTabHelpFragment();
-		if (tabHelpFragment != null) {
-			tabHelpFragment.onSaveInstanceState(outState);
+		if (mTabHelpFragment != null) {
+			mTabHelpFragment.onSaveInstanceState(outState);
 		}
 	}
 
@@ -180,6 +185,18 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	public void onAttachFragment(Fragment fragment) {
+		super.onAttachFragment(fragment);
+		if (fragment instanceof TabCalculationFragment) {
+			mTabCalculationFragment = (TabCalculationFragment) fragment;
+		} else if (fragment instanceof TabSettingsFragment) {
+			mTabSettingsFragment = (TabSettingsFragment) fragment;
+		} else if (fragment instanceof TabHelpFragment) {
+			mTabHelpFragment = (TabHelpFragment) fragment;
 		}
 	}
 }
