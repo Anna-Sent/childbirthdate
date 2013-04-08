@@ -47,7 +47,6 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 				if (action.equals(Intent.ACTION_TIME_CHANGED)
 						|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
 						|| action.equals(Intent.ACTION_DATE_CHANGED)
-						|| action.equals(Intent.ACTION_BOOT_COMPLETED)
 						|| action.equals(Intent.ACTION_BOOT_COMPLETED)) {
 					installAlarms(context, getClass());
 				}
