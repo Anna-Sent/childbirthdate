@@ -217,5 +217,6 @@ public abstract class Pregnancy {
 		date.set(Calendar.MINUTE, 0);
 		date.set(Calendar.SECOND, 0);
 		date.set(Calendar.MILLISECOND, 0);
+		date.set(Calendar.AM_PM, Calendar.AM);
 	}
 }
