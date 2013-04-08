@@ -103,9 +103,10 @@ public abstract class Builder {
 			p.setCurrentPoint(currentDate);
 			if (p.isCorrect()) {
 				Log.d("moo",
-						DateFormat.getDateFormat(context).format(
-								currentDate.getTime()));
-				Log.d("moo", p.getInfo(context));
+						"current date is "
+								+ DateFormat.getDateFormat(context).format(
+										currentDate.getTime()));
+				Log.d("moo", "pregnancy: " + p.getInfo(context));
 				views.setTextViewText(
 						R.id.tv1,
 						countdown ? context
