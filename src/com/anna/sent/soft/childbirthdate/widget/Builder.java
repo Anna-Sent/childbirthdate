@@ -6,8 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -102,11 +100,12 @@ public abstract class Builder {
 			Calendar currentDate = Calendar.getInstance();
 			p.setCurrentPoint(currentDate);
 			if (p.isCorrect()) {
-				Log.d("moo",
-						"current date is "
-								+ DateFormat.getDateFormat(context).format(
-										currentDate.getTime()));
-				Log.d("moo", "pregnancy: " + p.getInfo(context));
+				/*
+				 * Log.d("moo", "current date is " +
+				 * DateFormat.getDateFormat(context).format(
+				 * currentDate.getTime())); Log.d("moo", "pregnancy: " +
+				 * p.getInfo(context));
+				 */
 				views.setTextViewText(
 						R.id.tv1,
 						countdown ? context

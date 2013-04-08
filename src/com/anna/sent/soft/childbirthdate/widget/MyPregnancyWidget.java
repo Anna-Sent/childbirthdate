@@ -12,8 +12,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.anna.sent.soft.childbirthdate.shared.Shared;
@@ -38,8 +36,10 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 			int[] appWidgetIds = appWidgetManager
 					.getAppWidgetIds(new ComponentName(context, getClass()));
 			if (appWidgetIds.length > 0) {
-				Log.d("moo", getClass().getSimpleName() + " got action "
-						+ action);
+				/*
+				 * Log.d("moo", getClass().getSimpleName() + " got action " +
+				 * action);
+				 */
 
 				onUpdate(context, appWidgetManager, appWidgetIds);
 
@@ -114,7 +114,9 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	@Override
 	public void onDisabled(Context context) {
 		super.onDisabled(context);
-		Log.d("moo", getClass().getSimpleName() + " cancel alarm");
+		/*
+		 * Log.d("moo", getClass().getSimpleName() + " cancel alarm");
+		 */
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(getPendingIntent(context, getClass()));
@@ -134,8 +136,10 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 		midnight.set(Calendar.SECOND, 0);
 		midnight.set(Calendar.MILLISECOND, 0);
 		midnight.add(Calendar.DAY_OF_MONTH, 1);
-		Log.d("moo", cls.getSimpleName() + " install alarm to "
-				+ DateFormat.getDateFormat(context).format(midnight.getTime()));
+		/*
+		 * Log.d("moo", cls.getSimpleName() + " install alarm to " +
+		 * DateFormat.getDateFormat(context).format(midnight.getTime()));
+		 */
 		PendingIntent operation = getPendingIntent(context, cls);
 		alarmManager.cancel(operation);
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
