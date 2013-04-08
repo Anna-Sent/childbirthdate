@@ -16,4 +16,9 @@ public final class MyPregnancyWidgetConfigureAdditional extends
 	protected boolean hasShowCalculatingMethod() {
 		return true;
 	}
+
+	@Override
+	protected Class<?> getWidgetProviderClass() {
+		return MyPregnancyWidgetAdditional.class;
+	}
 }

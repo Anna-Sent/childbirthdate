@@ -28,7 +28,6 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	public void onReceive(Context context, Intent intent) {
 		// Manual or automatic widget update started
 		String action = intent.getAction();
-		Log.d("moo", getClass().getSimpleName() + " got action " + action);
 		if (action.equals(UPDATE_ACTION)
 				|| action.equals(Intent.ACTION_TIME_CHANGED)
 				|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
@@ -38,15 +37,20 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 					.getInstance(context);
 			int[] appWidgetIds = appWidgetManager
 					.getAppWidgetIds(new ComponentName(context, getClass()));
-			onUpdate(context, appWidgetManager, appWidgetIds);
+			if (appWidgetIds.length > 0) {
+				Log.d("moo", getClass().getSimpleName() + " got action "
+						+ action);
 
-			// Need to reinstall alarm on this events
-			if (action.equals(Intent.ACTION_TIME_CHANGED)
-					|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
-					|| action.equals(Intent.ACTION_DATE_CHANGED)
-					|| action.equals(Intent.ACTION_BOOT_COMPLETED)
-					|| action.equals(Intent.ACTION_BOOT_COMPLETED)) {
-				installAlarms(context, getClass());
+				onUpdate(context, appWidgetManager, appWidgetIds);
+
+				// Need to reinstall alarm on this events
+				if (action.equals(Intent.ACTION_TIME_CHANGED)
+						|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
+						|| action.equals(Intent.ACTION_DATE_CHANGED)
+						|| action.equals(Intent.ACTION_BOOT_COMPLETED)
+						|| action.equals(Intent.ACTION_BOOT_COMPLETED)) {
+					installAlarms(context, getClass());
+				}
 			}
 		}
 
@@ -110,6 +114,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	@Override
 	public void onDisabled(Context context) {
 		super.onDisabled(context);
+		Log.d("moo", getClass().getSimpleName() + " cancel alarm");
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(getPendingIntent(context, getClass()));

@@ -15,4 +15,9 @@ public class MyPregnancyWidgetConfigureSmall extends MyPregnancyWidgetConfigure 
 	protected boolean hasShowCalculatingMethod() {
 		return false;
 	}
+
+	@Override
+	protected Class<?> getWidgetProviderClass() {
+		return MyPregnancyWidgetSmall.class;
+	}
 }

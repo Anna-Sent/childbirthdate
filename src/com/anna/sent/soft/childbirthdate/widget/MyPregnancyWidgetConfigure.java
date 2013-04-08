@@ -2,7 +2,6 @@ package com.anna.sent.soft.childbirthdate.widget;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProviderInfo;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -55,6 +54,8 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		init();
 	}
 
+	protected abstract Class<?> getWidgetProviderClass();
+
 	public void addWidget() {
 		if (radioByLMP.isChecked() || radiobyByOvulation.isChecked()
 				|| radioByUltrasound.isChecked()) {
@@ -71,10 +72,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 			RemoteViews views = getBuilder().buildViews(this, mAppWidgetId);
 			appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
-			AppWidgetProviderInfo providerInfo = appWidgetManager
-					.getAppWidgetInfo(mAppWidgetId);
-			Class<?> providerClass = providerInfo.provider.getClass();
-			MyPregnancyWidget.installAlarms(this, providerClass);
+			MyPregnancyWidget.installAlarms(this, getWidgetProviderClass());
 
 			// Finally, create the return Intent, set it with the Activity
 			// result, and finish the Activity:
