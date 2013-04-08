@@ -2,6 +2,7 @@ package com.anna.sent.soft.childbirthdate.widget;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProviderInfo;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -70,7 +71,10 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 			RemoteViews views = getBuilder().buildViews(this, mAppWidgetId);
 			appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
-			MyPregnancyWidget.installAlarms(this);
+			AppWidgetProviderInfo providerInfo = appWidgetManager
+					.getAppWidgetInfo(mAppWidgetId);
+			Class<?> providerClass = providerInfo.provider.getClass();
+			MyPregnancyWidget.installAlarms(this, providerClass);
 
 			// Finally, create the return Intent, set it with the Activity
 			// result, and finish the Activity:

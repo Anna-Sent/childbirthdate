@@ -28,7 +28,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	public void onReceive(Context context, Intent intent) {
 		// Manual or automatic widget update started
 		String action = intent.getAction();
-		Log.d("moo", "got action " + action);
+		Log.d("moo", getClass().getSimpleName() + " got action " + action);
 		if (action.equals(UPDATE_ACTION)
 				|| action.equals(Intent.ACTION_TIME_CHANGED)
 				|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
@@ -46,7 +46,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 					|| action.equals(Intent.ACTION_DATE_CHANGED)
 					|| action.equals(Intent.ACTION_BOOT_COMPLETED)
 					|| action.equals(Intent.ACTION_BOOT_COMPLETED)) {
-				installAlarms(context);
+				installAlarms(context, getClass());
 			}
 		}
 
@@ -120,28 +120,21 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 		super.onEnabled(context);
 	}
 
-	public static void installAlarms(Context context) {
+	public static void installAlarms(Context context, Class<?> cls) {
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		Calendar midnight = Calendar.getInstance();
-
 		midnight.set(Calendar.HOUR_OF_DAY, 0);
 		midnight.set(Calendar.MINUTE, 0);
 		midnight.set(Calendar.SECOND, 0);
 		midnight.set(Calendar.MILLISECOND, 0);
 		midnight.add(Calendar.DAY_OF_MONTH, 1);
-		Log.d("moo", "install alarm to "
+		Log.d("moo", cls.getSimpleName() + " install alarm to "
 				+ DateFormat.getDateFormat(context).format(midnight.getTime()));
-		PendingIntent[] operations = new PendingIntent[] {
-				getPendingIntent(context, MyPregnancyWidgetSmall.class),
-				getPendingIntent(context, MyPregnancyWidgetSimple.class),
-				getPendingIntent(context, MyPregnancyWidgetAdditional.class) };
-		for (int i = 0; i < operations.length; ++i) {
-			PendingIntent operation = operations[i];
-			alarmManager.cancel(operation);
-			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-					midnight.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
-					operation);
-		}
+		PendingIntent operation = getPendingIntent(context, cls);
+		alarmManager.cancel(operation);
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+				midnight.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
+				operation);
 	}
 }
