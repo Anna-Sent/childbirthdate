@@ -3,5 +3,9 @@
     android:configure="com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetConfigureSimple"
     android:initialLayout="@layout/initial_widget_layout"
     android:minHeight="110dp"
+    android:minResizeHeight="40dp"
+    android:minResizeWidth="40dp"
     android:minWidth="110dp"
+    android:previewImage="@drawable/preview_medium"
+    android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="0" />

@@ -2,6 +2,10 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:configure="com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetConfigureAdditional"
     android:initialLayout="@layout/initial_widget_layout"
-    android:minHeight="110dip"
+    android:minHeight="110dp"
+    android:minResizeHeight="40dp"
+    android:minResizeWidth="110dp"
     android:minWidth="180dp"
+    android:previewImage="@drawable/preview_large"
+    android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="0" />
