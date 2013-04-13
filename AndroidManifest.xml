@@ -93,6 +93,7 @@
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+        <activity android:name=".DetailsActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
