@@ -12,7 +12,6 @@ import android.widget.TabHost;
 
 import com.anna.sent.soft.childbirthdate.fragments.TabCalculationFragment;
 import com.anna.sent.soft.childbirthdate.fragments.TabHelpFragment;
-import com.anna.sent.soft.childbirthdate.fragments.TabSettingsFragment;
 import com.anna.sent.soft.childbirthdate.gui.TabsAdapter;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetAdditional;
@@ -28,7 +27,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	TabsAdapter mTabsAdapter;
 
 	private TabCalculationFragment mTabCalculationFragment = null;
-	private TabSettingsFragment mTabSettingsFragment = null;
 	private TabHelpFragment mTabHelpFragment = null;
 
 	private static final String EXTRA_GUI_CURRENT_TAB = "com.anna.sent.soft.childbirthdate.currenttab";
@@ -75,19 +73,14 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		final String tab_settings = "tab_settings", tab_calculation = "tab_calculation", tab_help = "tab_help";
+		final String tab_calculation = "tab_calculation", tab_help = "tab_help";
 
 		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
 		mTabHost.setup();
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setOffscreenPageLimit(2);
 
 		mTabsAdapter = new TabsAdapter(this, mTabHost, mViewPager);
-		mTabsAdapter.addTab(
-				mTabHost.newTabSpec(tab_settings).setIndicator(
-						getString(R.string.settings)),
-				TabSettingsFragment.class, null);
 		mTabsAdapter.addTab(
 				mTabHost.newTabSpec(tab_calculation).setIndicator(
 						getString(R.string.calculation)),
@@ -108,21 +101,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 				mTabHost.setCurrentTabByTag(tab_calculation);
 			}
 		}
-	}
-
-	@SuppressWarnings("unused")
-	private TabCalculationFragment getTabCalculationFragment() {
-		return (TabCalculationFragment) mTabsAdapter.getFragment(1);
-	}
-
-	@SuppressWarnings("unused")
-	private TabSettingsFragment getTabSettingsFragment() {
-		return (TabSettingsFragment) mTabsAdapter.getFragment(0);
-	}
-
-	@SuppressWarnings("unused")
-	private TabHelpFragment getTabHelpFragment() {
-		return (TabHelpFragment) mTabsAdapter.getFragment(2);
 	}
 
 	@Override
@@ -146,10 +124,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 
 		if (mTabCalculationFragment != null) {
 			mTabCalculationFragment.onSaveInstanceState(outState);
-		}
-
-		if (mTabSettingsFragment != null) {
-			mTabSettingsFragment.onSaveInstanceState(outState);
 		}
 
 		if (mTabHelpFragment != null) {
@@ -193,8 +167,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		super.onAttachFragment(fragment);
 		if (fragment instanceof TabCalculationFragment) {
 			mTabCalculationFragment = (TabCalculationFragment) fragment;
-		} else if (fragment instanceof TabSettingsFragment) {
-			mTabSettingsFragment = (TabSettingsFragment) fragment;
 		} else if (fragment instanceof TabHelpFragment) {
 			mTabHelpFragment = (TabHelpFragment) fragment;
 		}

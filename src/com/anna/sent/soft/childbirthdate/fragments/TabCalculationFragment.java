@@ -38,6 +38,8 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 	private CalculationPageLmpMethodFragment lmpMethodFragment;
 	private CalculationPageOvulationDateMethodFragment ovulationDateFragment;
 	private CalculationPageUltrasoundMethodFragment ultrasoundFragment;
+	private NumberPicker numberPickerMenstrualCycleLen,
+			numberPcikerLutealPhaseLen;
 
 	public TabCalculationFragment() {
 		super();
@@ -107,6 +109,24 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		Button buttonCalculateECD = (Button) getActivity().findViewById(
 				R.id.buttonCalculateEstimatedChildbirthDate);
 		buttonCalculateECD.setOnClickListener(this);
+
+		numberPickerMenstrualCycleLen = (NumberPicker) getActivity()
+				.findViewById(R.id.editTextMenstrualCycleLen);
+		numberPickerMenstrualCycleLen
+				.setMinValue(PregnancyCalculator.MIN_MENSTRUAL_CYCLE_LEN);
+		numberPickerMenstrualCycleLen
+				.setMaxValue(PregnancyCalculator.MAX_MENSTRUAL_CYCLE_LEN);
+
+		numberPcikerLutealPhaseLen = (NumberPicker) getActivity().findViewById(
+				R.id.editTextLutealPhaseLen);
+		numberPcikerLutealPhaseLen
+				.setMinValue(PregnancyCalculator.MIN_LUTEAL_PHASE_LEN);
+		numberPcikerLutealPhaseLen
+				.setMaxValue(PregnancyCalculator.MAX_LUTEAL_PHASE_LEN);
+
+		Button button = (Button) getActivity().findViewById(
+				R.id.buttonRestoreDefaultValues);
+		button.setOnClickListener(this);
 	}
 
 	@Override
@@ -177,11 +197,23 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		checkVisibility(checkBox1, lmpMethodFragment);
 		checkVisibility(checkBox2, ovulationDateFragment);
 		checkVisibility(checkBox3, ultrasoundFragment);
+
+		int menstrualCycleLen = settings.getInt(
+				Shared.Saved.Settings.EXTRA_MENSTRUAL_CYCLE_LEN,
+				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
+		int lutealPhaseLen = settings.getInt(
+				Shared.Saved.Settings.EXTRA_LUTEAL_PHASE_LEN,
+				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
+		numberPickerMenstrualCycleLen.setValue(menstrualCycleLen);
+		numberPcikerLutealPhaseLen.setValue(lutealPhaseLen);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+
+		int menstrualCycleLen = numberPickerMenstrualCycleLen.getValue();
+		int lutealPhaseLen = numberPcikerLutealPhaseLen.getValue();
 
 		Calendar lastMenstruationDate = getDate(datePickerLastMenstruationDate);
 		Calendar ovulationDate = getDate(datePickerOvulationDate);
@@ -211,6 +243,11 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		editor.putInt(Shared.Saved.Calculation.EXTRA_DAYS, days);
 		editor.putBoolean(Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE,
 				isEmbryonicAge);
+
+		editor.putInt(Shared.Saved.Settings.EXTRA_MENSTRUAL_CYCLE_LEN,
+				menstrualCycleLen);
+		editor.putInt(Shared.Saved.Settings.EXTRA_LUTEAL_PHASE_LEN,
+				lutealPhaseLen);
 
 		editor.commit();
 	}
@@ -290,9 +327,19 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		startActivity(intent);
 	}
 
+	public void restoreDefaultValues(View view) {
+		numberPickerMenstrualCycleLen
+				.setValue(PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
+		numberPcikerLutealPhaseLen
+				.setValue(PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.buttonRestoreDefaultValues:
+			restoreDefaultValues(v);
+			break;
 		case R.id.checkBox1:
 		case R.id.checkBox2:
 		case R.id.checkBox3:
