@@ -47,7 +47,7 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 
 	@Override
 	protected int getLayoutResourceId() {
-		return R.layout.tab_calculation;
+		return R.layout.fragment_layout_support;
 	}
 
 	@Override
