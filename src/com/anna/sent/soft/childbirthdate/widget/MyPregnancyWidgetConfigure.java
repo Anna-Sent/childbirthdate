@@ -48,6 +48,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 			Toast.makeText(this, R.string.errorInvalidAppWidgetId,
 					Toast.LENGTH_SHORT).show();
 			finish();
+			return;
 		}
 
 		// Perform App Widget configuration.

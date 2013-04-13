@@ -320,6 +320,7 @@ public class ResultActivity extends Activity {
 				Shared.ResultParam.Calculate.NOTHING);
 		if (Shared.ResultParam.Calculate.NOTHING == whatToDo) {
 			finish();
+			return;
 		}
 
 		currentDate.setTimeInMillis(intent.getLongExtra(
