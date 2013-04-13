@@ -199,10 +199,10 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		checkVisibility(checkBox3, ultrasoundFragment);
 
 		int menstrualCycleLen = settings.getInt(
-				Shared.Saved.Settings.EXTRA_MENSTRUAL_CYCLE_LEN,
+				Shared.Saved.Calculation.EXTRA_MENSTRUAL_CYCLE_LEN,
 				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
 		int lutealPhaseLen = settings.getInt(
-				Shared.Saved.Settings.EXTRA_LUTEAL_PHASE_LEN,
+				Shared.Saved.Calculation.EXTRA_LUTEAL_PHASE_LEN,
 				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
 		numberPickerMenstrualCycleLen.setValue(menstrualCycleLen);
 		numberPcikerLutealPhaseLen.setValue(lutealPhaseLen);
@@ -244,9 +244,9 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		editor.putBoolean(Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE,
 				isEmbryonicAge);
 
-		editor.putInt(Shared.Saved.Settings.EXTRA_MENSTRUAL_CYCLE_LEN,
+		editor.putInt(Shared.Saved.Calculation.EXTRA_MENSTRUAL_CYCLE_LEN,
 				menstrualCycleLen);
-		editor.putInt(Shared.Saved.Settings.EXTRA_LUTEAL_PHASE_LEN,
+		editor.putInt(Shared.Saved.Calculation.EXTRA_LUTEAL_PHASE_LEN,
 				lutealPhaseLen);
 
 		editor.commit();

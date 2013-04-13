@@ -50,10 +50,10 @@ public abstract class Builder {
 		switch (calculatingMethod) {
 		case Shared.Saved.Widget.Calculate.BY_LMP:
 			int menstrualCycleLen = settings.getInt(
-					Shared.Saved.Settings.EXTRA_MENSTRUAL_CYCLE_LEN,
+					Shared.Saved.Calculation.EXTRA_MENSTRUAL_CYCLE_LEN,
 					PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
 			int lutealPhaseLen = settings.getInt(
-					Shared.Saved.Settings.EXTRA_LUTEAL_PHASE_LEN,
+					Shared.Saved.Calculation.EXTRA_LUTEAL_PHASE_LEN,
 					PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
 			Calendar lastMenstruationDate = Calendar.getInstance();
 			lastMenstruationDate.setTimeInMillis(settings.getLong(
