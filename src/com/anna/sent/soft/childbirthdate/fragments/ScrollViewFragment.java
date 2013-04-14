@@ -59,13 +59,15 @@ public abstract class ScrollViewFragment extends Fragment implements StateSaver 
 	}
 
 	protected void restoreState(Bundle state) {
-		final int y = state.getInt(getExtraGuiScrollY(), 0);
-		scrollView.post(new Runnable() {
-			@Override
-			public void run() {
-				scrollView.scrollTo(0, y);
-			}
-		});
+		if (scrollView != null) {
+			final int y = state.getInt(getExtraGuiScrollY(), 0);
+			scrollView.post(new Runnable() {
+				@Override
+				public void run() {
+					scrollView.scrollTo(0, y);
+				}
+			});
+		}
 	}
 
 	protected void saveState(Bundle state) {
