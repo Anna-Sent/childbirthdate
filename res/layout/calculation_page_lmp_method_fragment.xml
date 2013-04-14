@@ -1,64 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/LinearLayoutVerticalStyle" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ScrollViewStyle" >
 
-    <!-- new line -->
+    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 
-    <DatePicker
-        android:id="@+id/datePickerLastMenstruationDate"
-        style="@style/DatePickerStyle" />
-    <!-- new line -->
+        <!-- new line -->
 
-    <TextView
-        style="@style/TextViewStyle.LeftPadding"
-        android:text="@string/acceptDefaults" />
-
-    <!-- new line -->
-
-    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+        <DatePicker
+            android:id="@+id/datePickerLastMenstruationDate"
+            style="@style/DatePickerStyle" />
+        <!-- new line -->
 
         <TextView
-            style="@style/SET_COL1"
-            android:text="@string/menstrualCycleLen" />
+            style="@style/TextViewStyle.LeftPadding"
+            android:text="@string/acceptDefaults" />
 
-        <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-            android:id="@+id/editTextMenstrualCycleLen"
-            style="@style/NumberPickerStyle" />
+        <!-- new line -->
 
-        <TextView
-            style="@style/SET_COL2"
-            android:text="@string/days" />
+        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+
+            <TextView
+                style="@style/SET_COL1"
+                android:text="@string/menstrualCycleLen" />
+
+            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                android:id="@+id/editTextMenstrualCycleLen"
+                style="@style/NumberPickerStyle" />
+
+            <TextView
+                style="@style/SET_COL2"
+                android:text="@string/days" />
+        </LinearLayout>
+
+        <!-- new line -->
+
+        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+
+            <TextView
+                style="@style/SET_COL1"
+                android:text="@string/lutealPhaseLen" />
+
+            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                android:id="@+id/editTextLutealPhaseLen"
+                style="@style/NumberPickerStyle" />
+
+            <TextView
+                style="@style/SET_COL2"
+                android:text="@string/days" />
+        </LinearLayout>
+
+        <!-- new line -->
+
+        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+
+            <RelativeLayout style="@style/ButtonSpace" />
+
+            <Button
+                android:id="@+id/buttonRestoreDefaultValues"
+                style="@style/ButtonStyle.SmallText"
+                android:text="@string/restoreDefaultValues" />
+
+            <RelativeLayout style="@style/ButtonSpace" />
+        </LinearLayout>
     </LinearLayout>
 
-    <!-- new line -->
-
-    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
-
-        <TextView
-            style="@style/SET_COL1"
-            android:text="@string/lutealPhaseLen" />
-
-        <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-            android:id="@+id/editTextLutealPhaseLen"
-            style="@style/NumberPickerStyle" />
-
-        <TextView
-            style="@style/SET_COL2"
-            android:text="@string/days" />
-    </LinearLayout>
-
-    <!-- new line -->
-
-    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
-
-        <RelativeLayout style="@style/ButtonSpace" />
-
-        <Button
-            android:id="@+id/buttonRestoreDefaultValues"
-            style="@style/ButtonStyle.SmallText"
-            android:text="@string/restoreDefaultValues" />
-
-        <RelativeLayout style="@style/ButtonSpace" />
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

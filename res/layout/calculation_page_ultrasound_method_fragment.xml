@@ -1,69 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/LinearLayoutVerticalStyle" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ScrollViewStyle" >
 
-    <!-- new line -->
+    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 
-    <TextView
-        style="@style/TextViewStyle.LeftPaddingDouble"
-        android:text="@string/ultrasoundDate" />
-
-    <!-- new line -->
-
-    <DatePicker
-        android:id="@+id/datePickerUltrasoundDate"
-        style="@style/DatePickerStyle" />
-
-    <!-- new line -->
-
-    <TextView
-        style="@style/TextViewStyle.LeftPaddingDouble"
-        android:text="@string/diagnosedAge" />
-
-    <!-- new line -->
-
-    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
-
-        <RelativeLayout style="@style/FixedSpace" />
-
-        <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-            android:id="@+id/editTextWeeks"
-            style="@style/NumberPickerStyle" />
+        <!-- new line -->
 
         <TextView
-            style="@style/CAL_COL1"
-            android:text="@string/weeks" />
+            style="@style/TextViewStyle.LeftPaddingDouble"
+            android:text="@string/ultrasoundDate" />
 
-        <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-            android:id="@+id/editTextDays"
-            style="@style/NumberPickerStyle" />
+        <!-- new line -->
+
+        <DatePicker
+            android:id="@+id/datePickerUltrasoundDate"
+            style="@style/DatePickerStyle" />
+
+        <!-- new line -->
 
         <TextView
-            style="@style/CAL_COL2"
-            android:text="@string/days" />
+            style="@style/TextViewStyle.LeftPaddingDouble"
+            android:text="@string/diagnosedAge" />
+
+        <!-- new line -->
+
+        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+
+            <RelativeLayout style="@style/FixedSpace" />
+
+            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                android:id="@+id/editTextWeeks"
+                style="@style/NumberPickerStyle" />
+
+            <TextView
+                style="@style/CAL_COL1"
+                android:text="@string/weeks" />
+
+            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                android:id="@+id/editTextDays"
+                style="@style/NumberPickerStyle" />
+
+            <TextView
+                style="@style/CAL_COL2"
+                android:text="@string/days" />
+        </LinearLayout>
+
+        <!-- new line -->
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/shift" >
+
+            <RadioButton
+                android:id="@+id/radioIsGestationalAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/isGestationalAge"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <RadioButton
+                android:id="@+id/radioIsEmbryonicAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/isEmbryonicAge"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </RadioGroup>
     </LinearLayout>
 
-    <!-- new line -->
-
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/shift" >
-
-        <RadioButton
-            android:id="@+id/radioIsGestationalAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/isGestationalAge"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <RadioButton
-            android:id="@+id/radioIsEmbryonicAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/isEmbryonicAge"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-    </RadioGroup>
-
-</LinearLayout>
+</ScrollView>
