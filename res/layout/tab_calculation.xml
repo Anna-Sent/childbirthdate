@@ -7,48 +7,11 @@
 
         <!-- new line -->
 
-        <CheckBox
-            android:id="@+id/checkBox1"
-            style="@style/CheckBoxStyle"
-            android:text="@string/lastMenstruationDate" />
-
-        <!-- new line -->
-
         <fragment
-            android:id="@+id/lmpMethodFragment"
-            android:name="com.anna.sent.soft.childbirthdate.fragments.CalculationPageLmpMethodFragment"
+            android:id="@+id/titles"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- new line -->
-
-        <CheckBox
-            android:id="@+id/checkBox2"
-            style="@style/CheckBoxStyle"
-            android:text="@string/ovulationDate" />
-
-        <!-- new line -->
-
-        <fragment
-            android:id="@+id/ovulationDateMethodFragment"
-            android:name="com.anna.sent.soft.childbirthdate.fragments.CalculationPageOvulationDateMethodFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- new line -->
-
-        <CheckBox
-            android:id="@+id/checkBox3"
-            style="@style/CheckBoxStyle"
-            android:text="@string/ultrasoundResults" />
-
-        <!-- new line -->
-
-        <fragment
-            android:id="@+id/ultrasoundMethodFragment"
-            android:name="com.anna.sent.soft.childbirthdate.fragments.CalculationPageUltrasoundMethodFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            class="com.anna.sent.soft.childbirthdate.fragments.TitlesFragment" />
 
         <!-- new line -->
 
