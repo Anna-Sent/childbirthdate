@@ -1,16 +1,19 @@
 package com.anna.sent.soft.childbirthdate;
 
 import android.content.res.Configuration;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.anna.sent.soft.childbirthdate.fragments.DetailsFragment;
+import com.anna.sent.soft.utils.Utils;
 
 public class DetailsActivity extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Utils.onDialogStyleActivityCreateSetTheme(this);
 		super.onCreate(savedInstanceState);
 
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
