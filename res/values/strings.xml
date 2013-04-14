@@ -2,7 +2,6 @@
 <resources>
 
     <string name="emptyString">empty</string>
-    <string name="settings">Настройки</string>
     <string name="calculation">Расчет</string>
     <string name="help">Справка</string>
     <string name="accurateUltrasoundResults">Высокая точность расчета по результатам УЗИ.</string>
