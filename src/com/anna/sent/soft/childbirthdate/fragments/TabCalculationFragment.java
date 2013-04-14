@@ -57,10 +57,12 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 	@Override
 	protected void restoreState(Bundle state) {
 		super.restoreState(state);
-		Calendar value = Calendar.getInstance();
-		value.setTimeInMillis(state.getLong(EXTRA_GUI_CURRENT_DATE,
-				System.currentTimeMillis()));
-		Utils.setDate(datePickerCurrentDate, value);
+		if (datePickerCurrentDate != null) {
+			Calendar value = Calendar.getInstance();
+			value.setTimeInMillis(state.getLong(EXTRA_GUI_CURRENT_DATE,
+					System.currentTimeMillis()));
+			Utils.setDate(datePickerCurrentDate, value);
+		}
 	}
 
 	@Override
