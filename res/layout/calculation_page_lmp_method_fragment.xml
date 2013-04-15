@@ -70,14 +70,14 @@
 
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
-            <RelativeLayout style="@style/ButtonSpace" />
+            <FrameLayout style="@style/ButtonSpace" />
 
             <Button
                 android:id="@+id/buttonRestoreDefaultValues"
                 style="@style/ButtonStyle"
                 android:text="@string/restoreDefaultValues" />
 
-            <RelativeLayout style="@style/ButtonSpace" />
+            <FrameLayout style="@style/ButtonSpace" />
         </LinearLayout>
     </LinearLayout>
 

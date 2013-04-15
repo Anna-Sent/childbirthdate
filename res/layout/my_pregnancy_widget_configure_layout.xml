@@ -40,14 +40,14 @@
 
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
-            <RelativeLayout style="@style/ButtonSpace" />
+            <FrameLayout style="@style/ButtonSpace" />
 
             <Button
                 android:id="@+id/widgetConfigureButton"
                 style="@style/ButtonStyle"
                 android:text="@string/widgetAddWidget" />
 
-            <RelativeLayout style="@style/ButtonSpace" />
+            <FrameLayout style="@style/ButtonSpace" />
         </LinearLayout>
     </LinearLayout>
 

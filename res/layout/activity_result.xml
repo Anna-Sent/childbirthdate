@@ -67,14 +67,14 @@
             style="@style/LinearLayoutHorizontalStyle"
             android:paddingTop="@dimen/view_padding" >
 
-            <RelativeLayout style="@style/ButtonSpace" />
+            <FrameLayout style="@style/ButtonSpace" />
 
             <Button
                 style="@style/ButtonStyle.LargeText"
                 android:onClick="rate"
                 android:text="@string/rateApplication" />
 
-            <RelativeLayout style="@style/ButtonSpace" />
+            <FrameLayout style="@style/ButtonSpace" />
         </LinearLayout>
     </LinearLayout>
 
