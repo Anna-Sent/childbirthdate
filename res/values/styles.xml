@@ -21,25 +21,6 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="LinearLayoutVerticalStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="LinearLayoutVerticalStyle.Padding">
-        <item name="android:paddingBottom">@dimen/layout_vertical_padding</item>
-        <item name="android:paddingLeft">@dimen/layout_horizontal_padding</item>
-        <item name="android:paddingRight">@dimen/layout_horizontal_padding</item>
-        <item name="android:paddingTop">@dimen/layout_vertical_padding</item>
-    </style>
-
-    <style name="LinearLayoutHorizontalStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">horizontal</item>
-    </style>
-
     <style name="ScrollViewStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -54,7 +35,7 @@
     <style name="RadioButtonStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
         <item name="android:checked">false</item>
     </style>
 

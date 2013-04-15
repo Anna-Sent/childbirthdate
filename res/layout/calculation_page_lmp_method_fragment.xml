@@ -16,7 +16,8 @@
             style="@style/TextViewStyle"
             android:text="@string/acceptDefaults" />
 
-        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+        <LinearLayout style="@style/LinearLayoutHorizontalStyle"
+            android:paddingTop="@dimen/view_padding" >
 
             <TextView
                 style="@style/TextViewStyle.Center"

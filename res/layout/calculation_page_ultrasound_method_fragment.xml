@@ -29,7 +29,8 @@
 
             <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                 android:id="@+id/editTextDays"
-                style="@style/NumberPickerStyle" />
+                style="@style/NumberPickerStyle"
+                android:paddingLeft="@dimen/view_padding" />
 
             <TextView
                 style="@style/TextViewStyle"
