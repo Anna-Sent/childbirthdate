@@ -26,7 +26,11 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
     </style>
-
+    
+    <style name="LinearLayoutVerticalStyle.Padding">
+        <item name="android:padding">@dimen/layout_padding</item>
+    </style>
+    
     <style name="LinearLayoutHorizontalStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

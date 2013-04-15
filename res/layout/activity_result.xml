@@ -5,12 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <!-- xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads" -->
-
     <LinearLayout
         android:id="@+id/linearLayout"
-        style="@style/LinearLayoutVerticalStyle"
-        android:padding="@dimen/shift" >
+        style="@style/LinearLayoutVerticalStyle.Padding" >
 
         <TextView
             android:id="@+id/textView0"
@@ -65,30 +62,22 @@
         <TextView
             android:id="@+id/textView00"
             style="@style/TextViewStyle.Medium"
-            android:paddingTop="@dimen/doubleshift"
+            android:paddingTop="@dimen/view_padding"
             android:text="@string/emptyString" />
 
         <LinearLayout
             style="@style/LinearLayoutHorizontalStyle"
-            android:paddingBottom="@dimen/doubleshift"
-            android:paddingTop="@dimen/doubleshift" >
+            android:paddingTop="@dimen/view_padding" >
+
+            <RelativeLayout style="@style/ButtonSpace" />
 
             <Button
                 style="@style/ButtonStyle.LargeText"
                 android:onClick="rate"
                 android:text="@string/rateApplication" />
-        </LinearLayout>
 
-        <!--
-            com.google.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            ads:adSize="BANNER"
-            ads:adUnitId="a1513549e3d3050"
-            ads:loadAdOnCreate="false"
-            ads:testDevices="TEST_EMULATOR, 2600D922057328C48F2E6DBAB33639C1" /
-        -->
+            <RelativeLayout style="@style/ButtonSpace" />
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

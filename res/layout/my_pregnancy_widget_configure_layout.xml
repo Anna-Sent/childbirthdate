@@ -4,8 +4,7 @@
     style="@style/ScrollViewStyle" >
 
     <LinearLayout
-        style="@style/LinearLayoutVerticalStyle"
-        android:padding="@dimen/shift" >
+        style="@style/LinearLayoutVerticalStyle.Padding" >
 
         <TextView
             android:id="@+id/widgetConfigureTextView"
@@ -14,8 +13,7 @@
 
         <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/shift" >
+            android:layout_height="wrap_content" >
 
             <RadioButton
                 android:id="@+id/radioByLMP"

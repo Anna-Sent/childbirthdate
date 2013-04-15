@@ -3,8 +3,7 @@
     style="@style/ScrollViewStyle" >
 
     <LinearLayout
-        style="@style/LinearLayoutVerticalStyle"
-        android:padding="@dimen/shift" >
+        style="@style/LinearLayoutVerticalStyle.Padding" >
 
         <!-- new line -->
 

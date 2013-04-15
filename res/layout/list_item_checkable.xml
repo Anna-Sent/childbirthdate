@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/text2"
             style="@style/TextViewStyle"
-            android:paddingLeft="@dimen/shift"
+            android:paddingLeft="@dimen/view_padding"
             android:text="@string/emptyString" />
     </LinearLayout>
 

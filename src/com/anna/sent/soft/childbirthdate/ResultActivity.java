@@ -366,6 +366,9 @@ public class ResultActivity extends Activity {
 		adView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 				LayoutParams.WRAP_CONTENT));
 		adView.setGravity(Gravity.CENTER);
+		adView.setPadding(0,
+				getResources().getDimensionPixelSize(R.dimen.view_padding), 0,
+				0);
 		LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
 		linearLayout.addView(adView);
 

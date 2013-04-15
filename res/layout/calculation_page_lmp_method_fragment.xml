@@ -2,9 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/ScrollViewStyle" >
 
-    <LinearLayout
-        style="@style/LinearLayoutVerticalStyle"
-        android:padding="@dimen/shift" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
 
         <!-- new line -->
 
@@ -84,10 +82,14 @@
 
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
+            <RelativeLayout style="@style/ButtonSpace" />
+
             <Button
                 android:id="@+id/buttonRestoreDefaultValues"
                 style="@style/ButtonStyle"
                 android:text="@string/restoreDefaultValues" />
+
+            <RelativeLayout style="@style/ButtonSpace" />
         </LinearLayout>
     </LinearLayout>
 
