@@ -3,37 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?android:attr/listPreferredItemHeight"
-        android:orientation="vertical" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
             <CheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:focusable="false" />
 
             <TextView
                 android:id="@+id/text1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                style="@style/TextViewStyle.Medium"
+                android:text="@string/emptyString" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/text2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            style="@style/TextViewStyle"
+            android:paddingLeft="@dimen/shift"
+            android:text="@string/emptyString" />
     </LinearLayout>
 
 </com.anna.sent.soft.childbirthdate.CheckableFrameLayout>

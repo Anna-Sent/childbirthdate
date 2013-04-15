@@ -19,6 +19,8 @@ import com.anna.sent.soft.childbirthdate.DetailsActivity;
 import com.anna.sent.soft.childbirthdate.R;
 
 public class TitlesFragment extends ListFragment {
+	private String[] titles = null;
+
 	public TitlesFragment() {
 		super();
 	}
@@ -27,9 +29,18 @@ public class TitlesFragment extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = super.onCreateView(inflater, container, savedInstanceState);
+		Log.d("moo", "view height is " + v.getLayoutParams().height);
 		v.getLayoutParams().height = 320;// getItemHeight() * 3;
 		Log.d("moo", "item height is " + getItemHeight());
 		Log.d("moo", "view height is " + v.getLayoutParams().height);
+		if (container != null) {
+			Log.d("moo", "container height is "
+					+ container.getLayoutParams().height);
+			container.getLayoutParams().height = 600;
+			Log.d("moo", "container height is "
+					+ container.getLayoutParams().height);
+		}
+
 		return v;
 	}
 
@@ -37,7 +48,7 @@ public class TitlesFragment extends ListFragment {
 	public void onInflate(Activity activity, AttributeSet attrs,
 			Bundle savedInstanceState) {
 		super.onInflate(activity, attrs, savedInstanceState);
-		//Log.d("moo", "list view height is " + getListView().getHeight());
+		// Log.d("moo", "list view height is " + getListView().getHeight());
 	}
 
 	private int getItemHeight() {
@@ -57,10 +68,9 @@ public class TitlesFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		String[] titles = new String[] {
-				getString(R.string.lastMenstruationDate),
-				getString(R.string.ovulationDate),
-				getString(R.string.ultrasoundResults) };
+		titles = new String[] { getString(R.string.ByLMP),
+				getString(R.string.ByOvulation),
+				getString(R.string.ByUltrasound) };
 
 		// Populate list with our array of titles.
 		setListAdapter(new ArrayAdapter<String>(getActivity(),
@@ -114,6 +124,7 @@ public class TitlesFragment extends ListFragment {
 			// Check what fragment is currently shown, replace if needed.
 			DetailsFragment details = (DetailsFragment) getFragmentManager()
 					.findFragmentById(R.id.details);
+			Log.d("moo", "details is " + details.toString());
 			if (details == null || details.getShownIndex() != index) {
 				// Make new fragment to show this selection.
 				details = DetailsFragment.newInstance(index);
@@ -132,6 +143,7 @@ public class TitlesFragment extends ListFragment {
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), DetailsActivity.class);
 			intent.putExtra("index", index);
+			intent.putExtra("label", titles[index]);
 			startActivity(intent);
 		}
 	}

@@ -12,6 +12,7 @@ import android.widget.TabHost;
 
 import com.anna.sent.soft.childbirthdate.fragments.TabCalculationFragment;
 import com.anna.sent.soft.childbirthdate.fragments.TabHelpFragment;
+import com.anna.sent.soft.childbirthdate.fragments.FragmentLayoutSupport;
 import com.anna.sent.soft.childbirthdate.gui.TabsAdapter;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetAdditional;
@@ -84,7 +85,7 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		mTabsAdapter.addTab(
 				mTabHost.newTabSpec(tab_calculation).setIndicator(
 						getString(R.string.calculation)),
-				TabCalculationFragment.class, null);
+				FragmentLayoutSupport.class, null);
 		mTabsAdapter.addTab(
 				mTabHost.newTabSpec(tab_help).setIndicator(
 						getString(R.string.help)), TabHelpFragment.class, null);

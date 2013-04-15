@@ -2,12 +2,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/ScrollViewStyle" >
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
+    <LinearLayout
+        style="@style/LinearLayoutVerticalStyle"
+        android:padding="@dimen/shift" >
 
         <!-- new line -->
 
         <TextView
-            style="@style/TextViewStyle.LeftPaddingDouble"
+            style="@style/TextViewStyle"
             android:text="@string/ultrasoundDate" />
 
         <!-- new line -->
@@ -19,21 +21,20 @@
         <!-- new line -->
 
         <TextView
-            style="@style/TextViewStyle.LeftPaddingDouble"
+            style="@style/TextViewStyle"
             android:text="@string/diagnosedAge" />
 
         <!-- new line -->
 
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
-            <RelativeLayout style="@style/FixedSpace" />
-
             <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                 android:id="@+id/editTextWeeks"
                 style="@style/NumberPickerStyle" />
 
             <TextView
-                style="@style/CAL_COL1"
+                style="@style/TextViewStyle"
+                android:layout_width="wrap_content"
                 android:text="@string/weeks" />
 
             <com.anna.sent.soft.numberpickerlibrary.NumberPicker
@@ -41,7 +42,8 @@
                 style="@style/NumberPickerStyle" />
 
             <TextView
-                style="@style/CAL_COL2"
+                style="@style/TextViewStyle"
+                android:layout_width="wrap_content"
                 android:text="@string/days" />
         </LinearLayout>
 
@@ -49,8 +51,7 @@
 
         <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/shift" >
+            android:layout_height="wrap_content" >
 
             <RadioButton
                 android:id="@+id/radioIsGestationalAge"

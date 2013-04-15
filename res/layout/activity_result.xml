@@ -9,7 +9,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        style="@style/LinearLayoutVerticalStyle" >
+        style="@style/LinearLayoutVerticalStyle"
+        android:padding="@dimen/shift" >
 
         <TextView
             android:id="@+id/textView0"
@@ -28,7 +29,7 @@
 
         <TextView
             android:id="@+id/message1"
-            style="@style/TextViewStyle.LeftPadding"
+            style="@style/TextViewStyle"
             android:text="@string/emptyString" />
 
         <TextView
@@ -43,7 +44,7 @@
 
         <TextView
             android:id="@+id/message2"
-            style="@style/TextViewStyle.LeftPadding"
+            style="@style/TextViewStyle"
             android:text="@string/emptyString" />
 
         <TextView
@@ -58,31 +59,25 @@
 
         <TextView
             android:id="@+id/message3"
-            style="@style/TextViewStyle.LeftPadding"
+            style="@style/TextViewStyle"
             android:text="@string/emptyString" />
-
-        <RelativeLayout style="@style/VerticalSpace" />
 
         <TextView
             android:id="@+id/textView00"
-            style="@style/TextViewStyle.LeftPadding.Medium"
+            style="@style/TextViewStyle.Medium"
+            android:paddingTop="@dimen/doubleshift"
             android:text="@string/emptyString" />
 
-        <RelativeLayout style="@style/VerticalSpace" />
-
-        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
-
-            <RelativeLayout style="@style/ButtonSpace" />
+        <LinearLayout
+            style="@style/LinearLayoutHorizontalStyle"
+            android:paddingBottom="@dimen/doubleshift"
+            android:paddingTop="@dimen/doubleshift" >
 
             <Button
                 style="@style/ButtonStyle.LargeText"
                 android:onClick="rate"
                 android:text="@string/rateApplication" />
-
-            <RelativeLayout style="@style/ButtonSpace" />
         </LinearLayout>
-
-        <RelativeLayout style="@style/VerticalSpace" />
 
         <!--
             com.google.ads.AdView

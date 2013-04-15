@@ -44,14 +44,6 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		Button buttonToday = (Button) getActivity().findViewById(
 				R.id.buttonToday);
 		buttonToday.setOnClickListener(this);
-
-		Button buttonCalculateEGA = (Button) getActivity().findViewById(
-				R.id.buttonCalculateEstimatedGestationalAge);
-		buttonCalculateEGA.setOnClickListener(this);
-
-		Button buttonCalculateECD = (Button) getActivity().findViewById(
-				R.id.buttonCalculateEstimatedChildbirthDate);
-		buttonCalculateECD.setOnClickListener(this);
 	}
 
 	@Override
@@ -93,11 +85,11 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 
 		int viewId = view.getId();
 		int whatToDo = Shared.ResultParam.Calculate.NOTHING;
-		if (viewId == R.id.buttonCalculateEstimatedChildbirthDate) {
-			whatToDo = Shared.ResultParam.Calculate.ECD;
-		} else if (viewId == R.id.buttonCalculateEstimatedGestationalAge) {
-			whatToDo = Shared.ResultParam.Calculate.EGA;
-		}
+		// if (viewId == R.id.buttonCalculateEstimatedChildbirthDate) {
+		whatToDo = Shared.ResultParam.Calculate.ECD;
+		// } else if (viewId == R.id.buttonCalculateEstimatedGestationalAge) {
+		whatToDo = Shared.ResultParam.Calculate.EGA;
+		// }
 
 		intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE,
 				Utils.getDate(datePickerCurrentDate).getTimeInMillis());
@@ -118,10 +110,6 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		switch (v.getId()) {
 		case R.id.buttonToday:
 			today();
-			break;
-		case R.id.buttonCalculateEstimatedChildbirthDate:
-		case R.id.buttonCalculateEstimatedGestationalAge:
-			calculate(v);
 			break;
 		}
 	}

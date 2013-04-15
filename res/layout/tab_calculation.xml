@@ -3,41 +3,13 @@
     android:id="@+id/tabCalculation"
     style="@style/ScrollViewStyle" >
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
-
-        <!-- new line -->
-
-        <fragment
-            android:id="@+id/titles"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            class="com.anna.sent.soft.childbirthdate.fragments.TitlesFragment" />
-
-        <!-- new line -->
-
-        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
-
-            <RelativeLayout style="@style/ButtonSpace" />
-
-            <Button
-                android:id="@+id/buttonCalculateEstimatedChildbirthDate"
-                style="@style/ButtonStyle.SmallText"
-                android:text="@string/calculateEstimatedChildbirthDate" />
-
-            <RelativeLayout style="@style/ButtonSpace" />
-        </LinearLayout>
-
-        <!-- new line -->
-
-        <RelativeLayout style="@style/VerticalSpace" />
-
-        <!-- new line -->
+    <LinearLayout
+        style="@style/LinearLayoutVerticalStyle"
+        android:padding="@dimen/shift" >
 
         <TextView
-            style="@style/TextViewStyle.LeftPadding.Medium"
+            style="@style/TextViewStyle.Medium"
             android:text="@string/currentDate" />
-
-        <!-- new line -->
 
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
@@ -49,20 +21,6 @@
                 android:id="@+id/buttonToday"
                 style="@style/SmallButtonStyle"
                 android:text="@string/today" />
-        </LinearLayout>
-
-        <!-- new line -->
-
-        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
-
-            <RelativeLayout style="@style/ButtonSpace" />
-
-            <Button
-                android:id="@+id/buttonCalculateEstimatedGestationalAge"
-                style="@style/ButtonStyle.SmallText"
-                android:text="@string/calculateEstimatedGestationalAge" />
-
-            <RelativeLayout style="@style/ButtonSpace" />
         </LinearLayout>
     </LinearLayout>
 

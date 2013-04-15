@@ -19,18 +19,39 @@ public class DetailsActivity extends FragmentActivity {
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			// If the screen is now in landscape mode, we can show the
 			// dialog in-line with the list so we don't need this activity.
-			finish();
-			return;
+			// finish();
+			// return;
+		}
+
+		String title = getIntent().getStringExtra("label");
+		if (title != null) {
+			setTitle(title);
 		}
 
 		int index = getIntent().getIntExtra("index", -1);
-		Fragment details = DetailsFragment.newInstance(index);
-		if (details == null) {
-			finish();
-			return;
-		}
 
-		getSupportFragmentManager().beginTransaction()
-				.add(android.R.id.content, details).commit();
+		DetailsFragment currentDetails = (DetailsFragment) getSupportFragmentManager()
+				.findFragmentById(android.R.id.content);
+		if (currentDetails == null) {
+			Fragment details = DetailsFragment.newInstance(index);
+			if (details == null) {
+				finish();
+				return;
+			}
+
+			getSupportFragmentManager().beginTransaction()
+					.add(android.R.id.content, details).commit();
+		} else {
+			if (currentDetails.getShownIndex() != index) {
+				Fragment details = DetailsFragment.newInstance(index);
+				if (details == null) {
+					finish();
+					return;
+				}
+
+				getSupportFragmentManager().beginTransaction()
+						.replace(android.R.id.content, details).commit();
+			}
+		}
 	}
 }

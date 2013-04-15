@@ -2,17 +2,26 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/ScrollViewStyle" >
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
+    <LinearLayout
+        style="@style/LinearLayoutVerticalStyle"
+        android:padding="@dimen/shift" >
+
+        <!-- new line -->
+
+        <TextView
+            style="@style/TextViewStyle"
+            android:text="@string/lastMenstruationDate" />
 
         <!-- new line -->
 
         <DatePicker
             android:id="@+id/datePickerLastMenstruationDate"
             style="@style/DatePickerStyle" />
+
         <!-- new line -->
 
         <TextView
-            style="@style/TextViewStyle.LeftPadding"
+            style="@style/TextViewStyle"
             android:text="@string/acceptDefaults" />
 
         <!-- new line -->
@@ -20,47 +29,65 @@
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
             <TextView
-                style="@style/SET_COL1"
+                style="@style/TextViewStyle.Center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:text="@string/menstrualCycleLen" />
 
-            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                android:id="@+id/editTextMenstrualCycleLen"
-                style="@style/NumberPickerStyle" />
-
             <TextView
-                style="@style/SET_COL2"
-                android:text="@string/days" />
-        </LinearLayout>
-
-        <!-- new line -->
-
-        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
-
-            <TextView
-                style="@style/SET_COL1"
+                style="@style/TextViewStyle.Center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:text="@string/lutealPhaseLen" />
+        </LinearLayout>
 
-            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                android:id="@+id/editTextLutealPhaseLen"
-                style="@style/NumberPickerStyle" />
+        <!-- new line -->
 
-            <TextView
-                style="@style/SET_COL2"
-                android:text="@string/days" />
+        <LinearLayout
+            style="@style/LinearLayoutHorizontalStyle"
+            android:baselineAligned="false" >
+
+            <LinearLayout
+                style="@style/LinearLayoutHorizontalStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center" >
+
+                <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                    android:id="@+id/editTextMenstrualCycleLen"
+                    style="@style/NumberPickerStyle" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_width="wrap_content"
+                    android:text="@string/days" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutHorizontalStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center" >
+
+                <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                    android:id="@+id/editTextLutealPhaseLen"
+                    style="@style/NumberPickerStyle" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_width="wrap_content"
+                    android:text="@string/days" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- new line -->
 
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
-
-            <RelativeLayout style="@style/ButtonSpace" />
 
             <Button
                 android:id="@+id/buttonRestoreDefaultValues"
-                style="@style/ButtonStyle.SmallText"
+                style="@style/ButtonStyle"
                 android:text="@string/restoreDefaultValues" />
-
-            <RelativeLayout style="@style/ButtonSpace" />
         </LinearLayout>
     </LinearLayout>
 

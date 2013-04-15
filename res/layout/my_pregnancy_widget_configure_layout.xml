@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ScrollViewStyle" >
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
+    <LinearLayout
+        style="@style/LinearLayoutVerticalStyle"
+        android:padding="@dimen/shift" >
 
         <TextView
             android:id="@+id/widgetConfigureTextView"
-            style="@style/TextViewStyle.LeftPadding.Medium"
+            style="@style/TextViewStyle.Medium"
             android:text="@string/widgetSpecifyTheMethodOfCalculation" />
 
         <RadioGroup
@@ -53,7 +55,7 @@
 
             <Button
                 android:id="@+id/widgetConfigureButton"
-                style="@style/ButtonStyle.SmallText"
+                style="@style/ButtonStyle"
                 android:text="@string/widgetAddWidget" />
 
             <RelativeLayout style="@style/ButtonSpace" />

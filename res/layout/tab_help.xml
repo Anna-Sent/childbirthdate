@@ -3,9 +3,14 @@
     android:id="@+id/tabHelp"
     style="@style/ScrollViewStyle" >
 
-    <TextView
-        android:id="@+id/textViewHelp"
-        style="@style/TextViewStyle.LeftPadding"
-        android:textIsSelectable="true" />
+    <LinearLayout
+        style="@style/LinearLayoutVerticalStyle"
+        android:padding="@dimen/shift" >
+
+        <TextView
+            android:id="@+id/textViewHelp"
+            style="@style/TextViewStyle"
+            android:textIsSelectable="true" />
+    </LinearLayout>
 
 </ScrollView>
