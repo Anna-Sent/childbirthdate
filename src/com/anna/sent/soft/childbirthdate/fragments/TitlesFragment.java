@@ -19,7 +19,9 @@ import com.anna.sent.soft.childbirthdate.DetailsActivity;
 import com.anna.sent.soft.childbirthdate.R;
 
 public class TitlesFragment extends ListFragment {
-	private String[] titles = null;
+	private String[] titles;
+	private boolean mDualPane;
+	private int mCurCheckPosition = 0;
 
 	public TitlesFragment() {
 		super();
@@ -30,13 +32,13 @@ public class TitlesFragment extends ListFragment {
 			Bundle savedInstanceState) {
 		View v = super.onCreateView(inflater, container, savedInstanceState);
 		Log.d("moo", "view height is " + v.getLayoutParams().height);
-		v.getLayoutParams().height = 320;// getItemHeight() * 3;
+		// v.getLayoutParams().height = 320;// getItemHeight() * 3;
 		Log.d("moo", "item height is " + getItemHeight());
 		Log.d("moo", "view height is " + v.getLayoutParams().height);
 		if (container != null) {
 			Log.d("moo", "container height is "
 					+ container.getLayoutParams().height);
-			container.getLayoutParams().height = 600;
+			// container.getLayoutParams().height = 600;
 			Log.d("moo", "container height is "
 					+ container.getLayoutParams().height);
 		}
@@ -61,9 +63,6 @@ public class TitlesFragment extends ListFragment {
 		return TypedValue.complexToDimensionPixelSize(value.data, metrics);
 	}
 
-	boolean mDualPane;
-	int mCurCheckPosition = 0;
-
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -81,6 +80,11 @@ public class TitlesFragment extends ListFragment {
 		View detailsFrame = getActivity().findViewById(R.id.details);
 		mDualPane = detailsFrame != null
 				&& detailsFrame.getVisibility() == View.VISIBLE;
+		if (mDualPane) {
+			Log.d("moo", "dual");
+		} else {
+			Log.d("moo", "single");
+		}
 
 		if (savedInstanceState != null) {
 			// Restore last state for checked position.
@@ -115,6 +119,11 @@ public class TitlesFragment extends ListFragment {
 	void showDetails(int index) {
 		mCurCheckPosition = index;
 		Log.d("moo", "index is " + index);
+		if (mDualPane) {
+			Log.d("moo", "dual");
+		} else {
+			Log.d("moo", "single");
+		}
 
 		if (mDualPane) {
 			// We can display everything in-place with fragments, so update

@@ -13,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 
-public class CalculationPageOvulationDateMethodFragment extends DetailsFragment {
+public class CalculationPageOvulationMethodFragment extends DetailsFragment {
 	private DatePicker datePickerOvulationDate;
 
-	public CalculationPageOvulationDateMethodFragment() {
+	public CalculationPageOvulationMethodFragment() {
 		super();
 	}
 
@@ -24,7 +24,7 @@ public class CalculationPageOvulationDateMethodFragment extends DetailsFragment 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(
-				R.layout.calculation_page_ovulation_date_method_fragment,
+				R.layout.calculation_page_ovulation_method_fragment,
 				container, false);
 		return v;
 	}

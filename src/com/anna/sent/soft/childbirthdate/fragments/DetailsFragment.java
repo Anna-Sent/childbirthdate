@@ -20,7 +20,7 @@ public class DetailsFragment extends Fragment {
 			details = new CalculationPageLmpMethodFragment();
 			break;
 		case 1:
-			details = new CalculationPageOvulationDateMethodFragment();
+			details = new CalculationPageOvulationMethodFragment();
 			break;
 		case 2:
 			details = new CalculationPageUltrasoundMethodFragment();
