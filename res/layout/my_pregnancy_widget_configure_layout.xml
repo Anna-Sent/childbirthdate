@@ -3,38 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ScrollViewStyle" >
 
-    <LinearLayout
-        style="@style/LinearLayoutVerticalStyle.Padding" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
 
         <TextView
             android:id="@+id/widgetConfigureTextView"
             style="@style/TextViewStyle.Medium"
             android:text="@string/widgetSpecifyTheMethodOfCalculation" />
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+        <RadioGroup style="@style/RadioGroupStyle" >
 
             <RadioButton
                 android:id="@+id/radioByLMP"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/byLMP"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                style="@style/RadioButtonStyle"
+                android:text="@string/byLMP" />
 
             <RadioButton
                 android:id="@+id/radioByOvulation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/byOvulation"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                style="@style/RadioButtonStyle"
+                android:text="@string/byOvulation" />
 
             <RadioButton
                 android:id="@+id/radioByUltrasound"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/byUltrasound"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                style="@style/RadioButtonStyle"
+                android:text="@string/byUltrasound" />
         </RadioGroup>
 
         <CheckBox

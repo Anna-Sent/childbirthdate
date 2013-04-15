@@ -3,8 +3,7 @@
     android:id="@+id/tabCalculation"
     style="@style/ScrollViewStyle" >
 
-    <LinearLayout
-        style="@style/LinearLayoutVerticalStyle.Padding" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
 
         <TextView
             style="@style/TextViewStyle.Medium"

@@ -2,28 +2,19 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/ScrollViewStyle" >
 
-    <LinearLayout
-        style="@style/LinearLayoutVerticalStyle.Padding" >
-
-        <!-- new line -->
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
 
         <TextView
             style="@style/TextViewStyle"
             android:text="@string/ultrasoundDate" />
 
-        <!-- new line -->
-
         <DatePicker
             android:id="@+id/datePickerUltrasoundDate"
             style="@style/DatePickerStyle" />
 
-        <!-- new line -->
-
         <TextView
             style="@style/TextViewStyle"
             android:text="@string/diagnosedAge" />
-
-        <!-- new line -->
 
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
@@ -46,26 +37,17 @@
                 android:text="@string/days" />
         </LinearLayout>
 
-        <!-- new line -->
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+        <RadioGroup style="@style/RadioGroupStyle" >
 
             <RadioButton
                 android:id="@+id/radioIsGestationalAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/isGestationalAge"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                style="@style/RadioButtonStyle.Checked"
+                android:text="@string/isGestationalAge" />
 
             <RadioButton
                 android:id="@+id/radioIsEmbryonicAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/isEmbryonicAge"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                style="@style/RadioButtonStyle"
+                android:text="@string/isEmbryonicAge" />
         </RadioGroup>
     </LinearLayout>
 

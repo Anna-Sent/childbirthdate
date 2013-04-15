@@ -4,25 +4,17 @@
 
     <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
 
-        <!-- new line -->
-
         <TextView
             style="@style/TextViewStyle"
             android:text="@string/lastMenstruationDate" />
-
-        <!-- new line -->
 
         <DatePicker
             android:id="@+id/datePickerLastMenstruationDate"
             style="@style/DatePickerStyle" />
 
-        <!-- new line -->
-
         <TextView
             style="@style/TextViewStyle"
             android:text="@string/acceptDefaults" />
-
-        <!-- new line -->
 
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
@@ -38,8 +30,6 @@
                 android:layout_weight="1"
                 android:text="@string/lutealPhaseLen" />
         </LinearLayout>
-
-        <!-- new line -->
 
         <LinearLayout
             style="@style/LinearLayoutHorizontalStyle"
@@ -77,8 +67,6 @@
                     android:text="@string/days" />
             </LinearLayout>
         </LinearLayout>
-
-        <!-- new line -->
 
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
