@@ -2,8 +2,7 @@
 
     <!--
          Customize dimensions originally defined in res/values/dimens.xml (such as
-         screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
-    -->
+         screen margins) for sw600dp devices (e.g. 7" tablets) here.    -->
     <dimen name="view_padding">24dp</dimen>
     <dimen name="widget_padding">4dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
