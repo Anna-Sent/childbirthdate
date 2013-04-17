@@ -83,7 +83,7 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 	public void calculate(View view) {
 		Intent intent = new Intent(getActivity(), ResultActivity.class);
 
-		int viewId = view.getId();
+		// int viewId = view.getId();
 		int whatToDo = Shared.ResultParam.Calculate.NOTHING;
 		// if (viewId == R.id.buttonCalculateEstimatedChildbirthDate) {
 		whatToDo = Shared.ResultParam.Calculate.ECD;

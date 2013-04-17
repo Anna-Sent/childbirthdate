@@ -10,10 +10,28 @@
         android:layout_weight="1"
         class="com.anna.sent.soft.childbirthdate.fragments.TitlesFragment" />
 
-    <FrameLayout
-        android:id="@+id/details"
+    <RelativeLayout
         android:layout_width="0px"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1" >
+
+        <fragment
+            android:id="@+id/detailsLmp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="com.anna.sent.soft.childbirthdate.fragments.CalculationPageLmpMethodFragment" />
+
+        <fragment
+            android:id="@+id/detailsOvulation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="com.anna.sent.soft.childbirthdate.fragments.CalculationPageOvulationMethodFragment" />
+
+        <fragment
+            android:id="@+id/detailsUltrasound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="com.anna.sent.soft.childbirthdate.fragments.CalculationPageUltrasoundMethodFragment" />
+    </RelativeLayout>
 
 </LinearLayout>

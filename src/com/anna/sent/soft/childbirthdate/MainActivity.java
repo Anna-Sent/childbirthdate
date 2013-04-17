@@ -2,14 +2,11 @@ package com.anna.sent.soft.childbirthdate;
 
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetAdditional;
@@ -69,17 +66,15 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		Utils.onActivityCreateSetTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_layout_support); // activity_main);
-		View view = findViewById(R.id.details);
-//		getSupportFragmentManager().popBackStack();
-		Fragment fr = getSupportFragmentManager()
-				.findFragmentById(R.id.details);
-		if (view != null) {
-			Log.d("moo", "found view in main activity");
-		}
-		if (fr != null) {
-			Log.d("moo", "found fr in main activity");
-			getSupportFragmentManager().beginTransaction().remove(fr).commit();
-		}
+		// View view = findViewById(R.id.details);
+		// getSupportFragmentManager().popBackStack();
+		// Fragment fr = getSupportFragmentManager()
+		// .findFragmentById(R.id.details);
+		/*
+		 * if (view != null) { Log.d("moo", "found view in main activity"); } if
+		 * (fr != null) { Log.d("moo", "found fr in main activity");
+		 * getSupportFragmentManager().beginTransaction().remove(fr).commit(); }
+		 */
 		/*
 		 * final String tab_calculation = "tab_calculation", tab_help =
 		 * "tab_help";
@@ -177,11 +172,5 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 										 * TabHelpFragment) { mTabHelpFragment =
 										 * (TabHelpFragment) fragment; }
 										 */
-	}
-
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		Log.d("moo", "activity on conf change");
 	}
 }
