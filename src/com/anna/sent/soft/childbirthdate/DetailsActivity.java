@@ -1,27 +1,29 @@
 package com.anna.sent.soft.childbirthdate;
 
 import android.content.res.Configuration;
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.anna.sent.soft.childbirthdate.fragments.DetailsFragment;
 import com.anna.sent.soft.utils.Utils;
 
 public class DetailsActivity extends FragmentActivity {
+	private DetailsFragment mDetailsFragment = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Utils.onDialogStyleActivityCreateSetTheme(this);
-		super.onCreate(savedInstanceState);
-
-		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { // or
+																									// not
+																									// has_two_panes
 			// If the screen is now in landscape mode, we can show the
 			// dialog in-line with the list so we don't need this activity.
 			finish();
 			return;
 		}
+
+		Utils.onDialogStyleActivityCreateSetTheme(this);
+		super.onCreate(savedInstanceState);
 
 		String title = getIntent().getStringExtra("label");
 		if (title != null) {
@@ -33,7 +35,7 @@ public class DetailsActivity extends FragmentActivity {
 		DetailsFragment currentDetails = (DetailsFragment) getSupportFragmentManager()
 				.findFragmentById(android.R.id.content);
 		if (currentDetails == null) {
-			Fragment details = DetailsFragment.newInstance(index);
+			DetailsFragment details = DetailsFragment.newInstance(index);
 			if (details == null) {
 				finish();
 				return;
@@ -41,9 +43,10 @@ public class DetailsActivity extends FragmentActivity {
 
 			getSupportFragmentManager().beginTransaction()
 					.add(android.R.id.content, details).commit();
+			mDetailsFragment = details;
 		} else {
 			if (currentDetails.getShownIndex() != index) {
-				Fragment details = DetailsFragment.newInstance(index);
+				DetailsFragment details = DetailsFragment.newInstance(index);
 				if (details == null) {
 					finish();
 					return;
@@ -51,6 +54,7 @@ public class DetailsActivity extends FragmentActivity {
 
 				getSupportFragmentManager().beginTransaction()
 						.replace(android.R.id.content, details).commit();
+				mDetailsFragment = details;
 			}
 		}
 	}

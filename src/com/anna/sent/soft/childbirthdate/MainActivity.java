@@ -2,18 +2,15 @@ package com.anna.sent.soft.childbirthdate;
 
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TabHost;
+import android.view.View;
 
-import com.anna.sent.soft.childbirthdate.fragments.TabCalculationFragment;
-import com.anna.sent.soft.childbirthdate.fragments.TabHelpFragment;
-import com.anna.sent.soft.childbirthdate.fragments.FragmentLayoutSupport;
-import com.anna.sent.soft.childbirthdate.gui.TabsAdapter;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetAdditional;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetSimple;
@@ -22,16 +19,15 @@ import com.anna.sent.soft.utils.StateSaver;
 import com.anna.sent.soft.utils.Utils;
 
 public class MainActivity extends FragmentActivity implements StateSaver {
-
-	private TabHost mTabHost;
-	ViewPager mViewPager;
-	TabsAdapter mTabsAdapter;
-
-	private TabCalculationFragment mTabCalculationFragment = null;
-	private TabHelpFragment mTabHelpFragment = null;
-
-	private static final String EXTRA_GUI_CURRENT_TAB = "com.anna.sent.soft.childbirthdate.currenttab";
-
+	/*
+	 * private TabHost mTabHost; ViewPager mViewPager; TabsAdapter mTabsAdapter;
+	 * 
+	 * private TabCalculationFragment mTabCalculationFragment = null; private
+	 * TabHelpFragment mTabHelpFragment = null;
+	 * 
+	 * private static final String EXTRA_GUI_CURRENT_TAB =
+	 * "com.anna.sent.soft.childbirthdate.currenttab";
+	 */
 	@SuppressWarnings("unused")
 	private void disableWidgets() {
 		disableWidget(MyPregnancyWidgetSmall.class);
@@ -72,36 +68,43 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	protected void onCreate(Bundle savedInstanceState) {
 		Utils.onActivityCreateSetTheme(this);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
-		final String tab_calculation = "tab_calculation", tab_help = "tab_help";
-
-		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
-		mTabHost.setup();
-
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-
-		mTabsAdapter = new TabsAdapter(this, mTabHost, mViewPager);
-		mTabsAdapter.addTab(
-				mTabHost.newTabSpec(tab_calculation).setIndicator(
-						getString(R.string.calculation)),
-				FragmentLayoutSupport.class, null);
-		mTabsAdapter.addTab(
-				mTabHost.newTabSpec(tab_help).setIndicator(
-						getString(R.string.help)), TabHelpFragment.class, null);
-
-		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
-			mTabHost.setCurrentTabByTag(savedInstanceState
-					.getString(EXTRA_GUI_CURRENT_TAB));
-		} else {
-			savedInstanceState = getIntent().getExtras();
-			if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
-				mTabHost.setCurrentTabByTag(savedInstanceState
-						.getString(EXTRA_GUI_CURRENT_TAB));
-			} else {
-				mTabHost.setCurrentTabByTag(tab_calculation);
-			}
+		setContentView(R.layout.fragment_layout_support); // activity_main);
+		View view = findViewById(R.id.details);
+//		getSupportFragmentManager().popBackStack();
+		Fragment fr = getSupportFragmentManager()
+				.findFragmentById(R.id.details);
+		if (view != null) {
+			Log.d("moo", "found view in main activity");
 		}
+		if (fr != null) {
+			Log.d("moo", "found fr in main activity");
+			getSupportFragmentManager().beginTransaction().remove(fr).commit();
+		}
+		/*
+		 * final String tab_calculation = "tab_calculation", tab_help =
+		 * "tab_help";
+		 * 
+		 * mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+		 * mTabHost.setup();
+		 * 
+		 * mViewPager = (ViewPager) findViewById(R.id.pager);
+		 * 
+		 * mTabsAdapter = new TabsAdapter(this, mTabHost, mViewPager);
+		 * mTabsAdapter.addTab(
+		 * mTabHost.newTabSpec(tab_calculation).setIndicator(
+		 * getString(R.string.calculation)), FragmentLayoutSupport.class, null);
+		 * mTabsAdapter.addTab( mTabHost.newTabSpec(tab_help).setIndicator(
+		 * getString(R.string.help)), TabHelpFragment.class, null);
+		 * 
+		 * if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
+		 * mTabHost.setCurrentTabByTag(savedInstanceState
+		 * .getString(EXTRA_GUI_CURRENT_TAB)); } else { savedInstanceState =
+		 * getIntent().getExtras(); if (savedInstanceState != null &&
+		 * !savedInstanceState.isEmpty()) {
+		 * mTabHost.setCurrentTabByTag(savedInstanceState
+		 * .getString(EXTRA_GUI_CURRENT_TAB)); } else {
+		 * mTabHost.setCurrentTabByTag(tab_calculation); } }
+		 */
 	}
 
 	@Override
@@ -120,16 +123,16 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-
-		outState.putString(EXTRA_GUI_CURRENT_TAB, mTabHost.getCurrentTabTag());
-
-		if (mTabCalculationFragment != null) {
-			mTabCalculationFragment.onSaveInstanceState(outState);
-		}
-
-		if (mTabHelpFragment != null) {
-			mTabHelpFragment.onSaveInstanceState(outState);
-		}
+		/*
+		 * outState.putString(EXTRA_GUI_CURRENT_TAB,
+		 * mTabHost.getCurrentTabTag());
+		 * 
+		 * if (mTabCalculationFragment != null) {
+		 * mTabCalculationFragment.onSaveInstanceState(outState); }
+		 * 
+		 * if (mTabHelpFragment != null) {
+		 * mTabHelpFragment.onSaveInstanceState(outState); }
+		 */
 	}
 
 	@Override
@@ -165,11 +168,20 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 
 	@Override
 	public void onAttachFragment(Fragment fragment) {
-		super.onAttachFragment(fragment);
-		if (fragment instanceof TabCalculationFragment) {
-			mTabCalculationFragment = (TabCalculationFragment) fragment;
-		} else if (fragment instanceof TabHelpFragment) {
-			mTabHelpFragment = (TabHelpFragment) fragment;
-		}
+		super.onAttachFragment(fragment);/*
+										 * if (fragment instanceof
+										 * TabCalculationFragment) {
+										 * mTabCalculationFragment =
+										 * (TabCalculationFragment) fragment; }
+										 * else if (fragment instanceof
+										 * TabHelpFragment) { mTabHelpFragment =
+										 * (TabHelpFragment) fragment; }
+										 */
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		Log.d("moo", "activity on conf change");
 	}
 }

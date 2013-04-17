@@ -2,6 +2,7 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
@@ -27,41 +28,33 @@ public class TitlesFragment extends ListFragment {
 		super();
 	}
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = super.onCreateView(inflater, container, savedInstanceState);
-		Log.d("moo", "view height is " + v.getLayoutParams().height);
-		// v.getLayoutParams().height = 320;// getItemHeight() * 3;
-		Log.d("moo", "item height is " + getItemHeight());
-		Log.d("moo", "view height is " + v.getLayoutParams().height);
-		if (container != null) {
-			Log.d("moo", "container height is "
-					+ container.getLayoutParams().height);
-			// container.getLayoutParams().height = 600;
-			Log.d("moo", "container height is "
-					+ container.getLayoutParams().height);
-		}
-
-		return v;
-	}
-
-	@Override
-	public void onInflate(Activity activity, AttributeSet attrs,
-			Bundle savedInstanceState) {
-		super.onInflate(activity, attrs, savedInstanceState);
-		// Log.d("moo", "list view height is " + getListView().getHeight());
-	}
-
-	private int getItemHeight() {
-		TypedValue value = new TypedValue();
-		DisplayMetrics metrics = new DisplayMetrics();
-		getActivity().getTheme().resolveAttribute(
-				android.R.attr.listPreferredItemHeight, value, true);
-		getActivity().getWindowManager().getDefaultDisplay()
-				.getMetrics(metrics);
-		return TypedValue.complexToDimensionPixelSize(value.data, metrics);
-	}
+	/*
+	 * @Override public View onCreateView(LayoutInflater inflater, ViewGroup
+	 * container, Bundle savedInstanceState) { View v =
+	 * super.onCreateView(inflater, container, savedInstanceState); Log.d("moo",
+	 * "view height is " + v.getLayoutParams().height); //
+	 * v.getLayoutParams().height = 320;// getItemHeight() * 3; Log.d("moo",
+	 * "item height is " + getItemHeight()); Log.d("moo", "view height is " +
+	 * v.getLayoutParams().height); if (container != null) { Log.d("moo",
+	 * "container height is " + container.getLayoutParams().height); //
+	 * container.getLayoutParams().height = 600; Log.d("moo",
+	 * "container height is " + container.getLayoutParams().height); }
+	 * 
+	 * return v; }
+	 * 
+	 * @Override public void onInflate(Activity activity, AttributeSet attrs,
+	 * Bundle savedInstanceState) { super.onInflate(activity, attrs,
+	 * savedInstanceState); // Log.d("moo", "list view height is " +
+	 * getListView().getHeight()); }
+	 * 
+	 * private int getItemHeight() { TypedValue value = new TypedValue();
+	 * DisplayMetrics metrics = new DisplayMetrics();
+	 * getActivity().getTheme().resolveAttribute(
+	 * android.R.attr.listPreferredItemHeight, value, true);
+	 * getActivity().getWindowManager().getDefaultDisplay()
+	 * .getMetrics(metrics); return
+	 * TypedValue.complexToDimensionPixelSize(value.data, metrics); }
+	 */
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -133,7 +126,7 @@ public class TitlesFragment extends ListFragment {
 			// Check what fragment is currently shown, replace if needed.
 			DetailsFragment details = (DetailsFragment) getFragmentManager()
 					.findFragmentById(R.id.details);
-			Log.d("moo", "details is " + details.toString());
+			// Log.d("moo", "details is " + details.toString());
 			if (details == null || details.getShownIndex() != index) {
 				// Make new fragment to show this selection.
 				details = DetailsFragment.newInstance(index);
@@ -154,6 +147,21 @@ public class TitlesFragment extends ListFragment {
 			intent.putExtra("index", index);
 			intent.putExtra("label", titles[index]);
 			startActivity(intent);
+		}
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		Log.d("moo", "on configuration changed");
+		if (newConfig.equals(Configuration.ORIENTATION_PORTRAIT)) { // and not
+																	// has two
+																	// panes
+			getFragmentManager()
+					.beginTransaction()
+					.remove(getFragmentManager().findFragmentById(R.id.details))
+					.commit();
+			Log.d("moo", "remove frag");
 		}
 	}
 }
