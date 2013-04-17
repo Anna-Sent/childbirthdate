@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <integer name="button_weight">1</integer>
-    <integer name="button_space_weight">0</integer>
-
-</resources>
