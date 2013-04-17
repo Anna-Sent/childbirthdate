@@ -27,12 +27,12 @@
             <TextView
                 style="@style/TextViewStyle"
                 android:layout_width="wrap_content"
-                android:text="@string/weeks" />
+                android:text="@string/weeks"
+                android:paddingRight="@dimen/view_padding" />
 
             <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                 android:id="@+id/editTextDays"
-                style="@style/NumberPickerStyle"
-                android:paddingLeft="@dimen/view_padding" />
+                style="@style/NumberPickerStyle" />
 
             <TextView
                 style="@style/TextViewStyle"
