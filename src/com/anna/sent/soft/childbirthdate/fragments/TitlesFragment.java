@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -15,7 +16,6 @@ import com.anna.sent.soft.childbirthdate.R;
 
 public class TitlesFragment extends ListFragment {
 	private String[] titles;
-	private int[] detailsIds;
 	private boolean mDualPane;
 	private int mSelectedItem;
 
@@ -27,9 +27,6 @@ public class TitlesFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		detailsIds = new int[] { R.id.detailsLmp, R.id.detailsOvulation,
-				R.id.detailsUltrasound };
-
 		titles = new String[] { getString(R.string.ByLMP),
 				getString(R.string.ByOvulation),
 				getString(R.string.ByUltrasound) };
@@ -40,28 +37,24 @@ public class TitlesFragment extends ListFragment {
 
 		mDualPane = getResources().getBoolean(R.bool.has_two_panes);
 
-		mSelectedItem = -1;
-		FragmentManager fm = getFragmentManager();
-		for (int i = 0; i < detailsIds.length; ++i) {
-			Fragment details = fm.findFragmentById(detailsIds[i]);
-			fm.beginTransaction().hide(details).commit();
-		}
-
 		if (mDualPane) {
 			// In dual-pane mode, the list view highlights the selected item.
 			getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
-			int itemToSelect = 0;
+			mSelectedItem = 0;
 			if (savedInstanceState != null) {
 				// Restore last state for checked position.
-				itemToSelect = savedInstanceState.getInt("curChoice", 0);
-				if (itemToSelect < 0 || itemToSelect >= detailsIds.length) {
-					itemToSelect = 0;
-				}
+				mSelectedItem = savedInstanceState.getInt("curChoice", 0);
 			}
+		}
+	}
 
-			// Make sure our UI is in the correct state.
-			showDetails(itemToSelect);
+	@Override
+	public void onStart() {
+		super.onStart();
+		// Make sure our UI is in the correct state.
+		if (mDualPane) {
+			showDetails(mSelectedItem);
 		}
 	}
 
@@ -69,6 +62,7 @@ public class TitlesFragment extends ListFragment {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt("curChoice", mSelectedItem);
+		Log.d("moo", "save index=" + mSelectedItem);
 	}
 
 	@Override
@@ -82,33 +76,27 @@ public class TitlesFragment extends ListFragment {
 	 * activity in which it is displayed.
 	 */
 	void showDetails(int index) {
+		Log.d("moo", "index is " + index + "; selected is " + mSelectedItem);
+		mSelectedItem = index;
 		if (mDualPane) {
 			// We can display everything in-place with fragments, so update
 			// the list to highlight the selected item and show the data.
 			getListView().setItemChecked(index, true);
 
 			// Check what fragment is currently shown, replace if needed.
-			if (mSelectedItem != index) {
-				if (index >= 0 && index < detailsIds.length) {
-					FragmentManager fm = getFragmentManager();
-					if (mSelectedItem >= 0 && mSelectedItem < detailsIds.length) {
-						Fragment details = fm
-								.findFragmentById(detailsIds[mSelectedItem]);
-						fm.beginTransaction().hide(details).commit();
-					}
-
-					mSelectedItem = index;
-					Fragment details = fm.findFragmentById(detailsIds[index]);
-					FragmentTransaction ft = fm.beginTransaction();
-					ft.show(details);
-					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-					ft.commit();
-				}
+			FragmentManager fm = getFragmentManager();
+			DetailsFragment details = (DetailsFragment) fm
+					.findFragmentById(R.id.details);
+			if (details == null || details.getShownIndex() != index) {
+				Fragment newDetails = DetailsFragment.newInstance(index);
+				FragmentTransaction ft = fm.beginTransaction();
+				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+				ft.replace(R.id.details, newDetails);
+				ft.commit();
 			}
 		} else {
 			// Otherwise we need to launch a new activity to display
 			// the dialog fragment with selected text.
-			mSelectedItem = index;
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), DetailsActivity.class);
 			intent.putExtra("index", index);
