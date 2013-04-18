@@ -107,14 +107,12 @@ public class ResultActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-			// Imitate Home-Up button click
-			Bundle savedState = getIntent().getBundleExtra(
-					Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE);
-			if (savedState == null) {
-				// ResultActivity is started from Widget
-				createParentStack();
-			}
+		// Imitate Home-Up button click
+		Bundle savedState = getIntent().getBundleExtra(
+				Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE);
+		if (savedState == null) {
+			// ResultActivity is started from Widget
+			createParentStack();
 		}
 
 		super.onBackPressed();
