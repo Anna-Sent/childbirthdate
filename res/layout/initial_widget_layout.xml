@@ -5,6 +5,6 @@
 
     <TextView
         style="@style/WidgetTextView2Style"
+        android:layout_gravity="center_vertical"
         android:text="@string/initialization" />
-
-</FrameLayout>
+</FrameLayout>
