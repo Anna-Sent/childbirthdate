@@ -25,9 +25,9 @@ public abstract class ScrollViewFragment extends Fragment implements StateSaver 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		if (container == null) {
+		/*if (container == null) {
 			return null;
-		}
+		}*/
 
 		View v = inflater.inflate(getLayoutResourceId(), container, false);
 		return v;

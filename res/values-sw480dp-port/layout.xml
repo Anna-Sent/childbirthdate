@@ -4,6 +4,11 @@
     <bool name="has_two_panes">false</bool>
 
     <item name="fragment_layout_support" type="layout">@layout/fragment_layout_support_one_pane</item>
+    <item name="activity_result" type="layout">@layout/activity_result_normal</item>
+    <item name="tab_calculation" type="layout">@layout/tab_calculation_normal</item>
+    <item name="fragment_lmp_method" type="layout">@layout/fragment_lmp_method_normal</item>
+    <item name="fragment_ovulation_method" type="layout">@layout/fragment_ovulation_method_normal</item>
+    <item name="fragment_ultrasound_method" type="layout">@layout/fragment_ultrasound_method_normal</item>
 
     <integer name="button_weight">1</integer>
     <integer name="button_space_weight">0</integer>

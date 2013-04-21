@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ScrollViewStyle"
+    tools:context=".ResultActivity" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        style="@style/LinearLayoutVerticalStyle.Padding" >
+
+        <TextView
+            android:id="@+id/textView0"
+            style="@style/TextViewStyle.Center.Large"
+            android:text="@string/emptyString" />
+
+        <LinearLayout style="@style/LinearLayoutVerticalStyle" >
+
+            <LinearLayout
+                style="@style/LinearLayoutHorizontalStyle"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    style="@style/TextViewStyle.Center.Medium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/byLMP" />
+
+                <TextView
+                    android:id="@+id/result1"
+                    style="@style/TextViewStyle.Center.Medium.Red"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/emptyString" />
+
+                <TextView
+                    android:id="@+id/message1"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/emptyString" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutHorizontalStyle"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/TextViewStyle.Center.Medium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/byOvulation" />
+
+                <TextView
+                    android:id="@+id/result2"
+                    style="@style/TextViewStyle.Center.Medium.Red"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/emptyString" />
+
+                <TextView
+                    android:id="@+id/message2"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/emptyString" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutHorizontalStyle"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/TextViewStyle.Center.Medium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/byUltrasound" />
+
+                <TextView
+                    android:id="@+id/result3"
+                    style="@style/TextViewStyle.Center.Medium.Red"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/emptyString" />
+
+                <TextView
+                    android:id="@+id/message3"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/emptyString" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView00"
+            style="@style/TextViewStyle.Medium"
+            android:paddingTop="@dimen/view_padding"
+            android:text="@string/emptyString" />
+
+        <LinearLayout
+            style="@style/LinearLayoutHorizontalStyle"
+            android:paddingTop="@dimen/view_padding" >
+
+            <FrameLayout style="@style/ButtonSpace" />
+
+            <Button
+                style="@style/ButtonStyle.LargeText"
+                android:onClick="rate"
+                android:text="@string/rateApplication" />
+
+            <FrameLayout style="@style/ButtonSpace" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

@@ -14,10 +14,6 @@
             android:id="@+id/datePickerLastMenstruationDate"
             style="@style/DatePickerStyle" />
 
-        <TextView
-            style="@style/TextViewStyle"
-            android:text="@string/acceptDefaults" />
-
         <LinearLayout
             style="@style/LinearLayoutHorizontalStyle"
             android:paddingTop="@dimen/view_padding" >
@@ -71,6 +67,10 @@
                     android:text="@string/days" />
             </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            style="@style/TextViewStyle"
+            android:text="@string/acceptDefaults" />
 
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 

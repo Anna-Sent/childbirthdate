@@ -42,7 +42,7 @@ public class CalculationPageLmpMethodFragment extends DetailsFragment implements
 		}
 
 		View v = inflater
-				.inflate(R.layout.calculation_page_lmp_method_fragment,
+				.inflate(R.layout.fragment_lmp_method,
 						container, false);
 		return v;
 	}

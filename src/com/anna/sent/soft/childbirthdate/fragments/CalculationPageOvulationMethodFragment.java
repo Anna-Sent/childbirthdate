@@ -35,7 +35,7 @@ public class CalculationPageOvulationMethodFragment extends DetailsFragment {
 		}
 
 		View v = inflater.inflate(
-				R.layout.calculation_page_ovulation_method_fragment, container,
+				R.layout.fragment_ovulation_method, container,
 				false);
 		return v;
 	}

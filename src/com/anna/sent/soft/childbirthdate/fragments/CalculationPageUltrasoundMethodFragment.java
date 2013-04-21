@@ -42,7 +42,7 @@ public class CalculationPageUltrasoundMethodFragment extends DetailsFragment
 		}
 
 		View v = inflater.inflate(
-				R.layout.calculation_page_ultrasound_method_fragment,
+				R.layout.fragment_ultrasound_method,
 				container, false);
 		return v;
 	}
