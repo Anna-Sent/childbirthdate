@@ -3,9 +3,7 @@
     android:id="@+id/tabCalculation"
     style="@style/ScrollViewStyle" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    <RelativeLayout style="@style/LinearLayoutVerticalStyle.Padding" >
 
         <TextView
             android:id="@+id/textViewCurrentDate"
