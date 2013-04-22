@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tabCalculation"
-    style="@style/ScrollViewStyle" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/LinearLayoutVerticalStyle.Padding" >
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
+    <TextView
+        style="@style/TextViewStyle.Medium"
+        android:text="@string/currentDate" />
 
-        <TextView
-            style="@style/TextViewStyle.Medium"
-            android:text="@string/currentDate" />
+    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
-        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+        <DatePicker
+            android:id="@+id/datePickerCurrentDate"
+            style="@style/DatePickerStyle" />
 
-            <DatePicker
-                android:id="@+id/datePickerCurrentDate"
-                style="@style/DatePickerStyle" />
-
-            <Button
-                android:id="@+id/buttonToday"
-                style="@style/SmallButtonStyle"
-                android:text="@string/today" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/buttonToday"
+            style="@style/SmallButtonStyle"
+            android:text="@string/today" />
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

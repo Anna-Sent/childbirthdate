@@ -19,7 +19,7 @@ import com.anna.sent.soft.childbirthdate.R;
 public class TitlesFragment extends ListFragment {
 	private boolean mDualPane;
 	private int mSelectedItem;
-	private View mFooter = null;
+	private View mHeader = null, mFooter = null;
 
 	public TitlesFragment() {
 		super();
@@ -28,6 +28,7 @@ public class TitlesFragment extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		mHeader = inflater.inflate(R.layout.list_header, null);
 		mFooter = inflater.inflate(R.layout.list_footer, null);
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
@@ -35,6 +36,10 @@ public class TitlesFragment extends ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+
+		if (mHeader != null) {
+			getListView().addHeaderView(mHeader);
+		}
 
 		if (mFooter != null) {
 			getListView().addFooterView(mFooter);

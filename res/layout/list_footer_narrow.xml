@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tabCalculation"
-    style="@style/ScrollViewStyle" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/LinearLayoutHorizontalStyle.Padding" >
 
-    <RelativeLayout style="@style/LinearLayoutVerticalStyle.Padding" >
+    <TextView
+        android:id="@+id/textViewCurrentDate"
+        style="@style/TextViewStyle.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/buttonToday"
+        android:text="@string/currentDate" />
 
-        <TextView
-            android:id="@+id/textViewCurrentDate"
-            style="@style/TextViewStyle.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/buttonToday"
-            android:text="@string/currentDate" />
+    <Button
+        android:id="@id/buttonToday"
+        style="@style/SmallButtonStyle"
+        android:layout_alignParentRight="true"
+        android:text="@string/today" />
 
-        <Button
-            android:id="@id/buttonToday"
-            style="@style/SmallButtonStyle"
-            android:layout_alignParentRight="true"
-            android:text="@string/today" />
+    <DatePicker
+        android:id="@+id/datePickerCurrentDate"
+        style="@style/DatePickerStyle"
+        android:layout_below="@id/textViewCurrentDate" >
+    </DatePicker>
 
-        <DatePicker
-            android:id="@+id/datePickerCurrentDate"
-            style="@style/DatePickerStyle"
-            android:layout_below="@id/textViewCurrentDate" >
-        </DatePicker>
-    </RelativeLayout>
-
-</ScrollView>
+</RelativeLayout>

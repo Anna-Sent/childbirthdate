@@ -33,7 +33,7 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 
 	@Override
 	protected int getScrollViewResourceId() {
-		return R.id.tabCalculation;
+		return -1;//R.id.tabCalculation;
 	}
 
 	@Override
