@@ -115,8 +115,8 @@
     <string name="days">д.</string>
     <string name="calculateEstimatedChildbirthDate">Рассчитать дату родов</string>
     <string name="calculateEstimatedGestationalAge">Рассчитать срок беременности</string>
-    <string name="estimatedChildbirthDate">Дата родов</string>
-    <string name="estimatedGestationalAge">Срок беременности</string>
+    <string name="childbirthDate">Дата родов</string>
+    <string name="gestationalAge">Срок беременности</string>
     <string name="errorNotSelectedCalculationMethod">Не выбран способ расчета</string>
     <string name="consultADoctor">Обратитесь в женскую консультацию для уточнения срока беременности</string>
     <string name="estimatedChildbirthDate">Предполагаемая дата родов</string>
