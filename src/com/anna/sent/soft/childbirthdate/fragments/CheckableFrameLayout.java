@@ -19,6 +19,7 @@ public class CheckableFrameLayout extends FrameLayout implements Checkable {
 		super(context, attrs);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void setChecked(boolean checked) {
 		mChecked = checked;
 		setBackgroundDrawable(checked ? new ColorDrawable(0xff0000a0/*003ea8f6*/) : null);

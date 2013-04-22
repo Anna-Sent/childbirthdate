@@ -18,7 +18,7 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.StateSaver;
 
-public class TitlesFragment extends ListFragment {
+public class TitlesFragment extends ListFragment implements StateSaver {
 	private boolean mDualPane;
 	private int mSelectedItem;
 	private View mHeader = null, mFooter = null;
@@ -55,20 +55,31 @@ public class TitlesFragment extends ListFragment {
 
 		mDualPane = getResources().getBoolean(R.bool.has_two_panes);
 
-		if (mDualPane) {
-			// In dual-pane mode, the list view highlights the selected item.
-			getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-			mSelectedItem = 0;
-			if (savedInstanceState != null) {
-				// Restore last state for checked position.
-				mSelectedItem = savedInstanceState.getInt("curChoice", 0);
-				Log.d("moo", "restore index=" + mSelectedItem);
-			}
-		}
+		getListView().setChoiceMode(
+				mDualPane ? ListView.CHOICE_MODE_SINGLE
+						: ListView.CHOICE_MODE_NONE);
 
 		mTabCalculation = new TabCalculation(getActivity());
 		mTabCalculation.setViews();
+
+		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
+			mTabCalculation.restoreState(savedInstanceState);
+			mSelectedItem = 0;
+			if (savedInstanceState != null) {
+				mSelectedItem = savedInstanceState.getInt("curChoice", 0);
+				Log.d("moo", "restore index=" + mSelectedItem);
+			}
+		} else {
+			savedInstanceState = getActivity().getIntent().getExtras();
+			if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
+				mTabCalculation.restoreState(savedInstanceState);
+				mSelectedItem = 0;
+				if (savedInstanceState != null) {
+					mSelectedItem = savedInstanceState.getInt("curChoice", 0);
+					Log.d("moo", "restore index=" + mSelectedItem);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -85,6 +96,7 @@ public class TitlesFragment extends ListFragment {
 		super.onSaveInstanceState(outState);
 		outState.putInt("curChoice", mSelectedItem);
 		Log.d("moo", "save index=" + mSelectedItem);
+		mTabCalculation.saveState(outState);
 	}
 
 	@Override
