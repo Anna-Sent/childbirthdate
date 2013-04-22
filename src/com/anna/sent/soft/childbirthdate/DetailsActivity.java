@@ -2,7 +2,6 @@ package com.anna.sent.soft.childbirthdate;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -10,7 +9,7 @@ import android.support.v4.view.ViewPager;
 import com.anna.sent.soft.childbirthdate.gui.DetailsPagerAdapter;
 import com.anna.sent.soft.utils.Utils;
 
-public class DetailsActivity extends FragmentActivity {
+public class DetailsActivity extends ChildActivity {
 	private ViewPager mViewPager;
 	private DetailsPagerAdapter mTabsAdapter;
 
