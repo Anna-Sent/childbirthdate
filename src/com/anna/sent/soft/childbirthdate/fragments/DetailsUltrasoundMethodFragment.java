@@ -17,13 +17,13 @@ import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
-public class CalculationPageUltrasoundMethodFragment extends DetailsFragment
-		implements OnClickListener {
+public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
+		OnClickListener {
 	private NumberPicker numberPickerWeeks, numberPickerDays;
 	private DatePicker datePickerUltrasoundDate;
 	private RadioButton radioButtonIsGestationalAge, radioButtonIsEmbryonicAge;
 
-	public CalculationPageUltrasoundMethodFragment() {
+	public DetailsUltrasoundMethodFragment() {
 		super();
 	}
 
@@ -41,8 +41,7 @@ public class CalculationPageUltrasoundMethodFragment extends DetailsFragment
 			return null;
 		}
 
-		View v = inflater.inflate(
-				R.layout.fragment_ultrasound_method,
+		View v = inflater.inflate(R.layout.details_ultrasound_method,
 				container, false);
 		return v;
 	}

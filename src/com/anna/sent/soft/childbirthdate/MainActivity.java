@@ -67,7 +67,7 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 	protected void onCreate(Bundle savedInstanceState) {
 		Utils.onActivityCreateSetTheme(this);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_layout_support); // activity_main);
+		setContentView(R.layout.tab_calculation); // activity_main);
 		// View view = findViewById(R.id.details);
 		// getSupportFragmentManager().popBackStack();
 		// Fragment fr = getSupportFragmentManager()

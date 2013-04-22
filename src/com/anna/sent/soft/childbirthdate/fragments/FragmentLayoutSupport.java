@@ -16,7 +16,7 @@ public class FragmentLayoutSupport extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_layout_support, container,
+		View v = inflater.inflate(R.layout.tab_calculation, container,
 				false);
 		return v;
 	}

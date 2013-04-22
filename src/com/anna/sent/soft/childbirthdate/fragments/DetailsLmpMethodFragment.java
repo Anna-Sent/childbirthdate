@@ -17,13 +17,13 @@ import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
-public class CalculationPageLmpMethodFragment extends DetailsFragment implements
+public class DetailsLmpMethodFragment extends DetailsFragment implements
 		OnClickListener {
 	private DatePicker datePickerLastMenstruationDate;
 	private NumberPicker numberPickerMenstrualCycleLen,
 			numberPcikerLutealPhaseLen;
 
-	public CalculationPageLmpMethodFragment() {
+	public DetailsLmpMethodFragment() {
 		super();
 	}
 
@@ -42,8 +42,7 @@ public class CalculationPageLmpMethodFragment extends DetailsFragment implements
 		}
 
 		View v = inflater
-				.inflate(R.layout.fragment_lmp_method,
-						container, false);
+				.inflate(R.layout.details_lmp_method, container, false);
 		return v;
 	}
 

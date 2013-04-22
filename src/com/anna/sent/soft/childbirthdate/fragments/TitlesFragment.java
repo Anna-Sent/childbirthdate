@@ -29,7 +29,7 @@ public class TitlesFragment extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		mFooter = inflater.inflate(R.layout.tab_calculation, null);
+		mFooter = inflater.inflate(R.layout.list_footer, null);
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
@@ -47,7 +47,7 @@ public class TitlesFragment extends ListFragment {
 
 		// Populate list with our array of titles.
 		setListAdapter(new ArrayAdapter<String>(getActivity(),
-				R.layout.list_item_checkable, R.id.text1, titles));
+				R.layout.list_item, R.id.text1, titles));
 
 		mDualPane = getResources().getBoolean(R.bool.has_two_panes);
 

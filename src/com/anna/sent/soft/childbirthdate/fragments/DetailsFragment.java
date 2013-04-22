@@ -17,13 +17,13 @@ public class DetailsFragment extends Fragment {
 		DetailsFragment details = null;
 		switch (index) {
 		case 0:
-			details = new CalculationPageLmpMethodFragment();
+			details = new DetailsLmpMethodFragment();
 			break;
 		case 1:
-			details = new CalculationPageOvulationMethodFragment();
+			details = new DetailsOvulationMethodFragment();
 			break;
 		case 2:
-			details = new CalculationPageUltrasoundMethodFragment();
+			details = new DetailsUltrasoundMethodFragment();
 			break;
 		default:
 			return null;
