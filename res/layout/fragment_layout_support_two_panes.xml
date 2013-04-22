@@ -3,24 +3,12 @@
     style="@style/LinearLayoutHorizontalStyle"
     android:baselineAligned="false" >
 
-    <LinearLayout
-        style="@style/LinearLayoutVerticalStyle"
+    <fragment
+        android:id="@+id/titles"
         android:layout_width="0px"
         android:layout_height="wrap_content"
-        android:layout_weight="1" >
-
-        <fragment
-            android:id="@+id/titles"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            class="com.anna.sent.soft.childbirthdate.fragments.TitlesFragment" />
-
-        <fragment
-            android:id="@+id/currentDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            class="com.anna.sent.soft.childbirthdate.fragments.TabCalculationFragment" />
-    </LinearLayout>
+        android:layout_weight="1"
+        class="com.anna.sent.soft.childbirthdate.fragments.TitlesFragment" />
 
     <FrameLayout
         android:id="@+id/details"

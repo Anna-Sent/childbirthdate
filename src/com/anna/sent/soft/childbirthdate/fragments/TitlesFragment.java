@@ -7,7 +7,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -18,9 +20,17 @@ public class TitlesFragment extends ListFragment {
 	private String[] titles;
 	private boolean mDualPane;
 	private int mSelectedItem;
+	private View mFooter = null;
 
 	public TitlesFragment() {
 		super();
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		mFooter = inflater.inflate(R.layout.tab_calculation, null);
+		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
 	@Override
@@ -30,6 +40,10 @@ public class TitlesFragment extends ListFragment {
 		titles = new String[] { getString(R.string.ByLMP),
 				getString(R.string.ByOvulation),
 				getString(R.string.ByUltrasound) };
+
+		if (mFooter != null) {
+			getListView().addFooterView(mFooter);
+		}
 
 		// Populate list with our array of titles.
 		setListAdapter(new ArrayAdapter<String>(getActivity(),
