@@ -39,17 +39,10 @@
             style="@style/CheckBoxStyle"
             android:text="@string/showCalculatingMethod" />
 
-        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
-
-            <FrameLayout style="@style/ButtonSpace" />
-
-            <Button
-                android:id="@+id/widgetConfigureButton"
-                style="@style/ButtonStyle"
-                android:text="@string/widgetAddWidget" />
-
-            <FrameLayout style="@style/ButtonSpace" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/widgetConfigureButton"
+            style="@style/WideButtonStyle"
+            android:text="@string/widgetAddWidget" />
     </LinearLayout>
 
 </ScrollView>

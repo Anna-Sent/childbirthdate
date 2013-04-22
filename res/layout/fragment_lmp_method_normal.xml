@@ -72,17 +72,10 @@
             style="@style/TextViewStyle"
             android:text="@string/acceptDefaults" />
 
-        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
-
-            <FrameLayout style="@style/ButtonSpace" />
-
-            <Button
-                android:id="@+id/buttonRestoreDefaultValues"
-                style="@style/ButtonStyle"
-                android:text="@string/restoreDefaultValues" />
-
-            <FrameLayout style="@style/ButtonSpace" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/buttonRestoreDefaultValues"
+            style="@style/WideButtonStyle"
+            android:text="@string/restoreDefaultValues" />
     </LinearLayout>
 
 </ScrollView>
