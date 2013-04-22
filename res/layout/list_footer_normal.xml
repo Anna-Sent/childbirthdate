@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/LinearLayoutVerticalStyle.Padding" >
+    style="@style/LinearLayoutVerticalStyle"
+    android:paddingLeft="@dimen/view_padding"
+    android:paddingRight="@dimen/view_padding" >
 
     <TextView
         style="@style/TextViewStyle.Medium"
