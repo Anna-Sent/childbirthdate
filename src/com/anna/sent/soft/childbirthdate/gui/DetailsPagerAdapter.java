@@ -6,11 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 public class DetailsPagerAdapter extends MyFragmentPagerAdapter {
-	private String[] titles;
+	private String[] mTitles;
 
 	public DetailsPagerAdapter(FragmentManager fm, String[] titles) {
 		super(fm);
-		this.titles = titles;
+		mTitles = titles;
 	}
 
 	@Override
@@ -25,6 +25,6 @@ public class DetailsPagerAdapter extends MyFragmentPagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		return titles[position];
+		return mTitles[position];
 	}
 }
