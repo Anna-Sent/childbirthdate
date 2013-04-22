@@ -6,12 +6,14 @@
         android:id="@+id/buttonCalculateEstimatedChildbirthDate"
         style="@style/ButtonStyle"
         android:layout_weight="1"
-        android:text="@string/calculateEstimatedChildbirthDate" />
+        android:hint="@string/calculateEstimatedChildbirthDate"
+        android:text="@string/estimatedChildbirthDate" />
 
     <Button
         android:id="@+id/buttonCalculateEstimatedGestationalAge"
-        style="@style/WideButtonStyle"
+        style="@style/ButtonStyle"
         android:layout_weight="1"
-        android:text="@string/calculateEstimatedGestationalAge" />
+        android:hint="@string/calculateEstimatedGestationalAge"
+        android:text="@string/estimatedGestationalAge" />
 
 </LinearLayout>
