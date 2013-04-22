@@ -1,4 +1,4 @@
-package com.anna.sent.soft.childbirthdate;
+package com.anna.sent.soft.childbirthdate.fragments;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
