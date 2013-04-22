@@ -68,15 +68,6 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 		Utils.onActivityCreateSetTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab_calculation); // activity_main);
-		// View view = findViewById(R.id.details);
-		// getSupportFragmentManager().popBackStack();
-		// Fragment fr = getSupportFragmentManager()
-		// .findFragmentById(R.id.details);
-		/*
-		 * if (view != null) { Log.d("moo", "found view in main activity"); } if
-		 * (fr != null) { Log.d("moo", "found fr in main activity");
-		 * getSupportFragmentManager().beginTransaction().remove(fr).commit(); }
-		 */
 		/*
 		 * final String tab_calculation = "tab_calculation", tab_help =
 		 * "tab_help";
