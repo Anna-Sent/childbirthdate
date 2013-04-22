@@ -15,40 +15,25 @@ import com.anna.sent.soft.childbirthdate.ResultActivity;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.StateSaver;
 
-public class TabCalculationFragment extends ScrollViewFragment implements
-		OnClickListener {
+public class TabCalculation implements OnClickListener {
 	private static final String EXTRA_GUI_CURRENT_DATE = "com.anna.sent.soft.childbirthdate.currentdate";
 
 	private DatePicker datePickerCurrentDate;
-	private StateSaver mListener;
+	private Activity mActivity;
 
-	public TabCalculationFragment() {
-		super();
+	public TabCalculation(Activity activity) {
+		mActivity = activity;
 	}
 
-	@Override
-	protected int getLayoutResourceId() {
-		return R.layout.tab_calculation;
-	}
+	public void setViews() {
+		datePickerCurrentDate = (DatePicker) mActivity
+				.findViewById(R.id.datePickerCurrentDate);
 
-	@Override
-	protected int getScrollViewResourceId() {
-		return -1;//R.id.tabCalculation;
-	}
-
-	@Override
-	protected void setViews() {
-		datePickerCurrentDate = (DatePicker) getActivity().findViewById(
-				R.id.datePickerCurrentDate);
-
-		Button buttonToday = (Button) getActivity().findViewById(
-				R.id.buttonToday);
+		Button buttonToday = (Button) mActivity.findViewById(R.id.buttonToday);
 		buttonToday.setOnClickListener(this);
 	}
 
-	@Override
 	protected void restoreState(Bundle state) {
-		super.restoreState(state);
 		if (datePickerCurrentDate != null) {
 			Calendar value = Calendar.getInstance();
 			value.setTimeInMillis(state.getLong(EXTRA_GUI_CURRENT_DATE,
@@ -57,66 +42,47 @@ public class TabCalculationFragment extends ScrollViewFragment implements
 		}
 	}
 
-	@Override
 	protected void saveState(Bundle state) {
-		super.saveState(state);
 		if (datePickerCurrentDate != null) {
 			state.putLong(EXTRA_GUI_CURRENT_DATE,
 					Utils.getDate(datePickerCurrentDate).getTimeInMillis());
 		}
 	}
 
-	@Override
-	public void onResume() {
-		super.onResume();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-	}
-
 	private void today() {
 		Utils.setDate(datePickerCurrentDate, Calendar.getInstance());
 	}
 
-	public void calculate(View view) {
-		Intent intent = new Intent(getActivity(), ResultActivity.class);
-
-		// int viewId = view.getId();
-		int whatToDo = Shared.ResultParam.Calculate.NOTHING;
-		// if (viewId == R.id.buttonCalculateEstimatedChildbirthDate) {
-		whatToDo = Shared.ResultParam.Calculate.ECD;
-		// } else if (viewId == R.id.buttonCalculateEstimatedGestationalAge) {
-		whatToDo = Shared.ResultParam.Calculate.EGA;
-		// }
+	public void calculate(int whatToDo) {
+		Intent intent = new Intent(mActivity, ResultActivity.class);
 
 		intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE,
 				Utils.getDate(datePickerCurrentDate).getTimeInMillis());
 		intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO, whatToDo);
 
 		// Save MainActivity state
-		if (mListener != null) {
+		StateSaver listener = (StateSaver) mActivity;
+		if (listener != null) {
 			Bundle state = new Bundle();
-			mListener.onSaveInstanceState(state);
+			listener.onSaveInstanceState(state);
 			intent.putExtra(Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE, state);
 		}
 
-		startActivity(intent);
+		mActivity.startActivity(intent);
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.buttonCalculateEstimatedChildbirthDate:
+			calculate(Shared.ResultParam.Calculate.ECD);
+			break;
+		case R.id.buttonCalculateEstimatedGestationalAge:
+			calculate(Shared.ResultParam.Calculate.EGA);
+			break;
 		case R.id.buttonToday:
 			today();
 			break;
 		}
-	}
-
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		mListener = (StateSaver) activity;
 	}
 }

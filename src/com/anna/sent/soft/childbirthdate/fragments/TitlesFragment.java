@@ -15,11 +15,14 @@ import android.widget.ListView;
 
 import com.anna.sent.soft.childbirthdate.DetailsActivity;
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.utils.StateSaver;
 
 public class TitlesFragment extends ListFragment {
 	private boolean mDualPane;
 	private int mSelectedItem;
 	private View mHeader = null, mFooter = null;
+	private TabCalculation mTabCalculation;
 
 	public TitlesFragment() {
 		super();
@@ -60,8 +63,12 @@ public class TitlesFragment extends ListFragment {
 			if (savedInstanceState != null) {
 				// Restore last state for checked position.
 				mSelectedItem = savedInstanceState.getInt("curChoice", 0);
+				Log.d("moo", "restore index=" + mSelectedItem);
 			}
 		}
+
+		mTabCalculation = new TabCalculation(getActivity());
+		mTabCalculation.setViews();
 	}
 
 	@Override
@@ -115,6 +122,16 @@ public class TitlesFragment extends ListFragment {
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), DetailsActivity.class);
 			intent.putExtra("index", index);
+
+			// Save MainActivity state
+			StateSaver listener = (StateSaver) getActivity();
+			if (listener != null) {
+				Bundle state = new Bundle();
+				listener.onSaveInstanceState(state);
+				intent.putExtra(Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE,
+						state);
+			}
+
 			startActivity(intent);
 		}
 	}
