@@ -4,12 +4,13 @@ import com.anna.sent.soft.childbirthdate.fragments.DetailsFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 
-public class DetailsPagerAdapter extends FragmentPagerAdapter {
+public class DetailsPagerAdapter extends MyFragmentPagerAdapter {
+	private String[] titles;
 
-	public DetailsPagerAdapter(FragmentManager fm) {
+	public DetailsPagerAdapter(FragmentManager fm, String[] titles) {
 		super(fm);
+		this.titles = titles;
 	}
 
 	@Override
@@ -22,4 +23,8 @@ public class DetailsPagerAdapter extends FragmentPagerAdapter {
 		return 3;
 	}
 
+	@Override
+	public CharSequence getPageTitle(int position) {
+		return titles[position];
+	}
 }

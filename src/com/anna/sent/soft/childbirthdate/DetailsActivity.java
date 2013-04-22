@@ -1,7 +1,10 @@
 package com.anna.sent.soft.childbirthdate;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 
 import com.anna.sent.soft.childbirthdate.gui.DetailsPagerAdapter;
@@ -25,11 +28,26 @@ public class DetailsActivity extends FragmentActivity {
 
 		setContentView(R.layout.activity_details);
 
-		mTabsAdapter = new DetailsPagerAdapter(getSupportFragmentManager());
+		mTabsAdapter = new DetailsPagerAdapter(getSupportFragmentManager(),
+				getResources().getStringArray(R.array.MethodNames));
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mTabsAdapter);
-		// String title = getIntent().getStringExtra("label");
 		int index = getIntent().getIntExtra("index", 0);
 		mViewPager.setCurrentItem(index);
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		FragmentManager fm = getSupportFragmentManager();
+		for (int i = 0; i < 3; ++i) {
+			Fragment details = mTabsAdapter.getFragment(i);
+			if (details != null) {
+				FragmentTransaction ft = fm.beginTransaction();
+				ft.remove(details);
+				ft.commit();
+			}
+		}
+
+		super.onSaveInstanceState(outState);
 	}
 }

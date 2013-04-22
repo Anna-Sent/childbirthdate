@@ -17,7 +17,6 @@ import com.anna.sent.soft.childbirthdate.DetailsActivity;
 import com.anna.sent.soft.childbirthdate.R;
 
 public class TitlesFragment extends ListFragment {
-	private String[] titles;
 	private boolean mDualPane;
 	private int mSelectedItem;
 	private View mFooter = null;
@@ -37,15 +36,12 @@ public class TitlesFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		titles = new String[] { getString(R.string.ByLMP),
-				getString(R.string.ByOvulation),
-				getString(R.string.ByUltrasound) };
-
 		if (mFooter != null) {
 			getListView().addFooterView(mFooter);
 		}
 
 		// Populate list with our array of titles.
+		String[] titles = getResources().getStringArray(R.array.MethodNames);
 		setListAdapter(new ArrayAdapter<String>(getActivity(),
 				R.layout.list_item, R.id.text1, titles));
 
@@ -114,7 +110,6 @@ public class TitlesFragment extends ListFragment {
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), DetailsActivity.class);
 			intent.putExtra("index", index);
-			intent.putExtra("label", titles[index]);
 			startActivity(intent);
 		}
 	}

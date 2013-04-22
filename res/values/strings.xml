@@ -121,12 +121,13 @@
     <string name="byLMP">по дате последней менструации</string>
     <string name="byOvulation">по дате овуляции (зачатия)</string>
     <string name="byUltrasound">по результатам УЗИ</string>
-    <string name="ByLMP">По дате последней менструации</string>
-    <string name="ByOvulation">По дате овуляции (зачатия)</string>
-    <string name="ByUltrasound">По результатам УЗИ</string>
-    <string name="ByLMPShort">По менструации</string>
-    <string name="ByOvulationShort">По овуляции</string>
-    <string name="ByUltrasoundShort">По УЗИ</string>
+
+    <string-array name="MethodNames">
+        <item>По дате последней менструации</item>
+        <item>По дате овуляции (зачатия)</item>
+        <item>По результатам УЗИ</item>
+    </string-array>
+
     <string name="rememberECD">Помните, что роды могут начаться на две недели раньше или на две недели позже ПДР.</string>
     <string name="rememberEGA">Помните, что нормально протекающая беременность длится от 38 до 42 недель.</string>
     <string name="rateApplication">Оценить приложение</string>

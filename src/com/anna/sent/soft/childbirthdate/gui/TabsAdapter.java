@@ -6,9 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
@@ -24,13 +22,12 @@ import android.widget.TabWidget;
  * listens to changes in tabs, and takes care of switch to the correct paged in
  * the ViewPager whenever the selected tab changes.
  */
-public class TabsAdapter extends FragmentPagerAdapter implements
+public class TabsAdapter extends MyFragmentPagerAdapter implements
 		TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
 	private final Context mContext;
 	private final TabHost mTabHost;
 	private final ViewPager mViewPager;
 	private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
-	private final SparseArray<Fragment> mFragments = new SparseArray<Fragment>();
 
 	static final class TabInfo {
 		@SuppressWarnings("unused")
@@ -119,23 +116,5 @@ public class TabsAdapter extends FragmentPagerAdapter implements
 
 	@Override
 	public void onPageScrollStateChanged(int state) {
-	}
-
-	@Override
-	public Object instantiateItem(ViewGroup container, int position) {
-		Fragment fragment = (Fragment) super.instantiateItem(container,
-				position);
-		mFragments.put(position, fragment);
-		return fragment;
-	}
-
-	@Override
-	public void destroyItem(ViewGroup container, int position, Object object) {
-		mFragments.remove(position);
-		super.destroyItem(container, position, object);
-	}
-
-	public Fragment getFragment(int position) {
-		return mFragments.get(position);
 	}
 }
