@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
-    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+    <LinearLayout
+        style="@style/LinearLayoutHorizontalStyle"
+        android:minHeight="?android:attr/listPreferredItemHeight" >
 
         <CheckBox
             android:id="@+id/checkBox"
@@ -11,7 +13,9 @@
             android:layout_height="match_parent"
             android:focusable="false" />
 
-        <LinearLayout style="@style/LinearLayoutVerticalStyle" >
+        <LinearLayout
+            style="@style/LinearLayoutVerticalStyle"
+            android:layout_gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/text1"
