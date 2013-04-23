@@ -5,6 +5,8 @@
     <Button
         android:id="@+id/buttonCalculateEstimatedChildbirthDate"
         style="@style/ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:hint="@string/calculateEstimatedChildbirthDate"
         android:text="@string/childbirthDate" />
@@ -12,6 +14,8 @@
     <Button
         android:id="@+id/buttonCalculateEstimatedGestationalAge"
         style="@style/ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:hint="@string/calculateEstimatedGestationalAge"
         android:text="@string/gestationalAge" />

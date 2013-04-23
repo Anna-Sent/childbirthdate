@@ -15,7 +15,7 @@
 
     <Button
         android:id="@id/buttonToday"
-        style="@style/SmallButtonStyle"
+        style="@style/ButtonStyle"
         android:layout_alignParentRight="true"
         android:text="@string/today" />
 

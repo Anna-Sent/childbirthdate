@@ -41,8 +41,9 @@
 
         <Button
             android:id="@+id/widgetConfigureButton"
-            style="@style/WideButtonStyle"
+            style="@style/ButtonStyle"
             android:text="@string/widgetAddWidget" />
+
     </LinearLayout>
 
 </ScrollView>

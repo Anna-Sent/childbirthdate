@@ -3,28 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
+    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
-        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+        <CheckBox
+            android:id="@+id/checkBox"
+            style="@style/CheckBoxStyle"
+            android:layout_height="match_parent"
+            android:focusable="false" />
 
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:focusable="false" />
+        <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 
             <TextView
                 android:id="@+id/text1"
                 style="@style/TextViewStyle.Medium"
                 android:text="@string/emptyString" />
-        </LinearLayout>
 
-        <TextView
-            android:id="@+id/text2"
-            style="@style/TextViewStyle"
-            android:paddingLeft="@dimen/view_padding"
-            android:text="@string/emptyString" />
+            <TextView
+                android:id="@+id/text2"
+                style="@style/TextViewStyle"
+                android:text="@string/emptyString" />
+        </LinearLayout>
     </LinearLayout>
 
 </com.anna.sent.soft.childbirthdate.fragments.CheckableFrameLayout>

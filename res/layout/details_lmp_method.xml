@@ -74,7 +74,7 @@
 
         <Button
             android:id="@+id/buttonRestoreDefaultValues"
-            style="@style/WideButtonStyle"
+            style="@style/ButtonStyle"
             android:text="@string/restoreDefaultValues" />
     </LinearLayout>
 

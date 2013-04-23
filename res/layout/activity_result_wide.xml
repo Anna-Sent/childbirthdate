@@ -109,19 +109,11 @@
             android:paddingTop="@dimen/view_padding"
             android:text="@string/emptyString" />
 
-        <LinearLayout
-            style="@style/LinearLayoutHorizontalStyle"
-            android:paddingTop="@dimen/view_padding" >
-
-            <FrameLayout style="@style/ButtonSpace" />
-
-            <Button
-                style="@style/ButtonStyle.LargeText"
-                android:onClick="rate"
-                android:text="@string/rateApplication" />
-
-            <FrameLayout style="@style/ButtonSpace" />
-        </LinearLayout>
+        <Button
+            style="@style/ButtonStyle.LargeText"
+            android:layout_marginTop="@dimen/view_padding"
+            android:onClick="rate"
+            android:text="@string/rateApplication" />
     </LinearLayout>
 
 </ScrollView>

@@ -10,7 +10,7 @@
     </style>
 
     <style name="CheckBoxStyle">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
@@ -28,12 +28,12 @@
     </style>
 
     <style name="RadioGroupStyle">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="RadioButtonStyle">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
         <item name="android:checked">false</item>

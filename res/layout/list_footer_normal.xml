@@ -16,7 +16,7 @@
 
         <Button
             android:id="@+id/buttonToday"
-            style="@style/SmallButtonStyle"
+            style="@style/ButtonStyle"
             android:text="@string/today" />
     </LinearLayout>
 
