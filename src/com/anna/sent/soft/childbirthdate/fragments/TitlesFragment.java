@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -56,12 +57,22 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 
 		// Populate list with our array of titles.
 		String[] titles = getResources().getStringArray(R.array.MethodNames);
+		SharedPreferences settings = Shared.getSettings(getActivity());
+		boolean[] checked = new boolean[3];
+		checked[0] = settings
+				.getBoolean(
+						Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
+						false);
+		checked[1] = settings.getBoolean(
+				Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE, false);
+		checked[2] = settings.getBoolean(
+				Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND, false);
 		/*
 		 * setListAdapter(new ArrayAdapter<String>(getActivity(),
 		 * R.layout.list_item, R.id.text1, titles));
 		 */
 		mListAdapter = new ListItemArrayAdapter(getActivity(), titles,
-				getStrings2());
+				getStrings2(), checked);
 		setListAdapter(mListAdapter);
 
 		mDualPane = getResources().getBoolean(R.bool.has_two_panes);
@@ -216,5 +227,21 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 	public void onResume() {
 		super.onResume();
 		detailsChanged();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		boolean[] checked = mListAdapter.getChecked();
+		SharedPreferences settings = Shared.getSettings(getActivity());
+		Editor editor = settings.edit();
+		editor.putBoolean(
+				Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
+				checked[0]);
+		editor.putBoolean(Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE,
+				checked[1]);
+		editor.putBoolean(Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND,
+				checked[2]);
+		editor.commit();
 	}
 }
