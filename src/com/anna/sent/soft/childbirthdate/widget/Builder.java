@@ -90,7 +90,7 @@ public abstract class Builder {
 		if (p == null) {
 			views.setViewVisibility(R.id.tv1, View.GONE);
 			views.setTextViewText(R.id.tv2,
-					context.getString(R.string.errorIncorrectGestationAge));
+					context.getString(R.string.errorIncorrectGestationalAge));
 			views.setViewVisibility(R.id.tv3, View.GONE);
 			views.setTextViewText(R.id.tv4, context
 					.getString(R.string.errorNotSelectedCalculationMethod));
@@ -116,7 +116,7 @@ public abstract class Builder {
 			} else {
 				views.setViewVisibility(R.id.tv1, View.GONE);
 				views.setTextViewText(R.id.tv2,
-						context.getString(R.string.errorIncorrectGestationAge));
+						context.getString(R.string.errorIncorrectGestationalAge));
 				Calendar start = p.getStartPoint(), end = p.getEndPoint();
 				if (currentDate.before(start)) {
 					views.setTextViewText(

@@ -52,18 +52,23 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		super.onActivityCreated(savedInstanceState);
 		datePickerUltrasoundDate = (DatePicker) getActivity().findViewById(
 				R.id.datePickerUltrasoundDate);
+		DateUtils.init(datePickerUltrasoundDate, this);
+
 		radioButtonIsGestationalAge = (RadioButton) getActivity().findViewById(
 				R.id.radioIsGestationalAge);
 		radioButtonIsGestationalAge.setOnClickListener(this);
 		radioButtonIsEmbryonicAge = (RadioButton) getActivity().findViewById(
 				R.id.radioIsEmbryonicAge);
 		radioButtonIsEmbryonicAge.setOnClickListener(this);
+
 		numberPickerWeeks = (NumberPicker) getActivity().findViewById(
 				R.id.editTextWeeks);
+		numberPickerWeeks.setOnValueChangedListener(this);
 		numberPickerWeeks.setMinValue(0);
 
 		numberPickerDays = (NumberPicker) getActivity().findViewById(
 				R.id.editTextDays);
+		numberPickerDays.setOnValueChangedListener(this);
 		numberPickerDays.setMinValue(0);
 		numberPickerDays.setMaxValue(6);
 	}
@@ -81,13 +86,13 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		case R.id.radioIsEmbryonicAge:
 		case R.id.radioIsGestationalAge:
 			radioClick(v);
+			dataChanged();
 			break;
 		}
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
+	protected void restoreData() {
 		SharedPreferences settings = Shared.getSettings(getActivity());
 		int weeks = settings.getInt(Shared.Saved.Calculation.EXTRA_WEEKS, 0);
 		int days = settings.getInt(Shared.Saved.Calculation.EXTRA_DAYS, 0);
@@ -115,8 +120,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 	}
 
 	@Override
-	public void onPause() {
-		super.onPause();
+	protected void saveData() {
 		Calendar ultrasoundDate = DateUtils.getDate(datePickerUltrasoundDate);
 		int weeks = numberPickerWeeks.getValue();
 		int days = numberPickerDays.getValue();

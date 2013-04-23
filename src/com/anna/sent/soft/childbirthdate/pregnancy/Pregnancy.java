@@ -146,7 +146,8 @@ public abstract class Pregnancy {
 
 	protected abstract int getSecondTrimesterEndInclusive();
 
-	private String getStringRepresentation(Context context, int weeks, int days) {
+	public static String getStringRepresentation(Context context, int weeks,
+			int days) {
 		if (weeks < 0 || days < 0) {
 			return "?";
 		}

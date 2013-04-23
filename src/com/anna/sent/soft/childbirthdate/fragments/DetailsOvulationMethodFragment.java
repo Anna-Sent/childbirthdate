@@ -45,11 +45,11 @@ public class DetailsOvulationMethodFragment extends DetailsFragment {
 		super.onActivityCreated(savedInstanceState);
 		datePickerOvulationDate = (DatePicker) getActivity().findViewById(
 				R.id.datePickerOvulationDate);
+		DateUtils.init(datePickerOvulationDate, this);
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
+	protected void restoreData() {
 		SharedPreferences settings = Shared.getSettings(getActivity());
 		Calendar ovulationDate = Calendar.getInstance();
 		ovulationDate.setTimeInMillis(settings.getLong(
@@ -59,8 +59,7 @@ public class DetailsOvulationMethodFragment extends DetailsFragment {
 	}
 
 	@Override
-	public void onPause() {
-		super.onPause();
+	protected void saveData() {
 		Calendar ovulationDate = DateUtils.getDate(datePickerOvulationDate);
 
 		SharedPreferences settings = Shared.getSettings(getActivity());

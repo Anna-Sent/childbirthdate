@@ -134,9 +134,9 @@
     <string name="rememberEGA">Помните, что нормально протекающая беременность длится от 38 до 42 недель.</string>
     <string name="rateApplication">Оценить приложение</string>
     <string name="marketNotFound">Приложение market не найдено</string>
-    <string name="estimatedGestationAge">Предполагаемый срок беременности</string>
+    <string name="estimatedGestationalAge">Предполагаемый срок беременности</string>
     <string name="currentDate">Дата расчета срока беременности</string>
-    <string name="errorIncorrectGestationAge">Ошибка</string>
+    <string name="errorIncorrectGestationalAge">Ошибка</string>
     <string name="errorIncorrectCurrentDateGreater">Указанная дата расчета намного больше ПДР.</string>
     <string name="errorIncorrectCurrentDateSmaller">Указанная дата расчета меньше даты начала отсчета беременности.</string>
     <string name="firstTrimester">Первый триместр</string>
@@ -161,5 +161,10 @@
     <string name="widgetCalculatingMethod">Метод расчета: %s</string>
     <string name="initialization">Загрузка&#8230;</string>
     <string name="today">Сегодня</string>
+    <string name="titles0">Дата последней менструации: %1$s; МЦ: %2$s д.; ЛФ: %3$s д.</string>
+    <string name="titles1">Дата овуляции (зачатия): %1$s</string>
+    <string name="titles2">Дата проведения исследования: %1$s; диагностированный срок беременности: %2$s (%3$s)</string>
+    <string name="gestational">акушерский</string>
+    <string name="embryonic">эмбриональный</string>
 
 </resources>

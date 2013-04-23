@@ -1,8 +1,10 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
+import java.util.Calendar;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
@@ -10,19 +12,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.anna.sent.soft.childbirthdate.DetailsActivity;
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
+import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.utils.DateUtils;
 import com.anna.sent.soft.utils.StateSaver;
 
-public class TitlesFragment extends ListFragment implements StateSaver {
+public class TitlesFragment extends ListFragment implements StateSaver,
+		DetailsFragment.OnDetailsChangedListener {
 	private boolean mDualPane;
 	private int mSelectedItem;
 	private View mHeader = null, mFooter = null;
 	private TabCalculation mTabCalculation;
+	private ListItemArrayAdapter mListAdapter;
 
 	public TitlesFragment() {
 		super();
@@ -50,8 +56,13 @@ public class TitlesFragment extends ListFragment implements StateSaver {
 
 		// Populate list with our array of titles.
 		String[] titles = getResources().getStringArray(R.array.MethodNames);
-		setListAdapter(new ArrayAdapter<String>(getActivity(),
-				R.layout.list_item, R.id.text1, titles));
+		/*
+		 * setListAdapter(new ArrayAdapter<String>(getActivity(),
+		 * R.layout.list_item, R.id.text1, titles));
+		 */
+		mListAdapter = new ListItemArrayAdapter(getActivity(), titles,
+				getStrings2());
+		setListAdapter(mListAdapter);
 
 		mDualPane = getResources().getBoolean(R.bool.has_two_panes);
 
@@ -117,8 +128,10 @@ public class TitlesFragment extends ListFragment implements StateSaver {
 			DetailsFragment details = (DetailsFragment) fm
 					.findFragmentById(R.id.details);
 			if (details == null || details.getShownIndex() != index) {
-				Fragment newDetails = DetailsFragment.newInstance(index);
+				DetailsFragment newDetails = DetailsFragment.newInstance(index);
 				if (newDetails != null) {
+					newDetails.setOnDetailsChangedListener(this);
+
 					FragmentTransaction ft = fm.beginTransaction();
 					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 					ft.replace(R.id.details, newDetails);
@@ -147,5 +160,61 @@ public class TitlesFragment extends ListFragment implements StateSaver {
 
 			startActivity(intent);
 		}
+	}
+
+	private String[] getStrings2() {
+		String[] result = new String[3];
+		SharedPreferences settings = Shared.getSettings(getActivity());
+
+		// first
+		Calendar lastMenstruationDate = Calendar.getInstance();
+		lastMenstruationDate.setTimeInMillis(settings.getLong(
+				Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
+				System.currentTimeMillis()));
+		int menstrualCycleLen = settings.getInt(
+				Shared.Saved.Calculation.EXTRA_MENSTRUAL_CYCLE_LEN,
+				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
+		int lutealPhaseLen = settings.getInt(
+				Shared.Saved.Calculation.EXTRA_LUTEAL_PHASE_LEN,
+				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
+		result[0] = getString(R.string.titles0,
+				DateUtils.toString(getActivity(), lastMenstruationDate),
+				menstrualCycleLen, lutealPhaseLen);
+
+		// second
+		Calendar ovulationDate = Calendar.getInstance();
+		ovulationDate.setTimeInMillis(settings.getLong(
+				Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
+				System.currentTimeMillis()));
+		result[1] = getString(R.string.titles1,
+				DateUtils.toString(getActivity(), ovulationDate));
+
+		// third
+		int weeks = settings.getInt(Shared.Saved.Calculation.EXTRA_WEEKS, 0);
+		int days = settings.getInt(Shared.Saved.Calculation.EXTRA_DAYS, 0);
+		boolean isEmbryonicAge = settings.getBoolean(
+				Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE, false);
+		Calendar ultrasoundDate = Calendar.getInstance();
+		ultrasoundDate.setTimeInMillis(settings.getLong(
+				Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
+				System.currentTimeMillis()));
+		result[2] = getString(R.string.titles2, DateUtils.toString(
+				getActivity(), ultrasoundDate),
+				Pregnancy.getStringRepresentation(getActivity(), weeks, days),
+				isEmbryonicAge ? getString(R.string.embryonic)
+						: getString(R.string.gestational));
+
+		return result;
+	}
+
+	@Override
+	public void detailsChanged() {
+		mListAdapter.updateValues(getStrings2());
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		detailsChanged();
 	}
 }

@@ -27,6 +27,13 @@ public class TabCalculation implements OnClickListener {
 	}
 
 	public void setViews() {
+		Button buttonCalculateECD = (Button) mActivity
+				.findViewById(R.id.buttonCalculateEstimatedChildbirthDate);
+		buttonCalculateECD.setOnClickListener(this);
+		Button buttonCalculateEGA = (Button) mActivity
+				.findViewById(R.id.buttonCalculateEstimatedGestationalAge);
+		buttonCalculateEGA.setOnClickListener(this);
+
 		datePickerCurrentDate = (DatePicker) mActivity
 				.findViewById(R.id.datePickerCurrentDate);
 
@@ -57,8 +64,8 @@ public class TabCalculation implements OnClickListener {
 	public void calculate(int whatToDo) {
 		Intent intent = new Intent(mActivity, ResultActivity.class);
 
-		intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE,
-				DateUtils.getDate(datePickerCurrentDate).getTimeInMillis());
+		intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE, DateUtils
+				.getDate(datePickerCurrentDate).getTimeInMillis());
 		intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO, whatToDo);
 
 		// Save MainActivity state

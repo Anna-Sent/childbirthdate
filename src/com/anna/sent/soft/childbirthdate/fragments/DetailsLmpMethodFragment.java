@@ -52,12 +52,15 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 		super.onActivityCreated(savedInstanceState);
 		datePickerLastMenstruationDate = (DatePicker) getActivity()
 				.findViewById(R.id.datePickerLastMenstruationDate);
+		DateUtils.init(datePickerLastMenstruationDate, this);
+
 		numberPickerMenstrualCycleLen = (NumberPicker) getActivity()
 				.findViewById(R.id.editTextMenstrualCycleLen);
 		numberPickerMenstrualCycleLen
 				.setMinValue(PregnancyCalculator.MIN_MENSTRUAL_CYCLE_LEN);
 		numberPickerMenstrualCycleLen
 				.setMaxValue(PregnancyCalculator.MAX_MENSTRUAL_CYCLE_LEN);
+		numberPickerMenstrualCycleLen.setOnValueChangedListener(this);
 
 		numberPcikerLutealPhaseLen = (NumberPicker) getActivity().findViewById(
 				R.id.editTextLutealPhaseLen);
@@ -65,6 +68,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 				.setMinValue(PregnancyCalculator.MIN_LUTEAL_PHASE_LEN);
 		numberPcikerLutealPhaseLen
 				.setMaxValue(PregnancyCalculator.MAX_LUTEAL_PHASE_LEN);
+		numberPcikerLutealPhaseLen.setOnValueChangedListener(this);
 
 		Button button = (Button) getActivity().findViewById(
 				R.id.buttonRestoreDefaultValues);
@@ -88,8 +92,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
+	protected void restoreData() {
 		SharedPreferences settings = Shared.getSettings(getActivity());
 		Calendar lastMenstruationDate = Calendar.getInstance();
 		lastMenstruationDate.setTimeInMillis(settings.getLong(
@@ -107,8 +110,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 	}
 
 	@Override
-	public void onPause() {
-		super.onPause();
+	protected void saveData() {
 		int menstrualCycleLen = numberPickerMenstrualCycleLen.getValue();
 		int lutealPhaseLen = numberPcikerLutealPhaseLen.getValue();
 		Calendar lastMenstruationDate = DateUtils

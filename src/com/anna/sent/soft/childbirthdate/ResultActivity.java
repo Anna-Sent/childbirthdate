@@ -72,7 +72,7 @@ public class ResultActivity extends ChildActivity {
 				textView00.setText(mContext.getString(R.string.rememberECD));
 			} else if (Shared.ResultParam.Calculate.EGA == whatToDo) {
 				textView0.setText(mContext
-						.getString(R.string.estimatedGestationAge)
+						.getString(R.string.estimatedGestationalAge)
 						+ " ("
 						+ DateUtils.toString(mContext, currentDate) + ")");
 				textView00.setText(mContext.getString(R.string.rememberEGA));
@@ -144,7 +144,7 @@ public class ResultActivity extends ChildActivity {
 			message.setText(pregnancy.getAdditionalInfo(mContext));
 		} else {
 			result.setText(mContext
-					.getString(R.string.errorIncorrectGestationAge));
+					.getString(R.string.errorIncorrectGestationalAge));
 			if (currentDate.before(start)) {
 				message.setText(mContext
 						.getString(R.string.errorIncorrectCurrentDateSmaller));
