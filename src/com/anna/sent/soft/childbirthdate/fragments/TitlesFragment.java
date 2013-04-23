@@ -118,10 +118,16 @@ public class TitlesFragment extends ListFragment implements StateSaver {
 					.findFragmentById(R.id.details);
 			if (details == null || details.getShownIndex() != index) {
 				Fragment newDetails = DetailsFragment.newInstance(index);
-				FragmentTransaction ft = fm.beginTransaction();
-				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-				ft.replace(R.id.details, newDetails);
-				ft.commit();
+				if (newDetails != null) {
+					FragmentTransaction ft = fm.beginTransaction();
+					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+					ft.replace(R.id.details, newDetails);
+					ft.commit();
+				} else if (details != null) {
+					FragmentTransaction ft = fm.beginTransaction();
+					ft.remove(details);
+					ft.commit();
+				}
 			}
 		} else {
 			// Otherwise we need to launch a new activity to display
