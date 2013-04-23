@@ -60,8 +60,8 @@ public class ResultActivity extends ChildActivity {
 				textView0.setText(getString(R.string.estimatedChildbirthDate));
 				textView00.setText(getString(R.string.rememberECD));
 			} else if (Shared.ResultParam.Calculate.EGA == whatToDo) {
-				textView0.setText(getString(R.string.estimatedGestationalAge)
-						+ " (" + DateUtils.toString(this, currentDate) + ")");
+				textView0.setText(getString(R.string.estimatedGestationalAge,
+						DateUtils.toString(this, currentDate)));
 				textView00.setText(getString(R.string.rememberEGA));
 			} else {
 				textView0.setText("");

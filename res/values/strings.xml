@@ -134,7 +134,7 @@
     <string name="rememberEGA">Помните, что нормально протекающая беременность длится от 38 до 42 недель.</string>
     <string name="rateApplication">Оценить приложение</string>
     <string name="marketNotFound">Приложение market не найдено</string>
-    <string name="estimatedGestationalAge">Предполагаемый срок беременности</string>
+    <string name="estimatedGestationalAge">Предполагаемый срок беременности (%s)</string>
     <string name="currentDate">Дата расчета срока беременности</string>
     <string name="errorIncorrectGestationalAge">Ошибка</string>
     <string name="errorIncorrectCurrentDateGreater">Указанная дата расчета намного больше ПДР.</string>
@@ -142,10 +142,10 @@
     <string name="firstTrimester">Первый триместр</string>
     <string name="secondTrimester">Второй триместр</string>
     <string name="thirdTrimester">Третий триместр</string>
-    <string name="fulltermis">полный срок:</string>
-    <string name="trimesteris">триместр:</string>
-    <string name="rest">осталось до ПДР:</string>
-    <string name="ECD">ПДР</string>
+    <string name="additionalInfo">триместр: %1$s; полный срок: %2$s%3$s</string>
+    <string name="positiveRest">; осталось до ПДР: %s</string>
+    <string name="zeroRest">; ПДР</string>
+    <string name="negativeRest"></string>
     <string name="lighttheme">Светлая тема</string>
     <string name="darktheme">Темная тема</string>
     <string name="errorInvalidAppWidgetId">Некорректный идентификатор виджета.</string>

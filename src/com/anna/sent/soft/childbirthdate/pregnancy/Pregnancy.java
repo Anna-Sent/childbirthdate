@@ -97,8 +97,9 @@ public abstract class Pregnancy {
 				return FIRST_TRIMESTER;
 			} else if (weeks <= getSecondTrimesterEndInclusive()) {
 				return SECOND_TRIMESTER;
-			} else if (getDurationInDays() <= getMaxDurationInDays())
+			} else if (getDurationInDays() <= getMaxDurationInDays()) {
 				return THIRD_TRIMESTER;
+			}
 		}
 
 		return -1;
@@ -178,29 +179,29 @@ public abstract class Pregnancy {
 	}
 
 	public String getAdditionalInfo(Context context) {
-		String result = context.getString(R.string.trimesteris)
-				+ " "
-				+ getTrimesterNumber()
-				+ "; "
-				+ context.getString(R.string.fulltermis)
-				+ " "
-				+ getStringRepresentation(context, getFullDurationWeeks(),
-						getFullDurationDays());
+		String result;
 		int rest = getRestInDays();
 		if (rest > 0) {
-			result += "; "
-					+ context.getString(R.string.rest)
-					+ " "
-					+ getStringRepresentation(context, getRestWeeks(),
-							getRestDays());
+			result = context.getString(
+					R.string.positiveRest,
+					getStringRepresentation(context, getRestWeeks(),
+							getRestDays()));
 		} else if (rest == 0) {
-			result += "; " + context.getString(R.string.ECD);
+			result = context.getString(R.string.zeroRest);
+		} else {
+			result = context.getString(R.string.negativeRest);
 		}
+
+		result = context.getString(
+				R.string.additionalInfo,
+				getTrimesterNumber(),
+				getStringRepresentation(context, getFullDurationWeeks(),
+						getFullDurationDays()), result);
 
 		return result;
 	}
 
-	public String getTrimesterString(Context context, int trimester) {
+	public static String getTrimesterString(Context context, int trimester) {
 		switch (trimester) {
 		case Pregnancy.FIRST_TRIMESTER:
 			return context.getString(R.string.firstTrimester);
@@ -213,7 +214,7 @@ public abstract class Pregnancy {
 		return "?";
 	}
 
-	private void zeroDate(Calendar date) {
+	private static void zeroDate(Calendar date) {
 		date.set(Calendar.HOUR, 0);
 		date.set(Calendar.MINUTE, 0);
 		date.set(Calendar.SECOND, 0);
