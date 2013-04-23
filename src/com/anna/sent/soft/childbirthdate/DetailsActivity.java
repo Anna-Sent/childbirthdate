@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 
 import com.anna.sent.soft.childbirthdate.gui.DetailsPagerAdapter;
-import com.anna.sent.soft.utils.Utils;
+import com.anna.sent.soft.utils.ThemeUtils;
 
 public class DetailsActivity extends ChildActivity {
 	private ViewPager mViewPager;
@@ -15,7 +15,7 @@ public class DetailsActivity extends ChildActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Utils.onActivityCreateSetTheme(this);
+		ThemeUtils.onActivityCreateSetTheme(this);
 		super.onCreate(savedInstanceState);
 
 		if (getResources().getBoolean(R.bool.has_two_panes)) {

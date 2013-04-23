@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.utils.Utils;
+import com.anna.sent.soft.utils.ThemeUtils;
 
 public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		OnClickListener {
@@ -30,7 +30,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 	@Override
 	protected void onCreate(Bundle arg0) {
-		Utils.onDialogStyleActivityCreateSetTheme(this);
+		ThemeUtils.onDialogStyleActivityCreateSetTheme(this);
 		super.onCreate(arg0);
 		setResult(RESULT_CANCELED);
 		setContentView(R.layout.my_pregnancy_widget_configure_layout);

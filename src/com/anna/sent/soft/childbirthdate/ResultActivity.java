@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -19,7 +18,8 @@ import android.widget.Toast;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.utils.Utils;
+import com.anna.sent.soft.utils.DateUtils;
+import com.anna.sent.soft.utils.ThemeUtils;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
@@ -49,7 +49,7 @@ public class ResultActivity extends ChildActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Utils.onActivityCreateSetTheme(this);
+		ThemeUtils.onActivityCreateSetTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result);
 
@@ -75,8 +75,7 @@ public class ResultActivity extends ChildActivity {
 				textView0.setText(mContext
 						.getString(R.string.estimatedGestationAge)
 						+ " ("
-						+ DateFormat.getDateFormat(mContext).format(
-								currentDate.getTime()) + ")");
+						+ DateUtils.toString(mContext, currentDate) + ")");
 				textView00.setText(mContext.getString(R.string.rememberEGA));
 			} else {
 				textView0.setText("");
@@ -192,8 +191,7 @@ public class ResultActivity extends ChildActivity {
 			if (pregnancy != null && result != null) {
 				Calendar childbirthDate = pregnancy.getEndPoint();
 				if (childbirthDate != null) {
-					result.setText(DateFormat.getDateFormat(mContext).format(
-							childbirthDate.getTime()));
+					result.setText(DateUtils.toString(mContext, childbirthDate));
 				}
 			}
 		}

@@ -16,6 +16,7 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
+import com.anna.sent.soft.utils.DateUtils;
 
 public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		OnClickListener {
@@ -96,7 +97,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		ultrasoundDate.setTimeInMillis(settings.getLong(
 				Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
 				System.currentTimeMillis()));
-		Utils.setDate(datePickerUltrasoundDate, ultrasoundDate);
+		DateUtils.setDate(datePickerUltrasoundDate, ultrasoundDate);
 
 		// first: set radio button state
 		if (isEmbryonicAge) {
@@ -116,7 +117,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 	@Override
 	public void onPause() {
 		super.onPause();
-		Calendar ultrasoundDate = Utils.getDate(datePickerUltrasoundDate);
+		Calendar ultrasoundDate = DateUtils.getDate(datePickerUltrasoundDate);
 		int weeks = numberPickerWeeks.getValue();
 		int days = numberPickerDays.getValue();
 		boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();

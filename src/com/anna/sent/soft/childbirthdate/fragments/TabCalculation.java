@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.ResultActivity;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.utils.DateUtils;
 import com.anna.sent.soft.utils.StateSaver;
 
 public class TabCalculation implements OnClickListener {
@@ -38,26 +39,26 @@ public class TabCalculation implements OnClickListener {
 			Calendar value = Calendar.getInstance();
 			value.setTimeInMillis(state.getLong(EXTRA_GUI_CURRENT_DATE,
 					System.currentTimeMillis()));
-			Utils.setDate(datePickerCurrentDate, value);
+			DateUtils.setDate(datePickerCurrentDate, value);
 		}
 	}
 
 	protected void saveState(Bundle state) {
 		if (datePickerCurrentDate != null) {
 			state.putLong(EXTRA_GUI_CURRENT_DATE,
-					Utils.getDate(datePickerCurrentDate).getTimeInMillis());
+					DateUtils.getDate(datePickerCurrentDate).getTimeInMillis());
 		}
 	}
 
 	private void today() {
-		Utils.setDate(datePickerCurrentDate, Calendar.getInstance());
+		DateUtils.setDate(datePickerCurrentDate, Calendar.getInstance());
 	}
 
 	public void calculate(int whatToDo) {
 		Intent intent = new Intent(mActivity, ResultActivity.class);
 
 		intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE,
-				Utils.getDate(datePickerCurrentDate).getTimeInMillis());
+				DateUtils.getDate(datePickerCurrentDate).getTimeInMillis());
 		intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO, whatToDo);
 
 		// Save MainActivity state

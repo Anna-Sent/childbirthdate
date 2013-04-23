@@ -137,10 +137,6 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 		midnight.set(Calendar.MILLISECOND, 0);
 		midnight.set(Calendar.AM_PM, Calendar.AM);
 		midnight.add(Calendar.DAY_OF_MONTH, 1);
-		/*
-		 * Log.d("moo", cls.getSimpleName() + " install alarm to " +
-		 * DateFormat.getDateFormat(context).format(midnight.getTime()));
-		 */
 		PendingIntent operation = getPendingIntent(context, cls);
 		alarmManager.cancel(operation);
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,

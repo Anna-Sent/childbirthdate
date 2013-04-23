@@ -10,7 +10,7 @@ import android.os.Bundle;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
-public class Utils {
+public class ThemeUtils {
 	private static final String EXTRA_GUI_THEME_ID = "com.anna.sent.soft.childbirthdate.themeid";
 
 	public final static int DARK_THEME = 0;

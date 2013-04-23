@@ -16,6 +16,7 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
+import com.anna.sent.soft.utils.DateUtils;
 
 public class DetailsLmpMethodFragment extends DetailsFragment implements
 		OnClickListener {
@@ -94,7 +95,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 		lastMenstruationDate.setTimeInMillis(settings.getLong(
 				Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
 				System.currentTimeMillis()));
-		Utils.setDate(datePickerLastMenstruationDate, lastMenstruationDate);
+		DateUtils.setDate(datePickerLastMenstruationDate, lastMenstruationDate);
 		int menstrualCycleLen = settings.getInt(
 				Shared.Saved.Calculation.EXTRA_MENSTRUAL_CYCLE_LEN,
 				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
@@ -110,7 +111,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 		super.onPause();
 		int menstrualCycleLen = numberPickerMenstrualCycleLen.getValue();
 		int lutealPhaseLen = numberPcikerLutealPhaseLen.getValue();
-		Calendar lastMenstruationDate = Utils
+		Calendar lastMenstruationDate = DateUtils
 				.getDate(datePickerLastMenstruationDate);
 
 		SharedPreferences settings = Shared.getSettings(getActivity());

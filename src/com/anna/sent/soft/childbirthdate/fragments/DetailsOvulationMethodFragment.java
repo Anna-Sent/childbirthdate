@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.utils.DateUtils;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -54,13 +55,13 @@ public class DetailsOvulationMethodFragment extends DetailsFragment {
 		ovulationDate.setTimeInMillis(settings.getLong(
 				Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
 				System.currentTimeMillis()));
-		Utils.setDate(datePickerOvulationDate, ovulationDate);
+		DateUtils.setDate(datePickerOvulationDate, ovulationDate);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		Calendar ovulationDate = Utils.getDate(datePickerOvulationDate);
+		Calendar ovulationDate = DateUtils.getDate(datePickerOvulationDate);
 
 		SharedPreferences settings = Shared.getSettings(getActivity());
 		Editor editor = settings.edit();
