@@ -2,8 +2,6 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import java.util.Calendar;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,7 @@ import android.widget.DatePicker;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
-import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 import com.anna.sent.soft.utils.DateUtils;
 
@@ -93,20 +91,12 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 
 	@Override
 	protected void restoreData() {
-		SharedPreferences settings = Shared.getSettings(getActivity());
-		Calendar lastMenstruationDate = Calendar.getInstance();
-		lastMenstruationDate.setTimeInMillis(settings.getLong(
-				Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
-				System.currentTimeMillis()));
-		DateUtils.setDate(datePickerLastMenstruationDate, lastMenstruationDate);
-		int menstrualCycleLen = settings.getInt(
-				Shared.Saved.Calculation.EXTRA_MENSTRUAL_CYCLE_LEN,
-				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
-		int lutealPhaseLen = settings.getInt(
-				Shared.Saved.Calculation.EXTRA_LUTEAL_PHASE_LEN,
-				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
-		numberPickerMenstrualCycleLen.setValue(menstrualCycleLen);
-		numberPcikerLutealPhaseLen.setValue(lutealPhaseLen);
+		Data data = new Data();
+		data.restoreLmp(getActivity());
+		DateUtils.setDate(datePickerLastMenstruationDate,
+				data.getLastMenstruationDate());
+		numberPickerMenstrualCycleLen.setValue(data.getMenstrualCycleLen());
+		numberPcikerLutealPhaseLen.setValue(data.getLutealPhaseLen());
 	}
 
 	@Override
@@ -115,15 +105,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 		int lutealPhaseLen = numberPcikerLutealPhaseLen.getValue();
 		Calendar lastMenstruationDate = DateUtils
 				.getDate(datePickerLastMenstruationDate);
-
-		SharedPreferences settings = Shared.getSettings(getActivity());
-		Editor editor = settings.edit();
-		editor.putLong(Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
-				lastMenstruationDate.getTimeInMillis());
-		editor.putInt(Shared.Saved.Calculation.EXTRA_MENSTRUAL_CYCLE_LEN,
-				menstrualCycleLen);
-		editor.putInt(Shared.Saved.Calculation.EXTRA_LUTEAL_PHASE_LEN,
+		Data.save(getActivity(), lastMenstruationDate, menstrualCycleLen,
 				lutealPhaseLen);
-		editor.commit();
 	}
 }

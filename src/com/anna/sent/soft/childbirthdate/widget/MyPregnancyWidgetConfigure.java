@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.ThemeUtils;
 
@@ -117,27 +118,21 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	protected abstract boolean hasShowCalculatingMethod();
 
 	private void init() {
-		SharedPreferences settings = Shared.getSettings(this);
-		boolean byLMP = settings
-				.getBoolean(
-						Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
-						false);
-		boolean byOvulation = settings.getBoolean(
-				Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE, false);
-		boolean byUltrasound = settings.getBoolean(
-				Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND, false);
-		doCalculation = byLMP || byOvulation || byUltrasound;
+		Data data = new Data();
+		data.restoreChecked(this);
+		doCalculation = data.byLmp() || data.byOvulation()
+				|| data.byUltrasound();
 		textView = (TextView) findViewById(R.id.widgetConfigureTextView);
 		textView.setText(doCalculation ? getString(R.string.widgetSpecifyTheMethodOfCalculation)
 				: getString(R.string.widgetStartTheApplicationToSpecifyNecessaryData));
 		radioByLMP = (RadioButton) findViewById(R.id.radioByLMP);
-		radioByLMP.setVisibility(byLMP ? View.VISIBLE : View.GONE);
+		radioByLMP.setVisibility(data.byLmp() ? View.VISIBLE : View.GONE);
 		radiobyByOvulation = (RadioButton) findViewById(R.id.radioByOvulation);
-		radiobyByOvulation
-				.setVisibility(byOvulation ? View.VISIBLE : View.GONE);
+		radiobyByOvulation.setVisibility(data.byOvulation() ? View.VISIBLE
+				: View.GONE);
 		radioByUltrasound = (RadioButton) findViewById(R.id.radioByUltrasound);
-		radioByUltrasound
-				.setVisibility(byUltrasound ? View.VISIBLE : View.GONE);
+		radioByUltrasound.setVisibility(data.byUltrasound() ? View.VISIBLE
+				: View.GONE);
 
 		if (radioByLMP.getVisibility() == View.VISIBLE) {
 			radioByLMP.setChecked(true);

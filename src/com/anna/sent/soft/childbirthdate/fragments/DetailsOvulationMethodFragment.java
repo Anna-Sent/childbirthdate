@@ -2,17 +2,15 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import java.util.Calendar;
 
-import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.utils.DateUtils;
-
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+
+import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.shared.Data;
+import com.anna.sent.soft.utils.DateUtils;
 
 public class DetailsOvulationMethodFragment extends DetailsFragment {
 	private DatePicker datePickerOvulationDate;
@@ -50,22 +48,14 @@ public class DetailsOvulationMethodFragment extends DetailsFragment {
 
 	@Override
 	protected void restoreData() {
-		SharedPreferences settings = Shared.getSettings(getActivity());
-		Calendar ovulationDate = Calendar.getInstance();
-		ovulationDate.setTimeInMillis(settings.getLong(
-				Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
-				System.currentTimeMillis()));
-		DateUtils.setDate(datePickerOvulationDate, ovulationDate);
+		Data data = new Data();
+		data.restoreOvulation(getActivity());
+		DateUtils.setDate(datePickerOvulationDate, data.getOvulationDate());
 	}
 
 	@Override
 	protected void saveData() {
 		Calendar ovulationDate = DateUtils.getDate(datePickerOvulationDate);
-
-		SharedPreferences settings = Shared.getSettings(getActivity());
-		Editor editor = settings.edit();
-		editor.putLong(Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
-				ovulationDate.getTimeInMillis());
-		editor.commit();
+		Data.save(getActivity(), ovulationDate);
 	}
 }

@@ -12,6 +12,7 @@ import android.widget.RemoteViews;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
+import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public abstract class Builder {
@@ -47,42 +48,23 @@ public abstract class Builder {
 						+ appWidgetId, false);
 		Pregnancy p = null;
 		String calculatingMethodString = "";
+		Data data = new Data();
 		switch (calculatingMethod) {
 		case Shared.Saved.Widget.Calculate.BY_LMP:
-			int menstrualCycleLen = settings.getInt(
-					Shared.Saved.Calculation.EXTRA_MENSTRUAL_CYCLE_LEN,
-					PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
-			int lutealPhaseLen = settings.getInt(
-					Shared.Saved.Calculation.EXTRA_LUTEAL_PHASE_LEN,
-					PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
-			Calendar lastMenstruationDate = Calendar.getInstance();
-			lastMenstruationDate.setTimeInMillis(settings.getLong(
-					Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
-					System.currentTimeMillis()));
-			p = PregnancyCalculator.Factory.get(lastMenstruationDate,
-					menstrualCycleLen, lutealPhaseLen);
+			data.restoreLmp(context);
+			p = PregnancyCalculator.Factory.get(data.getLastMenstruationDate(),
+					data.getMenstrualCycleLen(), data.getLutealPhaseLen());
 			calculatingMethodString = context.getString(R.string.byLMP);
 			break;
 		case Shared.Saved.Widget.Calculate.BY_OVULATION_DAY:
-			Calendar ovulationDate = Calendar.getInstance();
-			ovulationDate.setTimeInMillis(settings.getLong(
-					Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
-					System.currentTimeMillis()));
-			p = PregnancyCalculator.Factory.get(ovulationDate);
+			data.restoreOvulation(context);
+			p = PregnancyCalculator.Factory.get(data.getOvulationDate());
 			calculatingMethodString = context.getString(R.string.byOvulation);
 			break;
 		case Shared.Saved.Widget.Calculate.BY_ULTRASOUND:
-			Calendar ultrasoundDate = Calendar.getInstance();
-			ultrasoundDate.setTimeInMillis(settings.getLong(
-					Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
-					System.currentTimeMillis()));
-			int weeks = settings
-					.getInt(Shared.Saved.Calculation.EXTRA_WEEKS, 0);
-			int days = settings.getInt(Shared.Saved.Calculation.EXTRA_DAYS, 0);
-			boolean isEmbryonicAge = settings.getBoolean(
-					Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE, false);
-			p = PregnancyCalculator.Factory.get(ultrasoundDate, weeks, days,
-					isEmbryonicAge);
+			data.restoreUltrasound(context);
+			p = PregnancyCalculator.Factory.get(data.getUltrasoundDate(),
+					data.getWeeks(), data.getDays(), data.getIsEmbryonicAge());
 			calculatingMethodString = context.getString(R.string.byUltrasound);
 			break;
 		}
@@ -115,8 +97,8 @@ public abstract class Builder {
 						hasTV3() && !countdown ? View.VISIBLE : View.GONE);
 			} else {
 				views.setViewVisibility(R.id.tv1, View.GONE);
-				views.setTextViewText(R.id.tv2,
-						context.getString(R.string.errorIncorrectGestationalAge));
+				views.setTextViewText(R.id.tv2, context
+						.getString(R.string.errorIncorrectGestationalAge));
 				Calendar start = p.getStartPoint(), end = p.getEndPoint();
 				if (currentDate.before(start)) {
 					views.setTextViewText(

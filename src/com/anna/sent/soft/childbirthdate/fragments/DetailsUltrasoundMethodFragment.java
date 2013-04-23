@@ -2,8 +2,6 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import java.util.Calendar;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,7 @@ import android.widget.RadioButton;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
-import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 import com.anna.sent.soft.utils.DateUtils;
 
@@ -93,19 +91,12 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 
 	@Override
 	protected void restoreData() {
-		SharedPreferences settings = Shared.getSettings(getActivity());
-		int weeks = settings.getInt(Shared.Saved.Calculation.EXTRA_WEEKS, 0);
-		int days = settings.getInt(Shared.Saved.Calculation.EXTRA_DAYS, 0);
-		boolean isEmbryonicAge = settings.getBoolean(
-				Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE, false);
-		Calendar ultrasoundDate = Calendar.getInstance();
-		ultrasoundDate.setTimeInMillis(settings.getLong(
-				Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
-				System.currentTimeMillis()));
-		DateUtils.setDate(datePickerUltrasoundDate, ultrasoundDate);
+		Data data = new Data();
+		data.restoreUltrasound(getActivity());
+		DateUtils.setDate(datePickerUltrasoundDate, data.getUltrasoundDate());
 
 		// first: set radio button state
-		if (isEmbryonicAge) {
+		if (data.getIsEmbryonicAge()) {
 			radioButtonIsEmbryonicAge.setChecked(true);
 		} else {
 			radioButtonIsGestationalAge.setChecked(true);
@@ -115,8 +106,8 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		radioClick(null);
 
 		// third: set value for weeks number picker
-		numberPickerWeeks.setValue(weeks);
-		numberPickerDays.setValue(days);
+		numberPickerWeeks.setValue(data.getWeeks());
+		numberPickerDays.setValue(data.getDays());
 	}
 
 	@Override
@@ -125,15 +116,6 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		int weeks = numberPickerWeeks.getValue();
 		int days = numberPickerDays.getValue();
 		boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
-
-		SharedPreferences settings = Shared.getSettings(getActivity());
-		Editor editor = settings.edit();
-		editor.putLong(Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
-				ultrasoundDate.getTimeInMillis());
-		editor.putInt(Shared.Saved.Calculation.EXTRA_WEEKS, weeks);
-		editor.putInt(Shared.Saved.Calculation.EXTRA_DAYS, days);
-		editor.putBoolean(Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE,
-				isEmbryonicAge);
-		editor.commit();
+		Data.save(getActivity(), ultrasoundDate, weeks, days, isEmbryonicAge);
 	}
 }

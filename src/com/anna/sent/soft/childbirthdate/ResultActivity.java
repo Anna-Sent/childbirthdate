@@ -3,9 +3,7 @@ package com.anna.sent.soft.childbirthdate;
 import java.util.Calendar;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -17,6 +15,7 @@ import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
+import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.DateUtils;
 import com.anna.sent.soft.utils.ThemeUtils;
@@ -25,9 +24,6 @@ import com.google.ads.AdSize;
 import com.google.ads.AdView;
 
 public class ResultActivity extends ChildActivity {
-
-	private Context mContext;
-
 	private TextView textView0, textView00;
 
 	private TextView[] textViews;
@@ -37,13 +33,7 @@ public class ResultActivity extends ChildActivity {
 
 	private int whatToDo;
 	private Calendar currentDate = Calendar.getInstance();
-	private int menstrualCycleLen, lutealPhaseLen;
-	private boolean[] byMethod;
-	private Calendar lastMenstruationDate = Calendar.getInstance();
-	private Calendar ovulationDate = Calendar.getInstance();
-	private Calendar ultrasoundDate = Calendar.getInstance();
-	private int weeks, days;
-	private boolean isEmbryonicAge;
+	private Data data;
 
 	private AdView adView = null;
 
@@ -65,32 +55,29 @@ public class ResultActivity extends ChildActivity {
 	}
 
 	private void clearViews() {
-		if (byMethod[0] || byMethod[1] || byMethod[2]) {
+		if (data.byLmp() || data.byOvulation() || data.byUltrasound()) {
 			if (Shared.ResultParam.Calculate.ECD == whatToDo) {
-				textView0.setText(mContext
-						.getString(R.string.estimatedChildbirthDate));
-				textView00.setText(mContext.getString(R.string.rememberECD));
+				textView0.setText(getString(R.string.estimatedChildbirthDate));
+				textView00.setText(getString(R.string.rememberECD));
 			} else if (Shared.ResultParam.Calculate.EGA == whatToDo) {
-				textView0.setText(mContext
-						.getString(R.string.estimatedGestationalAge)
-						+ " ("
-						+ DateUtils.toString(mContext, currentDate) + ")");
-				textView00.setText(mContext.getString(R.string.rememberEGA));
+				textView0.setText(getString(R.string.estimatedGestationalAge)
+						+ " (" + DateUtils.toString(this, currentDate) + ")");
+				textView00.setText(getString(R.string.rememberEGA));
 			} else {
 				textView0.setText("");
 				textView00.setText("");
 			}
 		} else {
-			textView0.setText(mContext
-					.getString(R.string.errorNotSelectedCalculationMethod));
-			textView00.setText(mContext.getString(R.string.consultADoctor));
+			textView0
+					.setText(getString(R.string.errorNotSelectedCalculationMethod));
+			textView00.setText(getString(R.string.consultADoctor));
 		}
 
 		for (int i = 0; i < 3; ++i) {
 			results[i].setText("");
 			messages[i].setText("");
 			int visibility = whatToDo != Shared.ResultParam.Calculate.NOTHING
-					&& byMethod[i] ? View.VISIBLE : View.GONE;
+					&& data.byMethod()[i] ? View.VISIBLE : View.GONE;
 			textViews[i].setVisibility(visibility);
 			results[i].setVisibility(visibility);
 			messages[i].setVisibility(visibility);
@@ -99,20 +86,22 @@ public class ResultActivity extends ChildActivity {
 
 	private void calculate() {
 		for (int i = 0; i < 3; ++i) {
-			if (byMethod[i]) {
+			if (data.byMethod()[i]) {
 				switch (i) {
 				case 0:
 					pregnancies[i] = PregnancyCalculator.Factory.get(
-							lastMenstruationDate, menstrualCycleLen,
-							lutealPhaseLen);
+							data.getLastMenstruationDate(),
+							data.getMenstrualCycleLen(),
+							data.getLutealPhaseLen());
 					break;
 				case 1:
-					pregnancies[i] = PregnancyCalculator.Factory
-							.get(ovulationDate);
+					pregnancies[i] = PregnancyCalculator.Factory.get(data
+							.getOvulationDate());
 					break;
 				case 2:
 					pregnancies[i] = PregnancyCalculator.Factory.get(
-							ultrasoundDate, weeks, days, isEmbryonicAge);
+							data.getUltrasoundDate(), data.getWeeks(),
+							data.getDays(), data.getIsEmbryonicAge());
 					break;
 				}
 
@@ -140,17 +129,14 @@ public class ResultActivity extends ChildActivity {
 		Calendar start = pregnancy.getStartPoint();
 		Calendar end = pregnancy.getEndPoint();
 		if (pregnancy.isCorrect()) {
-			result.setText(pregnancy.getInfo(mContext));
-			message.setText(pregnancy.getAdditionalInfo(mContext));
+			result.setText(pregnancy.getInfo(this));
+			message.setText(pregnancy.getAdditionalInfo(this));
 		} else {
-			result.setText(mContext
-					.getString(R.string.errorIncorrectGestationalAge));
+			result.setText(getString(R.string.errorIncorrectGestationalAge));
 			if (currentDate.before(start)) {
-				message.setText(mContext
-						.getString(R.string.errorIncorrectCurrentDateSmaller));
+				message.setText(getString(R.string.errorIncorrectCurrentDateSmaller));
 			} else if (currentDate.after(end)) {
-				message.setText(mContext
-						.getString(R.string.errorIncorrectCurrentDateGreater));
+				message.setText(getString(R.string.errorIncorrectCurrentDateGreater));
 			}
 		}
 	}
@@ -159,7 +145,7 @@ public class ResultActivity extends ChildActivity {
 		TextView result = results[i];
 		Pregnancy pregnancy = pregnancies[i];
 		Calendar childbirthDate = pregnancy.getEndPoint();
-		result.setText(DateUtils.toString(mContext, childbirthDate));
+		result.setText(DateUtils.toString(this, childbirthDate));
 	}
 
 	private void setLast(int i) {
@@ -167,14 +153,12 @@ public class ResultActivity extends ChildActivity {
 		Pregnancy pregnancy = pregnancies[i];
 		if (i == 2 && pregnancy.isCorrect()) {
 			CharSequence old = message.getText();
-			if (pregnancy.isAccurateForUltrasound(weeks)) {
+			if (pregnancy.isAccurateForUltrasound(data.getWeeks())) {
 				message.setText((old.equals("") ? "" : old + "\n")
-						+ mContext
-								.getString(R.string.accurateUltrasoundResults));
+						+ getString(R.string.accurateUltrasoundResults));
 			} else {
 				message.setText((old.equals("") ? "" : old + "\n")
-						+ mContext
-								.getString(R.string.inaccurateUltrasoundResults));
+						+ getString(R.string.inaccurateUltrasoundResults));
 			}
 		}
 
@@ -195,7 +179,6 @@ public class ResultActivity extends ChildActivity {
 	}
 
 	private void setMembers() {
-		mContext = getApplicationContext();
 		textView0 = (TextView) findViewById(R.id.textView0);
 		textView00 = (TextView) findViewById(R.id.textView00);
 		pregnancies = new Pregnancy[] { null, null, null };
@@ -223,37 +206,11 @@ public class ResultActivity extends ChildActivity {
 				Shared.ResultParam.EXTRA_CURRENT_DATE,
 				System.currentTimeMillis()));
 
-		SharedPreferences settings = Shared.getSettings(this);
-		menstrualCycleLen = settings.getInt(
-				Shared.Saved.Calculation.EXTRA_MENSTRUAL_CYCLE_LEN,
-				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
-		lutealPhaseLen = settings.getInt(
-				Shared.Saved.Calculation.EXTRA_LUTEAL_PHASE_LEN,
-				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
-
-		byMethod = new boolean[3];
-		byMethod[0] = settings
-				.getBoolean(
-						Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
-						false);
-		byMethod[1] = settings.getBoolean(
-				Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE, false);
-		byMethod[2] = settings.getBoolean(
-				Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND, false);
-		lastMenstruationDate.setTimeInMillis(settings.getLong(
-				Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
-				System.currentTimeMillis()));
-		ovulationDate.setTimeInMillis(settings.getLong(
-				Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
-				System.currentTimeMillis()));
-		ultrasoundDate.setTimeInMillis(settings.getLong(
-				Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
-				System.currentTimeMillis()));
-
-		weeks = settings.getInt(Shared.Saved.Calculation.EXTRA_WEEKS, 0);
-		days = settings.getInt(Shared.Saved.Calculation.EXTRA_DAYS, 0);
-		isEmbryonicAge = settings.getBoolean(
-				Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE, false);
+		data = new Data();
+		data.restoreChecked(this);
+		data.restoreLmp(this);
+		data.restoreOvulation(this);
+		data.restoreUltrasound(this);
 	}
 
 	private void setAdView() {
