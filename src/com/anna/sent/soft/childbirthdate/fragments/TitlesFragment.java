@@ -62,22 +62,17 @@ public class TitlesFragment extends ListFragment implements StateSaver {
 		mTabCalculation = new TabCalculation(getActivity());
 		mTabCalculation.setViews();
 
+		mSelectedItem = 0;
 		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
 			mTabCalculation.restoreState(savedInstanceState);
-			mSelectedItem = 0;
-			if (savedInstanceState != null) {
-				mSelectedItem = savedInstanceState.getInt("curChoice", 0);
-				Log.d("moo", "restore index=" + mSelectedItem);
-			}
+			mSelectedItem = savedInstanceState.getInt("curChoice", 0);
+			Log.d("moo", "restore index=" + mSelectedItem);
 		} else {
 			savedInstanceState = getActivity().getIntent().getExtras();
 			if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
 				mTabCalculation.restoreState(savedInstanceState);
-				mSelectedItem = 0;
-				if (savedInstanceState != null) {
-					mSelectedItem = savedInstanceState.getInt("curChoice", 0);
-					Log.d("moo", "restore index=" + mSelectedItem);
-				}
+				mSelectedItem = savedInstanceState.getInt("curChoice", 0);
+				Log.d("moo", "restore index=" + mSelectedItem);
 			}
 		}
 	}
