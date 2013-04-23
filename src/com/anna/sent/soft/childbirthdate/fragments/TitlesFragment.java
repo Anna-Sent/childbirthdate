@@ -96,7 +96,7 @@ public class TitlesFragment extends ListFragment implements StateSaver {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		showDetails(position);
+		showDetails(position - 1); // because of header
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class TitlesFragment extends ListFragment implements StateSaver {
 		if (mDualPane) {
 			// We can display everything in-place with fragments, so update
 			// the list to highlight the selected item and show the data.
-			getListView().setItemChecked(index, true);
+			getListView().setItemChecked(index + 1, true); // because of header
 
 			// Check what fragment is currently shown, replace if needed.
 			FragmentManager fm = getFragmentManager();
