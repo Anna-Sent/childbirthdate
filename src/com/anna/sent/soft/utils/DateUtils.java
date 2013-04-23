@@ -22,4 +22,13 @@ public class DateUtils {
 	public static String toString(Context context, Calendar date) {
 		return DateFormat.getDateFormat(context).format(date.getTime());
 	}
+
+	public static void init(DatePicker datePicker,
+			DatePicker.OnDateChangedListener listener) {
+		Calendar today = Calendar.getInstance();
+		int year = today.get(Calendar.YEAR), monthOfYear = today
+				.get(Calendar.MONTH), dayOfMonth = today
+				.get(Calendar.DAY_OF_MONTH);
+		datePicker.init(year, monthOfYear, dayOfMonth, listener);
+	}
 }
