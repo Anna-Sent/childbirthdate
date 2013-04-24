@@ -27,12 +27,24 @@ public class DetailsActivity extends ChildActivity {
 
 		setContentView(R.layout.activity_details);
 
+		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mTabsAdapter = new DetailsPagerAdapter(getSupportFragmentManager(),
 				getResources().getStringArray(R.array.MethodNames));
-		mViewPager = (ViewPager) findViewById(R.id.pager);
+	}
+
+	@Override
+	protected void onStart() {
 		mViewPager.setAdapter(mTabsAdapter);
+		mViewPager.setOffscreenPageLimit(mTabsAdapter.getCount() - 1);
 		int index = getIntent().getIntExtra("index", 0);
 		mViewPager.setCurrentItem(index);
+		super.onStart();
+	}
+
+	@Override
+	protected void onStop() {
+		mViewPager.setAdapter(null);
+		super.onStop();
 	}
 
 	@Override
@@ -42,7 +54,7 @@ public class DetailsActivity extends ChildActivity {
 			Fragment details = mTabsAdapter.getFragment(i);
 			if (details != null) {
 				FragmentTransaction ft = fm.beginTransaction();
-				ft.remove(details);
+				ft.detach(details);
 				ft.commit();
 			}
 		}
