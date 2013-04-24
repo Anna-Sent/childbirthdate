@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,13 +76,11 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
 			mTabCalculation.restoreState(savedInstanceState);
 			mSelectedItem = savedInstanceState.getInt("curChoice", 0);
-			Log.d("moo", "restore index=" + mSelectedItem);
 		} else {
 			savedInstanceState = getActivity().getIntent().getExtras();
 			if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
 				mTabCalculation.restoreState(savedInstanceState);
 				mSelectedItem = savedInstanceState.getInt("curChoice", 0);
-				Log.d("moo", "restore index=" + mSelectedItem);
 			}
 		}
 	}
@@ -101,7 +98,6 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt("curChoice", mSelectedItem);
-		Log.d("moo", "save index=" + mSelectedItem);
 		mTabCalculation.saveState(outState);
 	}
 
@@ -116,7 +112,6 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 	 * activity in which it is displayed.
 	 */
 	void showDetails(int index) {
-		Log.d("moo", "index is " + index + "; selected is " + mSelectedItem);
 		mSelectedItem = index;
 		if (mDualPane) {
 			// We can display everything in-place with fragments, so update
