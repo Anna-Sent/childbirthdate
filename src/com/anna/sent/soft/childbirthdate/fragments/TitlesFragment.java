@@ -184,7 +184,9 @@ public class TitlesFragment extends ListFragment implements
 		if (requestCode == REQUEST_INDEX) {
 			if (resultCode == Activity.RESULT_OK) {
 				mSelectedItem = data.getIntExtra("index", mSelectedItem);
-				showDetails(mSelectedItem);
+				if (mDualPane) {
+					showDetails(mSelectedItem);
+				}
 			}
 		}
 	}
