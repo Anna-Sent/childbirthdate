@@ -30,9 +30,11 @@ public class DetailsActivity extends ChildActivity implements
 		setContentView(R.layout.activity_details);
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
+		mViewPager.setOnPageChangeListener(this);
 		mTabsAdapter = new DetailsPagerAdapter(getSupportFragmentManager(),
 				getResources().getStringArray(R.array.MethodNames));
 		mIndex = 0;
+		/* Log.d("moo", "init index=" + mIndex); */
 	}
 
 	@Override
@@ -48,11 +50,13 @@ public class DetailsActivity extends ChildActivity implements
 		}
 
 		state.putInt("index", mIndex);
+		/* Log.d("moo", "save index=" + mIndex); */
 	}
 
 	@Override
 	protected void restoreState(Bundle state) {
 		mIndex = state.getInt("index");
+		/* Log.d("moo", "restore index=" + mIndex); */
 	}
 
 	@Override
@@ -60,6 +64,7 @@ public class DetailsActivity extends ChildActivity implements
 		mViewPager.setAdapter(mTabsAdapter);
 		mViewPager.setOffscreenPageLimit(mTabsAdapter.getCount() - 1);
 		mViewPager.setCurrentItem(mIndex);
+		/* Log.d("moo", "start with index=" + mIndex); */
 		super.onStart();
 	}
 
@@ -75,10 +80,12 @@ public class DetailsActivity extends ChildActivity implements
 		Intent data = new Intent();
 		data.putExtra("index", mIndex);
 		setResult(RESULT_OK, data);
+		/* Log.d("moo", "pause with index=" + mIndex); */
 	}
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
+		/* Log.d("moo", "update index=" + mIndex); */
 	}
 
 	@Override
@@ -88,5 +95,6 @@ public class DetailsActivity extends ChildActivity implements
 	@Override
 	public void onPageSelected(int arg0) {
 		mIndex = arg0;
+		/* Log.d("moo", "update index=" + mIndex); */
 	}
 }
