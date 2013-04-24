@@ -1,30 +1,61 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
+import android.os.Bundle;
 import android.text.Html;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.utils.StateSaverFragment;
 
-public class TabHelpFragment extends ScrollViewFragment {
+public class TabHelpFragment extends StateSaverFragment {
 	private TextView textViewHelp;
+	private ScrollView scrollView;
+
+	private final String getExtraGuiScrollY() {
+		String str = "com.anna.sent.soft.childbirthdate."
+				+ getClass().getName() + ".srolly";
+		return str;
+	}
 
 	public TabHelpFragment() {
 		super();
 	}
 
 	@Override
-	protected int getLayoutResourceId() {
-		return R.layout.tab_help;
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.tab_help, container, false);
+		return v;
 	}
 
 	@Override
-	protected int getScrollViewResourceId() {
-		return R.id.tabHelp;
-	}
-
-	@Override
-	protected void setViews() {
+	public void internalOnActivityCreated() {
 		textViewHelp = (TextView) getActivity().findViewById(R.id.textViewHelp);
 		textViewHelp.setText(Html.fromHtml(getString(R.string.bigHelp)));
+		scrollView = (ScrollView) getActivity().findViewById(R.id.tabHelp);
+	}
+
+	@Override
+	protected void restoreState(Bundle state) {
+		if (scrollView != null) {
+			final int y = state.getInt(getExtraGuiScrollY(), 0);
+			scrollView.post(new Runnable() {
+				@Override
+				public void run() {
+					scrollView.scrollTo(0, y);
+				}
+			});
+		}
+	}
+
+	@Override
+	protected void saveState(Bundle state) {
+		if (scrollView != null) {
+			state.putInt(getExtraGuiScrollY(), scrollView.getScrollY());
+		}
 	}
 }

@@ -1,23 +1,29 @@
-package com.anna.sent.soft.childbirthdate;
+package com.anna.sent.soft.utils;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.view.MenuItem;
 
+import com.anna.sent.soft.childbirthdate.MainActivity;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
-public class ChildActivity extends FragmentActivity {
+public class ChildActivity extends StateSaverActivity {
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
+	protected void internalOnCreate() {
 		// Show the Up button in the action bar.
 		setupActionBar();
+	}
+
+	@Override
+	protected void restoreState(Bundle state) {
+	}
+
+	@Override
+	protected void saveState(Bundle state) {
 	}
 
 	/**

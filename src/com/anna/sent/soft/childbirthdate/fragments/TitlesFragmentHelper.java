@@ -14,15 +14,15 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.ResultActivity;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.DateUtils;
-import com.anna.sent.soft.utils.StateSaver;
+import com.anna.sent.soft.utils.StateSaverActivity;
 
-public class TabCalculation implements OnClickListener {
+public class TitlesFragmentHelper implements OnClickListener {
 	private static final String EXTRA_GUI_CURRENT_DATE = "com.anna.sent.soft.childbirthdate.currentdate";
 
 	private DatePicker datePickerCurrentDate;
 	private Activity mActivity;
 
-	public TabCalculation(Activity activity) {
+	public TitlesFragmentHelper(Activity activity) {
 		mActivity = activity;
 	}
 
@@ -68,13 +68,7 @@ public class TabCalculation implements OnClickListener {
 				.getDate(datePickerCurrentDate).getTimeInMillis());
 		intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO, whatToDo);
 
-		// Save MainActivity state
-		StateSaver listener = (StateSaver) mActivity;
-		if (listener != null) {
-			Bundle state = new Bundle();
-			listener.onSaveInstanceState(state);
-			intent.putExtra(Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE, state);
-		}
+		saveMainActivityState(intent);
 
 		mActivity.startActivity(intent);
 	}
@@ -91,6 +85,15 @@ public class TabCalculation implements OnClickListener {
 		case R.id.buttonToday:
 			today();
 			break;
+		}
+	}
+
+	public void saveMainActivityState(Intent intent) {
+		StateSaverActivity listener = (StateSaverActivity) mActivity;
+		if (listener != null) {
+			Bundle state = new Bundle();
+			listener.onSaveInstanceState(state);
+			intent.putExtra(Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE, state);
 		}
 	}
 }

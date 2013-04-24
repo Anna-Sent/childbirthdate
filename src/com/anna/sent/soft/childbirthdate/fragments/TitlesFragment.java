@@ -1,5 +1,6 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,19 +14,20 @@ import android.widget.ListView;
 
 import com.anna.sent.soft.childbirthdate.DetailsActivity;
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.adapters.ListItemArrayAdapter;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.shared.Data;
-import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.DateUtils;
-import com.anna.sent.soft.utils.StateSaver;
 
-public class TitlesFragment extends ListFragment implements StateSaver,
+public class TitlesFragment extends ListFragment implements
 		DetailsFragment.OnDetailsChangedListener {
+	public final static int REQUEST_INDEX = 1;
+
+	private View mHeader = null, mFooter = null;
+	private TitlesFragmentHelper mHelper;
+	private ListItemArrayAdapter mListAdapter;
 	private boolean mDualPane;
 	private int mSelectedItem;
-	private View mHeader = null, mFooter = null;
-	private TabCalculation mTabCalculation;
-	private ListItemArrayAdapter mListAdapter;
 
 	public TitlesFragment() {
 		super();
@@ -51,17 +53,15 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 			getListView().addFooterView(mFooter);
 		}
 
-		// Populate list with our array of titles.
-		String[] titles = getResources().getStringArray(R.array.MethodNames);
+		mHelper = new TitlesFragmentHelper(getActivity());
+		mHelper.setViews();
+
 		Data data = new Data();
 		data.restoreChecked(getActivity());
-		boolean[] checked = data.byMethod();
-		/*
-		 * setListAdapter(new ArrayAdapter<String>(getActivity(),
-		 * R.layout.list_item, R.id.text1, titles));
-		 */
-		mListAdapter = new ListItemArrayAdapter(getActivity(), titles,
-				getStrings2(), checked);
+
+		// Populate list
+		mListAdapter = new ListItemArrayAdapter(getActivity(), getStrings1(),
+				getStrings2(), data.byMethod());
 		setListAdapter(mListAdapter);
 
 		mDualPane = getResources().getBoolean(R.bool.has_two_panes);
@@ -70,33 +70,29 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 				mDualPane ? ListView.CHOICE_MODE_SINGLE
 						: ListView.CHOICE_MODE_NONE);
 
-		mTabCalculation = new TabCalculation(getActivity());
-		mTabCalculation.setViews();
-
 		mSelectedItem = 0;
 		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
-			mTabCalculation.restoreState(savedInstanceState);
-			mSelectedItem = savedInstanceState.getInt("curChoice", 0);
+			restoreState(savedInstanceState);
 		} else {
 			savedInstanceState = getActivity().getIntent().getExtras();
 			if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
-				mTabCalculation.restoreState(savedInstanceState);
-				mSelectedItem = savedInstanceState.getInt("curChoice", 0);
+				restoreState(savedInstanceState);
 			}
 		}
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
-		// Make sure our UI is in the correct state.
-		if (mDualPane) {
-			showDetails(mSelectedItem);
-		}
+	public void onSaveInstanceState(Bundle outState) {
+		saveState(outState);
+		super.onSaveInstanceState(outState);
 	}
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	private void restoreState(Bundle state) {
+		mHelper.restoreState(state);
+		mSelectedItem = state.getInt("curChoice", 0);
+	}
+
+	private void saveState(Bundle state) {
 		FragmentManager fm = getFragmentManager();
 		Fragment details = fm.findFragmentById(R.id.details);
 		if (details != null) {
@@ -105,9 +101,18 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 			ft.commit();
 		}
 
-		super.onSaveInstanceState(outState);
-		outState.putInt("curChoice", mSelectedItem);
-		mTabCalculation.saveState(outState);
+		state.putInt("curChoice", mSelectedItem);
+		mHelper.saveState(state);
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		// Make sure our UI is in the correct state.
+		if (mDualPane) {
+			showDetails(mSelectedItem);
+		}
 	}
 
 	@Override
@@ -132,7 +137,7 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 			DetailsFragment details = (DetailsFragment) fm
 					.findFragmentById(R.id.details);
 			if (details == null || details.getShownIndex() != index) {
-				DetailsFragment newDetails = getDetailsFragmentInstance(index); // DetailsFragment.newInstance(index);
+				DetailsFragment newDetails = getDetailsFragmentInstance(index);
 				if (newDetails != null) {
 					newDetails.setOnDetailsChangedListener(this);
 
@@ -153,16 +158,9 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 			intent.setClass(getActivity(), DetailsActivity.class);
 			intent.putExtra("index", index);
 
-			// Save MainActivity state
-			StateSaver listener = (StateSaver) getActivity();
-			if (listener != null) {
-				Bundle state = new Bundle();
-				listener.onSaveInstanceState(state);
-				intent.putExtra(Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE,
-						state);
-			}
+			mHelper.saveMainActivityState(intent);
 
-			startActivity(intent);
+			startActivityForResult(intent, REQUEST_INDEX);
 		}
 	}
 
@@ -179,6 +177,20 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 		}
 
 		return result;
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == REQUEST_INDEX) {
+			if (resultCode == Activity.RESULT_OK) {
+				mSelectedItem = data.getIntExtra("index", mSelectedItem);
+				showDetails(mSelectedItem);
+			}
+		}
+	}
+
+	private String[] getStrings1() {
+		return getResources().getStringArray(R.array.MethodNames);
 	}
 
 	private String[] getStrings2() {

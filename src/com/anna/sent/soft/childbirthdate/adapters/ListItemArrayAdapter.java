@@ -1,4 +1,4 @@
-package com.anna.sent.soft.childbirthdate.fragments;
+package com.anna.sent.soft.childbirthdate.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -67,12 +67,10 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 				viewHolder.text2
 						.setVisibility(viewHolder.checkBox.isChecked() ? View.VISIBLE
 								: View.GONE);
-				// view.setTag(viewHolder);
 				mViewHolders[position] = viewHolder;
 			}
 		} else {
 			view = contentView;
-			// viewHolder = (ViewHolder) contentView.getTag();
 			viewHolder = mViewHolders[position];
 		}
 

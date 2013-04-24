@@ -1,4 +1,4 @@
-package com.anna.sent.soft.childbirthdate.gui;
+package com.anna.sent.soft.childbirthdate.adapters;
 
 import java.util.ArrayList;
 

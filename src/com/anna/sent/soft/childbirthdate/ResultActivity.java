@@ -5,7 +5,6 @@ import java.util.Calendar;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -17,8 +16,8 @@ import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.utils.ChildActivity;
 import com.anna.sent.soft.utils.DateUtils;
-import com.anna.sent.soft.utils.ThemeUtils;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
@@ -38,9 +37,9 @@ public class ResultActivity extends ChildActivity {
 	private AdView adView = null;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		ThemeUtils.onActivityCreateSetTheme(this);
-		super.onCreate(savedInstanceState);
+	protected void internalOnCreate() {
+		super.internalOnCreate();
+
 		setContentView(R.layout.activity_result);
 
 		setMembers();
@@ -214,7 +213,6 @@ public class ResultActivity extends ChildActivity {
 	}
 
 	private void setAdView() {
-		// AdView adView = (AdView) findViewById(R.id.adView);
 		adView = new AdView(this, AdSize.BANNER, "a1513549e3d3050");
 		adView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 				LayoutParams.WRAP_CONTENT));

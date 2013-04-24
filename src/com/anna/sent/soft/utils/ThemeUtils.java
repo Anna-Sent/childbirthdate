@@ -34,8 +34,9 @@ public class ThemeUtils {
 			editor.commit();
 
 			Bundle state = new Bundle();
-			if (activity instanceof StateSaver) {
-				((StateSaver) activity).onSaveInstanceState(state);
+			StateSaverActivity stateSaverActivity = (StateSaverActivity) activity;
+			if (activity != null) {
+				stateSaverActivity.onSaveInstanceState(state);
 			}
 
 			activity.finish();
