@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.MenuItem;
 
 import com.anna.sent.soft.childbirthdate.adapters.DetailsPagerAdapter;
 import com.anna.sent.soft.utils.ChildActivity;
@@ -76,11 +78,29 @@ public class DetailsActivity extends ChildActivity implements
 
 	@Override
 	protected void onPause() {
-		super.onPause();
 		Intent data = new Intent();
 		data.putExtra("index", mIndex);
 		setResult(RESULT_OK, data);
-		/* Log.d("moo", "pause with index=" + mIndex); */
+		Log.d("moo", "pause with index=" + mIndex);
+		super.onPause();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent data = new Intent();
+		data.putExtra("index", mIndex);
+		setResult(RESULT_OK, data);
+		Log.d("moo", "back pressed with index=" + mIndex);
+		super.onBackPressed();
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent data = new Intent();
+		data.putExtra("index", mIndex);
+		setResult(RESULT_OK, data);
+		Log.d("moo", "up with index=" + mIndex);
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override

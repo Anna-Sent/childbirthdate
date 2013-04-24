@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,7 @@ public class TitlesFragment extends ListFragment implements
 						: ListView.CHOICE_MODE_NONE);
 
 		mSelectedItem = 0;
+		Log.d("moo", "init index=" + mSelectedItem);
 		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
 			restoreState(savedInstanceState);
 		} else {
@@ -90,6 +92,7 @@ public class TitlesFragment extends ListFragment implements
 	private void restoreState(Bundle state) {
 		mHelper.restoreState(state);
 		mSelectedItem = state.getInt("curChoice", 0);
+		Log.d("moo", "restore index=" + mSelectedItem);
 	}
 
 	private void saveState(Bundle state) {
@@ -101,8 +104,9 @@ public class TitlesFragment extends ListFragment implements
 			ft.commit();
 		}
 
-		state.putInt("curChoice", mSelectedItem);
 		mHelper.saveState(state);
+		state.putInt("curChoice", mSelectedItem);
+		Log.d("moo", "save index=" + mSelectedItem);
 	}
 
 	@Override
@@ -112,6 +116,7 @@ public class TitlesFragment extends ListFragment implements
 		// Make sure our UI is in the correct state.
 		if (mDualPane) {
 			showDetails(mSelectedItem);
+			Log.d("moo", "start with index=" + mSelectedItem);
 		}
 	}
 
@@ -127,6 +132,7 @@ public class TitlesFragment extends ListFragment implements
 	 */
 	void showDetails(int index) {
 		mSelectedItem = index;
+		Log.d("moo", "update index=" + mSelectedItem);
 		if (mDualPane) {
 			// We can display everything in-place with fragments, so update
 			// the list to highlight the selected item and show the data.
@@ -184,6 +190,7 @@ public class TitlesFragment extends ListFragment implements
 		if (requestCode == REQUEST_INDEX) {
 			if (resultCode == Activity.RESULT_OK) {
 				mSelectedItem = data.getIntExtra("index", mSelectedItem);
+				Log.d("moo", "got index=" + mSelectedItem);
 				if (mDualPane) {
 					showDetails(mSelectedItem);
 				}
