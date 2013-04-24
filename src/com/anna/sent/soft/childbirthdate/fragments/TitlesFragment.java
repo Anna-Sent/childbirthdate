@@ -2,6 +2,7 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
@@ -96,6 +97,14 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
+		FragmentManager fm = getFragmentManager();
+		Fragment details = fm.findFragmentById(R.id.details);
+		if (details != null) {
+			FragmentTransaction ft = fm.beginTransaction();
+			ft.remove(details);
+			ft.commit();
+		}
+
 		super.onSaveInstanceState(outState);
 		outState.putInt("curChoice", mSelectedItem);
 		mTabCalculation.saveState(outState);
@@ -123,7 +132,7 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 			DetailsFragment details = (DetailsFragment) fm
 					.findFragmentById(R.id.details);
 			if (details == null || details.getShownIndex() != index) {
-				DetailsFragment newDetails = DetailsFragment.newInstance(index);
+				DetailsFragment newDetails = getDetailsFragmentInstance(index); // DetailsFragment.newInstance(index);
 				if (newDetails != null) {
 					newDetails.setOnDetailsChangedListener(this);
 
@@ -155,6 +164,21 @@ public class TitlesFragment extends ListFragment implements StateSaver,
 
 			startActivity(intent);
 		}
+	}
+
+	private DetailsFragment[] fragments = new DetailsFragment[3];
+
+	private DetailsFragment getDetailsFragmentInstance(int index) {
+		DetailsFragment result = null;
+		if (index >= 0 && index < fragments.length) {
+			result = fragments[index];
+			if (result == null) {
+				result = DetailsFragment.newInstance(index);
+				fragments[index] = result;
+			}
+		}
+
+		return result;
 	}
 
 	private String[] getStrings2() {

@@ -1,10 +1,7 @@
 package com.anna.sent.soft.childbirthdate;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -41,16 +38,9 @@ public class MainActivity extends FragmentActivity implements StateSaver {
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		FragmentManager fm = getSupportFragmentManager();
-		Fragment details = fm.findFragmentById(R.id.details);
-		if (details != null) {
-			FragmentTransaction ft = fm.beginTransaction();
-			ft.remove(details);
-			ft.commit();
-		}
-
-		super.onSaveInstanceState(outState);
+		// call below must be before super.onSaveInstanceState(outState);
 		mTitlesFragment.onSaveInstanceState(outState);
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
