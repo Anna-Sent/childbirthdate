@@ -135,13 +135,12 @@ public class TitlesFragment extends ListFragment implements
 	 * activity in which it is displayed.
 	 */
 	void showDetails(int index) {
+		// We can display everything in-place with fragments, so update
+		// the list to highlight the selected item and show the data.
+		getListView().setItemChecked(index, true);
 		mSelectedItem = index;
 		/* Log.d("moo", "titles: update index=" + mSelectedItem); */
 		if (mDualPane) {
-			// We can display everything in-place with fragments, so update
-			// the list to highlight the selected item and show the data.
-			getListView().setItemChecked(index, true);
-
 			// Check what fragment is currently shown, replace if needed.
 			FragmentManager fm = getFragmentManager();
 			DetailsFragment details = (DetailsFragment) fm
