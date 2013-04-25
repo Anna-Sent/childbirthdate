@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,7 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
+		Log.d("moo", "titles: save state");
 		saveState(outState);
 		super.onSaveInstanceState(outState);
 	}
@@ -95,7 +97,7 @@ public class TitlesFragment extends ListFragment implements
 		/* Log.d("moo", "titles: restore index=" + mSelectedItem); */
 	}
 
-	private void saveState(Bundle state) {
+	public void beforeOnSaveInstanceState() {
 		FragmentManager fm = getFragmentManager();
 		Fragment details = fm.findFragmentById(R.id.details);
 		if (details != null) {
@@ -103,7 +105,9 @@ public class TitlesFragment extends ListFragment implements
 			ft.remove(details);
 			ft.commit();
 		}
+	}
 
+	private void saveState(Bundle state) {
 		mHelper.saveState(state);
 		state.putInt(EXTRA_GUI_POSITION, mSelectedItem);
 		/* Log.d("moo", "titles: save index=" + mSelectedItem); */
