@@ -78,6 +78,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 				.setValue(PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
 		numberPcikerLutealPhaseLen
 				.setValue(PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
+		dataChanged();
 	}
 
 	@Override
@@ -97,6 +98,8 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 				data.getLastMenstruationDate());
 		numberPickerMenstrualCycleLen.setValue(data.getMenstrualCycleLen());
 		numberPcikerLutealPhaseLen.setValue(data.getLutealPhaseLen());
+
+		dataChanged();
 	}
 
 	@Override

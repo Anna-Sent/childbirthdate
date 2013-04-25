@@ -51,6 +51,8 @@ public class DetailsOvulationMethodFragment extends DetailsFragment {
 		Data data = new Data();
 		data.restoreOvulation(getActivity());
 		DateUtils.setDate(datePickerOvulationDate, data.getOvulationDate());
+
+		dataChanged();
 	}
 
 	@Override

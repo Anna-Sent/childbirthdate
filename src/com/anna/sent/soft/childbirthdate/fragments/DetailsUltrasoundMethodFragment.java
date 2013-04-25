@@ -75,7 +75,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		numberPickerWeeks
 				.setMaxValue((radioButtonIsGestationalAge.isChecked() ? PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS
 						: PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS) - 1);
-
+		dataChanged();
 	}
 
 	@Override
@@ -84,7 +84,6 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		case R.id.radioIsEmbryonicAge:
 		case R.id.radioIsGestationalAge:
 			radioClick(v);
-			dataChanged();
 			break;
 		}
 	}
@@ -108,6 +107,8 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		// third: set value for weeks number picker
 		numberPickerWeeks.setValue(data.getWeeks());
 		numberPickerDays.setValue(data.getDays());
+
+		dataChanged();
 	}
 
 	@Override
