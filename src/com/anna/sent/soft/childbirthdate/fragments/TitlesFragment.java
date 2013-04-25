@@ -96,7 +96,7 @@ public class TitlesFragment extends ListFragment implements
 		/* Log.d("moo", "titles: restore index=" + mSelectedItem); */
 	}
 
-	public void beforeOnSaveInstanceState() {
+	private void saveState(Bundle state) {
 		FragmentManager fm = getFragmentManager();
 		Fragment details = fm.findFragmentById(R.id.details);
 		if (details != null) {
@@ -104,9 +104,7 @@ public class TitlesFragment extends ListFragment implements
 			ft.remove(details);
 			ft.commit();
 		}
-	}
 
-	private void saveState(Bundle state) {
 		mHelper.saveState(state);
 		state.putInt(EXTRA_GUI_POSITION, mSelectedItem);
 		/* Log.d("moo", "titles: save index=" + mSelectedItem); */
