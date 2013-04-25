@@ -44,36 +44,23 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 
 	@Override
 	public View getView(int position, View contentView, ViewGroup viewGroup) {
-		View view = null;
-		ViewHolder viewHolder = null;
-
-		if (contentView == null) {
-			LayoutInflater layoutInflater = (LayoutInflater) getContext()
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = layoutInflater.inflate(R.layout.list_item, null);
-
-			if (view != null) {
-				viewHolder = new ViewHolder();
-				viewHolder.checkBox = (CheckBox) view
-						.findViewById(R.id.checkBox);
-				viewHolder.text1 = (TextView) view.findViewById(R.id.text1);
-				viewHolder.text2 = (TextView) view.findViewById(R.id.text2);
-				viewHolder.position = position;
-				viewHolder.checkBox.setChecked(mChecked[position]);
-				viewHolder.checkBox.setOnClickListener(this);
-				viewHolder.checkBox.setTag(viewHolder);
-				viewHolder.text1.setText(mStrings1[position]);
-				viewHolder.text2.setText(mStrings2[position]);
-				viewHolder.text2
-						.setVisibility(viewHolder.checkBox.isChecked() ? View.VISIBLE
-								: View.GONE);
-				mViewHolders[position] = viewHolder;
-			}
-		} else {
-			view = contentView;
-			viewHolder = mViewHolders[position];
-		}
-
+		LayoutInflater layoutInflater = (LayoutInflater) getContext()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View view = layoutInflater.inflate(R.layout.list_item, null);
+		ViewHolder viewHolder = new ViewHolder();
+		viewHolder.checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+		viewHolder.text1 = (TextView) view.findViewById(R.id.text1);
+		viewHolder.text2 = (TextView) view.findViewById(R.id.text2);
+		viewHolder.position = position;
+		viewHolder.checkBox.setChecked(mChecked[position]);
+		viewHolder.checkBox.setOnClickListener(this);
+		viewHolder.checkBox.setTag(viewHolder);
+		viewHolder.text1.setText(mStrings1[position]);
+		viewHolder.text2.setText(mStrings2[position]);
+		viewHolder.text2
+				.setVisibility(viewHolder.checkBox.isChecked() ? View.VISIBLE
+						: View.GONE);
+		mViewHolders[position] = viewHolder;
 		return view;
 	}
 
@@ -91,11 +78,9 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 	public void updateValues(String[] strings2) {
 		for (int i = 0; i < mCount && i < strings2.length; ++i) {
 			mStrings2[i] = strings2[i];
-			ViewHolder viewHolder = mViewHolders[i];
-			if (viewHolder != null) {
-				viewHolder.text2.setText(mStrings2[i]);
-			}
 		}
+
+		notifyDataSetChanged();
 	}
 
 	public boolean[] getChecked() {
