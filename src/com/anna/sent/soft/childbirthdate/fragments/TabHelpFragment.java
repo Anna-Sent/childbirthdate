@@ -15,11 +15,7 @@ public class TabHelpFragment extends StateSaverFragment {
 	private TextView textViewHelp;
 	private ScrollView scrollView;
 
-	private final String getExtraGuiScrollY() {
-		String str = "com.anna.sent.soft.childbirthdate."
-				+ getClass().getName() + ".srolly";
-		return str;
-	}
+	private final static String EXTRA_GUI_SCROLL_Y = "com.anna.sent.soft.childbirthdate.tabhelp.srolly";
 
 	public TabHelpFragment() {
 		super();
@@ -42,7 +38,7 @@ public class TabHelpFragment extends StateSaverFragment {
 	@Override
 	protected void restoreState(Bundle state) {
 		if (scrollView != null) {
-			final int y = state.getInt(getExtraGuiScrollY(), 0);
+			final int y = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
 			scrollView.post(new Runnable() {
 				@Override
 				public void run() {
@@ -55,7 +51,7 @@ public class TabHelpFragment extends StateSaverFragment {
 	@Override
 	protected void saveState(Bundle state) {
 		if (scrollView != null) {
-			state.putInt(getExtraGuiScrollY(), scrollView.getScrollY());
+			state.putInt(EXTRA_GUI_SCROLL_Y, scrollView.getScrollY());
 		}
 	}
 }

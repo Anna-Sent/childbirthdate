@@ -21,7 +21,8 @@ import com.anna.sent.soft.utils.DateUtils;
 
 public class TitlesFragment extends ListFragment implements
 		DetailsFragment.OnDetailsChangedListener {
-	public final static int REQUEST_INDEX = 1;
+	private final static int REQUEST_POSITION = 1;
+	public final static String EXTRA_GUI_POSITION = "com.anna.sent.soft.childbirthdate.position";
 
 	private View mHeader = null, mFooter = null;
 	private TitlesFragmentHelper mHelper;
@@ -90,7 +91,7 @@ public class TitlesFragment extends ListFragment implements
 
 	private void restoreState(Bundle state) {
 		mHelper.restoreState(state);
-		mSelectedItem = state.getInt("index", 0);
+		mSelectedItem = state.getInt(EXTRA_GUI_POSITION, 0);
 		/* Log.d("moo", "titles: restore index=" + mSelectedItem); */
 	}
 
@@ -104,7 +105,7 @@ public class TitlesFragment extends ListFragment implements
 		}
 
 		mHelper.saveState(state);
-		state.putInt("index", mSelectedItem);
+		state.putInt(EXTRA_GUI_POSITION, mSelectedItem);
 		/* Log.d("moo", "titles: save index=" + mSelectedItem); */
 	}
 
@@ -161,11 +162,11 @@ public class TitlesFragment extends ListFragment implements
 			// the dialog fragment with selected text.
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), DetailsActivity.class);
-			intent.putExtra("index", index);
+			intent.putExtra(EXTRA_GUI_POSITION, index);
 
 			mHelper.saveMainActivityState(intent);
 
-			startActivityForResult(intent, REQUEST_INDEX);
+			startActivityForResult(intent, REQUEST_POSITION);
 		}
 	}
 
@@ -186,9 +187,10 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == REQUEST_INDEX) {
+		if (requestCode == REQUEST_POSITION) {
 			if (resultCode == Activity.RESULT_OK) {
-				mSelectedItem = data.getIntExtra("index", mSelectedItem);
+				mSelectedItem = data.getIntExtra(EXTRA_GUI_POSITION,
+						mSelectedItem);
 				/* Log.d("moo", "titles: got index=" + mSelectedItem); */
 				if (mDualPane) {
 					showDetails(mSelectedItem);
