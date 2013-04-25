@@ -42,6 +42,7 @@ public class ChildActivity extends StateSaverActivity {
 		case android.R.id.home:
 			Bundle savedState = getIntent().getBundleExtra(
 					Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE);
+			saveAdditionalData(savedState);
 			if (savedState == null) {
 				// ResultActivity is started from Widget
 				createParentStack();
@@ -56,6 +57,9 @@ public class ChildActivity extends StateSaverActivity {
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	protected void saveAdditionalData(Bundle state) {
 	}
 
 	@Override

@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.MenuItem;
 
 import com.anna.sent.soft.childbirthdate.adapters.DetailsPagerAdapter;
 import com.anna.sent.soft.utils.ChildActivity;
@@ -16,7 +14,7 @@ public class DetailsActivity extends ChildActivity implements
 		ViewPager.OnPageChangeListener {
 	private ViewPager mViewPager;
 	private DetailsPagerAdapter mTabsAdapter;
-	private int mIndex;
+	private static int mIndex = 0;
 
 	@Override
 	protected void internalOnCreate() {
@@ -25,6 +23,7 @@ public class DetailsActivity extends ChildActivity implements
 		if (getResources().getBoolean(R.bool.has_two_panes)) {
 			// If the screen is now in landscape mode, we can show the
 			// dialog in-line with the list so we don't need this activity.
+			setResult();
 			finish();
 			return;
 		}
@@ -35,8 +34,7 @@ public class DetailsActivity extends ChildActivity implements
 		mViewPager.setOnPageChangeListener(this);
 		mTabsAdapter = new DetailsPagerAdapter(getSupportFragmentManager(),
 				getResources().getStringArray(R.array.MethodNames));
-		mIndex = 0;
-		/* Log.d("moo", "init index=" + mIndex); */
+		/* Log.d("moo", "details: init index=" + mIndex); */
 	}
 
 	@Override
@@ -52,13 +50,13 @@ public class DetailsActivity extends ChildActivity implements
 		}
 
 		state.putInt("index", mIndex);
-		/* Log.d("moo", "save index=" + mIndex); */
+		/* Log.d("moo", "details: save index=" + mIndex); */
 	}
 
 	@Override
 	protected void restoreState(Bundle state) {
 		mIndex = state.getInt("index");
-		/* Log.d("moo", "restore index=" + mIndex); */
+		/* Log.d("moo", "details: restore index=" + mIndex); */
 	}
 
 	@Override
@@ -66,7 +64,7 @@ public class DetailsActivity extends ChildActivity implements
 		mViewPager.setAdapter(mTabsAdapter);
 		mViewPager.setOffscreenPageLimit(mTabsAdapter.getCount() - 1);
 		mViewPager.setCurrentItem(mIndex);
-		/* Log.d("moo", "start with index=" + mIndex); */
+		/* Log.d("moo", "details: start with index=" + mIndex); */
 		super.onStart();
 	}
 
@@ -77,35 +75,26 @@ public class DetailsActivity extends ChildActivity implements
 	}
 
 	@Override
-	protected void onPause() {
-		Intent data = new Intent();
-		data.putExtra("index", mIndex);
-		setResult(RESULT_OK, data);
-		Log.d("moo", "pause with index=" + mIndex);
-		super.onPause();
-	}
-	
-	@Override
 	public void onBackPressed() {
-		Intent data = new Intent();
-		data.putExtra("index", mIndex);
-		setResult(RESULT_OK, data);
-		Log.d("moo", "back pressed with index=" + mIndex);
+		setResult();
 		super.onBackPressed();
 	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+
+	private void setResult() {
 		Intent data = new Intent();
 		data.putExtra("index", mIndex);
 		setResult(RESULT_OK, data);
-		Log.d("moo", "up with index=" + mIndex);
-		return super.onOptionsItemSelected(item);
+		/* Log.d("moo", "details: set result index=" + mIndex); */
+	}
+
+	@Override
+	protected void saveAdditionalData(Bundle state) {
+		state.putInt("index", mIndex);
 	}
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
-		/* Log.d("moo", "update index=" + mIndex); */
+		/* Log.d("moo", "details: update index=" + mIndex); */
 	}
 
 	@Override
@@ -115,6 +104,6 @@ public class DetailsActivity extends ChildActivity implements
 	@Override
 	public void onPageSelected(int arg0) {
 		mIndex = arg0;
-		/* Log.d("moo", "update index=" + mIndex); */
+		/* Log.d("moo", "details: update index=" + mIndex); */
 	}
 }
