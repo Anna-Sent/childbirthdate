@@ -23,6 +23,7 @@ public class TitlesFragment extends ListFragment implements
 		DetailsFragment.OnDetailsChangedListener {
 	private final static int REQUEST_POSITION = 1;
 	public final static String EXTRA_GUI_POSITION = "com.anna.sent.soft.childbirthdate.position";
+	private final static String EXTRA_GUI_SCROLL_Y = "com.anna.sent.soft.childbirthdate.titles.srolly";
 
 	private View mHeader = null, mFooter = null;
 	private TitlesFragmentHelper mHelper;
@@ -94,6 +95,13 @@ public class TitlesFragment extends ListFragment implements
 		mHelper.restoreState(state);
 		mSelectedItem = state.getInt(EXTRA_GUI_POSITION, 0);
 		/* Log.d("moo", "titles: restore index=" + mSelectedItem); */
+		final int y = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
+		getListView().post(new Runnable() {
+			@Override
+			public void run() {
+				getListView().scrollTo(0, y);
+			}
+		});
 	}
 
 	private void saveState(Bundle state) {
@@ -108,6 +116,7 @@ public class TitlesFragment extends ListFragment implements
 		mHelper.saveState(state);
 		state.putInt(EXTRA_GUI_POSITION, mSelectedItem);
 		/* Log.d("moo", "titles: save index=" + mSelectedItem); */
+		state.putInt(EXTRA_GUI_SCROLL_Y, getListView().getScrollY());
 	}
 
 	@Override
