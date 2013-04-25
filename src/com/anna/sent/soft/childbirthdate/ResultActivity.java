@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.view.Gravity;
 import android.view.View;
@@ -161,7 +162,9 @@ public class ResultActivity extends ChildActivity {
 			}
 		}
 
-		if (message.getText().equals("")) {
+		if (message.getText().equals("")
+				&& Configuration.ORIENTATION_PORTRAIT == getResources()
+						.getConfiguration().orientation) {
 			message.setVisibility(View.GONE);
 		}
 	}
