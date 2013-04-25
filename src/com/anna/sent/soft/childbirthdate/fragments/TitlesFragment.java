@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,7 +85,7 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		Log.d("moo", "titles: save state");
+		/* Log.d("moo", "titles: save state"); */
 		saveState(outState);
 		super.onSaveInstanceState(outState);
 	}

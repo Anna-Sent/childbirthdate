@@ -1,7 +1,6 @@
 package com.anna.sent.soft.childbirthdate;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,7 +26,7 @@ public class MainActivity extends StateSaverActivity {
 
 	@Override
 	protected void saveState(Bundle state) {
-		Log.d("moo", "main activity: save state");
+		/* Log.d("moo", "main activity: save state"); */
 		mTitlesFragment.beforeOnSaveInstanceState();
 	}
 
