@@ -1,6 +1,7 @@
 package com.anna.sent.soft.childbirthdate.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +14,19 @@ import com.anna.sent.soft.childbirthdate.R;
 
 public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 		OnClickListener {
+	private static final String TAG = "moo";
+	private static final boolean DEBUG = true;
+
+	private String wrapMsg(String msg) {
+		return getClass().getSimpleName() + ": " + msg;
+	}
+
+	private void log(String msg) {
+		if (DEBUG) {
+			Log.d(TAG, wrapMsg(msg));
+		}
+	}
+
 	private String[] mStrings1;
 	private String[] mStrings2;
 	private boolean[] mChecked;
@@ -29,6 +43,7 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 	public ListItemArrayAdapter(Context context, String[] strings1,
 			String[] strings2, boolean[] checked) {
 		super(context, R.layout.list_item, R.id.text1, strings1);
+		log("create");
 		mStrings1 = strings1;
 		mStrings2 = strings2;
 		mChecked = checked;
@@ -44,6 +59,19 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 
 	@Override
 	public View getView(int position, View contentView, ViewGroup viewGroup) {
+		log("get view " + position);
+		if (contentView != null) {
+			log("content view is " + contentView.getClass().getSimpleName());
+		} else {
+			log("content view is null");
+		}
+
+		if (viewGroup != null) {
+			log("view group is " + viewGroup.getClass().getSimpleName());
+		} else {
+			log("view group is null");
+		}
+
 		LayoutInflater layoutInflater = (LayoutInflater) getContext()
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = layoutInflater.inflate(R.layout.list_item, null);
@@ -76,6 +104,7 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 	}
 
 	public void updateValues(String[] strings2) {
+		log("update values");
 		for (int i = 0; i < mCount && i < strings2.length; ++i) {
 			mStrings2[i] = strings2[i];
 		}
