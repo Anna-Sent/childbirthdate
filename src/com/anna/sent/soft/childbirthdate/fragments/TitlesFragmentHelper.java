@@ -96,7 +96,7 @@ public class TitlesFragmentHelper implements OnClickListener, StateSaver {
 		StateSaverActivity listener = (StateSaverActivity) mActivity;
 		if (listener != null) {
 			Bundle state = new Bundle();
-			listener.onSaveInstanceState(state);
+			listener.saveState(state);
 			intent.putExtra(Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE, state);
 		}
 	}

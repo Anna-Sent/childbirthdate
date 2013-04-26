@@ -27,7 +27,7 @@ public class MainActivity extends StateSaverActivity {
 	@Override
 	public void saveState(Bundle state) {
 		/* Log.d("moo", "main activity: save state"); */
-		mTitlesFragment.onSaveInstanceState(state);
+		mTitlesFragment.saveState(state);
 	}
 
 	@Override

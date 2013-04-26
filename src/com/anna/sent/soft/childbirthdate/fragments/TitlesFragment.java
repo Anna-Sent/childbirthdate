@@ -49,17 +49,13 @@ public class TitlesFragment extends ListFragment implements
 		super.onActivityCreated(savedInstanceState);
 
 		setViews();
-		mHelper = new TitlesFragmentHelper(getActivity());
-		mHelper.setViews();
 
 		if (savedInstanceState != null) {
 			restoreState(savedInstanceState);
-			mHelper.restoreState(savedInstanceState);
 		} else {
 			savedInstanceState = getActivity().getIntent().getExtras();
 			if (savedInstanceState != null) {
 				restoreState(savedInstanceState);
-				mHelper.restoreState(savedInstanceState);
 			}
 		}
 	}
@@ -90,13 +86,15 @@ public class TitlesFragment extends ListFragment implements
 
 		mSelectedItem = 0;
 		/* Log.d("moo", "titles: init index=" + mSelectedItem); */
+
+		mHelper = new TitlesFragmentHelper(getActivity());
+		mHelper.setViews();
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		/* Log.d("moo", "titles: save state"); */
 		saveState(outState);
-		mHelper.saveState(outState);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -111,6 +109,8 @@ public class TitlesFragment extends ListFragment implements
 				getListView().scrollTo(0, y);
 			}
 		});
+
+		mHelper.restoreState(state);
 	}
 
 	@Override
@@ -126,6 +126,7 @@ public class TitlesFragment extends ListFragment implements
 		state.putInt(EXTRA_GUI_POSITION, mSelectedItem);
 		/* Log.d("moo", "titles: save index=" + mSelectedItem); */
 		state.putInt(EXTRA_GUI_SCROLL_Y, getListView().getScrollY());
+		mHelper.saveState(state);
 	}
 
 	@Override
