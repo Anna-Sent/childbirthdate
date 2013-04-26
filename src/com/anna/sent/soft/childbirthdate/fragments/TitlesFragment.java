@@ -28,6 +28,7 @@ public class TitlesFragment extends ListFragment implements
 
 	private View mHeader = null, mFooter = null;
 	private TitlesFragmentHelper mHelper;
+	private ListView mListView;
 	private ListItemArrayAdapter mListAdapter;
 	private boolean mDualPane;
 	private int mSelectedItem;
@@ -62,12 +63,13 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void setViews() {
-		if (mHeader != null) {
-			getListView().addFooterView(mHeader);
+		mListView = getListView();
+		if (mHeader != null && mListView != null) {
+			mListView.addFooterView(mHeader);
 		}
 
-		if (mFooter != null) {
-			getListView().addFooterView(mFooter);
+		if (mFooter != null && mListView != null) {
+			mListView.addFooterView(mFooter);
 		}
 
 		Data data = new Data();
@@ -80,9 +82,10 @@ public class TitlesFragment extends ListFragment implements
 
 		mDualPane = getResources().getBoolean(R.bool.has_two_panes);
 
-		getListView().setChoiceMode(
-				mDualPane ? ListView.CHOICE_MODE_SINGLE
-						: ListView.CHOICE_MODE_NONE);
+		if (mListView != null) {
+			mListView.setChoiceMode(mDualPane ? ListView.CHOICE_MODE_SINGLE
+					: ListView.CHOICE_MODE_NONE);
+		}
 
 		mSelectedItem = 0;
 		/* Log.d("moo", "titles: init index=" + mSelectedItem); */
@@ -103,12 +106,14 @@ public class TitlesFragment extends ListFragment implements
 		mSelectedItem = state.getInt(EXTRA_GUI_POSITION, 0);
 		/* Log.d("moo", "titles: restore index=" + mSelectedItem); */
 		final int y = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
-		getListView().post(new Runnable() {
-			@Override
-			public void run() {
-				getListView().scrollTo(0, y);
-			}
-		});
+		if (mListView != null) {
+			mListView.post(new Runnable() {
+				@Override
+				public void run() {
+					mListView.scrollTo(0, y);
+				}
+			});
+		}
 
 		mHelper.restoreState(state);
 	}
@@ -125,7 +130,10 @@ public class TitlesFragment extends ListFragment implements
 
 		state.putInt(EXTRA_GUI_POSITION, mSelectedItem);
 		/* Log.d("moo", "titles: save index=" + mSelectedItem); */
-		state.putInt(EXTRA_GUI_SCROLL_Y, getListView().getScrollY());
+		if (mListView != null) {
+			state.putInt(EXTRA_GUI_SCROLL_Y, mListView.getScrollY());
+		}
+
 		mHelper.saveState(state);
 	}
 
