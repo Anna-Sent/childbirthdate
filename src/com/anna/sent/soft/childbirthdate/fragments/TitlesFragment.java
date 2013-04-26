@@ -171,7 +171,6 @@ public class TitlesFragment extends ListFragment implements
 			if (details == null || details.getShownIndex() != index) {
 				DetailsFragment newDetails = getDetailsFragmentInstance(index);
 				if (newDetails != null) {
-					newDetails.setOnDetailsChangedListener(this);
 					log("update details " + newDetails.getShownIndex());
 					FragmentTransaction ft = fm.beginTransaction();
 					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -205,6 +204,7 @@ public class TitlesFragment extends ListFragment implements
 			result = fragments[index];
 			if (result == null) {
 				result = DetailsFragment.newInstance(index);
+				result.setOnDetailsChangedListener(this);
 				fragments[index] = result;
 				log("create new details " + result.getShownIndex());
 			}

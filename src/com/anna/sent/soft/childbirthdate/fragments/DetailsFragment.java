@@ -57,8 +57,8 @@ public abstract class DetailsFragment extends Fragment implements
 	protected abstract void restoreData();
 
 	protected void dataChanged() {
+		saveData();
 		if (mListener != null) {
-			saveData();
 			mListener.detailsChanged();
 		}
 	}
