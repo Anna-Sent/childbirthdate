@@ -14,9 +14,10 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.ResultActivity;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.DateUtils;
+import com.anna.sent.soft.utils.StateSaver;
 import com.anna.sent.soft.utils.StateSaverActivity;
 
-public class TitlesFragmentHelper implements OnClickListener {
+public class TitlesFragmentHelper implements OnClickListener, StateSaver {
 	private static final String EXTRA_GUI_CURRENT_DATE = "com.anna.sent.soft.childbirthdate.currentdate";
 
 	private DatePicker datePickerCurrentDate;
@@ -26,6 +27,7 @@ public class TitlesFragmentHelper implements OnClickListener {
 		mActivity = activity;
 	}
 
+	@Override
 	public void setViews() {
 		Button buttonCalculateECD = (Button) mActivity
 				.findViewById(R.id.buttonCalculateEstimatedChildbirthDate);
@@ -41,7 +43,8 @@ public class TitlesFragmentHelper implements OnClickListener {
 		buttonToday.setOnClickListener(this);
 	}
 
-	protected void restoreState(Bundle state) {
+	@Override
+	public void restoreState(Bundle state) {
 		if (datePickerCurrentDate != null) {
 			Calendar value = Calendar.getInstance();
 			value.setTimeInMillis(state.getLong(EXTRA_GUI_CURRENT_DATE,
@@ -50,7 +53,8 @@ public class TitlesFragmentHelper implements OnClickListener {
 		}
 	}
 
-	protected void saveState(Bundle state) {
+	@Override
+	public void saveState(Bundle state) {
 		if (datePickerCurrentDate != null) {
 			state.putLong(EXTRA_GUI_CURRENT_DATE,
 					DateUtils.getDate(datePickerCurrentDate).getTimeInMillis());
@@ -61,7 +65,7 @@ public class TitlesFragmentHelper implements OnClickListener {
 		DateUtils.setDate(datePickerCurrentDate, Calendar.getInstance());
 	}
 
-	public void calculate(int whatToDo) {
+	private void calculate(int whatToDo) {
 		Intent intent = new Intent(mActivity, ResultActivity.class);
 
 		intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE, DateUtils

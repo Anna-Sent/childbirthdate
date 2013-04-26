@@ -18,9 +18,10 @@ import com.anna.sent.soft.childbirthdate.adapters.ListItemArrayAdapter;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.utils.DateUtils;
+import com.anna.sent.soft.utils.StateSaver;
 
 public class TitlesFragment extends ListFragment implements
-		DetailsFragment.OnDetailsChangedListener {
+		DetailsFragment.OnDetailsChangedListener, StateSaver {
 	private final static int REQUEST_POSITION = 1;
 	public final static String EXTRA_GUI_POSITION = "com.anna.sent.soft.childbirthdate.position";
 	private final static String EXTRA_GUI_SCROLL_Y = "com.anna.sent.soft.childbirthdate.titles.srolly";
@@ -47,6 +48,24 @@ public class TitlesFragment extends ListFragment implements
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
+		setViews();
+		mHelper = new TitlesFragmentHelper(getActivity());
+		mHelper.setViews();
+
+		if (savedInstanceState != null) {
+			restoreState(savedInstanceState);
+			mHelper.restoreState(savedInstanceState);
+		} else {
+			savedInstanceState = getActivity().getIntent().getExtras();
+			if (savedInstanceState != null) {
+				restoreState(savedInstanceState);
+				mHelper.restoreState(savedInstanceState);
+			}
+		}
+	}
+
+	@Override
+	public void setViews() {
 		if (mHeader != null) {
 			getListView().addFooterView(mHeader);
 		}
@@ -54,9 +73,6 @@ public class TitlesFragment extends ListFragment implements
 		if (mFooter != null) {
 			getListView().addFooterView(mFooter);
 		}
-
-		mHelper = new TitlesFragmentHelper(getActivity());
-		mHelper.setViews();
 
 		Data data = new Data();
 		data.restoreChecked(getActivity());
@@ -74,25 +90,18 @@ public class TitlesFragment extends ListFragment implements
 
 		mSelectedItem = 0;
 		/* Log.d("moo", "titles: init index=" + mSelectedItem); */
-		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
-			restoreState(savedInstanceState);
-		} else {
-			savedInstanceState = getActivity().getIntent().getExtras();
-			if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
-				restoreState(savedInstanceState);
-			}
-		}
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		/* Log.d("moo", "titles: save state"); */
 		saveState(outState);
+		mHelper.saveState(outState);
 		super.onSaveInstanceState(outState);
 	}
 
-	private void restoreState(Bundle state) {
-		mHelper.restoreState(state);
+	@Override
+	public void restoreState(Bundle state) {
 		mSelectedItem = state.getInt(EXTRA_GUI_POSITION, 0);
 		/* Log.d("moo", "titles: restore index=" + mSelectedItem); */
 		final int y = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
@@ -104,7 +113,8 @@ public class TitlesFragment extends ListFragment implements
 		});
 	}
 
-	private void saveState(Bundle state) {
+	@Override
+	public void saveState(Bundle state) {
 		FragmentManager fm = getFragmentManager();
 		Fragment details = fm.findFragmentById(R.id.details);
 		if (details != null) {
@@ -113,7 +123,6 @@ public class TitlesFragment extends ListFragment implements
 			ft.commit();
 		}
 
-		mHelper.saveState(state);
 		state.putInt(EXTRA_GUI_POSITION, mSelectedItem);
 		/* Log.d("moo", "titles: save index=" + mSelectedItem); */
 		state.putInt(EXTRA_GUI_SCROLL_Y, getListView().getScrollY());

@@ -13,7 +13,7 @@ public class MainActivity extends StateSaverActivity {
 	private TitlesFragment mTitlesFragment;
 
 	@Override
-	protected void internalOnCreate() {
+	public void setViews() {
 		setContentView(R.layout.tab_calculation);
 
 		mTitlesFragment = (TitlesFragment) getSupportFragmentManager()
@@ -21,11 +21,11 @@ public class MainActivity extends StateSaverActivity {
 	}
 
 	@Override
-	protected void restoreState(Bundle state) {
+	public void restoreState(Bundle state) {
 	}
 
 	@Override
-	protected void saveState(Bundle state) {
+	public void saveState(Bundle state) {
 		/* Log.d("moo", "main activity: save state"); */
 		mTitlesFragment.onSaveInstanceState(state);
 	}

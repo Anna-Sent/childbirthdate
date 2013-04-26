@@ -13,17 +13,17 @@ import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public class ChildActivity extends StateSaverActivity {
 	@Override
-	protected void internalOnCreate() {
+	public void setViews() {
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
 
 	@Override
-	protected void restoreState(Bundle state) {
+	public void restoreState(Bundle state) {
 	}
 
 	@Override
-	protected void saveState(Bundle state) {
+	public void saveState(Bundle state) {
 	}
 
 	/**

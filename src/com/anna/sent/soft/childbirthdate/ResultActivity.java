@@ -38,8 +38,8 @@ public class ResultActivity extends ChildActivity {
 	private AdView adView = null;
 
 	@Override
-	protected void internalOnCreate() {
-		super.internalOnCreate();
+	public void setViews() {
+		super.setViews();
 
 		setContentView(R.layout.activity_result);
 

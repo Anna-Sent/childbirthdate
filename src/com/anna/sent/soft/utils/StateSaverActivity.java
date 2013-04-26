@@ -3,19 +3,20 @@ package com.anna.sent.soft.utils;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-public abstract class StateSaverActivity extends FragmentActivity {
+public abstract class StateSaverActivity extends FragmentActivity implements
+		StateSaver {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		ThemeUtils.onActivityCreateSetTheme(this);
 		super.onCreate(savedInstanceState);
 
-		internalOnCreate();
+		setViews();
 
-		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
+		if (savedInstanceState != null) {
 			restoreState(savedInstanceState);
 		} else {
 			savedInstanceState = getIntent().getExtras();
-			if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
+			if (savedInstanceState != null) {
 				restoreState(savedInstanceState);
 			}
 		}
@@ -27,9 +28,9 @@ public abstract class StateSaverActivity extends FragmentActivity {
 		super.onSaveInstanceState(outState);
 	}
 
-	protected abstract void internalOnCreate();
+	public abstract void setViews();
 
-	protected abstract void restoreState(Bundle state);
+	public abstract void restoreState(Bundle state);
 
-	protected abstract void saveState(Bundle state);
+	public abstract void saveState(Bundle state);
 }

@@ -18,8 +18,8 @@ public class DetailsActivity extends ChildActivity implements
 	private static int mIndex = 0;
 
 	@Override
-	protected void internalOnCreate() {
-		super.internalOnCreate();
+	public void setViews() {
+		super.setViews();
 
 		if (getResources().getBoolean(R.bool.has_two_panes)) {
 			// If the screen is now in landscape mode, we can show the
@@ -39,7 +39,13 @@ public class DetailsActivity extends ChildActivity implements
 	}
 
 	@Override
-	protected void saveState(Bundle state) {
+	public void restoreState(Bundle state) {
+		mIndex = state.getInt(TitlesFragment.EXTRA_GUI_POSITION);
+		/* Log.d("moo", "details: restore index=" + mIndex); */
+	}
+
+	@Override
+	public void saveState(Bundle state) {
 		FragmentManager fm = getSupportFragmentManager();
 		for (int i = 0; i < 3; ++i) {
 			Fragment details = mTabsAdapter.getFragment(i);
@@ -52,12 +58,6 @@ public class DetailsActivity extends ChildActivity implements
 
 		state.putInt(TitlesFragment.EXTRA_GUI_POSITION, mIndex);
 		/* Log.d("moo", "details: save index=" + mIndex); */
-	}
-
-	@Override
-	protected void restoreState(Bundle state) {
-		mIndex = state.getInt(TitlesFragment.EXTRA_GUI_POSITION);
-		/* Log.d("moo", "details: restore index=" + mIndex); */
 	}
 
 	@Override

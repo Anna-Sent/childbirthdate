@@ -29,14 +29,14 @@ public class TabHelpFragment extends StateSaverFragment {
 	}
 
 	@Override
-	public void internalOnActivityCreated() {
+	public void setViews() {
 		textViewHelp = (TextView) getActivity().findViewById(R.id.textViewHelp);
 		textViewHelp.setText(Html.fromHtml(getString(R.string.bigHelp)));
 		scrollView = (ScrollView) getActivity().findViewById(R.id.tabHelp);
 	}
 
 	@Override
-	protected void restoreState(Bundle state) {
+	public void restoreState(Bundle state) {
 		if (scrollView != null) {
 			final int y = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
 			scrollView.post(new Runnable() {
@@ -49,7 +49,7 @@ public class TabHelpFragment extends StateSaverFragment {
 	}
 
 	@Override
-	protected void saveState(Bundle state) {
+	public void saveState(Bundle state) {
 		if (scrollView != null) {
 			state.putInt(EXTRA_GUI_SCROLL_Y, scrollView.getScrollY());
 		}
