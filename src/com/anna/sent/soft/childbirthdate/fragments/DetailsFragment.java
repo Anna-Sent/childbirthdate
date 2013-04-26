@@ -74,14 +74,14 @@ public abstract class DetailsFragment extends Fragment implements
 	}
 
 	@Override
-	public void onPause() {
-		super.onPause();
-		saveData();
-	}
-
-	@Override
 	public void onResume() {
 		super.onResume();
 		restoreData();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		saveData();
 	}
 }
