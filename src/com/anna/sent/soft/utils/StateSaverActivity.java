@@ -23,7 +23,7 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	protected void onSaveInstanceState(Bundle outState) {
 		saveState(outState);
 		super.onSaveInstanceState(outState);
 	}
