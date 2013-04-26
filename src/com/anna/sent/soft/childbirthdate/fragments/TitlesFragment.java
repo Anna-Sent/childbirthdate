@@ -25,6 +25,23 @@ public class TitlesFragment extends ListFragment implements
 		DetailsFragment.OnDetailsChangedListener, StateSaver {
 	private static final String TAG = "moo";
 	private static final boolean DEBUG = true;
+	private static final boolean DEBUG_INDEX = false;
+
+	private String wrapMsg(String msg) {
+		return getClass().getSimpleName() + ": " + msg;
+	}
+
+	private void log(String msg) {
+		if (DEBUG) {
+			Log.d(TAG, wrapMsg(msg));
+		}
+	}
+
+	private void log(String msg, int index) {
+		if (DEBUG_INDEX) {
+			Log.d(TAG, wrapMsg(msg + index));
+		}
+	}
 
 	private final static int REQUEST_POSITION = 1;
 	public final static String EXTRA_GUI_POSITION = "com.anna.sent.soft.childbirthdate.position";
@@ -37,18 +54,13 @@ public class TitlesFragment extends ListFragment implements
 
 	public TitlesFragment() {
 		super();
-		if (DEBUG) {
-			Log.d(TAG, "TitlesFragment()");
-		}
+		log("create");
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		if (DEBUG) {
-			Log.d(TAG, "onCreateView");
-		}
-
+		log("onCreateView");
 		mHeader = inflater.inflate(R.layout.list_header, null);
 		mFooter = inflater.inflate(R.layout.list_footer, null);
 		return super.onCreateView(inflater, container, savedInstanceState);
@@ -56,10 +68,7 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		if (DEBUG) {
-			Log.d(TAG, "onActivityCreated");
-		}
-
+		log("onActivityCreated");
 		super.onActivityCreated(savedInstanceState);
 
 		setViews();
@@ -99,9 +108,7 @@ public class TitlesFragment extends ListFragment implements
 						: ListView.CHOICE_MODE_NONE);
 
 		mSelectedItem = 0;
-		if (DEBUG) {
-			Log.d(TAG, "init index=" + mSelectedItem);
-		}
+		log("init index=", mSelectedItem);
 
 		mHelper = new TitlesFragmentHelper(getActivity());
 		mHelper.setViews();
@@ -109,34 +116,22 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		if (DEBUG) {
-			Log.d(TAG, "onSaveInstanceState");
-		}
-
+		log("onSaveInstanceState");
 		saveState(outState);
 		super.onSaveInstanceState(outState);
 	}
 
 	@Override
 	public void restoreState(Bundle state) {
-		if (DEBUG) {
-			Log.d(TAG, "restore state");
-		}
-
+		log("restore state");
 		mSelectedItem = state.getInt(EXTRA_GUI_POSITION, 0);
-		if (DEBUG) {
-			Log.d(TAG, "restore index=" + mSelectedItem);
-		}
-
+		log("restore index=", mSelectedItem);
 		mHelper.restoreState(state);
 	}
 
 	@Override
 	public void saveState(Bundle state) {
-		if (DEBUG) {
-			Log.d(TAG, "save state");
-		}
-
+		log("save state");
 		FragmentManager fm = getFragmentManager();
 		Fragment details = fm.findFragmentById(R.id.details);
 		if (details != null) {
@@ -146,6 +141,7 @@ public class TitlesFragment extends ListFragment implements
 		}
 
 		state.putInt(EXTRA_GUI_POSITION, mSelectedItem);
+		log("save index=", mSelectedItem);
 		mHelper.saveState(state);
 	}
 
@@ -156,9 +152,7 @@ public class TitlesFragment extends ListFragment implements
 		// Make sure our UI is in the correct state.
 		if (mDualPane) {
 			showDetails(mSelectedItem);
-			if (DEBUG) {
-				Log.d(TAG, "start with index=" + mSelectedItem);
-			}
+			log("start with index=", mSelectedItem);
 		}
 	}
 
@@ -177,10 +171,7 @@ public class TitlesFragment extends ListFragment implements
 		// the list to highlight the selected item and show the data.
 		getListView().setItemChecked(index, true);
 		mSelectedItem = index;
-		if (DEBUG) {
-			Log.d(TAG, "update index=" + mSelectedItem);
-		}
-
+		log("update index=", mSelectedItem);
 		if (mDualPane) {
 			// Check what fragment is currently shown, replace if needed.
 			FragmentManager fm = getFragmentManager();
@@ -190,12 +181,13 @@ public class TitlesFragment extends ListFragment implements
 				DetailsFragment newDetails = getDetailsFragmentInstance(index);
 				if (newDetails != null) {
 					newDetails.setOnDetailsChangedListener(this);
-
+					log("update details");
 					FragmentTransaction ft = fm.beginTransaction();
 					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 					ft.replace(R.id.details, newDetails);
 					ft.commit();
 				} else if (details != null) {
+					log("remove details");
 					FragmentTransaction ft = fm.beginTransaction();
 					ft.remove(details);
 					ft.commit();
@@ -223,6 +215,7 @@ public class TitlesFragment extends ListFragment implements
 			if (result == null) {
 				result = DetailsFragment.newInstance(index);
 				fragments[index] = result;
+				log("create new details");
 			}
 		}
 
@@ -235,10 +228,7 @@ public class TitlesFragment extends ListFragment implements
 			if (resultCode == Activity.RESULT_OK) {
 				mSelectedItem = data.getIntExtra(EXTRA_GUI_POSITION,
 						mSelectedItem);
-				if (DEBUG) {
-					Log.d(TAG, "got index=" + mSelectedItem);
-				}
-
+				log("got index=", mSelectedItem);
 				if (mDualPane) {
 					showDetails(mSelectedItem);
 				}
@@ -288,6 +278,7 @@ public class TitlesFragment extends ListFragment implements
 	public void onResume() {
 		super.onResume();
 		detailsChanged();
+		log("resume");
 	}
 
 	@Override
@@ -295,5 +286,6 @@ public class TitlesFragment extends ListFragment implements
 		super.onPause();
 		boolean[] checked = mListAdapter.getChecked();
 		Data.save(getActivity(), checked);
+		log("pause");
 	}
 }
