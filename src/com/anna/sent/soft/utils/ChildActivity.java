@@ -18,14 +18,6 @@ public class ChildActivity extends StateSaverActivity {
 		setupActionBar();
 	}
 
-	@Override
-	public void restoreState(Bundle state) {
-	}
-
-	@Override
-	public void saveState(Bundle state) {
-	}
-
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
 	 */

@@ -3,7 +3,6 @@ package com.anna.sent.soft.childbirthdate.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
@@ -132,14 +131,6 @@ public class TitlesFragment extends ListFragment implements
 	@Override
 	public void saveState(Bundle state) {
 		log("save state");
-		FragmentManager fm = getFragmentManager();
-		Fragment details = fm.findFragmentById(R.id.details);
-		if (details != null) {
-			FragmentTransaction ft = fm.beginTransaction();
-			ft.remove(details);
-			ft.commit();
-		}
-
 		state.putInt(EXTRA_GUI_POSITION, mSelectedItem);
 		log("save index=", mSelectedItem);
 		mHelper.saveState(state);
@@ -181,13 +172,13 @@ public class TitlesFragment extends ListFragment implements
 				DetailsFragment newDetails = getDetailsFragmentInstance(index);
 				if (newDetails != null) {
 					newDetails.setOnDetailsChangedListener(this);
-					log("update details");
+					log("update details " + newDetails.getShownIndex());
 					FragmentTransaction ft = fm.beginTransaction();
 					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 					ft.replace(R.id.details, newDetails);
 					ft.commit();
 				} else if (details != null) {
-					log("remove details");
+					log("remove details" + details.getShownIndex());
 					FragmentTransaction ft = fm.beginTransaction();
 					ft.remove(details);
 					ft.commit();
@@ -215,7 +206,7 @@ public class TitlesFragment extends ListFragment implements
 			if (result == null) {
 				result = DetailsFragment.newInstance(index);
 				fragments[index] = result;
-				log("create new details");
+				log("create new details " + result.getShownIndex());
 			}
 		}
 

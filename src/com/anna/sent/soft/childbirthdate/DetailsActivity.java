@@ -45,7 +45,7 @@ public class DetailsActivity extends ChildActivity implements
 	}
 
 	@Override
-	public void saveState(Bundle state) {
+	public void beforeOnSaveInstanceState() {
 		FragmentManager fm = getSupportFragmentManager();
 		for (int i = 0; i < 3; ++i) {
 			Fragment details = mTabsAdapter.getFragment(i);
@@ -55,7 +55,10 @@ public class DetailsActivity extends ChildActivity implements
 				ft.commit();
 			}
 		}
+	}
 
+	@Override
+	public void saveActivityState(Bundle state) {
 		state.putInt(TitlesFragment.EXTRA_GUI_POSITION, mIndex);
 		/* Log.d("moo", "details: save index=" + mIndex); */
 	}
