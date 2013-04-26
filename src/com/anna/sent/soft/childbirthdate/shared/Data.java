@@ -7,8 +7,22 @@ import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 
 public class Data {
+	private static final String TAG = "moo";
+	private static final boolean DEBUG = true;
+
+	private static String wrapMsg(String msg) {
+		return "Data: " + msg;
+	}
+
+	private static void log(String msg) {
+		if (DEBUG) {
+			Log.d(TAG, wrapMsg(msg));
+		}
+	}
+
 	private boolean isEmbryonicAge;
 	private boolean[] byMethod = new boolean[3];
 	private Calendar lastMenstruationDate, ovulationDate, ultrasoundDate;
@@ -64,6 +78,7 @@ public class Data {
 
 	public static void save(Context context, Calendar lastMenstruationDate,
 			int menstrualCycleLen, int lutealPhaseLen) {
+		log("save lmp");
 		SharedPreferences settings = Shared.getSettings(context);
 		Editor editor = settings.edit();
 		editor.putLong(Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
@@ -76,6 +91,7 @@ public class Data {
 	}
 
 	public void restoreLmp(Context context) {
+		log("restore lmp");
 		SharedPreferences settings = Shared.getSettings(context);
 		lastMenstruationDate = Calendar.getInstance();
 		lastMenstruationDate.setTimeInMillis(settings.getLong(
@@ -90,6 +106,7 @@ public class Data {
 	}
 
 	public static void save(Context context, Calendar ovulationDate) {
+		log("save ovulation");
 		SharedPreferences settings = Shared.getSettings(context);
 		Editor editor = settings.edit();
 		editor.putLong(Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
@@ -98,6 +115,7 @@ public class Data {
 	}
 
 	public void restoreOvulation(Context context) {
+		log("restore ovulation");
 		SharedPreferences settings = Shared.getSettings(context);
 		ovulationDate = Calendar.getInstance();
 		ovulationDate.setTimeInMillis(settings.getLong(
@@ -107,6 +125,7 @@ public class Data {
 
 	public static void save(Context context, Calendar ultrasoundDate,
 			int weeks, int days, boolean isEmbryonicAge) {
+		log("save ultrasound");
 		SharedPreferences settings = Shared.getSettings(context);
 		Editor editor = settings.edit();
 		editor.putLong(Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
@@ -119,6 +138,7 @@ public class Data {
 	}
 
 	public void restoreUltrasound(Context context) {
+		log("restore ultrasound");
 		SharedPreferences settings = Shared.getSettings(context);
 		weeks = settings.getInt(Shared.Saved.Calculation.EXTRA_WEEKS, 0);
 		days = settings.getInt(Shared.Saved.Calculation.EXTRA_DAYS, 0);
@@ -131,6 +151,7 @@ public class Data {
 	}
 
 	public static void save(Context context, boolean[] checked) {
+		log("save checked");
 		SharedPreferences settings = Shared.getSettings(context);
 		Editor editor = settings.edit();
 		editor.putBoolean(
@@ -144,6 +165,7 @@ public class Data {
 	}
 
 	public void restoreChecked(Context context) {
+		log("restore checked");
 		SharedPreferences settings = Shared.getSettings(context);
 		byMethod[0] = settings
 				.getBoolean(
