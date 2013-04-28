@@ -27,7 +27,7 @@ public class TitlesFragment extends ListFragment implements
 		DetailsFragment.OnDetailsChangedListener, StateSaver,
 		ListItemArrayAdapter.OnCheckedListener, DataClient {
 	private static final String TAG = "moo";
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 	private static final boolean DEBUG_INDEX = false;
 
 	private String wrapMsg(String msg) {
@@ -272,7 +272,7 @@ public class TitlesFragment extends ListFragment implements
 	@Override
 	public void onResume() {
 		super.onResume();
-		log("resume, update values");
+		log("resume, update ui");
 		mListAdapter.updateValues(mData.byMethod(), getStrings2());
 	}
 

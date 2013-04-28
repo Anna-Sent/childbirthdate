@@ -10,7 +10,7 @@ import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public abstract class DetailsFragment extends Fragment implements DataClient {
 	private static final String TAG = "moo";
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 
 	private String wrapMsg(String msg) {
 		return getClass().getSimpleName() + ": " + msg;
@@ -91,7 +91,7 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 	@Override
 	public void onResume() {
 		super.onResume();
-		log("resume, update data " + getShownIndex());
+		log("resume, update ui");
 		updateData();
 	}
 

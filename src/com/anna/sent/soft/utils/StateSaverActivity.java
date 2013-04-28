@@ -90,14 +90,14 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		log("resume, update data");
+		log("resume, update data", false);
 		mConcreteData.update();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		log("pause, save data");
+		log("pause, save data", false);
 		mConcreteData.save();
 	}
 
