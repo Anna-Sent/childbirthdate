@@ -2,7 +2,6 @@ package com.anna.sent.soft.childbirthdate;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -12,23 +11,30 @@ import com.anna.sent.soft.utils.StateSaverActivity;
 import com.anna.sent.soft.utils.ThemeUtils;
 
 public class MainActivity extends StateSaverActivity {
+	private FragmentManager mFragmentManager;
+	private static final String TAG_TITLES_HELPER = "TitlesHelper";
+
 	@Override
 	public void setViews() {
 		setContentView(R.layout.tab_calculation);
 
-		getSupportFragmentManager().beginTransaction()
-				.add(new TitlesHelperFragment(), "TitlesHelper").commit();
+		mFragmentManager = getSupportFragmentManager();
+
+		TitlesHelperFragment titlesHelper = new TitlesHelperFragment();
+		mFragmentManager.beginTransaction()
+				.add(titlesHelper, TAG_TITLES_HELPER).commit();
 	}
 
 	@Override
 	public void beforeOnSaveInstanceState() {
-		FragmentManager fm = getSupportFragmentManager();
-		Fragment details = fm.findFragmentById(R.id.details);
+		Fragment details = mFragmentManager.findFragmentById(R.id.details);
 		if (details != null) {
-			FragmentTransaction ft = fm.beginTransaction();
-			ft.remove(details);
-			ft.commit();
+			mFragmentManager.beginTransaction().remove(details).commit();
 		}
+
+		TitlesHelperFragment titlesHelper = (TitlesHelperFragment) mFragmentManager
+				.findFragmentByTag(TAG_TITLES_HELPER);
+		mFragmentManager.beginTransaction().remove(titlesHelper).commit();
 	}
 
 	@Override
