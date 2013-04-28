@@ -127,10 +127,8 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 	public void updateValues(boolean[] checked, String[] strings2) {
 		if (checked.length == mCount && strings2.length == mCount) {
 			log("update values", DEBUG);
-			for (int i = 0; i < mCount; ++i) {
-				mChecked[i] = checked[i];
-				mStrings2[i] = strings2[i];
-			}
+			mChecked = checked;
+			mStrings2 = strings2;
 
 			notifyDataSetChanged();
 		}
@@ -139,9 +137,7 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 	public void updateValues(String[] strings2) {
 		if (strings2.length == mCount) {
 			log("update values", DEBUG);
-			for (int i = 0; i < mCount; ++i) {
-				mStrings2[i] = strings2[i];
-			}
+			mStrings2 = strings2;
 
 			notifyDataSetChanged();
 		}
