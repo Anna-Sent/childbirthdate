@@ -38,7 +38,7 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 		mListener = listener;
 	}
 
-	protected Data mData;
+	protected Data mData = null;
 
 	@Override
 	public void setData(Data data) {

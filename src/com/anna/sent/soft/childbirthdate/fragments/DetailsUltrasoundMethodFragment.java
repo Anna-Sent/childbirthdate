@@ -73,15 +73,15 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		switch (v.getId()) {
 		case R.id.radioIsEmbryonicAge:
 		case R.id.radioIsGestationalAge:
-			boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
-			mData.setIsEmbryonicAge(isEmbryonicAge);
+			if (mData != null) {
+				boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
+				mData.setIsEmbryonicAge(isEmbryonicAge);
+			}
 
 			int previous = numberPickerWeeks.getValue();
-			numberPickerWeeks
-					.setMaxValue((mData.isEmbryonicAge() ? PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS
-							: PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS) - 1);
+			setMaxWeeks();
 			int current = numberPickerWeeks.getValue();
-			if (current != previous) {
+			if (current != previous && mData != null) {
 				mData.setWeeks(current);
 			}
 
@@ -92,38 +92,48 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 
 	@Override
 	protected void updateData() {
-		DateUtils.init(datePickerUltrasoundDate, null);
-		DateUtils.init(datePickerUltrasoundDate, mData.getUltrasoundDate(),
-				this);
+		if (mData != null) {
+			DateUtils.init(datePickerUltrasoundDate, null);
+			DateUtils.init(datePickerUltrasoundDate, mData.getUltrasoundDate(),
+					this);
 
-		radioButtonIsGestationalAge.setOnClickListener(null);
-		radioButtonIsEmbryonicAge.setOnClickListener(null);
+			radioButtonIsGestationalAge.setOnClickListener(null);
+			radioButtonIsEmbryonicAge.setOnClickListener(null);
 
-		if (mData.isEmbryonicAge()) {
-			radioButtonIsEmbryonicAge.setChecked(true);
-		} else {
-			radioButtonIsGestationalAge.setChecked(true);
+			if (mData.isEmbryonicAge()) {
+				radioButtonIsEmbryonicAge.setChecked(true);
+			} else {
+				radioButtonIsGestationalAge.setChecked(true);
+			}
+
+			radioButtonIsGestationalAge.setOnClickListener(this);
+			radioButtonIsEmbryonicAge.setOnClickListener(this);
 		}
 
-		radioButtonIsGestationalAge.setOnClickListener(this);
-		radioButtonIsEmbryonicAge.setOnClickListener(this);
+		setMaxWeeks();
 
+		if (mData != null) {
+			numberPickerWeeks.setValue(mData.getWeeks());
+			numberPickerDays.setValue(mData.getDays());
+		}
+	}
+
+	private void setMaxWeeks() {
 		numberPickerWeeks
-				.setMaxValue((mData.isEmbryonicAge() ? PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS
+				.setMaxValue((radioButtonIsEmbryonicAge.isChecked() ? PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS
 						: PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS) - 1);
-
-		numberPickerWeeks.setValue(mData.getWeeks());
-		numberPickerDays.setValue(mData.getDays());
 	}
 
 	@Override
 	public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-		if (picker.getId() == R.id.editTextWeeks) {
-			int weeks = numberPickerWeeks.getValue();
-			mData.setWeeks(weeks);
-		} else if (picker.getId() == R.id.editTextDays) {
-			int days = numberPickerDays.getValue();
-			mData.setDays(days);
+		if (mData != null) {
+			if (picker.getId() == R.id.editTextWeeks) {
+				int weeks = numberPickerWeeks.getValue();
+				mData.setWeeks(weeks);
+			} else if (picker.getId() == R.id.editTextDays) {
+				int days = numberPickerDays.getValue();
+				mData.setDays(days);
+			}
 		}
 
 		dataChanged();
@@ -131,8 +141,11 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 
 	@Override
 	public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
-		Calendar ultrasoundDate = DateUtils.getDate(datePickerUltrasoundDate);
-		mData.setUltrasoundDate(ultrasoundDate);
+		if (mData != null) {
+			Calendar ultrasoundDate = DateUtils
+					.getDate(datePickerUltrasoundDate);
+			mData.setUltrasoundDate(ultrasoundDate);
+		}
 
 		dataChanged();
 	}

@@ -47,14 +47,19 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
 
 	@Override
 	protected void updateData() {
-		DateUtils.init(datePickerOvulationDate, null);
-		DateUtils.init(datePickerOvulationDate, mData.getOvulationDate(), this);
+		if (mData != null) {
+			DateUtils.init(datePickerOvulationDate, null);
+			DateUtils.init(datePickerOvulationDate, mData.getOvulationDate(),
+					this);
+		}
 	}
 
 	@Override
 	public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
-		Calendar ovulationDate = DateUtils.getDate(datePickerOvulationDate);
-		mData.setOvulationDate(ovulationDate);
+		if (mData != null) {
+			Calendar ovulationDate = DateUtils.getDate(datePickerOvulationDate);
+			mData.setOvulationDate(ovulationDate);
+		}
 
 		dataChanged();
 	}
