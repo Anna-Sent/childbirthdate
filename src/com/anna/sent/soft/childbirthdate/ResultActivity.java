@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
-import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.ChildActivity;
 import com.anna.sent.soft.utils.DateUtils;
@@ -33,7 +32,6 @@ public class ResultActivity extends ChildActivity {
 
 	private int whatToDo;
 	private Calendar currentDate = Calendar.getInstance();
-	private Data data;
 
 	private AdView adView = null;
 
@@ -48,6 +46,11 @@ public class ResultActivity extends ChildActivity {
 		setMembersFromIntent();
 
 		setAdView();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 
 		clearViews();
 
@@ -55,7 +58,8 @@ public class ResultActivity extends ChildActivity {
 	}
 
 	private void clearViews() {
-		if (data.byLmp() || data.byOvulation() || data.byUltrasound()) {
+		if (getData().byLmp() || getData().byOvulation()
+				|| getData().byUltrasound()) {
 			if (Shared.ResultParam.Calculate.ECD == whatToDo) {
 				textView0.setText(getString(R.string.estimatedChildbirthDate));
 				textView00.setText(getString(R.string.rememberECD));
@@ -77,7 +81,7 @@ public class ResultActivity extends ChildActivity {
 			results[i].setText("");
 			messages[i].setText("");
 			int visibility = whatToDo != Shared.ResultParam.Calculate.NOTHING
-					&& data.byMethod()[i] ? View.VISIBLE : View.GONE;
+					&& getData().byMethod()[i] ? View.VISIBLE : View.GONE;
 			textViews[i].setVisibility(visibility);
 			results[i].setVisibility(visibility);
 			messages[i].setVisibility(visibility);
@@ -86,22 +90,22 @@ public class ResultActivity extends ChildActivity {
 
 	private void calculate() {
 		for (int i = 0; i < 3; ++i) {
-			if (data.byMethod()[i]) {
+			if (getData().byMethod()[i]) {
 				switch (i) {
 				case 0:
-					pregnancies[i] = PregnancyCalculator.Factory.get(
-							data.getLastMenstruationDate(),
-							data.getMenstrualCycleLen(),
-							data.getLutealPhaseLen());
+					pregnancies[i] = PregnancyCalculator.Factory.get(getData()
+							.getLastMenstruationDate(), getData()
+							.getMenstrualCycleLen(), getData()
+							.getLutealPhaseLen());
 					break;
 				case 1:
-					pregnancies[i] = PregnancyCalculator.Factory.get(data
+					pregnancies[i] = PregnancyCalculator.Factory.get(getData()
 							.getOvulationDate());
 					break;
 				case 2:
-					pregnancies[i] = PregnancyCalculator.Factory.get(
-							data.getUltrasoundDate(), data.getWeeks(),
-							data.getDays(), data.getIsEmbryonicAge());
+					pregnancies[i] = PregnancyCalculator.Factory.get(getData()
+							.getUltrasoundDate(), getData().getWeeks(),
+							getData().getDays(), getData().isEmbryonicAge());
 					break;
 				}
 
@@ -153,7 +157,7 @@ public class ResultActivity extends ChildActivity {
 		Pregnancy pregnancy = pregnancies[i];
 		if (i == 2 && pregnancy.isCorrect()) {
 			CharSequence old = message.getText();
-			if (pregnancy.isAccurateForUltrasound(data.getWeeks())) {
+			if (pregnancy.isAccurateForUltrasound(getData().getWeeks())) {
 				message.setText((old.equals("") ? "" : old + "\n")
 						+ getString(R.string.accurateUltrasoundResults));
 			} else {
@@ -207,12 +211,6 @@ public class ResultActivity extends ChildActivity {
 		currentDate.setTimeInMillis(intent.getLongExtra(
 				Shared.ResultParam.EXTRA_CURRENT_DATE,
 				System.currentTimeMillis()));
-
-		data = new Data();
-		data.restoreChecked(this);
-		data.restoreLmp(this);
-		data.restoreOvulation(this);
-		data.restoreUltrasound(this);
 	}
 
 	private void setAdView() {

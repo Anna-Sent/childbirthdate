@@ -2,7 +2,6 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import java.util.Calendar;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,32 +13,29 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.ResultActivity;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.DateUtils;
-import com.anna.sent.soft.utils.StateSaver;
-import com.anna.sent.soft.utils.StateSaverActivity;
+import com.anna.sent.soft.utils.MainActivityStateSaver;
+import com.anna.sent.soft.utils.StateSaverFragment;
 
-public class TitlesFragmentHelper implements OnClickListener, StateSaver {
+public class TitlesHelperFragment extends StateSaverFragment implements
+		OnClickListener {
 	private static final String EXTRA_GUI_CURRENT_DATE = "com.anna.sent.soft.childbirthdate.currentdate";
 
 	private DatePicker datePickerCurrentDate;
-	private Activity mActivity;
-
-	public TitlesFragmentHelper(Activity activity) {
-		mActivity = activity;
-	}
 
 	@Override
 	public void setViews() {
-		Button buttonCalculateECD = (Button) mActivity
-				.findViewById(R.id.buttonCalculateEstimatedChildbirthDate);
+		Button buttonCalculateECD = (Button) getActivity().findViewById(
+				R.id.buttonCalculateEstimatedChildbirthDate);
 		buttonCalculateECD.setOnClickListener(this);
-		Button buttonCalculateEGA = (Button) mActivity
-				.findViewById(R.id.buttonCalculateEstimatedGestationalAge);
+		Button buttonCalculateEGA = (Button) getActivity().findViewById(
+				R.id.buttonCalculateEstimatedGestationalAge);
 		buttonCalculateEGA.setOnClickListener(this);
 
-		datePickerCurrentDate = (DatePicker) mActivity
-				.findViewById(R.id.datePickerCurrentDate);
+		datePickerCurrentDate = (DatePicker) getActivity().findViewById(
+				R.id.datePickerCurrentDate);
 
-		Button buttonToday = (Button) mActivity.findViewById(R.id.buttonToday);
+		Button buttonToday = (Button) getActivity().findViewById(
+				R.id.buttonToday);
 		buttonToday.setOnClickListener(this);
 	}
 
@@ -66,15 +62,15 @@ public class TitlesFragmentHelper implements OnClickListener, StateSaver {
 	}
 
 	private void calculate(int whatToDo) {
-		Intent intent = new Intent(mActivity, ResultActivity.class);
+		Intent intent = new Intent(getActivity(), ResultActivity.class);
 
 		intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE, DateUtils
 				.getDate(datePickerCurrentDate).getTimeInMillis());
 		intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO, whatToDo);
 
-		saveMainActivityState(intent);
+		MainActivityStateSaver.save(getActivity(), intent);
 
-		mActivity.startActivity(intent);
+		startActivity(intent);
 	}
 
 	@Override
@@ -89,15 +85,6 @@ public class TitlesFragmentHelper implements OnClickListener, StateSaver {
 		case R.id.buttonToday:
 			today();
 			break;
-		}
-	}
-
-	public void saveMainActivityState(Intent intent) {
-		StateSaverActivity listener = (StateSaverActivity) mActivity;
-		if (listener != null) {
-			Bundle state = new Bundle();
-			listener.saveState(state);
-			intent.putExtra(Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE, state);
 		}
 	}
 }

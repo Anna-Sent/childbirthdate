@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.childbirthdate.shared.Data;
+import com.anna.sent.soft.childbirthdate.shared.DataImpl;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.ThemeUtils;
 
@@ -118,8 +118,8 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	protected abstract boolean hasShowCalculatingMethod();
 
 	private void init() {
-		Data data = new Data();
-		data.restoreChecked(this);
+		DataImpl data = new DataImpl(this);
+		data.update();
 		doCalculation = data.byLmp() || data.byOvulation()
 				|| data.byUltrasound();
 		textView = (TextView) findViewById(R.id.widgetConfigureTextView);

@@ -17,11 +17,15 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.adapters.ListItemArrayAdapter;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.shared.Data;
+import com.anna.sent.soft.childbirthdate.shared.DataClient;
+import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.DateUtils;
+import com.anna.sent.soft.utils.MainActivityStateSaver;
 import com.anna.sent.soft.utils.StateSaver;
 
 public class TitlesFragment extends ListFragment implements
-		DetailsFragment.OnDetailsChangedListener, StateSaver {
+		DetailsFragment.OnDetailsChangedListener, StateSaver,
+		ListItemArrayAdapter.OnCheckedListener, DataClient {
 	private static final String TAG = "moo";
 	private static final boolean DEBUG = true;
 	private static final boolean DEBUG_INDEX = false;
@@ -36,6 +40,12 @@ public class TitlesFragment extends ListFragment implements
 		}
 	}
 
+	private void log(String msg, boolean debug) {
+		if (debug) {
+			Log.d(TAG, wrapMsg(msg));
+		}
+	}
+
 	private void log(String msg, int index) {
 		if (DEBUG_INDEX) {
 			Log.d(TAG, wrapMsg(msg + index));
@@ -43,23 +53,28 @@ public class TitlesFragment extends ListFragment implements
 	}
 
 	private final static int REQUEST_POSITION = 1;
-	public final static String EXTRA_GUI_POSITION = "com.anna.sent.soft.childbirthdate.position";
 
 	private View mHeader = null, mFooter = null;
-	private TitlesFragmentHelper mHelper;
 	private ListItemArrayAdapter mListAdapter;
 	private boolean mDualPane;
 	private int mSelectedItem;
 
+	protected Data mData;
+
+	@Override
+	public void setData(Data data) {
+		mData = data;
+	}
+
 	public TitlesFragment() {
 		super();
-		log("create");
+		log("create", false);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		log("onCreateView");
+		log("onCreateView", false);
 		mHeader = inflater.inflate(R.layout.list_header, null);
 		mFooter = inflater.inflate(R.layout.list_footer, null);
 		return super.onCreateView(inflater, container, savedInstanceState);
@@ -67,7 +82,7 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		log("onActivityCreated");
+		log("onActivityCreated", false);
 		super.onActivityCreated(savedInstanceState);
 
 		setViews();
@@ -92,12 +107,9 @@ public class TitlesFragment extends ListFragment implements
 			getListView().addFooterView(mFooter);
 		}
 
-		Data data = new Data();
-		data.restoreChecked(getActivity());
-
 		// Populate list
-		mListAdapter = new ListItemArrayAdapter(getActivity(), getStrings1(),
-				getStrings2(), data.byMethod());
+		mListAdapter = new ListItemArrayAdapter(getActivity(), getStrings1());
+		mListAdapter.setOnCheckedListener(this);
 		setListAdapter(mListAdapter);
 
 		mDualPane = getResources().getBoolean(R.bool.has_two_panes);
@@ -108,32 +120,27 @@ public class TitlesFragment extends ListFragment implements
 
 		mSelectedItem = 0;
 		log("init index=", mSelectedItem);
-
-		mHelper = new TitlesFragmentHelper(getActivity());
-		mHelper.setViews();
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		log("onSaveInstanceState");
+		log("onSaveInstanceState", false);
 		saveState(outState);
 		super.onSaveInstanceState(outState);
 	}
 
 	@Override
 	public void restoreState(Bundle state) {
-		log("restore state");
-		mSelectedItem = state.getInt(EXTRA_GUI_POSITION, 0);
+		log("restore state", false);
+		mSelectedItem = state.getInt(Shared.Titles.EXTRA_GUI_POSITION, 0);
 		log("restore index=", mSelectedItem);
-		mHelper.restoreState(state);
 	}
 
 	@Override
 	public void saveState(Bundle state) {
-		log("save state");
-		state.putInt(EXTRA_GUI_POSITION, mSelectedItem);
+		log("save state", false);
+		state.putInt(Shared.Titles.EXTRA_GUI_POSITION, mSelectedItem);
 		log("save index=", mSelectedItem);
-		mHelper.saveState(state);
 	}
 
 	@Override
@@ -159,7 +166,7 @@ public class TitlesFragment extends ListFragment implements
 	 */
 	void showDetails(int index) {
 		// We can display everything in-place with fragments, so update
-		// the list to highlight the selected item and show the data.
+		// the list to highlight the selected item and show the mData.
 		getListView().setItemChecked(index, true);
 		mSelectedItem = index;
 		log("update index=", mSelectedItem);
@@ -171,13 +178,13 @@ public class TitlesFragment extends ListFragment implements
 			if (details == null || details.getShownIndex() != index) {
 				DetailsFragment newDetails = getDetailsFragmentInstance(index);
 				if (newDetails != null) {
-					log("update details " + newDetails.getShownIndex());
+					log("update details " + newDetails.getShownIndex(), false);
 					FragmentTransaction ft = fm.beginTransaction();
 					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 					ft.replace(R.id.details, newDetails);
 					ft.commit();
 				} else if (details != null) {
-					log("remove details" + details.getShownIndex());
+					log("remove details" + details.getShownIndex(), false);
 					FragmentTransaction ft = fm.beginTransaction();
 					ft.remove(details);
 					ft.commit();
@@ -188,9 +195,9 @@ public class TitlesFragment extends ListFragment implements
 			// the dialog fragment with selected text.
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), DetailsActivity.class);
-			intent.putExtra(EXTRA_GUI_POSITION, index);
+			intent.putExtra(Shared.Titles.EXTRA_GUI_POSITION, index);
 
-			mHelper.saveMainActivityState(intent);
+			MainActivityStateSaver.save(getActivity(), intent);
 
 			startActivityForResult(intent, REQUEST_POSITION);
 		}
@@ -206,7 +213,7 @@ public class TitlesFragment extends ListFragment implements
 				result = DetailsFragment.newInstance(index);
 				result.setOnDetailsChangedListener(this);
 				fragments[index] = result;
-				log("create new details " + result.getShownIndex());
+				log("create new details " + result.getShownIndex(), false);
 			}
 		}
 
@@ -217,8 +224,8 @@ public class TitlesFragment extends ListFragment implements
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_POSITION) {
 			if (resultCode == Activity.RESULT_OK) {
-				mSelectedItem = data.getIntExtra(EXTRA_GUI_POSITION,
-						mSelectedItem);
+				mSelectedItem = data.getIntExtra(
+						Shared.Titles.EXTRA_GUI_POSITION, mSelectedItem);
 				log("got index=", mSelectedItem);
 				if (mDualPane) {
 					showDetails(mSelectedItem);
@@ -233,28 +240,24 @@ public class TitlesFragment extends ListFragment implements
 
 	private String[] getStrings2() {
 		String[] result = new String[3];
-		Data data = new Data();
 
 		// first
-		data.restoreLmp(getActivity());
 		result[0] = getString(
 				R.string.titles0,
 				DateUtils.toString(getActivity(),
-						data.getLastMenstruationDate()),
-				data.getMenstrualCycleLen(), data.getLutealPhaseLen());
+						mData.getLastMenstruationDate()),
+				mData.getMenstrualCycleLen(), mData.getLutealPhaseLen());
 
 		// second
-		data.restoreOvulation(getActivity());
 		result[1] = getString(R.string.titles1,
-				DateUtils.toString(getActivity(), data.getOvulationDate()));
+				DateUtils.toString(getActivity(), mData.getOvulationDate()));
 
 		// third
-		data.restoreUltrasound(getActivity());
 		result[2] = getString(R.string.titles2, DateUtils.toString(
-				getActivity(), data.getUltrasoundDate()),
+				getActivity(), mData.getUltrasoundDate()),
 				Pregnancy.getStringRepresentation(getActivity(),
-						data.getWeeks(), data.getDays()),
-				data.getIsEmbryonicAge() ? getString(R.string.embryonic)
+						mData.getWeeks(), mData.getDays()),
+				mData.isEmbryonicAge() ? getString(R.string.embryonic)
 						: getString(R.string.gestational));
 
 		return result;
@@ -262,21 +265,24 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void detailsChanged() {
+		log("details changed, update values");
 		mListAdapter.updateValues(getStrings2());
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		detailsChanged();
-		log("resume");
+		log("resume, update values");
+		mListAdapter.updateValues(mData.byMethod(), getStrings2());
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		boolean[] checked = mListAdapter.getChecked();
-		Data.save(getActivity(), checked);
-		log("pause");
+	}
+
+	@Override
+	public void checked(int position, boolean isChecked) {
+		mData.setByMethod(position, isChecked);
 	}
 }

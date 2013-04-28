@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.utils.DateUtils;
 
-public class DetailsOvulationMethodFragment extends DetailsFragment {
+public class DetailsOvulationMethodFragment extends DetailsFragment implements
+		DatePicker.OnDateChangedListener {
 	private DatePicker datePickerOvulationDate;
 
 	public DetailsOvulationMethodFragment() {
@@ -43,21 +43,19 @@ public class DetailsOvulationMethodFragment extends DetailsFragment {
 		super.onActivityCreated(savedInstanceState);
 		datePickerOvulationDate = (DatePicker) getActivity().findViewById(
 				R.id.datePickerOvulationDate);
-		DateUtils.init(datePickerOvulationDate, this);
 	}
 
 	@Override
-	protected void restoreData() {
-		Data data = new Data();
-		data.restoreOvulation(getActivity());
-		DateUtils.setDate(datePickerOvulationDate, data.getOvulationDate());
+	protected void updateData() {
+		DateUtils.init(datePickerOvulationDate, null);
+		DateUtils.init(datePickerOvulationDate, mData.getOvulationDate(), this);
+	}
+
+	@Override
+	public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
+		Calendar ovulationDate = DateUtils.getDate(datePickerOvulationDate);
+		mData.setOvulationDate(ovulationDate);
 
 		dataChanged();
-	}
-
-	@Override
-	protected void saveData() {
-		Calendar ovulationDate = DateUtils.getDate(datePickerOvulationDate);
-		Data.save(getActivity(), ovulationDate);
 	}
 }

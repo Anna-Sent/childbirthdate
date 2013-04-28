@@ -11,6 +11,10 @@ public class Shared {
 				SETTINGS_FILE, Context.MODE_PRIVATE);
 	}
 
+	public static class Titles {
+		public final static String EXTRA_GUI_POSITION = "com.anna.sent.soft.childbirthdate.position";
+	}
+
 	public static class Saved {
 		public static class Calculation {
 			public static final String EXTRA_MENSTRUAL_CYCLE_LEN = "com.anna.sent.soft.childbirthdate.menstrualcyclelen";

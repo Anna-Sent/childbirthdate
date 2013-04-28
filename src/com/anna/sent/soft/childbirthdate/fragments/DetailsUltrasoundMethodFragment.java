@@ -12,12 +12,12 @@ import android.widget.RadioButton;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
-import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 import com.anna.sent.soft.utils.DateUtils;
 
 public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
-		OnClickListener {
+		OnClickListener, NumberPicker.OnValueChangeListener,
+		DatePicker.OnDateChangedListener {
 	private NumberPicker numberPickerWeeks, numberPickerDays;
 	private DatePicker datePickerUltrasoundDate;
 	private RadioButton radioButtonIsGestationalAge, radioButtonIsEmbryonicAge;
@@ -50,32 +50,22 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		super.onActivityCreated(savedInstanceState);
 		datePickerUltrasoundDate = (DatePicker) getActivity().findViewById(
 				R.id.datePickerUltrasoundDate);
-		DateUtils.init(datePickerUltrasoundDate, this);
 
 		radioButtonIsGestationalAge = (RadioButton) getActivity().findViewById(
 				R.id.radioIsGestationalAge);
-		radioButtonIsGestationalAge.setOnClickListener(this);
 		radioButtonIsEmbryonicAge = (RadioButton) getActivity().findViewById(
 				R.id.radioIsEmbryonicAge);
-		radioButtonIsEmbryonicAge.setOnClickListener(this);
 
 		numberPickerWeeks = (NumberPicker) getActivity().findViewById(
 				R.id.editTextWeeks);
-		numberPickerWeeks.setOnValueChangedListener(this);
 		numberPickerWeeks.setMinValue(0);
+		numberPickerWeeks.setOnValueChangedListener(this);
 
 		numberPickerDays = (NumberPicker) getActivity().findViewById(
 				R.id.editTextDays);
-		numberPickerDays.setOnValueChangedListener(this);
 		numberPickerDays.setMinValue(0);
 		numberPickerDays.setMaxValue(6);
-	}
-
-	private void radioClick(View view) {
-		numberPickerWeeks
-				.setMaxValue((radioButtonIsGestationalAge.isChecked() ? PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS
-						: PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS) - 1);
-		dataChanged();
+		numberPickerDays.setOnValueChangedListener(this);
 	}
 
 	@Override
@@ -83,40 +73,67 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		switch (v.getId()) {
 		case R.id.radioIsEmbryonicAge:
 		case R.id.radioIsGestationalAge:
-			radioClick(v);
+			boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
+			mData.setIsEmbryonicAge(isEmbryonicAge);
+
+			int previous = numberPickerWeeks.getValue();
+			numberPickerWeeks
+					.setMaxValue((mData.isEmbryonicAge() ? PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS
+							: PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS) - 1);
+			int current = numberPickerWeeks.getValue();
+			if (current != previous) {
+				mData.setWeeks(current);
+			}
+
+			dataChanged();
 			break;
 		}
 	}
 
 	@Override
-	protected void restoreData() {
-		Data data = new Data();
-		data.restoreUltrasound(getActivity());
-		DateUtils.setDate(datePickerUltrasoundDate, data.getUltrasoundDate());
+	protected void updateData() {
+		DateUtils.init(datePickerUltrasoundDate, null);
+		DateUtils.init(datePickerUltrasoundDate, mData.getUltrasoundDate(),
+				this);
 
-		// first: set radio button state
-		if (data.getIsEmbryonicAge()) {
+		radioButtonIsGestationalAge.setOnClickListener(null);
+		radioButtonIsEmbryonicAge.setOnClickListener(null);
+
+		if (mData.isEmbryonicAge()) {
 			radioButtonIsEmbryonicAge.setChecked(true);
 		} else {
 			radioButtonIsGestationalAge.setChecked(true);
 		}
 
-		// second: set max value for weeks number picker
-		radioClick(null);
+		radioButtonIsGestationalAge.setOnClickListener(this);
+		radioButtonIsEmbryonicAge.setOnClickListener(this);
 
-		// third: set value for weeks number picker
-		numberPickerWeeks.setValue(data.getWeeks());
-		numberPickerDays.setValue(data.getDays());
+		numberPickerWeeks
+				.setMaxValue((mData.isEmbryonicAge() ? PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS
+						: PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS) - 1);
+
+		numberPickerWeeks.setValue(mData.getWeeks());
+		numberPickerDays.setValue(mData.getDays());
+	}
+
+	@Override
+	public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+		if (picker.getId() == R.id.editTextWeeks) {
+			int weeks = numberPickerWeeks.getValue();
+			mData.setWeeks(weeks);
+		} else if (picker.getId() == R.id.editTextDays) {
+			int days = numberPickerDays.getValue();
+			mData.setDays(days);
+		}
 
 		dataChanged();
 	}
 
 	@Override
-	protected void saveData() {
+	public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
 		Calendar ultrasoundDate = DateUtils.getDate(datePickerUltrasoundDate);
-		int weeks = numberPickerWeeks.getValue();
-		int days = numberPickerDays.getValue();
-		boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
-		Data.save(getActivity(), ultrasoundDate, weeks, days, isEmbryonicAge);
+		mData.setUltrasoundDate(ultrasoundDate);
+
+		dataChanged();
 	}
 }

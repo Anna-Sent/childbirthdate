@@ -15,7 +15,7 @@ import com.anna.sent.soft.childbirthdate.R;
 public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 		OnClickListener {
 	private static final String TAG = "moo";
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 	private static final boolean DEBUG_CREATION = false;
 
 	private String wrapMsg(String msg) {
@@ -28,10 +28,19 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 		}
 	}
 
+	public interface OnCheckedListener {
+		public void checked(int position, boolean isChecked);
+	}
+
+	private OnCheckedListener mListener = null;
+
+	public void setOnCheckedListener(OnCheckedListener listener) {
+		mListener = listener;
+	}
+
 	private String[] mStrings1;
 	private String[] mStrings2;
 	private boolean[] mChecked;
-	// private ViewHolder[] mViewHolders;
 	private int mCount;
 
 	private static class ViewHolder {
@@ -41,16 +50,16 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 		private TextView text2;
 	}
 
-	public ListItemArrayAdapter(Context context, String[] strings1,
-			String[] strings2, boolean[] checked) {
+	public ListItemArrayAdapter(Context context, String[] strings1) {
 		super(context, R.layout.list_item, R.id.text1, strings1);
-		log("create", DEBUG);
 		mStrings1 = strings1;
-		mStrings2 = strings2;
-		mChecked = checked;
-		mCount = Math.min(mStrings1.length, mStrings2.length);
-		mCount = Math.min(mCount, mChecked.length);
-		// mViewHolders = new ViewHolder[mCount];
+		mCount = mStrings1.length;
+		mChecked = new boolean[mCount];
+		mStrings2 = new String[mCount];
+		for (int i = 0; i < mCount; ++i) {
+			mChecked[i] = false;
+			mStrings2[i] = "";
+		}
 	}
 
 	@Override
@@ -104,23 +113,37 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 	public void onClick(View v) {
 		ViewHolder viewHolder = (ViewHolder) v.getTag();
 		if (viewHolder != null) {
-			mChecked[viewHolder.position] = viewHolder.checkBox.isChecked();
+			int position = viewHolder.position;
+			mChecked[position] = viewHolder.checkBox.isChecked();
 			viewHolder.text2
 					.setVisibility(viewHolder.checkBox.isChecked() ? View.VISIBLE
 							: View.GONE);
+			if (mListener != null) {
+				mListener.checked(position, mChecked[position]);
+			}
+		}
+	}
+
+	public void updateValues(boolean[] checked, String[] strings2) {
+		if (checked.length == mCount && strings2.length == mCount) {
+			log("update values", DEBUG);
+			for (int i = 0; i < mCount; ++i) {
+				mChecked[i] = checked[i];
+				mStrings2[i] = strings2[i];
+			}
+
+			notifyDataSetChanged();
 		}
 	}
 
 	public void updateValues(String[] strings2) {
-		log("update values", DEBUG);
-		for (int i = 0; i < mCount && i < strings2.length; ++i) {
-			mStrings2[i] = strings2[i];
+		if (strings2.length == mCount) {
+			log("update values", DEBUG);
+			for (int i = 0; i < mCount; ++i) {
+				mStrings2[i] = strings2[i];
+			}
+
+			notifyDataSetChanged();
 		}
-
-		notifyDataSetChanged();
-	}
-
-	public boolean[] getChecked() {
-		return mChecked;
 	}
 }

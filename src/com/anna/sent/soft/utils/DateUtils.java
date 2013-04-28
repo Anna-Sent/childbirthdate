@@ -26,8 +26,13 @@ public class DateUtils {
 	public static void init(DatePicker datePicker,
 			DatePicker.OnDateChangedListener listener) {
 		Calendar today = Calendar.getInstance();
-		int year = today.get(Calendar.YEAR), monthOfYear = today
-				.get(Calendar.MONTH), dayOfMonth = today
+		init(datePicker, today, listener);
+	}
+
+	public static void init(DatePicker datePicker, Calendar date,
+			DatePicker.OnDateChangedListener listener) {
+		int year = date.get(Calendar.YEAR), monthOfYear = date
+				.get(Calendar.MONTH), dayOfMonth = date
 				.get(Calendar.DAY_OF_MONTH);
 		datePicker.init(year, monthOfYear, dayOfMonth, listener);
 	}

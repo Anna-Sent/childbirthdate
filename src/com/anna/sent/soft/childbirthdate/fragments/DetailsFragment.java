@@ -1,13 +1,33 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
-import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.widget.DatePicker;
+import android.util.Log;
 
-public abstract class DetailsFragment extends Fragment implements
-		NumberPicker.OnValueChangeListener, DatePicker.OnDateChangedListener {
+import com.anna.sent.soft.childbirthdate.shared.Data;
+import com.anna.sent.soft.childbirthdate.shared.DataClient;
+import com.anna.sent.soft.childbirthdate.shared.Shared;
+
+public abstract class DetailsFragment extends Fragment implements DataClient {
+	private static final String TAG = "moo";
+	private static final boolean DEBUG = true;
+
+	private String wrapMsg(String msg) {
+		return getClass().getSimpleName() + ": " + msg;
+	}
+
+	private void log(String msg) {
+		if (DEBUG) {
+			Log.d(TAG, wrapMsg(msg));
+		}
+	}
+
+	private void log(String msg, boolean debug) {
+		if (debug) {
+			Log.d(TAG, wrapMsg(msg));
+		}
+	}
+
 	public interface OnDetailsChangedListener {
 		void detailsChanged();
 	}
@@ -16,6 +36,13 @@ public abstract class DetailsFragment extends Fragment implements
 
 	public void setOnDetailsChangedListener(OnDetailsChangedListener listener) {
 		mListener = listener;
+	}
+
+	protected Data mData;
+
+	@Override
+	public void setData(Data data) {
+		mData = data;
 	}
 
 	public DetailsFragment() {
@@ -43,45 +70,33 @@ public abstract class DetailsFragment extends Fragment implements
 		}
 
 		Bundle args = new Bundle();
-		args.putInt("index", index);
+		args.putInt(Shared.Titles.EXTRA_GUI_POSITION, index);
 		details.setArguments(args);
 		return details;
 	}
 
 	public int getShownIndex() {
-		return getArguments().getInt("index", -1);
+		return getArguments().getInt(Shared.Titles.EXTRA_GUI_POSITION, -1);
 	}
 
-	protected abstract void saveData();
-
-	protected abstract void restoreData();
-
 	protected void dataChanged() {
-		saveData();
+		log("data changed", false);
 		if (mListener != null) {
 			mListener.detailsChanged();
 		}
 	}
 
-	@Override
-	public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
-		dataChanged();
-	}
-
-	@Override
-	public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-		dataChanged();
-	}
+	protected abstract void updateData();
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		restoreData();
+		log("resume, update data " + getShownIndex());
+		updateData();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		saveData();
 	}
 }

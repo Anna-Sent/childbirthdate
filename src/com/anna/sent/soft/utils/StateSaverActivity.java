@@ -1,13 +1,19 @@
 package com.anna.sent.soft.utils;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+
+import com.anna.sent.soft.childbirthdate.shared.DataClient;
+import com.anna.sent.soft.childbirthdate.shared.DataImpl;
 
 public abstract class StateSaverActivity extends FragmentActivity implements
 		StateSaver {
 	private static final String TAG = "moo";
-	private static final boolean DEBUG = false;
+	private static final boolean DEBUG = true;
 
 	private String wrapMsg(String msg) {
 		return getClass().getSimpleName() + ": " + msg;
@@ -19,11 +25,25 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 		}
 	}
 
+	private void log(String msg, boolean debug) {
+		if (debug) {
+			Log.d(TAG, wrapMsg(msg));
+		}
+	}
+
+	private DataImpl mConcreteData;
+	private ArrayList<StateSaver> mStateSavers = new ArrayList<StateSaver>();
+
+	protected DataImpl getData() {
+		return mConcreteData;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		ThemeUtils.onActivityCreateSetTheme(this);
 		super.onCreate(savedInstanceState);
 
+		mConcreteData = new DataImpl(this);
 		setViews();
 
 		if (savedInstanceState != null) {
@@ -38,7 +58,7 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		log("onSaveInstanceState");
+		log("onSaveInstanceState", false);
 		beforeOnSaveInstanceState();
 		saveActivityState(outState);
 		super.onSaveInstanceState(outState);
@@ -61,6 +81,38 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 	public void saveActivityState(Bundle state) {
 	}
 
-	public void saveFragmentState(Bundle state) {
+	private void saveFragmentState(Bundle state) {
+		for (int i = 0; i < mStateSavers.size(); ++i) {
+			mStateSavers.get(i).saveState(state);
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		log("resume, update data");
+		mConcreteData.update();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		log("pause, save data");
+		mConcreteData.save();
+	}
+
+	@Override
+	public void onAttachFragment(Fragment fragment) {
+		super.onAttachFragment(fragment);
+		log("attach " + fragment.toString());
+		if (fragment instanceof DataClient) {
+			DataClient dataClient = (DataClient) fragment;
+			dataClient.setData(mConcreteData);
+		}
+
+		if (fragment instanceof StateSaver) {
+			StateSaver stateSaver = (StateSaver) fragment;
+			mStateSavers.add(stateSaver);
+		}
 	}
 }

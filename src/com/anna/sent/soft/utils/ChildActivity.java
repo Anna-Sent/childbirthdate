@@ -36,10 +36,10 @@ public class ChildActivity extends StateSaverActivity {
 					Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE);
 			saveAdditionalData(savedState);
 			if (savedState == null) {
-				// ResultActivity is started from Widget
+				// child activity is started from Widget
 				createParentStack();
 			} else {
-				// ResultActivity is started from MainActivity
+				// child activity is started from MainActivity
 				Intent intent = new Intent(this, MainActivity.class);
 				intent.putExtras(savedState);
 				NavUtils.navigateUpTo(this, intent);
@@ -60,7 +60,7 @@ public class ChildActivity extends StateSaverActivity {
 		Bundle savedState = getIntent().getBundleExtra(
 				Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE);
 		if (savedState == null) {
-			// ResultActivity is started from Widget
+			// child activity is started from Widget
 			createParentStack();
 		}
 

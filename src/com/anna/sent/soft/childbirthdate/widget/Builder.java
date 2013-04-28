@@ -12,7 +12,7 @@ import android.widget.RemoteViews;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
-import com.anna.sent.soft.childbirthdate.shared.Data;
+import com.anna.sent.soft.childbirthdate.shared.DataImpl;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public abstract class Builder {
@@ -48,23 +48,21 @@ public abstract class Builder {
 						+ appWidgetId, false);
 		Pregnancy p = null;
 		String calculatingMethodString = "";
-		Data data = new Data();
+		DataImpl data = new DataImpl(context);
+		data.update();
 		switch (calculatingMethod) {
 		case Shared.Saved.Widget.Calculate.BY_LMP:
-			data.restoreLmp(context);
 			p = PregnancyCalculator.Factory.get(data.getLastMenstruationDate(),
 					data.getMenstrualCycleLen(), data.getLutealPhaseLen());
 			calculatingMethodString = context.getString(R.string.byLMP);
 			break;
 		case Shared.Saved.Widget.Calculate.BY_OVULATION_DAY:
-			data.restoreOvulation(context);
 			p = PregnancyCalculator.Factory.get(data.getOvulationDate());
 			calculatingMethodString = context.getString(R.string.byOvulation);
 			break;
 		case Shared.Saved.Widget.Calculate.BY_ULTRASOUND:
-			data.restoreUltrasound(context);
 			p = PregnancyCalculator.Factory.get(data.getUltrasoundDate(),
-					data.getWeeks(), data.getDays(), data.getIsEmbryonicAge());
+					data.getWeeks(), data.getDays(), data.isEmbryonicAge());
 			calculatingMethodString = context.getString(R.string.byUltrasound);
 			break;
 		}

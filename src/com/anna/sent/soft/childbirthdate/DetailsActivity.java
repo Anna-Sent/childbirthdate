@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 
 import com.anna.sent.soft.childbirthdate.adapters.DetailsPagerAdapter;
-import com.anna.sent.soft.childbirthdate.fragments.TitlesFragment;
+import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.ChildActivity;
 
 public class DetailsActivity extends ChildActivity implements
@@ -40,7 +40,7 @@ public class DetailsActivity extends ChildActivity implements
 
 	@Override
 	public void restoreState(Bundle state) {
-		mIndex = state.getInt(TitlesFragment.EXTRA_GUI_POSITION);
+		mIndex = state.getInt(Shared.Titles.EXTRA_GUI_POSITION);
 		/* Log.d("moo", "details: restore index=" + mIndex); */
 	}
 
@@ -59,7 +59,7 @@ public class DetailsActivity extends ChildActivity implements
 
 	@Override
 	public void saveActivityState(Bundle state) {
-		state.putInt(TitlesFragment.EXTRA_GUI_POSITION, mIndex);
+		state.putInt(Shared.Titles.EXTRA_GUI_POSITION, mIndex);
 		/* Log.d("moo", "details: save index=" + mIndex); */
 	}
 
@@ -86,14 +86,14 @@ public class DetailsActivity extends ChildActivity implements
 
 	private void setResult() {
 		Intent data = new Intent();
-		data.putExtra(TitlesFragment.EXTRA_GUI_POSITION, mIndex);
+		data.putExtra(Shared.Titles.EXTRA_GUI_POSITION, mIndex);
 		setResult(RESULT_OK, data);
 		/* Log.d("moo", "details: set result index=" + mIndex); */
 	}
 
 	@Override
 	protected void saveAdditionalData(Bundle state) {
-		state.putInt(TitlesFragment.EXTRA_GUI_POSITION, mIndex);
+		state.putInt(Shared.Titles.EXTRA_GUI_POSITION, mIndex);
 	}
 
 	@Override

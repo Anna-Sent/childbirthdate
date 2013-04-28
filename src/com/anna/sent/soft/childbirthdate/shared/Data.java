@@ -2,178 +2,46 @@ package com.anna.sent.soft.childbirthdate.shared;
 
 import java.util.Calendar;
 
-import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
+public interface Data {
+	public boolean byLmp();
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.util.Log;
+	public boolean byOvulation();
 
-public class Data {
-	private static final String TAG = "moo";
-	private static final boolean DEBUG = true;
+	public boolean byUltrasound();
 
-	private static String wrapMsg(String msg) {
-		return "Data: " + msg;
-	}
+	public boolean[] byMethod();
 
-	private static void log(String msg) {
-		if (DEBUG) {
-			Log.d(TAG, wrapMsg(msg));
-		}
-	}
+	public boolean isEmbryonicAge();
 
-	private boolean isEmbryonicAge;
-	private boolean[] byMethod = new boolean[3];
-	private Calendar lastMenstruationDate, ovulationDate, ultrasoundDate;
-	private int menstrualCycleLen, lutealPhaseLen, weeks, days;
+	public Calendar getLastMenstruationDate();
 
-	public boolean byLmp() {
-		return byMethod[0];
-	}
+	public Calendar getOvulationDate();
 
-	public boolean byOvulation() {
-		return byMethod[1];
-	}
+	public Calendar getUltrasoundDate();
 
-	public boolean byUltrasound() {
-		return byMethod[2];
-	}
+	public int getMenstrualCycleLen();
 
-	public boolean[] byMethod() {
-		return byMethod;
-	}
+	public int getLutealPhaseLen();
 
-	public boolean getIsEmbryonicAge() {
-		return isEmbryonicAge;
-	}
+	public int getWeeks();
 
-	public Calendar getLastMenstruationDate() {
-		return lastMenstruationDate;
-	}
+	public int getDays();
 
-	public Calendar getOvulationDate() {
-		return ovulationDate;
-	}
+	public void setByMethod(int index, boolean value);
 
-	public Calendar getUltrasoundDate() {
-		return ultrasoundDate;
-	}
+	public void setIsEmbryonicAge(boolean value);
 
-	public int getMenstrualCycleLen() {
-		return menstrualCycleLen;
-	}
+	public void setLastMenstruationDate(Calendar value);
 
-	public int getLutealPhaseLen() {
-		return lutealPhaseLen;
-	}
+	public void setOvulationDate(Calendar value);
 
-	public int getWeeks() {
-		return weeks;
-	}
+	public void setUltrasoundDate(Calendar value);
 
-	public int getDays() {
-		return days;
-	}
+	public void setMenstrualCycleLen(int value);
 
-	public static void save(Context context, Calendar lastMenstruationDate,
-			int menstrualCycleLen, int lutealPhaseLen) {
-		log("save lmp");
-		SharedPreferences settings = Shared.getSettings(context);
-		Editor editor = settings.edit();
-		editor.putLong(Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
-				lastMenstruationDate.getTimeInMillis());
-		editor.putInt(Shared.Saved.Calculation.EXTRA_MENSTRUAL_CYCLE_LEN,
-				menstrualCycleLen);
-		editor.putInt(Shared.Saved.Calculation.EXTRA_LUTEAL_PHASE_LEN,
-				lutealPhaseLen);
-		editor.commit();
-	}
+	public void setLutealPhaseLen(int value);
 
-	public void restoreLmp(Context context) {
-		log("restore lmp");
-		SharedPreferences settings = Shared.getSettings(context);
-		lastMenstruationDate = Calendar.getInstance();
-		lastMenstruationDate.setTimeInMillis(settings.getLong(
-				Shared.Saved.Calculation.EXTRA_LAST_MENSTRUATION_DATE,
-				System.currentTimeMillis()));
-		menstrualCycleLen = settings.getInt(
-				Shared.Saved.Calculation.EXTRA_MENSTRUAL_CYCLE_LEN,
-				PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
-		lutealPhaseLen = settings.getInt(
-				Shared.Saved.Calculation.EXTRA_LUTEAL_PHASE_LEN,
-				PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
-	}
+	public void setWeeks(int value);
 
-	public static void save(Context context, Calendar ovulationDate) {
-		log("save ovulation");
-		SharedPreferences settings = Shared.getSettings(context);
-		Editor editor = settings.edit();
-		editor.putLong(Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
-				ovulationDate.getTimeInMillis());
-		editor.commit();
-	}
-
-	public void restoreOvulation(Context context) {
-		log("restore ovulation");
-		SharedPreferences settings = Shared.getSettings(context);
-		ovulationDate = Calendar.getInstance();
-		ovulationDate.setTimeInMillis(settings.getLong(
-				Shared.Saved.Calculation.EXTRA_OVULATION_DATE,
-				System.currentTimeMillis()));
-	}
-
-	public static void save(Context context, Calendar ultrasoundDate,
-			int weeks, int days, boolean isEmbryonicAge) {
-		log("save ultrasound");
-		SharedPreferences settings = Shared.getSettings(context);
-		Editor editor = settings.edit();
-		editor.putLong(Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
-				ultrasoundDate.getTimeInMillis());
-		editor.putInt(Shared.Saved.Calculation.EXTRA_WEEKS, weeks);
-		editor.putInt(Shared.Saved.Calculation.EXTRA_DAYS, days);
-		editor.putBoolean(Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE,
-				isEmbryonicAge);
-		editor.commit();
-	}
-
-	public void restoreUltrasound(Context context) {
-		log("restore ultrasound");
-		SharedPreferences settings = Shared.getSettings(context);
-		weeks = settings.getInt(Shared.Saved.Calculation.EXTRA_WEEKS, 0);
-		days = settings.getInt(Shared.Saved.Calculation.EXTRA_DAYS, 0);
-		isEmbryonicAge = settings.getBoolean(
-				Shared.Saved.Calculation.EXTRA_IS_EMBRYONIC_AGE, false);
-		ultrasoundDate = Calendar.getInstance();
-		ultrasoundDate.setTimeInMillis(settings.getLong(
-				Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
-				System.currentTimeMillis()));
-	}
-
-	public static void save(Context context, boolean[] checked) {
-		log("save checked");
-		SharedPreferences settings = Shared.getSettings(context);
-		Editor editor = settings.edit();
-		editor.putBoolean(
-				Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
-				checked[0]);
-		editor.putBoolean(Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE,
-				checked[1]);
-		editor.putBoolean(Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND,
-				checked[2]);
-		editor.commit();
-	}
-
-	public void restoreChecked(Context context) {
-		log("restore checked");
-		SharedPreferences settings = Shared.getSettings(context);
-		byMethod[0] = settings
-				.getBoolean(
-						Shared.Saved.Calculation.EXTRA_BY_LAST_MENSTRUATION_DATE,
-						false);
-		byMethod[1] = settings.getBoolean(
-				Shared.Saved.Calculation.EXTRA_BY_OVULATION_DATE, false);
-		byMethod[2] = settings.getBoolean(
-				Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND, false);
-	}
+	public void setDays(int value);
 }
