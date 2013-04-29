@@ -87,6 +87,7 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 	private void saveFragmentState(Bundle state) {
 		for (int i = 0; i < mStateSavers.size(); ++i) {
 			mStateSavers.get(i).saveState(state);
+			log("save fragment state " + i);
 		}
 	}
 
