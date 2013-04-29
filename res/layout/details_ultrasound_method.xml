@@ -27,8 +27,8 @@
             <TextView
                 style="@style/TextViewStyle"
                 android:layout_width="wrap_content"
-                android:text="@string/weeks"
-                android:paddingRight="@dimen/view_padding" />
+                android:paddingRight="@dimen/view_padding"
+                android:text="@string/weeks" />
 
             <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                 android:id="@+id/editTextDays"
