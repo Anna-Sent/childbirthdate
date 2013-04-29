@@ -8,7 +8,7 @@ public abstract class StateSaverFragment extends Fragment implements StateSaver 
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		setViews();
+		setViews(savedInstanceState);
 
 		if (savedInstanceState != null) {
 			restoreState(savedInstanceState);
@@ -26,9 +26,12 @@ public abstract class StateSaverFragment extends Fragment implements StateSaver 
 		super.onSaveInstanceState(outState);
 	}
 
-	public abstract void setViews();
+	@Override
+	public abstract void setViews(Bundle savedInstanceState);
 
+	@Override
 	public abstract void restoreState(Bundle state);
 
+	@Override
 	public abstract void saveState(Bundle state);
 }

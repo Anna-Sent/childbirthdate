@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -36,8 +37,8 @@ public class ResultActivity extends ChildActivity {
 	private AdView adView = null;
 
 	@Override
-	public void setViews() {
-		super.setViews();
+	public void setViews(Bundle savedInstanceState) {
+		super.setViews(savedInstanceState);
 
 		setContentView(R.layout.activity_result);
 

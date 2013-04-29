@@ -29,7 +29,7 @@ public class TabHelpFragment extends StateSaverFragment {
 	}
 
 	@Override
-	public void setViews() {
+	public void setViews(Bundle savedInstanceState) {
 		textViewHelp = (TextView) getActivity().findViewById(R.id.textViewHelp);
 		textViewHelp.setText(Html.fromHtml(getString(R.string.bigHelp)));
 		scrollView = (ScrollView) getActivity().findViewById(R.id.tabHelp);

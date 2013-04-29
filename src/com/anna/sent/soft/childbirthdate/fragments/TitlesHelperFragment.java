@@ -23,7 +23,7 @@ public class TitlesHelperFragment extends StateSaverFragment implements
 	private DatePicker datePickerCurrentDate;
 
 	@Override
-	public void setViews() {
+	public void setViews(Bundle savedInstanceState) {
 		Button buttonCalculateECD = (Button) getActivity().findViewById(
 				R.id.buttonCalculateEstimatedChildbirthDate);
 		buttonCalculateECD.setOnClickListener(this);

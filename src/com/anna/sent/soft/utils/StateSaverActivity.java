@@ -44,7 +44,7 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 
 		mConcreteData = new DataImpl(this);
-		setViews();
+		setViews(savedInstanceState);
 
 		if (savedInstanceState != null) {
 			restoreState(savedInstanceState);
@@ -64,12 +64,15 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 		super.onSaveInstanceState(outState);
 	}
 
-	public void setViews() {
+	@Override
+	public void setViews(Bundle savedInstanceState) {
 	}
 
+	@Override
 	public void restoreState(Bundle state) {
 	}
 
+	@Override
 	public void saveState(Bundle state) {
 		saveActivityState(state);
 		saveFragmentState(state);

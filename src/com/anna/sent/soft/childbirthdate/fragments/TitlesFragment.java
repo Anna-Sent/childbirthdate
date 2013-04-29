@@ -53,6 +53,7 @@ public class TitlesFragment extends ListFragment implements
 	}
 
 	private final static int REQUEST_POSITION = 1;
+	private static final String TAG_TITLES_HELPER = "TitlesHelper";
 
 	private View mHeader = null, mFooter = null;
 	private ListItemArrayAdapter mListAdapter;
@@ -85,7 +86,7 @@ public class TitlesFragment extends ListFragment implements
 		log("onActivityCreated", false);
 		super.onActivityCreated(savedInstanceState);
 
-		setViews();
+		setViews(savedInstanceState);
 
 		if (savedInstanceState != null) {
 			restoreState(savedInstanceState);
@@ -98,7 +99,7 @@ public class TitlesFragment extends ListFragment implements
 	}
 
 	@Override
-	public void setViews() {
+	public void setViews(Bundle savedInstanceState) {
 		if (mHeader != null) {
 			getListView().addFooterView(mHeader);
 		}
@@ -120,6 +121,12 @@ public class TitlesFragment extends ListFragment implements
 
 		mSelectedItem = 0;
 		log("init index=", mSelectedItem);
+
+		if (savedInstanceState == null) {
+			getFragmentManager().beginTransaction()
+					.add(new TitlesHelperFragment(), TAG_TITLES_HELPER)
+					.commit();
+		}
 	}
 
 	@Override

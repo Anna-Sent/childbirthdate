@@ -18,8 +18,8 @@ public class DetailsActivity extends ChildActivity implements
 	private static int mIndex = 0;
 
 	@Override
-	public void setViews() {
-		super.setViews();
+	public void setViews(Bundle savedInstanceState) {
+		super.setViews(savedInstanceState);
 
 		if (getResources().getBoolean(R.bool.has_two_panes)) {
 			// If the screen is now in landscape mode, we can show the
