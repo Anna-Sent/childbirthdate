@@ -9,8 +9,29 @@
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
     </style>
 
+    <declare-styleable name="Theme">
+        <attr name="imageButtonEditStyle" format="reference" />
+        <attr name="imageButtonHelpStyle" format="reference" />
+    </declare-styleable>
+
     <style name="ButtonStyle.LargeText">
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    </style>
+
+    <style name="ButtonStyle.ImageButtonEdit">
+        <item name="android:src">@drawable/edit_dark</item>
+    </style>
+
+    <style name="ButtonStyle.ImageButtonEdit.Light">
+        <item name="android:src">@drawable/edit_light</item>
+    </style>
+
+    <style name="ButtonStyle.ImageButtonHelp">
+        <item name="android:src">@drawable/help_dark</item>
+    </style>
+
+    <style name="ButtonStyle.ImageButtonHelp.Light">
+        <item name="android:src">@drawable/help_light</item>
     </style>
 
 </resources>

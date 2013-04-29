@@ -9,9 +9,15 @@
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
     </style>
 
-    <style name="AppTheme" parent="AppBaseTheme" />
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="imageButtonEditStyle">@style/ButtonStyle.ImageButtonEdit</item>
+        <item name="imageButtonHelpStyle">@style/ButtonStyle.ImageButtonHelp</item>
+    </style>
 
-    <style name="AppThemeLight" parent="AppBaseThemeLight" />
+    <style name="AppThemeLight" parent="AppBaseThemeLight">
+        <item name="imageButtonEditStyle">@style/ButtonStyle.ImageButtonEdit.Light</item>
+        <item name="imageButtonHelpStyle">@style/ButtonStyle.ImageButtonHelp.Light</item>
+    </style>
 
     <style name="DialogTheme" parent="android:Theme.Dialog">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
