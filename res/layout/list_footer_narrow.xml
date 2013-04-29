@@ -10,11 +10,11 @@
         style="@style/TextViewStyle.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/buttonToday"
+        android:layout_alignParentLeft="true"
         android:text="@string/currentDate" />
 
     <Button
-        android:id="@id/buttonToday"
+        android:id="@+id/buttonToday"
         style="@style/ButtonStyle"
         android:layout_alignParentRight="true"
         android:text="@string/today" />
