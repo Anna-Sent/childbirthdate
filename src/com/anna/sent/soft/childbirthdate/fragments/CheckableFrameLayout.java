@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.widget.Checkable;
 import android.widget.FrameLayout;
 
+import com.anna.sent.soft.childbirthdate.R;
+
 public class CheckableFrameLayout extends FrameLayout implements Checkable {
 	private boolean mChecked;
 
@@ -20,7 +22,8 @@ public class CheckableFrameLayout extends FrameLayout implements Checkable {
 	@SuppressWarnings("deprecation")
 	public void setChecked(boolean checked) {
 		mChecked = checked;
-		setBackgroundDrawable(checked ? new ColorDrawable(0xff0000a0/*003ea8f6*/) : null);
+		setBackgroundDrawable(checked ? new ColorDrawable(getResources()
+				.getColor(R.color.blue)) : null);
 	}
 
 	public boolean isChecked() {
