@@ -171,7 +171,7 @@ public class TitlesFragment extends ListFragment implements
 	 * displaying a fragment in-place in the current UI, or starting a whole new
 	 * activity in which it is displayed.
 	 */
-	void showDetails(int index) {
+	private void showDetails(int index) {
 		// We can display everything in-place with fragments, so update
 		// the list to highlight the selected item and show the mData.
 		getListView().setItemChecked(index, true);
