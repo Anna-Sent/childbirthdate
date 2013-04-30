@@ -31,6 +31,7 @@ public class TabHelpFragmentFactory {
 	public abstract static class TabHelpFragment extends StateSaverFragment {
 		private TextView textViewHelp;
 		private ScrollView scrollView;
+		private int mScrollY = 0;
 
 		private final static String EXTRA_GUI_SCROLL_Y = "com.anna.sent.soft.childbirthdate.tabhelp.srolly";
 
@@ -66,15 +67,19 @@ public class TabHelpFragmentFactory {
 		@Override
 		public void restoreState(Bundle state) {
 			if (scrollView != null) {
-				final int y = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
-				Log.d("moo", "restore scroll " + y);
-				scrollView.post(new Runnable() {
-					@Override
-					public void run() {
-						scrollView.scrollTo(0, y);
-					}
-				});
+				mScrollY = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
+				Log.d("moo", "restore scroll " + mScrollY);
+				setScrollY();
 			}
+		}
+
+		public void setScrollY() {
+			scrollView.post(new Runnable() {
+				@Override
+				public void run() {
+					scrollView.scrollTo(0, mScrollY);
+				}
+			});
 		}
 
 		@Override
