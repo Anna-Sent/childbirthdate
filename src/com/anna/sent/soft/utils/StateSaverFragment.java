@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 
 public abstract class StateSaverFragment extends Fragment implements StateSaver {
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
+	public final void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
 		setViews(savedInstanceState);
@@ -21,7 +21,7 @@ public abstract class StateSaverFragment extends Fragment implements StateSaver 
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public final void onSaveInstanceState(Bundle outState) {
 		saveState(outState);
 		super.onSaveInstanceState(outState);
 	}
