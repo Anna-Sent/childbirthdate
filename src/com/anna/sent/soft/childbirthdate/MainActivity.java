@@ -1,5 +1,6 @@
 package com.anna.sent.soft.childbirthdate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
+import com.anna.sent.soft.utils.MainActivityStateSaver;
 import com.anna.sent.soft.utils.StateSaverActivity;
 import com.anna.sent.soft.utils.ThemeUtils;
 
@@ -47,7 +49,6 @@ public class MainActivity extends StateSaverActivity {
 			menu.findItem(R.id.lighttheme).setChecked(true);
 			break;
 		case ThemeUtils.DARK_THEME:
-		default:
 			menu.findItem(R.id.darktheme).setChecked(true);
 			break;
 		}
@@ -64,6 +65,13 @@ public class MainActivity extends StateSaverActivity {
 		case R.id.darktheme:
 			ThemeUtils.changeToTheme(this, ThemeUtils.DARK_THEME);
 			return true;
+		case R.id.help:
+			Intent intent = new Intent();
+			intent.setClass(this, HelpActivity.class);
+
+			MainActivityStateSaver.save(this, intent);
+
+			startActivity(intent);
 		default:
 			return super.onOptionsItemSelected(item);
 		}

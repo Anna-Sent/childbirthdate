@@ -3,21 +3,17 @@
 
     <style name="AppBaseTheme" parent="android:Theme">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
+        <item name="helpIcon">@drawable/help_dark</item>
     </style>
 
     <style name="AppBaseThemeLight" parent="android:Theme.Light">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
+        <item name="helpIcon">@drawable/help_light</item>
     </style>
 
-    <style name="AppTheme" parent="AppBaseTheme">
-        <item name="imageButtonEditStyle">@style/ButtonStyle.ImageButtonEdit</item>
-        <item name="imageButtonHelpStyle">@style/ButtonStyle.ImageButtonHelp</item>
-    </style>
+    <style name="AppTheme" parent="AppBaseTheme" />
 
-    <style name="AppThemeLight" parent="AppBaseThemeLight">
-        <item name="imageButtonEditStyle">@style/ButtonStyle.ImageButtonEdit.Light</item>
-        <item name="imageButtonHelpStyle">@style/ButtonStyle.ImageButtonHelp.Light</item>
-    </style>
+    <style name="AppThemeLight" parent="AppBaseThemeLight" />
 
     <style name="DialogTheme" parent="android:Theme.Dialog">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
@@ -26,5 +22,9 @@
     <style name="DialogThemeLight" parent="android:Theme.Dialog">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
     </style>
+
+    <declare-styleable name="AppTheme">
+        <attr name="helpIcon" format="reference" />
+    </declare-styleable>
 
 </resources>

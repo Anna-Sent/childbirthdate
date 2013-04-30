@@ -3,10 +3,12 @@
 
     <style name="AppBaseTheme" parent="android:Theme.Holo">
         <item name="numberPickerStyle">@style/Widget.Holo.NumberPicker</item>
+        <item name="helpIcon">@drawable/help_dark</item>
     </style>
 
     <style name="AppBaseThemeLight" parent="android:Theme.Holo.Light.DarkActionBar">
         <item name="numberPickerStyle">@style/Widget.Holo.Light.NumberPicker</item>
+        <item name="helpIcon">@drawable/help_dark</item>
     </style>
 
 </resources>
