@@ -47,7 +47,7 @@ public class DetailsActivity extends ChildActivity implements
 	@Override
 	public void beforeOnSaveInstanceState() {
 		FragmentManager fm = getSupportFragmentManager();
-		for (int i = 0; i < 3; ++i) {
+		for (int i = 0; i < mTabsAdapter.getCount(); ++i) {
 			Fragment details = mTabsAdapter.getFragment(i);
 			if (details != null) {
 				FragmentTransaction ft = fm.beginTransaction();

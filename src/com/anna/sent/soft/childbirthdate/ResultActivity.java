@@ -78,7 +78,7 @@ public class ResultActivity extends ChildActivity {
 			textView00.setText(getString(R.string.consultADoctor));
 		}
 
-		for (int i = 0; i < 3; ++i) {
+		for (int i = 0; i < getData().byMethod().length; ++i) {
 			results[i].setText("");
 			messages[i].setText("");
 			int visibility = whatToDo != Shared.ResultParam.Calculate.NOTHING
@@ -90,7 +90,7 @@ public class ResultActivity extends ChildActivity {
 	}
 
 	private void calculate() {
-		for (int i = 0; i < 3; ++i) {
+		for (int i = 0; i < getData().byMethod().length; ++i) {
 			if (getData().byMethod()[i]) {
 				switch (i) {
 				case 0:
