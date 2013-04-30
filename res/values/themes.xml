@@ -3,7 +3,7 @@
 
     <style name="AppBaseTheme" parent="android:Theme">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
-        <item name="helpIcon">@drawable/help_dark</item>
+        <item name="helpIcon">@drawable/help_light</item>
     </style>
 
     <style name="AppBaseThemeLight" parent="android:Theme.Light">
