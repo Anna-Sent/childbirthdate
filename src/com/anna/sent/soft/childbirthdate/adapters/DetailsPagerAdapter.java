@@ -14,13 +14,13 @@ public class DetailsPagerAdapter extends MyFragmentPagerAdapter {
 	}
 
 	@Override
-	public Fragment getItem(int arg0) {
-		return DetailsFragment.newInstance(arg0);
+	public Fragment getItem(int position) {
+		return DetailsFragment.newInstance(position);
 	}
 
 	@Override
 	public int getCount() {
-		return 3;
+		return mTitles.length;
 	}
 
 	@Override
