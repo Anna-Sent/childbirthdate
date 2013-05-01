@@ -16,6 +16,7 @@
 
         <TextView
             style="@style/TextViewStyle"
+            android:paddingTop="@dimen/view_padding"
             android:text="@string/diagnosedAge" />
 
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
