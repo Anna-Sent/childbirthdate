@@ -15,8 +15,8 @@ import com.anna.sent.soft.childbirthdate.R;
 public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 		OnClickListener {
 	private static final String TAG = "moo";
-	private static final boolean DEBUG = false;
-	private static final boolean DEBUG_CREATION = false;
+	private static final boolean DEBUG = true;
+	private static final boolean DEBUG_CREATION = true;
 
 	private String wrapMsg(String msg) {
 		return getClass().getSimpleName() + ": " + msg;
@@ -69,42 +69,32 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 
 	@Override
 	public View getView(int position, View contentView, ViewGroup viewGroup) {
-		log("get view " + position, DEBUG_CREATION);
 		View view;
 		ViewHolder viewHolder = null;
 		if (contentView == null) {
 			LayoutInflater layoutInflater = (LayoutInflater) getContext()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = layoutInflater.inflate(R.layout.list_item, null);
-			if (view == null) {
-				log("view is not created", DEBUG_CREATION);
-			} else {
-				log("created view " + view.toString(), DEBUG_CREATION);
-				viewHolder = new ViewHolder();
-				viewHolder.checkBox = (CheckBox) view
-						.findViewById(R.id.checkBox);
-				viewHolder.text1 = (TextView) view.findViewById(R.id.text1);
-				viewHolder.text2 = (TextView) view.findViewById(R.id.text2);
-				viewHolder.position = position;
-				view.setTag(viewHolder);
-			}
+			log(position + " created view " + view.toString(), DEBUG_CREATION);
+			viewHolder = new ViewHolder();
+			viewHolder.checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+			viewHolder.text1 = (TextView) view.findViewById(R.id.text1);
+			viewHolder.text2 = (TextView) view.findViewById(R.id.text2);
+			view.setTag(viewHolder);
 		} else {
 			view = contentView;
-			log("existing view " + view.toString(), DEBUG_CREATION);
+			log(position + " existing view " + view.toString(), DEBUG_CREATION);
 			viewHolder = (ViewHolder) view.getTag();
 		}
 
-		if (viewHolder != null) {
-			log("update view holder", DEBUG_CREATION);
-			viewHolder.checkBox.setChecked(mChecked[position]);
-			viewHolder.checkBox.setOnClickListener(this);
-			viewHolder.checkBox.setTag(viewHolder);
-			viewHolder.text1.setText(mStrings1[position]);
-			viewHolder.text2.setText(mStrings2[position]);
-			viewHolder.text2
-					.setVisibility(viewHolder.checkBox.isChecked() ? View.VISIBLE
-							: View.GONE);
-		}
+		viewHolder.position = position;
+		viewHolder.checkBox.setChecked(mChecked[position]);
+		viewHolder.checkBox.setOnClickListener(this);
+		viewHolder.checkBox.setTag(viewHolder);
+		viewHolder.text1.setText(mStrings1[position]);
+		viewHolder.text2.setText(mStrings2[position]);
+		viewHolder.text2.setVisibility(mChecked[position] ? View.VISIBLE
+				: View.GONE);
 
 		return view;
 	}
@@ -112,15 +102,12 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 	@Override
 	public void onClick(View v) {
 		ViewHolder viewHolder = (ViewHolder) v.getTag();
-		if (viewHolder != null) {
-			int position = viewHolder.position;
-			mChecked[position] = viewHolder.checkBox.isChecked();
-			viewHolder.text2
-					.setVisibility(viewHolder.checkBox.isChecked() ? View.VISIBLE
-							: View.GONE);
-			if (mListener != null) {
-				mListener.checked(position, mChecked[position]);
-			}
+		int position = viewHolder.position;
+		mChecked[position] = viewHolder.checkBox.isChecked();
+		viewHolder.text2.setVisibility(mChecked[position] ? View.VISIBLE
+				: View.GONE);
+		if (mListener != null) {
+			mListener.checked(position, mChecked[position]);
 		}
 	}
 
