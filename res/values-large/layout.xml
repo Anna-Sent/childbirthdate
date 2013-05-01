@@ -7,10 +7,4 @@
     <item name="activity_result" type="layout">@layout/activity_result_normal</item>
     <item name="list_footer" type="layout">@layout/list_footer_normal</item>
 
-    <dimen name="view_padding">16dp</dimen>
-    <dimen name="widget_padding">4dp</dimen>
-    <dimen name="widget_margin">8dp</dimen>
-    <dimen name="layout_horizontal_padding">16dp</dimen>
-    <dimen name="layout_vertical_padding">16dp</dimen>
-
 </resources>
