@@ -22,8 +22,9 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void log(String msg, boolean debug) {
-		if (debug) {
+		if (DEBUG && debug) {
 			Log.d(TAG, wrapMsg(msg));
 		}
 	}

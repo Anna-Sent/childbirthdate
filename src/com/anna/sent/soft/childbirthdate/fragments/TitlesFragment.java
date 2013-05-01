@@ -40,8 +40,9 @@ public class TitlesFragment extends ListFragment implements
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void log(String msg, boolean debug) {
-		if (debug) {
+		if (DEBUG && debug) {
 			Log.d(TAG, wrapMsg(msg));
 		}
 	}

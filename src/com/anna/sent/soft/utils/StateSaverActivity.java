@@ -14,7 +14,7 @@ import com.anna.sent.soft.childbirthdate.shared.DataImpl;
 public abstract class StateSaverActivity extends FragmentActivity implements
 		StateSaver {
 	private static final String TAG = "moo";
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 
 	private String wrapMsg(String msg) {
 		return getClass().getSimpleName() + ": " + msg;
@@ -26,8 +26,9 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void log(String msg, boolean debug) {
-		if (debug) {
+		if (DEBUG && debug) {
 			Log.d(TAG, wrapMsg(msg));
 		}
 	}
