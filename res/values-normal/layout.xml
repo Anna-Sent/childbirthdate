@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <bool name="has_two_panes">true</bool>
+    <bool name="has_two_panes">false</bool>
 
-    <item name="tab_calculation" type="layout">@layout/tab_calculation_two_panes</item>
-    <item name="activity_result" type="layout">@layout/activity_result_wide</item>
-    <item name="list_footer" type="layout">@layout/list_footer_normal</item>
+    <item name="tab_calculation" type="layout">@layout/tab_calculation_one_pane</item>
+    <item name="activity_result" type="layout">@layout/activity_result_normal</item>
+    <item name="list_footer" type="layout">@layout/list_footer_narrow</item>
 
     <dimen name="view_padding">16dp</dimen>
     <dimen name="widget_padding">4dp</dimen>
