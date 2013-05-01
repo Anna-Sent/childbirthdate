@@ -10,7 +10,7 @@
     <dimen name="view_padding">16dp</dimen>
     <dimen name="widget_padding">4dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
-    <dimen name="layout_horizontal_padding">128dp</dimen>
+    <dimen name="layout_horizontal_padding">16dp</dimen>
     <dimen name="layout_vertical_padding">16dp</dimen>
 
 </resources>
