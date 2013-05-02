@@ -15,8 +15,8 @@ import com.anna.sent.soft.childbirthdate.R;
 public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 		OnClickListener {
 	private static final String TAG = "moo";
-	private static final boolean DEBUG = true;
-	private static final boolean DEBUG_CREATION = true;
+	private static final boolean DEBUG = false;
+	private static final boolean DEBUG_CREATION = false;
 
 	private String wrapMsg(String msg) {
 		return getClass().getSimpleName() + ": " + msg;
