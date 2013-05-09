@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <declare-styleable name="AppTheme">
+        <attr name="helpIcon" format="reference" />
+    </declare-styleable>
+
     <style name="AppBaseTheme" parent="android:Theme">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
         <item name="helpIcon">@drawable/help_light</item>
@@ -15,16 +19,16 @@
 
     <style name="AppThemeLight" parent="AppBaseThemeLight" />
 
-    <style name="DialogTheme" parent="android:Theme.Dialog">
+    <style name="DialogBaseTheme" parent="android:Theme.Dialog">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
     </style>
 
-    <style name="DialogThemeLight" parent="android:Theme.Dialog">
+    <style name="DialogBaseThemeLight" parent="android:Theme.Dialog">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
     </style>
 
-    <declare-styleable name="AppTheme">
-        <attr name="helpIcon" format="reference" />
-    </declare-styleable>
+    <style name="DialogTheme" parent="DialogBaseTheme" />
+
+    <style name="DialogThemeLight" parent="DialogBaseThemeLight" />
 
 </resources>

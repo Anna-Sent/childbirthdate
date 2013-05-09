@@ -11,11 +11,11 @@
         <item name="helpIcon">@drawable/help_light</item>
     </style>
 
-    <style name="DialogTheme" parent="android:Theme.Holo.Dialog">
+    <style name="DialogBaseTheme" parent="android:Theme.Holo.Dialog">
         <item name="numberPickerStyle">@style/Widget.Holo.NumberPicker</item>
     </style>
 
-    <style name="DialogThemeLight" parent="android:Theme.Holo.Light.Dialog">
+    <style name="DialogBaseThemeLight" parent="android:Theme.Holo.Light.Dialog">
         <item name="numberPickerStyle">@style/Widget.Holo.Light.NumberPicker</item>
     </style>
 
