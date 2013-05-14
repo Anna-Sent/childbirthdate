@@ -35,9 +35,7 @@ public class ThemeUtils {
 
 			Bundle state = new Bundle();
 			StateSaverActivity stateSaverActivity = (StateSaverActivity) activity;
-			if (activity != null) {
-				stateSaverActivity.saveState(state);
-			}
+			stateSaverActivity.saveState(state);
 
 			activity.finish();
 
