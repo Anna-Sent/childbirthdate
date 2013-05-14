@@ -72,6 +72,7 @@ public class MainActivity extends StateSaverActivity {
 			MainActivityStateSaver.save(this, intent);
 
 			startActivity(intent);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
