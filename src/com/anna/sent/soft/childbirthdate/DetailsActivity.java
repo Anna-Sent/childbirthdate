@@ -58,7 +58,7 @@ public class DetailsActivity extends ChildActivity implements
 	}
 
 	@Override
-	public void saveActivityState(Bundle state) {
+	protected void saveActivityState(Bundle state) {
 		state.putInt(Shared.Titles.EXTRA_GUI_POSITION, mIndex);
 		/* Log.d("moo", "details: save index=" + mIndex); */
 	}

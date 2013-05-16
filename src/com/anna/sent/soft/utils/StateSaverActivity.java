@@ -85,10 +85,10 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 		saveFragmentState(state);
 	}
 
-	public void beforeOnSaveInstanceState() {
+	protected void beforeOnSaveInstanceState() {
 	}
 
-	public void saveActivityState(Bundle state) {
+	protected void saveActivityState(Bundle state) {
 	}
 
 	private final void saveFragmentState(Bundle state) {
