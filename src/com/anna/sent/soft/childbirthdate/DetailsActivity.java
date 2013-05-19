@@ -33,8 +33,8 @@ public class DetailsActivity extends ChildActivity implements
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setOnPageChangeListener(this);
-		mTabsAdapter = new DetailsPagerAdapter(getSupportFragmentManager(),
-				getResources().getStringArray(R.array.MethodNames));
+		mTabsAdapter = new DetailsPagerAdapter(this,
+				getSupportFragmentManager());
 		/* Log.d("moo", "details: init index=" + mIndex); */
 	}
 
