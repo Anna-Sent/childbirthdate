@@ -12,8 +12,8 @@ public class HelpActivity extends ChildActivity {
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
-		super.setViews(savedInstanceState);
 		setContentView(R.layout.activity_details);
+		super.setViews(savedInstanceState);
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mTabsAdapter = new HelpPagerAdapter(this, getSupportFragmentManager());

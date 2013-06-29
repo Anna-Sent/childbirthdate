@@ -19,8 +19,6 @@ public class DetailsActivity extends ChildActivity implements
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
-		super.setViews(savedInstanceState);
-
 		if (getResources().getBoolean(R.bool.has_two_panes)) {
 			// If the screen is now in landscape mode, we can show the
 			// dialog in-line with the list so we don't need this activity.
@@ -30,6 +28,7 @@ public class DetailsActivity extends ChildActivity implements
 		}
 
 		setContentView(R.layout.activity_details);
+		super.setViews(savedInstanceState);
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setOnPageChangeListener(this);

@@ -38,9 +38,8 @@ public class ResultActivity extends ChildActivity {
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
-		super.setViews(savedInstanceState);
-
 		setContentView(R.layout.activity_result);
+		super.setViews(savedInstanceState);
 
 		setMembers();
 
