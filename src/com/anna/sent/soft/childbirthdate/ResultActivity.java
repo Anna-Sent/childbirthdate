@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -19,11 +20,27 @@ import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.ChildActivity;
 import com.anna.sent.soft.utils.DateUtils;
+import com.google.ads.Ad;
+import com.google.ads.AdListener;
 import com.google.ads.AdRequest;
+import com.google.ads.AdRequest.ErrorCode;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
 
-public class ResultActivity extends ChildActivity {
+public class ResultActivity extends ChildActivity implements AdListener {
+	private static final String TAG = "moo";
+	private static final boolean DEBUG_AD = true;
+
+	private String wrapMsg(String msg) {
+		return getClass().getSimpleName() + ": " + msg;
+	}
+
+	private void log(String msg, boolean scenario) {
+		if (scenario) {
+			Log.d(TAG, wrapMsg(msg));
+		}
+	}
+
 	private TextView textView0, textView00;
 
 	private TextView[] textViews;
@@ -34,7 +51,7 @@ public class ResultActivity extends ChildActivity {
 	private int whatToDo;
 	private Calendar currentDate = Calendar.getInstance();
 
-	private AdView adView = null;
+	private AdView mAdView = null;
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
@@ -214,15 +231,16 @@ public class ResultActivity extends ChildActivity {
 	}
 
 	private void setAdView() {
-		adView = new AdView(this, AdSize.BANNER, "a1513549e3d3050");
-		adView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+		mAdView = new AdView(this, AdSize.BANNER, "a1513549e3d3050");
+		mAdView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 				LayoutParams.WRAP_CONTENT));
-		adView.setGravity(Gravity.CENTER);
-		adView.setPadding(0,
+		mAdView.setGravity(Gravity.CENTER);
+		mAdView.setPadding(0,
 				getResources().getDimensionPixelSize(R.dimen.view_padding), 0,
 				0);
+		mAdView.setAdListener(this);
 		LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
-		linearLayout.addView(adView);
+		linearLayout.addView(mAdView);
 
 		AdRequest request = new AdRequest();
 		/*
@@ -230,16 +248,59 @@ public class ResultActivity extends ChildActivity {
 		 * request.addTestDevice("2600D922057328C48F2E6DBAB33639C1");
 		 */
 		request.setGender(AdRequest.Gender.FEMALE);
-		adView.loadAd(request);
+		mAdView.loadAd(request);
 	}
+
+	private boolean mIsActivityDestroyed = false;
+	private boolean mIsAdLoadingCompleted = false;
 
 	@Override
 	protected void onDestroy() {
-		if (adView != null) {
-			adView.removeAllViews();
-			adView.destroy();
+		log("destroy activity", DEBUG_AD);
+		mIsActivityDestroyed = true;
+		if (mIsAdLoadingCompleted) {
+			destroyAdView();
 		}
 
 		super.onDestroy();
+	}
+
+	private void destroyAdView() {
+		if (mAdView != null) {
+			log("destroy ad view", DEBUG_AD);
+			mAdView.removeAllViews();
+			mAdView.destroy();
+			mAdView = null;
+		}
+	}
+
+	@Override
+	public void onDismissScreen(Ad arg0) {
+	}
+
+	@Override
+	public void onFailedToReceiveAd(Ad arg0, ErrorCode arg1) {
+		log("failed to receive ad", DEBUG_AD);
+		mIsAdLoadingCompleted = true;
+		if (mIsActivityDestroyed) {
+			destroyAdView();
+		}
+	}
+
+	@Override
+	public void onLeaveApplication(Ad arg0) {
+	}
+
+	@Override
+	public void onPresentScreen(Ad arg0) {
+	}
+
+	@Override
+	public void onReceiveAd(Ad arg0) {
+		log("receive ad", DEBUG_AD);
+		mIsAdLoadingCompleted = true;
+		if (mIsActivityDestroyed) {
+			destroyAdView();
+		}
 	}
 }

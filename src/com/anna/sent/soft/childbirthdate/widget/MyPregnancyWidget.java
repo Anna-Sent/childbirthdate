@@ -89,7 +89,6 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 		try {
 			getPendingIntent(context, cls).send();
 		} catch (CanceledException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
