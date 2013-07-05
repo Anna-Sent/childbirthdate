@@ -29,7 +29,7 @@ import com.google.ads.AdView;
 
 public class ResultActivity extends ChildActivity implements AdListener {
 	private static final String TAG = "moo";
-	private static final boolean DEBUG_AD = true;
+	private static final boolean DEBUG_AD = false;
 
 	private String wrapMsg(String msg) {
 		return getClass().getSimpleName() + ": " + msg;
