@@ -64,11 +64,11 @@ public class DetailsActivity extends ChildActivity implements
 
 	@Override
 	protected void onStart() {
+		super.onStart();
 		mViewPager.setAdapter(mTabsAdapter);
 		mViewPager.setOffscreenPageLimit(mTabsAdapter.getCount() - 1);
 		mViewPager.setCurrentItem(mIndex);
 		/* Log.d("moo", "details: start with index=" + mIndex); */
-		super.onStart();
 	}
 
 	@Override
