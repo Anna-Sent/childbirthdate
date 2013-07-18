@@ -38,11 +38,12 @@ public class ChildActivity extends StateSaverActivity {
 		case android.R.id.home:
 			Bundle savedState = getIntent().getBundleExtra(
 					Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE);
-			saveAdditionalData(savedState);
 			if (savedState == null) {
 				// child activity is started from Widget
 				createParentStack();
 			} else {
+				saveAdditionalData(savedState);
+
 				// child activity is started from MainActivity
 				Intent intent = new Intent(this, MainActivity.class);
 				intent.putExtras(savedState);
