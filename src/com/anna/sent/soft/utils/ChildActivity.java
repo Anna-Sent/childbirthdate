@@ -15,16 +15,14 @@ import com.anna.sent.soft.childbirthdate.shared.Shared;
 public class ChildActivity extends StateSaverActivity {
 	@Override
 	public void setViews(Bundle savedInstanceState) {
-		// Show the Up button in the action bar.
-		setupActionBar();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			new ActionBarHelper().setupActionBar();
+		}
 	}
 
-	/**
-	 * Set up the {@link android.app.ActionBar}, if the API is available.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void setupActionBar() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+	private class ActionBarHelper {
+		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+		private void setupActionBar() {
 			ActionBar actionBar = getActionBar();
 			if (actionBar != null) {
 				actionBar.setDisplayHomeAsUpEnabled(true);
