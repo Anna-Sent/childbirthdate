@@ -16,6 +16,7 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 		return getClass().getSimpleName() + ": " + msg;
 	}
 
+	@SuppressWarnings("unused")
 	private void log(String msg) {
 		if (DEBUG) {
 			Log.d(TAG, wrapMsg(msg));
@@ -81,7 +82,7 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 	}
 
 	protected void dataChanged() {
-		log("data changed", false);
+		// log("data changed", false);
 		if (mListener != null) {
 			mListener.detailsChanged();
 		}
@@ -92,7 +93,7 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 	@Override
 	public void onResume() {
 		super.onResume();
-		log("resume, update ui");
+		// log("resume, update ui");
 		updateData();
 	}
 

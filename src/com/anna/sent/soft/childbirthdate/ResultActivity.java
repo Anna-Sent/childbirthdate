@@ -29,12 +29,14 @@ import com.google.ads.AdView;
 
 public class ResultActivity extends ChildActivity implements AdListener {
 	private static final String TAG = "moo";
+	@SuppressWarnings("unused")
 	private static final boolean DEBUG_AD = false;
 
 	private String wrapMsg(String msg) {
 		return getClass().getSimpleName() + ": " + msg;
 	}
 
+	@SuppressWarnings("unused")
 	private void log(String msg, boolean scenario) {
 		if (scenario) {
 			Log.d(TAG, wrapMsg(msg));
@@ -256,7 +258,7 @@ public class ResultActivity extends ChildActivity implements AdListener {
 
 	@Override
 	protected void onDestroy() {
-		log("destroy activity", DEBUG_AD);
+		// log("destroy activity", DEBUG_AD);
 		mIsActivityDestroyed = true;
 		if (mIsAdLoadingCompleted) {
 			destroyAdView();
@@ -267,7 +269,7 @@ public class ResultActivity extends ChildActivity implements AdListener {
 
 	private void destroyAdView() {
 		if (mAdView != null) {
-			log("destroy ad view", DEBUG_AD);
+			// log("destroy ad view", DEBUG_AD);
 			mAdView.removeAllViews();
 			mAdView.destroy();
 			mAdView = null;
@@ -280,7 +282,7 @@ public class ResultActivity extends ChildActivity implements AdListener {
 
 	@Override
 	public void onFailedToReceiveAd(Ad arg0, ErrorCode arg1) {
-		log("failed to receive ad", DEBUG_AD);
+		// log("failed to receive ad", DEBUG_AD);
 		mIsAdLoadingCompleted = true;
 		if (mIsActivityDestroyed) {
 			destroyAdView();
@@ -297,7 +299,7 @@ public class ResultActivity extends ChildActivity implements AdListener {
 
 	@Override
 	public void onReceiveAd(Ad arg0) {
-		log("receive ad", DEBUG_AD);
+		// log("receive ad", DEBUG_AD);
 		mIsAdLoadingCompleted = true;
 		if (mIsActivityDestroyed) {
 			destroyAdView();

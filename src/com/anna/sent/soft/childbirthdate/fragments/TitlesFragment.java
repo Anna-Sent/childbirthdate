@@ -34,6 +34,7 @@ public class TitlesFragment extends ListFragment implements
 		return getClass().getSimpleName() + ": " + msg;
 	}
 
+	@SuppressWarnings("unused")
 	private void log(String msg) {
 		if (DEBUG) {
 			Log.d(TAG, wrapMsg(msg));
@@ -47,6 +48,7 @@ public class TitlesFragment extends ListFragment implements
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void log(String msg, int index) {
 		if (DEBUG_INDEX) {
 			Log.d(TAG, wrapMsg(msg + index));
@@ -70,13 +72,13 @@ public class TitlesFragment extends ListFragment implements
 
 	public TitlesFragment() {
 		super();
-		log("create", false);
+		// log("create", false);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		log("onCreateView", false);
+		// log("onCreateView", false);
 		mHeader = inflater.inflate(R.layout.list_header, null);
 		mFooter = inflater.inflate(R.layout.list_footer, null);
 		return super.onCreateView(inflater, container, savedInstanceState);
@@ -84,7 +86,7 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		log("onActivityCreated", false);
+		// log("onActivityCreated", false);
 		super.onActivityCreated(savedInstanceState);
 
 		setViews(savedInstanceState);
@@ -121,7 +123,7 @@ public class TitlesFragment extends ListFragment implements
 						: ListView.CHOICE_MODE_NONE);
 
 		mSelectedItem = 0;
-		log("init index=", mSelectedItem);
+		// log("init index=", mSelectedItem);
 
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
@@ -132,23 +134,23 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		log("onSaveInstanceState", false);
+		// log("onSaveInstanceState", false);
 		saveState(outState);
 		super.onSaveInstanceState(outState);
 	}
 
 	@Override
 	public void restoreState(Bundle state) {
-		log("restore state", false);
+		// log("restore state", false);
 		mSelectedItem = state.getInt(Shared.Titles.EXTRA_GUI_POSITION, 0);
-		log("restore index=", mSelectedItem);
+		// log("restore index=", mSelectedItem);
 	}
 
 	@Override
 	public void saveState(Bundle state) {
-		log("save state", false);
+		// log("save state", false);
 		state.putInt(Shared.Titles.EXTRA_GUI_POSITION, mSelectedItem);
-		log("save index=", mSelectedItem);
+		// log("save index=", mSelectedItem);
 	}
 
 	@Override
@@ -158,7 +160,7 @@ public class TitlesFragment extends ListFragment implements
 		// Make sure our UI is in the correct state.
 		if (mDualPane) {
 			showDetails(mSelectedItem);
-			log("start with index=", mSelectedItem);
+			// log("start with index=", mSelectedItem);
 		}
 	}
 
@@ -177,7 +179,7 @@ public class TitlesFragment extends ListFragment implements
 		// the list to highlight the selected item and show the mData.
 		getListView().setItemChecked(index, true);
 		mSelectedItem = index;
-		log("update index=", mSelectedItem);
+		// log("update index=", mSelectedItem);
 		if (mDualPane) {
 			// Check what fragment is currently shown, replace if needed.
 			FragmentManager fm = getFragmentManager();
@@ -186,13 +188,14 @@ public class TitlesFragment extends ListFragment implements
 			if (details == null || details.getShownIndex() != index) {
 				DetailsFragment newDetails = getDetailsFragmentInstance(index);
 				if (newDetails != null) {
-					log("update details " + newDetails.getShownIndex(), false);
+					// log("update details " + newDetails.getShownIndex(),
+					// false);
 					FragmentTransaction ft = fm.beginTransaction();
 					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 					ft.replace(R.id.details, newDetails);
 					ft.commit();
 				} else if (details != null) {
-					log("remove details" + details.getShownIndex(), false);
+					// log("remove details" + details.getShownIndex(), false);
 					FragmentTransaction ft = fm.beginTransaction();
 					ft.remove(details);
 					ft.commit();
@@ -221,7 +224,7 @@ public class TitlesFragment extends ListFragment implements
 				result = DetailsFragment.newInstance(index);
 				result.setOnDetailsChangedListener(this);
 				fragments[index] = result;
-				log("create new details " + result.getShownIndex(), false);
+				// log("create new details " + result.getShownIndex(), false);
 			}
 		}
 
@@ -234,7 +237,7 @@ public class TitlesFragment extends ListFragment implements
 			if (resultCode == Activity.RESULT_OK) {
 				mSelectedItem = data.getIntExtra(
 						Shared.Titles.EXTRA_GUI_POSITION, mSelectedItem);
-				log("got index=", mSelectedItem);
+				// log("got index=", mSelectedItem);
 				if (mDualPane) {
 					showDetails(mSelectedItem);
 				}
@@ -273,14 +276,14 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void detailsChanged() {
-		log("details changed, update values");
+		// log("details changed, update values");
 		mListAdapter.updateValues(getStrings2());
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		log("resume, update ui");
+		// log("resume, update ui");
 		mListAdapter.updateValues(mData.byMethod(), getStrings2());
 	}
 

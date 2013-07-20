@@ -20,6 +20,7 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 		return getClass().getSimpleName() + ": " + msg;
 	}
 
+	@SuppressWarnings("unused")
 	private void log(String msg) {
 		if (DEBUG) {
 			Log.d(TAG, wrapMsg(msg));
@@ -51,12 +52,12 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 		setViews(savedInstanceState);
 
 		if (savedInstanceState != null) {
-			log("restore 1");
+			// log("restore 1");
 			restoreState(savedInstanceState);
 		} else {
 			savedInstanceState = getIntent().getExtras();
 			if (savedInstanceState != null) {
-				log("restore 2");
+				// log("restore 2");
 				restoreState(savedInstanceState);
 			}
 		}
@@ -64,7 +65,7 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 
 	@Override
 	protected final void onSaveInstanceState(Bundle outState) {
-		log("onSaveInstanceState", true);
+		// log("onSaveInstanceState", true);
 		beforeOnSaveInstanceState();
 		saveActivityState(outState);
 		super.onSaveInstanceState(outState);
@@ -80,7 +81,7 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 
 	@Override
 	public final void saveState(Bundle state) {
-		log("save state");
+		// log("save state");
 		saveActivityState(state);
 		saveFragmentState(state);
 	}
@@ -94,32 +95,32 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 	private final void saveFragmentState(Bundle state) {
 		for (int i = 0; i < mStateSavers.size(); ++i) {
 			mStateSavers.get(i).saveState(state);
-			log("save fragment state " + i);
+			// log("save fragment state " + i);
 		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		log("resume, update data", true);
+		// log("resume, update data", true);
 		mConcreteData.update();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		log("pause, save data", true);
+		// log("pause, save data", true);
 		mConcreteData.save();
 	}
 
 	@Override
 	public final void onAttachFragment(Fragment fragment) {
 		super.onAttachFragment(fragment);
-		log("attach " + fragment.toString());
+		// log("attach " + fragment.toString());
 		if (fragment instanceof DataClient) {
 			DataClient dataClient = (DataClient) fragment;
 			dataClient.setData(mConcreteData);
-			log("set data");
+			// log("set data");
 		}
 
 		if (fragment instanceof StateSaver) {

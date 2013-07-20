@@ -11,13 +11,16 @@ import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 
 public class DataImpl implements Data {
 	private static final String TAG = "moo";
+	@SuppressWarnings("unused")
 	private static final boolean DEBUG = false;
+	@SuppressWarnings("unused")
 	private static final boolean DEBUG_EDITOR = false;
 
 	private static String wrapMsg(String msg) {
 		return "Data: " + msg;
 	}
 
+	@SuppressWarnings("unused")
 	private static void log(String msg, boolean scenario) {
 		if (scenario) {
 			Log.d(TAG, wrapMsg(msg));
@@ -85,7 +88,7 @@ public class DataImpl implements Data {
 
 	@Override
 	public void setByMethod(int index, boolean value) {
-		log("setByMethod " + index, DEBUG_EDITOR);
+		// log("setByMethod " + index, DEBUG_EDITOR);
 		if (index >= 0 && index < byMethod.length) {
 			byMethod[index] = value;
 		}
@@ -93,54 +96,54 @@ public class DataImpl implements Data {
 
 	@Override
 	public void setIsEmbryonicAge(boolean value) {
-		log("setIsEmbryonicAge", DEBUG_EDITOR);
+		// log("setIsEmbryonicAge", DEBUG_EDITOR);
 		isEmbryonicAge = value;
 	}
 
 	@Override
 	public void setLastMenstruationDate(Calendar value) {
-		log("setLastMenstruationDate", DEBUG_EDITOR);
+		// log("setLastMenstruationDate", DEBUG_EDITOR);
 		lastMenstruationDate = value;
 	}
 
 	@Override
 	public void setOvulationDate(Calendar value) {
-		log("setOvulationDate", DEBUG_EDITOR);
+		// log("setOvulationDate", DEBUG_EDITOR);
 		ovulationDate = value;
 	}
 
 	@Override
 	public void setUltrasoundDate(Calendar value) {
-		log("setUltrasoundDate", DEBUG_EDITOR);
+		// log("setUltrasoundDate", DEBUG_EDITOR);
 		ultrasoundDate = value;
 	}
 
 	@Override
 	public void setMenstrualCycleLen(int value) {
-		log("setMenstrualCycleLen", DEBUG_EDITOR);
+		// log("setMenstrualCycleLen", DEBUG_EDITOR);
 		menstrualCycleLen = value;
 	}
 
 	@Override
 	public void setLutealPhaseLen(int value) {
-		log("setLutealPhaseLen", DEBUG_EDITOR);
+		// log("setLutealPhaseLen", DEBUG_EDITOR);
 		lutealPhaseLen = value;
 	}
 
 	@Override
 	public void setWeeks(int value) {
-		log("setWeeks", DEBUG_EDITOR);
+		// log("setWeeks", DEBUG_EDITOR);
 		weeks = value;
 	}
 
 	@Override
 	public void setDays(int value) {
-		log("setDays", DEBUG_EDITOR);
+		// log("setDays", DEBUG_EDITOR);
 		days = value;
 	}
 
 	public void save() {
-		log("save", DEBUG);
+		// log("save", DEBUG);
 		Editor editor = Shared.getSettings(mContext).edit();
 
 		editor.putBoolean(
@@ -169,7 +172,7 @@ public class DataImpl implements Data {
 	}
 
 	public void update() {
-		log("update", DEBUG);
+		// log("update", DEBUG);
 		SharedPreferences settings = Shared.getSettings(mContext);
 
 		lastMenstruationDate = Calendar.getInstance();
