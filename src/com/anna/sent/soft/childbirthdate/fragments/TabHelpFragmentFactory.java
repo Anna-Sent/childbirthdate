@@ -68,7 +68,7 @@ public class TabHelpFragmentFactory {
 		public void restoreState(Bundle state) {
 			if (scrollView != null) {
 				mScrollY = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
-				Log.d("moo", "restore scroll " + mScrollY);
+				// Log.d("moo", "restore scroll " + mScrollY);
 				setScrollY();
 			}
 		}
@@ -85,7 +85,7 @@ public class TabHelpFragmentFactory {
 		@Override
 		public void saveState(Bundle state) {
 			if (scrollView != null) {
-				Log.d("moo", "save scroll " + scrollView.getScrollY());
+				// Log.d("moo", "save scroll " + scrollView.getScrollY());
 				state.putInt(EXTRA_GUI_SCROLL_Y, scrollView.getScrollY());
 			}
 		}
