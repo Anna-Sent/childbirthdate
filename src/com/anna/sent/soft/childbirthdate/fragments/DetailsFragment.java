@@ -56,7 +56,7 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 	 * 'index'.
 	 */
 	public static DetailsFragment newInstance(int index) {
-		DetailsFragment details = null;
+		DetailsFragment details;
 		switch (index) {
 		case 0:
 			details = new DetailsLmpMethodFragment();
