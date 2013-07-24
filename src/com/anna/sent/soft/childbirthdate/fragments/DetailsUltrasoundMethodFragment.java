@@ -76,16 +76,17 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 			if (mData != null) {
 				boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
 				mData.setIsEmbryonicAge(isEmbryonicAge);
+
+				int previous = numberPickerWeeks.getValue();
+				setMaxWeeks();
+				int current = numberPickerWeeks.getValue();
+				if (current != previous && mData != null) {
+					mData.setWeeks(current);
+				}
+
+				dataChanged();
 			}
 
-			int previous = numberPickerWeeks.getValue();
-			setMaxWeeks();
-			int current = numberPickerWeeks.getValue();
-			if (current != previous && mData != null) {
-				mData.setWeeks(current);
-			}
-
-			dataChanged();
 			break;
 		}
 	}
@@ -108,11 +109,9 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 
 			radioButtonIsGestationalAge.setOnClickListener(this);
 			radioButtonIsEmbryonicAge.setOnClickListener(this);
-		}
 
-		setMaxWeeks();
+			setMaxWeeks();
 
-		if (mData != null) {
 			numberPickerWeeks.setValue(mData.getWeeks());
 			numberPickerDays.setValue(mData.getDays());
 		}
@@ -134,9 +133,9 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 				int days = numberPickerDays.getValue();
 				mData.setDays(days);
 			}
-		}
 
-		dataChanged();
+			dataChanged();
+		}
 	}
 
 	@Override
@@ -145,8 +144,8 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 			Calendar ultrasoundDate = DateUtils
 					.getDate(datePickerUltrasoundDate);
 			mData.setUltrasoundDate(ultrasoundDate);
-		}
 
-		dataChanged();
+			dataChanged();
+		}
 	}
 }

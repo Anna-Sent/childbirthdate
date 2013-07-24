@@ -72,28 +72,26 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 		button.setOnClickListener(this);
 	}
 
-	public void restoreDefaultValues(View view) {
-		int menstrualCycleLen = PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH;
-		int lutealPhaseLen = PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH;
-
-		numberPickerMenstrualCycleLen.setValue(menstrualCycleLen);
+	public void restoreDefaultValues() {
 		if (mData != null) {
+			int menstrualCycleLen = PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH;
+			int lutealPhaseLen = PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH;
+
+			numberPickerMenstrualCycleLen.setValue(menstrualCycleLen);
 			mData.setMenstrualCycleLen(menstrualCycleLen);
-		}
 
-		numberPcikerLutealPhaseLen.setValue(lutealPhaseLen);
-		if (mData != null) {
+			numberPcikerLutealPhaseLen.setValue(lutealPhaseLen);
 			mData.setLutealPhaseLen(lutealPhaseLen);
-		}
 
-		dataChanged();
+			dataChanged();
+		}
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonRestoreDefaultValues:
-			restoreDefaultValues(v);
+			restoreDefaultValues();
 			break;
 		}
 	}
@@ -122,9 +120,9 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 				int lutealPhaseLen = numberPcikerLutealPhaseLen.getValue();
 				mData.setLutealPhaseLen(lutealPhaseLen);
 			}
-		}
 
-		dataChanged();
+			dataChanged();
+		}
 	}
 
 	@Override
@@ -134,8 +132,8 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 			Calendar lastMenstruationDate = DateUtils
 					.getDate(datePickerLastMenstruationDate);
 			mData.setLastMenstruationDate(lastMenstruationDate);
-		}
 
-		dataChanged();
+			dataChanged();
+		}
 	}
 }

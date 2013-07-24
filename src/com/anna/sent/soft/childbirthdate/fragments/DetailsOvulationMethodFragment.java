@@ -59,8 +59,8 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
 		if (mData != null) {
 			Calendar ovulationDate = DateUtils.getDate(datePickerOvulationDate);
 			mData.setOvulationDate(ovulationDate);
-		}
 
-		dataChanged();
+			dataChanged();
+		}
 	}
 }
