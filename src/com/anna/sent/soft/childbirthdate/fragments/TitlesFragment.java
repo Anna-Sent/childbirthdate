@@ -195,7 +195,8 @@ public class TitlesFragment extends ListFragment implements
 					ft.replace(R.id.details, newDetails);
 					ft.commit();
 				} else if (details != null) {
-					// log("remove details" + details.getShownIndex(), false);
+					// log("remove details" + details.getShownIndex(),
+					// false);
 					FragmentTransaction ft = fm.beginTransaction();
 					ft.remove(details);
 					ft.commit();
@@ -214,18 +215,17 @@ public class TitlesFragment extends ListFragment implements
 		}
 	}
 
-	private DetailsFragment[] fragments = new DetailsFragment[3];
-
+	/**
+	 * DO NOT CACHE THESE FRAGMENTS!
+	 * 
+	 * @param index
+	 *            index of method
+	 * @return fragment or null
+	 */
 	private DetailsFragment getDetailsFragmentInstance(int index) {
-		DetailsFragment result = null;
-		if (index >= 0 && index < fragments.length) {
-			result = fragments[index];
-			if (result == null) {
-				result = DetailsFragment.newInstance(index);
-				result.setOnDetailsChangedListener(this);
-				fragments[index] = result;
-				// log("create new details " + result.getShownIndex(), false);
-			}
+		DetailsFragment result = DetailsFragment.newInstance(index);
+		if (result != null) {
+			result.setOnDetailsChangedListener(this);
 		}
 
 		return result;
