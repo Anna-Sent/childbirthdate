@@ -5,6 +5,6 @@ import java.util.Calendar;
 public class ByFirstMovementsGestationalAge extends GestationalAge {
 	public ByFirstMovementsGestationalAge(Calendar date,
 			boolean isFirstPregnancy) {
-		super(isFirstPregnancy ? 22 : 20, 0, date);
+		super(isFirstPregnancy ? 20 : 22, 0, date);
 	}
 }
