@@ -16,7 +16,8 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher_childbirthdate"
-        android:label="@string/app_name" >
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.DeviceDefault.NoActionBar" >
         <activity
             android:name=".widget.MyPregnancyWidgetConfigureSmall"
             android:label="@string/widget_small_name" >
