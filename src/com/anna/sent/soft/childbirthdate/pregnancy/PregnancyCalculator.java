@@ -50,8 +50,8 @@ public class PregnancyCalculator {
 	public static class Factory {
 		public static Pregnancy get(Calendar lastMenstruationDate,
 				int menstrualCycleLen, int lutealPhaseLen) {
-			return new CorrectedGestationalAge(lastMenstruationDate, menstrualCycleLen,
-					lutealPhaseLen);
+			return new CorrectedGestationalAge(lastMenstruationDate,
+					menstrualCycleLen, lutealPhaseLen);
 		}
 
 		public static Pregnancy get(Calendar ovulationDate) {
@@ -65,6 +65,16 @@ public class PregnancyCalculator {
 			} else {
 				return new GestationalAge(weeks, days, ultrasoundDate);
 			}
+		}
+
+		// by first appearance
+		public static Pregnancy get(Calendar date, int weeks) {
+			return new GestationalAge(weeks, 0, date);
+		}
+
+		// by first movements
+		public static Pregnancy get(Calendar date, boolean isFirstPregnancy) {
+			return new GestationalAge(isFirstPregnancy ? 20 : 22, 0, date);
 		}
 	}
 }
