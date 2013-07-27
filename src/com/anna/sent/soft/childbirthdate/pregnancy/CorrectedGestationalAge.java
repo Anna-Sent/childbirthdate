@@ -8,11 +8,11 @@ import java.util.Calendar;
  * @author Anna
  * 
  */
-public class CorrectedAge extends GestationalAge {
+public final class CorrectedGestationalAge extends GestationalAge {
 	private int phollicularPhaseLen;
 	private int difference;
 
-	public CorrectedAge(Calendar start, int menstrualCycleLen,
+	public CorrectedGestationalAge(Calendar start, int menstrualCycleLen,
 			int lutealPhaseLen) {
 		super(start);
 		phollicularPhaseLen = menstrualCycleLen - lutealPhaseLen;

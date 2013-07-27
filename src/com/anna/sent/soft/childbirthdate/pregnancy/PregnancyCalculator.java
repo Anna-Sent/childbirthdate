@@ -41,9 +41,6 @@ public class PregnancyCalculator {
 	public final static int EMBRYONIC_MAX_AGE_DURATION = GESTATIONAL_MAX_AGE_DURATION
 			- MIN_PHOLLICULAR_PHASE_LENGTH;
 
-	public final static int GESTATIONAL_MAX_ULTRASOUND_ACCURACY_IN_WEEKS = 14;
-	public final static int EMBRYONIC_MAX_ULTRASOUND_ACCURACY_IN_WEEKS = GESTATIONAL_MAX_ULTRASOUND_ACCURACY_IN_WEEKS - 2;
-
 	public final static int GESTATIIONAL_FIRST_TRIMESTER_END_INCLUSIVE_IN_WEEKS = 12;
 	public final static int EMBRYONIC_FIRST_TRIMESTER_END_INCLUSIVE_IN_WEEKS = GESTATIIONAL_FIRST_TRIMESTER_END_INCLUSIVE_IN_WEEKS - 2;
 
@@ -53,7 +50,7 @@ public class PregnancyCalculator {
 	public static class Factory {
 		public static Pregnancy get(Calendar lastMenstruationDate,
 				int menstrualCycleLen, int lutealPhaseLen) {
-			return new CorrectedAge(lastMenstruationDate, menstrualCycleLen,
+			return new CorrectedGestationalAge(lastMenstruationDate, menstrualCycleLen,
 					lutealPhaseLen);
 		}
 

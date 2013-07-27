@@ -67,16 +67,6 @@ public abstract class Pregnancy {
 	}
 
 	/**
-	 * Call {@code isCorrect()} before call of this method.
-	 * 
-	 * @return {@code true}, if value of weeks is less than
-	 *         {@code getMaxUltrasoundAccuracy()}; {@code false} otherwise
-	 */
-	public boolean isAccurateForUltrasound(int weeks) {
-		return weeks < getMaxUltrasoundAccuracy();
-	}
-
-	/**
 	 * Checker for the correctness of values of weeks and days.
 	 * 
 	 * @return {@code true}, if {@code weeks} and {@code days} values are
@@ -140,8 +130,6 @@ public abstract class Pregnancy {
 	}
 
 	protected abstract int getMaxDurationInDays();
-
-	protected abstract int getMaxUltrasoundAccuracy();
 
 	protected abstract int getFirstTrimesterEndInclusive();
 

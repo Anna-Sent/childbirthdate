@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -135,11 +134,9 @@ public class ResultActivity extends ChildActivity implements AdListener {
 				switch (whatToDo) {
 				case Shared.ResultParam.Calculate.ECD:
 					setEdcTexts(i);
-					setLast(i);
 					break;
 				case Shared.ResultParam.Calculate.EGA:
 					setEgaTexts(i);
-					setLast(i);
 					break;
 				}
 			}
@@ -169,27 +166,6 @@ public class ResultActivity extends ChildActivity implements AdListener {
 		Pregnancy pregnancy = pregnancies[i];
 		Calendar childbirthDate = pregnancy.getEndPoint();
 		result.setText(DateUtils.toString(this, childbirthDate));
-	}
-
-	private void setLast(int i) {
-		TextView message = messages[i];
-		Pregnancy pregnancy = pregnancies[i];
-		if (i == 2 && pregnancy.isCorrect()) {
-			CharSequence old = message.getText();
-			if (pregnancy.isAccurateForUltrasound(getData().getWeeks())) {
-				message.setText((old.equals("") ? "" : old + "\n")
-						+ getString(R.string.accurateUltrasoundResults));
-			} else {
-				message.setText((old.equals("") ? "" : old + "\n")
-						+ getString(R.string.inaccurateUltrasoundResults));
-			}
-		}
-
-		if (message.getText().equals("")
-				&& Configuration.ORIENTATION_PORTRAIT == getResources()
-						.getConfiguration().orientation) {
-			message.setVisibility(View.GONE);
-		}
 	}
 
 	public void rate(View view) {

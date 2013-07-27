@@ -8,7 +8,7 @@ import java.util.Calendar;
  * @author Anna
  * 
  */
-public class EmbryonicAge extends Pregnancy {
+public final class EmbryonicAge extends Pregnancy {
 	public EmbryonicAge(Calendar start) {
 		super(start);
 	}
@@ -25,11 +25,6 @@ public class EmbryonicAge extends Pregnancy {
 	@Override
 	protected int getMaxDurationInDays() {
 		return PregnancyCalculator.EMBRYONIC_MAX_AGE_DURATION;
-	}
-
-	@Override
-	protected int getMaxUltrasoundAccuracy() {
-		return PregnancyCalculator.EMBRYONIC_MAX_ULTRASOUND_ACCURACY_IN_WEEKS;
 	}
 
 	@Override

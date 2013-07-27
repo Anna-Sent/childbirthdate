@@ -23,22 +23,17 @@ public class GestationalAge extends Pregnancy {
 	}
 
 	@Override
-	protected int getMaxDurationInDays() {
+	protected final int getMaxDurationInDays() {
 		return PregnancyCalculator.GESTATIONAL_MAX_AGE_DURATION;
 	}
 
 	@Override
-	protected int getMaxUltrasoundAccuracy() {
-		return PregnancyCalculator.GESTATIONAL_MAX_ULTRASOUND_ACCURACY_IN_WEEKS;
-	}
-
-	@Override
-	protected int getFirstTrimesterEndInclusive() {
+	protected final int getFirstTrimesterEndInclusive() {
 		return PregnancyCalculator.GESTATIIONAL_FIRST_TRIMESTER_END_INCLUSIVE_IN_WEEKS;
 	}
 
 	@Override
-	protected int getSecondTrimesterEndInclusive() {
+	protected final int getSecondTrimesterEndInclusive() {
 		return PregnancyCalculator.GESTATIONAL_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS;
 	}
 }
