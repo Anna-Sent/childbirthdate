@@ -61,8 +61,11 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 	public void addWidget() {
 		boolean addWidget = false;
-		for (int i = 0; !addWidget && i < radio.length; ++i) {
-			addWidget = addWidget || radio[i].isChecked();
+		for (int i = 0; i < radio.length; ++i) {
+			if (radio[i].isChecked()) {
+				addWidget = true;
+				break;
+			}
 		}
 
 		if (addWidget) {

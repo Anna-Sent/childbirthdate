@@ -46,10 +46,12 @@ public abstract class Builder {
 		boolean showCalculatingMethod = settings
 				.getBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATING_METHOD
 						+ appWidgetId, false);
-		String calculatingMethodString = "";
+
 		DataImpl data = new DataImpl(context);
 		data.update();
+
 		Pregnancy p = PregnancyCalculator.Factory.get(data, calculatingMethod);
+
 		if (p == null) {
 			views.setViewVisibility(R.id.tv1, View.GONE);
 			views.setTextViewText(R.id.tv2,
@@ -60,6 +62,9 @@ public abstract class Builder {
 			views.setViewVisibility(R.id.tv4,
 					showCalculatingMethod ? View.VISIBLE : View.GONE);
 		} else {
+			String[] methodNames = context.getResources().getStringArray(
+					R.array.methodNames);
+			String calculatingMethodString = methodNames[calculatingMethod - 1];
 			Calendar currentDate = Calendar.getInstance();
 			p.setCurrentPoint(currentDate);
 			if (p.isCorrect()) {
