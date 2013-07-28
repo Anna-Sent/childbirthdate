@@ -4,7 +4,7 @@
     <bool name="has_two_panes">true</bool>
 
     <item name="tab_calculation" type="layout">@layout/tab_calculation_two_panes</item>
-    <item name="activity_result" type="layout">@layout/activity_result_wide</item>
+    <item name="result_row" type="layout">@layout/result_row_wide</item>
     <item name="list_footer" type="layout">@layout/list_footer_narrow</item>
 
 </resources>

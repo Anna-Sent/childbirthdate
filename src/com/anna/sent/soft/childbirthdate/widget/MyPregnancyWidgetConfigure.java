@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +25,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		OnClickListener {
 	private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 	private TextView textView;
-	private RadioButton radioByLMP, radiobyByOvulation, radioByUltrasound;
+	private RadioButton radio[] = new RadioButton[Shared.Calculation.METHODS_COUNT];
 	private CheckBox checkBoxCountdown, checkBoxShowCalculatingMethod;
 	private Button button;
 	private boolean doCalculation = false;
@@ -59,8 +60,12 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	protected abstract Class<?> getWidgetProviderClass();
 
 	public void addWidget() {
-		if (radioByLMP.isChecked() || radiobyByOvulation.isChecked()
-				|| radioByUltrasound.isChecked()) {
+		boolean addWidget = false;
+		for (int i = 0; !addWidget && i < radio.length; ++i) {
+			addWidget = addWidget || radio[i].isChecked();
+		}
+
+		if (addWidget) {
 			// When the configuration is complete, get an instance of the
 			// AppWidgetManager
 
@@ -120,26 +125,23 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	private void init() {
 		DataImpl data = new DataImpl(this);
 		data.update();
-		doCalculation = data.byLmp() || data.byOvulation()
-				|| data.byUltrasound();
+		doCalculation = data.thereIsAtLeastOneSelectedMethod();
 		textView = (TextView) findViewById(R.id.widgetConfigureTextView);
 		textView.setText(doCalculation ? getString(R.string.widgetSpecifyTheMethodOfCalculation)
 				: getString(R.string.widgetStartTheApplicationToSpecifyNecessaryData));
-		radioByLMP = (RadioButton) findViewById(R.id.radioByLMP);
-		radioByLMP.setVisibility(data.byLmp() ? View.VISIBLE : View.GONE);
-		radiobyByOvulation = (RadioButton) findViewById(R.id.radioByOvulation);
-		radiobyByOvulation.setVisibility(data.byOvulation() ? View.VISIBLE
-				: View.GONE);
-		radioByUltrasound = (RadioButton) findViewById(R.id.radioByUltrasound);
-		radioByUltrasound.setVisibility(data.byUltrasound() ? View.VISIBLE
-				: View.GONE);
-
-		if (radioByLMP.getVisibility() == View.VISIBLE) {
-			radioByLMP.setChecked(true);
-		} else if (radiobyByOvulation.getVisibility() == View.VISIBLE) {
-			radiobyByOvulation.setChecked(true);
-		} else if (radioByUltrasound.getVisibility() == View.VISIBLE) {
-			radioByUltrasound.setChecked(true);
+		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+		String[] methodNames = getResources().getStringArray(
+				R.array.methodNames);
+		boolean check = false, byMethod[] = data.byMethod();
+		for (int i = 0; i < radio.length; ++i) {
+			radio[i] = new RadioButton(this);
+			radio[i].setVisibility(byMethod[i] ? View.VISIBLE : View.GONE);
+			radio[i].setText(methodNames[i]);
+			radioGroup.addView(radio[i]);
+			if (!check) {
+				radio[i].setChecked(true);
+				check = true;
+			}
 		}
 
 		checkBoxCountdown = (CheckBox) findViewById(R.id.checkBoxCountdown);
@@ -160,13 +162,12 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	private void saveWidgetParams() {
 		SharedPreferences settings = Shared.getSettings(this);
 		Editor editor = settings.edit();
-		int calculatingMethod = Shared.Saved.Widget.Calculate.UNKNOWN;
-		if (radioByLMP.isChecked()) {
-			calculatingMethod = Shared.Saved.Widget.Calculate.BY_LMP;
-		} else if (radiobyByOvulation.isChecked()) {
-			calculatingMethod = Shared.Saved.Widget.Calculate.BY_OVULATION_DAY;
-		} else if (radioByUltrasound.isChecked()) {
-			calculatingMethod = Shared.Saved.Widget.Calculate.BY_ULTRASOUND;
+		int calculatingMethod = Shared.Calculation.UNKNOWN;
+		for (int i = 0; i < radio.length; ++i) {
+			if (radio[i].isChecked()) {
+				calculatingMethod = i + 1;
+				break;
+			}
 		}
 
 		editor.putInt(Shared.Saved.Widget.EXTRA_CALCULATING_METHOD

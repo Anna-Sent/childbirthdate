@@ -67,6 +67,12 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 		case 2:
 			details = new DetailsUltrasoundMethodFragment();
 			break;
+		case 3:
+			details = new DetailsFirstAppearanceMethodFragment();
+			break;
+		case 4:
+			details = new DetailsFirstMovementsMethodFragment();
+			break;
 		default:
 			return null;
 		}

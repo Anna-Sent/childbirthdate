@@ -11,23 +11,9 @@
             style="@style/TextViewStyle.Medium"
             android:text="@string/widgetSpecifyTheMethodOfCalculation" />
 
-        <RadioGroup style="@style/RadioGroupStyle" >
-
-            <RadioButton
-                android:id="@+id/radioByLMP"
-                style="@style/RadioButtonStyle"
-                android:text="@string/byLMP" />
-
-            <RadioButton
-                android:id="@+id/radioByOvulation"
-                style="@style/RadioButtonStyle"
-                android:text="@string/byOvulation" />
-
-            <RadioButton
-                android:id="@+id/radioByUltrasound"
-                style="@style/RadioButtonStyle"
-                android:text="@string/byUltrasound" />
-        </RadioGroup>
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            style="@style/RadioGroupStyle" />
 
         <CheckBox
             android:id="@+id/checkBoxCountdown"
@@ -43,7 +29,6 @@
             android:id="@+id/widgetConfigureButton"
             style="@style/ButtonStyle"
             android:text="@string/widgetAddWidget" />
-
     </LinearLayout>
 
 </ScrollView>

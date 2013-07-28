@@ -75,13 +75,13 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		case R.id.radioIsGestationalAge:
 			if (mData != null) {
 				boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
-				mData.setIsEmbryonicAge(isEmbryonicAge);
+				mData.isEmbryonicAge(isEmbryonicAge);
 
 				int previous = numberPickerWeeks.getValue();
 				setMaxWeeks();
 				int current = numberPickerWeeks.getValue();
 				if (current != previous && mData != null) {
-					mData.setWeeks(current);
+					mData.setUltrasoundWeeks(current);
 				}
 
 				dataChanged();
@@ -112,8 +112,8 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 
 			setMaxWeeks();
 
-			numberPickerWeeks.setValue(mData.getWeeks());
-			numberPickerDays.setValue(mData.getDays());
+			numberPickerWeeks.setValue(mData.getUltrasoundWeeks());
+			numberPickerDays.setValue(mData.getUltrasoundDays());
 		}
 	}
 
@@ -128,10 +128,10 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		if (mData != null) {
 			if (picker.getId() == R.id.editTextWeeks) {
 				int weeks = numberPickerWeeks.getValue();
-				mData.setWeeks(weeks);
+				mData.setUltrasoundWeeks(weeks);
 			} else if (picker.getId() == R.id.editTextDays) {
 				int days = numberPickerDays.getValue();
-				mData.setDays(days);
+				mData.setUltrasoundDays(days);
 			}
 
 			dataChanged();

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ScrollViewStyle"
+    tools:context=".ResultActivity" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        style="@style/LinearLayoutVerticalStyle.Padding" >
+
+        <TextView
+            android:id="@+id/textView0"
+            style="@style/TextViewStyle.Center.Large"
+            android:text="@string/emptyString" />
+
+        <TableLayout
+            android:id="@+id/table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/view_padding"
+            android:shrinkColumns="*"
+            android:stretchColumns="*" />
+
+        <TextView
+            android:id="@+id/textView00"
+            style="@style/TextViewStyle.Medium"
+            android:paddingTop="@dimen/view_padding"
+            android:text="@string/emptyString" />
+    </LinearLayout>
+
+</ScrollView>

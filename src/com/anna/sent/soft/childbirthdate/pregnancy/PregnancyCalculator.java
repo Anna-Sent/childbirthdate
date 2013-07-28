@@ -2,6 +2,9 @@ package com.anna.sent.soft.childbirthdate.pregnancy;
 
 import java.util.Calendar;
 
+import com.anna.sent.soft.childbirthdate.shared.Data;
+import com.anna.sent.soft.childbirthdate.shared.Shared;
+
 public class PregnancyCalculator {
 	/**
 	 * The average menstrual cycle length is 28 days.
@@ -48,33 +51,39 @@ public class PregnancyCalculator {
 	public final static int EMBRYONIC_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS = GESTATIONAL_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS - 2;
 
 	public static class Factory {
-		public static Pregnancy get(Calendar lastMenstruationDate,
-				int menstrualCycleLen, int lutealPhaseLen) {
-			return new CorrectedGestationalAge(lastMenstruationDate,
-					menstrualCycleLen, lutealPhaseLen);
-		}
-
-		public static Pregnancy get(Calendar ovulationDate) {
-			return new EmbryonicAge(ovulationDate);
-		}
-
-		public static Pregnancy get(Calendar ultrasoundDate, int weeks,
-				int days, boolean isEmbryonicAge) {
-			if (isEmbryonicAge) {
-				return new EmbryonicAge(weeks, days, ultrasoundDate);
-			} else {
-				return new GestationalAge(weeks, days, ultrasoundDate);
+		public static Pregnancy get(Data data, int index) {
+			switch (index) {
+			case Shared.Calculation.BY_LMP:
+				Calendar lastMenstruationDate = data.getLastMenstruationDate();
+				int menstrualCycleLen = data.getMenstrualCycleLen();
+				int lutealPhaseLen = data.getLutealPhaseLen();
+				return new CorrectedGestationalAge(lastMenstruationDate,
+						menstrualCycleLen, lutealPhaseLen);
+			case Shared.Calculation.BY_OVULATION:
+				Calendar ovulationDate = data.getOvulationDate();
+				return new EmbryonicAge(ovulationDate);
+			case Shared.Calculation.BY_ULTRASOUND:
+				Calendar ultrasoundDate = data.getUltrasoundDate();
+				int weeks = data.getUltrasoundWeeks();
+				int days = data.getUltrasoundDays();
+				boolean isEmbryonicAge = data.isEmbryonicAge();
+				if (isEmbryonicAge) {
+					return new EmbryonicAge(weeks, days, ultrasoundDate);
+				} else {
+					return new GestationalAge(weeks, days, ultrasoundDate);
+				}
+			case Shared.Calculation.BY_FIRST_APPEARANCE:
+				Calendar faDate = data.getFirstAppearanceDate();
+				int faWeeks = data.getFirstAppearanceWeeks();
+				return new GestationalAge(faWeeks, 0, faDate);
+			case Shared.Calculation.BY_FIRST_MOVEMENTS:
+				Calendar firstMovementsDate = data.getFirstMovementsDate();
+				boolean isFirstPregnancy = data.isFirstPregnancy();
+				return new GestationalAge(isFirstPregnancy ? 20 : 22, 0,
+						firstMovementsDate);
 			}
-		}
 
-		// by first appearance
-		public static Pregnancy get(Calendar date, int weeks) {
-			return new GestationalAge(weeks, 0, date);
-		}
-
-		// by first movements
-		public static Pregnancy get(Calendar date, boolean isFirstPregnancy) {
-			return new GestationalAge(isFirstPregnancy ? 20 : 22, 0, date);
+			return null;
 		}
 	}
 }

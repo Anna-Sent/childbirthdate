@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ScrollViewStyle"
+    tools:context=".DetailsActivity" >
+
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
+
+        <TextView
+            style="@style/TextViewStyle"
+            android:text="@string/firstMovementsDate" />
+
+        <DatePicker
+            android:id="@+id/datePickerFirstMovementsDate"
+            style="@style/DatePickerStyle" />
+
+        <CheckBox
+            android:id="@+id/checkBoxIsFirstPregnancy"
+            style="@style/CheckBoxStyle"
+            android:text="@string/IsFirstPregnancy"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </LinearLayout>
+
+</ScrollView>

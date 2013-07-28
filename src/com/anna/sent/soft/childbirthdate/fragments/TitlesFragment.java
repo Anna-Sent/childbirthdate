@@ -15,11 +15,9 @@ import android.widget.ListView;
 import com.anna.sent.soft.childbirthdate.DetailsActivity;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.adapters.ListItemArrayAdapter;
-import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.childbirthdate.shared.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.utils.DateUtils;
 import com.anna.sent.soft.utils.MainActivityStateSaver;
 import com.anna.sent.soft.utils.StateSaver;
 
@@ -249,42 +247,18 @@ public class TitlesFragment extends ListFragment implements
 		return getResources().getStringArray(R.array.MethodNames);
 	}
 
-	private String[] getStrings2() {
-		String[] result = new String[3];
-
-		// first
-		result[0] = getString(
-				R.string.titles0,
-				DateUtils.toString(getActivity(),
-						mData.getLastMenstruationDate()),
-				mData.getMenstrualCycleLen(), mData.getLutealPhaseLen());
-
-		// second
-		result[1] = getString(R.string.titles1,
-				DateUtils.toString(getActivity(), mData.getOvulationDate()));
-
-		// third
-		result[2] = getString(R.string.titles2, DateUtils.toString(
-				getActivity(), mData.getUltrasoundDate()),
-				Pregnancy.getStringRepresentation(getActivity(),
-						mData.getWeeks(), mData.getDays()),
-				mData.isEmbryonicAge() ? getString(R.string.embryonic)
-						: getString(R.string.gestational));
-
-		return result;
-	}
-
 	@Override
 	public void detailsChanged() {
 		// log("details changed, update values");
-		mListAdapter.updateValues(getStrings2());
+		mListAdapter.updateValues(mData.getStrings2(getActivity()));
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		// log("resume, update ui");
-		mListAdapter.updateValues(mData.byMethod(), getStrings2());
+		mListAdapter.updateValues(mData.byMethod(),
+				mData.getStrings2(getActivity()));
 	}
 
 	@Override

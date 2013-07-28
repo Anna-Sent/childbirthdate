@@ -40,33 +40,16 @@ public abstract class Builder {
 		SharedPreferences settings = Shared.getSettings(context);
 		int calculatingMethod = settings.getInt(
 				Shared.Saved.Widget.EXTRA_CALCULATING_METHOD + appWidgetId,
-				Shared.Saved.Widget.Calculate.UNKNOWN);
+				Shared.Calculation.UNKNOWN);
 		boolean countdown = settings.getBoolean(
 				Shared.Saved.Widget.EXTRA_COUNTDOWN + appWidgetId, false);
 		boolean showCalculatingMethod = settings
 				.getBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATING_METHOD
 						+ appWidgetId, false);
-		Pregnancy p = null;
 		String calculatingMethodString = "";
 		DataImpl data = new DataImpl(context);
 		data.update();
-		switch (calculatingMethod) {
-		case Shared.Saved.Widget.Calculate.BY_LMP:
-			p = PregnancyCalculator.Factory.get(data.getLastMenstruationDate(),
-					data.getMenstrualCycleLen(), data.getLutealPhaseLen());
-			calculatingMethodString = context.getString(R.string.byLMP);
-			break;
-		case Shared.Saved.Widget.Calculate.BY_OVULATION_DAY:
-			p = PregnancyCalculator.Factory.get(data.getOvulationDate());
-			calculatingMethodString = context.getString(R.string.byOvulation);
-			break;
-		case Shared.Saved.Widget.Calculate.BY_ULTRASOUND:
-			p = PregnancyCalculator.Factory.get(data.getUltrasoundDate(),
-					data.getWeeks(), data.getDays(), data.isEmbryonicAge());
-			calculatingMethodString = context.getString(R.string.byUltrasound);
-			break;
-		}
-
+		Pregnancy p = PregnancyCalculator.Factory.get(data, calculatingMethod);
 		if (p == null) {
 			views.setViewVisibility(R.id.tv1, View.GONE);
 			views.setTextViewText(R.id.tv2,
