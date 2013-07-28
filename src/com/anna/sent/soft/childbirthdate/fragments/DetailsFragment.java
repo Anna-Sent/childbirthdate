@@ -57,20 +57,20 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 	 */
 	public static DetailsFragment newInstance(int index) {
 		DetailsFragment details;
-		switch (index) {
-		case 0:
+		switch (index + 1) {
+		case Shared.Calculation.BY_LMP:
 			details = new DetailsLmpMethodFragment();
 			break;
-		case 1:
+		case Shared.Calculation.BY_OVULATION:
 			details = new DetailsOvulationMethodFragment();
 			break;
-		case 2:
+		case Shared.Calculation.BY_ULTRASOUND:
 			details = new DetailsUltrasoundMethodFragment();
 			break;
-		case 3:
+		case Shared.Calculation.BY_FIRST_APPEARANCE:
 			details = new DetailsFirstAppearanceMethodFragment();
 			break;
-		case 4:
+		case Shared.Calculation.BY_FIRST_MOVEMENTS:
 			details = new DetailsFirstMovementsMethodFragment();
 			break;
 		default:

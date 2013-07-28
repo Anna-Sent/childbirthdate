@@ -13,7 +13,7 @@ import com.anna.sent.soft.utils.DateUtils;
 
 public class DetailsOvulationMethodFragment extends DetailsFragment implements
 		DatePicker.OnDateChangedListener {
-	private DatePicker datePickerOvulationDate;
+	private DatePicker datePicker;
 
 	public DetailsOvulationMethodFragment() {
 		super();
@@ -41,24 +41,23 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		datePickerOvulationDate = (DatePicker) getActivity().findViewById(
+		datePicker = (DatePicker) getActivity().findViewById(
 				R.id.datePickerOvulationDate);
 	}
 
 	@Override
 	protected void updateData() {
 		if (mData != null) {
-			DateUtils.init(datePickerOvulationDate, null);
-			DateUtils.init(datePickerOvulationDate, mData.getOvulationDate(),
-					this);
+			DateUtils.init(datePicker, null);
+			DateUtils.init(datePicker, mData.getOvulationDate(), this);
 		}
 	}
 
 	@Override
 	public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
 		if (mData != null) {
-			Calendar ovulationDate = DateUtils.getDate(datePickerOvulationDate);
-			mData.setOvulationDate(ovulationDate);
+			Calendar value = DateUtils.getDate(datePicker);
+			mData.setOvulationDate(value);
 
 			dataChanged();
 		}

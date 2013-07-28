@@ -15,8 +15,8 @@ import com.anna.sent.soft.utils.DateUtils;
 
 public class DetailsFirstMovementsMethodFragment extends DetailsFragment
 		implements OnClickListener, DatePicker.OnDateChangedListener {
-	private DatePicker datePickerFirstMovementsDate;
-	private CheckBox checkBoxIsFirstPregnancy;
+	private DatePicker datePicker;
+	private CheckBox checkBox;
 
 	public DetailsFirstMovementsMethodFragment() {
 		super();
@@ -44,20 +44,19 @@ public class DetailsFirstMovementsMethodFragment extends DetailsFragment
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		datePickerFirstMovementsDate = (DatePicker) getActivity().findViewById(
+		datePicker = (DatePicker) getActivity().findViewById(
 				R.id.datePickerFirstMovementsDate);
-		checkBoxIsFirstPregnancy = (CheckBox) getActivity().findViewById(
+		checkBox = (CheckBox) getActivity().findViewById(
 				R.id.checkBoxIsFirstPregnancy);
-		checkBoxIsFirstPregnancy.setOnClickListener(this);
+		checkBox.setOnClickListener(this);
 	}
 
 	@Override
 	protected void updateData() {
 		if (mData != null) {
-			DateUtils.init(datePickerFirstMovementsDate, null);
-			DateUtils.init(datePickerFirstMovementsDate,
-					mData.getFirstMovementsDate(), this);
-			checkBoxIsFirstPregnancy.setChecked(mData.isFirstPregnancy());
+			DateUtils.init(datePicker, null);
+			DateUtils.init(datePicker, mData.getFirstMovementsDate(), this);
+			checkBox.setChecked(mData.isFirstPregnancy());
 		}
 	}
 
@@ -65,8 +64,8 @@ public class DetailsFirstMovementsMethodFragment extends DetailsFragment
 	public void onDateChanged(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
 		if (mData != null) {
-			Calendar date = DateUtils.getDate(datePickerFirstMovementsDate);
-			mData.setFirstMovementsDate(date);
+			Calendar value = DateUtils.getDate(datePicker);
+			mData.setFirstMovementsDate(value);
 
 			dataChanged();
 		}
@@ -75,7 +74,7 @@ public class DetailsFirstMovementsMethodFragment extends DetailsFragment
 	@Override
 	public void onClick(View v) {
 		if (mData != null) {
-			boolean value = checkBoxIsFirstPregnancy.isChecked();
+			boolean value = checkBox.isChecked();
 			mData.isFirstPregnancy(value);
 
 			dataChanged();

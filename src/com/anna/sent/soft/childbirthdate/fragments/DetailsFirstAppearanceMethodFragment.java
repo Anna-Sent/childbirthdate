@@ -16,8 +16,8 @@ import com.anna.sent.soft.utils.DateUtils;
 public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 		implements NumberPicker.OnValueChangeListener,
 		DatePicker.OnDateChangedListener {
-	private DatePicker datePickerFirstAppearanceDate;
-	private NumberPicker numberPickerWeeks;
+	private DatePicker datePicker;
+	private NumberPicker numberPicker;
 
 	public DetailsFirstAppearanceMethodFragment() {
 		super();
@@ -45,31 +45,30 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		datePickerFirstAppearanceDate = (DatePicker) getActivity()
-				.findViewById(R.id.datePickerFirstAppearanceDate);
-		numberPickerWeeks = (NumberPicker) getActivity().findViewById(
-				R.id.firstAppearanceWeeks);
-		numberPickerWeeks.setMinValue(0);
-		numberPickerWeeks
+		datePicker = (DatePicker) getActivity().findViewById(
+				R.id.datePickerFirstAppearanceDate);
+		numberPicker = (NumberPicker) getActivity().findViewById(
+				R.id.numberPickerFirstAppearanceWeeks);
+		numberPicker.setMinValue(0);
+		numberPicker
 				.setMaxValue(PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS - 1);
-		numberPickerWeeks.setOnValueChangedListener(this);
+		numberPicker.setOnValueChangedListener(this);
 	}
 
 	@Override
 	protected void updateData() {
 		if (mData != null) {
-			DateUtils.init(datePickerFirstAppearanceDate, null);
-			DateUtils.init(datePickerFirstAppearanceDate,
-					mData.getFirstAppearanceDate(), this);
-			numberPickerWeeks.setValue(mData.getFirstAppearanceWeeks());
+			DateUtils.init(datePicker, null);
+			DateUtils.init(datePicker, mData.getFirstAppearanceDate(), this);
+			numberPicker.setValue(mData.getFirstAppearanceWeeks());
 		}
 	}
 
 	@Override
 	public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
 		if (mData != null) {
-			int weeks = numberPickerWeeks.getValue();
-			mData.setFirstAppearanceWeeks(weeks);
+			int value = numberPicker.getValue();
+			mData.setFirstAppearanceWeeks(value);
 
 			dataChanged();
 		}
@@ -79,8 +78,8 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 	public void onDateChanged(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
 		if (mData != null) {
-			Calendar date = DateUtils.getDate(datePickerFirstAppearanceDate);
-			mData.setFirstAppearanceDate(date);
+			Calendar value = DateUtils.getDate(datePicker);
+			mData.setFirstAppearanceDate(value);
 
 			dataChanged();
 		}

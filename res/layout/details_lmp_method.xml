@@ -42,7 +42,7 @@
                 android:gravity="center" >
 
                 <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                    android:id="@+id/editTextMenstrualCycleLen"
+                    android:id="@+id/numberPickerMenstrualCycleLen"
                     style="@style/NumberPickerStyle" />
 
                 <TextView
@@ -58,7 +58,7 @@
                 android:gravity="center" >
 
                 <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                    android:id="@+id/editTextLutealPhaseLen"
+                    android:id="@+id/numberPickerLutealPhaseLen"
                     style="@style/NumberPickerStyle" />
 
                 <TextView

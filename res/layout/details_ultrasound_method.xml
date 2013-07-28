@@ -22,7 +22,7 @@
         <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
 
             <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                android:id="@+id/editTextWeeks"
+                android:id="@+id/numberPickerUltrasoundWeeks"
                 style="@style/NumberPickerStyle" />
 
             <TextView
@@ -32,7 +32,7 @@
                 android:text="@string/weeks" />
 
             <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                android:id="@+id/editTextDays"
+                android:id="@+id/numberPickerUltrasoundDays"
                 style="@style/NumberPickerStyle" />
 
             <TextView

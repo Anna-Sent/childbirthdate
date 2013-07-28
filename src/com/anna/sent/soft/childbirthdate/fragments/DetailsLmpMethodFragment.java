@@ -18,9 +18,8 @@ import com.anna.sent.soft.utils.DateUtils;
 public class DetailsLmpMethodFragment extends DetailsFragment implements
 		OnClickListener, NumberPicker.OnValueChangeListener,
 		DatePicker.OnDateChangedListener {
-	private DatePicker datePickerLastMenstruationDate;
-	private NumberPicker numberPickerMenstrualCycleLen,
-			numberPcikerLutealPhaseLen;
+	private DatePicker datePicker;
+	private NumberPicker numberPickerMcl, numberPcikerLpl;
 
 	public DetailsLmpMethodFragment() {
 		super();
@@ -48,24 +47,22 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		datePickerLastMenstruationDate = (DatePicker) getActivity()
-				.findViewById(R.id.datePickerLastMenstruationDate);
+		datePicker = (DatePicker) getActivity().findViewById(
+				R.id.datePickerLastMenstruationDate);
 
-		numberPickerMenstrualCycleLen = (NumberPicker) getActivity()
-				.findViewById(R.id.editTextMenstrualCycleLen);
-		numberPickerMenstrualCycleLen
+		numberPickerMcl = (NumberPicker) getActivity().findViewById(
+				R.id.numberPickerMenstrualCycleLen);
+		numberPickerMcl
 				.setMinValue(PregnancyCalculator.MIN_MENSTRUAL_CYCLE_LEN);
-		numberPickerMenstrualCycleLen
+		numberPickerMcl
 				.setMaxValue(PregnancyCalculator.MAX_MENSTRUAL_CYCLE_LEN);
-		numberPickerMenstrualCycleLen.setOnValueChangedListener(this);
+		numberPickerMcl.setOnValueChangedListener(this);
 
-		numberPcikerLutealPhaseLen = (NumberPicker) getActivity().findViewById(
-				R.id.editTextLutealPhaseLen);
-		numberPcikerLutealPhaseLen
-				.setMinValue(PregnancyCalculator.MIN_LUTEAL_PHASE_LEN);
-		numberPcikerLutealPhaseLen
-				.setMaxValue(PregnancyCalculator.MAX_LUTEAL_PHASE_LEN);
-		numberPcikerLutealPhaseLen.setOnValueChangedListener(this);
+		numberPcikerLpl = (NumberPicker) getActivity().findViewById(
+				R.id.numberPickerLutealPhaseLen);
+		numberPcikerLpl.setMinValue(PregnancyCalculator.MIN_LUTEAL_PHASE_LEN);
+		numberPcikerLpl.setMaxValue(PregnancyCalculator.MAX_LUTEAL_PHASE_LEN);
+		numberPcikerLpl.setOnValueChangedListener(this);
 
 		Button button = (Button) getActivity().findViewById(
 				R.id.buttonRestoreDefaultValues);
@@ -77,10 +74,10 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 			int menstrualCycleLen = PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH;
 			int lutealPhaseLen = PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH;
 
-			numberPickerMenstrualCycleLen.setValue(menstrualCycleLen);
+			numberPickerMcl.setValue(menstrualCycleLen);
 			mData.setMenstrualCycleLen(menstrualCycleLen);
 
-			numberPcikerLutealPhaseLen.setValue(lutealPhaseLen);
+			numberPcikerLpl.setValue(lutealPhaseLen);
 			mData.setLutealPhaseLen(lutealPhaseLen);
 
 			dataChanged();
@@ -99,25 +96,22 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 	@Override
 	protected void updateData() {
 		if (mData != null) {
-			DateUtils.init(datePickerLastMenstruationDate, null);
-			DateUtils.init(datePickerLastMenstruationDate,
-					mData.getLastMenstruationDate(), this);
+			DateUtils.init(datePicker, null);
+			DateUtils.init(datePicker, mData.getLastMenstruationDate(), this);
 
-			numberPickerMenstrualCycleLen
-					.setValue(mData.getMenstrualCycleLen());
-			numberPcikerLutealPhaseLen.setValue(mData.getLutealPhaseLen());
+			numberPickerMcl.setValue(mData.getMenstrualCycleLen());
+			numberPcikerLpl.setValue(mData.getLutealPhaseLen());
 		}
 	}
 
 	@Override
 	public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
 		if (mData != null) {
-			if (picker.getId() == R.id.editTextMenstrualCycleLen) {
-				int menstrualCycleLen = numberPickerMenstrualCycleLen
-						.getValue();
+			if (picker.getId() == R.id.numberPickerMenstrualCycleLen) {
+				int menstrualCycleLen = numberPickerMcl.getValue();
 				mData.setMenstrualCycleLen(menstrualCycleLen);
-			} else if (picker.getId() == R.id.editTextLutealPhaseLen) {
-				int lutealPhaseLen = numberPcikerLutealPhaseLen.getValue();
+			} else if (picker.getId() == R.id.numberPickerLutealPhaseLen) {
+				int lutealPhaseLen = numberPcikerLpl.getValue();
 				mData.setLutealPhaseLen(lutealPhaseLen);
 			}
 
@@ -129,9 +123,8 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 	public void onDateChanged(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
 		if (mData != null) {
-			Calendar lastMenstruationDate = DateUtils
-					.getDate(datePickerLastMenstruationDate);
-			mData.setLastMenstruationDate(lastMenstruationDate);
+			Calendar value = DateUtils.getDate(datePicker);
+			mData.setLastMenstruationDate(value);
 
 			dataChanged();
 		}

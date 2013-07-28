@@ -19,7 +19,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		OnClickListener, NumberPicker.OnValueChangeListener,
 		DatePicker.OnDateChangedListener {
 	private NumberPicker numberPickerWeeks, numberPickerDays;
-	private DatePicker datePickerUltrasoundDate;
+	private DatePicker datePicker;
 	private RadioButton radioButtonIsGestationalAge, radioButtonIsEmbryonicAge;
 
 	public DetailsUltrasoundMethodFragment() {
@@ -48,7 +48,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		datePickerUltrasoundDate = (DatePicker) getActivity().findViewById(
+		datePicker = (DatePicker) getActivity().findViewById(
 				R.id.datePickerUltrasoundDate);
 
 		radioButtonIsGestationalAge = (RadioButton) getActivity().findViewById(
@@ -57,12 +57,12 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 				R.id.radioIsEmbryonicAge);
 
 		numberPickerWeeks = (NumberPicker) getActivity().findViewById(
-				R.id.editTextWeeks);
+				R.id.numberPickerUltrasoundWeeks);
 		numberPickerWeeks.setMinValue(0);
 		numberPickerWeeks.setOnValueChangedListener(this);
 
 		numberPickerDays = (NumberPicker) getActivity().findViewById(
-				R.id.editTextDays);
+				R.id.numberPickerUltrasoundDays);
 		numberPickerDays.setMinValue(0);
 		numberPickerDays.setMaxValue(6);
 		numberPickerDays.setOnValueChangedListener(this);
@@ -94,9 +94,8 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 	@Override
 	protected void updateData() {
 		if (mData != null) {
-			DateUtils.init(datePickerUltrasoundDate, null);
-			DateUtils.init(datePickerUltrasoundDate, mData.getUltrasoundDate(),
-					this);
+			DateUtils.init(datePicker, null);
+			DateUtils.init(datePicker, mData.getUltrasoundDate(), this);
 
 			radioButtonIsGestationalAge.setOnClickListener(null);
 			radioButtonIsEmbryonicAge.setOnClickListener(null);
@@ -126,10 +125,10 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 	@Override
 	public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
 		if (mData != null) {
-			if (picker.getId() == R.id.editTextWeeks) {
+			if (picker.getId() == R.id.numberPickerUltrasoundWeeks) {
 				int weeks = numberPickerWeeks.getValue();
 				mData.setUltrasoundWeeks(weeks);
-			} else if (picker.getId() == R.id.editTextDays) {
+			} else if (picker.getId() == R.id.numberPickerUltrasoundDays) {
 				int days = numberPickerDays.getValue();
 				mData.setUltrasoundDays(days);
 			}
@@ -141,8 +140,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 	@Override
 	public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
 		if (mData != null) {
-			Calendar ultrasoundDate = DateUtils
-					.getDate(datePickerUltrasoundDate);
+			Calendar ultrasoundDate = DateUtils.getDate(datePicker);
 			mData.setUltrasoundDate(ultrasoundDate);
 
 			dataChanged();
