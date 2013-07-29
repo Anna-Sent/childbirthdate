@@ -65,15 +65,15 @@ public class ResultActivity extends ChildActivity implements OnClickListener {
 		table = (TableLayout) findViewById(R.id.table);
 
 		Intent intent = getIntent();
-		whatToDo = intent.getIntExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
-				Shared.ResultParam.Calculate.NOTHING);
-		if (Shared.ResultParam.Calculate.NOTHING == whatToDo) {
+		whatToDo = intent.getIntExtra(Shared.Result.EXTRA_WHAT_TO_DO,
+				Shared.Result.Calculate.NOTHING);
+		if (Shared.Result.Calculate.NOTHING == whatToDo) {
 			finish();
 			return;
 		}
 
 		currentDate.setTimeInMillis(intent.getLongExtra(
-				Shared.ResultParam.EXTRA_CURRENT_DATE,
+				Shared.Result.EXTRA_CURRENT_DATE,
 				System.currentTimeMillis()));
 	}
 
@@ -82,10 +82,10 @@ public class ResultActivity extends ChildActivity implements OnClickListener {
 		super.onResume();
 
 		if (getData().thereIsAtLeastOneSelectedMethod()) {
-			if (Shared.ResultParam.Calculate.ECD == whatToDo) {
+			if (Shared.Result.Calculate.ECD == whatToDo) {
 				textView0.setText(getString(R.string.estimatedChildbirthDate));
 				textView00.setText(getString(R.string.rememberECD));
-			} else if (Shared.ResultParam.Calculate.EGA == whatToDo) {
+			} else if (Shared.Result.Calculate.EGA == whatToDo) {
 				textView0.setText(getString(R.string.estimatedGestationalAge,
 						DateUtils.toString(this, currentDate)));
 				textView00.setText(getString(R.string.rememberEGA));
@@ -118,7 +118,7 @@ public class ResultActivity extends ChildActivity implements OnClickListener {
 				table.addView(row);
 				row.setOnClickListener(this);
 
-				if (whatToDo == Shared.ResultParam.Calculate.EGA) {
+				if (whatToDo == Shared.Result.Calculate.EGA) {
 					pregnancy.setCurrentPoint(currentDate);
 					if (pregnancy.isCorrect()) {
 						result.setText(pregnancy.getInfo(this));

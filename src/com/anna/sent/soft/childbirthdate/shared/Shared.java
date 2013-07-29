@@ -50,7 +50,7 @@ public class Shared {
 		}
 	}
 
-	public static class ResultParam {
+	public static class Result {
 		public static final String EXTRA_WHAT_TO_DO = "com.anna.sent.soft.childbirthdate.whattodo";
 
 		public static class Calculate {

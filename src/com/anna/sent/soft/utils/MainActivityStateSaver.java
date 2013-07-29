@@ -12,7 +12,7 @@ public class MainActivityStateSaver {
 		if (listener != null) {
 			Bundle state = new Bundle();
 			listener.saveState(state);
-			intent.putExtra(Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE, state);
+			intent.putExtra(Shared.Result.EXTRA_MAIN_ACTIVITY_STATE, state);
 		}
 	}
 }

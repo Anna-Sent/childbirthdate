@@ -23,8 +23,8 @@ public abstract class Builder {
 	private void setOnClickPendingIntent(Context context, RemoteViews views) {
 		Intent intent = new Intent(context,
 				com.anna.sent.soft.childbirthdate.ResultActivity.class);
-		intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO,
-				Shared.ResultParam.Calculate.EGA);
+		intent.putExtra(Shared.Result.EXTRA_WHAT_TO_DO,
+				Shared.Result.Calculate.EGA);
 
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
 				intent, 0);

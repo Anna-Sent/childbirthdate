@@ -35,7 +35,7 @@ public class ChildActivity extends StateSaverActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Bundle savedState = getIntent().getBundleExtra(
-					Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE);
+					Shared.Result.EXTRA_MAIN_ACTIVITY_STATE);
 			if (savedState == null) {
 				// child activity is started from Widget
 				createParentStack();
@@ -61,7 +61,7 @@ public class ChildActivity extends StateSaverActivity {
 	public void onBackPressed() {
 		// Imitate Home-Up button click
 		Bundle savedState = getIntent().getBundleExtra(
-				Shared.ResultParam.EXTRA_MAIN_ACTIVITY_STATE);
+				Shared.Result.EXTRA_MAIN_ACTIVITY_STATE);
 		if (savedState == null) {
 			// child activity is started from Widget
 			createParentStack();

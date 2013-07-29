@@ -64,9 +64,9 @@ public class TitlesHelperFragment extends StateSaverFragment implements
 	private void calculate(int whatToDo) {
 		Intent intent = new Intent(getActivity(), ResultActivity.class);
 
-		intent.putExtra(Shared.ResultParam.EXTRA_CURRENT_DATE, DateUtils
+		intent.putExtra(Shared.Result.EXTRA_CURRENT_DATE, DateUtils
 				.getDate(datePickerCurrentDate).getTimeInMillis());
-		intent.putExtra(Shared.ResultParam.EXTRA_WHAT_TO_DO, whatToDo);
+		intent.putExtra(Shared.Result.EXTRA_WHAT_TO_DO, whatToDo);
 
 		MainActivityStateSaver.save(getActivity(), intent);
 
@@ -77,10 +77,10 @@ public class TitlesHelperFragment extends StateSaverFragment implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonCalculateEstimatedChildbirthDate:
-			calculate(Shared.ResultParam.Calculate.ECD);
+			calculate(Shared.Result.Calculate.ECD);
 			break;
 		case R.id.buttonCalculateEstimatedGestationalAge:
-			calculate(Shared.ResultParam.Calculate.EGA);
+			calculate(Shared.Result.Calculate.EGA);
 			break;
 		case R.id.buttonToday:
 			today();
