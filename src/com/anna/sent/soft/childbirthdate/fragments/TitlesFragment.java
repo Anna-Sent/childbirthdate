@@ -56,7 +56,6 @@ public class TitlesFragment extends ListFragment implements
 	private final static int REQUEST_POSITION = 1;
 	private static final String TAG_TITLES_HELPER = "TitlesHelper";
 
-	private View mFooter;
 	private ListItemArrayAdapter mListAdapter;
 	private boolean mDualPane;
 	private int mSelectedItem;
@@ -77,7 +76,6 @@ public class TitlesFragment extends ListFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// log("onCreateView", false);
-		mFooter = inflater.inflate(R.layout.list_footer, null);
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
@@ -100,8 +98,6 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
-		getListView().addFooterView(mFooter);
-
 		// Populate list
 		mListAdapter = new ListItemArrayAdapter(getActivity(), getStrings1());
 		mListAdapter.setOnCheckedListener(this);
