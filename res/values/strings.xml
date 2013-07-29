@@ -19,7 +19,7 @@
     <string name="ultrasoundResults">Результаты УЗИ</string>
     <string name="ultrasoundDate">Дата проведения исследования</string>
     <string name="diagnosedAge">Диагностированный срок беременности</string>
-    <string name="firstAppearanceDate">Дата первой явки в женскую консультацию (ЖК)</string>
+    <string name="firstAppearanceDate">Дата явки в женскую консультацию</string>
     <string name="firstMovementsDate">Дата первого шевеления</string>
     <string name="IsFirstPregnancy">Первая беременность</string>
     <string name="isGestationalAge">Указан акушерский срок (как правило)</string>
@@ -45,8 +45,8 @@
     <string name="firstTrimester">Первый триместр</string>
     <string name="secondTrimester">Второй триместр</string>
     <string name="thirdTrimester">Третий триместр</string>
-    <string name="additionalInfo">триместр: %1$s; полный срок: %2$s%3$s</string>
-    <string name="positiveRest">; осталось до ПДР: %s</string>
+    <string name="additionalInfo">триместр %1$s; полный срок %2$s%3$s</string>
+    <string name="positiveRest">; осталось до ПДР %s</string>
     <string name="zeroRest">; ПДР</string>
     <string name="negativeRest"></string>
     <string name="lighttheme">Светлая тема</string>

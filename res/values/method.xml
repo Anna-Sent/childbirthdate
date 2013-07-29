@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="titles0">Дата последней менструации: %1$s; МЦ: %2$s д.; ЛФ: %3$s д.</string>
-    <string name="titles1">Дата овуляции (зачатия): %1$s</string>
-    <string name="titles2">Дата проведения исследования: %1$s; диагностированный срок беременности: %2$s (%3$s)</string>
+    <string name="titles0">%1$s; МЦ %2$s д.; ЛФ %3$s д.</string>
+    <string name="titles1">%1$s</string>
+    <string name="titles2">УЗИ № 1: на %1$s диагностирован срок беременности %2$s (%3$s)</string>
     <string name="gestational">акушерский</string>
     <string name="embryonic">эмбриональный</string>
-    <string name="titles3">Дата первой явки в ЖК: %1$s; диагностированный срок беременности: %2$s</string>
-    <string name="titles4">Дата первого шевеления: %1$s; %2$s</string>
+    <string name="titles3">Явка № 1: на %1$s диагностирован срок беременности %2$s</string>
+    <string name="titles4">%1$s; %2$s</string>
     <string name="isFirstPregnancy">первая беременность</string>
     <string name="isSecondPregnancy">повторная беременность</string>
 
@@ -15,14 +15,14 @@
         <item>по дате последней менструации</item>
         <item>по дате овуляции (зачатия)</item>
         <item>по результатам УЗИ</item>
-        <item>по первой явке в ЖК</item>
+        <item>по явке в ЖК</item>
         <item>по первому шевелению</item>
     </string-array>
     <string-array name="MethodNames">
         <item>По дате последней менструации</item>
         <item>По дате овуляции (зачатия)</item>
         <item>По результатам УЗИ</item>
-        <item>По первой явке в ЖК</item>
+        <item>По явке в ЖК</item>
         <item>По первому шевелению</item>
     </string-array>
     <string-array name="HelpParts">
