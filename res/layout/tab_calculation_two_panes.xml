@@ -3,12 +3,39 @@
     style="@style/LinearLayoutHorizontalStyle"
     android:baselineAligned="false" >
 
-    <fragment
-        android:id="@+id/titles"
+    <LinearLayout
+        style="@style/LinearLayoutVerticalStyle"
         android:layout_width="0px"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        class="com.anna.sent.soft.childbirthdate.fragments.TitlesFragment" />
+        android:layout_weight="1" >
+
+        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+
+            <Button
+                android:id="@+id/buttonCalculateEstimatedChildbirthDate"
+                style="@style/ButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="@string/calculateEstimatedChildbirthDate"
+                android:text="@string/childbirthDate" />
+
+            <Button
+                android:id="@+id/buttonCalculateEstimatedGestationalAge"
+                style="@style/ButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="@string/calculateEstimatedGestationalAge"
+                android:text="@string/gestationalAge" />
+        </LinearLayout>
+
+        <fragment
+            android:id="@+id/titles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="com.anna.sent.soft.childbirthdate.fragments.TitlesFragment" />
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/details"
