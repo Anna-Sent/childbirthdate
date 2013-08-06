@@ -2,7 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/LinearLayoutVerticalStyle" >
 
-    <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
+    <LinearLayout
+        style="@style/LinearLayoutHorizontalStyle"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:paddingTop="2dp" >
 
         <Button
             android:id="@+id/buttonCalculateEstimatedChildbirthDate"

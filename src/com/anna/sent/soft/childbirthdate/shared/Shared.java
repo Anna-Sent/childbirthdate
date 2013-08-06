@@ -12,7 +12,12 @@ public class Shared {
 	}
 
 	public static class Titles {
-		public final static String EXTRA_GUI_POSITION = "com.anna.sent.soft.childbirthdate.position";
+		public final static int REQUEST_POSITION = 1;
+		public final static String EXTRA_POSITION = "com.anna.sent.soft.childbirthdate.position";
+	}
+
+	public static class Child {
+		public static final String EXTRA_IS_STARTED_FROM_WIDGET = "com.anna.sent.soft.childbirthdate.isstartedfromwidget";
 	}
 
 	public static class Calculation {
@@ -48,17 +53,5 @@ public class Shared {
 			public static final String EXTRA_COUNTDOWN = "com.anna.sent.soft.childbirthdate.widget.countdown";
 			public static final String EXTRA_SHOW_CALCULATING_METHOD = "com.anna.sent.soft.childbirthdate.widget.showCalculatingMethod";
 		}
-	}
-
-	public static class Result {
-		public static final String EXTRA_WHAT_TO_DO = "com.anna.sent.soft.childbirthdate.whattodo";
-
-		public static class Calculate {
-			public static final int NOTHING = 0, EGA = 1, ECD = 2;
-		}
-
-		public static final String EXTRA_CURRENT_DATE = "com.anna.sent.soft.childbirthdate.currentdate";
-
-		public static final String EXTRA_MAIN_ACTIVITY_STATE = "com.anna.sent.soft.childbirthdate.mainactivitystate";
 	}
 }

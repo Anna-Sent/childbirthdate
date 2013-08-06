@@ -18,7 +18,6 @@ import com.anna.sent.soft.childbirthdate.adapters.ListItemArrayAdapter;
 import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.childbirthdate.shared.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.utils.MainActivityStateSaver;
 import com.anna.sent.soft.utils.StateSaver;
 
 public class TitlesFragment extends ListFragment implements
@@ -53,7 +52,6 @@ public class TitlesFragment extends ListFragment implements
 		}
 	}
 
-	private final static int REQUEST_POSITION = 1;
 	private static final String TAG_TITLES_HELPER = "TitlesHelper";
 
 	private ListItemArrayAdapter mListAdapter;
@@ -129,14 +127,14 @@ public class TitlesFragment extends ListFragment implements
 	@Override
 	public void restoreState(Bundle state) {
 		// log("restore state", false);
-		mSelectedItem = state.getInt(Shared.Titles.EXTRA_GUI_POSITION, 0);
+		mSelectedItem = state.getInt(Shared.Titles.EXTRA_POSITION, 0);
 		// log("restore index=", mSelectedItem);
 	}
 
 	@Override
 	public void saveState(Bundle state) {
 		// log("save state", false);
-		state.putInt(Shared.Titles.EXTRA_GUI_POSITION, mSelectedItem);
+		state.putInt(Shared.Titles.EXTRA_POSITION, mSelectedItem);
 		// log("save index=", mSelectedItem);
 	}
 
@@ -194,11 +192,8 @@ public class TitlesFragment extends ListFragment implements
 			// the dialog fragment with selected text.
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), DetailsActivity.class);
-			intent.putExtra(Shared.Titles.EXTRA_GUI_POSITION, index);
-
-			MainActivityStateSaver.save(getActivity(), intent);
-
-			startActivityForResult(intent, REQUEST_POSITION);
+			intent.putExtra(Shared.Titles.EXTRA_POSITION, index);
+			startActivityForResult(intent, Shared.Titles.REQUEST_POSITION);
 		}
 	}
 
@@ -220,10 +215,10 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == REQUEST_POSITION) {
+		if (requestCode == Shared.Titles.REQUEST_POSITION) {
 			if (resultCode == Activity.RESULT_OK) {
-				mSelectedItem = data.getIntExtra(
-						Shared.Titles.EXTRA_GUI_POSITION, mSelectedItem);
+				mSelectedItem = data.getIntExtra(Shared.Titles.EXTRA_POSITION,
+						mSelectedItem);
 				// log("got index=", mSelectedItem);
 				if (mDualPane) {
 					showDetails(mSelectedItem);

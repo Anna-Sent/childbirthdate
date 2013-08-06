@@ -9,8 +9,6 @@ import android.widget.Button;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.ResultActivity;
-import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.utils.MainActivityStateSaver;
 
 public class TitlesHelperFragment extends Fragment implements OnClickListener {
 	@Override
@@ -24,15 +22,8 @@ public class TitlesHelperFragment extends Fragment implements OnClickListener {
 		buttonCalculateEGA.setOnClickListener(this);
 	}
 
-	private void calculate(int whatToDo) {
+	private void calculate() {
 		Intent intent = new Intent(getActivity(), ResultActivity.class);
-
-		intent.putExtra(Shared.Result.EXTRA_CURRENT_DATE,
-				System.currentTimeMillis());
-		intent.putExtra(Shared.Result.EXTRA_WHAT_TO_DO, whatToDo);
-
-		MainActivityStateSaver.save(getActivity(), intent);
-
 		startActivity(intent);
 	}
 
@@ -40,10 +31,8 @@ public class TitlesHelperFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonCalculateEstimatedChildbirthDate:
-			calculate(Shared.Result.Calculate.ECD);
-			break;
 		case R.id.buttonCalculateEstimatedGestationalAge:
-			calculate(Shared.Result.Calculate.EGA);
+			calculate();
 			break;
 		}
 	}

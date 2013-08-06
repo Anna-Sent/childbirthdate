@@ -39,7 +39,7 @@ public class DetailsActivity extends ChildActivity implements
 
 	@Override
 	public void restoreState(Bundle state) {
-		mIndex = state.getInt(Shared.Titles.EXTRA_GUI_POSITION);
+		mIndex = state.getInt(Shared.Titles.EXTRA_POSITION);
 		/* Log.d("moo", "details: restore index=" + mIndex); */
 	}
 
@@ -58,7 +58,7 @@ public class DetailsActivity extends ChildActivity implements
 
 	@Override
 	protected void saveActivityState(Bundle state) {
-		state.putInt(Shared.Titles.EXTRA_GUI_POSITION, mIndex);
+		state.putInt(Shared.Titles.EXTRA_POSITION, mIndex);
 		/* Log.d("moo", "details: save index=" + mIndex); */
 	}
 
@@ -85,14 +85,14 @@ public class DetailsActivity extends ChildActivity implements
 
 	private void setResult() {
 		Intent data = new Intent();
-		data.putExtra(Shared.Titles.EXTRA_GUI_POSITION, mIndex);
+		data.putExtra(Shared.Titles.EXTRA_POSITION, mIndex);
 		setResult(RESULT_OK, data);
 		/* Log.d("moo", "details: set result index=" + mIndex); */
 	}
 
 	@Override
 	protected void saveAdditionalData(Bundle state) {
-		state.putInt(Shared.Titles.EXTRA_GUI_POSITION, mIndex);
+		state.putInt(Shared.Titles.EXTRA_POSITION, mIndex);
 	}
 
 	@Override

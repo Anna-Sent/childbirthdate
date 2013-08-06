@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.app.TaskStackBuilder;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -23,11 +24,10 @@ public abstract class Builder {
 	private void setOnClickPendingIntent(Context context, RemoteViews views) {
 		Intent intent = new Intent(context,
 				com.anna.sent.soft.childbirthdate.ResultActivity.class);
-		intent.putExtra(Shared.Result.EXTRA_WHAT_TO_DO,
-				Shared.Result.Calculate.EGA);
+		intent.putExtra(Shared.Child.EXTRA_IS_STARTED_FROM_WIDGET, true);
 
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
-				intent, 0);
+		PendingIntent pendingIntent = TaskStackBuilder.create(context)
+				.addNextIntentWithParentStack(intent).getPendingIntent(0, 0);
 		views.setOnClickPendingIntent(R.id.widget, pendingIntent);
 	}
 

@@ -78,13 +78,13 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 		}
 
 		Bundle args = new Bundle();
-		args.putInt(Shared.Titles.EXTRA_GUI_POSITION, index);
+		args.putInt(Shared.Titles.EXTRA_POSITION, index);
 		details.setArguments(args);
 		return details;
 	}
 
 	public int getShownIndex() {
-		return getArguments().getInt(Shared.Titles.EXTRA_GUI_POSITION, -1);
+		return getArguments().getInt(Shared.Titles.EXTRA_POSITION, -1);
 	}
 
 	protected void dataChanged() {

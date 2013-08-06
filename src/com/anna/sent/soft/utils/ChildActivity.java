@@ -1,5 +1,7 @@
 package com.anna.sent.soft.utils;
 
+import com.anna.sent.soft.childbirthdate.shared.Shared;
+
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.content.Intent;
@@ -7,10 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 import android.view.MenuItem;
-
-import com.anna.sent.soft.childbirthdate.MainActivity;
-import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public class ChildActivity extends StateSaverActivity {
 	@Override
@@ -31,48 +31,43 @@ public class ChildActivity extends StateSaverActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			Bundle savedState = getIntent().getBundleExtra(
-					Shared.Result.EXTRA_MAIN_ACTIVITY_STATE);
-			if (savedState == null) {
-				// child activity is started from Widget
-				createParentStack();
-			} else {
-				saveAdditionalData(savedState);
-
-				// child activity is started from MainActivity
-				Intent intent = new Intent(this, MainActivity.class);
-				intent.putExtras(savedState);
-				NavUtils.navigateUpTo(this, intent);
+	public void onBackPressed() {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+			boolean isStartedFromWidget = getIntent().getBooleanExtra(
+					Shared.Child.EXTRA_IS_STARTED_FROM_WIDGET, false);
+			Log.d("moo", isStartedFromWidget ? "from w" : "no");
+			if (isStartedFromWidget) {
+				TaskStackBuilder tsb = TaskStackBuilder.create(this)
+						.addParentStack(this);
+				tsb.startActivities();
 			}
-
-			return true;
 		}
 
-		return super.onOptionsItemSelected(item);
+		super.onBackPressed();
 	}
 
 	protected void saveAdditionalData(Bundle state) {
 	}
 
 	@Override
-	public void onBackPressed() {
-		// Imitate Home-Up button click
-		Bundle savedState = getIntent().getBundleExtra(
-				Shared.Result.EXTRA_MAIN_ACTIVITY_STATE);
-		if (savedState == null) {
-			// child activity is started from Widget
-			createParentStack();
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			Intent upIntent = NavUtils.getParentActivityIntent(this);
+			Bundle extras = new Bundle();
+			saveAdditionalData(extras);
+			upIntent.putExtras(extras);
+			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+				TaskStackBuilder.create(this)
+						.addNextIntentWithParentStack(upIntent)
+						.startActivities();
+			} else {
+				NavUtils.navigateUpTo(this, upIntent);
+			}
+
+			return true;
 		}
 
-		super.onBackPressed();
-	}
-
-	private void createParentStack() {
-		TaskStackBuilder tsb = TaskStackBuilder.create(this).addParentStack(
-				this);
-		tsb.startActivities();
+		return super.onOptionsItemSelected(item);
 	}
 }

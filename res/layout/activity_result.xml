@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/ScrollViewStyle"
+    android:id="@android:id/tabhost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".ResultActivity" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        style="@style/LinearLayoutVerticalStyle.Padding" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 
-        <TextView
-            android:id="@+id/textView0"
-            style="@style/TextViewStyle.Center.Large"
-            android:text="@string/emptyString" />
-
-        <TableLayout
-            android:id="@+id/table"
+        <TabWidget
+            android:id="@android:id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/view_padding"
-            android:shrinkColumns="*"
-            android:stretchColumns="*" />
+            android:layout_weight="0"
+            android:orientation="horizontal" />
 
-        <TextView
-            android:id="@+id/textView00"
-            style="@style/TextViewStyle.Medium"
-            android:paddingTop="@dimen/view_padding"
-            android:text="@string/emptyString" />
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
-</ScrollView>
+</TabHost>
