@@ -25,7 +25,7 @@ public abstract class Builder {
 		Intent intent = new Intent(context,
 				com.anna.sent.soft.childbirthdate.ResultActivity.class);
 		intent.putExtra(Shared.Child.EXTRA_IS_STARTED_FROM_WIDGET, true);
-		intent.putExtra(Shared.Result.EXTRA_TAB_INDEX, 1);
+		//intent.putExtra(Shared.Result.EXTRA_TAB_INDEX, 1);
 
 		PendingIntent pendingIntent = TaskStackBuilder.create(context)
 				.addNextIntentWithParentStack(intent).getPendingIntent(0, 0);

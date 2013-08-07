@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
+import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.childbirthdate.shared.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.DataImpl;
 
@@ -34,6 +35,11 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 	}
 
 	private DataImpl mConcreteData;
+
+	protected Data getData() {
+		return mConcreteData;
+	}
+
 	private ArrayList<StateSaver> mStateSavers = new ArrayList<StateSaver>();
 
 	@Override

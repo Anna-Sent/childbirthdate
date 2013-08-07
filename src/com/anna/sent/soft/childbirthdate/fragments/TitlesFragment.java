@@ -53,7 +53,6 @@ public class TitlesFragment extends ListFragment implements
 	}
 
 	private final static int REQUEST_POSITION = 1;
-	private static final String TAG_TITLES_HELPER = "TitlesHelper";
 
 	private ListItemArrayAdapter mListAdapter;
 	private boolean mDualPane;
@@ -110,12 +109,6 @@ public class TitlesFragment extends ListFragment implements
 
 		mSelectedItem = 0;
 		// log("init index=", mSelectedItem);
-
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(new TitlesHelperFragment(), TAG_TITLES_HELPER)
-					.commit();
-		}
 	}
 
 	@Override

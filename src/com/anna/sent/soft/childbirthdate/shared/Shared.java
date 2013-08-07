@@ -19,13 +19,6 @@ public class Shared {
 		public static final String EXTRA_IS_STARTED_FROM_WIDGET = "com.anna.sent.soft.childbirthdate.isstartedfromwidget";
 	}
 
-	public static class Result {
-		/**
-		 * 0 is ecd, 1 is ega
-		 */
-		public static final String EXTRA_TAB_INDEX = "com.anna.sent.soft.childbirthdate.tabindex";
-	}
-
 	public static class Calculation {
 		public static final int METHODS_COUNT = 5;
 		public static final int UNKNOWN = 0, BY_LMP = 1, BY_OVULATION = 2,

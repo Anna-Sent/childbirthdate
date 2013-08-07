@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
-    android:padding="4dp" >
+    android:padding="@dimen/small_padding" >
 
     <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 
@@ -20,14 +20,28 @@
                 android:gravity="center_vertical|left"
                 android:text="@string/emptyString" />
 
-            <TextView
-                android:id="@+id/result"
-                style="@style/TextViewStyle.Center.Medium.Red"
+            <LinearLayout
+                style="@style/LinearLayoutVerticalStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/emptyString" />
+                android:layout_weight="1" >
+
+                <TextView
+                    android:id="@+id/result1"
+                    style="@style/TextViewStyle.Center.Medium.Red"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/emptyString" />
+
+                <TextView
+                    android:id="@+id/result2"
+                    style="@style/TextViewStyle.Center.Medium.Blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/emptyString" />
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
