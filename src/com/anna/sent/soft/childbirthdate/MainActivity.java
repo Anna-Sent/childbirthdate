@@ -14,7 +14,7 @@ import com.anna.sent.soft.utils.ThemeUtils;
 public class MainActivity extends StateSaverActivity {
 	@Override
 	public void setViews(Bundle savedInstanceState) {
-		setContentView(R.layout.tab_calculation);
+		setContentView(R.layout.activity_main);
 	}
 
 	@Override
