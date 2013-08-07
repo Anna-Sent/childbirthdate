@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="currentDate">Cрок беременности на дату dd.mm.yyyy</string>
     <string name="adUnitId">a1513549e3d3050</string>
     <string name="emptyString">empty</string>
     <string name="calculation">Расчет</string>
     <string name="help">Справка</string>
     <string name="ecdAndGestationalAge">ПДР и срок беременности</string>
-    <string name="accurateUltrasoundResults">Высокая точность расчета по результатам УЗИ.</string>
-    <string name="inaccurateUltrasoundResults">Низкая точность расчета, так как срок беременности при проведении УЗИ велик.</string>
     <string name="app_name">Дата родов</string>
     <string name="widget_small_name">Дата родов Small</string>
     <string name="widget_simple_name">Дата родов Medium</string>
@@ -28,21 +27,11 @@
     <string name="isEmbryonicAge">Указан эмбриональный срок</string>
     <string name="weeks">нед.</string>
     <string name="days">д.</string>
-    <string name="calculateChildbirthDate">Рассчитать дату родов</string>
-    <string name="calculateGestationalAge">Рассчитать срок беременности</string>
     <string name="calculate">Рассчитать</string>
-    <string name="calculateEgaAndEcd">Рассчитать предполагаемые срок беременности и дату родов</string>
-    <string name="childbirthDate">Дата родов</string>
-    <string name="gestationalAge">Срок беременности</string>
+    <string name="calculateEcdAndGestationalAge">Рассчитать ПДР и срок беременности</string>
     <string name="errorNotSelectedCalculationMethod">Не выбран способ расчета</string>
-    <string name="consultADoctor">Обратитесь в женскую консультацию для уточнения срока беременности и ПДР</string>
-    <string name="estimatedChildbirthDate">Предполагаемая дата родов</string>
-    <string name="rememberECD">Помните, что роды могут начаться на две недели раньше или на две недели позже ПДР.</string>
-    <string name="rememberEGA">Помните, что нормально протекающая беременность длится от 38 до 42 недель.</string>
     <string name="rateApplication">Оценить приложение</string>
     <string name="marketNotFound">Приложение market не найдено</string>
-    <string name="estimatedGestationalAge">Предполагаемый срок беременности</string>
-    <string name="currentDate">Cрок беременности на дату dd.mm.yyyy</string>
     <string name="errorIncorrectGestationalAge">Ошибка</string>
     <string name="errorIncorrectCurrentDateGreater">Указанная дата расчета намного больше ПДР.</string>
     <string name="errorIncorrectCurrentDateSmaller">Указанная дата расчета меньше даты начала отсчета беременности.</string>

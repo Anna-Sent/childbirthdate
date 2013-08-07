@@ -68,7 +68,7 @@ public class TabHelpFragmentFactory {
 		public void setViews(Bundle savedInstanceState) {
 			int position = getArguments().getInt("position");
 			String[] help = getActivity().getResources().getStringArray(
-					R.array.help);
+					R.array.helpParts);
 			String text = position >= 0 && position < help.length ? help[position]
 					: null;
 			textViewHelp = (TextView) getActivity().findViewById(

@@ -19,6 +19,6 @@ public class HelpPagerAdapter extends TitlesPagerAdapter {
 
 	@Override
 	protected String[] getTitlesFromContext(Context context) {
-		return context.getResources().getStringArray(R.array.HelpParts);
+		return context.getResources().getStringArray(R.array.helpTitles);
 	}
 }

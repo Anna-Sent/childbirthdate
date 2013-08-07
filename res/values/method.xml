@@ -25,7 +25,7 @@
         <item>По явке в ЖК</item>
         <item>По первому шевелению</item>
     </string-array>
-    <string-array name="HelpParts">
+    <string-array name="helpTitles">
         <item>Введение</item>
         <item>По дате последней менструации</item>
         <item>По дате овуляции (зачатия)</item>
@@ -33,7 +33,7 @@
         <item>По явке в ЖК</item>
         <item>По первому шевелению</item>
     </string-array>
-    <string-array name="help">
+    <string-array name="helpParts">
         <item>
 <![CDATA[
  <b>ПДР</b> - предполагаемая дата родов.<br/><br/>
