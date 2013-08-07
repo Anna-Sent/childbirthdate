@@ -59,10 +59,10 @@
     <string name="widgetStartTheApplicationToSpecifyNecessaryData">Запустите приложение и заполните необходимые для расчета данные</string>
     <string name="widgetStartTheApplication">Запустить приложение</string>
     <string name="countdown">Обратный отсчет</string>
-    <string name="showCalculatingMethod">Отображать метод расчета</string>
+    <string name="showCalculationMethod">Отображать метод расчета</string>
     <string name="widgetTextInfo">Беременность</string>
     <string name="widgetTextRestInfo">До родов</string>
-    <string name="widgetCalculatingMethod">Метод расчета: %s</string>
+    <string name="widgetCalculationMethod">Метод расчета: %s</string>
     <string name="initialization">Загрузка&#8230;</string>
     <string name="today">Сегодня</string>
 

@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 import com.anna.sent.soft.utils.StateSaverActivity;
 import com.anna.sent.soft.utils.ThemeUtils;
@@ -43,7 +41,6 @@ public class MainActivity extends StateSaverActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		switch (ThemeUtils.getThemeId(this)) {
 		case ThemeUtils.LIGHT_THEME:
@@ -73,17 +70,6 @@ public class MainActivity extends StateSaverActivity {
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
-		}
-	}
-
-	@Override
-	protected void onNewIntent(Intent intent) {
-		super.onNewIntent(intent);
-		FragmentManager fm = getSupportFragmentManager();
-		Fragment titles = fm.findFragmentById(R.id.titles);
-		if (titles != null) {
-			titles.onActivityResult(Shared.Titles.REQUEST_POSITION,
-					Activity.RESULT_OK, intent);
 		}
 	}
 }

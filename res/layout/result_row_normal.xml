@@ -8,10 +8,8 @@
     <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            style="@style/LinearLayoutHorizontalStyle"
+            android:gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/textView"

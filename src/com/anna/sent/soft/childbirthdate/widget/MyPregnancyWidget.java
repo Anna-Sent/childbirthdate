@@ -16,9 +16,6 @@ import android.widget.RemoteViews;
 
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
-/**
- * Define a simple widget that shows a text.
- */
 public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	public static final String UPDATE_ACTION = "UPDATE_MY_PREGNANCY_WIDGET_ACTION";
 
@@ -40,10 +37,9 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 				 * Log.d("moo", getClass().getSimpleName() + " got action " +
 				 * action);
 				 */
-
 				onUpdate(context, appWidgetManager, appWidgetIds);
 
-				// Need to reinstall alarm on this events
+				// Need to reinstall alarm on these events
 				if (action.equals(Intent.ACTION_TIME_CHANGED)
 						|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
 						|| action.equals(Intent.ACTION_DATE_CHANGED)
@@ -99,10 +95,10 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 		SharedPreferences settings = Shared.getSettings(context);
 		Editor editor = settings.edit();
 		for (int i = 0; i < appWidgetIds.length; ++i) {
-			editor.remove(Shared.Saved.Widget.EXTRA_CALCULATING_METHOD
+			editor.remove(Shared.Saved.Widget.EXTRA_CALCULATION_METHOD
 					+ appWidgetIds[i]);
 			editor.remove(Shared.Saved.Widget.EXTRA_COUNTDOWN + appWidgetIds[i]);
-			editor.remove(Shared.Saved.Widget.EXTRA_SHOW_CALCULATING_METHOD
+			editor.remove(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD
 					+ appWidgetIds[i]);
 		}
 

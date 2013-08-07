@@ -13,7 +13,7 @@ public final class MyPregnancyWidgetConfigureAdditional extends
 	}
 
 	@Override
-	protected boolean hasShowCalculatingMethod() {
+	protected boolean hasShowCalculationMethod() {
 		return true;
 	}
 

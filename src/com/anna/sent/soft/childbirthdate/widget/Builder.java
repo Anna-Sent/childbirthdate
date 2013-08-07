@@ -25,6 +25,7 @@ public abstract class Builder {
 		Intent intent = new Intent(context,
 				com.anna.sent.soft.childbirthdate.ResultActivity.class);
 		intent.putExtra(Shared.Child.EXTRA_IS_STARTED_FROM_WIDGET, true);
+		intent.putExtra(Shared.Result.EXTRA_TAB_INDEX, 1);
 
 		PendingIntent pendingIntent = TaskStackBuilder.create(context)
 				.addNextIntentWithParentStack(intent).getPendingIntent(0, 0);
@@ -38,19 +39,19 @@ public abstract class Builder {
 		setOnClickPendingIntent(context, views);
 
 		SharedPreferences settings = Shared.getSettings(context);
-		int calculatingMethod = settings.getInt(
-				Shared.Saved.Widget.EXTRA_CALCULATING_METHOD + appWidgetId,
+		int calculationMethod = settings.getInt(
+				Shared.Saved.Widget.EXTRA_CALCULATION_METHOD + appWidgetId,
 				Shared.Calculation.UNKNOWN);
 		boolean countdown = settings.getBoolean(
 				Shared.Saved.Widget.EXTRA_COUNTDOWN + appWidgetId, false);
-		boolean showCalculatingMethod = settings
-				.getBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATING_METHOD
+		boolean showCalculationMethod = settings
+				.getBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD
 						+ appWidgetId, false);
 
 		DataImpl data = new DataImpl(context);
 		data.update();
 
-		Pregnancy p = PregnancyCalculator.Factory.get(data, calculatingMethod);
+		Pregnancy p = PregnancyCalculator.Factory.get(data, calculationMethod);
 
 		if (p == null) {
 			views.setViewVisibility(R.id.tv1, View.GONE);
@@ -60,11 +61,11 @@ public abstract class Builder {
 			views.setTextViewText(R.id.tv4, context
 					.getString(R.string.errorNotSelectedCalculationMethod));
 			views.setViewVisibility(R.id.tv4,
-					showCalculatingMethod ? View.VISIBLE : View.GONE);
+					showCalculationMethod ? View.VISIBLE : View.GONE);
 		} else {
 			String[] methodNames = context.getResources().getStringArray(
 					R.array.methodNames);
-			String calculatingMethodString = methodNames[calculatingMethod - 1];
+			String calculationMethodString = methodNames[calculationMethod - 1];
 			Calendar currentDate = Calendar.getInstance();
 			p.setCurrentPoint(currentDate);
 			if (p.isCorrect()) {
@@ -103,9 +104,9 @@ public abstract class Builder {
 			}
 
 			views.setTextViewText(R.id.tv4, context.getString(
-					R.string.widgetCalculatingMethod, calculatingMethodString));
+					R.string.widgetCalculationMethod, calculationMethodString));
 			views.setViewVisibility(R.id.tv4,
-					showCalculatingMethod ? View.VISIBLE : View.GONE);
+					showCalculationMethod ? View.VISIBLE : View.GONE);
 		}
 
 		return views;

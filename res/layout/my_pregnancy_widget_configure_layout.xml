@@ -21,9 +21,9 @@
             android:text="@string/countdown" />
 
         <CheckBox
-            android:id="@+id/checkBoxShowCalculatingMethod"
+            android:id="@+id/checkBoxShowCalculationMethod"
             style="@style/CheckBoxStyle"
-            android:text="@string/showCalculatingMethod" />
+            android:text="@string/showCalculationMethod" />
 
         <Button
             android:id="@+id/widgetConfigureButton"

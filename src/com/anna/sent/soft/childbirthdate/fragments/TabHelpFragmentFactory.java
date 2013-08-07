@@ -5,7 +5,6 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
@@ -29,10 +28,6 @@ public class TabHelpFragmentFactory {
 
 	public abstract static class TabHelpFragment extends StateSaverFragment {
 		private TextView textViewHelp;
-		private ScrollView scrollView;
-		private int mScrollY = 0;
-
-		private final static String EXTRA_GUI_SCROLL_Y = "com.anna.sent.soft.childbirthdate.tabhelp.srolly";
 
 		public TabHelpFragment() {
 			super();
@@ -43,8 +38,6 @@ public class TabHelpFragmentFactory {
 		protected abstract int getHelpStringResourceId();
 
 		protected abstract int getTextViewResourceId();
-
-		protected abstract int getScrollViewResourceId();
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,34 +52,14 @@ public class TabHelpFragmentFactory {
 					getTextViewResourceId());
 			textViewHelp.setText(Html
 					.fromHtml(getString(getHelpStringResourceId())));
-			scrollView = (ScrollView) getActivity().findViewById(
-					getScrollViewResourceId());
 		}
 
 		@Override
 		public void restoreState(Bundle state) {
-			if (scrollView != null) {
-				mScrollY = state.getInt(EXTRA_GUI_SCROLL_Y, 0);
-				// Log.d("moo", "restore scroll " + mScrollY);
-				setScrollY();
-			}
-		}
-
-		public void setScrollY() {
-			scrollView.post(new Runnable() {
-				@Override
-				public void run() {
-					scrollView.scrollTo(0, mScrollY);
-				}
-			});
 		}
 
 		@Override
 		public void saveState(Bundle state) {
-			if (scrollView != null) {
-				// Log.d("moo", "save scroll " + scrollView.getScrollY());
-				state.putInt(EXTRA_GUI_SCROLL_Y, scrollView.getScrollY());
-			}
 		}
 	}
 
@@ -105,11 +78,6 @@ public class TabHelpFragmentFactory {
 		protected int getTextViewResourceId() {
 			return R.id.textViewHelpIntro;
 		}
-
-		@Override
-		protected int getScrollViewResourceId() {
-			return R.id.tabHelpIntro;
-		}
 	}
 
 	public static class TabHelpLmpFragment extends TabHelpFragment {
@@ -126,11 +94,6 @@ public class TabHelpFragmentFactory {
 		@Override
 		protected int getTextViewResourceId() {
 			return R.id.textViewHelpLmp;
-		}
-
-		@Override
-		protected int getScrollViewResourceId() {
-			return R.id.tabHelpLmp;
 		}
 	}
 
@@ -149,11 +112,6 @@ public class TabHelpFragmentFactory {
 		protected int getTextViewResourceId() {
 			return R.id.textViewHelpOvulation;
 		}
-
-		@Override
-		protected int getScrollViewResourceId() {
-			return R.id.tabHelpOvulation;
-		}
 	}
 
 	public static class TabHelpUltrasoundFragment extends TabHelpFragment {
@@ -170,11 +128,6 @@ public class TabHelpFragmentFactory {
 		@Override
 		protected int getTextViewResourceId() {
 			return R.id.textViewHelpUltrasound;
-		}
-
-		@Override
-		protected int getScrollViewResourceId() {
-			return R.id.tabHelpUltrasound;
 		}
 	}
 }

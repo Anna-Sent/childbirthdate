@@ -15,13 +15,12 @@ public class DetailsActivity extends ChildActivity implements
 		ViewPager.OnPageChangeListener {
 	private ViewPager mViewPager;
 	private DetailsPagerAdapter mTabsAdapter;
-	private static int mIndex = 0;
+	private int mIndex = 0;
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
 		if (getResources().getBoolean(R.bool.has_two_panes)) {
-			// If the screen is now in landscape mode, we can show the
-			// dialog in-line with the list so we don't need this activity.
+			restoreState(savedInstanceState);
 			setResult();
 			finish();
 			return;
@@ -34,13 +33,11 @@ public class DetailsActivity extends ChildActivity implements
 		mViewPager.setOnPageChangeListener(this);
 		mTabsAdapter = new DetailsPagerAdapter(this,
 				getSupportFragmentManager());
-		/* Log.d("moo", "details: init index=" + mIndex); */
 	}
 
 	@Override
 	public void restoreState(Bundle state) {
 		mIndex = state.getInt(Shared.Titles.EXTRA_POSITION);
-		/* Log.d("moo", "details: restore index=" + mIndex); */
 	}
 
 	@Override
@@ -59,7 +56,6 @@ public class DetailsActivity extends ChildActivity implements
 	@Override
 	protected void saveActivityState(Bundle state) {
 		state.putInt(Shared.Titles.EXTRA_POSITION, mIndex);
-		/* Log.d("moo", "details: save index=" + mIndex); */
 	}
 
 	@Override
@@ -68,7 +64,6 @@ public class DetailsActivity extends ChildActivity implements
 		mViewPager.setAdapter(mTabsAdapter);
 		mViewPager.setOffscreenPageLimit(mTabsAdapter.getCount() - 1);
 		mViewPager.setCurrentItem(mIndex);
-		/* Log.d("moo", "details: start with index=" + mIndex); */
 	}
 
 	@Override
@@ -77,27 +72,14 @@ public class DetailsActivity extends ChildActivity implements
 		super.onStop();
 	}
 
-	@Override
-	public void onBackPressed() {
-		setResult();
-		super.onBackPressed();
-	}
-
 	private void setResult() {
 		Intent data = new Intent();
 		data.putExtra(Shared.Titles.EXTRA_POSITION, mIndex);
 		setResult(RESULT_OK, data);
-		/* Log.d("moo", "details: set result index=" + mIndex); */
-	}
-
-	@Override
-	protected void saveAdditionalData(Bundle state) {
-		state.putInt(Shared.Titles.EXTRA_POSITION, mIndex);
 	}
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
-		/* Log.d("moo", "details: update index=" + mIndex); */
 	}
 
 	@Override
@@ -107,6 +89,6 @@ public class DetailsActivity extends ChildActivity implements
 	@Override
 	public void onPageSelected(int arg0) {
 		mIndex = arg0;
-		/* Log.d("moo", "details: update index=" + mIndex); */
+		setResult();
 	}
 }

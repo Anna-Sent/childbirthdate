@@ -25,8 +25,8 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		OnClickListener {
 	private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 	private TextView textView;
-	private RadioButton radio[] = new RadioButton[Shared.Calculation.METHODS_COUNT];
-	private CheckBox checkBoxCountdown, checkBoxShowCalculatingMethod;
+	private RadioButton[] radio = new RadioButton[Shared.Calculation.METHODS_COUNT];
+	private CheckBox checkBoxCountdown, checkBoxShowCalculationMethod;
 	private Button button;
 	private boolean doCalculation = false;
 
@@ -39,8 +39,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 		// First, get the App Widget ID from the Intent that launched the
 		// Activity:
-		Intent intent = getIntent();
-		Bundle extras = intent.getExtras();
+		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
 					AppWidgetManager.INVALID_APPWIDGET_ID);
@@ -123,7 +122,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 	protected abstract boolean hasCountdown();
 
-	protected abstract boolean hasShowCalculatingMethod();
+	protected abstract boolean hasShowCalculationMethod();
 
 	private void init() {
 		DataImpl data = new DataImpl(this);
@@ -141,7 +140,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 			radio[i].setVisibility(byMethod[i] ? View.VISIBLE : View.GONE);
 			radio[i].setText(methodNames[i]);
 			radioGroup.addView(radio[i]);
-			if (!check) {
+			if (!check && radio[i].getVisibility() == View.VISIBLE) {
 				radio[i].setChecked(true);
 				check = true;
 			}
@@ -152,8 +151,8 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 				.setVisibility(hasCountdown() && doCalculation ? View.VISIBLE
 						: View.GONE);
 
-		checkBoxShowCalculatingMethod = (CheckBox) findViewById(R.id.checkBoxShowCalculatingMethod);
-		checkBoxShowCalculatingMethod.setVisibility(hasShowCalculatingMethod()
+		checkBoxShowCalculationMethod = (CheckBox) findViewById(R.id.checkBoxShowCalculationMethod);
+		checkBoxShowCalculationMethod.setVisibility(hasShowCalculationMethod()
 				&& doCalculation ? View.VISIBLE : View.GONE);
 
 		button = (Button) findViewById(R.id.widgetConfigureButton);
@@ -165,25 +164,25 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	private void saveWidgetParams() {
 		SharedPreferences settings = Shared.getSettings(this);
 		Editor editor = settings.edit();
-		int calculatingMethod = Shared.Calculation.UNKNOWN;
+		int calculationMethod = Shared.Calculation.UNKNOWN;
 		for (int i = 0; i < radio.length; ++i) {
 			if (radio[i].isChecked()) {
-				calculatingMethod = i + 1;
+				calculationMethod = i + 1;
 				break;
 			}
 		}
 
-		editor.putInt(Shared.Saved.Widget.EXTRA_CALCULATING_METHOD
-				+ mAppWidgetId, calculatingMethod);
+		editor.putInt(Shared.Saved.Widget.EXTRA_CALCULATION_METHOD
+				+ mAppWidgetId, calculationMethod);
 
 		if (hasCountdown()) {
 			editor.putBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN
 					+ mAppWidgetId, checkBoxCountdown.isChecked());
 		}
 
-		if (hasShowCalculatingMethod()) {
-			editor.putBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATING_METHOD
-					+ mAppWidgetId, checkBoxShowCalculatingMethod.isChecked());
+		if (hasShowCalculationMethod()) {
+			editor.putBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD
+					+ mAppWidgetId, checkBoxShowCalculationMethod.isChecked());
 		}
 
 		editor.commit();

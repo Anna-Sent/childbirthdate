@@ -51,10 +51,6 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 		super();
 	}
 
-	/**
-	 * Create a new instance of DetailsFragment, initialized to show the text at
-	 * 'index'.
-	 */
 	public static DetailsFragment newInstance(int index) {
 		DetailsFragment details;
 		switch (index + 1) {

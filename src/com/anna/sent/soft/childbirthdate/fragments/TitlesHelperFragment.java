@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.ResultActivity;
+import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public class TitlesHelperFragment extends Fragment implements OnClickListener {
 	@Override
@@ -22,8 +23,9 @@ public class TitlesHelperFragment extends Fragment implements OnClickListener {
 		buttonCalculateEGA.setOnClickListener(this);
 	}
 
-	private void calculate() {
+	private void calculate(int index) {
 		Intent intent = new Intent(getActivity(), ResultActivity.class);
+		intent.putExtra(Shared.Result.EXTRA_TAB_INDEX, index);
 		startActivity(intent);
 	}
 
@@ -31,8 +33,10 @@ public class TitlesHelperFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonCalculateEstimatedChildbirthDate:
+			calculate(0);
+			break;
 		case R.id.buttonCalculateEstimatedGestationalAge:
-			calculate();
+			calculate(1);
 			break;
 		}
 	}

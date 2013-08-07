@@ -52,6 +52,7 @@ public class TitlesFragment extends ListFragment implements
 		}
 	}
 
+	private final static int REQUEST_POSITION = 1;
 	private static final String TAG_TITLES_HELPER = "TitlesHelper";
 
 	private ListItemArrayAdapter mListAdapter;
@@ -193,7 +194,7 @@ public class TitlesFragment extends ListFragment implements
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), DetailsActivity.class);
 			intent.putExtra(Shared.Titles.EXTRA_POSITION, index);
-			startActivityForResult(intent, Shared.Titles.REQUEST_POSITION);
+			startActivityForResult(intent, REQUEST_POSITION);
 		}
 	}
 
@@ -215,7 +216,7 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == Shared.Titles.REQUEST_POSITION) {
+		if (requestCode == REQUEST_POSITION) {
 			if (resultCode == Activity.RESULT_OK) {
 				mSelectedItem = data.getIntExtra(Shared.Titles.EXTRA_POSITION,
 						mSelectedItem);

@@ -12,7 +12,7 @@ public class MyPregnancyWidgetConfigureSmall extends MyPregnancyWidgetConfigure 
 	}
 
 	@Override
-	protected boolean hasShowCalculatingMethod() {
+	protected boolean hasShowCalculationMethod() {
 		return false;
 	}
 

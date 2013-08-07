@@ -90,7 +90,6 @@ public class DataImpl implements Data {
 
 	@Override
 	public void setByMethod(int index, boolean value) {
-		// log("setByMethod " + index, DEBUG_EDITOR);
 		if (index >= 0 && index < byMethod.length) {
 			byMethod[index] = value;
 		}
@@ -98,49 +97,41 @@ public class DataImpl implements Data {
 
 	@Override
 	public void isEmbryonicAge(boolean value) {
-		// log("setIsEmbryonicAge", DEBUG_EDITOR);
 		isEmbryonicAge = value;
 	}
 
 	@Override
 	public void setLastMenstruationDate(Calendar value) {
-		// log("setLastMenstruationDate", DEBUG_EDITOR);
 		lastMenstruationDate = value;
 	}
 
 	@Override
 	public void setOvulationDate(Calendar value) {
-		// log("setOvulationDate", DEBUG_EDITOR);
 		ovulationDate = value;
 	}
 
 	@Override
 	public void setUltrasoundDate(Calendar value) {
-		// log("setUltrasoundDate", DEBUG_EDITOR);
 		ultrasoundDate = value;
 	}
 
 	@Override
 	public void setMenstrualCycleLen(int value) {
-		// log("setMenstrualCycleLen", DEBUG_EDITOR);
 		menstrualCycleLen = value;
 	}
 
 	@Override
 	public void setLutealPhaseLen(int value) {
-		// log("setLutealPhaseLen", DEBUG_EDITOR);
 		lutealPhaseLen = value;
 	}
 
 	@Override
 	public void setUltrasoundWeeks(int value) {
-		// log("setWeeks", DEBUG_EDITOR);
 		ultrasoundWeeks = value;
 	}
 
 	@Override
 	public void setUltrasoundDays(int value) {
-		// log("setDays", DEBUG_EDITOR);
 		ultrasoundDays = value;
 	}
 

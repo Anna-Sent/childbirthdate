@@ -12,12 +12,18 @@ public class Shared {
 	}
 
 	public static class Titles {
-		public final static int REQUEST_POSITION = 1;
 		public final static String EXTRA_POSITION = "com.anna.sent.soft.childbirthdate.position";
 	}
 
 	public static class Child {
 		public static final String EXTRA_IS_STARTED_FROM_WIDGET = "com.anna.sent.soft.childbirthdate.isstartedfromwidget";
+	}
+
+	public static class Result {
+		/**
+		 * 0 is ecd, 1 is ega
+		 */
+		public static final String EXTRA_TAB_INDEX = "com.anna.sent.soft.childbirthdate.tabindex";
 	}
 
 	public static class Calculation {
@@ -49,9 +55,9 @@ public class Shared {
 		}
 
 		public static class Widget {
-			public static final String EXTRA_CALCULATING_METHOD = "com.anna.sent.soft.childbirthdate.widget.calculatingmethod";
+			public static final String EXTRA_CALCULATION_METHOD = "com.anna.sent.soft.childbirthdate.widget.calculatingmethod";
 			public static final String EXTRA_COUNTDOWN = "com.anna.sent.soft.childbirthdate.widget.countdown";
-			public static final String EXTRA_SHOW_CALCULATING_METHOD = "com.anna.sent.soft.childbirthdate.widget.showCalculatingMethod";
+			public static final String EXTRA_SHOW_CALCULATION_METHOD = "com.anna.sent.soft.childbirthdate.widget.showCalculatingMethod";
 		}
 	}
 }
