@@ -64,8 +64,7 @@ public class MainActivity extends StateSaverActivity {
 			ThemeUtils.changeToTheme(this, ThemeUtils.DARK_THEME);
 			return true;
 		case R.id.help:
-			Intent intent = new Intent();
-			intent.setClass(this, HelpActivity.class);
+			Intent intent = new Intent(this, HelpActivity.class);
 			startActivity(intent);
 			return true;
 		default:

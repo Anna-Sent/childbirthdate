@@ -184,8 +184,7 @@ public class TitlesFragment extends ListFragment implements
 		} else {
 			// Otherwise we need to launch a new activity to display
 			// the dialog fragment with selected text.
-			Intent intent = new Intent();
-			intent.setClass(getActivity(), DetailsActivity.class);
+			Intent intent = new Intent(getActivity(), DetailsActivity.class);
 			intent.putExtra(Shared.Titles.EXTRA_POSITION, index);
 			startActivityForResult(intent, REQUEST_POSITION);
 		}
