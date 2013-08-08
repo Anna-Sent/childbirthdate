@@ -31,7 +31,8 @@
     <string name="calculateEcdAndGestationalAge">Рассчитать ПДР и срок беременности</string>
     <string name="errorNotSelectedCalculationMethod">Не выбран способ расчета</string>
     <string name="rateApplication">Оценить приложение</string>
-    <string name="marketNotFound">Приложение market недоступно</string>
+    <string name="sendto_app_not_available">Приложение \"Почтовый клиент\" недоступно</string>
+    <string name="market_app_not_available">Приложение market недоступно</string>
     <string name="errorIncorrectGestationalAge">Ошибка</string>
     <string name="errorIncorrectCurrentDateGreater">Указанная дата расчета намного больше ПДР.</string>
     <string name="errorIncorrectCurrentDateSmaller">Указанная дата расчета меньше даты начала отсчета беременности.</string>
