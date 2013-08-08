@@ -26,8 +26,8 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="?attr/helpIcon"
-                android:hint="@string/today" />
+                android:contentDescription="@string/today"
+                android:drawableLeft="?attr/helpIcon" />
         </LinearLayout>
 
         <TableLayout
