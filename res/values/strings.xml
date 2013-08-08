@@ -5,7 +5,11 @@
     <string name="adUnitId">a1513549e3d3050</string>
     <string name="emptyString">empty</string>
     <string name="calculation">Расчет</string>
+    <string name="sendData">Отправить данные</string>
+    <string name="lighttheme">Светлая тема</string>
+    <string name="darktheme">Темная тема</string>
     <string name="help">Справка</string>
+    <string name="rate">Оценить приложение</string>
     <string name="ecdAndGestationalAge">ПДР и срок беременности</string>
     <string name="app_name">Дата родов</string>
     <string name="widget_small_name">Дата родов Small</string>
@@ -30,7 +34,6 @@
     <string name="calculate">Рассчитать</string>
     <string name="calculateEcdAndGestationalAge">Рассчитать ПДР и срок беременности</string>
     <string name="errorNotSelectedCalculationMethod">Не выбран способ расчета</string>
-    <string name="rateApplication">Оценить приложение</string>
     <string name="sendto_app_not_available">Приложение \"Почтовый клиент\" недоступно</string>
     <string name="market_app_not_available">Приложение market недоступно</string>
     <string name="errorIncorrectGestationalAge">Ошибка</string>
@@ -43,8 +46,6 @@
     <string name="positiveRest">; до ПДР осталось %s</string>
     <string name="zeroRest">; ПДР</string>
     <string name="negativeRest"></string>
-    <string name="lighttheme">Светлая тема</string>
-    <string name="darktheme">Темная тема</string>
     <string name="errorInvalidAppWidgetId">Некорректный идентификатор виджета.</string>
     <string name="widgetSpecifyTheMethodOfCalculation">Задайте предпочтительный метод расчета:</string>
     <string name="widgetToastSpecifyTheMethodOfCalculation">Выберите метод расчета</string>

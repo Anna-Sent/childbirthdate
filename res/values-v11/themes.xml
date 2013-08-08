@@ -3,13 +3,19 @@
 
     <style name="AppBaseTheme" parent="android:Theme.Holo">
         <item name="numberPickerStyle">@style/Widget.Holo.NumberPicker</item>
-        <item name="helpIcon">@drawable/ic_menu_help_dark</item>
+        <item name="menuIconHelp">@drawable/ic_menu_help_dark</item>
+        <item name="menuIconRate">@drawable/ic_menu_rate_dark</item>
+        <item name="menuIconEmail">@drawable/ic_menu_email_dark</item>
+        <item name="iconGoToToday">@drawable/ic_go_to_today_dark</item>
         <item name="android:windowActionBar">true</item>
     </style>
 
     <style name="AppBaseThemeLight" parent="android:Theme.Holo.Light">
         <item name="numberPickerStyle">@style/Widget.Holo.Light.NumberPicker</item>
-        <item name="helpIcon">@drawable/ic_menu_help_light</item>
+        <item name="menuIconHelp">@drawable/ic_menu_help_light</item>
+        <item name="menuIconRate">@drawable/ic_menu_rate_light</item>
+        <item name="menuIconEmail">@drawable/ic_menu_email_light</item>
+        <item name="iconGoToToday">@drawable/ic_go_to_today_light</item>
         <item name="android:windowActionBar">true</item>
     </style>
 

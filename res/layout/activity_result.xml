@@ -18,7 +18,7 @@
             android:gravity="center_vertical" >
 
             <DatePicker
-                android:id="@+id/datePickerCurrentDate"
+                android:id="@+id/datePicker"
                 style="@style/DatePickerStyle" />
 
             <Button
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/today"
-                android:drawableLeft="?attr/helpIcon" />
+                android:drawableLeft="?attr/iconGoToToday" />
         </LinearLayout>
 
         <TableLayout

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <item
+        android:id="@+id/sendData"
+        android:icon="?attr/menuIconEmail"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/sendData"/>
+
     <group android:checkableBehavior="single" >
         <item
             android:id="@+id/lighttheme"
@@ -16,8 +22,13 @@
 
     <item
         android:id="@+id/help"
-        android:icon="?attr/helpIcon"
+        android:icon="?attr/menuIconHelp"
         android:showAsAction="ifRoom|withText"
         android:title="@string/help"/>
+    <item
+        android:id="@+id/rate"
+        android:icon="?attr/menuIconRate"
+        android:showAsAction="never"
+        android:title="@string/rate"/>
 
 </menu>
