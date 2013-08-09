@@ -12,11 +12,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher_childbirthdate"
         android:label="@string/app_name"
+        android:requiredAccountType="com.google"
         android:theme="@android:style/Theme.Black.NoTitleBar" >
         <activity
             android:name=".widget.MyPregnancyWidgetConfigureSmall"
@@ -129,16 +131,23 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name="com.anna.sent.soft.womancyc.actions.MarketChildbirthDateActionActivity" >
+        <activity android:name="com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity" >
             <intent-filter>
-                <action android:name="com.anna.sent.soft.womancyc.actions.MarketChildbirthDateActionActivity" />
+                <action android:name="com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.anna.sent.soft.womancyc.actions.MarketWomanCycActionActivity" >
+        <activity android:name="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity" >
             <intent-filter>
-                <action android:name="com.anna.sent.soft.womancyc.actions.MarketWomanCycActionActivity" />
+                <action android:name="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.anna.sent.soft.childbirthdate.actions.MarketWomanCycActionActivity" >
+            <intent-filter>
+                <action android:name="com.anna.sent.soft.childbirthdate.actions.MarketWomanCycActionActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

@@ -7,6 +7,9 @@ import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity;
+import com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity;
+import com.anna.sent.soft.childbirthdate.actions.MarketWomanCycActionActivity;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 import com.anna.sent.soft.utils.StateSaverActivity;
 import com.anna.sent.soft.utils.ThemeUtils;
@@ -64,8 +67,22 @@ public class MainActivity extends StateSaverActivity {
 			ThemeUtils.changeToTheme(this, ThemeUtils.DARK_THEME);
 			return true;
 		case R.id.help:
-			Intent intent = new Intent(this, HelpActivity.class);
-			startActivity(intent);
+			Intent help = new Intent(this, HelpActivity.class);
+			startActivity(help);
+			return true;
+		case R.id.rate:
+			Intent rate = new Intent(this,
+					MarketChildbirthDateActionActivity.class);
+			startActivity(rate);
+			return true;
+		case R.id.womancyc:
+			Intent womancyc = new Intent(this,
+					MarketWomanCycActionActivity.class);
+			startActivity(womancyc);
+			return true;
+		case R.id.sendData:
+			Intent sendData = new Intent(this, EmailDataActionActivity.class);
+			startActivity(sendData);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

@@ -4,6 +4,7 @@
     <declare-styleable name="AppTheme">
         <attr name="menuIconHelp" format="reference" />
         <attr name="menuIconRate" format="reference" />
+        <attr name="menuIconWomanCyc" format="reference" />
         <attr name="menuIconEmail" format="reference" />
         <attr name="iconGoToToday" format="reference" />
     </declare-styleable>
@@ -24,9 +25,13 @@
         <item name="iconGoToToday">@drawable/ic_go_to_today_light</item>
     </style>
 
-    <style name="AppTheme" parent="AppBaseTheme" />
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="menuIconWomanCyc">@drawable/ic_menu_womancyc</item>
+    </style>
 
-    <style name="AppThemeLight" parent="AppBaseThemeLight" />
+    <style name="AppThemeLight" parent="AppBaseThemeLight">
+        <item name="menuIconWomanCyc">@drawable/ic_menu_womancyc</item>
+    </style>
 
     <style name="DialogBaseTheme" parent="android:Theme.Dialog">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>

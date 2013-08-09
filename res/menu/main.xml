@@ -30,5 +30,10 @@
         android:icon="?attr/menuIconRate"
         android:showAsAction="never"
         android:title="@string/rate"/>
+    <item
+        android:id="@+id/womancyc"
+        android:icon="?attr/menuIconWomanCyc"
+        android:showAsAction="never"
+        android:title="@string/womancyc"/>
 
 </menu>
