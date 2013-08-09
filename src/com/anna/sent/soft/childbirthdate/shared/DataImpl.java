@@ -17,7 +17,7 @@ import com.anna.sent.soft.utils.DateUtils;
 
 public class DataImpl implements Data {
 	private static final String TAG = "moo";
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 
 	private static String wrapMsg(String msg) {
 		return DataImpl.class.getSimpleName() + ": " + msg;
