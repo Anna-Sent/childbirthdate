@@ -7,6 +7,8 @@
         <attr name="menuIconWomanCyc" format="reference" />
         <attr name="menuIconEmail" format="reference" />
         <attr name="iconGoToToday" format="reference" />
+        <attr name="iconNextItem" format="reference" />
+        <attr name="iconPrevItem" format="reference" />
     </declare-styleable>
 
     <style name="AppBaseTheme" parent="android:Theme">
@@ -15,6 +17,8 @@
         <item name="menuIconRate">@drawable/ic_menu_rate_light</item>
         <item name="menuIconEmail">@drawable/ic_menu_email_light</item>
         <item name="iconGoToToday">@drawable/ic_go_to_today_light</item>
+        <item name="iconNextItem">@drawable/ic_next_item_light</item>
+        <item name="iconPrevItem">@drawable/ic_previous_item_light</item>
     </style>
 
     <style name="AppBaseThemeLight" parent="android:Theme.Light">
@@ -23,6 +27,8 @@
         <item name="menuIconRate">@drawable/ic_menu_rate_light</item>
         <item name="menuIconEmail">@drawable/ic_menu_email_light</item>
         <item name="iconGoToToday">@drawable/ic_go_to_today_light</item>
+        <item name="iconNextItem">@drawable/ic_next_item_light</item>
+        <item name="iconPrevItem">@drawable/ic_previous_item_light</item>
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme">

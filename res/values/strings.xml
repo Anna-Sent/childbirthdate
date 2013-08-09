@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="currentDate">Cрок беременности на дату dd.mm.yyyy</string>
+    <string name="onDate">на дату</string>
     <string name="adUnitId">a1513549e3d3050</string>
     <string name="emptyString">empty</string>
     <string name="calculation">Расчет</string>
@@ -60,5 +60,7 @@
     <string name="widgetCalculationMethod">Метод расчета: %s</string>
     <string name="initialization">Загрузка&#8230;</string>
     <string name="today">Сегодня</string>
+    <string name="prevDay">Предыдущий день</string>
+    <string name="nextDay">Следующий день</string>
 
 </resources>

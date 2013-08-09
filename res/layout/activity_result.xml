@@ -5,13 +5,13 @@
     style="@style/ScrollViewStyle"
     tools:context=".ResultActivity" >
 
-    <LinearLayout
-        style="@style/LinearLayoutVerticalStyle"
-        android:padding="@dimen/small_padding" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 
         <TextView
             style="@style/TextViewStyle.Medium"
-            android:text="@string/currentDate" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/onDate" />
 
         <LinearLayout
             style="@style/LinearLayoutHorizontalStyle"
@@ -21,13 +21,37 @@
                 android:id="@+id/datePicker"
                 style="@style/DatePickerStyle" />
 
-            <Button
-                android:id="@+id/buttonToday"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/today"
-                android:drawableLeft="?attr/iconGoToToday" />
+            <LinearLayout
+                style="@style/LinearLayoutVerticalStyle"
+                android:gravity="center_vertical" >
+
+                <com.anna.sent.soft.childbirthdate.ui.LongPressedButton
+                    android:id="@+id/buttonPrevDay"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/prevDay"
+                    android:drawableLeft="?attr/iconPrevItem"
+                    android:gravity="center" />
+
+                <Button
+                    android:id="@+id/buttonToday"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/today"
+                    android:drawableLeft="?attr/iconGoToToday"
+                    android:gravity="center" />
+
+                <com.anna.sent.soft.childbirthdate.ui.LongPressedButton
+                    android:id="@+id/buttonNextDay"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/nextDay"
+                    android:drawableLeft="?attr/iconNextItem"
+                    android:gravity="center" />
+            </LinearLayout>
         </LinearLayout>
 
         <TableLayout
