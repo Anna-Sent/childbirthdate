@@ -36,4 +36,11 @@ public class DateUtils {
 				.get(Calendar.DAY_OF_MONTH);
 		datePicker.init(year, monthOfYear, dayOfMonth, listener);
 	}
+
+	public static boolean areEqual(Calendar date1, Calendar date2) {
+		return date1.get(Calendar.DAY_OF_MONTH) == date2
+				.get(Calendar.DAY_OF_MONTH)
+				&& date1.get(Calendar.MONTH) == date2.get(Calendar.MONTH)
+				&& date1.get(Calendar.YEAR) == date2.get(Calendar.YEAR);
+	}
 }
