@@ -1,4 +1,4 @@
-package com.anna.sent.soft.childbirthdate.fragments;
+package com.anna.sent.soft.childbirthdate.ui;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -11,12 +11,17 @@ import com.anna.sent.soft.childbirthdate.R;
 public class CheckableFrameLayout extends FrameLayout implements Checkable {
 	private boolean mChecked;
 
-	public CheckableFrameLayout(Context context) {
-		super(context);
+	public CheckableFrameLayout(Context context, AttributeSet attrs,
+			int defStyle) {
+		super(context, attrs, defStyle);
 	}
 
 	public CheckableFrameLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
+	}
+
+	public CheckableFrameLayout(Context context) {
+		super(context);
 	}
 
 	@SuppressWarnings("deprecation")
