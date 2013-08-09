@@ -22,8 +22,22 @@ import com.anna.sent.soft.utils.DateUtils;
 
 public class ResultActivity extends ChildActivity implements OnClickListener,
 		OnDateChangedListener, LongPressedButton.Listener {
+	private static final String TAG = "moo";
+	private static final boolean DEBUG = true;
+
+	private String wrapMsg(String msg) {
+		return getClass().getSimpleName() + ": " + msg;
+	}
+
+	private void log(String msg) {
+		if (DEBUG) {
+			Log.d(TAG, wrapMsg(msg));
+		}
+	}
+
 	private TableLayout table;
 	private DatePicker datePicker;
+	private Calendar mDate;
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
@@ -112,13 +126,15 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 	}
 
 	private void setDate(Calendar date) {
-		DateUtils.init(datePicker, date, this);
+		log("setDate");
+		DateUtils.setDate(datePicker, date);
 		update();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		mDate = DateUtils.getDate(datePicker);
 		table.removeAllViews();
 		String[] methodNames = getResources().getStringArray(
 				R.array.methodNames);
@@ -126,8 +142,7 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 			if (getData().byMethod()[i]) {
 				Pregnancy pregnancy = PregnancyCalculator.Factory.get(
 						getData(), i + 1);
-				Calendar date = DateUtils.getDate(datePicker);
-				pregnancy.setCurrentPoint(date);
+				pregnancy.setCurrentPoint(mDate);
 
 				View row = getLayoutInflater().inflate(R.layout.result_row,
 						null);
@@ -156,8 +171,8 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 				TextView message = (TextView) row.findViewById(R.id.message);
 				message.setText(msg);
 
-				row.setTag(pregnancy);
 				table.addView(row);
+				row.setTag(pregnancy);
 				row.setOnClickListener(this);
 			}
 		}
@@ -165,36 +180,40 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 
 	@Override
 	public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
+		log("onDateChanged");
 		update();
 	}
 
 	private void update() {
-		Log.d("moo", "update");
-		for (int i = 0; i < table.getChildCount(); ++i) {
-			View row = table.getChildAt(i);
+		Calendar newDate = DateUtils.getDate(datePicker);
+		if (DateUtils.areEqual(newDate, mDate)) {
+			log("update " + DateUtils.toString(this, newDate));
+			mDate = newDate;
+			for (int i = 0; i < table.getChildCount(); ++i) {
+				View row = table.getChildAt(i);
 
-			Pregnancy pregnancy = (Pregnancy) row.getTag();
-			Calendar date = DateUtils.getDate(datePicker);
-			pregnancy.setCurrentPoint(date);
+				Pregnancy pregnancy = (Pregnancy) row.getTag();
+				pregnancy.setCurrentPoint(mDate);
 
-			String res1, msg;
-			if (pregnancy.isCorrect()) {
-				res1 = pregnancy.getInfo(this);
-				msg = pregnancy.getAdditionalInfo(this);
-			} else {
-				Calendar end = pregnancy.getEndPoint();
-				res1 = getString(R.string.errorIncorrectGestationalAge);
-				if (pregnancy.getCurrentPoint().before(end)) {
-					msg = getString(R.string.errorIncorrectCurrentDateSmaller);
+				String res1, msg;
+				if (pregnancy.isCorrect()) {
+					res1 = pregnancy.getInfo(this);
+					msg = pregnancy.getAdditionalInfo(this);
 				} else {
-					msg = getString(R.string.errorIncorrectCurrentDateGreater);
+					Calendar end = pregnancy.getEndPoint();
+					res1 = getString(R.string.errorIncorrectGestationalAge);
+					if (pregnancy.getCurrentPoint().before(end)) {
+						msg = getString(R.string.errorIncorrectCurrentDateSmaller);
+					} else {
+						msg = getString(R.string.errorIncorrectCurrentDateGreater);
+					}
 				}
-			}
 
-			TextView result1 = (TextView) row.findViewById(R.id.result1);
-			result1.setText(res1);
-			TextView message = (TextView) row.findViewById(R.id.message);
-			message.setText(msg);
+				TextView result1 = (TextView) row.findViewById(R.id.result1);
+				result1.setText(res1);
+				TextView message = (TextView) row.findViewById(R.id.message);
+				message.setText(msg);
+			}
 		}
 	}
 
