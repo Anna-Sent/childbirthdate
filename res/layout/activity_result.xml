@@ -5,7 +5,7 @@
     style="@style/ScrollViewStyle"
     tools:context=".ResultActivity" >
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
 
         <TextView
             style="@style/TextViewStyle.Medium"
