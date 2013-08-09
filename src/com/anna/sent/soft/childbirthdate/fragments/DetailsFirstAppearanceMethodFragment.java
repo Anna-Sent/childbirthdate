@@ -3,6 +3,7 @@ package com.anna.sent.soft.childbirthdate.fragments;
 import java.util.Calendar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,19 @@ import com.anna.sent.soft.utils.DateUtils;
 public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 		implements NumberPicker.OnValueChangeListener,
 		DatePicker.OnDateChangedListener {
+	private static final String TAG = "moo";
+	private static final boolean DEBUG = true;
+
+	private String wrapMsg(String msg) {
+		return getClass().getSimpleName() + ": " + msg;
+	}
+
+	private void log(String msg) {
+		if (DEBUG) {
+			Log.d(TAG, wrapMsg(msg));
+		}
+	}
+
 	private DatePicker datePicker;
 	private NumberPicker numberPicker;
 
@@ -47,6 +61,7 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 		super.onActivityCreated(savedInstanceState);
 		datePicker = (DatePicker) getActivity().findViewById(
 				R.id.datePickerFirstAppearanceDate);
+		DateUtils.init(datePicker, this);
 		numberPicker = (NumberPicker) getActivity().findViewById(
 				R.id.numberPickerFirstAppearanceWeeks);
 		numberPicker.setMinValue(0);
@@ -58,8 +73,7 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 	@Override
 	protected void updateData() {
 		if (mData != null) {
-			DateUtils.init(datePicker, null);
-			DateUtils.init(datePicker, mData.getFirstAppearanceDate(), this);
+			DateUtils.setDate(datePicker, mData.getFirstAppearanceDate());
 			numberPicker.setValue(mData.getFirstAppearanceWeeks());
 		}
 	}
@@ -82,6 +96,7 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 			mData.setFirstAppearanceDate(value);
 
 			dataChanged();
+			log("onDateChanged " + DateUtils.toString(getActivity(), value));
 		}
 	}
 }

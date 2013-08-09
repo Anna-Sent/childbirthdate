@@ -49,6 +49,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 		super.onActivityCreated(savedInstanceState);
 		datePicker = (DatePicker) getActivity().findViewById(
 				R.id.datePickerLastMenstruationDate);
+		DateUtils.init(datePicker, this);
 
 		numberPickerMcl = (NumberPicker) getActivity().findViewById(
 				R.id.numberPickerMenstrualCycleLen);
@@ -96,8 +97,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 	@Override
 	protected void updateData() {
 		if (mData != null) {
-			DateUtils.init(datePicker, null);
-			DateUtils.init(datePicker, mData.getLastMenstruationDate(), this);
+			DateUtils.setDate(datePicker, mData.getLastMenstruationDate());
 
 			numberPickerMcl.setValue(mData.getMenstrualCycleLen());
 			numberPcikerLpl.setValue(mData.getLutealPhaseLen());

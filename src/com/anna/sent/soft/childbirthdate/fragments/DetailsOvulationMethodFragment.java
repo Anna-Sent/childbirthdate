@@ -43,13 +43,13 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
 		super.onActivityCreated(savedInstanceState);
 		datePicker = (DatePicker) getActivity().findViewById(
 				R.id.datePickerOvulationDate);
+		DateUtils.init(datePicker, this);
 	}
 
 	@Override
 	protected void updateData() {
 		if (mData != null) {
-			DateUtils.init(datePicker, null);
-			DateUtils.init(datePicker, mData.getOvulationDate(), this);
+			DateUtils.setDate(datePicker, mData.getOvulationDate());
 		}
 	}
 

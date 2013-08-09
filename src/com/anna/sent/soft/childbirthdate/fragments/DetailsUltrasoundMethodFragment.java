@@ -50,11 +50,14 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		super.onActivityCreated(savedInstanceState);
 		datePicker = (DatePicker) getActivity().findViewById(
 				R.id.datePickerUltrasoundDate);
+		DateUtils.init(datePicker, this);
 
 		radioButtonIsGestationalAge = (RadioButton) getActivity().findViewById(
 				R.id.radioIsGestationalAge);
+		radioButtonIsGestationalAge.setOnClickListener(this);
 		radioButtonIsEmbryonicAge = (RadioButton) getActivity().findViewById(
 				R.id.radioIsEmbryonicAge);
+		radioButtonIsEmbryonicAge.setOnClickListener(this);
 
 		numberPickerWeeks = (NumberPicker) getActivity().findViewById(
 				R.id.numberPickerUltrasoundWeeks);
@@ -94,20 +97,13 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 	@Override
 	protected void updateData() {
 		if (mData != null) {
-			DateUtils.init(datePicker, null);
-			DateUtils.init(datePicker, mData.getUltrasoundDate(), this);
-
-			radioButtonIsGestationalAge.setOnClickListener(null);
-			radioButtonIsEmbryonicAge.setOnClickListener(null);
+			DateUtils.setDate(datePicker, mData.getUltrasoundDate());
 
 			if (mData.isEmbryonicAge()) {
 				radioButtonIsEmbryonicAge.setChecked(true);
 			} else {
 				radioButtonIsGestationalAge.setChecked(true);
 			}
-
-			radioButtonIsGestationalAge.setOnClickListener(this);
-			radioButtonIsEmbryonicAge.setOnClickListener(this);
 
 			setMaxWeeks();
 

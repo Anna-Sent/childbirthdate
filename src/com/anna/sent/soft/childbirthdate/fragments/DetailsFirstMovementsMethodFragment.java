@@ -46,6 +46,7 @@ public class DetailsFirstMovementsMethodFragment extends DetailsFragment
 		super.onActivityCreated(savedInstanceState);
 		datePicker = (DatePicker) getActivity().findViewById(
 				R.id.datePickerFirstMovementsDate);
+		DateUtils.init(datePicker, this);
 		checkBox = (CheckBox) getActivity().findViewById(
 				R.id.checkBoxIsFirstPregnancy);
 		checkBox.setOnClickListener(this);
@@ -54,8 +55,7 @@ public class DetailsFirstMovementsMethodFragment extends DetailsFragment
 	@Override
 	protected void updateData() {
 		if (mData != null) {
-			DateUtils.init(datePicker, null);
-			DateUtils.init(datePicker, mData.getFirstMovementsDate(), this);
+			DateUtils.setDate(datePicker, mData.getFirstMovementsDate());
 			checkBox.setChecked(mData.isFirstPregnancy());
 		}
 	}
