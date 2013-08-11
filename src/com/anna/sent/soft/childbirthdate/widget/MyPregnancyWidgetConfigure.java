@@ -59,15 +59,15 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	protected abstract Class<?> getWidgetProviderClass();
 
 	public void addWidget() {
-		boolean addWidget = false;
+		boolean isSomeMethodChecked = false;
 		for (int i = 0; i < radio.length; ++i) {
 			if (radio[i].isChecked()) {
-				addWidget = true;
+				isSomeMethodChecked = true;
 				break;
 			}
 		}
 
-		if (addWidget) {
+		if (isSomeMethodChecked) {
 			// When the configuration is complete, get an instance of the
 			// AppWidgetManager
 
@@ -93,9 +93,8 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 			finish();
 		} else {
-			Toast.makeText(
-					this,
-					getString(R.string.widgetToastSpecifyTheMethodOfCalculation),
+			Toast.makeText(this,
+					getString(R.string.errorNotSelectedCalculationMethod),
 					Toast.LENGTH_SHORT).show();
 		}
 	}

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
-    android:padding="@dimen/small_padding" >
+    android:padding="@dimen/row_padding" >
 
     <LinearLayout style="@style/LinearLayoutVerticalStyle" >
 

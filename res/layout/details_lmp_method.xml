@@ -68,10 +68,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            style="@style/TextViewStyle"
-            android:text="@string/acceptDefaults" />
-
         <Button
             android:id="@+id/buttonRestoreDefaultValues"
             style="@style/ButtonStyle"

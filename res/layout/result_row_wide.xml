@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:gravity="center_vertical"
-    android:padding="@dimen/small_padding" >
+    android:padding="@dimen/row_padding" >
 
     <TextView
         android:id="@+id/textView"
