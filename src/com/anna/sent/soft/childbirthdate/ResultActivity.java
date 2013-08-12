@@ -186,7 +186,7 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 
 	private void update() {
 		Calendar newDate = DateUtils.getDate(datePicker);
-		if (DateUtils.areEqual(newDate, mDate)) {
+		if (!DateUtils.areEqual(newDate, mDate)) {
 			log("update " + DateUtils.toString(this, newDate));
 			mDate = newDate;
 			for (int i = 0; i < table.getChildCount(); ++i) {
