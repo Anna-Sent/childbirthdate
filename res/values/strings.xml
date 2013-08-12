@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="collapse">Свернуть</string>
+    <string name="expand">Развернуть</string>
     <string name="onDate">на дату</string>
     <string name="adUnitId">a1513549e3d3050</string>
     <string name="emptyString">empty</string>

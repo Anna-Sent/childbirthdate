@@ -48,6 +48,7 @@
             android:id="@+id/message"
             style="@style/TextViewStyle"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical|left"
             android:text="@string/emptyString" />
     </LinearLayout>
 

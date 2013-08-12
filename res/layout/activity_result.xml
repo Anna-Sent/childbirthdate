@@ -7,52 +7,85 @@
 
     <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
 
-        <TextView
-            style="@style/TextViewStyle.Medium"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/TextViewStyle.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/onDate" />
+
+            <TextView
+                android:id="@+id/textViewOnDate"
+                style="@style/TextViewStyle.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+            <Button
+                android:id="@+id/buttonShowHide"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/collapse"
+                android:drawableLeft="?attr/iconCollapse"
+                android:gravity="center" />
+        </RelativeLayout>
+
+        <com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout
+            android:id="@+id/animatedLayout"
+            style="@style/LinearLayoutVerticalStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/onDate" />
-
-        <LinearLayout
-            style="@style/LinearLayoutHorizontalStyle"
-            android:gravity="center_vertical" >
-
-            <DatePicker
-                android:id="@+id/datePicker"
-                style="@style/DatePickerStyle" />
+            android:layout_gravity="center" >
 
             <LinearLayout
-                style="@style/LinearLayoutVerticalStyle"
-                android:gravity="center_vertical" >
+                style="@style/LinearLayoutHorizontalStyle"
+                android:gravity="center" >
 
-                <com.anna.sent.soft.childbirthdate.ui.LongPressedButton
-                    android:id="@+id/buttonPrevDay"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/prevDay"
-                    android:drawableLeft="?attr/iconPrevItem"
-                    android:gravity="center" />
+                <DatePicker
+                    android:id="@+id/datePicker"
+                    style="@style/DatePickerStyle" />
 
-                <Button
-                    android:id="@+id/buttonToday"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/today"
-                    android:drawableLeft="?attr/iconGoToToday"
-                    android:gravity="center" />
+                <LinearLayout
+                    style="@style/LinearLayoutVerticalStyle"
+                    android:gravity="center_vertical" >
 
-                <com.anna.sent.soft.childbirthdate.ui.LongPressedButton
-                    android:id="@+id/buttonNextDay"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/nextDay"
-                    android:drawableLeft="?attr/iconNextItem"
-                    android:gravity="center" />
+                    <com.anna.sent.soft.childbirthdate.ui.LongPressedButton
+                        android:id="@+id/buttonPrevDay"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/prevDay"
+                        android:drawableLeft="?attr/iconPrevItem"
+                        android:gravity="center" />
+
+                    <Button
+                        android:id="@+id/buttonToday"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/today"
+                        android:drawableLeft="?attr/iconGoToToday"
+                        android:gravity="center" />
+
+                    <com.anna.sent.soft.childbirthdate.ui.LongPressedButton
+                        android:id="@+id/buttonNextDay"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/nextDay"
+                        android:drawableLeft="?attr/iconNextItem"
+                        android:gravity="center" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout>
 
         <TableLayout
             android:id="@+id/table"

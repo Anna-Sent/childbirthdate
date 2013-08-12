@@ -2,6 +2,8 @@ package com.anna.sent.soft.childbirthdate;
 
 import java.util.Calendar;
 
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
+import com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout;
 import com.anna.sent.soft.childbirthdate.ui.LongPressedButton;
 import com.anna.sent.soft.utils.ChildActivity;
 import com.anna.sent.soft.utils.DateUtils;
@@ -83,6 +86,52 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 			};
 		});
 		prevDay.setListener(this);
+		animatedLayout = (AnimatedLinearLayout) findViewById(R.id.animatedLayout);
+		textViewOnDate = (TextView) findViewById(R.id.textViewOnDate);
+		buttonShowHide = (Button) findViewById(R.id.buttonShowHide);
+		buttonShowHide.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				initDatePickerLayout();
+			}
+		});
+		mCollapseDrawable = getDrawableFromTheme(R.attr.iconCollapse);
+		mExpandDrawable = getDrawableFromTheme(R.attr.iconExpand);
+		initDatePickerLayout();
+	}
+
+	private AnimatedLinearLayout animatedLayout;
+	private TextView textViewOnDate;
+	private Button buttonShowHide;
+	private boolean isDatePickerLayoutVisible = true;
+
+	private void initDatePickerLayout() {
+		if (isDatePickerLayoutVisible) {
+			animatedLayout.show();
+			textViewOnDate.setText("");
+			buttonShowHide.setCompoundDrawablesWithIntrinsicBounds(
+					mCollapseDrawable, null, null, null);
+			buttonShowHide.setContentDescription(getString(R.string.collapse));
+		} else {
+			animatedLayout.hide();
+			textViewOnDate.setText(DateUtils.toString(this,
+					DateUtils.getDate(datePicker)));
+			buttonShowHide.setCompoundDrawablesWithIntrinsicBounds(
+					mExpandDrawable, null, null, null);
+			buttonShowHide.setContentDescription(getString(R.string.expand));
+		}
+
+		isDatePickerLayoutVisible = !isDatePickerLayoutVisible;
+	}
+
+	private Drawable mCollapseDrawable, mExpandDrawable;
+
+	private Drawable getDrawableFromTheme(int attribute) {
+		int[] attrs = new int[] { attribute };
+		TypedArray ta = obtainStyledAttributes(attrs);
+		Drawable result = ta.getDrawable(0);
+		ta.recycle();
+		return result;
 	}
 
 	@Override
