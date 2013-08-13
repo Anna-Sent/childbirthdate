@@ -13,33 +13,27 @@
 
             <TextView
                 android:id="@+id/textView"
-                style="@style/TextViewStyle.Center.Medium"
+                style="@style/TextViewStyle.Medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_vertical|left"
                 android:text="@string/emptyString" />
 
             <LinearLayout
                 style="@style/LinearLayoutVerticalStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" >
+                android:layout_weight="1"
+                android:gravity="center" >
 
                 <TextView
                     android:id="@+id/result1"
-                    style="@style/TextViewStyle.Center.Medium.Red"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
+                    style="@style/TextViewStyle.Medium.Red"
                     android:text="@string/emptyString" />
 
                 <TextView
                     android:id="@+id/result2"
-                    style="@style/TextViewStyle.Center.Medium.Blue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
+                    style="@style/TextViewStyle.Medium.Blue"
                     android:text="@string/emptyString" />
             </LinearLayout>
         </LinearLayout>
@@ -47,8 +41,6 @@
         <TextView
             android:id="@+id/message"
             style="@style/TextViewStyle"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|left"
             android:text="@string/emptyString" />
     </LinearLayout>
 

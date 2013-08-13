@@ -36,11 +36,6 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-        <item name="android:checked">false</item>
-    </style>
-
-    <style name="RadioButtonStyle.Checked">
-        <item name="android:checked">true</item>
     </style>
 
 </resources>

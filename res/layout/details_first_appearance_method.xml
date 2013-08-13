@@ -4,7 +4,7 @@
     style="@style/ScrollViewStyle"
     tools:context=".DetailsActivity" >
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
 
         <TextView
             style="@style/TextViewStyle"
@@ -27,7 +27,7 @@
 
             <TextView
                 style="@style/TextViewStyle"
-                android:layout_width="wrap_content"
+                android:layout_gravity="center"
                 android:text="@string/weeks" />
         </LinearLayout>
     </LinearLayout>

@@ -3,7 +3,7 @@
     android:id="@+id/tabHelpOvulation"
     style="@style/ScrollViewStyle" >
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
 
         <TextView
             android:id="@+id/textViewHelpOvulation"

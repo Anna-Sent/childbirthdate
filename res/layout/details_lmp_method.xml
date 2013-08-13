@@ -4,7 +4,7 @@
     style="@style/ScrollViewStyle"
     tools:context=".DetailsActivity" >
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
 
         <TextView
             style="@style/TextViewStyle"
@@ -19,15 +19,17 @@
             android:paddingTop="@dimen/view_padding" >
 
             <TextView
-                style="@style/TextViewStyle.Center"
+                style="@style/TextViewStyle"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/menstrualCycleLen" />
 
             <TextView
-                style="@style/TextViewStyle.Center"
+                style="@style/TextViewStyle"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/lutealPhaseLen" />
         </LinearLayout>
 
@@ -47,7 +49,6 @@
 
                 <TextView
                     style="@style/TextViewStyle"
-                    android:layout_width="wrap_content"
                     android:text="@string/days" />
             </LinearLayout>
 
@@ -63,7 +64,6 @@
 
                 <TextView
                     style="@style/TextViewStyle"
-                    android:layout_width="wrap_content"
                     android:text="@string/days" />
             </LinearLayout>
         </LinearLayout>

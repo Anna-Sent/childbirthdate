@@ -6,11 +6,13 @@
     <TextView
         android:id="@+id/tv1"
         style="@style/WidgetTextView1Style"
+        android:layout_gravity="center"
         android:text="@string/emptyString" />
 
     <TextView
         android:id="@+id/tv2"
         style="@style/WidgetTextView2Style"
+        android:layout_gravity="center"
         android:text="@string/emptyString" />
 
     <TextView

@@ -4,7 +4,7 @@
     style="@style/ScrollViewStyle"
     tools:context=".DetailsActivity" >
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle.Padding" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
 
             <TextView
                 style="@style/TextViewStyle"
-                android:layout_width="wrap_content"
+                android:layout_gravity="center"
                 android:paddingRight="@dimen/view_padding"
                 android:text="@string/weeks" />
 
@@ -68,7 +68,7 @@
 
             <TextView
                 style="@style/TextViewStyle"
-                android:layout_width="wrap_content"
+                android:layout_gravity="center"
                 android:text="@string/days" />
         </LinearLayout>
 
@@ -76,7 +76,7 @@
 
             <RadioButton
                 android:id="@+id/radioIsGestationalAge"
-                style="@style/RadioButtonStyle.Checked"
+                style="@style/RadioButtonStyle"
                 android:text="@string/isGestationalAge" />
 
             <RadioButton

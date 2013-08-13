@@ -2,25 +2,21 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="WidgetBackground" parent="LinearLayoutVerticalStyle">
-        <item name="android:gravity">center_vertical</item>
         <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center_vertical</item>
         <item name="android:background">@drawable/widget_bg</item>
         <item name="android:layout_margin">@dimen/widget_margin</item>
     </style>
 
-    <style name="WidgetTextView34Style" parent="TextViewStyle">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">@dimen/widget_padding</item>
-        <item name="android:textColor">@android:color/secondary_text_dark</item>
-    </style>
-
-    <style name="WidgetTextView1Style" parent="TextViewStyle.Center.Medium">
-        <item name="android:layout_height">wrap_content</item>
+    <style name="WidgetTextView1Style" parent="TextViewStyle.Medium">
         <item name="android:textColor">@android:color/primary_text_dark</item>
     </style>
 
-    <style name="WidgetTextView2Style" parent="TextViewStyle.Center.Medium.Red">
-        <item name="android:layout_height">wrap_content</item>
+    <style name="WidgetTextView2Style" parent="TextViewStyle.Medium.Red" />
+
+    <style name="WidgetTextView34Style" parent="TextViewStyle">
+        <item name="android:paddingLeft">@dimen/widget_padding</item>
+        <item name="android:textColor">@android:color/secondary_text_dark</item>
     </style>
 
 </resources>

@@ -7,7 +7,7 @@
         <item name="android:orientation">vertical</item>
     </style>
 
-    <style name="LinearLayoutVerticalStyle.Padding">
+    <style name="LinearLayoutVerticalStyle.WithPadding">
         <item name="android:paddingBottom">@dimen/layout_vertical_padding</item>
         <item name="android:paddingLeft">@dimen/layout_horizontal_padding</item>
         <item name="android:paddingRight">@dimen/layout_horizontal_padding</item>
@@ -20,7 +20,7 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
-    <style name="LinearLayoutHorizontalStyle.Padding">
+    <style name="LinearLayoutHorizontalStyle.WithPadding">
         <item name="android:paddingBottom">@dimen/layout_vertical_padding</item>
         <item name="android:paddingLeft">@dimen/layout_horizontal_padding</item>
         <item name="android:paddingRight">@dimen/layout_horizontal_padding</item>
