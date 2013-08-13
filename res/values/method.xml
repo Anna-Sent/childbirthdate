@@ -14,8 +14,8 @@
     <string-array name="methodNames">
         <item>по дате последней менструации</item>
         <item>по дате овуляции (зачатия)</item>
-        <item>УЗИ от %s</item>
-        <item>явка от %s</item>
+        <item>по результатам УЗИ</item>
+        <item>по явке в ЖК</item>
         <item>по первому шевелению</item>
     </string-array>
     <string-array name="MethodNames">
