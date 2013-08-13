@@ -99,7 +99,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/ecdAndGestationalAge"
+            android:label="@string/app_name"
             android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -117,7 +117,7 @@
         </activity>
         <activity
             android:name=".DetailsActivity"
-            android:label="@string/ecdAndGestationalAge"
+            android:label="@string/app_name"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
