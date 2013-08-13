@@ -37,7 +37,7 @@ public class DetailsActivity extends ChildActivity implements
 
 	@Override
 	public void restoreState(Bundle state) {
-		mIndex = state.getInt(Shared.Titles.EXTRA_POSITION);
+		mIndex = state.getInt(Shared.Titles.EXTRA_POSITION, 0);
 	}
 
 	@Override

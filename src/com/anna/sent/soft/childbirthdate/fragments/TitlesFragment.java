@@ -56,7 +56,7 @@ public class TitlesFragment extends ListFragment implements
 
 	private ListItemArrayAdapter mListAdapter;
 	private boolean mDualPane;
-	private int mSelectedItem;
+	private int mSelectedItem = 0;
 
 	protected Data mData;
 
@@ -96,7 +96,6 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
-		// Populate list
 		mListAdapter = new ListItemArrayAdapter(getActivity(), getStrings1());
 		mListAdapter.setOnCheckedListener(this);
 		setListAdapter(mListAdapter);
@@ -107,7 +106,6 @@ public class TitlesFragment extends ListFragment implements
 				mDualPane ? ListView.CHOICE_MODE_SINGLE
 						: ListView.CHOICE_MODE_NONE);
 
-		mSelectedItem = 0;
 		// log("init index=", mSelectedItem);
 	}
 
@@ -136,36 +134,27 @@ public class TitlesFragment extends ListFragment implements
 	public void onStart() {
 		super.onStart();
 
-		// Make sure our UI is in the correct state.
 		if (mDualPane) {
-			showDetails(mSelectedItem);
+			showDetails();
 			// log("start with index=", mSelectedItem);
 		}
 	}
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		showDetails(position);
+		mSelectedItem = position;
+		showDetails();
 	}
 
-	/**
-	 * Helper function to show the details of a selected item, either by
-	 * displaying a fragment in-place in the current UI, or starting a whole new
-	 * activity in which it is displayed.
-	 */
-	private void showDetails(int index) {
-		// We can display everything in-place with fragments, so update
-		// the list to highlight the selected item and show the mData.
-		getListView().setItemChecked(index, true);
-		mSelectedItem = index;
+	private void showDetails() {
+		getListView().setItemChecked(mSelectedItem, true);
 		// log("update index=", mSelectedItem);
 		if (mDualPane) {
-			// Check what fragment is currently shown, replace if needed.
 			FragmentManager fm = getFragmentManager();
 			DetailsFragment details = (DetailsFragment) fm
 					.findFragmentById(R.id.details);
-			if (details == null || details.getShownIndex() != index) {
-				DetailsFragment newDetails = getDetailsFragmentInstance(index);
+			if (details == null || details.getShownIndex() != mSelectedItem) {
+				DetailsFragment newDetails = getDetailsFragmentInstance(mSelectedItem);
 				if (newDetails != null) {
 					// log("update details " + newDetails.getShownIndex(),
 					// false);
@@ -182,10 +171,8 @@ public class TitlesFragment extends ListFragment implements
 				}
 			}
 		} else {
-			// Otherwise we need to launch a new activity to display
-			// the dialog fragment with selected text.
 			Intent intent = new Intent(getActivity(), DetailsActivity.class);
-			intent.putExtra(Shared.Titles.EXTRA_POSITION, index);
+			intent.putExtra(Shared.Titles.EXTRA_POSITION, mSelectedItem);
 			startActivityForResult(intent, REQUEST_POSITION);
 		}
 	}
@@ -214,7 +201,7 @@ public class TitlesFragment extends ListFragment implements
 						mSelectedItem);
 				// log("got index=", mSelectedItem);
 				if (mDualPane) {
-					showDetails(mSelectedItem);
+					showDetails();
 				}
 			}
 		}
