@@ -39,9 +39,17 @@ public class AnimatedLinearLayout extends LinearLayout {
 			mInAnimation = new DropDownAnimation(this, getMeasuredHeight(),
 					true);
 			startAnimation(mInAnimation);
+		} else {
+			setVisibility(View.VISIBLE);
 		}
+	}
 
-		setVisibility(View.VISIBLE);
+	@Override
+	protected void onAnimationStart() {
+		super.onAnimationStart();
+		if (mInAnimation != null) {
+			setVisibility(View.VISIBLE);
+		}
 	}
 
 	public void hide() {
@@ -69,6 +77,10 @@ public class AnimatedLinearLayout extends LinearLayout {
 		if (mOutAnimation != null) {
 			setVisibility(View.GONE);
 			mOutAnimation = null;
+		}
+
+		if (mInAnimation != null) {
+			mInAnimation = null;
 		}
 	}
 
