@@ -58,7 +58,7 @@ public class TitlesFragment extends ListFragment implements
 	private boolean mDualPane;
 	private int mSelectedItem = 0;
 
-	protected Data mData;
+	protected Data mData = null;
 
 	@Override
 	public void setData(Data data) {
@@ -214,15 +214,19 @@ public class TitlesFragment extends ListFragment implements
 	@Override
 	public void detailsChanged() {
 		// log("details changed, update values");
-		mListAdapter.updateValues(mData.getStrings2(getActivity()));
+		if (mData != null) {
+			mListAdapter.updateValues(mData.getStrings2(getActivity()));
+		}
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		// log("resume, update ui");
-		mListAdapter.updateValues(mData.byMethod(),
-				mData.getStrings2(getActivity()));
+		if (mData != null) {
+			mListAdapter.updateValues(mData.byMethod(),
+					mData.getStrings2(getActivity()));
+		}
 	}
 
 	@Override
@@ -232,6 +236,8 @@ public class TitlesFragment extends ListFragment implements
 
 	@Override
 	public void checked(int position, boolean isChecked) {
-		mData.setByMethod(position, isChecked);
+		if (mData != null) {
+			mData.setByMethod(position, isChecked);
+		}
 	}
 }

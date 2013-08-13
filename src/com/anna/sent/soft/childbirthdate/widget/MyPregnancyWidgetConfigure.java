@@ -47,7 +47,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 		if (mAppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
 			Toast.makeText(this, R.string.errorInvalidAppWidgetId,
-					Toast.LENGTH_SHORT).show();
+					Toast.LENGTH_LONG).show();
 			finish();
 			return;
 		}
@@ -106,7 +106,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		} else {
 			Toast.makeText(this,
 					getString(R.string.errorNotSelectedCalculationMethod),
-					Toast.LENGTH_SHORT).show();
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -141,17 +141,15 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		textView = (TextView) findViewById(R.id.widgetConfigureTextView);
 		textView.setText(doCalculation ? getString(R.string.widgetSpecifyTheMethodOfCalculation)
 				: getString(R.string.widgetStartTheApplicationToSpecifyNecessaryData));
-		if (doCalculation) {
-			RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-			String[] methodNames = getResources().getStringArray(
-					R.array.methodNames);
-			boolean byMethod[] = data.byMethod();
-			for (int i = 0; i < radio.length; ++i) {
-				radio[i] = new RadioButton(this);
-				radio[i].setVisibility(byMethod[i] ? View.VISIBLE : View.GONE);
-				radio[i].setText(methodNames[i]);
-				radioGroup.addView(radio[i]);
-			}
+		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+		String[] methodNames = getResources().getStringArray(
+				R.array.methodNames);
+		boolean byMethod[] = data.byMethod();
+		for (int i = 0; i < radio.length; ++i) {
+			radio[i] = new RadioButton(this);
+			radio[i].setVisibility(byMethod[i] ? View.VISIBLE : View.GONE);
+			radio[i].setText(methodNames[i]);
+			radioGroup.addView(radio[i]);
 		}
 
 		checkBoxCountdown = (CheckBox) findViewById(R.id.checkBoxCountdown);
