@@ -92,21 +92,22 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 		buttonShowHide.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				initDatePickerLayout();
+				setVisibility(!mIsVisible);
 			}
 		});
 		mCollapseDrawable = getDrawableFromTheme(R.attr.iconCollapse);
 		mExpandDrawable = getDrawableFromTheme(R.attr.iconExpand);
-		initDatePickerLayout();
+		setVisibility(mIsVisible);
 	}
 
 	private AnimatedLinearLayout animatedLayout;
 	private TextView textViewOnDate;
 	private Button buttonShowHide;
-	private boolean isDatePickerLayoutVisible = true;
+	private boolean mIsVisible = true;
 
-	private void initDatePickerLayout() {
-		if (isDatePickerLayoutVisible) {
+	private void setVisibility(boolean isVisible) {
+		mIsVisible = isVisible;
+		if (isVisible) {
 			animatedLayout.show();
 			textViewOnDate.setText("");
 			buttonShowHide.setCompoundDrawablesWithIntrinsicBounds(
@@ -120,8 +121,6 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 					mExpandDrawable, null, null, null);
 			buttonShowHide.setContentDescription(getString(R.string.expand));
 		}
-
-		isDatePickerLayoutVisible = !isDatePickerLayoutVisible;
 	}
 
 	private Drawable mCollapseDrawable, mExpandDrawable;
