@@ -8,6 +8,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.base.StateSaverActivity;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public class ThemeUtils {

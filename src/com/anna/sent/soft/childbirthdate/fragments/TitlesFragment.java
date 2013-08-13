@@ -15,10 +15,10 @@ import android.widget.ListView;
 import com.anna.sent.soft.childbirthdate.DetailsActivity;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.adapters.ListItemArrayAdapter;
+import com.anna.sent.soft.childbirthdate.base.StateSaver;
 import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.childbirthdate.shared.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.utils.StateSaver;
 
 public class TitlesFragment extends ListFragment implements
 		DetailsFragment.OnDetailsChangedListener, StateSaver,

@@ -16,11 +16,11 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.anna.sent.soft.childbirthdate.base.ChildActivity;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout;
 import com.anna.sent.soft.childbirthdate.ui.LongPressedButton;
-import com.anna.sent.soft.utils.ChildActivity;
 import com.anna.sent.soft.utils.DateUtils;
 
 public class ResultActivity extends ChildActivity implements OnClickListener,

@@ -1,4 +1,4 @@
-package com.anna.sent.soft.utils;
+package com.anna.sent.soft.childbirthdate.base;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,7 @@ import android.util.Log;
 import com.anna.sent.soft.childbirthdate.shared.Data;
 import com.anna.sent.soft.childbirthdate.shared.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.DataImpl;
+import com.anna.sent.soft.utils.ThemeUtils;
 
 public abstract class StateSaverActivity extends FragmentActivity implements
 		StateSaver {

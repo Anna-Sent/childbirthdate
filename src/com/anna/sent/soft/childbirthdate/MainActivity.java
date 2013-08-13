@@ -10,8 +10,8 @@ import android.view.MenuItem;
 import com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity;
 import com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity;
 import com.anna.sent.soft.childbirthdate.actions.MarketWomanCycActionActivity;
+import com.anna.sent.soft.childbirthdate.base.StateSaverActivity;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
-import com.anna.sent.soft.utils.StateSaverActivity;
 import com.anna.sent.soft.utils.ThemeUtils;
 
 public class MainActivity extends StateSaverActivity {
