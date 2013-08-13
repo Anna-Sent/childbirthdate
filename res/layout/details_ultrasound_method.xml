@@ -45,31 +45,36 @@
             android:id="@+id/datePickerUltrasoundDate"
             style="@style/DatePickerStyle" />
 
-        <TextView
-            style="@style/TextViewStyle"
-            android:paddingTop="@dimen/view_padding"
-            android:text="@string/diagnosedAge" />
-
-        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
-
-            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                android:id="@+id/numberPickerUltrasoundWeeks"
-                style="@style/NumberPickerStyle" />
+        <LinearLayout
+            style="@style/LinearLayoutVerticalStyle"
+            android:layout_width="wrap_content" >
 
             <TextView
                 style="@style/TextViewStyle"
-                android:layout_gravity="center"
-                android:paddingRight="@dimen/view_padding"
-                android:text="@string/weeks" />
+                android:paddingTop="@dimen/view_padding"
+                android:text="@string/diagnosedAge" />
 
-            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                android:id="@+id/numberPickerUltrasoundDays"
-                style="@style/NumberPickerStyle" />
+            <LinearLayout
+                style="@style/LinearLayoutHorizontalStyle"
+                android:gravity="center" >
 
-            <TextView
-                style="@style/TextViewStyle"
-                android:layout_gravity="center"
-                android:text="@string/days" />
+                <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                    android:id="@+id/numberPickerUltrasoundWeeks"
+                    style="@style/NumberPickerStyle" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:paddingRight="@dimen/view_padding"
+                    android:text="@string/weeks" />
+
+                <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                    android:id="@+id/numberPickerUltrasoundDays"
+                    style="@style/NumberPickerStyle" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:text="@string/days" />
+            </LinearLayout>
         </LinearLayout>
 
         <RadioGroup style="@style/RadioGroupStyle" >

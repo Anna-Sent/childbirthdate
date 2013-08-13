@@ -14,21 +14,27 @@
             android:id="@+id/datePickerFirstAppearanceDate"
             style="@style/DatePickerStyle" />
 
-        <TextView
-            style="@style/TextViewStyle"
-            android:paddingTop="@dimen/view_padding"
-            android:text="@string/diagnosedAge" />
-
-        <LinearLayout style="@style/LinearLayoutHorizontalStyle" >
-
-            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                android:id="@+id/numberPickerFirstAppearanceWeeks"
-                style="@style/NumberPickerStyle" />
+        <LinearLayout
+            style="@style/LinearLayoutVerticalStyle"
+            android:layout_width="wrap_content" >
 
             <TextView
                 style="@style/TextViewStyle"
-                android:layout_gravity="center"
-                android:text="@string/weeks" />
+                android:paddingTop="@dimen/view_padding"
+                android:text="@string/diagnosedAge" />
+
+            <LinearLayout
+                style="@style/LinearLayoutHorizontalStyle"
+                android:gravity="center" >
+
+                <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                    android:id="@+id/numberPickerFirstAppearanceWeeks"
+                    style="@style/NumberPickerStyle" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:text="@string/weeks" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
