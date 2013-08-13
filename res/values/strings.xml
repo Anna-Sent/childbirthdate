@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="ecdIs">ПДР %s</string>
     <string name="collapse">Свернуть</string>
     <string name="expand">Развернуть</string>
     <string name="onDate">на дату</string>
