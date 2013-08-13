@@ -40,7 +40,7 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 
 	private TableLayout table;
 	private DatePicker datePicker;
-	private Calendar mDate;
+	private Calendar mDate = null;
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
@@ -235,7 +235,7 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 
 	private void update() {
 		Calendar newDate = DateUtils.getDate(datePicker);
-		if (!DateUtils.areEqual(newDate, mDate)) {
+		if (mDate == null || !DateUtils.areEqual(newDate, mDate)) {
 			log("update " + DateUtils.toString(this, newDate));
 			mDate = newDate;
 			for (int i = 0; i < table.getChildCount(); ++i) {
