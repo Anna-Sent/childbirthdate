@@ -92,29 +92,48 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 		buttonShowHide.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setVisibility(!mIsVisible);
+				setVisibility(!mIsVisible, true);
 			}
 		});
 		mCollapseDrawable = getDrawableFromTheme(R.attr.iconCollapse);
 		mExpandDrawable = getDrawableFromTheme(R.attr.iconExpand);
-		setVisibility(mIsVisible);
+	}
+
+	private static final String KEY_IS_ANIMATED_ACTIVITY_VISIBLE = "isAnimatedActivityVisible";
+	private static final boolean DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE = false;
+
+	@Override
+	public void restoreState(Bundle state) {
+		mIsVisible = state.getBoolean(KEY_IS_ANIMATED_ACTIVITY_VISIBLE,
+				DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE);
+	}
+
+	@Override
+	protected void saveActivityState(Bundle state) {
+		state.putBoolean(KEY_IS_ANIMATED_ACTIVITY_VISIBLE, mIsVisible);
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		setVisibility(mIsVisible, false);
 	}
 
 	private AnimatedLinearLayout animatedLayout;
 	private TextView textViewOnDate;
 	private Button buttonShowHide;
-	private boolean mIsVisible = true;
+	private boolean mIsVisible = DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE;
 
-	private void setVisibility(boolean isVisible) {
+	private void setVisibility(boolean isVisible, boolean withAnimation) {
 		mIsVisible = isVisible;
 		if (isVisible) {
-			animatedLayout.show();
+			animatedLayout.show(withAnimation);
 			textViewOnDate.setText("");
 			buttonShowHide.setCompoundDrawablesWithIntrinsicBounds(
 					mCollapseDrawable, null, null, null);
 			buttonShowHide.setContentDescription(getString(R.string.collapse));
 		} else {
-			animatedLayout.hide();
+			animatedLayout.hide(withAnimation);
 			textViewOnDate.setText(DateUtils.toString(this,
 					DateUtils.getDate(datePicker)));
 			buttonShowHide.setCompoundDrawablesWithIntrinsicBounds(
