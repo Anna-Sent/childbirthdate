@@ -31,9 +31,9 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	private boolean doCalculation = false;
 
 	@Override
-	protected void onCreate(Bundle arg0) {
+	protected void onCreate(Bundle savedInstanceState) {
 		ThemeUtils.onDialogStyleActivityCreateSetTheme(this);
-		super.onCreate(arg0);
+		super.onCreate(savedInstanceState);
 		setResult(RESULT_CANCELED);
 		setContentView(R.layout.my_pregnancy_widget_configure_layout);
 
@@ -54,23 +54,34 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 		// Perform App Widget configuration.
 		init();
+		int defaultValue = getDefaultRadioIndex();
+		int radioIndex = defaultValue;
+		if (savedInstanceState != null) {
+			radioIndex = savedInstanceState.getInt(KEY_CHECKED_RADIO_INDEX,
+					defaultValue);
+		}
+
+		if (radioIndex != -1) {
+			radio[radioIndex].setChecked(true);
+		}
+	}
+
+	private static final String KEY_CHECKED_RADIO_INDEX = "checkedRadioIndex";
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		int radioIndex = getCheckedRadioIndex();
+		outState.putInt(KEY_CHECKED_RADIO_INDEX, radioIndex);
 	}
 
 	protected abstract Class<?> getWidgetProviderClass();
 
 	public void addWidget() {
-		boolean isSomeMethodChecked = false;
-		for (int i = 0; i < radio.length; ++i) {
-			if (radio[i].isChecked()) {
-				isSomeMethodChecked = true;
-				break;
-			}
-		}
-
-		if (isSomeMethodChecked) {
+		int radioIndex = getCheckedRadioIndex();
+		if (radioIndex != -1) {
 			// When the configuration is complete, get an instance of the
 			// AppWidgetManager
-
 			AppWidgetManager appWidgetManager = AppWidgetManager
 					.getInstance(this);
 
@@ -130,18 +141,16 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		textView = (TextView) findViewById(R.id.widgetConfigureTextView);
 		textView.setText(doCalculation ? getString(R.string.widgetSpecifyTheMethodOfCalculation)
 				: getString(R.string.widgetStartTheApplicationToSpecifyNecessaryData));
-		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-		String[] methodNames = getResources().getStringArray(
-				R.array.methodNames);
-		boolean check = false, byMethod[] = data.byMethod();
-		for (int i = 0; i < radio.length; ++i) {
-			radio[i] = new RadioButton(this);
-			radio[i].setVisibility(byMethod[i] ? View.VISIBLE : View.GONE);
-			radio[i].setText(methodNames[i]);
-			radioGroup.addView(radio[i]);
-			if (!check && radio[i].getVisibility() == View.VISIBLE) {
-				radio[i].setChecked(true);
-				check = true;
+		if (doCalculation) {
+			RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+			String[] methodNames = getResources().getStringArray(
+					R.array.methodNames);
+			boolean byMethod[] = data.byMethod();
+			for (int i = 0; i < radio.length; ++i) {
+				radio[i] = new RadioButton(this);
+				radio[i].setVisibility(byMethod[i] ? View.VISIBLE : View.GONE);
+				radio[i].setText(methodNames[i]);
+				radioGroup.addView(radio[i]);
 			}
 		}
 
@@ -163,27 +172,38 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	private void saveWidgetParams() {
 		SharedPreferences settings = Shared.getSettings(this);
 		Editor editor = settings.edit();
-		int calculationMethod = Shared.Calculation.UNKNOWN;
+
+		int methodIndex = getCheckedRadioIndex() + 1;
+		editor.putInt(Shared.Saved.Widget.EXTRA_CALCULATION_METHOD
+				+ mAppWidgetId, methodIndex);
+
+		editor.putBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN + mAppWidgetId,
+				hasCountdown() && checkBoxCountdown.isChecked());
+
+		editor.putBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD
+				+ mAppWidgetId, hasShowCalculationMethod()
+				&& checkBoxShowCalculationMethod.isChecked());
+
+		editor.commit();
+	}
+
+	private int getCheckedRadioIndex() {
 		for (int i = 0; i < radio.length; ++i) {
 			if (radio[i].isChecked()) {
-				calculationMethod = i + 1;
-				break;
+				return i;
 			}
 		}
 
-		editor.putInt(Shared.Saved.Widget.EXTRA_CALCULATION_METHOD
-				+ mAppWidgetId, calculationMethod);
+		return -1;
+	}
 
-		if (hasCountdown()) {
-			editor.putBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN
-					+ mAppWidgetId, checkBoxCountdown.isChecked());
+	private int getDefaultRadioIndex() {
+		for (int i = 0; i < radio.length; ++i) {
+			if (radio[i].getVisibility() == View.VISIBLE) {
+				return i;
+			}
 		}
 
-		if (hasShowCalculationMethod()) {
-			editor.putBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD
-					+ mAppWidgetId, checkBoxShowCalculationMethod.isChecked());
-		}
-
-		editor.commit();
+		return -1;
 	}
 }
