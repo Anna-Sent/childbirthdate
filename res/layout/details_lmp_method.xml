@@ -16,61 +16,65 @@
 
         <LinearLayout
             style="@style/LinearLayoutHorizontalStyle"
-            android:paddingTop="@dimen/view_padding" >
-
-            <TextView
-                style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/menstrualCycleLen" />
-
-            <TextView
-                style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/lutealPhaseLen" />
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/LinearLayoutHorizontalStyle"
-            android:baselineAligned="false" >
+            android:layout_marginTop="@dimen/view_padding" >
 
             <LinearLayout
-                style="@style/LinearLayoutHorizontalStyle"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                style="@style/LinearLayoutVerticalStyle"
+                android:layout_width="wrap_content"
                 android:gravity="center" >
-
-                <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                    android:id="@+id/numberPickerMenstrualCycleLen"
-                    style="@style/NumberPickerStyle" />
 
                 <TextView
                     style="@style/TextViewStyle"
-                    android:text="@string/days" />
+                    android:layout_width="wrap_content"
+                    android:text="@string/menstrualCycleLen" />
+
+                <LinearLayout
+                    style="@style/LinearLayoutHorizontalStyle"
+                    android:layout_width="wrap_content"
+                    android:gravity="center" >
+
+                    <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                        android:id="@+id/numberPickerMenstrualCycleLen"
+                        style="@style/NumberPickerStyle" />
+
+                    <TextView
+                        style="@style/TextViewStyle"
+                        android:text="@string/days" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                style="@style/LinearLayoutHorizontalStyle"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                style="@style/LinearLayoutVerticalStyle"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/view_padding"
                 android:gravity="center" >
-
-                <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                    android:id="@+id/numberPickerLutealPhaseLen"
-                    style="@style/NumberPickerStyle" />
 
                 <TextView
                     style="@style/TextViewStyle"
-                    android:text="@string/days" />
+                    android:layout_width="wrap_content"
+                    android:text="@string/lutealPhaseLen" />
+
+                <LinearLayout
+                    style="@style/LinearLayoutHorizontalStyle"
+                    android:layout_width="wrap_content"
+                    android:gravity="center" >
+
+                    <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                        android:id="@+id/numberPickerLutealPhaseLen"
+                        style="@style/NumberPickerStyle" />
+
+                    <TextView
+                        style="@style/TextViewStyle"
+                        android:text="@string/days" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
         <Button
             android:id="@+id/buttonRestoreDefaultValues"
             style="@style/ButtonStyle"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/view_padding"
             android:text="@string/restoreDefaultValues" />
     </LinearLayout>
 

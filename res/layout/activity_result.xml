@@ -94,11 +94,11 @@
             android:id="@+id/adView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/adview_margin"
             ads:adSize="BANNER"
             ads:adUnitId="@string/adUnitId"
             ads:loadAdOnCreate="true"
-            android:gravity="center"
-            android:paddingTop="@dimen/view_padding" />
+            android:gravity="center" />
     </LinearLayout>
 
 </ScrollView>

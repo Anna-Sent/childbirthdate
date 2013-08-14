@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/LinearLayoutHorizontalStyle"
+    android:paddingBottom="@dimen/layout_vertical_padding"
     android:paddingLeft="@dimen/layout_horizontal_padding"
     android:paddingRight="@dimen/layout_horizontal_padding"
     android:paddingTop="@dimen/layout_vertical_padding" >
