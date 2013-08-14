@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate.base;
 
-import com.anna.sent.soft.childbirthdate.shared.Shared;
-
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.content.Intent;
@@ -10,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.view.MenuItem;
+
+import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public class ChildActivity extends StateSaverActivity {
 	@Override
