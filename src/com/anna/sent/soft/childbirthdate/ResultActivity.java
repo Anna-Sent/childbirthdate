@@ -93,7 +93,8 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 		buttonShowHide.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setVisibility(!mIsVisible, true);
+				mIsVisible = !mIsVisible;
+				setVisibility(mIsVisible, USE_ANIMATION);
 			}
 		});
 		mCollapseDrawable = getDrawableFromTheme(R.attr.iconCollapse);
@@ -102,6 +103,8 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 
 	private static final String KEY_IS_ANIMATED_ACTIVITY_VISIBLE = "isAnimatedActivityVisible";
 	private static final boolean DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE = false;
+
+	private static final boolean USE_ANIMATION = false;
 
 	@Override
 	public void restoreState(Bundle state) {
@@ -117,6 +120,7 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 	@Override
 	protected void onStart() {
 		super.onStart();
+		mIsVisible = USE_ANIMATION ? true : mIsVisible;
 		setVisibility(mIsVisible, false);
 	}
 
@@ -126,7 +130,6 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 	private boolean mIsVisible = DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE;
 
 	private void setVisibility(boolean isVisible, boolean withAnimation) {
-		mIsVisible = isVisible;
 		if (isVisible) {
 			animatedLayout.show(withAnimation);
 			textViewOnDate.setText("");

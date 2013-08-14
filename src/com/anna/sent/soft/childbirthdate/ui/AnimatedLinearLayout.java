@@ -1,6 +1,7 @@
 package com.anna.sent.soft.childbirthdate.ui;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
@@ -26,9 +27,10 @@ public class AnimatedLinearLayout extends LinearLayout {
 	}
 
 	private int getHeightForAnimation() {
-		measure(MeasureSpec.makeMeasureSpec(LayoutParams.WRAP_CONTENT,
-				MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(
-				LayoutParams.WRAP_CONTENT, MeasureSpec.EXACTLY));
+		int measureSpec = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ? 0
+				: MeasureSpec.makeMeasureSpec(LayoutParams.WRAP_CONTENT,
+						MeasureSpec.EXACTLY);
+		measure(measureSpec, measureSpec);
 		return getMeasuredHeight();
 	}
 
