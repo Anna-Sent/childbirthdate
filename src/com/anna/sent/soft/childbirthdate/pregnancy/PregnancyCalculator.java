@@ -79,7 +79,7 @@ public class PregnancyCalculator {
 			case Shared.Calculation.BY_FIRST_MOVEMENTS:
 				Calendar firstMovementsDate = data.getFirstMovementsDate();
 				boolean isFirstPregnancy = data.isFirstPregnancy();
-				return new GestationalAge(isFirstPregnancy ? 20 : 22, 0,
+				return new GestationalAge(isFirstPregnancy ? 20 : 18, 0,
 						firstMovementsDate);
 			}
 

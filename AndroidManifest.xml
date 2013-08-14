@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.anna.sent.soft.childbirthdate"
-    android:versionCode="18"
-    android:versionName="2.6" >
+    android:versionCode="19"
+    android:versionName="2.6.1" >
 
     <uses-sdk
         android:minSdkVersion="5"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
