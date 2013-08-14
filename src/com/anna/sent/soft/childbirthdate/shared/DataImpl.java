@@ -23,6 +23,7 @@ public class DataImpl implements Data {
 		return DataImpl.class.getSimpleName() + ": " + msg;
 	}
 
+	@SuppressWarnings("unused")
 	private static void log(String msg) {
 		if (DEBUG) {
 			Log.d(TAG, wrapMsg(msg));
@@ -244,7 +245,7 @@ public class DataImpl implements Data {
 		SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT,
 				Locale.getDefault());
 		String value = formatter.format(date.getTime());
-		log("save " + value);
+		// log("save " + value);
 		editor.putString(extra, value);
 	}
 
@@ -256,11 +257,11 @@ public class DataImpl implements Data {
 			String value = settings.getString(extra, null);
 			Date date1 = formatter.parse(value);
 			date.setTime(date1);
-			log("restore 1 " + DateUtils.toString(mContext, date));
+			// log("restore 1 " + DateUtils.toString(mContext, date));
 		} catch (Exception e) {
 			date.setTimeInMillis(settings.getLong(extra,
 					System.currentTimeMillis()));
-			log("restore 2 " + DateUtils.toString(mContext, date));
+			// log("restore 2 " + DateUtils.toString(mContext, date));
 		}
 	}
 

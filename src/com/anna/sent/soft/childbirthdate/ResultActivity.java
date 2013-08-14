@@ -26,12 +26,13 @@ import com.anna.sent.soft.utils.DateUtils;
 public class ResultActivity extends ChildActivity implements OnClickListener,
 		OnDateChangedListener, LongPressedButton.Listener {
 	private static final String TAG = "moo";
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 
 	private String wrapMsg(String msg) {
 		return getClass().getSimpleName() + ": " + msg;
 	}
 
+	@SuppressWarnings("unused")
 	private void log(String msg) {
 		if (DEBUG) {
 			Log.d(TAG, wrapMsg(msg));
@@ -193,7 +194,7 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 	}
 
 	private void setDate(Calendar date) {
-		log("setDate");
+		// log("setDate");
 		DateUtils.setDate(datePicker, date);
 		update();
 	}
@@ -247,14 +248,14 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 
 	@Override
 	public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
-		log("onDateChanged");
+		// log("onDateChanged");
 		update();
 	}
 
 	private void update() {
 		Calendar newDate = DateUtils.getDate(datePicker);
 		if (mDate == null || !DateUtils.areEqual(newDate, mDate)) {
-			log("update " + DateUtils.toString(this, newDate));
+			// log("update " + DateUtils.toString(this, newDate));
 			mDate = newDate;
 			for (int i = 0; i < table.getChildCount(); ++i) {
 				View row = table.getChildAt(i);

@@ -18,12 +18,13 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 		implements NumberPicker.OnValueChangeListener,
 		DatePicker.OnDateChangedListener {
 	private static final String TAG = "moo";
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 
 	private String wrapMsg(String msg) {
 		return getClass().getSimpleName() + ": " + msg;
 	}
 
+	@SuppressWarnings("unused")
 	private void log(String msg) {
 		if (DEBUG) {
 			Log.d(TAG, wrapMsg(msg));
@@ -96,7 +97,7 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 			mData.setFirstAppearanceDate(value);
 
 			dataChanged();
-			log("onDateChanged " + DateUtils.toString(getActivity(), value));
+			// log("onDateChanged " + DateUtils.toString(getActivity(), value));
 		}
 	}
 }
