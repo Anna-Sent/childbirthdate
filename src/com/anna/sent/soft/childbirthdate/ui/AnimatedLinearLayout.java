@@ -25,6 +25,13 @@ public class AnimatedLinearLayout extends LinearLayout {
 		super(context, attrs);
 	}
 
+	private int getHeightForAnimation() {
+		measure(MeasureSpec.makeMeasureSpec(LayoutParams.WRAP_CONTENT,
+				MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(
+				LayoutParams.WRAP_CONTENT, MeasureSpec.EXACTLY));
+		return getMeasuredHeight();
+	}
+
 	public void show() {
 		if (!isVisible()) {
 			show(true);
@@ -33,10 +40,7 @@ public class AnimatedLinearLayout extends LinearLayout {
 
 	public void show(boolean withAnimation) {
 		if (withAnimation) {
-			measure(MeasureSpec.makeMeasureSpec(LayoutParams.WRAP_CONTENT,
-					MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(
-					LayoutParams.WRAP_CONTENT, MeasureSpec.EXACTLY));
-			mInAnimation = new DropDownAnimation(this, getMeasuredHeight(),
+			mInAnimation = new DropDownAnimation(this, getHeightForAnimation(),
 					true);
 			startAnimation(mInAnimation);
 		} else {
@@ -60,11 +64,8 @@ public class AnimatedLinearLayout extends LinearLayout {
 
 	public void hide(boolean withAnimation) {
 		if (withAnimation) {
-			measure(MeasureSpec.makeMeasureSpec(LayoutParams.WRAP_CONTENT,
-					MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(
-					LayoutParams.WRAP_CONTENT, MeasureSpec.EXACTLY));
-			mOutAnimation = new DropDownAnimation(this, getMeasuredHeight(),
-					false);
+			mOutAnimation = new DropDownAnimation(this,
+					getHeightForAnimation(), false);
 			startAnimation(mOutAnimation);
 		} else {
 			setVisibility(View.GONE);
