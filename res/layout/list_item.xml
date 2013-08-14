@@ -5,13 +5,13 @@
 
     <LinearLayout
         style="@style/LinearLayoutHorizontalStyle"
-        android:minHeight="?android:attr/listPreferredItemHeight" >
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:paddingLeft="@dimen/layout_horizontal_padding" >
 
         <CheckBox
             android:id="@+id/checkBox"
             style="@style/CheckBoxStyle"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/layout_horizontal_padding"
             android:focusable="false" />
 
         <LinearLayout

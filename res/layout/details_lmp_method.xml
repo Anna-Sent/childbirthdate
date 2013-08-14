@@ -16,7 +16,7 @@
 
         <LinearLayout
             style="@style/LinearLayoutHorizontalStyle"
-            android:layout_marginTop="@dimen/view_padding" >
+            android:layout_marginTop="@dimen/view_vertical_margin" >
 
             <LinearLayout
                 style="@style/LinearLayoutVerticalStyle"
@@ -46,7 +46,7 @@
             <LinearLayout
                 style="@style/LinearLayoutVerticalStyle"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="@dimen/view_padding"
+                android:layout_marginLeft="@dimen/view_horizontal_margin"
                 android:gravity="center" >
 
                 <TextView
@@ -74,7 +74,7 @@
             android:id="@+id/buttonRestoreDefaultValues"
             style="@style/ButtonStyle"
             android:layout_gravity="left"
-            android:layout_marginTop="@dimen/view_padding"
+            android:layout_marginTop="@dimen/view_vertical_margin"
             android:text="@string/restoreDefaultValues" />
     </LinearLayout>
 

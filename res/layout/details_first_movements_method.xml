@@ -17,7 +17,7 @@
         <CheckBox
             android:id="@+id/checkBoxIsFirstPregnancy"
             style="@style/CheckBoxStyle"
-            android:layout_marginTop="@dimen/view_padding"
+            android:layout_marginTop="@dimen/view_vertical_margin"
             android:text="@string/IsFirstPregnancy"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>

@@ -20,7 +20,7 @@
 
             <TextView
                 style="@style/TextViewStyle"
-                android:layout_marginTop="@dimen/view_padding"
+                android:layout_marginTop="@dimen/view_vertical_margin"
                 android:text="@string/diagnosedAge" />
 
             <LinearLayout
@@ -33,7 +33,7 @@
 
                 <TextView
                     style="@style/TextViewStyle"
-                    android:layout_marginRight="@dimen/view_padding"
+                    android:layout_marginRight="@dimen/view_horizontal_margin"
                     android:text="@string/weeks" />
 
                 <com.anna.sent.soft.numberpickerlibrary.NumberPicker
@@ -48,7 +48,7 @@
 
         <RadioGroup
             style="@style/RadioGroupStyle"
-            android:layout_marginTop="@dimen/view_padding" >
+            android:layout_marginTop="@dimen/view_vertical_margin" >
 
             <RadioButton
                 android:id="@+id/radioIsGestationalAge"
