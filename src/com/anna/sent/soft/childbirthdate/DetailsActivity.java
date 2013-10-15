@@ -20,7 +20,10 @@ public class DetailsActivity extends ChildActivity implements
 	@Override
 	public void setViews(Bundle savedInstanceState) {
 		if (getResources().getBoolean(R.bool.has_two_panes)) {
-			restoreState(savedInstanceState);
+			if (savedInstanceState != null) {
+				restoreState(savedInstanceState);
+			}
+
 			setResult();
 			finish();
 			return;
