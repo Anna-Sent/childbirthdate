@@ -7,9 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import com.anna.sent.soft.childbirthdate.shared.Data;
-import com.anna.sent.soft.childbirthdate.shared.DataClient;
-import com.anna.sent.soft.childbirthdate.shared.DataImpl;
+import com.anna.sent.soft.childbirthdate.data.Data;
+import com.anna.sent.soft.childbirthdate.data.DataClient;
+import com.anna.sent.soft.childbirthdate.data.DataImpl;
 import com.anna.sent.soft.utils.ThemeUtils;
 
 public abstract class StateSaverActivity extends FragmentActivity implements

@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.ResultActivity;
-import com.anna.sent.soft.childbirthdate.shared.Data;
-import com.anna.sent.soft.childbirthdate.shared.DataClient;
+import com.anna.sent.soft.childbirthdate.data.Data;
+import com.anna.sent.soft.childbirthdate.data.DataClient;
 
 public class TitlesHeaderFragment extends Fragment implements DataClient {
 	public TitlesHeaderFragment() {

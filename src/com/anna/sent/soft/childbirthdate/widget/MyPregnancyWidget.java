@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.widget.RemoteViews;
 
+import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public abstract class MyPregnancyWidget extends AppWidgetProvider {
@@ -92,7 +93,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	@Override
 	public void onDeleted(Context context, int[] appWidgetIds) {
 		super.onDeleted(context, appWidgetIds);
-		SharedPreferences settings = Shared.getSettings(context);
+		SharedPreferences settings = Settings.getSettings(context);
 		Editor editor = settings.edit();
 		for (int i = 0; i < appWidgetIds.length; ++i) {
 			editor.remove(Shared.Saved.Widget.EXTRA_CALCULATION_METHOD

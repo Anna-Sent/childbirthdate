@@ -14,7 +14,7 @@ import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.utils.ThemeUtils;
 
 @SuppressWarnings("deprecation")
@@ -85,14 +85,14 @@ public class SettingsActivity extends PreferenceActivity implements
 	}
 
 	private void setupThemePreference() {
-		ListPreference pref = (ListPreference) findPreference(Shared.KEY_PREF_THEME);
+		ListPreference pref = (ListPreference) findPreference(Settings.KEY_PREF_THEME);
 		pref.setSummary(pref.getEntry());
 	}
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
-		if (key.equals(Shared.KEY_PREF_THEME)) {
+		if (key.equals(Settings.KEY_PREF_THEME)) {
 			setupThemePreference();
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 				Intent intent = new Intent(this, getClass());

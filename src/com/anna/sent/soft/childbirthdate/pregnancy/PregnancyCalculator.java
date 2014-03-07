@@ -2,7 +2,7 @@ package com.anna.sent.soft.childbirthdate.pregnancy;
 
 import java.util.Calendar;
 
-import com.anna.sent.soft.childbirthdate.shared.Data;
+import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public class PregnancyCalculator {

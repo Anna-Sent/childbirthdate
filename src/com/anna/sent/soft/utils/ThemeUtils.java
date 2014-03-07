@@ -3,7 +3,7 @@ package com.anna.sent.soft.utils;
 import android.app.Activity;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.childbirthdate.shared.Settings;
 
 public class ThemeUtils {
 	public final static int DARK_THEME = 0;
@@ -13,7 +13,7 @@ public class ThemeUtils {
 	 * Set the theme of the activity, according to the configuration.
 	 */
 	public static void onActivityCreateSetTheme(Activity activity) {
-		switch (Shared.getTheme(activity)) {
+		switch (Settings.getTheme(activity)) {
 		case LIGHT_THEME:
 			activity.setTheme(R.style.AppThemeLight);
 			break;
@@ -29,7 +29,7 @@ public class ThemeUtils {
 	 * configuration.
 	 */
 	public static void onDialogStyleActivityCreateSetTheme(Activity activity) {
-		switch (Shared.getTheme(activity)) {
+		switch (Settings.getTheme(activity)) {
 		case LIGHT_THEME:
 			activity.setTheme(R.style.DialogThemeLight);
 			break;
