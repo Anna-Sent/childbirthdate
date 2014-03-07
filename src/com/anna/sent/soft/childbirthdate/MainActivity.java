@@ -8,11 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity;
-import com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity;
-import com.anna.sent.soft.childbirthdate.actions.MarketWomanCycActionActivity;
 import com.anna.sent.soft.childbirthdate.base.StateSaverActivity;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
-import com.anna.sent.soft.utils.ThemeUtils;
 
 public class MainActivity extends StateSaverActivity {
 	@Override
@@ -43,49 +40,44 @@ public class MainActivity extends StateSaverActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.clear();
 		getMenuInflater().inflate(R.menu.main, menu);
-		switch (ThemeUtils.getThemeId(this)) {
-		case ThemeUtils.LIGHT_THEME:
-			menu.findItem(R.id.lighttheme).setChecked(true);
-			break;
-		case ThemeUtils.DARK_THEME:
-			menu.findItem(R.id.darktheme).setChecked(true);
-			break;
-		}
-
-		return true;
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.lighttheme:
-			ThemeUtils.changeToTheme(this, ThemeUtils.LIGHT_THEME);
+		case R.id.sendData:
+			Intent sendData = new Intent(this, EmailDataActionActivity.class);
+			startActivity(sendData);
 			return true;
-		case R.id.darktheme:
-			ThemeUtils.changeToTheme(this, ThemeUtils.DARK_THEME);
+		case R.id.settings:
+			startActivity(new Intent(this, SettingsActivity.class));
 			return true;
 		case R.id.help:
 			Intent help = new Intent(this, HelpActivity.class);
 			startActivity(help);
 			return true;
-		case R.id.rate:
-			Intent rate = new Intent(this,
-					MarketChildbirthDateActionActivity.class);
-			startActivity(rate);
-			return true;
-		case R.id.womancyc:
-			Intent womancyc = new Intent(this,
-					MarketWomanCycActionActivity.class);
-			startActivity(womancyc);
-			return true;
-		case R.id.sendData:
-			Intent sendData = new Intent(this, EmailDataActionActivity.class);
-			startActivity(sendData);
-			return true;
 		default:
 			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	public final static String EXTRA_THEME_CHANGED = "extra_theme_changed";
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		// log("onNewIntent");
+		super.onNewIntent(intent);
+		Bundle extras = intent.getExtras();
+		if (extras != null && extras.containsKey(EXTRA_THEME_CHANGED)) {
+			Bundle state = new Bundle();
+			saveState(state);
+			finish();
+			intent.putExtras(state);
+			startActivity(intent);
 		}
 	}
 }

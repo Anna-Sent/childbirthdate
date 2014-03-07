@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.anna.sent.soft.childbirthdate"
     android:versionCode="20"
-    android:versionName="2.6.2" >
+    android:versionName="2.7" >
 
     <uses-sdk
         android:minSdkVersion="5"
@@ -108,6 +108,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
             android:name=".HelpActivity"
             android:label="@string/help"
             android:parentActivityName=".MainActivity" >
@@ -132,6 +140,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity" >
+            <intent-filter>
+                <action android:name="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name="com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity" >
             <intent-filter>
                 <action android:name="com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity" />
@@ -139,9 +154,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity" >
+        <activity android:name="com.anna.sent.soft.childbirthdate.actions.EmailSupportActionActivity" >
             <intent-filter>
-                <action android:name="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity" />
+                <action android:name="com.anna.sent.soft.childbirthdate.actions.EmailSupportActionActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
