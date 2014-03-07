@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import com.anna.sent.soft.childbirthdate.shared.Data;
-import com.anna.sent.soft.childbirthdate.shared.DataClient;
+import com.anna.sent.soft.childbirthdate.data.Data;
+import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public abstract class DetailsFragment extends Fragment implements DataClient {

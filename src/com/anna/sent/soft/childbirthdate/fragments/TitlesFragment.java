@@ -16,8 +16,8 @@ import com.anna.sent.soft.childbirthdate.DetailsActivity;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.adapters.ListItemArrayAdapter;
 import com.anna.sent.soft.childbirthdate.base.StateSaver;
-import com.anna.sent.soft.childbirthdate.shared.Data;
-import com.anna.sent.soft.childbirthdate.shared.DataClient;
+import com.anna.sent.soft.childbirthdate.data.Data;
+import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public class TitlesFragment extends ListFragment implements

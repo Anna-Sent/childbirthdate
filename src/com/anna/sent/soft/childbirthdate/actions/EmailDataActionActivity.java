@@ -1,9 +1,9 @@
 package com.anna.sent.soft.childbirthdate.actions;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.data.DataImpl;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
-import com.anna.sent.soft.childbirthdate.shared.DataImpl;
 import com.anna.sent.soft.utils.DateUtils;
 import com.anna.sent.soft.utils.UserEmailFetcher;
 

@@ -17,7 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.childbirthdate.shared.DataImpl;
+import com.anna.sent.soft.childbirthdate.data.DataImpl;
+import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.ThemeUtils;
 
@@ -168,7 +169,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	}
 
 	private void saveWidgetParams() {
-		SharedPreferences settings = Shared.getSettings(this);
+		SharedPreferences settings = Settings.getSettings(this);
 		Editor editor = settings.edit();
 
 		int methodIndex = getCheckedRadioIndex() + 1;

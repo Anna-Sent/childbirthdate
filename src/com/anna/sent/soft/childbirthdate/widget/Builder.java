@@ -11,9 +11,10 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.data.DataImpl;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
-import com.anna.sent.soft.childbirthdate.shared.DataImpl;
+import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
 public abstract class Builder {
@@ -38,7 +39,7 @@ public abstract class Builder {
 
 		setOnClickPendingIntent(context, views);
 
-		SharedPreferences settings = Shared.getSettings(context);
+		SharedPreferences settings = Settings.getSettings(context);
 		int calculationMethod = settings.getInt(
 				Shared.Saved.Widget.EXTRA_CALCULATION_METHOD + appWidgetId,
 				Shared.Calculation.UNKNOWN);

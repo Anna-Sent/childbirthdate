@@ -1,4 +1,4 @@
-package com.anna.sent.soft.childbirthdate.shared;
+package com.anna.sent.soft.childbirthdate.data;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,6 +13,8 @@ import android.util.Log;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
+import com.anna.sent.soft.childbirthdate.shared.Settings;
+import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.DateUtils;
 
 public class DataImpl implements Data {
@@ -140,7 +142,7 @@ public class DataImpl implements Data {
 
 	public void save() {
 		// log("save");
-		Editor editor = Shared.getSettings(mContext).edit();
+		Editor editor = Settings.getSettings(mContext).edit();
 
 		editor.putBoolean(Shared.Saved.Calculation.EXTRA_BY_LMP,
 				byMethod[Shared.Calculation.BY_LMP - 1]);
@@ -188,7 +190,7 @@ public class DataImpl implements Data {
 
 	public void update() {
 		// log("update");
-		SharedPreferences settings = Shared.getSettings(mContext);
+		SharedPreferences settings = Settings.getSettings(mContext);
 
 		updateDate(settings, lastMenstruationDate,
 				Shared.Saved.Calculation.EXTRA_LMP_DATE);

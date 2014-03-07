@@ -1,4 +1,4 @@
-package com.anna.sent.soft.childbirthdate.shared;
+package com.anna.sent.soft.childbirthdate.data;
 
 import java.util.Calendar;
 
