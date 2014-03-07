@@ -3,8 +3,7 @@
 
     <declare-styleable name="AppTheme">
         <attr name="menuIconHelp" format="reference" />
-        <attr name="menuIconRate" format="reference" />
-        <attr name="menuIconWomanCyc" format="reference" />
+        <attr name="menuIconSettings" format="reference" />
         <attr name="menuIconEmail" format="reference" />
         <attr name="iconGoToToday" format="reference" />
         <attr name="iconNextItem" format="reference" />
@@ -16,7 +15,7 @@
     <style name="AppBaseTheme" parent="android:Theme">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
         <item name="menuIconHelp">@drawable/ic_menu_help_light</item>
-        <item name="menuIconRate">@drawable/ic_menu_rate_light</item>
+        <item name="menuIconSettings">@drawable/ic_menu_settings_light</item>
         <item name="menuIconEmail">@drawable/ic_menu_email_light</item>
         <item name="iconGoToToday">@drawable/ic_go_to_today_light</item>
         <item name="iconNextItem">@drawable/ic_next_item_light</item>
@@ -28,7 +27,7 @@
     <style name="AppBaseThemeLight" parent="android:Theme.Light">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
         <item name="menuIconHelp">@drawable/ic_menu_help_light</item>
-        <item name="menuIconRate">@drawable/ic_menu_rate_light</item>
+        <item name="menuIconSettings">@drawable/ic_menu_settings_light</item>
         <item name="menuIconEmail">@drawable/ic_menu_email_light</item>
         <item name="iconGoToToday">@drawable/ic_go_to_today_light</item>
         <item name="iconNextItem">@drawable/ic_next_item_light</item>
@@ -37,13 +36,9 @@
         <item name="iconCollapse">@drawable/ic_collapse_light</item>
     </style>
 
-    <style name="AppTheme" parent="AppBaseTheme">
-        <item name="menuIconWomanCyc">@drawable/ic_menu_womancyc</item>
-    </style>
+    <style name="AppTheme" parent="AppBaseTheme"></style>
 
-    <style name="AppThemeLight" parent="AppBaseThemeLight">
-        <item name="menuIconWomanCyc">@drawable/ic_menu_womancyc</item>
-    </style>
+    <style name="AppThemeLight" parent="AppBaseThemeLight"></style>
 
     <style name="DialogBaseTheme" parent="android:Theme.Dialog">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
