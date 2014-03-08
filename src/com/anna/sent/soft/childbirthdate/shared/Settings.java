@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.preference.PreferenceManager;
 
 import com.anna.sent.soft.childbirthdate.R;
 
@@ -109,16 +108,10 @@ public class Settings {
 				.getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE));
 	}
 
-	private static SharedPreferences getDefaultSettings(Context context) {
-		return new SharedPreferencesWrapper(
-				PreferenceManager.getDefaultSharedPreferences(context));
-	}
-
-	// com.anna.sent.soft.childbirthdate.themeid
-	public static final String KEY_PREF_THEME = "pref_theme";
+	public static final String KEY_PREF_THEME = "com.anna.sent.soft.childbirthdate.themeid";
 
 	public static int getTheme(Context context) {
-		SharedPreferences settings = getDefaultSettings(context);
+		SharedPreferences settings = getSettings(context);
 		int defaultValue = context.getResources().getInteger(
 				R.integer.defaultTheme);
 		String value = settings.getString(KEY_PREF_THEME, "");
@@ -135,7 +128,7 @@ public class Settings {
 	}
 
 	public static void setTheme(Context context, int value) {
-		SharedPreferences settings = getDefaultSettings(context);
+		SharedPreferences settings = getSettings(context);
 		Editor editor = settings.edit();
 		editor.putString(KEY_PREF_THEME, String.valueOf(value));
 		editor.commit();
