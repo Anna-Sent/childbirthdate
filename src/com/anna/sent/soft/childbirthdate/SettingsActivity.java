@@ -121,4 +121,9 @@ public class SettingsActivity extends PreferenceActivity implements
 		getPreferenceScreen().getSharedPreferences()
 				.unregisterOnSharedPreferenceChangeListener(this);
 	}
+
+	@Override
+	public SharedPreferences getSharedPreferences(String name, int mode) {
+		return Settings.getSettings(this);
+	}
 }
