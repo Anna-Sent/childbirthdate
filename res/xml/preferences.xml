@@ -2,21 +2,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto" >
 
-    <PreferenceCategory android:title="@string/pref_ui_settings_title" >
+    <PreferenceCategory
+        android:key="@string/pref_ui_settings_key"
+        android:title="@string/pref_ui_settings_title" >
         <ListPreference
             android:defaultValue="@integer/defaultTheme"
             android:dialogTitle="@string/pref_theme_title"
             android:entries="@array/theme"
             android:entryValues="@array/theme_values"
-            android:key="com.anna.sent.soft.childbirthdate.themeid"
+            android:key="@string/pref_theme_key"
             android:title="@string/pref_theme_title" />
-        <ListPreference
-            android:defaultValue="@integer/defaultLanguage"
-            android:dialogTitle="@string/pref_language_title"
-            android:entries="@array/language"
-            android:entryValues="@array/language_values"
-            android:key="com.anna.sent.soft.childbirthdate.languageid"
-            android:title="@string/pref_language_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_other_settings_title" >
         <Preference

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="pref_ui_settings_key">com.anna.sent.soft.childbirthdate.ui_settings</string>
+    <string name="pref_theme_key">com.anna.sent.soft.childbirthdate.themeid</string>
+    <string name="pref_language_key">com.anna.sent.soft.childbirthdate.languageid</string>
     <string name="supportEmail">anna.sent@gmail.com</string>
 
     <string-array name="theme">
@@ -26,7 +29,5 @@
         <item>ru</item>
         <item>uk</item>
     </string-array>
-
-    <integer name="defaultLanguage">0</integer>
 
 </resources>
