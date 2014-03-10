@@ -10,6 +10,7 @@ import android.util.Log;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.data.DataImpl;
+import com.anna.sent.soft.utils.LanguageUtils;
 import com.anna.sent.soft.utils.ThemeUtils;
 
 public abstract class StateSaverActivity extends FragmentActivity implements
@@ -50,6 +51,8 @@ public abstract class StateSaverActivity extends FragmentActivity implements
 		mConcreteData = new DataImpl(this);
 
 		super.onCreate(savedInstanceState);
+
+		LanguageUtils.configurationChanged(this);
 
 		setViews(savedInstanceState);
 

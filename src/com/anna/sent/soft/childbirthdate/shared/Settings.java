@@ -127,10 +127,64 @@ public class Settings {
 		return result;
 	}
 
-	public static void setTheme(Context context, int value) {
+	public static final String KEY_PREF_LANGUAGE = "com.anna.sent.soft.childbirthdate.languageid";
+
+	public static int getLanguage(Context context) {
+		int result = getDefaultLanguage(context);
+		if (Settings.isLanguageSetByUser(context)) {
+			SharedPreferences settings = getSettings(context);
+			String value = settings.getString(KEY_PREF_LANGUAGE, "");
+			if (!value.equals("")) {
+				try {
+					result = Integer.parseInt(value);
+				} catch (NumberFormatException e) {
+				}
+			}
+
+		}
+
+		return result;
+	}
+
+	/**
+	 * Gets language set in configuration and returns the language's index in
+	 * supported languages array.
+	 * 
+	 * @return index between 0 and (count of supported languages - 1) - UI
+	 *         language index
+	 */
+	private static int getDefaultLanguage(Context context) {
+		String[] supportedLocales = context.getResources().getStringArray(
+				R.array.locales);
+		String currentLocale = context.getResources().getConfiguration().locale
+				.getLanguage();
+		for (int i = 0; i < supportedLocales.length; ++i) {
+			if (supportedLocales[i].equals(currentLocale)) {
+				return i;
+			}
+		}
+
+		return 0; // 0 is ru, default UI language
+	}
+
+	public static String getLocale(Context context) {
+		int languageId = getLanguage(context);
+		String[] supportedLocales = context.getResources().getStringArray(
+				R.array.locales);
+		return supportedLocales[languageId];
+	}
+
+	public static final String KEY_PREF_IS_LANGUAGE_SET_BY_USER = "com.anna.sent.soft.childbirthdate.islanguagesetbyuser";
+
+	public static boolean isLanguageSetByUser(Context context) {
+		SharedPreferences settings = getSettings(context);
+		return settings.getBoolean(KEY_PREF_IS_LANGUAGE_SET_BY_USER, false);
+	}
+
+	public static void userSetLanguage(Context context) {
 		SharedPreferences settings = getSettings(context);
 		Editor editor = settings.edit();
-		editor.putString(KEY_PREF_THEME, String.valueOf(value));
+		editor.putBoolean(KEY_PREF_IS_LANGUAGE_SET_BY_USER, true);
 		editor.commit();
 	}
 }

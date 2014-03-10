@@ -9,11 +9,7 @@
     <string name="emptyString">empty</string>
     <string name="sendData">Отправить данные</string>
     <string name="settings">Настройки</string>
-    <string name="lighttheme">Светлая тема</string>
-    <string name="darktheme">Темная тема</string>
     <string name="help">Справка</string>
-    <string name="rate">Оценить приложение</string>
-    <string name="womancyc">Женский календарь</string>
     <string name="ecdAndGestationalAge">ПДР и срок беременности</string>
     <string name="app_name">Дата родов</string>
     <string name="widget_small_name">Дата родов Small</string>
@@ -64,12 +60,13 @@
     <string name="nextDay">Следующий день</string>
     <string name="pref_ui_settings_title">Внешний вид</string>
     <string name="pref_theme_title">Тема</string>
+    <string name="pref_language_title">Язык</string>
     <string name="pref_other_settings_title">Другое</string>
     <string name="pref_rate_title">Оценить приложение</string>
     <string name="pref_rate_summary"></string>
     <string name="pref_support_title">Написать разработчику</string>
     <string name="pref_support_summary">Отправить отзыв, замечание, предложение.</string>
-    <string name="pref_childbirthdate_title">Календарь женских циклов</string>
-    <string name="pref_childbirthdate_summary">Приложение \"WomanCyc\": простое приложение для слежения за менструальным циклом.</string>
+    <string name="pref_womancyc_title">Календарь женских циклов</string>
+    <string name="pref_womancyc_summary">Приложение \"WomanCyc\": простое приложение для слежения за менструальным циклом.</string>
 
 </resources>
