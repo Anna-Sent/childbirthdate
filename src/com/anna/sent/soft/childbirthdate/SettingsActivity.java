@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.anna.sent.soft.childbirthdate.shared.Settings;
+import com.anna.sent.soft.utils.LanguageUtils;
 import com.anna.sent.soft.utils.ThemeUtils;
 
 @SuppressWarnings("deprecation")
@@ -46,6 +47,8 @@ public class SettingsActivity extends PreferenceActivity implements
 		ThemeUtils.onActivityCreateSetTheme(this);
 		super.onCreate(savedInstanceState);
 
+		LanguageUtils.configurationChanged(this);
+
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			new ActionBarHelper().setupActionBar();
 		}
@@ -53,6 +56,7 @@ public class SettingsActivity extends PreferenceActivity implements
 		addPreferencesFromResource(R.xml.preferences);
 
 		setupThemePreference();
+		setupLanguagePreference();
 	}
 
 	private class ActionBarHelper {
@@ -89,22 +93,38 @@ public class SettingsActivity extends PreferenceActivity implements
 		pref.setSummary(pref.getEntry());
 	}
 
+	private void setupLanguagePreference() {
+		ListPreference pref = (ListPreference) findPreference(Settings.KEY_PREF_LANGUAGE);
+		int value = Settings.getLanguage(this);
+		pref.setValue(String.valueOf(value));
+		pref.setSummary(pref.getEntry());
+	}
+
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
 		if (key.equals(Settings.KEY_PREF_THEME)) {
 			setupThemePreference();
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-				Intent intent = new Intent(this, getClass());
-				TaskStackBuilder.create(this)
-						.addNextIntentWithParentStack(intent).startActivities();
-			} else {
-				finish();
-				Intent intent = new Intent(this, MainActivity.class);
-				intent.putExtra(MainActivity.EXTRA_THEME_CHANGED, true);
-				TaskStackBuilder.create(this).addNextIntent(intent)
-						.startActivities();
-			}
+			restart();
+		} else if (key.equals(Settings.KEY_PREF_LANGUAGE)) {
+			Settings.userSetLanguage(this);
+			setupLanguagePreference();
+			LanguageUtils.configurationChanged(this);
+			restart();
+		}
+	}
+
+	private void restart() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			Intent intent = new Intent(this, getClass());
+			TaskStackBuilder.create(this).addNextIntentWithParentStack(intent)
+					.startActivities();
+		} else {
+			finish();
+			Intent intent = new Intent(this, MainActivity.class);
+			intent.putExtra(MainActivity.EXTRA_THEME_CHANGED, true);
+			TaskStackBuilder.create(this).addNextIntent(intent)
+					.startActivities();
 		}
 	}
 

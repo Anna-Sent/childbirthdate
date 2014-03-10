@@ -14,4 +14,19 @@
 
     <integer name="defaultTheme">0</integer>
 
+    <string-array name="language">
+        <item>Русский</item>
+        <item>Українська</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="locales">
+        <item>ru</item>
+        <item>uk</item>
+    </string-array>
+
+    <integer name="defaultLanguage">0</integer>
+
 </resources>

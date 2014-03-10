@@ -10,6 +10,13 @@
             android:entryValues="@array/theme_values"
             android:key="com.anna.sent.soft.childbirthdate.themeid"
             android:title="@string/pref_theme_title" />
+        <ListPreference
+            android:defaultValue="@integer/defaultLanguage"
+            android:dialogTitle="@string/pref_language_title"
+            android:entries="@array/language"
+            android:entryValues="@array/language_values"
+            android:key="com.anna.sent.soft.childbirthdate.languageid"
+            android:title="@string/pref_language_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_other_settings_title" >
         <Preference
@@ -23,8 +30,8 @@
             <intent android:action="com.anna.sent.soft.childbirthdate.actions.EmailSupportActionActivity" />
         </Preference>
         <Preference
-            android:summary="@string/pref_childbirthdate_summary"
-            android:title="@string/pref_childbirthdate_title" >
+            android:summary="@string/pref_womancyc_summary"
+            android:title="@string/pref_womancyc_title" >
             <intent android:action="com.anna.sent.soft.childbirthdate.actions.MarketWomanCycActionActivity" />
         </Preference>
     </PreferenceCategory>
