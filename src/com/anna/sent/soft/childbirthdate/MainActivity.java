@@ -2,6 +2,7 @@ package com.anna.sent.soft.childbirthdate;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 public class MainActivity extends StateSaverActivity {
 	@Override
 	public void setViews(Bundle savedInstanceState) {
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		setContentView(R.layout.activity_main);
 	}
 
