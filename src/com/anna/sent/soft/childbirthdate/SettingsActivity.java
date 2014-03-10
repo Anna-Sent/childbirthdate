@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate;
 
-import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -9,13 +7,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
-import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.MenuItem;
 
 import com.anna.sent.soft.childbirthdate.shared.Settings;
+import com.anna.sent.soft.utils.ActionBarUtils;
 import com.anna.sent.soft.utils.LanguageUtils;
+import com.anna.sent.soft.utils.NavigationUtils;
 import com.anna.sent.soft.utils.ThemeUtils;
 
 @SuppressWarnings("deprecation")
@@ -42,46 +41,30 @@ public class SettingsActivity extends PreferenceActivity implements
 		}
 	}
 
+	private boolean mFromOnCreate = false;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		ThemeUtils.onActivityCreateSetTheme(this);
+
 		super.onCreate(savedInstanceState);
 
 		LanguageUtils.configurationChanged(this);
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			new ActionBarHelper().setupActionBar();
-		}
+		new ActionBarUtils().setupActionBar(this);
 
 		addPreferencesFromResource(R.xml.preferences);
 
+		mFromOnCreate = true;
 		setupThemePreference();
 		setupLanguagePreference();
-	}
-
-	private class ActionBarHelper {
-		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-		private void setupActionBar() {
-			ActionBar actionBar = getActionBar();
-			if (actionBar != null) {
-				actionBar.setDisplayHomeAsUpEnabled(true);
-			}
-		}
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent upIntent = NavUtils.getParentActivityIntent(this);
-			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-				TaskStackBuilder.create(this)
-						.addNextIntentWithParentStack(upIntent)
-						.startActivities();
-			} else {
-				NavUtils.navigateUpTo(this, upIntent);
-			}
-
+			NavigationUtils.navigateUp(this, item);
 			return true;
 		}
 
@@ -107,10 +90,14 @@ public class SettingsActivity extends PreferenceActivity implements
 			setupThemePreference();
 			restart();
 		} else if (key.equals(Settings.KEY_PREF_LANGUAGE)) {
-			Settings.userSetLanguage(this);
-			setupLanguagePreference();
-			LanguageUtils.configurationChanged(this);
-			restart();
+			if (!mFromOnCreate) {
+				Settings.userSetLanguage(this);
+				setupLanguagePreference();
+				LanguageUtils.configurationChanged(this);
+				restart();
+			} else {
+				mFromOnCreate = false;
+			}
 		}
 	}
 
