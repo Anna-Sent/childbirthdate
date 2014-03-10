@@ -108,13 +108,12 @@ public class Settings {
 				.getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE));
 	}
 
-	public static final String KEY_PREF_THEME = "com.anna.sent.soft.childbirthdate.themeid";
-
 	public static int getTheme(Context context) {
 		SharedPreferences settings = getSettings(context);
 		int defaultValue = context.getResources().getInteger(
 				R.integer.defaultTheme);
-		String value = settings.getString(KEY_PREF_THEME, "");
+		String value = settings.getString(
+				context.getResources().getString(R.string.pref_theme_key), "");
 		int result = defaultValue;
 		if (!value.equals("")) {
 			try {
@@ -127,13 +126,22 @@ public class Settings {
 		return result;
 	}
 
-	public static final String KEY_PREF_LANGUAGE = "com.anna.sent.soft.childbirthdate.languageid";
+	public static void setTheme(Context context, int value) {
+		SharedPreferences settings = getSettings(context);
+		Editor editor = settings.edit();
+		editor.putString(
+				context.getResources().getString(R.string.pref_theme_key),
+				String.valueOf(value));
+		editor.commit();
+	}
 
 	public static int getLanguage(Context context) {
 		int result = getDefaultLanguage(context);
 		if (Settings.isLanguageSetByUser(context)) {
 			SharedPreferences settings = getSettings(context);
-			String value = settings.getString(KEY_PREF_LANGUAGE, "");
+			String value = settings.getString(
+					context.getResources()
+							.getString(R.string.pref_language_key), "");
 			if (!value.equals("")) {
 				try {
 					result = Integer.parseInt(value);
@@ -174,17 +182,24 @@ public class Settings {
 		return supportedLocales[languageId];
 	}
 
-	public static final String KEY_PREF_IS_LANGUAGE_SET_BY_USER = "com.anna.sent.soft.childbirthdate.islanguagesetbyuser";
+	private static final String KEY_PREF_IS_LANGUAGE_SET_BY_USER = "com.anna.sent.soft.childbirthdate.islanguagesetbyuser";
 
 	public static boolean isLanguageSetByUser(Context context) {
 		SharedPreferences settings = getSettings(context);
 		return settings.getBoolean(KEY_PREF_IS_LANGUAGE_SET_BY_USER, false);
 	}
 
-	public static void userSetLanguage(Context context) {
+	public static void setLanguage(Context context, int value) {
 		SharedPreferences settings = getSettings(context);
 		Editor editor = settings.edit();
+		editor.putString(
+				context.getResources().getString(R.string.pref_language_key),
+				String.valueOf(value));
 		editor.putBoolean(KEY_PREF_IS_LANGUAGE_SET_BY_USER, true);
 		editor.commit();
+	}
+
+	public static void clear(Context context) {
+		getSettings(context).edit().clear().commit();
 	}
 }

@@ -2,11 +2,13 @@ package com.anna.sent.soft.childbirthdate;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,7 +21,7 @@ import com.anna.sent.soft.utils.ThemeUtils;
 
 @SuppressWarnings("deprecation")
 public class SettingsActivity extends PreferenceActivity implements
-		OnSharedPreferenceChangeListener {
+		OnPreferenceChangeListener {
 	private static final String TAG = "moo";
 	private static final boolean DEBUG = false;
 
@@ -27,7 +29,6 @@ public class SettingsActivity extends PreferenceActivity implements
 		return getClass().getSimpleName() + ": " + msg;
 	}
 
-	@SuppressWarnings("unused")
 	private void log(String msg) {
 		if (DEBUG) {
 			Log.d(TAG, wrapMsg(msg));
@@ -41,8 +42,6 @@ public class SettingsActivity extends PreferenceActivity implements
 		}
 	}
 
-	private boolean mFromOnCreate = false;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		ThemeUtils.onActivityCreateSetTheme(this);
@@ -51,13 +50,12 @@ public class SettingsActivity extends PreferenceActivity implements
 
 		LanguageUtils.configurationChanged(this);
 
-		new ActionBarUtils().setupActionBar(this);
-
 		addPreferencesFromResource(R.xml.preferences);
 
-		mFromOnCreate = true;
+		new ActionBarUtils().setupActionBar(this);
+
+		createLanguagePreference();
 		setupThemePreference();
-		setupLanguagePreference();
 	}
 
 	@Override
@@ -71,34 +69,62 @@ public class SettingsActivity extends PreferenceActivity implements
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void setupThemePreference() {
-		ListPreference pref = (ListPreference) findPreference(Settings.KEY_PREF_THEME);
+	private void createLanguagePreference() {
+		log("create language preference");
+		PreferenceCategory category = (PreferenceCategory) findPreference(getString(R.string.pref_ui_settings_key));
+		final ListPreference pref = new ListPreference(this);
+		pref.setKey(getString(R.string.pref_language_key));
+		String[] entries = getResources().getStringArray(R.array.language);
+		pref.setEntries(entries);
+		String[] entryValues = getResources().getStringArray(
+				R.array.language_values);
+		pref.setEntryValues(entryValues);
+		String title = getString(R.string.pref_language_title);
+		pref.setDialogTitle(title);
+		pref.setTitle(title);
+		int value = Settings.getLanguage(this);
+		pref.setDefaultValue(String.valueOf(value));
+		pref.setValue(String.valueOf(value));
+		log(pref.getValue() + " " + pref.getEntry());
 		pref.setSummary(pref.getEntry());
+		pref.setOnPreferenceChangeListener(this);
+		category.addPreference(pref);
 	}
 
-	private void setupLanguagePreference() {
-		ListPreference pref = (ListPreference) findPreference(Settings.KEY_PREF_LANGUAGE);
-		int value = Settings.getLanguage(this);
-		pref.setValue(String.valueOf(value));
+	private void setupThemePreference() {
+		ListPreference pref = (ListPreference) findPreference(getString(R.string.pref_theme_key));
 		pref.setSummary(pref.getEntry());
+		pref.setOnPreferenceChangeListener(this);
 	}
 
 	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-			String key) {
-		if (key.equals(Settings.KEY_PREF_THEME)) {
-			setupThemePreference();
-			restart();
-		} else if (key.equals(Settings.KEY_PREF_LANGUAGE)) {
-			if (!mFromOnCreate) {
-				Settings.userSetLanguage(this);
-				setupLanguagePreference();
-				LanguageUtils.configurationChanged(this);
-				restart();
-			} else {
-				mFromOnCreate = false;
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		try {
+			int value = Integer.parseInt(newValue.toString());
+
+			if (preference.getKey().equals(
+					getString(R.string.pref_language_key))) {
+				int current = Settings.getLanguage(SettingsActivity.this);
+				if (value != current) {
+					log("language changed");
+					Settings.setLanguage(SettingsActivity.this, value);
+					restart();
+					return true;
+				}
+			} else if (preference.getKey().equals(
+					getString(R.string.pref_theme_key))) {
+				int current = Settings.getTheme(SettingsActivity.this);
+				if (value != current) {
+					log("theme changed");
+					Settings.setTheme(SettingsActivity.this, value);
+					restart();
+					return true;
+				}
 			}
+		} catch (NumberFormatException e) {
 		}
+
+		return false;
 	}
 
 	private void restart() {
@@ -109,24 +135,10 @@ public class SettingsActivity extends PreferenceActivity implements
 		} else {
 			finish();
 			Intent intent = new Intent(this, MainActivity.class);
-			intent.putExtra(MainActivity.EXTRA_THEME_CHANGED, true);
+			intent.putExtra(MainActivity.EXTRA_CONFIGURATION_CHANGED, true);
 			TaskStackBuilder.create(this).addNextIntent(intent)
 					.startActivities();
 		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		getPreferenceScreen().getSharedPreferences()
-				.registerOnSharedPreferenceChangeListener(this);
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		getPreferenceScreen().getSharedPreferences()
-				.unregisterOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override
