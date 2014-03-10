@@ -7,11 +7,7 @@
     <string name="adUnitId">"a1513549e3d3050"</string>
     <string name="emptyString">"empty"</string>
     <string name="sendData">"Надіслати дані"</string>
-    <string name="lighttheme">"Світла тема"</string>
-    <string name="darktheme">"Темна тема"</string>
     <string name="help">"Довідка"</string>
-    <string name="rate">"Оцінити додаток"</string>
-    <string name="womancyc">"Жіночий календар"</string>
     <string name="ecdAndGestationalAge">"ПДР і термін вагітності"</string>
     <string name="app_name">"Дата пологів"</string>
     <string name="widget_small_name">"Дата пологів Small"</string>
