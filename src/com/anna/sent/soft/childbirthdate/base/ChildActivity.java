@@ -12,7 +12,7 @@ import com.anna.sent.soft.utils.NavigationUtils;
 public class ChildActivity extends StateSaverActivity {
 	@Override
 	public void setViews(Bundle savedInstanceState) {
-		new ActionBarUtils().setupActionBar(this);
+		ActionBarUtils.setupActionBar(this);
 	}
 
 	@Override
