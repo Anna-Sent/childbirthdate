@@ -113,7 +113,7 @@ public class Settings {
 		int defaultValue = context.getResources().getInteger(
 				R.integer.defaultTheme);
 		String value = settings.getString(
-				context.getResources().getString(R.string.pref_theme_key), "");
+				context.getString(R.string.pref_theme_key), "");
 		int result = defaultValue;
 		if (!value.equals("")) {
 			try {
@@ -129,8 +129,7 @@ public class Settings {
 	public static void setTheme(Context context, int value) {
 		SharedPreferences settings = getSettings(context);
 		Editor editor = settings.edit();
-		editor.putString(
-				context.getResources().getString(R.string.pref_theme_key),
+		editor.putString(context.getString(R.string.pref_theme_key),
 				String.valueOf(value));
 		editor.commit();
 	}
@@ -192,8 +191,7 @@ public class Settings {
 	public static void setLanguage(Context context, int value) {
 		SharedPreferences settings = getSettings(context);
 		Editor editor = settings.edit();
-		editor.putString(
-				context.getResources().getString(R.string.pref_language_key),
+		editor.putString(context.getString(R.string.pref_language_key),
 				String.valueOf(value));
 		editor.putBoolean(KEY_PREF_IS_LANGUAGE_SET_BY_USER, true);
 		editor.commit();
