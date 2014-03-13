@@ -9,14 +9,14 @@
     </style>
 
     <style name="WidgetTextView1Style" parent="TextViewStyle.Medium">
-        <item name="android:textColor">@android:color/primary_text_dark</item>
+        <item name="android:textColor">@color/blue</item>
     </style>
 
     <style name="WidgetTextView2Style" parent="TextViewStyle.Medium.Red" />
 
     <style name="WidgetTextView34Style" parent="TextViewStyle">
         <item name="android:paddingLeft">@dimen/widget_padding</item>
-        <item name="android:textColor">@android:color/secondary_text_dark</item>
+        <item name="android:textColor">@android:color/secondary_text_light</item>
     </style>
 
 </resources>
