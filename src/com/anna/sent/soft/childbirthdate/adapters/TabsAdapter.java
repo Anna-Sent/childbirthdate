@@ -29,7 +29,7 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
 	private final ViewPager mViewPager;
 	private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
 
-	static final class TabInfo {
+	private static final class TabInfo {
 		@SuppressWarnings("unused")
 		private final String tag;
 		private final Class<?> clss;
@@ -42,7 +42,7 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
 		}
 	}
 
-	static class DummyTabFactory implements TabHost.TabContentFactory {
+	private static class DummyTabFactory implements TabHost.TabContentFactory {
 		private final Context mContext;
 
 		public DummyTabFactory(Context context) {
