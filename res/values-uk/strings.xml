@@ -53,7 +53,7 @@
     <string name="widgetTextInfo">"Вагітність"</string>
     <string name="widgetTextRestInfo">"До пологів"</string>
     <string name="widgetCalculationMethod">"Метод розрахунку: %s"</string>
-    <string name="initialization">"Завантаження..."</string>
+    <string name="initialization">"Завантаження&#8230;"</string>
     <string name="today">"Сьогодні"</string>
     <string name="prevDay">"Попередній день"</string>
     <string name="nextDay">"Наступний день"</string>
