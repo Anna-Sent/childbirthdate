@@ -7,6 +7,7 @@
     <string name="adUnitId">"a1513549e3d3050"</string>
     <string name="emptyString">"empty"</string>
     <string name="sendData">"Надіслати дані"</string>
+    <string name="settings">"Налаштування"</string>
     <string name="help">"Довідка"</string>
     <string name="ecdAndGestationalAge">"ПДР і термін вагітності"</string>
     <string name="app_name">"Дата пологів"</string>
@@ -56,5 +57,15 @@
     <string name="today">"Сьогодні"</string>
     <string name="prevDay">"Попередній день"</string>
     <string name="nextDay">"Наступний день"</string>
+    <string name="pref_ui_settings_title">"Зовнішній вигляд"</string>
+    <string name="pref_theme_title">"Тема"</string>
+    <string name="pref_language_title">"Мова"</string>
+    <string name="pref_other_settings_title">"Інша"</string>
+    <string name="pref_rate_title">"Оцінити додаток"</string>
+    <string name="pref_rate_summary"></string>
+    <string name="pref_support_title">"Написати розробнику"</string>
+    <string name="pref_support_summary">"Надіслати відгук, зауваження, пропозицію."</string>
+    <string name="pref_womancyc_title">"Календар жіночих циклів"</string>
+    <string name="pref_womancyc_summary">"Додаток \"WomanCyc\": просте додаток для стеження за менструальним циклом."</string>
 
 </resources>
