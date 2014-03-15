@@ -1,15 +1,12 @@
 package com.anna.sent.soft.childbirthdate;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
-import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -17,6 +14,7 @@ import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.utils.ActionBarUtils;
 import com.anna.sent.soft.utils.LanguageUtils;
 import com.anna.sent.soft.utils.NavigationUtils;
+import com.anna.sent.soft.utils.TaskStackBuilderUtils;
 import com.anna.sent.soft.utils.ThemeUtils;
 
 @SuppressWarnings("deprecation")
@@ -62,7 +60,7 @@ public class SettingsActivity extends PreferenceActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			NavigationUtils.navigateUp(this, item);
+			NavigationUtils.navigateUp(this);
 			return true;
 		}
 
@@ -108,7 +106,7 @@ public class SettingsActivity extends PreferenceActivity implements
 				if (value != current) {
 					log("language changed");
 					Settings.setLanguage(SettingsActivity.this, value);
-					restart();
+					TaskStackBuilderUtils.restartFromSettings(this);
 					return true;
 				}
 			} else if (preference.getKey().equals(
@@ -117,7 +115,7 @@ public class SettingsActivity extends PreferenceActivity implements
 				if (value != current) {
 					log("theme changed");
 					Settings.setTheme(SettingsActivity.this, value);
-					restart();
+					TaskStackBuilderUtils.restartFromSettings(this);
 					return true;
 				}
 			}
@@ -125,20 +123,6 @@ public class SettingsActivity extends PreferenceActivity implements
 		}
 
 		return false;
-	}
-
-	private void restart() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			Intent intent = new Intent(this, getClass());
-			TaskStackBuilder.create(this).addNextIntentWithParentStack(intent)
-					.startActivities();
-		} else {
-			finish();
-			Intent intent = new Intent(this, MainActivity.class);
-			intent.putExtra(MainActivity.EXTRA_CONFIGURATION_CHANGED, true);
-			TaskStackBuilder.create(this).addNextIntent(intent)
-					.startActivities();
-		}
 	}
 
 	@Override
