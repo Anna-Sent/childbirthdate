@@ -66,6 +66,6 @@
     <string name="pref_support_title">"Написати розробнику"</string>
     <string name="pref_support_summary">"Надіслати відгук, зауваження, пропозицію."</string>
     <string name="pref_womancyc_title">"Календар жіночих циклів"</string>
-    <string name="pref_womancyc_summary">"Додаток \"WomanCyc\": просте додаток для стеження за менструальним циклом."</string>
+    <string name="pref_womancyc_summary">"Додаток \"WomanCyc\": простий додаток для стеження за менструальним циклом."</string>
 
 </resources>
