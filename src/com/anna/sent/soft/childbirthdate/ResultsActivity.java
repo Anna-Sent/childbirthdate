@@ -9,6 +9,7 @@ import com.anna.sent.soft.childbirthdate.adapters.TabsAdapter;
 import com.anna.sent.soft.childbirthdate.base.ChildActivity;
 import com.anna.sent.soft.childbirthdate.fragments.ResultEcdFragment;
 import com.anna.sent.soft.childbirthdate.fragments.ResultSickListFragment;
+import com.anna.sent.soft.childbirthdate.strategy.menu.MenuStrategy;
 
 public class ResultsActivity extends ChildActivity {
 	private TabHost mTabHost;
@@ -37,5 +38,10 @@ public class ResultsActivity extends ChildActivity {
 						ResultSickListFragment.class.getSimpleName())
 						.setIndicator(getString(R.string.sick_list)),
 				ResultSickListFragment.class, null);
+	}
+
+	@Override
+	protected void addStrategies() {
+		addStrategy(new MenuStrategy(this));
 	}
 }

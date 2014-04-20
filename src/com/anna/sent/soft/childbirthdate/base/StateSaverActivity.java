@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.data.DataImpl;
+import com.anna.sent.soft.childbirthdate.strategy.StrategyActivity;
 import com.anna.sent.soft.utils.LanguageUtils;
 import com.anna.sent.soft.utils.ThemeUtils;
 
-public abstract class StateSaverActivity extends FragmentActivity implements
+public abstract class StateSaverActivity extends StrategyActivity implements
 		StateSaver {
 	private static final String TAG = "moo";
 	private static final boolean DEBUG = false;
