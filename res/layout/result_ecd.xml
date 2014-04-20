@@ -80,7 +80,7 @@
         </com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout>
 
         <TableLayout
-            android:id="@+id/table"
+            android:id="@+id/table_ecd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:shrinkColumns="*"

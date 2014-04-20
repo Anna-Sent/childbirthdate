@@ -68,5 +68,7 @@
     <string name="pref_support_summary">Отправить отзыв, замечание, предложение.</string>
     <string name="pref_womancyc_title">Календарь женских циклов</string>
     <string name="pref_womancyc_summary">Приложение \"WomanCyc\": простое приложение для слежения за менструальным циклом.</string>
+    <string name="calculation">Расчет</string>
+    <string name="sick_list">Больничный лист</string>
 
 </resources>

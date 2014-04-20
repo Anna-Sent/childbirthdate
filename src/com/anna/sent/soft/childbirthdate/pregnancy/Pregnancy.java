@@ -56,6 +56,13 @@ public abstract class Pregnancy {
 		return currentPoint;
 	}
 
+	public void setWeeks(int value) {
+		weeks = value;
+		days = 0;
+		currentPoint = (Calendar) startPoint.clone();
+		currentPoint.add(Calendar.DAY_OF_MONTH, getDurationInDays());
+	}
+
 	public Calendar getStartPoint() {
 		return startPoint;
 	}

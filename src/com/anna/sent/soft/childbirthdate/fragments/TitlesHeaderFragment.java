@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.childbirthdate.ResultActivity;
+import com.anna.sent.soft.childbirthdate.ResultsActivity;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 
@@ -37,7 +37,7 @@ public class TitlesHeaderFragment extends Fragment implements DataClient {
 			public void onClick(View v) {
 				if (mData != null && mData.thereIsAtLeastOneSelectedMethod()) {
 					Intent intent = new Intent(getActivity(),
-							ResultActivity.class);
+							ResultsActivity.class);
 					startActivity(intent);
 				} else {
 					Toast.makeText(
