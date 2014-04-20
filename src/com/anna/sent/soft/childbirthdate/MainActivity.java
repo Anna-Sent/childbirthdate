@@ -6,12 +6,10 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity;
 import com.anna.sent.soft.childbirthdate.base.StateSaverActivity;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
+import com.anna.sent.soft.childbirthdate.strategy.menu.MenuStrategy;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 
 public class MainActivity extends StateSaverActivity {
@@ -48,6 +46,11 @@ public class MainActivity extends StateSaverActivity {
 	}
 
 	@Override
+	protected void addStrategies() {
+		addStrategy(new MenuStrategy(this));
+	}
+
+	@Override
 	public void beforeOnSaveInstanceState() {
 		FragmentManager fm = getSupportFragmentManager();
 		Fragment details = fm.findFragmentById(R.id.details);
@@ -67,32 +70,6 @@ public class MainActivity extends StateSaverActivity {
 
 		// update all widgets
 		MyPregnancyWidget.updateAllWidgets(this);
-	}
-
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.clear();
-		getMenuInflater().inflate(R.menu.main, menu);
-		return super.onPrepareOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.sendData:
-			Intent sendData = new Intent(this, EmailDataActionActivity.class);
-			startActivity(sendData);
-			return true;
-		case R.id.settings:
-			startActivity(new Intent(this, SettingsActivity.class));
-			return true;
-		case R.id.help:
-			Intent help = new Intent(this, HelpActivity.class);
-			startActivity(help);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
 	}
 
 	public final static String EXTRA_CONFIGURATION_CHANGED = "extra_configuration_changed";
