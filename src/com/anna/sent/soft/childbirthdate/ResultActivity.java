@@ -176,7 +176,7 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 
 	private ChangeCurrentByOneFromLongPressCommand mChangeCurrentByOneFromLongPressCommand = null;
 
-	class ChangeCurrentByOneFromLongPressCommand implements Runnable {
+	private class ChangeCurrentByOneFromLongPressCommand implements Runnable {
 		private boolean mIncrement;
 
 		private void setStep(boolean increment) {
