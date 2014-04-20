@@ -132,8 +132,8 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".ResultActivity"
-            android:label="@string/ecdAndGestationalAge"
+            android:name=".ResultsActivity"
+            android:label="@string/calculation"
             android:launchMode="singleTop"
             android:parentActivityName=".MainActivity" >
             <meta-data

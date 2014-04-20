@@ -1,4 +1,4 @@
-package com.anna.sent.soft.childbirthdate;
+package com.anna.sent.soft.childbirthdate.fragments;
 
 import java.util.Calendar;
 
@@ -6,25 +6,31 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.DatePicker.OnDateChangedListener;
 
-import com.anna.sent.soft.childbirthdate.base.ChildActivity;
+import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.base.StateSaverFragment;
+import com.anna.sent.soft.childbirthdate.data.Data;
+import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout;
 import com.anna.sent.soft.childbirthdate.ui.LongPressedButton;
 import com.anna.sent.soft.utils.DateUtils;
 
-public class ResultActivity extends ChildActivity implements OnClickListener,
-		OnDateChangedListener, LongPressedButton.Listener {
+public class ResultEcdFragment extends StateSaverFragment implements
+		DataClient, OnClickListener, OnDateChangedListener,
+		LongPressedButton.Listener {
 	private static final String TAG = "moo";
 	private static final boolean DEBUG = false;
 
@@ -39,25 +45,46 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 		}
 	}
 
-	private TableLayout table;
-	private DatePicker datePicker;
+	private TableLayout mTable;
+	private DatePicker mDatePicker;
 	private Calendar mDate = null;
+
+	public ResultEcdFragment() {
+		super();
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.result_ecd, container, false);
+		return v;
+	}
+
+	protected Data mData = null;
+
+	@Override
+	public void setData(Data data) {
+		mData = data;
+	}
+
+	private Data getData() {
+		return mData;
+	}
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_result);
-		super.setViews(savedInstanceState);
-		table = (TableLayout) findViewById(R.id.table);
-		datePicker = (DatePicker) findViewById(R.id.datePicker);
-		DateUtils.init(datePicker, Calendar.getInstance(), this);
-		Button today = (Button) findViewById(R.id.buttonToday);
+		mTable = (TableLayout) getActivity().findViewById(R.id.table_ecd);
+		mDatePicker = (DatePicker) getActivity().findViewById(R.id.datePicker);
+		DateUtils.init(mDatePicker, Calendar.getInstance(), this);
+		Button today = (Button) getActivity().findViewById(R.id.buttonToday);
 		today.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				setDate(Calendar.getInstance());
 			}
 		});
-		LongPressedButton nextDay = (LongPressedButton) findViewById(R.id.buttonNextDay);
+		LongPressedButton nextDay = (LongPressedButton) getActivity()
+				.findViewById(R.id.buttonNextDay);
 		nextDay.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -72,7 +99,8 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 			};
 		});
 		nextDay.setListener(this);
-		LongPressedButton prevDay = (LongPressedButton) findViewById(R.id.buttonPrevDay);
+		LongPressedButton prevDay = (LongPressedButton) getActivity()
+				.findViewById(R.id.buttonPrevDay);
 		prevDay.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -87,9 +115,12 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 			};
 		});
 		prevDay.setListener(this);
-		animatedLayout = (AnimatedLinearLayout) findViewById(R.id.animatedLayout);
-		textViewOnDate = (TextView) findViewById(R.id.textViewOnDate);
-		buttonShowHide = (Button) findViewById(R.id.buttonShowHide);
+		animatedLayout = (AnimatedLinearLayout) getActivity().findViewById(
+				R.id.animatedLayout);
+		textViewOnDate = (TextView) getActivity().findViewById(
+				R.id.textViewOnDate);
+		buttonShowHide = (Button) getActivity().findViewById(
+				R.id.buttonShowHide);
 		buttonShowHide.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -113,12 +144,12 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 	}
 
 	@Override
-	protected void saveActivityState(Bundle state) {
+	public void saveState(Bundle state) {
 		state.putBoolean(KEY_IS_ANIMATED_ACTIVITY_VISIBLE, mIsVisible);
 	}
 
 	@Override
-	protected void onStart() {
+	public void onStart() {
 		super.onStart();
 		mIsVisible = USE_ANIMATION ? true : mIsVisible;
 		setVisibility(mIsVisible, false);
@@ -138,8 +169,8 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 			buttonShowHide.setContentDescription(getString(R.string.collapse));
 		} else {
 			animatedLayout.hide(withAnimation);
-			textViewOnDate.setText(DateUtils.toString(this,
-					DateUtils.getDate(datePicker)));
+			textViewOnDate.setText(DateUtils.toString(getActivity(),
+					DateUtils.getDate(mDatePicker)));
 			buttonShowHide.setCompoundDrawablesWithIntrinsicBounds(
 					mExpandDrawable, null, null, null);
 			buttonShowHide.setContentDescription(getString(R.string.expand));
@@ -150,7 +181,7 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 
 	private Drawable getDrawableFromTheme(int attribute) {
 		int[] attrs = new int[] { attribute };
-		TypedArray ta = obtainStyledAttributes(attrs);
+		TypedArray ta = getActivity().obtainStyledAttributes(attrs);
 		Drawable result = ta.getDrawable(0);
 		ta.recycle();
 		return result;
@@ -158,7 +189,7 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 
 	@Override
 	public void cancelLongPress() {
-		datePicker.removeCallbacks(mChangeCurrentByOneFromLongPressCommand);
+		mDatePicker.removeCallbacks(mChangeCurrentByOneFromLongPressCommand);
 	}
 
 	private void postChangeCurrentByOneFromLongPress(boolean increment,
@@ -166,11 +197,12 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 		if (mChangeCurrentByOneFromLongPressCommand == null) {
 			mChangeCurrentByOneFromLongPressCommand = new ChangeCurrentByOneFromLongPressCommand();
 		} else {
-			datePicker.removeCallbacks(mChangeCurrentByOneFromLongPressCommand);
+			mDatePicker
+					.removeCallbacks(mChangeCurrentByOneFromLongPressCommand);
 		}
 
 		mChangeCurrentByOneFromLongPressCommand.setStep(increment);
-		datePicker.postDelayed(mChangeCurrentByOneFromLongPressCommand,
+		mDatePicker.postDelayed(mChangeCurrentByOneFromLongPressCommand,
 				delayMillis);
 	}
 
@@ -186,27 +218,27 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 		@Override
 		public void run() {
 			changeValueByOne(mIncrement);
-			datePicker.postDelayed(this, 10);
+			mDatePicker.postDelayed(this, 10);
 		}
 	}
 
 	private void changeValueByOne(boolean increment) {
-		Calendar date = DateUtils.getDate(datePicker);
+		Calendar date = DateUtils.getDate(mDatePicker);
 		date.add(Calendar.DAY_OF_MONTH, increment ? 1 : -1);
 		setDate(date);
 	}
 
 	private void setDate(Calendar date) {
 		// log("setDate");
-		DateUtils.setDate(datePicker, date);
+		DateUtils.setDate(mDatePicker, date);
 		update();
 	}
 
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
-		mDate = DateUtils.getDate(datePicker);
-		table.removeAllViews();
+		mDate = DateUtils.getDate(mDatePicker);
+		mTable.removeAllViews();
 		String[] methodNames = getResources().getStringArray(
 				R.array.methodNames);
 		for (int i = 0; i < getData().byMethod().length; ++i) {
@@ -215,17 +247,17 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 						getData(), i + 1);
 				pregnancy.setCurrentPoint(mDate);
 
-				View row = getLayoutInflater().inflate(R.layout.result_row,
-						null);
+				View row = getActivity().getLayoutInflater().inflate(
+						R.layout.result_row, null);
 				TextView textView = (TextView) row.findViewById(R.id.textView);
 				textView.setText(methodNames[i]);
 
 				Calendar end = pregnancy.getEndPoint();
 				String res1, res2, msg;
-				res2 = DateUtils.toString(this, end);
+				res2 = DateUtils.toString(getActivity(), end);
 				if (pregnancy.isCorrect()) {
-					res1 = pregnancy.getInfo(this);
-					msg = pregnancy.getAdditionalInfo(this);
+					res1 = pregnancy.getInfo(getActivity());
+					msg = pregnancy.getAdditionalInfo(getActivity());
 				} else {
 					res1 = getString(R.string.errorIncorrectGestationalAge);
 					if (pregnancy.getCurrentPoint().before(end)) {
@@ -242,7 +274,7 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 				TextView message = (TextView) row.findViewById(R.id.message);
 				message.setText(msg);
 
-				table.addView(row);
+				mTable.addView(row);
 				row.setTag(pregnancy);
 				row.setOnClickListener(this);
 			}
@@ -256,20 +288,20 @@ public class ResultActivity extends ChildActivity implements OnClickListener,
 	}
 
 	private void update() {
-		Calendar newDate = DateUtils.getDate(datePicker);
+		Calendar newDate = DateUtils.getDate(mDatePicker);
 		if (mDate == null || !DateUtils.areEqual(newDate, mDate)) {
 			// log("update " + DateUtils.toString(this, newDate));
 			mDate = newDate;
-			for (int i = 0; i < table.getChildCount(); ++i) {
-				View row = table.getChildAt(i);
+			for (int i = 0; i < mTable.getChildCount(); ++i) {
+				View row = mTable.getChildAt(i);
 
 				Pregnancy pregnancy = (Pregnancy) row.getTag();
 				pregnancy.setCurrentPoint(mDate);
 
 				String res1, msg;
 				if (pregnancy.isCorrect()) {
-					res1 = pregnancy.getInfo(this);
-					msg = pregnancy.getAdditionalInfo(this);
+					res1 = pregnancy.getInfo(getActivity());
+					msg = pregnancy.getAdditionalInfo(getActivity());
 				} else {
 					Calendar end = pregnancy.getEndPoint();
 					res1 = getString(R.string.errorIncorrectGestationalAge);

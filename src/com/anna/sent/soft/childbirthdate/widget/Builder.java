@@ -24,7 +24,7 @@ public abstract class Builder {
 
 	private void setOnClickPendingIntent(Context context, RemoteViews views) {
 		Intent intent = new Intent(context,
-				com.anna.sent.soft.childbirthdate.ResultActivity.class);
+				com.anna.sent.soft.childbirthdate.ResultsActivity.class);
 		intent.putExtra(Shared.Child.EXTRA_IS_STARTED_FROM_WIDGET, true);
 
 		PendingIntent pendingIntent = TaskStackBuilder.create(context)

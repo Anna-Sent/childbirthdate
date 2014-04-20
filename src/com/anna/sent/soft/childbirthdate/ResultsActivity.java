@@ -1,0 +1,41 @@
+package com.anna.sent.soft.childbirthdate;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.widget.TabHost;
+
+import com.anna.sent.soft.childbirthdate.adapters.TabsAdapter;
+import com.anna.sent.soft.childbirthdate.base.ChildActivity;
+import com.anna.sent.soft.childbirthdate.fragments.ResultEcdFragment;
+import com.anna.sent.soft.childbirthdate.fragments.ResultSickListFragment;
+
+public class ResultsActivity extends ChildActivity {
+	private TabHost mTabHost;
+	private ViewPager mViewPager;
+	private TabsAdapter mTabsAdapter;
+
+	@SuppressLint("NewApi")
+	@Override
+	public void setViews(Bundle savedInstanceState) {
+		setContentView(R.layout.activity_results);
+		super.setViews(savedInstanceState);
+
+		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+		mTabHost.setup();
+
+		mViewPager = (ViewPager) findViewById(R.id.pager);
+
+		mTabsAdapter = new TabsAdapter(this, mTabHost, mViewPager);
+		mTabsAdapter
+				.addTab(mTabHost.newTabSpec(
+						ResultEcdFragment.class.getSimpleName()).setIndicator(
+						getString(R.string.ecdAndGestationalAge)),
+						ResultEcdFragment.class, null);
+		mTabsAdapter.addTab(
+				mTabHost.newTabSpec(
+						ResultSickListFragment.class.getSimpleName())
+						.setIndicator(getString(R.string.sick_list)),
+				ResultSickListFragment.class, null);
+	}
+}

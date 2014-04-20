@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ScrollViewStyle"
+    tools:context=".ResultActivity" >
+
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
+
+        <LinearLayout
+            style="@style/LinearLayoutHorizontalStyle"
+            android:gravity="center" >
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:text="при достижении срока беременности" />
+
+            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                android:id="@+id/numberPickerWeeks"
+                style="@style/NumberPickerStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/weeks" />
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="на" />
+
+            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                android:id="@+id/numberPickerSickDays"
+                style="@style/NumberPickerStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/days" />
+        </LinearLayout>
+
+        <TableLayout
+            android:id="@+id/table_sick_days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:shrinkColumns="*"
+            android:stretchColumns="*" />
+
+        <com.google.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/adview_margin"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/adUnitId"
+            ads:loadAdOnCreate="true"
+            android:gravity="center" />
+    </LinearLayout>
+
+</ScrollView>
