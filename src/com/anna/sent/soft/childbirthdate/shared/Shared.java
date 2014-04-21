@@ -1,12 +1,15 @@
 package com.anna.sent.soft.childbirthdate.shared;
 
 public class Shared {
+	private static final String PREFIX = "com.anna.sent.soft.childbirthdate.";
+
 	public static class Titles {
-		public final static String EXTRA_POSITION = "com.anna.sent.soft.childbirthdate.position";
+		public static final String EXTRA_POSITION = PREFIX + "position";
 	}
 
 	public static class Child {
-		public static final String EXTRA_IS_STARTED_FROM_WIDGET = "com.anna.sent.soft.childbirthdate.isstartedfromwidget";
+		public static final String EXTRA_IS_STARTED_FROM_WIDGET = PREFIX
+				+ "isstartedfromwidget";
 	}
 
 	public static class Calculation {
@@ -18,29 +21,48 @@ public class Shared {
 
 	public static class Saved {
 		public static class Calculation {
-			public static final String EXTRA_BY_LMP = "com.anna.sent.soft.childbirthdate.bylastmenstruationdate";
-			public static final String EXTRA_LMP_MENSTRUAL_CYCLE_LEN = "com.anna.sent.soft.childbirthdate.menstrualcyclelen";
-			public static final String EXTRA_LMP_LUTEAL_PHASE_LEN = "com.anna.sent.soft.childbirthdate.lutealphaselen";
-			public static final String EXTRA_LMP_DATE = "com.anna.sent.soft.childbirthdate.lastmenstruationdate";
-			public static final String EXTRA_BY_OVULATION = "com.anna.sent.soft.childbirthdate.byovulationdate";
-			public static final String EXTRA_OVULATION_DATE = "com.anna.sent.soft.childbirthdate.ovulationdate";
-			public static final String EXTRA_BY_ULTRASOUND = "com.anna.sent.soft.childbirthdate.byultrasound";
-			public static final String EXTRA_ULTRASOUND_DATE = "com.anna.sent.soft.childbirthdate.ultrasounddate";
-			public static final String EXTRA_ULTRASOUND_WEEKS = "com.anna.sent.soft.childbirthdate.weeks";
-			public static final String EXTRA_ULTRASOUND_DAYS = "com.anna.sent.soft.childbirthdate.days";
-			public static final String EXTRA_ULTRASOUND_IS_EMBRYONIC_AGE = "com.anna.sent.soft.childbirthdate.isfetal";
-			public static final String EXTRA_BY_FIRST_APPEARANCE = "com.anna.sent.soft.childbirthdate.byfirstappearance";
-			public static final String EXTRA_FIRST_APPEARANCE_DATE = "com.anna.sent.soft.childbirthdate.firstappearancedate";
-			public static final String EXTRA_FIRST_APPEARANCE_WEEKS = "com.anna.sent.soft.childbirthdate.firstappearanceweeks";
-			public static final String EXTRA_BY_FIRST_MOVEMENTS = "com.anna.sent.soft.childbirthdate.byfirstmovements";
-			public static final String EXTRA_FIRST_MOVEMENTS_DATE = "com.anna.sent.soft.childbirthdate.firstmovementsdate";
-			public static final String EXTRA_FIRST_MOVEMENTS_IS_FIRST_PREGNANCY = "com.anna.sent.soft.childbirthdate.isfirstpregnancy";
+			public static final String EXTRA_BY_LMP = PREFIX
+					+ "bylastmenstruationdate";
+			public static final String EXTRA_LMP_MENSTRUAL_CYCLE_LEN = PREFIX
+					+ "menstrualcyclelen";
+			public static final String EXTRA_LMP_LUTEAL_PHASE_LEN = PREFIX
+					+ "lutealphaselen";
+			public static final String EXTRA_LMP_DATE = PREFIX
+					+ "lastmenstruationdate";
+			public static final String EXTRA_BY_OVULATION = PREFIX
+					+ "byovulationdate";
+			public static final String EXTRA_OVULATION_DATE = PREFIX
+					+ "ovulationdate";
+			public static final String EXTRA_BY_ULTRASOUND = PREFIX
+					+ "byultrasound";
+			public static final String EXTRA_ULTRASOUND_DATE = PREFIX
+					+ "ultrasounddate";
+			public static final String EXTRA_ULTRASOUND_WEEKS = PREFIX
+					+ "weeks";
+			public static final String EXTRA_ULTRASOUND_DAYS = PREFIX + "days";
+			public static final String EXTRA_ULTRASOUND_IS_EMBRYONIC_AGE = PREFIX
+					+ "isfetal";
+			public static final String EXTRA_BY_FIRST_APPEARANCE = PREFIX
+					+ "byfirstappearance";
+			public static final String EXTRA_FIRST_APPEARANCE_DATE = PREFIX
+					+ "firstappearancedate";
+			public static final String EXTRA_FIRST_APPEARANCE_WEEKS = PREFIX
+					+ "firstappearanceweeks";
+			public static final String EXTRA_BY_FIRST_MOVEMENTS = PREFIX
+					+ "byfirstmovements";
+			public static final String EXTRA_FIRST_MOVEMENTS_DATE = PREFIX
+					+ "firstmovementsdate";
+			public static final String EXTRA_FIRST_MOVEMENTS_IS_FIRST_PREGNANCY = PREFIX
+					+ "isfirstpregnancy";
 		}
 
 		public static class Widget {
-			public static final String EXTRA_CALCULATION_METHOD = "com.anna.sent.soft.childbirthdate.widget.calculatingmethod";
-			public static final String EXTRA_COUNTDOWN = "com.anna.sent.soft.childbirthdate.widget.countdown";
-			public static final String EXTRA_SHOW_CALCULATION_METHOD = "com.anna.sent.soft.childbirthdate.widget.showCalculatingMethod";
+			public static final String EXTRA_CALCULATION_METHOD = PREFIX
+					+ "widget.calculatingmethod";
+			public static final String EXTRA_COUNTDOWN = PREFIX
+					+ "widget.countdown";
+			public static final String EXTRA_SHOW_CALCULATION_METHOD = PREFIX
+					+ "widget.showCalculatingMethod";
 		}
 	}
 }
