@@ -9,12 +9,12 @@ import android.util.Log;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.data.DataImpl;
-import com.anna.sent.soft.strategy.StrategyActivity;
+import com.anna.sent.soft.strategy.activity.StrategyFragmentActivity;
 import com.anna.sent.soft.utils.LanguageUtils;
 import com.anna.sent.soft.utils.ThemeUtils;
 
-public abstract class StateSaverActivity extends StrategyActivity implements
-		StateSaver {
+public abstract class StateSaverActivity extends StrategyFragmentActivity
+		implements StateSaver {
 	private static final String TAG = "moo";
 	private static final boolean DEBUG = false;
 
