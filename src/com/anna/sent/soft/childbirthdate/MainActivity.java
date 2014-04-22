@@ -47,6 +47,7 @@ public class MainActivity extends StateSaverActivity {
 
 	@Override
 	protected void addStrategies() {
+		super.addStrategies();
 		addStrategy(new MenuStrategy(this));
 	}
 

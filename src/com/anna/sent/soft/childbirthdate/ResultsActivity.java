@@ -42,6 +42,7 @@ public class ResultsActivity extends ChildActivity {
 
 	@Override
 	protected void addStrategies() {
+		super.addStrategies();
 		addStrategy(new MenuStrategy(this));
 	}
 }
