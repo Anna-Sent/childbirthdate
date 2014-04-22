@@ -1,6 +1,7 @@
-package com.anna.sent.soft.childbirthdate.strategy;
+package com.anna.sent.soft.strategy;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,7 +9,11 @@ import android.view.MenuItem;
 public interface Strategy {
 	void onCreate(Bundle savedInstanceState);
 
+	void onRestart();
+
 	void onStart();
+
+	void onActivityResult(int requestCode, int resultCode, Intent data);
 
 	void onRestoreInstanceState(Bundle savedInstanceState);
 
@@ -20,7 +25,9 @@ public interface Strategy {
 
 	void onStop();
 
-	void onActivityResult(int requestCode, int resultCode, Intent data);
+	void onDestroy();
+
+	void onConfigurationChanged(Configuration newConfig);
 
 	boolean onCreateOptionsMenu(Menu menu);
 

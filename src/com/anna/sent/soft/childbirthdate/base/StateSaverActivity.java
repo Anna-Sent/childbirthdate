@@ -9,7 +9,7 @@ import android.util.Log;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.data.DataImpl;
-import com.anna.sent.soft.childbirthdate.strategy.StrategyActivity;
+import com.anna.sent.soft.strategy.StrategyActivity;
 import com.anna.sent.soft.utils.LanguageUtils;
 import com.anna.sent.soft.utils.ThemeUtils;
 
