@@ -10,6 +10,8 @@
         <attr name="iconPrevItem" format="reference" />
         <attr name="iconExpand" format="reference" />
         <attr name="iconCollapse" format="reference" />
+        <attr name="iconAdd" format="reference" />
+        <attr name="iconDelete" format="reference" />
     </declare-styleable>
 
     <style name="AppBaseTheme" parent="android:Theme">
@@ -22,6 +24,8 @@
         <item name="iconPrevItem">@drawable/ic_previous_item_light</item>
         <item name="iconExpand">@drawable/ic_expand_light</item>
         <item name="iconCollapse">@drawable/ic_collapse_light</item>
+        <item name="iconAdd">@drawable/ic_new_light</item>
+        <item name="iconDelete">@drawable/ic_remove_content_light</item>
     </style>
 
     <style name="AppBaseThemeLight" parent="android:Theme.Light">
@@ -34,6 +38,8 @@
         <item name="iconPrevItem">@drawable/ic_previous_item_light</item>
         <item name="iconExpand">@drawable/ic_expand_light</item>
         <item name="iconCollapse">@drawable/ic_collapse_light</item>
+        <item name="iconAdd">@drawable/ic_new_light</item>
+        <item name="iconDelete">@drawable/ic_remove_content_light</item>
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme"></style>

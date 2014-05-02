@@ -4,6 +4,9 @@
     <string name="pref_ui_settings_key">com.anna.sent.soft.childbirthdate.ui_settings</string>
     <string name="pref_theme_key">com.anna.sent.soft.childbirthdate.themeid</string>
     <string name="pref_language_key">com.anna.sent.soft.childbirthdate.languageid</string>
+    <string name="pref_sick_list_key">com.anna.sent.soft.childbirthdate.sick_list_id</string>
+    <string name="pref_sick_list_days_key">com.anna.sent.soft.childbirthdate.sick_list_days_id</string>
+    <string name="pref_sick_list_age_key">com.anna.sent.soft.childbirthdate.sick_list_age_id</string>
     <string name="supportEmail">anna.sent@gmail.com</string>
 
     <string-array name="theme_values">

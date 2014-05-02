@@ -3,6 +3,19 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto" >
 
     <PreferenceCategory
+        android:key="@string/pref_sick_list_key"
+        android:title="@string/sick_list" >
+        <com.anna.sent.soft.childbirthdate.preferences.SickListDaysPreference
+            android:dialogTitle="@string/sick_list_days"
+            android:key="@string/pref_sick_list_days_key"
+            android:title="@string/sick_list_days" />
+
+        <com.anna.sent.soft.childbirthdate.preferences.SickListAgePreference
+            android:dialogTitle="@string/sick_list_age"
+            android:key="@string/pref_sick_list_age_key"
+            android:title="@string/sick_list_age" />
+    </PreferenceCategory>
+    <PreferenceCategory
         android:key="@string/pref_ui_settings_key"
         android:title="@string/pref_ui_settings_title" >
         <ListPreference
