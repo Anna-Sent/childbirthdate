@@ -58,7 +58,7 @@ public class SickListAgePreference extends MoveableItemsPreference {
 	@Override
 	protected void restoreAddValue(String value) {
 		Age age = new Age();
-		age.load(value);
+		age = (Age) age.load(value);
 		mNumberPickerWeeks.setValue(age.getWeeks());
 		mNumberPickerDays.setValue(age.getDays());
 	}
