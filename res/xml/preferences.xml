@@ -5,12 +5,12 @@
     <PreferenceCategory
         android:key="@string/pref_sick_list_key"
         android:title="@string/sick_list" >
-        <com.anna.sent.soft.childbirthdate.preferences.SickListDaysPreference
+        <com.anna.sent.soft.childbirthdate.sicklist.SickListDaysPreference
             android:dialogTitle="@string/sick_list_days"
             android:key="@string/pref_sick_list_days_key"
             android:title="@string/sick_list_days" />
 
-        <com.anna.sent.soft.childbirthdate.preferences.SickListAgePreference
+        <com.anna.sent.soft.childbirthdate.sicklist.SickListAgePreference
             android:dialogTitle="@string/sick_list_age"
             android:key="@string/pref_sick_list_age_key"
             android:title="@string/sick_list_age" />

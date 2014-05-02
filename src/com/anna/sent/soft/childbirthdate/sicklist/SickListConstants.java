@@ -1,4 +1,4 @@
-package com.anna.sent.soft.childbirthdate.preferences;
+package com.anna.sent.soft.childbirthdate.sicklist;
 
 public class SickListConstants {
 	public static final class Days {

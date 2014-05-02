@@ -10,17 +10,18 @@ import android.os.Parcelable;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
 
-public class SickListDaysPreference extends DialogPreference implements
-		OnClickListener {
+public abstract class MoveableItemsPreference extends DialogPreference
+		implements OnClickListener {
 	private static final String TAG = "moo";
 	private static final boolean DEBUG = false;
 
@@ -35,9 +36,9 @@ public class SickListDaysPreference extends DialogPreference implements
 		}
 	}
 
-	private String mValue = SickListConstants.Days.DEFAULT_VALUE;
+	private String mValue;
+
 	private MoveableItemsArrayAdapter mAdapter;
-	private EditText mEditText;
 
 	private static List<Object> toList(String value) {
 		List<Object> result = new ArrayList<Object>();
@@ -57,22 +58,14 @@ public class SickListDaysPreference extends DialogPreference implements
 		return result;
 	}
 
-	private static String toString(List<Integer> values) {
-		String result = "";
-		for (int i = 0; i < values.size(); ++i) {
-			result += values.get(i) + ",";
-		}
-
-		return result;
-	}
-
-	public SickListDaysPreference(Context context) {
+	public MoveableItemsPreference(Context context) {
 		this(context, null);
 	}
 
-	public SickListDaysPreference(Context context, AttributeSet attrs) {
+	public MoveableItemsPreference(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		setDialogLayoutResource(R.layout.dialog_sick_list_days);
+		mValue = getDefaultValue();
+		setDialogLayoutResource(R.layout.dialog_list);
 		setPositiveButtonText(android.R.string.ok);
 		setNegativeButtonText(android.R.string.cancel);
 		setDialogIcon(null);
@@ -80,7 +73,7 @@ public class SickListDaysPreference extends DialogPreference implements
 
 	@Override
 	protected void onSetInitialValue(boolean restore, Object defaultValue) {
-		setValue(restore ? getPersistedString(SickListConstants.Days.DEFAULT_VALUE)
+		setValue(restore ? getPersistedString(getDefaultValue())
 				: (String) defaultValue);
 	}
 
@@ -95,14 +88,33 @@ public class SickListDaysPreference extends DialogPreference implements
 
 		ListView listView = (ListView) view.findViewById(R.id.listView);
 		mAdapter = new MoveableItemsArrayAdapter(getContext(),
-				toList(SickListConstants.Days.DEFAULT_VALUE));
+				toList(getDefaultValue()));
 		listView.setAdapter(mAdapter);
+
+		LayoutInflater inflater = (LayoutInflater) getContext()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+		View footer = inflater.inflate(R.layout.dialog_list_last_item, null);
 
 		Button buttonAdd = (Button) view.findViewById(R.id.buttonAdd);
 		buttonAdd.setOnClickListener(this);
 
-		mEditText = (EditText) view.findViewById(R.id.editTextItem);
+		View viewAdd = inflater.inflate(getAddLayoutResourceId(), null);
+
+		ViewGroup viewAddParent = (ViewGroup) view.findViewById(R.id.lastItem);
+		viewAddParent.addView(viewAdd, new LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+
+		listView.addFooterView(footer);
+
+		setupViewAdd(viewAdd);
 	}
+
+	protected abstract String getDefaultValue();
+
+	protected abstract int getAddLayoutResourceId();
+
+	protected abstract void setupViewAdd(View viewAdd);
 
 	public String getValue() {
 		return mValue;
@@ -205,40 +217,10 @@ public class SickListDaysPreference extends DialogPreference implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonAdd:
-			String text = mEditText.getText().toString();
-			try {
-				int number = Integer.parseInt(text);
-
-				if (number < 1 || number > 300) {
-					Toast.makeText(
-							getContext(),
-							getContext().getString(R.string.error_value_bounds,
-									SickListConstants.Days.MIN_VALUE,
-									SickListConstants.Days.MAX_VALUE),
-							Toast.LENGTH_SHORT).show();
-				}
-
-				List<Object> values = mAdapter.getValues();
-
-				if (values.contains(number)) {
-					Toast.makeText(
-							getContext(),
-							getContext().getString(
-									R.string.error_value_already_exists),
-							Toast.LENGTH_SHORT).show();
-				}
-
-				mAdapter.addItem(number);
-			} catch (NumberFormatException e) {
-				Toast.makeText(
-						getContext(),
-						getContext().getString(R.string.error_enter_value,
-								SickListConstants.Days.MIN_VALUE,
-								SickListConstants.Days.MAX_VALUE),
-						Toast.LENGTH_SHORT).show();
-			}
-
+			addItem(mAdapter);
 			break;
 		}
 	}
+
+	protected abstract void addItem(MoveableItemsArrayAdapter adapter);
 }
