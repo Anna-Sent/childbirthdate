@@ -63,7 +63,7 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		viewHolder.position = position;
 
 		TextView tv = (TextView) view.findViewById(R.id.textViewItem);
-		tv.setText(String.valueOf(mValues.get(position)));
+		tv.setText(mValues.get(position).toString());
 
 		Button buttonUp = (Button) view.findViewById(R.id.buttonUp);
 		buttonUp.setTag(viewHolder);

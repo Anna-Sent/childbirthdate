@@ -1,6 +1,6 @@
 package com.anna.sent.soft.childbirthdate.age;
 
-public class Days {
+public class Days implements ISetting {
 	private int days;
 
 	public Days() {
@@ -15,24 +15,23 @@ public class Days {
 		return days;
 	}
 
-	public static final String DELIMITER_LIST = ";";
-
+	@Override
 	public String save() {
 		return String.valueOf(days);
 	}
 
-	public boolean load(String str) {
+	@Override
+	public ISetting load(String str) {
 		if (str == null) {
-			return false;
+			return null;
 		}
 
 		try {
 			int d = Integer.parseInt(str);
-			days = d;
-			return true;
+			return new Days(d);
 		} catch (NumberFormatException e) {
 		}
 
-		return false;
+		return null;
 	}
 }

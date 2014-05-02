@@ -1,6 +1,7 @@
 package com.anna.sent.soft.childbirthdate.preferences;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.content.Context;
@@ -19,6 +20,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.age.ISetting;
+import com.anna.sent.soft.childbirthdate.age.SettingsParser;
 
 public abstract class MoveableItemsPreference extends DialogPreference
 		implements OnClickListener {
@@ -37,26 +40,7 @@ public abstract class MoveableItemsPreference extends DialogPreference
 	}
 
 	private String mValue;
-
 	private MoveableItemsArrayAdapter mAdapter;
-
-	private static List<Object> toList(String value) {
-		List<Object> result = new ArrayList<Object>();
-		String[] items = value.split(",");
-
-		for (int i = 0; i < items.length; ++i) {
-			if (!items[i].equals("")) {
-				try {
-					int item = Integer.parseInt(items[i]);
-					result.add(item);
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		return result;
-	}
 
 	public MoveableItemsPreference(Context context) {
 		this(context, null);
@@ -151,17 +135,29 @@ public abstract class MoveableItemsPreference extends DialogPreference
 		super.onDialogClosed(positiveResult);
 
 		if (positiveResult) {
-			/*
-			 * int numberPickerValue = mNumberPicker.getValue(); if
-			 * (callChangeListener(numberPickerValue)) {
-			 * setValue(numberPickerValue); mNumberPicker = null; }
-			 */
+			List<Object> list = mAdapter.getValues();
+			setValue(toString(list));
 		}
+	}
+
+	private List<Object> toList(String str) {
+		List<ISetting> source = SettingsParser.loadList(str, getElement());
+		List<Object> destination = new ArrayList<Object>();
+		Collections.copy(destination, source);
+		return destination;
+	}
+
+	protected abstract ISetting getElement();
+
+	private String toString(List<Object> list) {
+		List<Object> destination = list;
+		List<ISetting> source = new ArrayList<ISetting>();
+		Collections.copy(destination, source);
+		return SettingsParser.saveList(source);
 	}
 
 	@Override
 	protected Parcelable onSaveInstanceState() {
-		// log("save");
 		final Parcelable superState = super.onSaveInstanceState();
 
 		/*
@@ -169,31 +165,25 @@ public abstract class MoveableItemsPreference extends DialogPreference
 		 */
 
 		final SavedState myState = new SavedState(superState);
-		/*
-		 * if (mNumberPicker != null) { myState.value =
-		 * mNumberPicker.getValue(); // log("save " + myState.value); }
-		 */
-
+		myState.value = saveAddValue();
 		return myState;
 	}
 
+	protected abstract String saveAddValue();
+
 	@Override
 	protected void onRestoreInstanceState(Parcelable state) {
-		// log("restore");
 		if (state == null || !state.getClass().equals(SavedState.class)) {
-			// log("restore " + state == null ? "null" :
-			// state.getClass().getName());
 			super.onRestoreInstanceState(state);
 			return;
 		}
 
 		SavedState myState = (SavedState) state;
 		super.onRestoreInstanceState(myState.getSuperState());
-		/*
-		 * if (mNumberPicker != null) { mNumberPicker.setValue(myState.value);
-		 * // log("restore " + myState.value); }
-		 */
+		restoreAddValue(myState.value);
 	}
+
+	protected abstract void restoreAddValue(String value);
 
 	private static class SavedState extends BaseSavedState {
 		public String value;
