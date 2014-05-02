@@ -2,6 +2,8 @@ package com.anna.sent.soft.childbirthdate.pregnancy;
 
 import java.util.Calendar;
 
+import com.anna.sent.soft.childbirthdate.age.Age;
+
 /**
  * The class represents embryonic age in weeks and days.
  * 
@@ -19,7 +21,8 @@ public final class EmbryonicAge extends Pregnancy {
 
 	@Override
 	public int getFullDurationInDays() {
-		return PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS * 7;
+		return PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS
+				* Age.DAYS_IN_WEEK;
 	}
 
 	@Override

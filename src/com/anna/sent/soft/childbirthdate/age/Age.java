@@ -5,6 +5,8 @@ import android.content.Context;
 import com.anna.sent.soft.childbirthdate.R;
 
 public class Age implements ISetting {
+	public static final int DAYS_IN_WEEK = 7;
+
 	private int weeks, days;
 
 	public Age() {
@@ -39,15 +41,16 @@ public class Age implements ISetting {
 					"Days value must be non-negative");
 		}
 
-		if (value >= 7) {
-			throw new IllegalArgumentException("Days value must be less then 7");
+		if (value >= DAYS_IN_WEEK) {
+			throw new IllegalArgumentException("Days value must be less then "
+					+ DAYS_IN_WEEK);
 		}
 
 		days = value;
 	}
 
 	public int getDurationInDays() {
-		return weeks * 7 + days;
+		return weeks * DAYS_IN_WEEK + days;
 	}
 
 	@Override

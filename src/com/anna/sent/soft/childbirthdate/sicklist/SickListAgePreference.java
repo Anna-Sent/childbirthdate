@@ -40,7 +40,7 @@ public class SickListAgePreference extends MoveableItemsPreference {
 		mNumberPickerDays = (NumberPicker) viewAdd
 				.findViewById(R.id.numberPickerDays);
 		mNumberPickerDays.setMinValue(0);
-		mNumberPickerDays.setMaxValue(6);
+		mNumberPickerDays.setMaxValue(Age.DAYS_IN_WEEK - 1);
 	}
 
 	@Override

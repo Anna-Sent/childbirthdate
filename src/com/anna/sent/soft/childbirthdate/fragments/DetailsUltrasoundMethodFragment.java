@@ -11,6 +11,7 @@ import android.widget.DatePicker;
 import android.widget.RadioButton;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 import com.anna.sent.soft.utils.DateUtils;
@@ -67,7 +68,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		numberPickerDays = (NumberPicker) getActivity().findViewById(
 				R.id.numberPickerUltrasoundDays);
 		numberPickerDays.setMinValue(0);
-		numberPickerDays.setMaxValue(6);
+		numberPickerDays.setMaxValue(Age.DAYS_IN_WEEK - 1);
 		numberPickerDays.setOnValueChangedListener(this);
 	}
 
