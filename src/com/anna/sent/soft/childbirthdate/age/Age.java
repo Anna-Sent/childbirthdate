@@ -1,5 +1,9 @@
 package com.anna.sent.soft.childbirthdate.age;
 
+import android.content.Context;
+
+import com.anna.sent.soft.childbirthdate.R;
+
 public class Age implements ISetting {
 	private int weeks, days;
 
@@ -8,16 +12,65 @@ public class Age implements ISetting {
 	}
 
 	public Age(int weeks, int days) {
-		this.weeks = weeks;
-		this.days = days;
+		setWeeks(weeks);
+		setDays(days);
 	}
 
 	public int getWeeks() {
 		return weeks;
 	}
 
+	public void setWeeks(int value) {
+		if (value < 0) {
+			throw new IllegalArgumentException(
+					"Weeks value must be non-negative");
+		}
+
+		weeks = value;
+	}
+
 	public int getDays() {
 		return days;
+	}
+
+	public void setDays(int value) {
+		if (value < 0) {
+			throw new IllegalArgumentException(
+					"Days value must be non-negative");
+		}
+
+		if (value >= 7) {
+			throw new IllegalArgumentException("Days value must be less then 7");
+		}
+
+		days = value;
+	}
+
+	public int getDurationInDays() {
+		return weeks * 7 + days;
+	}
+
+	@Override
+	public String toString() {
+		return save();
+	}
+
+	public String toString(Context context) {
+		String result = "";
+		if (weeks > 0) {
+			result += weeks + " " + context.getString(R.string.weeks)
+					+ (days > 0 ? " " : "");
+		}
+
+		if (days > 0) {
+			result += days + " " + context.getString(R.string.days);
+		}
+
+		if (weeks == 0 && days == 0) {
+			result = "0 " + context.getString(R.string.days);
+		}
+
+		return result;
 	}
 
 	private static final String DELIMITER = ",";
@@ -39,7 +92,7 @@ public class Age implements ISetting {
 				int w = Integer.parseInt(tokens[0]);
 				int d = Integer.parseInt(tokens[1]);
 				return new Age(w, d);
-			} catch (NumberFormatException e) {
+			} catch (Exception e) {
 			}
 		}
 
