@@ -11,7 +11,7 @@ import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
+import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
@@ -321,16 +321,14 @@ public class DataImpl implements Data {
 
 		result[Shared.Calculation.BY_ULTRASOUND - 1] = context.getString(
 				R.string.titles2, DateUtils.toString(context, ultrasoundDate),
-				Pregnancy.getStringRepresentation(context, ultrasoundWeeks,
-						ultrasoundDays),
+				new Age(ultrasoundWeeks, ultrasoundDays).toString(context),
 				isEmbryonicAge ? context.getString(R.string.embryonic)
 						: context.getString(R.string.gestational));
 
 		result[Shared.Calculation.BY_FIRST_APPEARANCE - 1] = context.getString(
 				R.string.titles3, DateUtils.toString(context,
-						firstAppearanceDate), Pregnancy
-						.getStringRepresentation(context, firstAppearanceWeeks,
-								0));
+						firstAppearanceDate), new Age(firstAppearanceWeeks, 0)
+						.toString(context));
 
 		result[Shared.Calculation.BY_FIRST_MOVEMENTS - 1] = context.getString(
 				R.string.titles4, DateUtils.toString(context,

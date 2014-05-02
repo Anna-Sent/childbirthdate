@@ -5,14 +5,14 @@ import java.util.Calendar;
 import android.content.Context;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.age.Age;
 
 public abstract class Pregnancy {
 	public static final int FIRST_TRIMESTER = 1;
 	public static final int SECOND_TRIMESTER = 2;
 	public static final int THIRD_TRIMESTER = 3;
 
-	private int weeks = 0;
-	private int days = 0;
+	private Age age = new Age();
 	private Calendar startPoint = null, currentPoint = null;
 
 	/**
@@ -34,8 +34,8 @@ public abstract class Pregnancy {
 	 *            current date, must be not null
 	 */
 	public Pregnancy(int weeks, int days, Calendar current) {
-		this.weeks = weeks;
-		this.days = days;
+		age.setDays(days);
+		age.setWeeks(weeks);
 		startPoint = (Calendar) current.clone();
 		zeroDate(startPoint);
 		startPoint.add(Calendar.DAY_OF_MONTH, -getDurationInDays());
@@ -48,8 +48,10 @@ public abstract class Pregnancy {
 		long difference = currentPoint.getTimeInMillis()
 				- startPoint.getTimeInMillis();
 		int days = (int) (difference / (1000l * 3600l * 24l));
-		weeks = days / 7;
-		this.days = days - weeks * 7;
+		int weeks = days / 7;
+		days = days - weeks * 7;
+		age.setDays(days);
+		age.setWeeks(weeks);
 	}
 
 	public Calendar getCurrentPoint() {
@@ -57,8 +59,8 @@ public abstract class Pregnancy {
 	}
 
 	public void setWeeks(int value) {
-		weeks = value;
-		days = 0;
+		age.setWeeks(value);
+		age.setDays(0);
 		currentPoint = (Calendar) startPoint.clone();
 		currentPoint.add(Calendar.DAY_OF_MONTH, getDurationInDays());
 	}
@@ -89,10 +91,10 @@ public abstract class Pregnancy {
 	 * @return number of trimester, if weeks value is correct; -1 otherwise
 	 */
 	public int getTrimesterNumber() {
-		if (weeks >= 0) {
-			if (weeks <= getFirstTrimesterEndInclusive()) {
+		if (age.getWeeks() >= 0) {
+			if (age.getWeeks() <= getFirstTrimesterEndInclusive()) {
 				return FIRST_TRIMESTER;
-			} else if (weeks <= getSecondTrimesterEndInclusive()) {
+			} else if (age.getWeeks() <= getSecondTrimesterEndInclusive()) {
 				return SECOND_TRIMESTER;
 			} else if (getDurationInDays() <= getMaxDurationInDays()) {
 				return THIRD_TRIMESTER;
@@ -103,15 +105,15 @@ public abstract class Pregnancy {
 	}
 
 	public int getDurationInDays() {
-		return weeks * 7 + days;
+		return age.getDurationInDays();
 	}
 
 	public int getWeeks() {
-		return weeks;
+		return age.getWeeks();
 	}
 
 	public int getDays() {
-		return days;
+		return age.getDays();
 	}
 
 	public abstract int getFullDurationInDays();
@@ -142,56 +144,29 @@ public abstract class Pregnancy {
 
 	protected abstract int getSecondTrimesterEndInclusive();
 
-	public static String getStringRepresentation(Context context, int weeks,
-			int days) {
-		if (weeks < 0 || days < 0) {
-			return "?";
-		}
-
-		String result = "";
-		if (weeks > 0) {
-			result += weeks + " " + context.getString(R.string.weeks)
-					+ (days > 0 ? " " : "");
-		}
-
-		if (days > 0) {
-			result += days + " " + context.getString(R.string.days);
-		}
-
-		if (weeks == 0 && days == 0) {
-			result = "0 " + context.getString(R.string.days);
-		}
-
-		return result;
-	}
-
 	public String getRestInfo(Context context) {
-		return getStringRepresentation(context, getRestWeeks(), getRestDays());
+		return new Age(getRestWeeks(), getRestDays()).toString(context);
 	}
 
 	public String getInfo(Context context) {
-		return getStringRepresentation(context, weeks, days);
+		return age.toString(context);
 	}
 
 	public String getAdditionalInfo(Context context) {
 		String result;
 		int rest = getRestInDays();
 		if (rest > 0) {
-			result = context.getString(
-					R.string.positiveRest,
-					getStringRepresentation(context, getRestWeeks(),
-							getRestDays()));
+			result = context.getString(R.string.positiveRest,
+					getRestInfo(context));
 		} else if (rest == 0) {
 			result = context.getString(R.string.zeroRest);
 		} else {
 			result = context.getString(R.string.negativeRest);
 		}
 
-		result = context.getString(
-				R.string.additionalInfo,
-				getTrimesterNumber(),
-				getStringRepresentation(context, getFullDurationWeeks(),
-						getFullDurationDays()), result);
+		result = context.getString(R.string.additionalInfo,
+				getTrimesterNumber(), new Age(getFullDurationWeeks(),
+						getFullDurationDays()).toString(context), result);
 
 		return result;
 	}

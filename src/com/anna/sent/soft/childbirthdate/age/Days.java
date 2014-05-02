@@ -1,5 +1,9 @@
 package com.anna.sent.soft.childbirthdate.age;
 
+import android.content.Context;
+
+import com.anna.sent.soft.childbirthdate.R;
+
 public class Days implements ISetting {
 	private int days;
 
@@ -8,11 +12,30 @@ public class Days implements ISetting {
 	}
 
 	public Days(int days) {
-		this.days = days;
+		setDays(days);
 	}
 
 	public int getDays() {
 		return days;
+	}
+
+	public void setDays(int value) {
+		if (value < 0) {
+			throw new IllegalArgumentException(
+					"Days value must be non-negative");
+		}
+
+		days = value;
+	}
+
+	@Override
+	public String toString() {
+		return save();
+	}
+
+	public String toString(Context context) {
+		String result = days + " " + context.getString(R.string.days);
+		return result;
 	}
 
 	@Override
@@ -29,7 +52,7 @@ public class Days implements ISetting {
 		try {
 			int d = Integer.parseInt(str);
 			return new Days(d);
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 		}
 
 		return null;
