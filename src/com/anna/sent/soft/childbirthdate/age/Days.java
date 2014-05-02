@@ -29,6 +29,20 @@ public class Days implements ISetting {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+
+		if (obj == null || obj.getClass() != getClass()) {
+			return false;
+		}
+
+		Days d = (Days) obj;
+		return days == d.days;
+	}
+
+	@Override
 	public String toString() {
 		return save();
 	}
