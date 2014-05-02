@@ -70,5 +70,10 @@
     <string name="pref_womancyc_summary">Приложение \"WomanCyc\": простое приложение для слежения за менструальным циклом.</string>
     <string name="calculation">Расчет</string>
     <string name="sick_list">Больничный лист</string>
+    <string name="sick_list_days">Количество дней</string>
+    <string name="sick_list_age">Срок беременности</string>
+    <string name="error_enter_value">Введите число от %1$s до %2$s</string>
+    <string name="error_value_already_exists">Такое значение уже есть в списке</string>
+    <string name="error_value_bounds">Значение должно быть в границах от %1$s до %2$s включительно</string>
 
 </resources>

@@ -11,6 +11,8 @@
         <item name="iconPrevItem">@drawable/ic_previous_item_dark</item>
         <item name="iconExpand">@drawable/ic_expand_dark</item>
         <item name="iconCollapse">@drawable/ic_collapse_dark</item>
+        <item name="iconAdd">@drawable/ic_new_dark</item>
+        <item name="iconDelete">@drawable/ic_remove_content_dark</item>
         <item name="android:windowActionBar">true</item>
     </style>
 
@@ -24,6 +26,8 @@
         <item name="iconPrevItem">@drawable/ic_previous_item_light</item>
         <item name="iconExpand">@drawable/ic_expand_light</item>
         <item name="iconCollapse">@drawable/ic_collapse_light</item>
+        <item name="iconAdd">@drawable/ic_new_light</item>
+        <item name="iconDelete">@drawable/ic_remove_content_light</item>
         <item name="android:windowActionBar">true</item>
     </style>
 
