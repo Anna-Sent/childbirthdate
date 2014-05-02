@@ -2,6 +2,7 @@ package com.anna.sent.soft.childbirthdate.pregnancy;
 
 import java.util.Calendar;
 
+import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
@@ -40,7 +41,9 @@ public class PregnancyCalculator {
 	public final static int EMBRYONIC_AVG_AGE_IN_WEEKS = GESTATIONAL_AVG_AGE_IN_WEEKS - 2;
 
 	public final static int GESTATIONAL_MAX_AGE_DURATION = GESTATIONAL_AVG_AGE_IN_WEEKS
-			* 7 - AVG_PHOLLICULAR_PHASE_LENGTH + MAX_PHOLLICULAR_PHASE_LENGTH;
+			* Age.DAYS_IN_WEEK
+			- AVG_PHOLLICULAR_PHASE_LENGTH
+			+ MAX_PHOLLICULAR_PHASE_LENGTH;
 	public final static int EMBRYONIC_MAX_AGE_DURATION = GESTATIONAL_MAX_AGE_DURATION
 			- MIN_PHOLLICULAR_PHASE_LENGTH;
 

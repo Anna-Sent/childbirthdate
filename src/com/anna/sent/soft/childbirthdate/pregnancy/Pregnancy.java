@@ -48,8 +48,8 @@ public abstract class Pregnancy {
 		long difference = currentPoint.getTimeInMillis()
 				- startPoint.getTimeInMillis();
 		int days = (int) (difference / (1000l * 3600l * 24l));
-		int weeks = days / 7;
-		days = days - weeks * 7;
+		int weeks = days / Age.DAYS_IN_WEEK;
+		days = days - weeks * Age.DAYS_IN_WEEK;
 		age.setDays(days);
 		age.setWeeks(weeks);
 	}
@@ -119,11 +119,12 @@ public abstract class Pregnancy {
 	public abstract int getFullDurationInDays();
 
 	public int getFullDurationWeeks() {
-		return getFullDurationInDays() / 7;
+		return getFullDurationInDays() / Age.DAYS_IN_WEEK;
 	}
 
 	public int getFullDurationDays() {
-		return getFullDurationInDays() - getFullDurationWeeks() * 7;
+		return getFullDurationInDays() - getFullDurationWeeks()
+				* Age.DAYS_IN_WEEK;
 	}
 
 	public int getRestInDays() {
@@ -131,11 +132,11 @@ public abstract class Pregnancy {
 	}
 
 	public int getRestWeeks() {
-		return getRestInDays() / 7;
+		return getRestInDays() / Age.DAYS_IN_WEEK;
 	}
 
 	public int getRestDays() {
-		return getRestInDays() - getRestWeeks() * 7;
+		return getRestInDays() - getRestWeeks() * Age.DAYS_IN_WEEK;
 	}
 
 	protected abstract int getMaxDurationInDays();
