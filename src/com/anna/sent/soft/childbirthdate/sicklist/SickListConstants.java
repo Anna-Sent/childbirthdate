@@ -7,7 +7,7 @@ public class SickListConstants {
 		public final static int MAX_VALUE = 300;
 	}
 
-	public static final class Ages {
+	public static final class Age {
 		public final static String DEFAULT_VALUE = "126,140,170,180,184,194";
 	}
 }

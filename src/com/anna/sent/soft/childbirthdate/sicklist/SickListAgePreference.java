@@ -5,8 +5,12 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.age.Age;
+import com.anna.sent.soft.childbirthdate.age.ISetting;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsArrayAdapter;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsPreference;
+import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
+import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 public class SickListAgePreference extends MoveableItemsPreference {
 	public SickListAgePreference(Context context) {
@@ -25,10 +29,42 @@ public class SickListAgePreference extends MoveableItemsPreference {
 		return R.layout.dialog_sick_list_age;
 	}
 
+	private NumberPicker mNumberPickerWeeks, mNumberPickerDays;
+
 	protected void setupViewAdd(View viewAdd) {
+		mNumberPickerWeeks = (NumberPicker) viewAdd
+				.findViewById(R.id.numberPickerWeeks);
+		mNumberPickerWeeks.setMinValue(0);
+		mNumberPickerWeeks
+				.setMaxValue(PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS - 1);
+		mNumberPickerDays = (NumberPicker) viewAdd
+				.findViewById(R.id.numberPickerDays);
+		mNumberPickerDays.setMinValue(0);
+		mNumberPickerDays.setMaxValue(6);
 	}
 
 	@Override
 	protected void addItem(MoveableItemsArrayAdapter adapter) {
+	}
+
+	@Override
+	protected String saveAddValue() {
+		int w = mNumberPickerWeeks.getValue();
+		int d = mNumberPickerDays.getValue();
+		Age age = new Age(w, d);
+		return age.save();
+	}
+
+	@Override
+	protected void restoreAddValue(String value) {
+		Age age = new Age();
+		age.load(value);
+		mNumberPickerWeeks.setValue(age.getWeeks());
+		mNumberPickerDays.setValue(age.getDays());
+	}
+
+	@Override
+	protected ISetting getElement() {
+		return new Age();
 	}
 }

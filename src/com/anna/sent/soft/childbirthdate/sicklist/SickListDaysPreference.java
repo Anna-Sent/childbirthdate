@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.age.Days;
+import com.anna.sent.soft.childbirthdate.age.ISetting;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsArrayAdapter;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsPreference;
 
@@ -72,5 +74,20 @@ public class SickListDaysPreference extends MoveableItemsPreference {
 							SickListConstants.Days.MAX_VALUE),
 					Toast.LENGTH_SHORT).show();
 		}
+	}
+
+	@Override
+	protected String saveAddValue() {
+		return mEditText.getText().toString();
+	}
+
+	@Override
+	protected void restoreAddValue(String value) {
+		mEditText.setText(value);
+	}
+
+	@Override
+	protected ISetting getElement() {
+		return new Days();
 	}
 }
