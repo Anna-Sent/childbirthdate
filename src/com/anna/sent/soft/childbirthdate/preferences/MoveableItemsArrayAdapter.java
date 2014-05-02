@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
 
 public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		OnClickListener {
@@ -33,9 +34,9 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		}
 	}
 
-	private List<Object> mValues;
+	private List<LocalizableObject> mValues;
 
-	public List<Object> getValues() {
+	public List<LocalizableObject> getValues() {
 		return mValues;
 	}
 
@@ -43,7 +44,8 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		private int position;
 	}
 
-	public MoveableItemsArrayAdapter(Context context, List<Object> values) {
+	public MoveableItemsArrayAdapter(Context context,
+			List<LocalizableObject> values) {
 		super(context, R.layout.dialog_list_item);
 		mValues = values;
 	}
@@ -63,7 +65,7 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		viewHolder.position = position;
 
 		TextView tv = (TextView) view.findViewById(R.id.textViewItem);
-		tv.setText(mValues.get(position).toString());
+		tv.setText(mValues.get(position).toString(getContext()));
 
 		Button buttonUp = (Button) view.findViewById(R.id.buttonUp);
 		buttonUp.setTag(viewHolder);
@@ -96,7 +98,7 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		return view;
 	}
 
-	public void addItem(Object object) {
+	public void addItem(LocalizableObject object) {
 		mValues.add(object);
 		notifyDataSetChanged();
 	}
@@ -106,7 +108,7 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 			return;
 		}
 
-		Object object = mValues.get(position);
+		LocalizableObject object = mValues.get(position);
 		if (position > 0) {
 			mValues.remove(position);
 			mValues.add(position - 1, object);
@@ -119,7 +121,7 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 			return;
 		}
 
-		Object object = mValues.get(position);
+		LocalizableObject object = mValues.get(position);
 		if (position < mValues.size() - 1) {
 			mValues.remove(position);
 			mValues.add(position + 1, object);

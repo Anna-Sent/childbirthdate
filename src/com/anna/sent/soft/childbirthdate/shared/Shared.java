@@ -64,10 +64,5 @@ public class Shared {
 			public static final String EXTRA_SHOW_CALCULATION_METHOD = PREFIX
 					+ "widget.showCalculatingMethod";
 		}
-
-		public static class SickList {
-			public static final String EXTRA_DAYS = PREFIX + "sicklist.days";
-			public static final String EXTRA_AGE = PREFIX + "sicklist.age";
-		}
 	}
 }

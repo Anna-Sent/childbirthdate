@@ -47,6 +47,7 @@ public class Days implements ISetting {
 		return save();
 	}
 
+	@Override
 	public String toString(Context context) {
 		String result = days + " " + context.getString(R.string.days);
 		return result;

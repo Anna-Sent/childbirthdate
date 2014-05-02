@@ -8,6 +8,6 @@ public class SickListConstants {
 	}
 
 	public static final class Age {
-		public final static String DEFAULT_VALUE = "27,1;28;30";
+		public final static String DEFAULT_VALUE = "27,1;28,0;30,0";
 	}
 }
