@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.Days;
 import com.anna.sent.soft.childbirthdate.age.ISetting;
+import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsArrayAdapter;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsPreference;
 
@@ -60,7 +61,7 @@ public class SickListDaysPreference extends MoveableItemsPreference {
 
 			Days days = new Days(number);
 
-			List<Object> values = adapter.getValues();
+			List<LocalizableObject> values = adapter.getValues();
 			if (values.contains(days)) {
 				Toast.makeText(
 						getContext(),

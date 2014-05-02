@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.age.ISetting;
+import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsArrayAdapter;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsPreference;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
@@ -25,7 +26,7 @@ public class SickListAgePreference extends MoveableItemsPreference {
 	}
 
 	protected String getDefaultValue() {
-		return SickListConstants.Days.DEFAULT_VALUE;
+		return SickListConstants.Age.DEFAULT_VALUE;
 	}
 
 	protected int getAddLayoutResourceId() {
@@ -53,7 +54,7 @@ public class SickListAgePreference extends MoveableItemsPreference {
 			int d = mNumberPickerDays.getValue();
 			Age age = new Age(w, d);
 
-			List<Object> values = adapter.getValues();
+			List<LocalizableObject> values = adapter.getValues();
 			if (values.contains(age)) {
 				Toast.makeText(
 						getContext(),

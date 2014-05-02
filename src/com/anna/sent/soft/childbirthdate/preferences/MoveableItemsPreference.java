@@ -20,6 +20,7 @@ import android.widget.ListView;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.ISetting;
+import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
 import com.anna.sent.soft.childbirthdate.age.SettingsParser;
 
 public abstract class MoveableItemsPreference extends DialogPreference
@@ -100,8 +101,7 @@ public abstract class MoveableItemsPreference extends DialogPreference
 		listView.addFooterView(footer);
 
 		// and then setup adapter
-		mAdapter = new MoveableItemsArrayAdapter(getContext(),
-				toList(getDefaultValue()));
+		mAdapter = new MoveableItemsArrayAdapter(getContext(), toList(mValue));
 		listView.setAdapter(mAdapter);
 
 		setupViewAdd(viewAdd);
@@ -113,35 +113,27 @@ public abstract class MoveableItemsPreference extends DialogPreference
 
 	protected abstract void setupViewAdd(View viewAdd);
 
-	public String getValue() {
-		return mValue;
+	@Override
+	protected void onDialogClosed(boolean positiveResult) {
+		super.onDialogClosed(positiveResult);
+
+		if (positiveResult) {
+			List<LocalizableObject> list = mAdapter.getValues();
+			setValue(toString(list));
+		}
 	}
 
-	public void setValue(String value) {
-		if (value.equals(mValue)) {
+	private void setValue(String value) {
+		if (!value.equals(mValue)) {
 			mValue = value;
 			persistString(value);
 			notifyChanged();
 		}
 	}
 
-	public List<Object> getValueAsList() {
-		return toList(mValue);
-	}
-
-	@Override
-	protected void onDialogClosed(boolean positiveResult) {
-		super.onDialogClosed(positiveResult);
-
-		if (positiveResult) {
-			List<Object> list = mAdapter.getValues();
-			setValue(toString(list));
-		}
-	}
-
-	private List<Object> toList(String str) {
+	private List<LocalizableObject> toList(String str) {
 		List<ISetting> source = SettingsParser.loadList(str, getElement());
-		List<Object> destination = new ArrayList<Object>();
+		List<LocalizableObject> destination = new ArrayList<LocalizableObject>();
 
 		for (int i = 0; i < source.size(); ++i) {
 			destination.add(source.get(i));
@@ -152,8 +144,8 @@ public abstract class MoveableItemsPreference extends DialogPreference
 
 	protected abstract ISetting getElement();
 
-	private String toString(List<Object> list) {
-		List<Object> source = list;
+	private String toString(List<LocalizableObject> list) {
+		List<LocalizableObject> source = list;
 		List<ISetting> destination = new ArrayList<ISetting>();
 
 		for (int i = 0; i < source.size(); ++i) {
