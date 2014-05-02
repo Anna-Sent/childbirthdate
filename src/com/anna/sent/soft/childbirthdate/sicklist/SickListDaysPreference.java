@@ -42,31 +42,36 @@ public class SickListDaysPreference extends MoveableItemsPreference {
 
 	@Override
 	protected void addItem(MoveableItemsArrayAdapter adapter) {
-		String text = mEditText.getText().toString();
 		try {
+			String text = mEditText.getText().toString();
+
 			int number = Integer.parseInt(text);
 
-			if (number < 1 || number > 300) {
+			if (number < SickListConstants.Days.MIN_VALUE
+					|| number > SickListConstants.Days.MAX_VALUE) {
 				Toast.makeText(
 						getContext(),
 						getContext().getString(R.string.error_value_bounds,
 								SickListConstants.Days.MIN_VALUE,
 								SickListConstants.Days.MAX_VALUE),
 						Toast.LENGTH_SHORT).show();
+				return;
 			}
 
-			List<Object> values = adapter.getValues();
+			Days days = new Days(number);
 
-			if (values.contains(number)) {
+			List<Object> values = adapter.getValues();
+			if (values.contains(days)) {
 				Toast.makeText(
 						getContext(),
 						getContext().getString(
 								R.string.error_value_already_exists),
 						Toast.LENGTH_SHORT).show();
+				return;
 			}
 
-			adapter.addItem(number);
-		} catch (NumberFormatException e) {
+			adapter.addItem(days);
+		} catch (Exception e) {
 			Toast.makeText(
 					getContext(),
 					getContext().getString(R.string.error_enter_value,

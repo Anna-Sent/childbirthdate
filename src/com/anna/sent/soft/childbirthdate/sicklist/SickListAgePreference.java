@@ -1,8 +1,11 @@
 package com.anna.sent.soft.childbirthdate.sicklist;
 
+import java.util.List;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.Age;
@@ -45,6 +48,29 @@ public class SickListAgePreference extends MoveableItemsPreference {
 
 	@Override
 	protected void addItem(MoveableItemsArrayAdapter adapter) {
+		try {
+			int w = mNumberPickerWeeks.getValue();
+			int d = mNumberPickerDays.getValue();
+			Age age = new Age(w, d);
+
+			List<Object> values = adapter.getValues();
+			if (values.contains(age)) {
+				Toast.makeText(
+						getContext(),
+						getContext().getString(
+								R.string.error_value_already_exists),
+						Toast.LENGTH_SHORT).show();
+				return;
+			}
+
+			adapter.addItem(age);
+		} catch (Exception e) {
+			Toast.makeText(
+					getContext(),
+					getContext().getString(
+							R.string.errorIncorrectGestationalAge),
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override
