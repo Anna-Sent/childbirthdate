@@ -1,54 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/LinearLayoutVerticalStyle" >
+    style="@style/LinearLayoutHorizontalStyle"
+    android:gravity="center" >
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:descendantFocusability="afterDescendants"
-        android:focusable="false"
-        android:footerDividersEnabled="false" />
+    <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+        android:id="@+id/numberPickerWeeks"
+        style="@style/NumberPickerStyle" />
 
-    <RelativeLayout
-        android:id="@+id/lastItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    <TextView
+        style="@style/TextViewStyle"
+        android:layout_marginRight="@dimen/view_horizontal_margin"
+        android:text="@string/weeks" />
 
-        <LinearLayout
-            style="@style/LinearLayoutHorizontalStyle"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/buttonAdd"
-            android:gravity="center" >
+    <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+        android:id="@+id/numberPickerDays"
+        style="@style/NumberPickerStyle" />
 
-            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                android:id="@+id/numberPickerWeeks"
-                style="@style/NumberPickerStyle" />
-
-            <TextView
-                style="@style/TextViewStyle"
-                android:layout_marginRight="@dimen/view_horizontal_margin"
-                android:text="@string/weeks" />
-
-            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                android:id="@+id/numberPickerDays"
-                style="@style/NumberPickerStyle" />
-
-            <TextView
-                style="@style/TextViewStyle"
-                android:text="@string/days" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/buttonAdd"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:drawableLeft="?attr/iconAdd"
-            android:text="" />
-    </RelativeLayout>
+    <TextView
+        style="@style/TextViewStyle"
+        android:text="@string/days" />
 
 </LinearLayout>

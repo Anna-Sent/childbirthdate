@@ -1,4 +1,4 @@
-package com.anna.sent.soft.childbirthdate.preferences;
+package com.anna.sent.soft.childbirthdate.age;
 
 public class Days {
 	private int days;
