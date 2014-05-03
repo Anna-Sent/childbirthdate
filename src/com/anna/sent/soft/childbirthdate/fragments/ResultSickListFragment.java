@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -285,6 +286,32 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		}
 	}
 
+	public static void showSickListInfoDialog(final Context context) {
+		if (Settings.showSickListInfoDialog(context)) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View view = inflater.inflate(R.layout.dialog_info, null);
+			TextView textView = (TextView) view.findViewById(R.id.textView);
+			textView.setText(R.string.dialog_sick_list);
+			final CheckBox checkBox = (CheckBox) view
+					.findViewById(R.id.checkBox);
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(context);
+			builder.setTitle(R.string.sick_list_days)
+					.setView(view)
+					.setPositiveButton(android.R.string.yes,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									if (checkBox.isChecked()) {
+										Settings.doNotShowSickListInfoDialog(context);
+									}
+								}
+							}).setNegativeButton(android.R.string.cancel, null);
+			builder.create().show();
+		}
+	}
+
 	private void editDays() {
 		LayoutInflater inflater = (LayoutInflater) getActivity()
 				.getLayoutInflater();
@@ -297,7 +324,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(null)
+		builder.setTitle(R.string.sick_list_days)
 				.setView(view)
 				.setPositiveButton(android.R.string.yes,
 						new DialogInterface.OnClickListener() {
@@ -341,9 +368,9 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(null)
+		builder.setTitle(R.string.sick_list_age)
 				.setView(view)
-				.setPositiveButton(android.R.string.yes,
+				.setPositiveButton(android.R.string.ok,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								Age age = SickListUtils.checkAge(getActivity(),
@@ -365,7 +392,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 									}
 								}
 							}
-						}).setNegativeButton(android.R.string.cancel, null);
+						});
 		builder.create().show();
 	}
 

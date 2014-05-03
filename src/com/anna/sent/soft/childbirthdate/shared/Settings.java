@@ -260,6 +260,21 @@ public class Settings {
 		editor.commit();
 	}
 
+	private static final String KEY_PREF_DO_NOT_SHOW_SICK_LIST_INFO_DIALOG = "com.anna.sent.soft.childbirthdate.donotshowsicklistinfodialog";
+
+	public static boolean showSickListInfoDialog(Context context) {
+		SharedPreferences settings = getSettings(context);
+		return !settings.getBoolean(KEY_PREF_DO_NOT_SHOW_SICK_LIST_INFO_DIALOG,
+				false);
+	}
+
+	public static void doNotShowSickListInfoDialog(Context context) {
+		SharedPreferences settings = getSettings(context);
+		Editor editor = settings.edit();
+		editor.putBoolean(KEY_PREF_DO_NOT_SHOW_SICK_LIST_INFO_DIALOG, true);
+		editor.commit();
+	}
+
 	public static void clear(Context context) {
 		getSettings(context).edit().clear().commit();
 	}

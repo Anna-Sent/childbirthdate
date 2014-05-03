@@ -29,6 +29,18 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
 	private final ViewPager mViewPager;
 	private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
 
+	private TabHost.OnTabChangeListener mOnTabChangeListner;
+
+	public void setOnTabChangeListener(TabHost.OnTabChangeListener listener) {
+		mOnTabChangeListner = listener;
+	}
+
+	private ViewPager.OnPageChangeListener mOnPageChangeListener;
+
+	public void setOnTabChangeListener(ViewPager.OnPageChangeListener listener) {
+		mOnPageChangeListener = listener;
+	}
+
 	private static final class TabInfo {
 		@SuppressWarnings("unused")
 		private final String tag;
@@ -93,11 +105,19 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
 	public void onTabChanged(String tabId) {
 		int position = mTabHost.getCurrentTab();
 		mViewPager.setCurrentItem(position);
+
+		if (mOnTabChangeListner != null) {
+			mOnTabChangeListner.onTabChanged(tabId);
+		}
 	}
 
 	@Override
 	public void onPageScrolled(int position, float positionOffset,
 			int positionOffsetPixels) {
+		if (mOnPageChangeListener != null) {
+			mOnPageChangeListener.onPageScrolled(position, positionOffset,
+					positionOffsetPixels);
+		}
 	}
 
 	@Override
@@ -112,9 +132,16 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
 		widget.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 		mTabHost.setCurrentTab(position);
 		widget.setDescendantFocusability(oldFocusability);
+
+		if (mOnPageChangeListener != null) {
+			mOnPageChangeListener.onPageSelected(position);
+		}
 	}
 
 	@Override
 	public void onPageScrollStateChanged(int state) {
+		if (mOnPageChangeListener != null) {
+			mOnPageChangeListener.onPageScrollStateChanged(state);
+		}
 	}
 }
