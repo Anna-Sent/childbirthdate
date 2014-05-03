@@ -31,4 +31,26 @@ public class SettingsParser {
 
 		return result;
 	}
+
+	public static List<LocalizableObject> toList(String str, ISetting element) {
+		List<ISetting> source = SettingsParser.loadList(str, element);
+		List<LocalizableObject> destination = new ArrayList<LocalizableObject>();
+
+		for (int i = 0; i < source.size(); ++i) {
+			destination.add(source.get(i));
+		}
+
+		return destination;
+	}
+
+	public static String toString(List<LocalizableObject> list, ISetting element) {
+		List<LocalizableObject> source = list;
+		List<ISetting> destination = new ArrayList<ISetting>();
+
+		for (int i = 0; i < source.size(); ++i) {
+			destination.add((ISetting) source.get(i));
+		}
+
+		return SettingsParser.saveList(destination);
+	}
 }
