@@ -30,8 +30,8 @@ public class LocalizableSimpleSpinnerItemArrayAdapter extends
 
 	private List<LocalizableObject> mObjects;
 
-	private static class ViewHolder {
-		private TextView textView;
+	protected static class ViewHolder {
+		protected TextView textView;
 	}
 
 	public LocalizableSimpleSpinnerItemArrayAdapter(Context context,
