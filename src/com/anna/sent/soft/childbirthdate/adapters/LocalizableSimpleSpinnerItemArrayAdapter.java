@@ -80,4 +80,20 @@ public class LocalizableSimpleSpinnerItemArrayAdapter extends
 
 		return view;
 	}
+
+	public List<LocalizableObject> getObjects() {
+		return mObjects;
+	}
+
+	public int addObject(LocalizableObject object) {
+		mObjects.add(object);
+		notifyDataSetChanged();
+		return mObjects.size() - 1;
+	}
+
+	public void addObjects(List<LocalizableObject> objects) {
+		if (mObjects.addAll(objects)) {
+			notifyDataSetChanged();
+		}
+	}
 }
