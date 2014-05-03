@@ -131,6 +131,22 @@ public abstract class MoveableItemsPreference extends DialogPreference
 		}
 	}
 
+	public String getValueToShow() {
+		return getValueToShow(mValue);
+	}
+
+	public String getValueToShow(String value) {
+		String result = "";
+
+		List<LocalizableObject> list = toList(value);
+		for (int i = 0; i < list.size(); ++i) {
+			result += list.get(i).toString(getContext())
+					+ (i == list.size() - 1 ? "" : "; ");
+		}
+
+		return result;
+	}
+
 	private List<LocalizableObject> toList(String str) {
 		List<ISetting> source = SettingsParser.loadList(str, getElement());
 		List<LocalizableObject> destination = new ArrayList<LocalizableObject>();
