@@ -13,7 +13,7 @@
 
             <TextView
                 style="@style/TextViewStyle"
-                android:text="при достижении срока беременности" />
+                android:text="@string/when_the_duration_of_pregnancy" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -40,7 +40,7 @@
 
             <TextView
                 style="@style/TextViewStyle"
-                android:text="на" />
+                android:text="@string/on" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
