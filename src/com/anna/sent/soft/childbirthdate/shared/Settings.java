@@ -145,6 +145,32 @@ public class Settings {
 		return result;
 	}
 
+	public static void setList(Context context, List<LocalizableObject> list,
+			Class<? extends ISetting> cls) {
+		if (cls == Age.class) {
+			setAge(context, list);
+		} else if (cls == Days.class) {
+			setDays(context, list);
+		}
+	}
+
+	public static void setDays(Context context, List<LocalizableObject> list) {
+		setList(context, R.string.pref_sick_list_days_key, list, new Days());
+	}
+
+	public static void setAge(Context context, List<LocalizableObject> list) {
+		setList(context, R.string.pref_sick_list_age_key, list, new Age());
+	}
+
+	private static void setList(Context context, int keyStringRes,
+			List<LocalizableObject> list, ISetting element) {
+		SharedPreferences settings = getSettings(context);
+		Editor editor = settings.edit();
+		String value = SettingsParser.toString(list, element);
+		editor.putString(context.getString(keyStringRes), value);
+		editor.commit();
+	}
+
 	public static int getTheme(Context context) {
 		SharedPreferences settings = getSettings(context);
 		int defaultValue = context.getResources().getInteger(
