@@ -89,18 +89,35 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		LocalizableSimpleSpinnerItemArrayAdapter adapter = new LocalizableSimpleSpinnerItemArrayAdapter(
 				getActivity(), objects);
 
+		int position = spinner.getSelectedItemPosition();
+
 		spinner.setAdapter(adapter);
 		spinner.setOnItemSelectedListener(this);
 
-		spinner.setSelection(0);
+		if (position >= 0 && position < objects.size()) {
+			spinner.setSelection(position);
+		} else {
+			spinner.setSelection(0);
+		}
 	}
+
+	private static final String KEY_SPINNER_DAYS_POSITION = "key_spinner_days_position";
+	private static final String KEY_SPINNER_AGE_POSITION = "key_spinner_age_position";
 
 	@Override
 	public void restoreState(Bundle state) {
+		int position = state.getInt(KEY_SPINNER_DAYS_POSITION);
+		mSpinnerDays.setSelection(position);
+		position = state.getInt(KEY_SPINNER_AGE_POSITION);
+		mSpinnerAge.setSelection(position);
 	}
 
 	@Override
 	public void saveState(Bundle state) {
+		int position = mSpinnerDays.getSelectedItemPosition();
+		state.putInt(KEY_SPINNER_DAYS_POSITION, position);
+		position = mSpinnerAge.getSelectedItemPosition();
+		state.putInt(KEY_SPINNER_AGE_POSITION, position);
 	}
 
 	@Override
