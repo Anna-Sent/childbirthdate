@@ -75,5 +75,6 @@
     <string name="error_enter_value">Введите число от %1$s до %2$s</string>
     <string name="error_value_already_exists">Такое значение уже есть в списке</string>
     <string name="error_value_bounds">Значение должно быть в границах от %1$s до %2$s включительно</string>
+    <string name="persist_setting">Сохранить в настройках</string>
 
 </resources>

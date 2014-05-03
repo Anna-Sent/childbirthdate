@@ -12,8 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -290,6 +292,10 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		final EditText editTextItem = (EditText) view
 				.findViewById(R.id.editTextItem);
 
+		view = wrapWithCheckBox(view);
+
+		final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(null)
 				.setView(view)
@@ -307,6 +313,13 @@ public class ResultSickListFragment extends StateSaverFragment implements
 									mSpinnerDaysIndex = index;
 									updateResults();
 								}
+
+								if (checkBox.isChecked()) {
+									List<LocalizableObject> list = Settings
+											.getDays(getActivity());
+									list.add(days);
+									Settings.setDays(getActivity(), list);
+								}
 							}
 						}).setNegativeButton(android.R.string.cancel, null);
 		builder.create().show();
@@ -322,6 +335,10 @@ public class ResultSickListFragment extends StateSaverFragment implements
 				.findViewById(R.id.numberPickerDays);
 		SickListUtils
 				.setupAgeNumberPickers(numberPickerWeeks, numberPickerDays);
+
+		view = wrapWithCheckBox(view);
+
+		final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(null)
@@ -339,10 +356,27 @@ public class ResultSickListFragment extends StateSaverFragment implements
 									mSpinnerAge.setSelection(index);
 									mSpinnerAgeIndex = index;
 									updateResults();
+
+									if (checkBox.isChecked()) {
+										List<LocalizableObject> list = Settings
+												.getAge(getActivity());
+										list.add(age);
+										Settings.setAge(getActivity(), list);
+									}
 								}
 							}
 						}).setNegativeButton(android.R.string.cancel, null);
 		builder.create().show();
+	}
+
+	private View wrapWithCheckBox(View child) {
+		LayoutInflater inflater = (LayoutInflater) getActivity()
+				.getLayoutInflater();
+		View view = inflater.inflate(R.layout.dialog_edit, null);
+		ViewGroup viewGroup = (ViewGroup) view.findViewById(R.id.lastItem);
+		viewGroup.addView(child, new LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.WRAP_CONTENT));
+		return view;
 	}
 
 	@Override
