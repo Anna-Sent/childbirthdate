@@ -12,6 +12,7 @@
         <attr name="iconCollapse" format="reference" />
         <attr name="iconAdd" format="reference" />
         <attr name="iconDelete" format="reference" />
+        <attr name="iconEdit" format="reference" />
     </declare-styleable>
 
     <style name="AppBaseTheme" parent="android:Theme">
@@ -26,6 +27,7 @@
         <item name="iconCollapse">@drawable/ic_collapse_light</item>
         <item name="iconAdd">@drawable/ic_new_light</item>
         <item name="iconDelete">@drawable/ic_remove_content_light</item>
+        <item name="iconEdit">@drawable/ic_edit_light</item>
     </style>
 
     <style name="AppBaseThemeLight" parent="android:Theme.Light">
@@ -40,6 +42,7 @@
         <item name="iconCollapse">@drawable/ic_collapse_light</item>
         <item name="iconAdd">@drawable/ic_new_light</item>
         <item name="iconDelete">@drawable/ic_remove_content_light</item>
+        <item name="iconEdit">@drawable/ic_edit_light</item>
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme"></style>
