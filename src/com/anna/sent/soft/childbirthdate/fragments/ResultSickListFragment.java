@@ -3,6 +3,8 @@ package com.anna.sent.soft.childbirthdate.fragments;
 import java.util.Calendar;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +19,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.childbirthdate.adapters.LocalizableSimpleSpinnerItemArrayAdapter;
+import com.anna.sent.soft.childbirthdate.adapters.HackedLocalizableSimpleSpinnerItemArrayAdapter;
 import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.age.Days;
 import com.anna.sent.soft.childbirthdate.age.ISetting;
@@ -48,6 +50,10 @@ public class ResultSickListFragment extends StateSaverFragment implements
 
 	private TableLayout mTable;
 	private Spinner mSpinnerDays, mSpinnerAge;
+	private HackedLocalizableSimpleSpinnerItemArrayAdapter mSpinnerDaysAdapter,
+			mSpinnerAgeAdapter;
+	private Days mOtherDays;
+	private Age mOtherAge;
 
 	public ResultSickListFragment() {
 		super();
@@ -74,19 +80,25 @@ public class ResultSickListFragment extends StateSaverFragment implements
 	@Override
 	public void setViews(Bundle savedInstanceState) {
 		mTable = (TableLayout) getActivity().findViewById(R.id.table_sick_days);
+		getActivity().findViewById(R.id.buttonEditDays)
+				.setOnClickListener(this);
+		getActivity().findViewById(R.id.buttonEditAge).setOnClickListener(this);
 		mSpinnerDays = (Spinner) getActivity().findViewById(R.id.spinnerDays);
 		mSpinnerAge = (Spinner) getActivity().findViewById(R.id.spinnerAge);
 		setupSpinners();
 	}
 
 	private void setupSpinners() {
-		setupSpinner(mSpinnerDays, Days.class);
-		setupSpinner(mSpinnerAge, Age.class);
+		mSpinnerDaysAdapter = setupSpinner(mSpinnerDays, Days.class);
+		mSpinnerAgeAdapter = setupSpinner(mSpinnerAge, Age.class);
+		mSpinnerDaysAdapter.setSelectedObject(mOtherDays);
+		mSpinnerAgeAdapter.setSelectedObject(mOtherAge);
 	}
 
-	private void setupSpinner(Spinner spinner, Class<? extends ISetting> cls) {
+	private HackedLocalizableSimpleSpinnerItemArrayAdapter setupSpinner(
+			Spinner spinner, Class<? extends ISetting> cls) {
 		List<LocalizableObject> objects = Settings.getList(getActivity(), cls);
-		LocalizableSimpleSpinnerItemArrayAdapter adapter = new LocalizableSimpleSpinnerItemArrayAdapter(
+		HackedLocalizableSimpleSpinnerItemArrayAdapter adapter = new HackedLocalizableSimpleSpinnerItemArrayAdapter(
 				getActivity(), objects);
 
 		int position = spinner.getSelectedItemPosition();
@@ -99,10 +111,14 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		} else {
 			spinner.setSelection(0);
 		}
+
+		return adapter;
 	}
 
 	private static final String KEY_SPINNER_DAYS_POSITION = "key_spinner_days_position";
 	private static final String KEY_SPINNER_AGE_POSITION = "key_spinner_age_position";
+	private static final String KEY_OTHER_DAYS = "key_other_days";
+	private static final String KEY_OTHER_AGE = "key_other_age";
 
 	@Override
 	public void restoreState(Bundle state) {
@@ -110,6 +126,10 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		mSpinnerDays.setSelection(position);
 		position = state.getInt(KEY_SPINNER_AGE_POSITION);
 		mSpinnerAge.setSelection(position);
+		mOtherDays = (Days) state.getSerializable(KEY_OTHER_DAYS);
+		mSpinnerDaysAdapter.setSelectedObject(mOtherDays);
+		mOtherAge = (Age) state.getSerializable(KEY_OTHER_AGE);
+		mSpinnerAgeAdapter.setSelectedObject(mOtherAge);
 	}
 
 	@Override
@@ -118,6 +138,8 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		state.putInt(KEY_SPINNER_DAYS_POSITION, position);
 		position = mSpinnerAge.getSelectedItemPosition();
 		state.putInt(KEY_SPINNER_AGE_POSITION, position);
+		state.putSerializable(KEY_OTHER_DAYS, mOtherDays);
+		state.putSerializable(KEY_OTHER_AGE, mOtherAge);
 	}
 
 	@Override
@@ -126,8 +148,8 @@ public class ResultSickListFragment extends StateSaverFragment implements
 
 		setupSpinners();
 
-		Days days = (Days) mSpinnerDays.getSelectedItem();
-		Age age = (Age) mSpinnerAge.getSelectedItem();
+		Days days = getSelectedDays();
+		Age age = getSelectedAge();
 		fillResults(age, days);
 	}
 
@@ -242,25 +264,87 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		} else {
 			switch (v.getId()) {
 			case R.id.buttonEditDays:
+				editDays();
 				break;
 			case R.id.buttonEditAge:
+				editAge();
 				break;
 			}
 		}
 	}
 
+	private void editDays() {
+		LayoutInflater inflater = (LayoutInflater) getActivity()
+				.getLayoutInflater();
+		View view = inflater.inflate(R.layout.dialog_sick_list_days, null);
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle(null)
+				.setView(view)
+				.setPositiveButton(android.R.string.yes,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								mOtherDays = new Days(120);
+								mSpinnerDaysAdapter
+										.setSelectedObject(mOtherDays);
+								Days days = getSelectedDays();
+								Age age = getSelectedAge();
+								updateResults(age, days);
+							}
+						}).setNegativeButton(android.R.string.cancel, null);
+		builder.create().show();
+	}
+
+	private void editAge() {
+		LayoutInflater inflater = (LayoutInflater) getActivity()
+				.getLayoutInflater();
+		View view = inflater.inflate(R.layout.dialog_sick_list_age, null);
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle(null)
+				.setView(view)
+				.setPositiveButton(android.R.string.yes,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								mOtherAge = new Age(32, 1);
+								mSpinnerAgeAdapter.setSelectedObject(mOtherAge);
+								Days days = getSelectedDays();
+								Age age = getSelectedAge();
+								updateResults(age, days);
+							}
+						}).setNegativeButton(android.R.string.cancel, null);
+		builder.create().show();
+	}
+
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
-		Days days = (Days) mSpinnerDays.getSelectedItem();
-		Age age = (Age) mSpinnerAge.getSelectedItem();
+		if (parent == mSpinnerDays) {
+			mOtherDays = null;
+			mSpinnerDaysAdapter.setSelectedObject(null);
+		} else if (parent == mSpinnerAge) {
+			mOtherAge = null;
+			mSpinnerAgeAdapter.setSelectedObject(null);
+		}
+
+		Days days = getSelectedDays();
+		Age age = getSelectedAge();
 		updateResults(age, days);
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
-		Days days = (Days) mSpinnerDays.getSelectedItem();
-		Age age = (Age) mSpinnerAge.getSelectedItem();
-		updateResults(age, days);
+	}
+
+	private Days getSelectedDays() {
+		Days days = mOtherDays == null ? (Days) mSpinnerDays.getSelectedItem()
+				: mOtherDays;
+		return days;
+	}
+
+	private Age getSelectedAge() {
+		Age age = mOtherAge == null ? (Age) mSpinnerAge.getSelectedItem()
+				: mOtherAge;
+		return age;
 	}
 }
