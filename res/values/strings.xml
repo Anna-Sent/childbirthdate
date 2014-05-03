@@ -78,5 +78,7 @@
     <string name="persist_setting">Сохранить в настройках</string>
     <string name="when_the_duration_of_pregnancy">при достижении срока беременности</string>
     <string name="on">на</string>
+    <string name="dialog_sick_list">Вы можете редактировать списки значений в \"Меню-Настройки-Больничный лист\"</string>
+    <string name="do_not_show">Больше не показывать</string>
 
 </resources>

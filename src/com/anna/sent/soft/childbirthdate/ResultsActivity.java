@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 
 import com.anna.sent.soft.childbirthdate.adapters.TabsAdapter;
 import com.anna.sent.soft.childbirthdate.base.ChildActivity;
@@ -11,7 +12,8 @@ import com.anna.sent.soft.childbirthdate.fragments.ResultEcdFragment;
 import com.anna.sent.soft.childbirthdate.fragments.ResultSickListFragment;
 import com.anna.sent.soft.childbirthdate.strategy.menu.MenuStrategy;
 
-public class ResultsActivity extends ChildActivity {
+public class ResultsActivity extends ChildActivity implements
+		OnTabChangeListener {
 	private TabHost mTabHost;
 	private ViewPager mViewPager;
 	private TabsAdapter mTabsAdapter;
@@ -38,11 +40,19 @@ public class ResultsActivity extends ChildActivity {
 						ResultSickListFragment.class.getSimpleName())
 						.setIndicator(getString(R.string.sick_list)),
 				ResultSickListFragment.class, null);
+		mTabsAdapter.setOnTabChangeListener(this);
 	}
 
 	@Override
 	protected void addStrategies() {
 		super.addStrategies();
 		addStrategy(new MenuStrategy(this));
+	}
+
+	@Override
+	public void onTabChanged(String tabId) {
+		if (tabId.equals(ResultSickListFragment.class.getSimpleName())) {
+			ResultSickListFragment.showSickListInfoDialog(this);
+		}
 	}
 }
