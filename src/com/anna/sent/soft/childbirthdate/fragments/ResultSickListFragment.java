@@ -304,6 +304,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 									int index = mSpinnerDaysAdapter
 											.addObject(days);
 									mSpinnerDays.setSelection(index);
+									mSpinnerDaysIndex = index;
 									updateResults();
 								}
 							}
@@ -336,6 +337,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 									int index = mSpinnerAgeAdapter
 											.addObject(age);
 									mSpinnerAge.setSelection(index);
+									mSpinnerAgeIndex = index;
 									updateResults();
 								}
 							}
