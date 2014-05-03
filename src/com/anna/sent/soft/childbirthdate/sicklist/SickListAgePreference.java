@@ -1,19 +1,14 @@
 package com.anna.sent.soft.childbirthdate.sicklist;
 
-import java.util.List;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.age.ISetting;
-import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsArrayAdapter;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsPreference;
-import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 public class SickListAgePreference extends MoveableItemsPreference {
@@ -38,39 +33,18 @@ public class SickListAgePreference extends MoveableItemsPreference {
 	protected void setupViewAdd(View viewAdd) {
 		mNumberPickerWeeks = (NumberPicker) viewAdd
 				.findViewById(R.id.numberPickerWeeks);
-		mNumberPickerWeeks.setMinValue(0);
-		mNumberPickerWeeks
-				.setMaxValue(PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS - 1);
 		mNumberPickerDays = (NumberPicker) viewAdd
 				.findViewById(R.id.numberPickerDays);
-		mNumberPickerDays.setMinValue(0);
-		mNumberPickerDays.setMaxValue(Age.DAYS_IN_WEEK - 1);
+		SickListUtils.setupAgeNumberPickers(mNumberPickerWeeks,
+				mNumberPickerDays);
 	}
 
 	@Override
 	protected void addItem(MoveableItemsArrayAdapter adapter) {
-		try {
-			int w = mNumberPickerWeeks.getValue();
-			int d = mNumberPickerDays.getValue();
-			Age age = new Age(w, d);
-
-			List<LocalizableObject> values = adapter.getValues();
-			if (values.contains(age)) {
-				Toast.makeText(
-						getContext(),
-						getContext().getString(
-								R.string.error_value_already_exists),
-						Toast.LENGTH_SHORT).show();
-				return;
-			}
-
+		Age age = SickListUtils.checkAge(getContext(), mNumberPickerWeeks,
+				mNumberPickerDays, adapter.getValues());
+		if (age != null) {
 			adapter.addItem(age);
-		} catch (Exception e) {
-			Toast.makeText(
-					getContext(),
-					getContext().getString(
-							R.string.errorIncorrectGestationalAge),
-					Toast.LENGTH_SHORT).show();
 		}
 	}
 
