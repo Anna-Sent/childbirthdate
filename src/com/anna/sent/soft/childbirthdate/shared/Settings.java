@@ -1,5 +1,6 @@
 package com.anna.sent.soft.childbirthdate.shared;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -9,6 +10,12 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.age.Age;
+import com.anna.sent.soft.childbirthdate.age.Days;
+import com.anna.sent.soft.childbirthdate.age.ISetting;
+import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
+import com.anna.sent.soft.childbirthdate.age.SettingsParser;
+import com.anna.sent.soft.childbirthdate.sicklist.SickListConstants;
 
 public class Settings {
 	private static class SharedPreferencesWrapper implements SharedPreferences {
@@ -106,6 +113,36 @@ public class Settings {
 	public static SharedPreferences getSettings(Context context) {
 		return new SharedPreferencesWrapper(context.getApplicationContext()
 				.getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE));
+	}
+
+	public static List<LocalizableObject> getList(Context context,
+			Class<? extends ISetting> cls) {
+		if (cls == Age.class) {
+			return getAge(context);
+		} else if (cls == Days.class) {
+			return getDays(context);
+		}
+
+		return null;
+	}
+
+	public static List<LocalizableObject> getDays(Context context) {
+		return getList(context, R.string.pref_sick_list_days_key,
+				SickListConstants.Days.DEFAULT_VALUE, new Days());
+	}
+
+	public static List<LocalizableObject> getAge(Context context) {
+		return getList(context, R.string.pref_sick_list_age_key,
+				SickListConstants.Age.DEFAULT_VALUE, new Age());
+	}
+
+	private static List<LocalizableObject> getList(Context context,
+			int keyStringRes, String defaultValue, ISetting element) {
+		SharedPreferences settings = getSettings(context);
+		String value = settings.getString(context.getString(keyStringRes),
+				defaultValue);
+		List<LocalizableObject> result = SettingsParser.toList(value, element);
+		return result;
 	}
 
 	public static int getTheme(Context context) {

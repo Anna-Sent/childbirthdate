@@ -231,12 +231,22 @@ public class ResultEcdFragment extends StateSaverFragment implements
 	private void setDate(Calendar date) {
 		// log("setDate");
 		DateUtils.setDate(mDatePicker, date);
-		update();
+		updateResults();
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
+		fillResults();
+	}
+
+	@Override
+	public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
+		// log("onDateChanged");
+		updateResults();
+	}
+
+	private void fillResults() {
 		mDate = DateUtils.getDate(mDatePicker);
 		mTable.removeAllViews();
 		String[] methodNames = getResources().getStringArray(
@@ -281,13 +291,7 @@ public class ResultEcdFragment extends StateSaverFragment implements
 		}
 	}
 
-	@Override
-	public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
-		// log("onDateChanged");
-		update();
-	}
-
-	private void update() {
+	private void updateResults() {
 		Calendar newDate = DateUtils.getDate(mDatePicker);
 		if (mDate == null || !DateUtils.areEqual(newDate, mDate)) {
 			// log("update " + DateUtils.toString(this, newDate));

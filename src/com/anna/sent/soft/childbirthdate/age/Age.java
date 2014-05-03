@@ -22,6 +22,11 @@ public class Age implements ISetting {
 		return weeks;
 	}
 
+	public void set(Age age) {
+		weeks = age.weeks;
+		days = age.days;
+	}
+
 	public void setWeeks(int value) {
 		if (value < 0) {
 			throw new IllegalArgumentException(

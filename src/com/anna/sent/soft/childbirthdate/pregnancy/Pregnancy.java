@@ -58,9 +58,8 @@ public abstract class Pregnancy {
 		return currentPoint;
 	}
 
-	public void setWeeks(int value) {
-		age.setWeeks(value);
-		age.setDays(0);
+	public void setAge(Age age) {
+		this.age.set(age);
 		currentPoint = (Calendar) startPoint.clone();
 		currentPoint.add(Calendar.DAY_OF_MONTH, getDurationInDays());
 	}

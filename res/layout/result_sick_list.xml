@@ -8,44 +8,62 @@
     <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
 
         <LinearLayout
-            style="@style/LinearLayoutHorizontalStyle"
+            style="@style/LinearLayoutVerticalStyle"
             android:gravity="center" >
 
             <TextView
                 style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_weight="3"
                 android:text="при достижении срока беременности" />
 
-            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                android:id="@+id/numberPickerWeeks"
-                style="@style/NumberPickerStyle"
-                android:layout_width="0dp"
-                android:layout_weight="1" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Spinner
+                    android:id="@+id/spinnerAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/buttonEditAge" />
+
+                <Button
+                    android:id="@+id/buttonEditAge"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="?attr/iconCollapse"
+                    android:text="" />
+            </RelativeLayout>
 
             <TextView
                 style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="@string/weeks" />
-
-            <TextView
-                style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_weight="1"
                 android:text="на" />
 
-            <com.anna.sent.soft.numberpickerlibrary.NumberPicker
-                android:id="@+id/numberPickerSickDays"
-                style="@style/NumberPickerStyle"
-                android:layout_width="0dp"
-                android:layout_weight="1" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
 
-            <TextView
-                style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="@string/days" />
+                <Spinner
+                    android:id="@+id/spinnerDays"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/buttonEditDays" />
+
+                <Button
+                    android:id="@+id/buttonEditDays"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="?attr/iconCollapse"
+                    android:text="" />
+            </RelativeLayout>
         </LinearLayout>
 
         <TableLayout

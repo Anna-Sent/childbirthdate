@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate.preferences;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -148,27 +147,13 @@ public abstract class MoveableItemsPreference extends DialogPreference
 	}
 
 	private List<LocalizableObject> toList(String str) {
-		List<ISetting> source = SettingsParser.loadList(str, getElement());
-		List<LocalizableObject> destination = new ArrayList<LocalizableObject>();
-
-		for (int i = 0; i < source.size(); ++i) {
-			destination.add(source.get(i));
-		}
-
-		return destination;
+		return SettingsParser.toList(str, getElement());
 	}
 
 	protected abstract ISetting getElement();
 
 	private String toString(List<LocalizableObject> list) {
-		List<LocalizableObject> source = list;
-		List<ISetting> destination = new ArrayList<ISetting>();
-
-		for (int i = 0; i < source.size(); ++i) {
-			destination.add((ISetting) source.get(i));
-		}
-
-		return SettingsParser.saveList(destination);
+		return SettingsParser.toString(list, getElement());
 	}
 
 	@Override
