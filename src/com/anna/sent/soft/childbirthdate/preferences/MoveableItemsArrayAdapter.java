@@ -108,13 +108,20 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		notifyDataSetChanged();
 	}
 
+	public void removeItem(int position) {
+		if (position < mValues.size()) {
+			mValues.remove(position);
+			notifyDataSetChanged();
+		}
+	}
+
 	public void removeItems() {
 		mValues.clear();
 		notifyDataSetChanged();
 	}
 
 	public void upItem(int position) {
-		if (position >= mValues.size()) {
+		if (position < 0 || position >= mValues.size()) {
 			return;
 		}
 
@@ -127,7 +134,7 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 	}
 
 	public void downItem(int position) {
-		if (position < 0) {
+		if (position < 0 || position >= mValues.size()) {
 			return;
 		}
 
@@ -137,11 +144,6 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 			mValues.add(position + 1, object);
 			notifyDataSetChanged();
 		}
-	}
-
-	public void removeItem(int position) {
-		mValues.remove(position);
-		notifyDataSetChanged();
 	}
 
 	@Override
