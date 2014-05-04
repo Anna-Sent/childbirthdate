@@ -43,6 +43,7 @@ public class SickListDaysPreference extends MoveableItemsPreference {
 				adapter.getValues());
 		if (days != null) {
 			adapter.addItem(days);
+			mEditText.setText(null);
 		}
 	}
 
