@@ -3,14 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
-    <ListView
-        android:id="@+id/listView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottom"
         android:layout_alignParentTop="true"
-        android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll" />
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/colorForeground" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:colorForeground" />
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/bottom"
