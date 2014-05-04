@@ -47,13 +47,24 @@ public class SickListDaysPreference extends MoveableItemsPreference {
 	}
 
 	@Override
+	protected void onDialogClosed(boolean positiveResult) {
+		super.onDialogClosed(positiveResult);
+
+		if (positiveResult) {
+			mEditText = null;
+		}
+	}
+
+	@Override
 	protected String saveAddValue() {
-		return mEditText.getText().toString();
+		return mEditText == null ? null : mEditText.getText().toString();
 	}
 
 	@Override
 	protected void restoreAddValue(String value) {
-		mEditText.setText(value);
+		if (mEditText != null) {
+			mEditText.setText(value);
+		}
 	}
 
 	@Override

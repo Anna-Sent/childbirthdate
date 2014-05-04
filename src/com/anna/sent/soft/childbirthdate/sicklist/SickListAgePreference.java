@@ -49,19 +49,40 @@ public class SickListAgePreference extends MoveableItemsPreference {
 	}
 
 	@Override
+	protected void onDialogClosed(boolean positiveResult) {
+		super.onDialogClosed(positiveResult);
+
+		if (positiveResult) {
+			mNumberPickerWeeks = null;
+			mNumberPickerDays = null;
+		}
+	}
+
+	@Override
 	protected String saveAddValue() {
-		int w = mNumberPickerWeeks.getValue();
-		int d = mNumberPickerDays.getValue();
-		Age age = new Age(w, d);
-		return age.save();
+		if (mNumberPickerWeeks != null && mNumberPickerDays != null) {
+			int w = mNumberPickerWeeks.getValue();
+			int d = mNumberPickerDays.getValue();
+			Age age = new Age(w, d);
+			return age.save();
+		} else {
+			return null;
+		}
 	}
 
 	@Override
 	protected void restoreAddValue(String value) {
+		if (mNumberPickerWeeks == null || mNumberPickerDays == null) {
+			return;
+		}
+
 		Age age = new Age();
 		age = (Age) age.load(value);
-		mNumberPickerWeeks.setValue(age.getWeeks());
-		mNumberPickerDays.setValue(age.getDays());
+
+		if (age != null) {
+			mNumberPickerWeeks.setValue(age.getWeeks());
+			mNumberPickerDays.setValue(age.getDays());
+		}
 	}
 
 	@Override
