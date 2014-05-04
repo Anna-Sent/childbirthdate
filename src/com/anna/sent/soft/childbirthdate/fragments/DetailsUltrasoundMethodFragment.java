@@ -73,6 +73,13 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		numberPickerWeeks.clearFocus();
+		numberPickerDays.clearFocus();
+	}
+
+	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.radioIsEmbryonicAge:

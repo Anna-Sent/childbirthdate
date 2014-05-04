@@ -72,6 +72,12 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		numberPicker.clearFocus();
+	}
+
+	@Override
 	protected void updateData() {
 		if (mData != null) {
 			DateUtils.setDate(datePicker, mData.getFirstAppearanceDate());

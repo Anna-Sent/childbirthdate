@@ -70,6 +70,13 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 		button.setOnClickListener(this);
 	}
 
+	@Override
+	public void onPause() {
+		super.onPause();
+		numberPickerMcl.clearFocus();
+		numberPcikerLpl.clearFocus();
+	}
+
 	public void restoreDefaultValues() {
 		if (mData != null) {
 			int menstrualCycleLen = PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH;

@@ -55,6 +55,8 @@ public class SickListUtils {
 
 	public static Age checkAge(Context context, NumberPicker numberPickerWeeks,
 			NumberPicker numberPickerDays, List<LocalizableObject> values) {
+		numberPickerWeeks.clearFocus();
+		numberPickerDays.clearFocus();
 		try {
 			int w = numberPickerWeeks.getValue();
 			int d = numberPickerDays.getValue();
