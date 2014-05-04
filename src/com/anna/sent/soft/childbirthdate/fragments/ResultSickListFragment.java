@@ -299,7 +299,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);
 			builder.setTitle(R.string.sick_list_days)
 					.setView(view)
-					.setPositiveButton(android.R.string.yes,
+					.setPositiveButton(android.R.string.ok,
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int id) {
@@ -307,7 +307,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 										Settings.doNotShowSickListInfoDialog(context);
 									}
 								}
-							}).setNegativeButton(android.R.string.cancel, null);
+							});
 			builder.create().show();
 		}
 	}
@@ -326,7 +326,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.sick_list_days)
 				.setView(view)
-				.setPositiveButton(android.R.string.yes,
+				.setPositiveButton(android.R.string.ok,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								Days days = SickListUtils.checkDays(
@@ -392,7 +392,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 									}
 								}
 							}
-						});
+						}).setNegativeButton(android.R.string.cancel, null);
 		builder.create().show();
 	}
 
