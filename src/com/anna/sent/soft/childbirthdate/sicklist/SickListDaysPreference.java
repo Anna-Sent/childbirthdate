@@ -38,13 +38,16 @@ public class SickListDaysPreference extends MoveableItemsPreference {
 	}
 
 	@Override
-	protected void addItem(MoveableItemsArrayAdapter adapter) {
+	protected boolean addItem(MoveableItemsArrayAdapter adapter) {
 		Days days = SickListUtils.checkDays(getContext(), mEditText,
 				adapter.getValues());
 		if (days != null) {
 			adapter.addItem(days);
 			mEditText.setText(null);
+			return true;
 		}
+
+		return false;
 	}
 
 	@Override

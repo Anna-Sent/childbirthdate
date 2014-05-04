@@ -103,6 +103,16 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		notifyDataSetChanged();
 	}
 
+	public void addItems(List<LocalizableObject> objects) {
+		mValues.addAll(objects);
+		notifyDataSetChanged();
+	}
+
+	public void removeItems() {
+		mValues.clear();
+		notifyDataSetChanged();
+	}
+
 	public void upItem(int position) {
 		if (position >= mValues.size()) {
 			return;

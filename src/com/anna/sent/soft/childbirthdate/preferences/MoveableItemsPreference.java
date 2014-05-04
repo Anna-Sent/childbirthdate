@@ -40,6 +40,7 @@ public abstract class MoveableItemsPreference extends DialogPreference
 
 	private String mValue;
 	private MoveableItemsArrayAdapter mAdapter;
+	private ListView mListView;
 
 	public MoveableItemsPreference(Context context) {
 		this(context, null);
@@ -65,45 +66,78 @@ public abstract class MoveableItemsPreference extends DialogPreference
 		return a.getString(index);
 	}
 
+	private boolean usefooter = false;
+
 	@Override
 	protected void onBindDialogView(View view) {
 		super.onBindDialogView(view);
+		if (usefooter) {
+			// get inflater
+			LayoutInflater inflater = (LayoutInflater) getContext()
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		// get inflater
-		LayoutInflater inflater = (LayoutInflater) getContext()
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			// inflate footer
+			View footer = inflater
+					.inflate(R.layout.dialog_list_last_item, null);
 
-		// inflate footer
-		View footer = inflater.inflate(R.layout.dialog_list_last_item, null);
+			// get button 'add' from footer
+			Button buttonAdd = (Button) footer.findViewById(R.id.buttonAdd);
+			buttonAdd.setOnClickListener(this);
 
-		// get button 'add' from footer
-		Button buttonAdd = (Button) footer.findViewById(R.id.buttonAdd);
-		buttonAdd.setOnClickListener(this);
+			// inflate view 'add'
+			View viewAdd = inflater.inflate(getAddLayoutResourceId(), null);
 
-		// inflate view 'add'
-		View viewAdd = inflater.inflate(getAddLayoutResourceId(), null);
+			// find parent of view 'add' from footer
+			ViewGroup viewAddParent = (ViewGroup) footer
+					.findViewById(R.id.lastItem);
 
-		// find parent of view 'add' from footer
-		ViewGroup viewAddParent = (ViewGroup) footer
-				.findViewById(R.id.lastItem);
+			// add view 'add' to parent
+			viewAddParent.addView(viewAdd, new LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-		// add view 'add' to parent
-		viewAddParent.addView(viewAdd, new LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			// get list view
+			ListView listView = (ListView) view.findViewById(R.id.listView);
 
-		// get list view
-		ListView listView = (ListView) view.findViewById(R.id.listView);
+			// add footer to list view
+			listView.setFooterDividersEnabled(true);
+			listView.addFooterView(footer);
 
-		listView.setFooterDividersEnabled(true);
+			// and then setup adapter
+			mAdapter = new MoveableItemsArrayAdapter(getContext(),
+					toList(mValue));
+			listView.setAdapter(mAdapter);
 
-		// add footer to list view
-		listView.addFooterView(footer);
+			setupViewAdd(viewAdd);
+		} else {
+			// get inflater
+			LayoutInflater inflater = (LayoutInflater) getContext()
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		// and then setup adapter
-		mAdapter = new MoveableItemsArrayAdapter(getContext(), toList(mValue));
-		listView.setAdapter(mAdapter);
+			// get button 'add'
+			Button buttonAdd = (Button) view.findViewById(R.id.buttonAdd);
+			buttonAdd.setOnClickListener(this);
 
-		setupViewAdd(viewAdd);
+			// inflate view 'add'
+			View viewAdd = inflater.inflate(getAddLayoutResourceId(), null);
+
+			// find parent of view 'add'
+			ViewGroup viewAddParent = (ViewGroup) view
+					.findViewById(R.id.lastItem);
+
+			// add view 'add' to parent
+			viewAddParent.addView(viewAdd, new LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+
+			// get list view
+			mListView = (ListView) view.findViewById(R.id.listView);
+
+			// and then setup adapter
+			mAdapter = new MoveableItemsArrayAdapter(getContext(),
+					toList(mValue));
+			mListView.setAdapter(mAdapter);
+
+			setupViewAdd(viewAdd);
+		}
 	}
 
 	protected abstract String getDefaultValue();
@@ -166,6 +200,13 @@ public abstract class MoveableItemsPreference extends DialogPreference
 
 		final SavedState myState = new SavedState(superState);
 		myState.value = saveAddValue();
+		if (mAdapter != null) {
+			myState.values = SettingsParser.toString(mAdapter.getValues(),
+					getElement());
+		} else {
+			myState.values = null;
+		}
+
 		return myState;
 	}
 
@@ -181,12 +222,18 @@ public abstract class MoveableItemsPreference extends DialogPreference
 		SavedState myState = (SavedState) state;
 		super.onRestoreInstanceState(myState.getSuperState());
 		restoreAddValue(myState.value);
+		if (mAdapter != null) {
+			mAdapter.removeItems();
+			mAdapter.addItems(SettingsParser.toList(myState.values,
+					getElement()));
+		}
 	}
 
 	protected abstract void restoreAddValue(String value);
 
 	private static class SavedState extends BaseSavedState {
 		public String value;
+		private String values;
 
 		public SavedState(Parcelable superState) {
 			super(superState);
@@ -195,12 +242,14 @@ public abstract class MoveableItemsPreference extends DialogPreference
 		public SavedState(Parcel source) {
 			super(source);
 			value = source.readString();
+			values = source.readString();
 		}
 
 		@Override
 		public void writeToParcel(Parcel dest, int flags) {
 			super.writeToParcel(dest, flags);
 			dest.writeString(value);
+			dest.writeString(values);
 		}
 
 		@SuppressWarnings("unused")
@@ -221,10 +270,24 @@ public abstract class MoveableItemsPreference extends DialogPreference
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonAdd:
-			addItem(mAdapter);
+			boolean result = addItem(mAdapter);
+			if (result) {
+				// scrollToBottom();
+			}
+
 			break;
 		}
 	}
 
-	protected abstract void addItem(MoveableItemsArrayAdapter adapter);
+	@SuppressWarnings("unused")
+	private void scrollToBottom() {
+		mListView.post(new Runnable() {
+			@Override
+			public void run() {
+				mListView.setSelection(mAdapter.getCount() - 1);
+			}
+		});
+	}
+
+	protected abstract boolean addItem(MoveableItemsArrayAdapter adapter);
 }
