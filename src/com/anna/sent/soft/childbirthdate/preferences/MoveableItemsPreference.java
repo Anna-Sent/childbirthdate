@@ -66,78 +66,36 @@ public abstract class MoveableItemsPreference extends DialogPreference
 		return a.getString(index);
 	}
 
-	private boolean usefooter = false;
-
 	@Override
 	protected void onBindDialogView(View view) {
 		super.onBindDialogView(view);
-		if (usefooter) {
-			// get inflater
-			LayoutInflater inflater = (LayoutInflater) getContext()
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-			// inflate footer
-			View footer = inflater
-					.inflate(R.layout.dialog_list_last_item, null);
+		// get inflater
+		LayoutInflater inflater = (LayoutInflater) getContext()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-			// get button 'add' from footer
-			Button buttonAdd = (Button) footer.findViewById(R.id.buttonAdd);
-			buttonAdd.setOnClickListener(this);
+		// get button 'add'
+		Button buttonAdd = (Button) view.findViewById(R.id.buttonAdd);
+		buttonAdd.setOnClickListener(this);
 
-			// inflate view 'add'
-			View viewAdd = inflater.inflate(getAddLayoutResourceId(), null);
+		// inflate view 'add'
+		View viewAdd = inflater.inflate(getAddLayoutResourceId(), null);
 
-			// find parent of view 'add' from footer
-			ViewGroup viewAddParent = (ViewGroup) footer
-					.findViewById(R.id.lastItem);
+		// find parent of view 'add'
+		ViewGroup viewAddParent = (ViewGroup) view.findViewById(R.id.lastItem);
 
-			// add view 'add' to parent
-			viewAddParent.addView(viewAdd, new LayoutParams(
-					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		// add view 'add' to parent
+		viewAddParent.addView(viewAdd, new LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-			// get list view
-			ListView listView = (ListView) view.findViewById(R.id.listView);
+		// get list view
+		mListView = (ListView) view.findViewById(R.id.listView);
 
-			// add footer to list view
-			listView.setFooterDividersEnabled(true);
-			listView.addFooterView(footer);
+		// and then setup adapter
+		mAdapter = new MoveableItemsArrayAdapter(getContext(), toList(mValue));
+		mListView.setAdapter(mAdapter);
 
-			// and then setup adapter
-			mAdapter = new MoveableItemsArrayAdapter(getContext(),
-					toList(mValue));
-			listView.setAdapter(mAdapter);
-
-			setupViewAdd(viewAdd);
-		} else {
-			// get inflater
-			LayoutInflater inflater = (LayoutInflater) getContext()
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-			// get button 'add'
-			Button buttonAdd = (Button) view.findViewById(R.id.buttonAdd);
-			buttonAdd.setOnClickListener(this);
-
-			// inflate view 'add'
-			View viewAdd = inflater.inflate(getAddLayoutResourceId(), null);
-
-			// find parent of view 'add'
-			ViewGroup viewAddParent = (ViewGroup) view
-					.findViewById(R.id.lastItem);
-
-			// add view 'add' to parent
-			viewAddParent.addView(viewAdd, new LayoutParams(
-					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-
-			// get list view
-			mListView = (ListView) view.findViewById(R.id.listView);
-
-			// and then setup adapter
-			mAdapter = new MoveableItemsArrayAdapter(getContext(),
-					toList(mValue));
-			mListView.setAdapter(mAdapter);
-
-			setupViewAdd(viewAdd);
-		}
+		setupViewAdd(viewAdd);
 	}
 
 	protected abstract String getDefaultValue();
