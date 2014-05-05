@@ -325,13 +325,13 @@ public class ResultSickListFragment extends StateSaverFragment implements
 									mSpinnerDays.setSelection(index);
 									mSpinnerDaysIndex = index;
 									updateResults();
-								}
 
-								if (checkBox.isChecked()) {
-									List<LocalizableObject> list = Settings
-											.getDays(getActivity());
-									list.add(days);
-									Settings.setDays(getActivity(), list);
+									if (checkBox.isChecked()) {
+										List<LocalizableObject> list = Settings
+												.getDays(getActivity());
+										list.add(days);
+										Settings.setDays(getActivity(), list);
+									}
 								}
 							}
 						}).setNegativeButton(android.R.string.cancel, null);
