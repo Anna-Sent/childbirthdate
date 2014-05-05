@@ -12,10 +12,12 @@ import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.ResultsActivity;
+import com.anna.sent.soft.childbirthdate.SickListActivity;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 
-public class TitlesHeaderFragment extends Fragment implements DataClient {
+public class TitlesHeaderFragment extends Fragment implements DataClient,
+		OnClickListener {
 	public TitlesHeaderFragment() {
 		super();
 	}
@@ -32,21 +34,10 @@ public class TitlesHeaderFragment extends Fragment implements DataClient {
 		super.onActivityCreated(savedInstanceState);
 		Button buttonCalculate = (Button) getActivity().findViewById(
 				R.id.buttonCalculate);
-		buttonCalculate.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (mData != null && mData.thereIsAtLeastOneSelectedMethod()) {
-					Intent intent = new Intent(getActivity(),
-							ResultsActivity.class);
-					startActivity(intent);
-				} else {
-					Toast.makeText(
-							getActivity(),
-							getString(R.string.errorNotSelectedCalculationMethod),
-							Toast.LENGTH_LONG).show();
-				}
-			}
-		});
+		buttonCalculate.setOnClickListener(this);
+		Button buttonSickList = (Button) getActivity().findViewById(
+				R.id.buttonSickList);
+		buttonSickList.setOnClickListener(this);
 	}
 
 	private Data mData = null;
@@ -54,5 +45,26 @@ public class TitlesHeaderFragment extends Fragment implements DataClient {
 	@Override
 	public void setData(Data data) {
 		mData = data;
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.buttonCalculate:
+			if (mData != null && mData.thereIsAtLeastOneSelectedMethod()) {
+				Intent intent = new Intent(getActivity(), ResultsActivity.class);
+				startActivity(intent);
+			} else {
+				Toast.makeText(getActivity(),
+						getString(R.string.errorNotSelectedCalculationMethod),
+						Toast.LENGTH_LONG).show();
+			}
+
+			break;
+		case R.id.buttonSickList:
+			Intent intent = new Intent(getActivity(), SickListActivity.class);
+			startActivity(intent);
+			break;
+		}
 	}
 }
