@@ -8,10 +8,20 @@
 
     <Button
         android:id="@+id/buttonCalculate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:layout_weight="1"
         android:contentDescription="@string/calculateEcdAndGestationalAge"
         android:text="@string/calculate" />
+
+    <Button
+        android:id="@+id/buttonSickList"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:contentDescription="@string/sick_list"
+        android:text="@string/sick_list" />
 
 </LinearLayout>
