@@ -67,7 +67,7 @@
         </LinearLayout>
 
         <TableLayout
-            android:id="@+id/table_sick_days"
+            android:id="@+id/table_sick_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:shrinkColumns="*"
