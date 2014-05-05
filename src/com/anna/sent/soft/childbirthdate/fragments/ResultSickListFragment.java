@@ -174,41 +174,15 @@ public class ResultSickListFragment extends StateSaverFragment implements
 				R.array.methodNames);
 		for (int i = 0; i < getData().byMethod().length; ++i) {
 			if (getData().byMethod()[i]) {
-				Pregnancy pregnancy = PregnancyCalculator.Factory.get(
-						getData(), i + 1);
-				pregnancy.setAge(age);
-
 				View row = getActivity().getLayoutInflater().inflate(
 						R.layout.result_row, null);
 				TextView textView = (TextView) row.findViewById(R.id.textView);
 				textView.setText(methodNames[i]);
 
-				Calendar current = pregnancy.getCurrentPoint();
-				String res1 = null, res2 = null, msg = null;
-				if (pregnancy.isCorrect()) {
-					Calendar to = (Calendar) current.clone();
-					to.add(Calendar.DAY_OF_MONTH, days.getDays());
-					res2 = DateUtils.toString(getActivity(), current) + " - "
-							+ DateUtils.toString(getActivity(), to);
-				} else {
-					res1 = getString(R.string.errorIncorrectGestationalAge);
-					Calendar end = pregnancy.getEndPoint();
-					if (pregnancy.getCurrentPoint().before(end)) {
-						msg = getString(R.string.errorIncorrectCurrentDateSmaller);
-					} else {
-						msg = getString(R.string.errorIncorrectCurrentDateGreater);
-					}
-				}
+				Pregnancy pregnancy = PregnancyCalculator.Factory.get(
+						getData(), i + 1);
 
-				TextView result1 = (TextView) row.findViewById(R.id.result1);
-				result1.setText(res1);
-				result1.setVisibility(res1 == null ? View.GONE : View.VISIBLE);
-				TextView result2 = (TextView) row.findViewById(R.id.result2);
-				result2.setText(res2);
-				result2.setVisibility(res2 == null ? View.GONE : View.VISIBLE);
-				TextView message = (TextView) row.findViewById(R.id.message);
-				message.setText(msg);
-				message.setVisibility(msg == null ? View.GONE : View.VISIBLE);
+				fillRows(pregnancy, age, days, row);
 
 				mTable.addView(row);
 				row.setTag(pregnancy);
@@ -230,35 +204,44 @@ public class ResultSickListFragment extends StateSaverFragment implements
 			View row = mTable.getChildAt(i);
 
 			Pregnancy pregnancy = (Pregnancy) row.getTag();
-			pregnancy.setAge(age);
 
-			Calendar current = pregnancy.getCurrentPoint();
-			String res1 = null, res2 = null, msg = null;
-			if (pregnancy.isCorrect()) {
-				Calendar to = (Calendar) current.clone();
-				to.add(Calendar.DAY_OF_MONTH, days.getDays());
+			fillRows(pregnancy, age, days, row);
+		}
+	}
+
+	private void fillRows(Pregnancy pregnancy, Age age, Days days, View row) {
+		pregnancy.setAge(age);
+		Calendar current = pregnancy.getCurrentPoint();
+		String res1 = null, res2 = null, msg = null;
+		if (pregnancy.isCorrect()) {
+			Calendar to = (Calendar) current.clone();
+			to.add(Calendar.DAY_OF_MONTH, days.getDays() - 1);
+
+			if (DateUtils.areEqual(current, to)) {
+				res2 = DateUtils.toString(getActivity(), current);
+			} else {
 				res2 = DateUtils.toString(getActivity(), current) + " - "
 						+ DateUtils.toString(getActivity(), to);
-			} else {
-				res1 = getString(R.string.errorIncorrectGestationalAge);
-				Calendar end = pregnancy.getEndPoint();
-				if (pregnancy.getCurrentPoint().before(end)) {
-					msg = getString(R.string.errorIncorrectCurrentDateSmaller);
-				} else {
-					msg = getString(R.string.errorIncorrectCurrentDateGreater);
-				}
 			}
-
-			TextView result1 = (TextView) row.findViewById(R.id.result1);
-			result1.setText(res1);
-			result1.setVisibility(res1 == null ? View.GONE : View.VISIBLE);
-			TextView result2 = (TextView) row.findViewById(R.id.result2);
-			result2.setText(res2);
-			result2.setVisibility(res2 == null ? View.GONE : View.VISIBLE);
-			TextView message = (TextView) row.findViewById(R.id.message);
-			message.setText(msg);
-			message.setVisibility(msg == null ? View.GONE : View.VISIBLE);
+		} else {
+			res1 = getString(R.string.errorIncorrectGestationalAge);
+			Calendar end = pregnancy.getEndPoint();
+			if (current.before(end)) {
+				msg = getString(R.string.errorIncorrectCurrentDateSmaller);
+			} else {
+				msg = getString(R.string.errorIncorrectCurrentDateGreater);
+			}
 		}
+
+		TextView result1 = (TextView) row.findViewById(R.id.result1);
+		result1.setText(res1);
+		result1.setVisibility(res1 == null ? View.GONE : View.VISIBLE);
+		TextView result2 = (TextView) row.findViewById(R.id.result2);
+		result2.setText(res2);
+		result2.setVisibility(res2 == null ? View.GONE : View.VISIBLE);
+		TextView message = (TextView) row.findViewById(R.id.message);
+		message.setText(msg);
+		message.setVisibility(msg == null ? View.GONE : View.VISIBLE);
 	}
 
 	private View mSelectedRow = null;

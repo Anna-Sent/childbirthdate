@@ -253,36 +253,15 @@ public class ResultEcdFragment extends StateSaverFragment implements
 				R.array.methodNames);
 		for (int i = 0; i < getData().byMethod().length; ++i) {
 			if (getData().byMethod()[i]) {
-				Pregnancy pregnancy = PregnancyCalculator.Factory.get(
-						getData(), i + 1);
-				pregnancy.setCurrentPoint(mDate);
-
 				View row = getActivity().getLayoutInflater().inflate(
 						R.layout.result_row, null);
 				TextView textView = (TextView) row.findViewById(R.id.textView);
 				textView.setText(methodNames[i]);
 
-				Calendar end = pregnancy.getEndPoint();
-				String res1, res2, msg;
-				res2 = DateUtils.toString(getActivity(), end);
-				if (pregnancy.isCorrect()) {
-					res1 = pregnancy.getInfo(getActivity());
-					msg = pregnancy.getAdditionalInfo(getActivity());
-				} else {
-					res1 = getString(R.string.errorIncorrectGestationalAge);
-					if (pregnancy.getCurrentPoint().before(end)) {
-						msg = getString(R.string.errorIncorrectCurrentDateSmaller);
-					} else {
-						msg = getString(R.string.errorIncorrectCurrentDateGreater);
-					}
-				}
+				Pregnancy pregnancy = PregnancyCalculator.Factory.get(
+						getData(), i + 1);
 
-				TextView result1 = (TextView) row.findViewById(R.id.result1);
-				result1.setText(res1);
-				TextView result2 = (TextView) row.findViewById(R.id.result2);
-				result2.setText(res2);
-				TextView message = (TextView) row.findViewById(R.id.message);
-				message.setText(msg);
+				fillRows(pregnancy, row);
 
 				mTable.addView(row);
 				row.setTag(pregnancy);
@@ -300,28 +279,33 @@ public class ResultEcdFragment extends StateSaverFragment implements
 				View row = mTable.getChildAt(i);
 
 				Pregnancy pregnancy = (Pregnancy) row.getTag();
-				pregnancy.setCurrentPoint(mDate);
 
-				String res1, msg;
-				if (pregnancy.isCorrect()) {
-					res1 = pregnancy.getInfo(getActivity());
-					msg = pregnancy.getAdditionalInfo(getActivity());
-				} else {
-					Calendar end = pregnancy.getEndPoint();
-					res1 = getString(R.string.errorIncorrectGestationalAge);
-					if (pregnancy.getCurrentPoint().before(end)) {
-						msg = getString(R.string.errorIncorrectCurrentDateSmaller);
-					} else {
-						msg = getString(R.string.errorIncorrectCurrentDateGreater);
-					}
-				}
-
-				TextView result1 = (TextView) row.findViewById(R.id.result1);
-				result1.setText(res1);
-				TextView message = (TextView) row.findViewById(R.id.message);
-				message.setText(msg);
+				fillRows(pregnancy, row);
 			}
 		}
+	}
+
+	private void fillRows(Pregnancy pregnancy, View row) {
+		pregnancy.setCurrentPoint(mDate);
+
+		String res1, msg;
+		if (pregnancy.isCorrect()) {
+			res1 = pregnancy.getInfo(getActivity());
+			msg = pregnancy.getAdditionalInfo(getActivity());
+		} else {
+			Calendar end = pregnancy.getEndPoint();
+			res1 = getString(R.string.errorIncorrectGestationalAge);
+			if (pregnancy.getCurrentPoint().before(end)) {
+				msg = getString(R.string.errorIncorrectCurrentDateSmaller);
+			} else {
+				msg = getString(R.string.errorIncorrectCurrentDateGreater);
+			}
+		}
+
+		TextView result1 = (TextView) row.findViewById(R.id.result1);
+		result1.setText(res1);
+		TextView message = (TextView) row.findViewById(R.id.message);
+		message.setText(msg);
 	}
 
 	private View mSelectedRow = null;
