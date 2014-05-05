@@ -67,5 +67,17 @@
     <string name="pref_support_summary">"Надіслати відгук, зауваження, пропозицію."</string>
     <string name="pref_womancyc_title">"Календар жіночих циклів"</string>
     <string name="pref_womancyc_summary">"Додаток \"WomanCyc\": простий додаток для стеження за менструальним циклом."</string>
+    <string name="calculation">"Розрахунок"</string>
+    <string name="sick_list">"Лікарняний лист"</string>
+    <string name="sick_list_days">"Кількість днів"</string>
+    <string name="sick_list_age">"Термін вагітності"</string>
+    <string name="error_enter_value">"Введіть число від %1$s до %2$s"</string>
+    <string name="error_value_already_exists">"Таке значення вже є в списку"</string>
+    <string name="error_value_bounds">"Значення має бути в межах від %1$s до %2$s включно"</string>
+    <string name="persist_setting">"Зберегти в налаштуваннях"</string>
+    <string name="when_the_duration_of_pregnancy">"при досягненні терміну вагітності"</string>
+    <string name="on">"на"</string>
+    <string name="dialog_sick_list">"Ви можете редагувати списки значень в \"Меню-Налаштування-Лікарняний лист\""</string>
+    <string name="do_not_show">"Більше не показувати"</string>
 
 </resources>
