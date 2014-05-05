@@ -50,8 +50,16 @@ public abstract class Pregnancy {
 		int days = (int) (difference / (1000l * 3600l * 24l));
 		int weeks = days / Age.DAYS_IN_WEEK;
 		days = days - weeks * Age.DAYS_IN_WEEK;
-		age.setDays(days);
-		age.setWeeks(weeks);
+		try {
+			if (age == null) {
+				age = new Age(weeks, days);
+			} else {
+				age.setDays(days);
+				age.setWeeks(weeks);
+			}
+		} catch (Exception e) {
+			age = null;
+		}
 	}
 
 	public Calendar getCurrentPoint() {
@@ -81,6 +89,10 @@ public abstract class Pregnancy {
 	 *         correct; {@code false}, otherwise
 	 */
 	public boolean isCorrect() {
+		if (age == null) {
+			return false;
+		}
+
 		int duration = getDurationInDays();
 		return duration >= 0 && duration <= getMaxDurationInDays();
 	}
