@@ -27,6 +27,10 @@ public class Age implements ISetting, Serializable {
 	}
 
 	public void set(Age age) {
+		if (age == null) {
+			throw new IllegalArgumentException("Age must be not null");
+		}
+
 		weeks = age.weeks;
 		days = age.days;
 	}
