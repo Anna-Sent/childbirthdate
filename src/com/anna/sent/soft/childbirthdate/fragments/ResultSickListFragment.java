@@ -87,7 +87,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
-		mTable = (TableLayout) getActivity().findViewById(R.id.table_sick_days);
+		mTable = (TableLayout) getActivity().findViewById(R.id.table_sick_list);
 		getActivity().findViewById(R.id.buttonEditDays)
 				.setOnClickListener(this);
 		getActivity().findViewById(R.id.buttonEditAge).setOnClickListener(this);
