@@ -288,12 +288,15 @@ public class ResultEcdFragment extends StateSaverFragment implements
 	private void fillRows(Pregnancy pregnancy, View row) {
 		pregnancy.setCurrentPoint(mDate);
 
-		String res1, msg;
+		String res1 = null, res2 = null, msg = null;
+
+		Calendar end = pregnancy.getEndPoint();
+		res2 = DateUtils.toString(getActivity(), end);
+
 		if (pregnancy.isCorrect()) {
 			res1 = pregnancy.getInfo(getActivity());
 			msg = pregnancy.getAdditionalInfo(getActivity());
 		} else {
-			Calendar end = pregnancy.getEndPoint();
 			res1 = getString(R.string.errorIncorrectGestationalAge);
 			if (pregnancy.getCurrentPoint().before(end)) {
 				msg = getString(R.string.errorIncorrectCurrentDateSmaller);
@@ -304,8 +307,13 @@ public class ResultEcdFragment extends StateSaverFragment implements
 
 		TextView result1 = (TextView) row.findViewById(R.id.result1);
 		result1.setText(res1);
+		result1.setVisibility(res1 == null ? View.GONE : View.VISIBLE);
+		TextView result2 = (TextView) row.findViewById(R.id.result2);
+		result2.setText(res2);
+		result2.setVisibility(res2 == null ? View.GONE : View.VISIBLE);
 		TextView message = (TextView) row.findViewById(R.id.message);
 		message.setText(msg);
+		message.setVisibility(msg == null ? View.GONE : View.VISIBLE);
 	}
 
 	private View mSelectedRow = null;

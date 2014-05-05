@@ -211,8 +211,11 @@ public class ResultSickListFragment extends StateSaverFragment implements
 
 	private void fillRows(Pregnancy pregnancy, Age age, Days days, View row) {
 		pregnancy.setAge(age);
-		Calendar current = pregnancy.getCurrentPoint();
+
 		String res1 = null, res2 = null, msg = null;
+
+		Calendar current = pregnancy.getCurrentPoint();
+
 		if (pregnancy.isCorrect()) {
 			Calendar to = (Calendar) current.clone();
 			to.add(Calendar.DAY_OF_MONTH, days.getDays() - 1);
