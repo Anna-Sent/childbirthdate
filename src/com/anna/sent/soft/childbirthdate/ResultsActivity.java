@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.widget.TabHost;
@@ -18,7 +17,6 @@ public class ResultsActivity extends ChildActivity implements
 	private ViewPager mViewPager;
 	private TabsAdapter mTabsAdapter;
 
-	@SuppressLint("NewApi")
 	@Override
 	public void setViews(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_results);
