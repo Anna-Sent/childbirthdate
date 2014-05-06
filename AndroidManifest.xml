@@ -140,15 +140,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity
-            android:name=".SickListActivity"
-            android:label="@string/sick_list"
-            android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
         <activity android:name="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity" >
             <intent-filter>
                 <action android:name="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity" />
