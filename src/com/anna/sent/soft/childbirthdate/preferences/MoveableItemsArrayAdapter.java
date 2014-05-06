@@ -42,6 +42,7 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 
 	private static class ViewHolder {
 		private int position;
+		private TextView textView;
 	}
 
 	public MoveableItemsArrayAdapter(Context context,
@@ -58,42 +59,38 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 	@Override
 	public View getView(int position, View contentView, ViewGroup viewGroup) {
 		View view;
-
-		view = getItem(contentView, R.id.lastItem, R.layout.dialog_list_item);
-
-		ViewHolder viewHolder = (ViewHolder) view.getTag();
-		viewHolder.position = position;
-
-		TextView tv = (TextView) view.findViewById(R.id.textViewItem);
-		tv.setText(mValues.get(position).toString(getContext()));
-
-		Button buttonUp = (Button) view.findViewById(R.id.buttonUp);
-		buttonUp.setTag(viewHolder);
-		buttonUp.setOnClickListener(this);
-
-		Button buttonDown = (Button) view.findViewById(R.id.buttonDown);
-		buttonDown.setTag(viewHolder);
-		buttonDown.setOnClickListener(this);
-
-		Button buttonDelete = (Button) view.findViewById(R.id.buttonDelete);
-		buttonDelete.setTag(viewHolder);
-		buttonDelete.setOnClickListener(this);
-
-		return view;
-	}
-
-	private View getItem(View contentView, int id, int resourceId) {
-		View view;
 		ViewHolder viewHolder;
-		if (contentView == null || contentView.getId() != id) {
+		if (contentView == null) {
 			LayoutInflater layoutInflater = (LayoutInflater) getContext()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = layoutInflater.inflate(resourceId, null);
+			view = layoutInflater.inflate(R.layout.dialog_list_item, null);
+
 			viewHolder = new ViewHolder();
+
 			view.setTag(viewHolder);
+
+			viewHolder.textView = (TextView) view
+					.findViewById(R.id.textViewItem);
+
+			Button buttonUp = (Button) view.findViewById(R.id.buttonUp);
+			buttonUp.setTag(viewHolder);
+			buttonUp.setOnClickListener(this);
+
+			Button buttonDown = (Button) view.findViewById(R.id.buttonDown);
+			buttonDown.setTag(viewHolder);
+			buttonDown.setOnClickListener(this);
+
+			Button buttonDelete = (Button) view.findViewById(R.id.buttonDelete);
+			buttonDelete.setTag(viewHolder);
+			buttonDelete.setOnClickListener(this);
 		} else {
 			view = contentView;
+			viewHolder = (ViewHolder) view.getTag();
 		}
+
+		viewHolder.position = position;
+		viewHolder.textView.setText(mValues.get(position)
+				.toString(getContext()));
 
 		return view;
 	}
