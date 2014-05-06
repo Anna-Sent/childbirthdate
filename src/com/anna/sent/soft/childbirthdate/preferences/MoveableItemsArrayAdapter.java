@@ -98,6 +98,12 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		return view;
 	}
 
+	public void setItems(List<LocalizableObject> objects) {
+		mValues.clear();
+		mValues.addAll(objects);
+		notifyDataSetChanged();
+	}
+
 	public void addItem(LocalizableObject object) {
 		mValues.add(object);
 		notifyDataSetChanged();
