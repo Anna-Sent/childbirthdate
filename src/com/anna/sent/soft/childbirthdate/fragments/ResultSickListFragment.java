@@ -105,8 +105,16 @@ public class ResultSickListFragment extends StateSaverFragment implements
 	public void restoreState(Bundle state) {
 		mSpinnerDaysIndex = state.getInt(KEY_SPINNER_DAYS_POSITION);
 		mSpinnerAgeIndex = state.getInt(KEY_SPINNER_AGE_POSITION);
+
 		mTmpDaysList = (ArrayList<Days>) state.getSerializable(KEY_OTHER_DAYS);
+		if (mTmpDaysList == null) {
+			mTmpDaysList = new ArrayList<Days>();
+		}
+
 		mTmpAgeList = (ArrayList<Age>) state.getSerializable(KEY_OTHER_AGE);
+		if (mTmpAgeList == null) {
+			mTmpAgeList = new ArrayList<Age>();
+		}
 	}
 
 	@Override
