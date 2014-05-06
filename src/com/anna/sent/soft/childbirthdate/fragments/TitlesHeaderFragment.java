@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.ResultsActivity;
-import com.anna.sent.soft.childbirthdate.SickListActivity;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 
@@ -35,9 +34,6 @@ public class TitlesHeaderFragment extends Fragment implements DataClient,
 		Button buttonCalculate = (Button) getActivity().findViewById(
 				R.id.buttonCalculate);
 		buttonCalculate.setOnClickListener(this);
-		Button buttonSickList = (Button) getActivity().findViewById(
-				R.id.buttonSickList);
-		buttonSickList.setOnClickListener(this);
 	}
 
 	private Data mData = null;
@@ -60,10 +56,6 @@ public class TitlesHeaderFragment extends Fragment implements DataClient,
 						Toast.LENGTH_LONG).show();
 			}
 
-			break;
-		case R.id.buttonSickList:
-			Intent intent = new Intent(getActivity(), SickListActivity.class);
-			startActivity(intent);
 			break;
 		}
 	}
