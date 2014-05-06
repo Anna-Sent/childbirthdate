@@ -181,8 +181,7 @@ public abstract class MoveableItemsPreference extends DialogPreference
 		super.onRestoreInstanceState(myState.getSuperState());
 		restoreAddValue(myState.value);
 		if (mAdapter != null) {
-			mAdapter.removeItems();
-			mAdapter.addItems(SettingsParser.toList(myState.values,
+			mAdapter.setItems(SettingsParser.toList(myState.values,
 					getElement()));
 		}
 	}
