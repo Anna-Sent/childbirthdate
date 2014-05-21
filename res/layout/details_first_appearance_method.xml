@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ScrollViewStyle"
+    tools:context=".DetailsActivity" >
+
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
+
+        <TextView
+            style="@style/TextViewStyle"
+            android:text="@string/firstAppearanceDate" />
+
+        <DatePicker
+            android:id="@+id/datePickerFirstAppearanceDate"
+            style="@style/DatePickerStyle" />
+
+        <LinearLayout
+            style="@style/LinearLayoutVerticalStyle"
+            android:layout_width="wrap_content" >
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:layout_marginTop="@dimen/view_vertical_margin"
+                android:text="@string/diagnosedAge" />
+
+            <LinearLayout
+                style="@style/LinearLayoutHorizontalStyle"
+                android:gravity="center" >
+
+                <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                    android:id="@+id/numberPickerFirstAppearanceWeeks"
+                    style="@style/NumberPickerStyle" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:text="@string/weeks" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
