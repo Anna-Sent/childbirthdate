@@ -28,6 +28,7 @@ public abstract class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 	}
 
 	public Fragment getFragment(int position) {
-		return mFragments.get(position);
+		return position >= 0 && position < mFragments.size() ? mFragments
+				.get(position) : null;
 	}
 }
