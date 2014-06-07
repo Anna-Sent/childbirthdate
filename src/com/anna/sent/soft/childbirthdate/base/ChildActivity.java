@@ -9,7 +9,7 @@ import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.ActionBarUtils;
 import com.anna.sent.soft.utils.NavigationUtils;
 
-public class ChildActivity extends StateSaverActivity {
+public class ChildActivity extends DataKeeperActivity {
 	@Override
 	public void setViews(Bundle savedInstanceState) {
 		ActionBarUtils.setupActionBar(this);

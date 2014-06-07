@@ -5,35 +5,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 
-import com.anna.sent.soft.childbirthdate.base.StateSaverActivity;
+import com.anna.sent.soft.childbirthdate.base.DataKeeperActivity;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.strategy.menu.MenuStrategy;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 
-public class MainActivity extends StateSaverActivity {
-	private static final String TAG = "moo";
-	private static final boolean DEBUG = false;
+public class MainActivity extends DataKeeperActivity {
 	private static final boolean TEST_CLEAR_SETTINGS = false;
-
-	private String wrapMsg(String msg) {
-		return getClass().getSimpleName() + ": " + msg;
-	}
-
-	@SuppressWarnings("unused")
-	private void log(String msg) {
-		if (DEBUG) {
-			Log.d(TAG, wrapMsg(msg));
-		}
-	}
-
-	@SuppressWarnings("unused")
-	private void log(String msg, boolean debug) {
-		if (DEBUG && debug) {
-			Log.d(TAG, wrapMsg(msg));
-		}
-	}
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {

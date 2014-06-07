@@ -29,7 +29,6 @@ import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.age.Days;
 import com.anna.sent.soft.childbirthdate.age.ISetting;
 import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
-import com.anna.sent.soft.childbirthdate.base.StateSaverFragment;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
@@ -37,6 +36,7 @@ import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListUtils;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
+import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
 import com.anna.sent.soft.utils.DateUtils;
 
 public class ResultSickListFragment extends StateSaverFragment implements
