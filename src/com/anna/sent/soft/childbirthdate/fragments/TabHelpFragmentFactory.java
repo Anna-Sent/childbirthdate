@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.childbirthdate.base.StateSaverFragment;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
 
 public class TabHelpFragmentFactory {
 	public static Fragment newInstance(int position) {
