@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    tools:ignore="UselessParent" >
+
+    <LinearLayout
+        style="@style/LinearLayoutVerticalStyle"
+        android:layout_margin="@dimen/row_padding" >
+
+        <LinearLayout
+            style="@style/LinearLayoutHorizontalStyle"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/TextViewStyle.Medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/emptyString" />
+
+            <LinearLayout
+                style="@style/LinearLayoutVerticalStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/result1"
+                    style="@style/TextViewStyle.Medium.Red"
+                    android:text="@string/emptyString" />
+
+                <TextView
+                    android:id="@+id/result2"
+                    style="@style/TextViewStyle.Medium.Blue"
+                    android:text="@string/emptyString" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/message"
+            style="@style/TextViewStyle"
+            android:layout_width="match_parent"
+            android:text="@string/emptyString" />
+    </LinearLayout>
+
+</TableRow>
