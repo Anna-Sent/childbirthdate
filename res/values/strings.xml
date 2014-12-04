@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ru">
 
-    <string name="ecdIs">ПДР %s</string>
+    <string name="ecdIs">EDD %s</string>
     <string name="collapse">Свернуть</string>
     <string name="expand">Развернуть</string>
     <string name="onDate">на дату</string>
@@ -9,7 +9,7 @@
     <string name="sendData">Отправить данные</string>
     <string name="settings">Настройки</string>
     <string name="help">Справка</string>
-    <string name="ecdAndGestationalAge">ПДР и срок беременности</string>
+    <string name="ecdAndGestationalAge">EDD и срок беременности</string>
     <string name="app_name">Дата родов</string>
     <string name="widget_small_name">Дата родов Small</string>
     <string name="widget_simple_name">Дата родов Medium</string>
@@ -29,18 +29,18 @@
     <string name="weeks">нед.</string>
     <string name="days">д.</string>
     <string name="calculate">Рассчитать</string>
-    <string name="calculateEcdAndGestationalAge">Рассчитать ПДР и срок беременности</string>
+    <string name="calculateEcdAndGestationalAge">Рассчитать EDD и срок беременности</string>
     <string name="sendto_app_not_available">Приложение \"Почтовый клиент\" недоступно</string>
     <string name="market_app_not_available">Приложение market недоступно</string>
     <string name="errorIncorrectGestationalAge">Ошибка</string>
-    <string name="errorIncorrectCurrentDateGreater">Указанная дата расчета намного больше ПДР.</string>
+    <string name="errorIncorrectCurrentDateGreater">Указанная дата расчета намного больше EDD.</string>
     <string name="errorIncorrectCurrentDateSmaller">Указанная дата расчета меньше даты начала отсчета беременности.</string>
     <string name="firstTrimester">Первый триместр</string>
     <string name="secondTrimester">Второй триместр</string>
     <string name="thirdTrimester">Третий триместр</string>
     <string name="additionalInfo">триместр %1$s; полный срок %2$s%3$s</string>
-    <string name="positiveRest">; до ПДР осталось %s</string>
-    <string name="zeroRest">; ПДР</string>
+    <string name="positiveRest">; до EDD осталось %s</string>
+    <string name="zeroRest">; EDD</string>
     <string name="negativeRest"></string>
     <string name="errorInvalidAppWidgetId">Некорректный идентификатор виджета</string>
     <string name="widgetSpecifyTheMethodOfCalculation">Задайте предпочтительный метод расчета:</string>
