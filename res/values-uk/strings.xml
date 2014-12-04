@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="ecdIs">"ПДР %s"</string>
     <string name="collapse">"Згорнути"</string>
     <string name="expand">"Розгорнути"</string>
     <string name="onDate">"на дату"</string>
-    <string name="adUnitId">"a1513549e3d3050"</string>
     <string name="emptyString">"empty"</string>
     <string name="sendData">"Надіслати дані"</string>
     <string name="settings">"Налаштування"</string>
