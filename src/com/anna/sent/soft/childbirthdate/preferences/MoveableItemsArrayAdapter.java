@@ -2,6 +2,7 @@ package com.anna.sent.soft.childbirthdate.preferences;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,6 +57,7 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		return mValues.size();
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View contentView, ViewGroup viewGroup) {
 		View view;

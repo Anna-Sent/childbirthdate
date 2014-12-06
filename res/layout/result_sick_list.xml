@@ -81,7 +81,8 @@
             ads:adSize="BANNER"
             ads:adUnitId="@string/adUnitId"
             ads:loadAdOnCreate="true"
-            android:gravity="center" />
+            android:gravity="center"
+            tools:ignore="MissingRegistered" />
     </LinearLayout>
 
 </ScrollView>
