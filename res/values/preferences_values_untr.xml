@@ -17,14 +17,17 @@
     <integer name="defaultTheme">0</integer>
 
     <string-array name="language" translatable="false">
+        <item>English</item>
         <item>Русский</item>
         <item>Українська</item>
     </string-array>
     <string-array name="language_values" translatable="false">
+        <item>2</item>
         <item>0</item>
         <item>1</item>
     </string-array>
     <string-array name="locales" translatable="false">
+        <item>en</item>
         <item>ru</item>
         <item>uk</item>
     </string-array>
