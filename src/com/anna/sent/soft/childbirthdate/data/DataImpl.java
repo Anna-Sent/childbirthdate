@@ -320,10 +320,10 @@ public class DataImpl implements Data {
 				R.string.titles1, DateUtils.toString(context, ovulationDate));
 
 		result[Shared.Calculation.BY_ULTRASOUND - 1] = context.getString(
-				R.string.titles2, DateUtils.toString(context, ultrasoundDate),
-				new Age(ultrasoundWeeks, ultrasoundDays).toString(context),
-				isEmbryonicAge ? context.getString(R.string.embryonic)
-						: context.getString(R.string.gestational));
+				isEmbryonicAge ? R.string.titles2_emryonic
+						: R.string.titles2_gestational, DateUtils.toString(
+						context, ultrasoundDate), new Age(ultrasoundWeeks,
+						ultrasoundDays).toString(context));
 
 		result[Shared.Calculation.BY_FIRST_APPEARANCE - 1] = context.getString(
 				R.string.titles3, DateUtils.toString(context,
@@ -331,10 +331,9 @@ public class DataImpl implements Data {
 						.toString(context));
 
 		result[Shared.Calculation.BY_FIRST_MOVEMENTS - 1] = context.getString(
-				R.string.titles4, DateUtils.toString(context,
-						firstMovementsDate),
-				isFirstPregnancy ? context.getString(R.string.isFirstPregnancy)
-						: context.getString(R.string.isSecondPregnancy));
+				isFirstPregnancy ? R.string.titles4_first_pregnancy
+						: R.string.titles4_second_pregnancy, DateUtils
+						.toString(context, firstMovementsDate));
 
 		return result;
 	}
