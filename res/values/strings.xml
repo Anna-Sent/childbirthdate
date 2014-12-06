@@ -38,7 +38,7 @@
     <string name="firstTrimester">First trimester</string>
     <string name="secondTrimester">Second trimester</string>
     <string name="thirdTrimester">Third trimester</string>
-    <string name="additionalInfo">trimester number is %1$s; expected pregnancy duration is %2$s%3$s</string>
+    <string name="additionalInfo">trimester number is %1$s; expected pregnancy length is %2$s%3$s</string>
     <string name="positiveRest">; %s left to EDD</string>
     <string name="zeroRest">; EDD</string>
     <string name="negativeRest"></string>

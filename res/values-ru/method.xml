@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="titles0">%1$s; МЦ %2$s д.; ЛФ %3$s д.</string>
+    <string name="titles0">%1$s; МЦ %2$d д.; ЛФ %3$d д.</string>
     <string name="titles1">%1$s</string>
-    <string name="titles2">на %1$s диагностирован срок беременности %2$s (%3$s)</string>
-    <string name="gestational">акушерский</string>
-    <string name="embryonic">эмбриональный</string>
+    <string name="titles2_gestational">на %1$s диагностирован акушерский срок беременности %2$s</string>
+    <string name="titles2_emryonic">на %1$s диагностирован эмбриональный срок беременности %2$s</string>
     <string name="titles3">на %1$s диагностирован срок беременности %2$s</string>
-    <string name="titles4">%1$s; %2$s</string>
-    <string name="isFirstPregnancy">первая беременность</string>
-    <string name="isSecondPregnancy">повторная беременность</string>
+    <string name="titles4_first_pregnancy">%1$s; первая беременность</string>
+    <string name="titles4_second_pregnancy">%1$s; повторная беременность</string>
 
     <string-array name="methodNames">
         <item>по дате последней менструации</item>

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="titles0">"%1$s; МЦ %2$s д.; ЛФ %3$s д."</string>
+    <string name="titles0">"%1$s; МЦ %2$d д.; ЛФ %3$d д."</string>
     <string name="titles1">"%1$s"</string>
-    <string name="titles2">"на %1$s діагностований термін вагітності %2$s (%3$s)"</string>
-    <string name="gestational">"акушерський"</string>
-    <string name="embryonic">"ембріональний"</string>
+    <string name="titles2_gestational">"на %1$s діагностований акушерський термін вагітності %2$s"</string>
+    <string name="titles2_emryonic">"на %1$s діагностований ембріональний термін вагітності %2$s"</string>
     <string name="titles3">"на %1$s діагностований термін вагітності %2$s"</string>
-    <string name="titles4">"%1$s; %2$s"</string>
-    <string name="isFirstPregnancy">"перша вагітність"</string>
-    <string name="isSecondPregnancy">"повторна вагітність"</string>
+    <string name="titles4_first_pregnancy">"%1$s; перша вагітність"</string>
+    <string name="titles4_second_pregnancy">"%1$s; повторна вагітність"</string>
 
     <string-array name="methodNames">
         <item>"за датою останньої менструації"</item>
@@ -159,7 +157,7 @@
 
 <i><b>Термін вагітності</b> = Задана дата - Дата останньої менструації.</i><br/><br/>
 ]]>
-		</item>
+        </item>
         <item>
 <![CDATA[
 <i><b>Ембріональна ПДР</b> = Дата овуляції (зачаття) + 38 тижнів,</i><br/><br/>
@@ -190,7 +188,7 @@
 
 де <i>Дата початку відліку вагітності = Дата проведення дослідження - Діагностований термін вагітності.</i><br/><br/>
 ]]>
-		</item>
+        </item>
         <item>
 <![CDATA[
 <i><b>ПДР</b> = Дата явки - Діагностований термін вагітності + 40 тижнів.</i><br/><br/>
@@ -198,8 +196,8 @@
 Тривалість вагітності приймається за 40 тижнів.
  Термін вагітності розраховується так само, як і в методі розрахунку по УЗД.<br/><br/>
  ]]>
-		</item>
-		<item>
+        </item>
+        <item>
 <![CDATA[
 Якщо вагітність перша, <i><b>ПДР</b> = Дата першого ворушіння плоду + 20 тижнів.</i><br/><br/>
 
@@ -210,7 +208,7 @@
  терміну вагітності береться значення 20 тижнів, якщо вагітність перша, або 18 тижнів,
  якщо вагітність повторна.<br/><br/>
 ]]>
-		</item>
+        </item>
     </string-array>
 
 </resources>

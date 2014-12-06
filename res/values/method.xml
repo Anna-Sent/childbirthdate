@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="titles0">%1$s; menstrual cycle length %2$s days; luteal phase length %3$s days</string>
+    <string name="titles0">%1$s; menstrual cycle length %2$d days; luteal phase length %3$d days</string>
     <string name="titles1">%1$s</string>
-    <string name="titles2">на %1$s диагностирован срок беременности %2$s (%3$s)</string>
-    <string name="gestational">gestational</string>
-    <string name="embryonic">fertilizational</string>
-    <string name="titles3">на %1$s диагностирован срок беременности %2$s</string>
-    <string name="titles4">%1$s; %2$s</string>
-    <string name="isFirstPregnancy">first pregnancy</string>
-    <string name="isSecondPregnancy">second pregnancy</string>
+    <string name="titles2_gestational">on %1$s determined gestational age of %2$s</string>
+    <string name="titles2_emryonic">on %1$s determined fertilization age of %2$s</string>
+    <string name="titles3">on %1$s determined gestational age of %2$s</string>
+    <string name="titles4_first_pregnancy">%1$s; first pregnancy</string>
+    <string name="titles4_second_pregnancy">%1$s; second pregnancy</string>
 
     <string-array name="methodNames">
         <item>by last menstrual period</item>
@@ -58,22 +56,21 @@ If you have had single sexual intercourse after which you have got pregnancy, th
  that conception may occur in few days after sexual intercourse.<br/><br/>
 
 Calculation method by ovulation date gives high accuracy for women who get pregnant with
- In Vitro Fertilization (IVF) and know the date of insemination exactly.<br/><br/>
+ In Vitro Fertilization (IVF) and know the date of artificial insemination exactly.<br/><br/>
 
 Calculation method <b><i>by ultrasound</i></b> is very accurate.
+ In the first trimester there is very little variation in fetal size,
+ and so it turns out that an ultrasound done between 9 and 13 weeks is the most accurate.
+ EDD can be calculated with error in 1-3 days.<br/><br/>
 
-Метод расчета <b><i>по результатам ультразвукового исследования (УЗИ)</i></b> &mdash; самый точный.
- По результатам УЗИ, полученным на сроке 9-13 (акушерских) weeks, можно вычислить EDD с точностью до 1-3 дней,
- поскольку в первом триместре размеры эмбрионов одного срока почти не отличаются.
- Более поздние УЗИ уже не так достоверны.<br/><br/>
-
-Точность расчета <b><i>по явке в женскую консультацию</i></b> низкая
- (погрешность может составлять от одной до нескольких weeks).
+Calculation method <b><i>by clinical examination</i></b> gives low accuracy.
+ EDD can be calculated with error in few weeks.
  Врач, наблюдающий беременную, может определить срок беременности и предположить дату родов по величине матки,
  объему живота, высоте стояния дна матки и другим признакам.
  Чем раньше женщина обратится в консультацию (желательно до 12 weeks), тем точнее будет установлен
  срок беременности.<br/><br/>
 
+Calculation method <b><i>by first fetal movement</i></b> gives very low accuracy.
 Точность расчета <b><i>по первому шевелению</i></b> очень низкая. Шевеление плода &mdash; ощущение, зависящее
  от индивидуальных особенностей женщины.
  Срок, на котором женщина ощущает первые шевеления плода, может варьироваться от 16 до 25 weeks.
@@ -82,37 +79,41 @@ Calculation method <b><i>by ultrasound</i></b> is very accurate.
         </item>
         <item>
 <![CDATA[
-<b>МЦ</b> &mdash; менструальный цикл; <b>ЛФ</b> &mdash; лютеиновая фаза (вторая фаза МЦ); <b>ФФ</b> &mdash;
- фолликулярная фаза (первая фаза МЦ).<br/><br/>
+<b>MC</b> &mdash; menstrual cycle; <b>LP</b> &mdash; luteal phase (the second phase of MC); <b>FP</b> &mdash;
+ follicular phase (the first phase of MC).<br/><br/>
 
-Оставьте значения по умолчанию для продолжительностей МЦ или ЛФ, если не можете их уточнить.<br/><br/>
+Leave the default values for the length of MC or LF, if you can not specify them.<br/><br/>
 
-Если менструации нерегулярные, то в качестве продолжительности МЦ введите среднее арифметическое продолжительностей
- трех последних циклов.<br/><br/>
+If menses are irregular, then use average length of last three cycles as MC length.<br/><br/>
 
+The average menstrual cycle lasts 28 days.
+the length of a menstrual cycle varies greatly among women (ranging from 21 to 35 days), with 28 days designated as the average length.
 Средняя <i>продолжительность МЦ</i> у женщин составляет 28 дней и может колебаться в пределах
  от 21 до 45 дней.<br/><br/>
 
+The human luteal phase lasts between ten and sixteen days, the average being fourteen days. Luteal phases of less than twelve days may make it more difficult to achieve pregnancy.
 Средняя <i>продолжительность ЛФ</i> у женщин составляет 14 дней и может колебаться в пределах
  от 10 до 16 дней.<br/><br/>
 
+While luteal phase length varies significantly from woman to woman, for the same woman the length will be fairly consistent from cycle to cycle.
 Для определения дня овуляции используется длительность ЛФ, поскольку она более постоянна, чем
  длительность ФФ. Чтобы получить наиболее вероятный день овуляции,
  необходимо из продолжительности МЦ вычесть продолжительность ЛФ.
  (Например, если цикл длится 35 дней, ЛФ &mdash; 16 дней, то овуляция происходит на 19-й день цикла).<br/><br/>
 
-<i><b>Уточненная EDD</b> = Дата последней менструации + Длина ФФ + 38 weeks,</i><br/><br/>
+<i><b>Уточненная EDD</b> = Last menstrual period + FP length + 38 weeks,</i><br/><br/>
 
-где <i>Длина ФФ = Длина МЦ - Длина ЛФ,</i><br/><br/>
+where <i>FP length = MC length - LP length,</i><br/><br/>
 
-<i>Дата последней менструации</i> &mdash; первый день последней менструации.<br/><br/>
+<i>Last menstrual period</i> is the first day of last menstruation.<br/><br/>
 
+The application calculates
 Программа рассчитывает уточненную EDD, поскольку она точнее акушерской.
  Если Вы оставите значения МЦ и ЛФ по умолчанию,
  то получите значение акушерской EDD, рассчитанной по формуле:
  <i><b>Акушерская EDD</b> = Дата последней менструации + 40 weeks.</i><br/><br/>
 
-<b><i>Обратите внимание:</i></b> если введенные значения МЦ и ЛФ не совпадают со средними (28 и 14 дней
+<b><i>Attention:</i></b> если введенные значения МЦ и ЛФ не совпадают со средними (28 и 14 дней
  соответственно), то EDD может выпадать на срок беременности, отличный от 40 weeks.<br/><br/>
 
 <i><b>Срок беременности</b> = Заданная дата - Дата последней менструации.</i><br/><br/>
@@ -132,11 +133,11 @@ Calculation method <b><i>by ultrasound</i></b> is very accurate.
         </item>
         <item>
 <![CDATA[
-<i><b>EDD</b> = Date of examination + Expected pregnancy duration (40 or 38 weeks) -
+<i><b>EDD</b> = Date of examination + Expected pregnancy length (40 or 38 weeks) -
  Determined gestational or fertilization age.</i><br/><br/>
 
 In this case pregnancy length is considered to be 40 weeks, if you select "Gestational age",
- or 38 weeks, if you select "Fertilization age" (counted from ovulation or insemination day).
+ or 38 weeks, if you select "Fertilization age" (counted from ovulation or artificial insemination day).
  As a rule, if an ultrasound determined the embryo or fetus, the conclusion indicates "Gestational age",
  if only the fertilized egg, the "Fertilization age".
  Consult your doctor about this.<br/><br/>
