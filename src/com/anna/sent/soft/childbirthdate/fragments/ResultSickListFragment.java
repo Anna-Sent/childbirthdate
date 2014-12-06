@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -168,6 +169,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		}
 	}
 
+	@SuppressLint("InflateParams")
 	private void fillResults() {
 		Days days = getSelectedDays();
 		Age age = getSelectedAge();
@@ -280,6 +282,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		}
 	}
 
+	@SuppressLint("InflateParams")
 	public static void showSickListInfoDialog(final Context context) {
 		if (Settings.showSickListInfoDialog(context)) {
 			LayoutInflater inflater = (LayoutInflater) context
@@ -306,6 +309,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		}
 	}
 
+	@SuppressLint("InflateParams")
 	private void editDays() {
 		LayoutInflater inflater = (LayoutInflater) getActivity()
 				.getLayoutInflater();
@@ -346,6 +350,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		builder.create().show();
 	}
 
+	@SuppressLint("InflateParams")
 	private void editAge() {
 		LayoutInflater inflater = (LayoutInflater) getActivity()
 				.getLayoutInflater();
@@ -390,6 +395,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 		builder.create().show();
 	}
 
+	@SuppressLint("InflateParams")
 	private View wrapWithCheckBox(View child) {
 		LayoutInflater inflater = (LayoutInflater) getActivity()
 				.getLayoutInflater();

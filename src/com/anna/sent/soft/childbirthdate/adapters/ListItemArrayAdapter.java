@@ -1,5 +1,6 @@
 package com.anna.sent.soft.childbirthdate.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,6 +71,7 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 		return mCount;
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View contentView, ViewGroup viewGroup) {
 		View view;
