@@ -5,9 +5,11 @@ import java.util.Map;
 import java.util.Set;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.Build;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.Age;
@@ -39,7 +41,7 @@ public class Settings {
 			}
 		}
 
-		@SuppressLint("NewApi")
+		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 		@Override
 		public Set<String> getStringSet(String key, Set<String> defValues) {
 			try {
