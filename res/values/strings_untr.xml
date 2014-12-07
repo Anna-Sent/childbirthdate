@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ru">
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="adUnitId" translatable="false">a1513549e3d3050</string>
 
