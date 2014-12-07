@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="titles0">%1$s; menstrual cycle length %2$d days; luteal phase length %3$d days</string>
     <string name="titles1">%1$s</string>
