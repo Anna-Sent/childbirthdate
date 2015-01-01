@@ -124,12 +124,12 @@ where <i>Ovulation (conception) date</i> is expected date of ovulation, intercou
         </item>
         <item>
 <![CDATA[
-<i><b>EDD</b> = Ultrasound date + Expected pregnancy length (40 or 38 weeks) -
+<i><b>EDD</b> = Ultrasound date + Expected pregnancy length -
  Determined gestational or fertilization age.</i><br/><br/>
 
-In this case pregnancy length is considered to be 40 weeks, if you select "Gestational age",
+Expected pregnancy length is considered to be 40 weeks, if you select "Gestational age",
  or 38 weeks, if you select "Fertilization age" (counted from ovulation or artificial insemination day).
- As a rule, if an ultrasound determined the embryo or fetus, the conclusion indicates "Gestational age",
+ As a rule, if an ultrasound determines the embryo or fetus, the conclusion indicates "Gestational age",
  if only the fertilized egg, the "Fertilization age".
  Consult your doctor about it.<br/><br/>
 
@@ -145,7 +145,7 @@ where <i>Starting point of pregnancy = Ultrasound date - Determined gestational 
 <![CDATA[
 <i><b>EDD</b> = Date of examination - Determined gestational age + 40 weeks.</i><br/><br/>
 
-Pregnancy length is considered to be 40 weeks.<br/><br/>
+Expected pregnancy length is considered to be 40 weeks.<br/><br/>
 
 <i><b>Gestational age</b> = Specified date - Starting point of pregnancy,</i><br/><br/>
 
@@ -158,11 +158,11 @@ If it is first pregnancy, <i><b>EDD</b> = First fetal movement date + 20 weeks.<
 
 If it is second pregnancy, <i><b>EDD</b> = First fetal movement date + 22 weeks.</i><br/><br/>
 
-Pregnancy length is considered to be 40 weeks.<br/><br/>
+Expected pregnancy length is considered to be 40 weeks.<br/><br/>
 
 <i><b>Gestational age</b> = Specified date - Starting point of pregnancy,</i><br/><br/>
 
-where <i>Starting point of pregnancy = First fetal movement date - 20 weeks (for first pregnancy) or 18 weeks (if second pregnancy).</i><br/><br/>
+where <i>Starting point of pregnancy = First fetal movement date - 20 weeks (for first pregnancy) or 18 weeks (for second pregnancy).</i><br/><br/>
 ]]>
         </item>
     </string-array>
