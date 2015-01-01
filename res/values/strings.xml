@@ -20,7 +20,7 @@
     <string name="restoreDefaultValues">Restore default values</string>
     <string name="ovulationDate">Ovulation (conception) date</string>
     <string name="ultrasoundDate">Ultrasound date</string>
-    <string name="diagnosedAge">Gestational age by ultrasound</string>
+    <string name="diagnosedAge">Determined by ultrasound</string>
     <string name="isGestationalAge">Gestational age (as a rule)</string>
     <string name="isEmbryonicAge">Fertilization age</string>
     <string name="firstAppearanceDate">Date of clinical examination</string>
@@ -39,7 +39,7 @@
     <string name="secondTrimester">Second trimester</string>
     <string name="thirdTrimester">Third trimester</string>
     <string name="additionalInfo">trimester number is %1$s; expected pregnancy length is %2$s%3$s</string>
-    <string name="positiveRest">; %s left to EDD</string>
+    <string name="positiveRest">; %s left before the EDD</string>
     <string name="zeroRest">; EDD</string>
     <string name="negativeRest"></string>
     <string name="errorInvalidAppWidgetId">Invalid widget identifier</string>
@@ -64,7 +64,7 @@
     <string name="pref_rate_title">Rate the application</string>
     <string name="pref_rate_summary"></string>
     <string name="pref_support_title">Feedback</string>
-    <string name="pref_support_summary">Send review, comments, suggestions.</string>
+    <string name="pref_support_summary">Send review, comment, suggestion.</string>
     <string name="pref_womancyc_title">"Calendar of women's cycles"</string>
     <string name="pref_womancyc_summary">\"WomanCyc\": simple period tracker application.</string>
     <string name="calculation">Calculation</string>
@@ -77,7 +77,7 @@
     <string name="persist_setting">Save in settings</string>
     <string name="when_the_duration_of_pregnancy">Gestational age from which leave is started</string>
     <string name="on">Number of days on which leave is granted</string>
-    <string name="dialog_sick_list">You can edit lists of values in \"Menu-Settings-Parentla leave\"</string>
+    <string name="dialog_sick_list">You can edit lists of values in \"Menu-Settings-Parental leave\"</string>
     <string name="do_not_show">Do not show again</string>
 
 </resources>
