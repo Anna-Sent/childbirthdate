@@ -48,45 +48,49 @@ If you use some methods to determine ovulation date, and know
 
 But many factors (physical and emotional,
  stresses, illness and others)
- may affect on the cycle length
- and the day when ovulation occurs (the most fertile day).<br/><br/>
+ may affect on the cycle length and the day when ovulation occurs
+ (the most fertile day).<br/><br/>
 
-If you have had single sexual intercourse after which you have got pregnancy, then you can use the date of
+If you have had single sexual intercourse after which you have got pregnant, then you can use the date of
  this sexual intercourse as an expected conception date. But you should keep in mind
  that conception may occur in few days after sexual intercourse.<br/><br/>
 
 Calculation method by ovulation date gives high accuracy for women who get pregnant with
- In Vitro Fertilization (IVF) and know the date of artificial insemination exactly.<br/><br/>
+ In Vitro Fertilization (IVF)
+ and know the date of artificial insemination exactly.<br/><br/>
 
-Calculation method <b><i>by ultrasound</i></b> is very accurate.
- In the first trimester there is very little variation in fetal size,
- and so it turns out that an ultrasound done between 9 and 13 weeks is the most accurate: it gives error in 1-3 days.
+Calculation method <b><i>by ultrasound</i></b> is the most accurate.
+ An ultrasound done between 9 and 13 weeks gives error in 1-3 days,
+ because there is very little variation in fetal size in the first trimester.
  Later ultrasound is not so reliable.<br/><br/>
 
 Calculation method <b><i>by clinical examination</i></b> gives low accuracy.
  EDD can be calculated with error in few weeks.
- The doctor who observe pregnancy may determine the gestational age and EDD suggesting on largest of the uterus,
- the volume of the stomach, the height of standing uterus and other features.
- The earlier a woman come to the doctor (preferably up to 12 weeks), the more accurate will be determined
+ The doctor overseeing pregnancy may determine the gestational age and EDD suggesting
+ on the size and position of the uterus and other features.
+ The sooner a woman visit the doctor (preferably up to 12 weeks), the more accurate will be determined
  gestational age.<br/><br/>
 
 Calculation method <b><i>by first fetal movement</i></b> gives very low accuracy.
- Feeling of fetal movement depends on the individual characteristics of woman.
+ Feeling of fetal movement depends on the individual characteristics of the woman.
  The period when the woman feels the first fetal movements can vary from 16 to 25 weeks.<br/><br/>
 ]]>
         </item>
         <item>
 <![CDATA[
-<b>MC</b> &mdash; menstrual cycle; <b>LP</b> &mdash; luteal phase (the second phase of MC); <b>FP</b> &mdash;
- follicular phase (the first phase of MC).<br/><br/>
+<b>MC</b> &mdash; menstrual cycle; <b>LP</b> &mdash; luteal phase (the second phase of MC);
+ <b>FP</b> &mdash; follicular phase (the first phase of MC).<br/><br/>
 
 Leave the default values for the length of MC or LF, if you can not specify them.<br/><br/>
 
-If menses are irregular, then use average length of last three cycles as MC length.<br/><br/>
+If menses are irregular, then use average length of
+ last three cycles as MC length.<br/><br/>
 
-The average <i>length of MC</i> lasts 28 days and varies from 21 to 35 days.<br/><br/>
+The average <i>length of MC</i> lasts 28 days and varies
+ from 21 to 35 days.<br/><br/>
 
-The average <i>length of LP</i> lasts 14 days and varies from 10 to 16 days.<br/><br/>
+The average <i>length of LP</i> lasts 14 days and varies
+ from 10 to 16 days.<br/><br/>
 
 While luteal phase length varies significantly from woman to woman,
  for the same woman the length will be fairly consistent from cycle to cycle.
@@ -104,8 +108,8 @@ The application calculates refined EDD, since it is more accurate than gestation
  then you get value of gestaional EDD calculated by the formula:
  <i><b>Gestational EDD</b> = Last menstrual period + 40 weeks.</i><br/><br/>
 
-<b><i>Attention:</i></b> if the value of MC and LP do not coincide with the average (28 and 14 days
- respectively), the EDD may fall for pregnancy other than 40 weeks.<br/><br/>
+<b><i>Attention:</i></b> if lengths of MC and LP do not coincide with the average (28 and 14 days
+ respectively), the EDD may fall for pregnancy length other than 40 weeks.<br/><br/>
 
 <i><b>Gestational age</b> = Specified date - Last menstrual period.</i><br/><br/>
 ]]>
@@ -125,7 +129,7 @@ where <i>Ovulation (conception) date</i> is expected date of ovulation, intercou
         <item>
 <![CDATA[
 <i><b>EDD</b> = Ultrasound date + Expected pregnancy length -
- Determined gestational or fertilization age.</i><br/><br/>
+ Determined gestational (fertilization) age.</i><br/><br/>
 
 Expected pregnancy length is considered to be 40 weeks, if you select "Gestational age",
  or 38 weeks, if you select "Fertilization age" (counted from ovulation or artificial insemination day).
@@ -162,7 +166,8 @@ Expected pregnancy length is considered to be 40 weeks.<br/><br/>
 
 <i><b>Gestational age</b> = Specified date - Starting point of pregnancy,</i><br/><br/>
 
-where <i>Starting point of pregnancy = First fetal movement date - 20 weeks (for first pregnancy) or 18 weeks (for second pregnancy).</i><br/><br/>
+where <i>Starting point of pregnancy = First fetal movement date - 20 weeks (for first pregnancy)
+ or 18 weeks (for second pregnancy).</i><br/><br/>
 ]]>
         </item>
     </string-array>
