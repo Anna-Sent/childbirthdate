@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <string name="google_app_name"></string>
+    <string name="yandex_app_name"></string>
+    <string name="google_marketing_message"></string>
+    <string name="description">
+<![CDATA[
+]]>
+    </string>
+    <string name="what_is_new">
+<![CDATA[
+]]>
+    </string>
+
 </resources>
