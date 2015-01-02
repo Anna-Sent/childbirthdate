@@ -200,7 +200,7 @@ public class Settings {
 
 	public static int getLanguage(Context context) {
 		int result = getDefaultLanguage(context);
-		if (Settings.isLanguageSetByUser(context)) {
+		if (isLanguageSetByUser(context)) {
 			SharedPreferences settings = getSettings(context);
 			String value = settings.getString(
 					context.getResources()
