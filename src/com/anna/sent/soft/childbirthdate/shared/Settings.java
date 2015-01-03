@@ -211,7 +211,6 @@ public class Settings {
 				} catch (NumberFormatException e) {
 				}
 			}
-
 		}
 
 		return result;
