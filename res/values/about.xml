@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="google_app_name"></string>
-    <string name="yandex_app_name"></string>
-    <string name="google_marketing_message"></string>
+    <string name="google_app_name">Pregnancy Calculator</string>
+    <string name="yandex_app_name">Pregnancy Calculator</string>
+    <string name="google_marketing_message">Calculates expected date of delivery (EDD) and expected gestational age by different methods</string>
     <string name="description">
 <![CDATA[
+With the help of this application you can calculate expected date of delivery (EDD) and expected gestational age on any date.
+
+Available calculation methods:
+
+ * by last menstrual period (refined EDD, gestational EDD);
+ * by ovulation date (fertilization EDD);
+ * by ultrasound;
+ * by clinical examination (by pelvic examination, by the first prenatal visit);
+ * by first fetal movement.
+
+If you don't know some data necessary for calculation, then just uncheck inappropriate calculation method.
+
+All entered data will be saved, and you can email it by selecting menu item "Send data".
+
+Help part of the application contains information about the methods of calculating and their accuracy.
+
+You can add widget on main screen of your device. It will display current gestational age or weeks and days left before the EDD. You can select the most preferred method.
+
+You can calculate parental leave: attract to gestational age some number of days and get range of dates (first and last date inclusive) on which parental leave is granted. In settings of application you can edit lists of available values.
+
+The application is intended for use by medical specialists, OB-GYN doctors, pregnant women and women planning pregnancy.
+
+Please send your comments and suggestions on email anna.sent@gmail.com.
+
+The application DOESN'T PREDICT date of delivery with accuracy of one day, it just calculates EXPECTED date of delivery suggesting on entered data and WELL-KNOWN formulas.
+
+If your date of delivery didn't match the reality, then there are many reasons for it:
+ 1) difficulty of determining input data:
+  - many factors (physical and emotional, stresses, illness and others) may affect on the cycle length and the day when ovulation occurs (the most fertile day);
+  - the conception may occur in few days after sexual intercourse;
+  - incorrect interpretation of ultrasound, individual characteristics of the woman, pathology of the fetus, ultrasound in late pregnancy;
+ 2) factors accelerating or delaying labor: labor induction, unplanned cesarean section, etc.
+
+Key words: pregnancy due date, pregnancy due date calculator, date of delivery, expected date of delivery, estimated date of delivery, EDD, gestational age, fertilization age, fetal, obstetrician, gynaecologist, pregnancy planning, preconception planning, In Vitro Fertilization, IVF, Naegele's rule, prenatal care, antenatal care, In Vitro Fertilization, IVF.
 ]]>
     </string>
     <string name="what_is_new">
 <![CDATA[
+v2.9:
+* English translation.
+Please send your comments and suggestions about translation on email anna.sent@gmail.com.
 ]]>
     </string>
 
