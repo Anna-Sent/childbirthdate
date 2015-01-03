@@ -12,8 +12,8 @@ import android.widget.DatePicker;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
+import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
-import com.anna.sent.soft.utils.DateUtils;
 
 public class DetailsLmpMethodFragment extends DetailsFragment implements
 		OnClickListener, NumberPicker.OnValueChangeListener,

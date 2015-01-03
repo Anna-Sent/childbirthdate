@@ -15,7 +15,7 @@ import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.utils.DateUtils;
+import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 
 public class DataImpl implements Data {
 	private static final String TAG = "moo";

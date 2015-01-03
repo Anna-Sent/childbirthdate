@@ -20,6 +20,7 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.data.DataImpl;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.utils.LanguageUtils;
 import com.anna.sent.soft.utils.ThemeUtils;
 
 public abstract class MyPregnancyWidgetConfigure extends Activity implements
@@ -33,8 +34,13 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		ThemeUtils.onDialogStyleActivityCreateSetTheme(this);
+		ThemeUtils.setupThemeBeforeOnActivityCreate(this,
+				Settings.settingsTheme.getStyle(this, R.array.style_dialog,
+						R.style.DialogTheme));
 		super.onCreate(savedInstanceState);
+		LanguageUtils.setupLanguageAfterOnActivityCreate(this,
+				Settings.settingsLanguage.isLanguageSetByUser(this),
+				Settings.settingsLanguage.getLocale(this));
 		setResult(RESULT_CANCELED);
 		setContentView(R.layout.my_pregnancy_widget_configure_layout);
 

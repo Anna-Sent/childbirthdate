@@ -20,7 +20,8 @@
     <string name="restoreDefaultValues">Restore default values</string>
     <string name="ovulationDate">Ovulation (conception) date</string>
     <string name="ultrasoundDate">Ultrasound date</string>
-    <string name="diagnosedAge">Determined by ultrasound</string>
+    <string name="diagnosedGestationalAge">Determined gestational age</string>
+    <string name="diagnosedEmbryonicAge">Determined fertilization age</string>
     <string name="isGestationalAge">Gestational age (as a rule)</string>
     <string name="isEmbryonicAge">Fertilization age</string>
     <string name="firstAppearanceDate">Date of clinical examination</string>

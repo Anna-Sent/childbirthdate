@@ -36,9 +36,9 @@ import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListUtils;
+import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
-import com.anna.sent.soft.utils.DateUtils;
 
 public class ResultSickListFragment extends StateSaverFragment implements
 		DataClient, OnClickListener, OnItemSelectedListener {

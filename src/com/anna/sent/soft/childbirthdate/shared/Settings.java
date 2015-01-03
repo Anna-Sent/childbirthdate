@@ -17,6 +17,8 @@ import com.anna.sent.soft.childbirthdate.age.ISetting;
 import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
 import com.anna.sent.soft.childbirthdate.age.SettingsParser;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListConstants;
+import com.anna.sent.soft.settings.SettingsLanguage;
+import com.anna.sent.soft.settings.SettingsTheme;
 
 public class Settings {
 	private static class SharedPreferencesWrapper implements SharedPreferences {
@@ -172,94 +174,6 @@ public class Settings {
 		editor.commit();
 	}
 
-	public static int getTheme(Context context) {
-		SharedPreferences settings = getSettings(context);
-		int defaultValue = context.getResources().getInteger(
-				R.integer.defaultTheme);
-		String value = settings.getString(
-				context.getString(R.string.pref_theme_key), "");
-		int result = defaultValue;
-		if (!value.equals("")) {
-			try {
-				result = Integer.parseInt(value);
-			} catch (NumberFormatException e) {
-				result = defaultValue;
-			}
-		}
-
-		return result;
-	}
-
-	public static void setTheme(Context context, int value) {
-		SharedPreferences settings = getSettings(context);
-		Editor editor = settings.edit();
-		editor.putString(context.getString(R.string.pref_theme_key),
-				String.valueOf(value));
-		editor.commit();
-	}
-
-	public static int getLanguage(Context context) {
-		int result = getDefaultLanguage(context);
-		if (isLanguageSetByUser(context)) {
-			SharedPreferences settings = getSettings(context);
-			String value = settings.getString(
-					context.getResources()
-							.getString(R.string.pref_language_key), "");
-			if (!value.equals("")) {
-				try {
-					result = Integer.parseInt(value);
-				} catch (NumberFormatException e) {
-				}
-			}
-		}
-
-		return result;
-	}
-
-	/**
-	 * Gets language set in configuration and returns the language's index in
-	 * supported languages array.
-	 * 
-	 * @return index between 0 and (count of supported languages - 1) - UI
-	 *         language index
-	 */
-	private static int getDefaultLanguage(Context context) {
-		String[] supportedLocales = context.getResources().getStringArray(
-				R.array.locales);
-		String currentLocale = context.getResources().getConfiguration().locale
-				.getLanguage();
-		for (int i = 0; i < supportedLocales.length; ++i) {
-			if (supportedLocales[i].equals(currentLocale)) {
-				return i;
-			}
-		}
-
-		return 0; // 0 is ru, default UI language
-	}
-
-	public static String getLocale(Context context) {
-		int languageId = getLanguage(context);
-		String[] supportedLocales = context.getResources().getStringArray(
-				R.array.locales);
-		return supportedLocales[languageId];
-	}
-
-	private static final String KEY_PREF_IS_LANGUAGE_SET_BY_USER = "com.anna.sent.soft.childbirthdate.islanguagesetbyuser";
-
-	public static boolean isLanguageSetByUser(Context context) {
-		SharedPreferences settings = getSettings(context);
-		return settings.getBoolean(KEY_PREF_IS_LANGUAGE_SET_BY_USER, false);
-	}
-
-	public static void setLanguage(Context context, int value) {
-		SharedPreferences settings = getSettings(context);
-		Editor editor = settings.edit();
-		editor.putString(context.getString(R.string.pref_language_key),
-				String.valueOf(value));
-		editor.putBoolean(KEY_PREF_IS_LANGUAGE_SET_BY_USER, true);
-		editor.commit();
-	}
-
 	private static final String KEY_PREF_DO_NOT_SHOW_SICK_LIST_INFO_DIALOG = "com.anna.sent.soft.childbirthdate.donotshowsicklistinfodialog";
 
 	public static boolean showSickListInfoDialog(Context context) {
@@ -277,5 +191,65 @@ public class Settings {
 
 	public static void clear(Context context) {
 		getSettings(context).edit().clear().commit();
+	}
+
+	public static SettingsLanguageImpl settingsLanguage = new SettingsLanguageImpl();
+
+	public static class SettingsLanguageImpl extends SettingsLanguage {
+		@Override
+		protected SharedPreferences getSettings(Context context) {
+			return Settings.getSettings(context);
+		}
+
+		@Override
+		protected String getLanguageKey(Context context) {
+			return context.getResources().getString(R.string.pref_language_key);
+		}
+
+		private static final String KEY_PREF_IS_LANGUAGE_SET_BY_USER = "com.anna.sent.soft.childbirthdate.islanguagesetbyuser";
+
+		@Override
+		protected String getIsLanguageSetByUserKey(Context context) {
+			return KEY_PREF_IS_LANGUAGE_SET_BY_USER;
+		}
+
+		@Override
+		protected int getLocaleArrayResourceId() {
+			return R.array.locale;
+		}
+
+		@Override
+		protected int getLanguageValuesArrayResourceId() {
+			return R.array.language_values;
+		}
+
+		@Override
+		protected int getDefaultLanguageId(Context context) {
+			return context.getResources().getInteger(R.integer.defaultLanguage);
+		}
+	};
+
+	public static SettingsThemeImpl settingsTheme = new SettingsThemeImpl();
+
+	public static class SettingsThemeImpl extends SettingsTheme {
+		@Override
+		protected SharedPreferences getSettings(Context context) {
+			return Settings.getSettings(context);
+		}
+
+		@Override
+		public String getThemeKey(Context context) {
+			return context.getString(R.string.pref_theme_key);
+		}
+
+		@Override
+		protected int getThemeValuesArrayResourceId() {
+			return R.array.theme_values;
+		}
+
+		@Override
+		protected int getDefaultThemeId(Context context) {
+			return context.getResources().getInteger(R.integer.defaultTheme);
+		}
 	}
 }

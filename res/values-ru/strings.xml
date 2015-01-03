@@ -20,7 +20,8 @@
     <string name="restoreDefaultValues">Восстановить значения по умолчанию</string>
     <string name="ovulationDate">Дата овуляции (зачатия)</string>
     <string name="ultrasoundDate">Дата проведения исследования</string>
-    <string name="diagnosedAge">Диагностированный срок беременности</string>
+    <string name="diagnosedGestationalAge">Диагностированный акушерский срок беременности</string>
+    <string name="diagnosedEmbryonicAge">Диагностированный эмбриональный срок беременности</string>
     <string name="isGestationalAge">Указан акушерский срок (как правило)</string>
     <string name="isEmbryonicAge">Указан эмбриональный срок</string>
     <string name="firstAppearanceDate">Дата явки в женскую консультацию</string>
