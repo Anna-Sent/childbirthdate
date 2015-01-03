@@ -9,16 +9,18 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
+import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
-import com.anna.sent.soft.utils.DateUtils;
 
 public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 		OnClickListener, NumberPicker.OnValueChangeListener,
 		DatePicker.OnDateChangedListener {
+	private TextView textViewDiagnosedAge;
 	private NumberPicker numberPickerWeeks, numberPickerDays;
 	private DatePicker datePicker;
 	private RadioButton radioButtonIsGestationalAge, radioButtonIsEmbryonicAge;
@@ -49,6 +51,10 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+
+		textViewDiagnosedAge = (TextView) getActivity().findViewById(
+				R.id.textViewDiagnosedAge);
+
 		datePicker = (DatePicker) getActivity().findViewById(
 				R.id.datePickerUltrasoundDate);
 		DateUtils.init(datePicker, this);
@@ -91,7 +97,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 				int previous = numberPickerWeeks.getValue();
 				setMaxWeeks();
 				int current = numberPickerWeeks.getValue();
-				if (current != previous && mData != null) {
+				if (current != previous) {
 					mData.setUltrasoundWeeks(current);
 				}
 
@@ -121,8 +127,12 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 	}
 
 	private void setMaxWeeks() {
+		boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
+		textViewDiagnosedAge
+				.setText(isEmbryonicAge ? R.string.diagnosedEmbryonicAge
+						: R.string.diagnosedGestationalAge);
 		numberPickerWeeks
-				.setMaxValue((radioButtonIsEmbryonicAge.isChecked() ? PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS
+				.setMaxValue((isEmbryonicAge ? PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS
 						: PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS) - 1);
 	}
 

@@ -45,11 +45,15 @@ public class SettingsActivity extends PreferenceActivity implements
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		ThemeUtils.onActivityCreateSetTheme(this);
+		ThemeUtils.setupThemeBeforeOnActivityCreate(this,
+				Settings.settingsTheme.getStyle(this, R.array.style,
+						R.style.AppTheme));
 
 		super.onCreate(savedInstanceState);
 
-		LanguageUtils.configurationChanged(this);
+		LanguageUtils.setupLanguageAfterOnActivityCreate(this,
+				Settings.settingsLanguage.isLanguageSetByUser(this),
+				Settings.settingsLanguage.getLocale(this));
 
 		addPreferencesFromResource(R.xml.preferences);
 
@@ -85,7 +89,7 @@ public class SettingsActivity extends PreferenceActivity implements
 		String title = getString(R.string.pref_language_title);
 		pref.setDialogTitle(title);
 		pref.setTitle(title);
-		int value = Settings.getLanguage(this);
+		int value = Settings.settingsLanguage.getLanguage(this);
 		pref.setDefaultValue(String.valueOf(value));
 		pref.setValue(String.valueOf(value));
 		log(pref.getValue() + " " + pref.getEntry());
@@ -116,11 +120,13 @@ public class SettingsActivity extends PreferenceActivity implements
 		if (key.equals(getString(R.string.pref_language_key))) {
 			try {
 				int value = Integer.parseInt(newValue.toString());
-				int current = Settings.getLanguage(this);
+				int current = Settings.settingsLanguage.getLanguage(this);
 				if (value != current) {
 					log("language changed");
-					Settings.setLanguage(this, value);
-					TaskStackBuilderUtils.restartFromSettings(this);
+					Settings.settingsLanguage.setLanguage(this, value);
+					TaskStackBuilderUtils.restartFromSettings(this,
+							MainActivity.class,
+							MainActivity.EXTRA_CONFIGURATION_CHANGED);
 					return true;
 				}
 			} catch (NumberFormatException e) {
@@ -128,11 +134,13 @@ public class SettingsActivity extends PreferenceActivity implements
 		} else if (key.equals(getString(R.string.pref_theme_key))) {
 			try {
 				int value = Integer.parseInt(newValue.toString());
-				int current = Settings.getTheme(this);
+				int current = Settings.settingsTheme.getTheme(this);
 				if (value != current) {
 					log("theme changed");
-					Settings.setTheme(this, value);
-					TaskStackBuilderUtils.restartFromSettings(this);
+					Settings.settingsTheme.setTheme(this, value);
+					TaskStackBuilderUtils.restartFromSettings(this,
+							MainActivity.class,
+							MainActivity.EXTRA_CONFIGURATION_CHANGED);
 					return true;
 				}
 			} catch (NumberFormatException e) {

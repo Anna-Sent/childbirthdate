@@ -25,8 +25,8 @@ import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout;
 import com.anna.sent.soft.childbirthdate.ui.LongPressedButton;
+import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
-import com.anna.sent.soft.utils.DateUtils;
 
 public class ResultEcdFragment extends StateSaverFragment implements
 		DataClient, OnClickListener, OnDateChangedListener,

@@ -11,7 +11,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.utils.DateUtils;
+import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 
 public class DetailsFirstMovementsMethodFragment extends DetailsFragment
 		implements OnClickListener, DatePicker.OnDateChangedListener {
