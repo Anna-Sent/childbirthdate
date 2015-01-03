@@ -92,6 +92,7 @@ public class SettingsActivity extends PreferenceActivity implements
 		int value = Settings.settingsLanguage.getLanguage(this);
 		pref.setDefaultValue(String.valueOf(value));
 		pref.setValue(String.valueOf(value));
+		Settings.settingsLanguage.setLanguage(this, value);
 		log(pref.getValue() + " " + pref.getEntry());
 		pref.setSummary(pref.getEntry());
 		pref.setOnPreferenceChangeListener(this);
