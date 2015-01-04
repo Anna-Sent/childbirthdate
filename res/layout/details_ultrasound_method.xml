@@ -21,6 +21,7 @@
             <TextView
                 android:id="@+id/textViewDiagnosedAge"
                 style="@style/TextViewStyle"
+                android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/view_vertical_margin"
                 android:text="@string/diagnosedGestationalAge" />
 
