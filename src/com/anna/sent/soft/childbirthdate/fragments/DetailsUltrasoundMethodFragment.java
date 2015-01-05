@@ -81,6 +81,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 	@Override
 	public void onPause() {
 		super.onPause();
+		datePicker.clearFocus();
 		numberPickerWeeks.clearFocus();
 		numberPickerDays.clearFocus();
 	}

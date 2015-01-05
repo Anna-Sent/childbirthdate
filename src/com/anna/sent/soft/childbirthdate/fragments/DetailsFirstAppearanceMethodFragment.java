@@ -74,6 +74,7 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 	@Override
 	public void onPause() {
 		super.onPause();
+		datePicker.clearFocus();
 		numberPicker.clearFocus();
 	}
 
