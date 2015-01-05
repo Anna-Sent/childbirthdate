@@ -25,21 +25,24 @@
         tools:ignore="UnusedAttribute" >
         <activity
             android:name=".widget.MyPregnancyWidgetConfigureSmall"
-            android:label="@string/widget_small_name" >
+            android:label="@string/widget_small_name"
+            android:theme="@style/DialogBaseThemeLight" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
         <activity
             android:name=".widget.MyPregnancyWidgetConfigureSimple"
-            android:label="@string/widget_simple_name" >
+            android:label="@string/widget_simple_name"
+            android:theme="@style/DialogBaseThemeLight" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
         <activity
             android:name=".widget.MyPregnancyWidgetConfigureAdditional"
-            android:label="@string/widget_additional_name" >
+            android:label="@string/widget_additional_name"
+            android:theme="@style/DialogBaseThemeLight" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
