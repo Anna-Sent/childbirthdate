@@ -21,7 +21,6 @@ import com.anna.sent.soft.childbirthdate.data.DataImpl;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.LanguageUtils;
-import com.anna.sent.soft.utils.ThemeUtils;
 
 public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		OnClickListener {
@@ -34,9 +33,11 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		ThemeUtils.setupThemeBeforeOnActivityCreate(this,
-				Settings.settingsTheme.getStyle(this, R.array.style_dialog,
-						R.style.DialogTheme));
+		/*
+		 * ThemeUtils.setupThemeBeforeOnActivityCreate(this,
+		 * Settings.settingsTheme.getStyle(this, R.array.style_dialog,
+		 * R.style.DialogTheme));
+		 */
 		super.onCreate(savedInstanceState);
 		LanguageUtils.setupLanguageAfterOnActivityCreate(this,
 				Settings.settingsLanguage.isLanguageSetByUser(this),

@@ -57,8 +57,20 @@
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
     </style>
 
-    <style name="DialogTheme" parent="DialogBaseTheme" />
+    <color name="opaque_50">#80000000</color>
 
-    <style name="DialogThemeLight" parent="DialogBaseThemeLight" />
+    <style name="DialogTheme" parent="DialogBaseTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/opaque_50</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="DialogThemeLight" parent="DialogBaseThemeLight">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/opaque_50</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 
 </resources>
