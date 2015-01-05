@@ -40,7 +40,7 @@ Actual day of delivery <b><i>can vary from EDD by two weeks</b></i>.<br/><br/>
 
 Pregnancy lengths <b><i>between 38 and 42 weeks</i></b> are considered normal.<br/><br/>
 
-Calculation methods <b><i>by last menstrual period</i></b> and <b><i>by ovulation date</i></b> give more
+Calculation methods <b><i>by last menstrual period</i></b> and <b><i>by ovulation (conception) date</i></b> give more
  accurate values for women with regular menses.<br/><br/>
 
 If you use some methods to determine ovulation date, and know
@@ -55,7 +55,7 @@ If you have had single sexual intercourse after which you have got pregnant, the
  this sexual intercourse as an expected conception date. But you should keep in mind
  that conception may occur in few days after sexual intercourse.<br/><br/>
 
-Calculation method by ovulation date gives high accuracy for women who get pregnant with
+Calculation method by ovulation (conception) date gives high accuracy for women who get pregnant with
  In Vitro Fertilization (IVF)
  and know the date of artificial insemination exactly.<br/><br/>
 
@@ -116,7 +116,7 @@ The application calculates refined EDD, since it is more accurate than gestation
         </item>
         <item>
 <![CDATA[
-<i><b>EDD by Ovulation</b> = Ovulation (conception) date + 38 weeks,</i><br/><br/>
+<i><b>EDD by ovulation (conception)</b> = Ovulation (conception) date + 38 weeks,</i><br/><br/>
 
 where <i>Ovulation (conception) date</i> is expected date of ovulation, intercourse, or artifical insemination.<br/><br/>
 
@@ -132,7 +132,7 @@ where <i>Ovulation (conception) date</i> is expected date of ovulation, intercou
  Determined gestational (fertilization) age.</i><br/><br/>
 
 Expected pregnancy length is considered to be 40 weeks, if you select "Gestational age",
- or 38 weeks, if you select "Fertilization age" (counted from ovulation or artificial insemination day).
+ or 38 weeks, if you select "Fertilization age" (counted from ovulation, intercourse, or artificial insemination day).
  As a rule, if an ultrasound determines the embryo or fetus, the conclusion indicates "Gestational age",
  if only the fertilized egg, the "Fertilization age".
  Consult your doctor about it.<br/><br/>
