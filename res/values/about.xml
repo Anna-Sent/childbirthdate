@@ -11,7 +11,7 @@
 Available calculation methods:
 
  * by last menstrual period (refined EDD, gestational EDD);
- * by ovulation date (fertilization EDD);
+ * by ovulation (conception) date (fertilization EDD);
  * by ultrasound;
  * by clinical examination (by pelvic examination, by first prenatal visit);
  * by first fetal movement.
@@ -24,7 +24,7 @@ Help part of the application contains information about the methods of calculati
 
 You can add widget on main screen of your device. It will display current gestational age or weeks and days left before the EDD. You can select the most preferred method.
 
-You can calculate parental leave: attract to gestational age some number of days and get range of dates (first and last date inclusive) on which parental leave is granted. In settings of application you can edit lists of available values.
+You can calculate range of dates (first and last date inclusive) for parental leave: just enter 1) gestational age from which leave is started and 2) number of days on which leave is granted. In settings of application you can edit lists of available values.
 
 The application is intended for use by medical specialists, OB-GYN doctors, pregnant women and women planning pregnancy.
 
@@ -34,7 +34,7 @@ The application DOESN'T PREDICT date of delivery with accuracy of one day, it ju
 
 If your date of delivery didn't match the reality, then there are many reasons for it:
  1) difficulty of determining input data:
-  - many factors (physical and emotional, stresses, illness and others) may affect on the cycle length and the day when ovulation occurs (the most fertile day);
+  - many factors (physical and emotional, stresses, illness, etc.) may affect on the cycle length and the day when ovulation occurs (the most fertile day);
   - the conception may occur in few days after sexual intercourse;
   - incorrect interpretation of ultrasound, individual characteristics of the woman, pathology of the fetus, ultrasound in late pregnancy;
  2) factors accelerating or delaying labor: labor induction, unplanned cesarean section, etc.
