@@ -53,6 +53,12 @@ public class DetailsFirstMovementsMethodFragment extends DetailsFragment
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		datePicker.clearFocus();
+	}
+
+	@Override
 	protected void updateData() {
 		if (mData != null) {
 			DateUtils.setDate(datePicker, mData.getFirstMovementsDate());

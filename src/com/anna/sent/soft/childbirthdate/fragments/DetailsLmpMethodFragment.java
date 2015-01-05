@@ -73,6 +73,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 	@Override
 	public void onPause() {
 		super.onPause();
+		datePicker.clearFocus();
 		numberPickerMcl.clearFocus();
 		numberPcikerLpl.clearFocus();
 	}

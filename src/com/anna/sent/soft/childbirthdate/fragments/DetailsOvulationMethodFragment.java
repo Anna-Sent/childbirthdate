@@ -47,6 +47,12 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		datePicker.clearFocus();
+	}
+
+	@Override
 	protected void updateData() {
 		if (mData != null) {
 			DateUtils.setDate(datePicker, mData.getOvulationDate());
