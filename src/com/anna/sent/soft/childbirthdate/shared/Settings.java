@@ -109,7 +109,7 @@ public class Settings {
 		}
 
 		@Override
-		protected String getLanguageKey(Context context) {
+		public String getLanguageKey(Context context) {
 			return context.getResources().getString(R.string.pref_language_key);
 		}
 

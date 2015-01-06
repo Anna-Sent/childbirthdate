@@ -61,6 +61,7 @@ public class SettingsActivity extends PreferenceActivity implements
 
 		createLanguagePreference();
 		setupThemePreference();
+
 		setupSickListDaysPreference();
 		setupSickListAgePreference();
 	}
@@ -80,7 +81,7 @@ public class SettingsActivity extends PreferenceActivity implements
 		log("create language preference");
 		PreferenceCategory category = (PreferenceCategory) findPreference(getString(R.string.pref_ui_settings_key));
 		final ListPreference pref = new ListPreference(this);
-		pref.setKey(getString(R.string.pref_language_key));
+		pref.setKey(Settings.settingsLanguage.getLanguageKey(this));
 		String[] entries = getResources().getStringArray(R.array.language);
 		pref.setEntries(entries);
 		String[] entryValues = getResources().getStringArray(
@@ -100,7 +101,8 @@ public class SettingsActivity extends PreferenceActivity implements
 	}
 
 	private void setupThemePreference() {
-		ListPreference pref = (ListPreference) findPreference(getString(R.string.pref_theme_key));
+		ListPreference pref = (ListPreference) findPreference(Settings.settingsTheme
+				.getThemeKey(this));
 		pref.setSummary(pref.getEntry());
 		pref.setOnPreferenceChangeListener(this);
 	}
@@ -118,7 +120,7 @@ public class SettingsActivity extends PreferenceActivity implements
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String key = preference.getKey();
-		if (key.equals(getString(R.string.pref_language_key))) {
+		if (key.equals(Settings.settingsLanguage.getLanguageKey(this))) {
 			try {
 				int value = Integer.parseInt(newValue.toString());
 				int current = Settings.settingsLanguage.getLanguage(this);
@@ -132,7 +134,7 @@ public class SettingsActivity extends PreferenceActivity implements
 				}
 			} catch (NumberFormatException e) {
 			}
-		} else if (key.equals(getString(R.string.pref_theme_key))) {
+		} else if (key.equals(Settings.settingsTheme.getThemeKey(this))) {
 			try {
 				int value = Integer.parseInt(newValue.toString());
 				int current = Settings.settingsTheme.getTheme(this);
