@@ -16,6 +16,7 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anna.sent.soft.childbirthdate.MainActivity;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.data.DataImpl;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
@@ -121,8 +122,9 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	protected abstract Builder getBuilder();
 
 	private void startTheApplication() {
-		Intent intent = new Intent(this,
-				com.anna.sent.soft.childbirthdate.MainActivity.class);
+		Intent intent = new Intent(this, MainActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+				| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 		finish();
 	}
