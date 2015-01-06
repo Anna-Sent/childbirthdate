@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.ResultsActivity;
 import com.anna.sent.soft.childbirthdate.data.DataImpl;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
@@ -23,8 +24,7 @@ public abstract class Builder {
 	protected abstract boolean hasTV3();
 
 	private void setOnClickPendingIntent(Context context, RemoteViews views) {
-		Intent intent = new Intent(context,
-				com.anna.sent.soft.childbirthdate.ResultsActivity.class);
+		Intent intent = new Intent(context, ResultsActivity.class);
 		intent.putExtra(Shared.Child.EXTRA_IS_STARTED_FROM_WIDGET, true);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 				| Intent.FLAG_ACTIVITY_CLEAR_TOP);
