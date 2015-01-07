@@ -19,6 +19,7 @@ public class ResultsActivity extends ChildActivity implements
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
+		setTitle(R.string.calculation);
 		setContentView(R.layout.activity_results);
 		super.setViews(savedInstanceState);
 

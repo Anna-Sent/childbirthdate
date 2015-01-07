@@ -29,6 +29,7 @@ public class DetailsActivity extends ChildActivity implements
 			return;
 		}
 
+		setTitle(R.string.app_name);
 		setContentView(R.layout.activity_details);
 		super.setViews(savedInstanceState);
 
