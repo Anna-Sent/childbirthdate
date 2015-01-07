@@ -32,6 +32,8 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 	private Button button;
 	private boolean doCalculation = false;
 
+	protected abstract int getTitleStringResourceId();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		/*
@@ -40,11 +42,14 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		 * R.style.DialogTheme));
 		 */
 		super.onCreate(savedInstanceState);
+
 		LanguageUtils.setupLanguageAfterOnActivityCreate(this,
 				Settings.settingsLanguage.isLanguageSetByUser(this),
 				Settings.settingsLanguage.getLocale(this));
-		setResult(RESULT_CANCELED);
+
+		setTitle(getTitleStringResourceId());
 		setContentView(R.layout.my_pregnancy_widget_configure_layout);
+		setResult(RESULT_CANCELED);
 
 		// First, get the App Widget ID from the Intent that launched the
 		// Activity:

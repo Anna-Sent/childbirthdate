@@ -12,6 +12,7 @@ public class HelpActivity extends ChildActivity {
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
+		setTitle(R.string.help);
 		setContentView(R.layout.activity_details);
 		super.setViews(savedInstanceState);
 

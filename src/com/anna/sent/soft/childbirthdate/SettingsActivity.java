@@ -55,6 +55,8 @@ public class SettingsActivity extends PreferenceActivity implements
 				Settings.settingsLanguage.isLanguageSetByUser(this),
 				Settings.settingsLanguage.getLocale(this));
 
+		setTitle(R.string.settings);
+
 		addPreferencesFromResource(R.xml.preferences);
 
 		ActionBarUtils.setupActionBar(this);

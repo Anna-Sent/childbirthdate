@@ -21,6 +21,7 @@ public class MainActivity extends DataKeeperActivity {
 		}
 
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		setTitle(R.string.app_name);
 		setContentView(R.layout.activity_main);
 	}
 
