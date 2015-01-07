@@ -29,7 +29,7 @@ public class EmailDataActionActivity extends EmailActionActivity {
 					result.append("\n\t");
 					String ecd = DateUtils.toString(this, p.getEndPoint());
 					result.append(getString(R.string.ecdIs, ecd));
-					result.append('\n');
+					result.append("\n\n");
 				}
 			}
 		}
