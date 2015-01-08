@@ -24,28 +24,30 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 	public void onReceive(Context context, Intent intent) {
 		// Manual or automatic widget update started
 		String action = intent.getAction();
-		if (action.equals(UPDATE_ACTION)
-				|| action.equals(Intent.ACTION_TIME_CHANGED)
-				|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
-				|| action.equals(Intent.ACTION_DATE_CHANGED)
-				|| action.equals(Intent.ACTION_BOOT_COMPLETED)) {
-			AppWidgetManager appWidgetManager = AppWidgetManager
-					.getInstance(context);
-			int[] appWidgetIds = appWidgetManager
-					.getAppWidgetIds(new ComponentName(context, getClass()));
-			if (appWidgetIds.length > 0) {
-				/*
-				 * Log.d("moo", getClass().getSimpleName() + " got action " +
-				 * action);
-				 */
-				onUpdate(context, appWidgetManager, appWidgetIds);
+		if (action != null) {
+			if (action.equals(UPDATE_ACTION)
+					|| action.equals(Intent.ACTION_TIME_CHANGED)
+					|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
+					|| action.equals(Intent.ACTION_DATE_CHANGED)
+					|| action.equals(Intent.ACTION_BOOT_COMPLETED)) {
+				AppWidgetManager appWidgetManager = AppWidgetManager
+						.getInstance(context);
+				int[] appWidgetIds = appWidgetManager
+						.getAppWidgetIds(new ComponentName(context, getClass()));
+				if (appWidgetIds.length > 0) {
+					/*
+					 * Log.d("moo", getClass().getSimpleName() + " got action "
+					 * + action);
+					 */
+					onUpdate(context, appWidgetManager, appWidgetIds);
 
-				// Need to reinstall alarm on these events
-				if (action.equals(Intent.ACTION_TIME_CHANGED)
-						|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
-						|| action.equals(Intent.ACTION_DATE_CHANGED)
-						|| action.equals(Intent.ACTION_BOOT_COMPLETED)) {
-					installAlarms(context, getClass());
+					// Need to reinstall alarm on these events
+					if (action.equals(Intent.ACTION_TIME_CHANGED)
+							|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)
+							|| action.equals(Intent.ACTION_DATE_CHANGED)
+							|| action.equals(Intent.ACTION_BOOT_COMPLETED)) {
+						installAlarms(context, getClass());
+					}
 				}
 			}
 		}
