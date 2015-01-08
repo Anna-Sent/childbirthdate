@@ -17,6 +17,7 @@ public class DataKeeperActivity extends StateSaverActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		mConcreteData = new DataImpl(this);
+		mConcreteData.update();
 		super.onCreate(savedInstanceState);
 	}
 
