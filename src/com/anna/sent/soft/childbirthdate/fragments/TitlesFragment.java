@@ -215,7 +215,7 @@ public class TitlesFragment extends ListFragment implements
 	public void detailsChanged() {
 		// log("details changed, update values");
 		if (mData != null) {
-			mListAdapter.updateValues(mData.getStrings2(getActivity()));
+			mListAdapter.updateValues(mData.getStrings2());
 		}
 	}
 
@@ -224,8 +224,7 @@ public class TitlesFragment extends ListFragment implements
 		super.onResume();
 		// log("resume, update ui");
 		if (mData != null) {
-			mListAdapter.updateValues(mData.byMethod(),
-					mData.getStrings2(getActivity()));
+			mListAdapter.updateValues(mData.byMethod(), mData.getStrings2());
 		}
 	}
 

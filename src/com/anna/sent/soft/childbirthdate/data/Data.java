@@ -2,8 +2,6 @@ package com.anna.sent.soft.childbirthdate.data;
 
 import java.util.Calendar;
 
-import android.content.Context;
-
 public interface Data {
 	public boolean[] byMethod();
 
@@ -13,7 +11,7 @@ public interface Data {
 
 	public int getSelectedMethodsCount();
 
-	public String[] getStrings2(Context context);
+	public String[] getStrings2();
 
 	public int getMenstrualCycleLen();
 

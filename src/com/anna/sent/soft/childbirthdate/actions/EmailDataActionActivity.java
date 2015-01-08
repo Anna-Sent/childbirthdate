@@ -19,7 +19,7 @@ public class EmailDataActionActivity extends EmailActionActivity {
 		data.update();
 		StringBuilder result = new StringBuilder();
 		String[] strings1 = getResources().getStringArray(R.array.MethodNames);
-		String[] strings2 = data.getStrings2(this);
+		String[] strings2 = data.getStrings2();
 		boolean[] byMethod = data.byMethod();
 		for (int i = 0; i < byMethod.length; ++i) {
 			if (byMethod[i]) {
