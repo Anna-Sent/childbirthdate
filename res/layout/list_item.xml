@@ -11,8 +11,13 @@
         <CheckBox
             android:id="@+id/checkBox"
             style="@style/CheckBoxStyle"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:focusable="false" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="@dimen/checkbox_margin"
+            android:focusable="false"
+            android:gravity="center"
+            android:paddingRight="@dimen/checkbox_padding" />
 
         <LinearLayout
             style="@style/LinearLayoutVerticalStyle"
