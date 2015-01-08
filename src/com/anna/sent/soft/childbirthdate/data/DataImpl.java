@@ -94,7 +94,7 @@ public class DataImpl implements Data {
 	}
 
 	@Override
-	public void setByMethod(int index, boolean value) {
+	public void byMethod(int index, boolean value) {
 		if (index >= 0 && index < byMethod.length) {
 			byMethod[index] = value;
 		}

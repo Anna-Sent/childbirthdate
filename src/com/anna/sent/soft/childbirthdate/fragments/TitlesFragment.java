@@ -237,7 +237,7 @@ public class TitlesFragment extends ListFragment implements
 	@Override
 	public void checked(int position, boolean isChecked) {
 		if (mData != null) {
-			mData.setByMethod(position, isChecked);
+			mData.byMethod(position, isChecked);
 		}
 	}
 }
