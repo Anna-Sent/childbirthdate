@@ -1,89 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/ScrollViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ResultActivity" >
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
+    <ScrollView
+        style="@style/ScrollViewStyle"
+        android:layout_above="@+id/adView" >
 
-        <LinearLayout
-            style="@style/LinearLayoutVerticalStyle"
-            android:gravity="center" >
+        <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
 
-            <TextView
-                style="@style/TextViewStyle"
-                android:text="@string/when_the_duration_of_pregnancy" />
+            <LinearLayout
+                style="@style/LinearLayoutVerticalStyle"
+                android:gravity="center" >
 
-            <RelativeLayout
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:text="@string/when_the_duration_of_pregnancy" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Spinner
+                        android:id="@+id/spinnerAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/buttonEditAge" />
+
+                    <Button
+                        android:id="@+id/buttonEditAge"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="?attr/iconEdit"
+                        android:text="" />
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:text="@string/on" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Spinner
+                        android:id="@+id/spinnerDays"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/buttonEditDays" />
+
+                    <Button
+                        android:id="@+id/buttonEditDays"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="?attr/iconEdit"
+                        android:text="" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/table_sick_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <Spinner
-                    android:id="@+id/spinnerAge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/buttonEditAge" />
-
-                <Button
-                    android:id="@+id/buttonEditAge"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:drawableLeft="?attr/iconEdit"
-                    android:text="" />
-            </RelativeLayout>
-
-            <TextView
-                style="@style/TextViewStyle"
-                android:text="@string/on" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <Spinner
-                    android:id="@+id/spinnerDays"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/buttonEditDays" />
-
-                <Button
-                    android:id="@+id/buttonEditDays"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:drawableLeft="?attr/iconEdit"
-                    android:text="" />
-            </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:shrinkColumns="*"
+                android:stretchColumns="*" />
         </LinearLayout>
+    </ScrollView>
 
-        <TableLayout
-            android:id="@+id/table_sick_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:shrinkColumns="*"
-            android:stretchColumns="*" />
+    <com.google.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/adview_margin"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/adUnitId"
+        ads:loadAdOnCreate="true"
+        ads:testDevices="TEST_EMULATOR"
+        android:gravity="center"
+        tools:ignore="MissingRegistered" />
 
-        <com.google.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/adview_margin"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/adUnitId"
-            ads:loadAdOnCreate="true"
-            ads:testDevices="TEST_EMULATOR"
-            android:gravity="center"
-            tools:ignore="MissingRegistered" />
-    </LinearLayout>
-
-</ScrollView>
+</RelativeLayout>
