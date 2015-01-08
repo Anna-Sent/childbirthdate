@@ -308,32 +308,32 @@ public class DataImpl implements Data {
 	}
 
 	@Override
-	public String[] getStrings2(Context context) {
+	public String[] getStrings2() {
 		String[] result = new String[Shared.Calculation.METHODS_COUNT];
 
-		result[Shared.Calculation.BY_LMP - 1] = context.getString(
+		result[Shared.Calculation.BY_LMP - 1] = mContext.getString(
 				R.string.titles0,
-				DateUtils.toString(context, lastMenstruationDate),
+				DateUtils.toString(mContext, lastMenstruationDate),
 				menstrualCycleLen, lutealPhaseLen);
 
-		result[Shared.Calculation.BY_OVULATION - 1] = context.getString(
-				R.string.titles1, DateUtils.toString(context, ovulationDate));
+		result[Shared.Calculation.BY_OVULATION - 1] = mContext.getString(
+				R.string.titles1, DateUtils.toString(mContext, ovulationDate));
 
-		result[Shared.Calculation.BY_ULTRASOUND - 1] = context.getString(
+		result[Shared.Calculation.BY_ULTRASOUND - 1] = mContext.getString(
 				isEmbryonicAge ? R.string.titles2_emryonic
 						: R.string.titles2_gestational, DateUtils.toString(
-						context, ultrasoundDate), new Age(ultrasoundWeeks,
-						ultrasoundDays).toString(context));
+						mContext, ultrasoundDate), new Age(ultrasoundWeeks,
+						ultrasoundDays).toString(mContext));
 
-		result[Shared.Calculation.BY_FIRST_APPEARANCE - 1] = context.getString(
-				R.string.titles3, DateUtils.toString(context,
-						firstAppearanceDate), new Age(firstAppearanceWeeks, 0)
-						.toString(context));
+		result[Shared.Calculation.BY_FIRST_APPEARANCE - 1] = mContext
+				.getString(R.string.titles3,
+						DateUtils.toString(mContext, firstAppearanceDate),
+						new Age(firstAppearanceWeeks, 0).toString(mContext));
 
-		result[Shared.Calculation.BY_FIRST_MOVEMENTS - 1] = context.getString(
+		result[Shared.Calculation.BY_FIRST_MOVEMENTS - 1] = mContext.getString(
 				isFirstPregnancy ? R.string.titles4_first_pregnancy
 						: R.string.titles4_second_pregnancy, DateUtils
-						.toString(context, firstMovementsDate));
+						.toString(mContext, firstMovementsDate));
 
 		return result;
 	}
