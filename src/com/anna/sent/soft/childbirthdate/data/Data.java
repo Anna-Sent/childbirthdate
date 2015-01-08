@@ -7,11 +7,11 @@ import android.content.Context;
 public interface Data {
 	public boolean[] byMethod();
 
+	public void byMethod(int index, boolean value);
+
 	public boolean thereIsAtLeastOneSelectedMethod();
 
 	public String[] getStrings2(Context context);
-
-	public void setByMethod(int index, boolean value);
 
 	public int getMenstrualCycleLen();
 
@@ -41,9 +41,9 @@ public interface Data {
 
 	public void setUltrasoundDays(int value);
 
-	public void isEmbryonicAge(boolean value);
-
 	public boolean isEmbryonicAge();
+
+	public void isEmbryonicAge(boolean value);
 
 	public Calendar getFirstAppearanceDate();
 
