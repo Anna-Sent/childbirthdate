@@ -11,6 +11,8 @@ public interface Data {
 
 	public boolean thereIsAtLeastOneSelectedMethod();
 
+	public int getSelectedMethodsCount();
+
 	public String[] getStrings2(Context context);
 
 	public int getMenstrualCycleLen();

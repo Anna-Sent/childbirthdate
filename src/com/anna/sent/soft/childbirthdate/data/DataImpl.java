@@ -348,4 +348,16 @@ public class DataImpl implements Data {
 
 		return false;
 	}
+
+	@Override
+	public int getSelectedMethodsCount() {
+		int count = 0;
+		for (int i = 0; i < byMethod.length; ++i) {
+			if (byMethod[i]) {
+				++count;
+			}
+		}
+
+		return count;
+	}
 }
