@@ -88,6 +88,7 @@
                 android:id="@+id/table_ecd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/adview_margin"
                 android:shrinkColumns="*"
                 android:stretchColumns="*" />
         </LinearLayout>
@@ -98,7 +99,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/adview_margin"
         ads:adSize="BANNER"
         ads:adUnitId="@string/adUnitId"
         ads:loadAdOnCreate="true"
