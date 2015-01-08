@@ -2,6 +2,7 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import java.util.Calendar;
 
+import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout;
 import com.anna.sent.soft.childbirthdate.ui.LongPressedButton;
+import com.anna.sent.soft.childbirthdate.utils.AdUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
 
@@ -73,6 +75,8 @@ public class ResultEcdFragment extends StateSaverFragment implements
 
 	@Override
 	public void setViews(Bundle savedInstanceState) {
+		AdUtils.setupAd(getData(), getActivity(), R.id.adView_ecd, 200, 100);
+
 		mTable = (TableLayout) getActivity().findViewById(R.id.table_ecd);
 		mDatePicker = (DatePicker) getActivity().findViewById(R.id.datePicker);
 		DateUtils.init(mDatePicker, Calendar.getInstance(), this);
@@ -246,6 +250,7 @@ public class ResultEcdFragment extends StateSaverFragment implements
 		updateResults();
 	}
 
+	@SuppressLint("InflateParams")
 	private void fillResults() {
 		mDate = DateUtils.getDate(mDatePicker);
 		mTable.removeAllViews();
