@@ -8,7 +8,7 @@
 
     <ScrollView
         style="@style/ScrollViewStyle"
-        android:layout_above="@+id/adView" >
+        android:layout_above="@+id/adView_ecd" >
 
         <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
 
@@ -95,13 +95,13 @@
     </ScrollView>
 
     <com.google.ads.AdView
-        android:id="@+id/adView"
+        android:id="@+id/adView_ecd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
         ads:adUnitId="@string/adUnitId"
-        ads:loadAdOnCreate="true"
+        ads:loadAdOnCreate="false"
         ads:testDevices="TEST_EMULATOR"
         android:gravity="center"
         tools:ignore="MissingRegistered" />
