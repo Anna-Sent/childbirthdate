@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="google_app_name">Pregnancy Calculator</string>
+    <string name="yandex_app_name">Pregnancy Calculator</string>
+    <string name="google_marketing_message">Calculation of estimated due date and gestational age by different methods</string>
+    <string name="description">
+<![CDATA[
+With the help of this application you can calculate expected date of delivery (EDD) and expected gestational age on any date.
+
+Available calculation methods:
+
+ * by last menstrual period;
+ * by ovulation (conception);
+ * by ultrasound;
+ * by clinical examination (by pelvic examination, by first prenatal visit);
+ * by first fetal movement.
+
+You can calculate range of dates (first and last date inclusive) for parental leave: just enter 1) gestational age from which leave is started and 2) number of days on which leave is granted.
+
+Additional features:
+ * Widget.
+
+The application is intended for use by medical specialists, OB-GYN doctors, pregnant women and women planning pregnancy.
+
+Please send your comments and suggestions at anna.sent@gmail.com.
+]]>
+    </string>
+    <string name="what_is_new">
+<![CDATA[
+v2.9:
+* English translation.
+Please send your comments and suggestions about translation at anna.sent@gmail.com.
+* Minor improvements.
+]]>
+    </string>
+
+</resources>
