@@ -18,11 +18,11 @@ Available calculation methods:
 
 If you don't know some data necessary for calculation, then just uncheck inappropriate calculation method.
 
-All entered data will be saved, and you can email it by selecting menu item "Send data".
+All entered data will be saved, and you can email it by selecting menu item «Send data».
 
 Help part of the application contains information about calculation methods and their accuracy.
 
-You can add widget on main screen of your device. It will display current gestational age or weeks and days left before the EDD. You can select the most preferred method.
+You can add widget on main screen of your device, it will display current gestational age or weeks and days left before the EDD. You can select the most preferred method.
 
 You can calculate range of dates (first and last date inclusive) for parental leave: just enter 1) gestational age from which leave is started and 2) number of days on which leave is granted. In settings of application you can edit lists of available values.
 
@@ -37,7 +37,7 @@ If your date of delivery didn't match the reality, then there are many reasons f
   - many factors (physical and emotional, stresses, illness, etc.) can affect on the cycle length and the day when ovulation occurs (the most fertile day);
   - the conception can occur in few days after sexual intercourse;
   - incorrect interpretation of ultrasound, individual characteristics of the woman, pathology of the fetus, ultrasound in late pregnancy;
- 2) factors accelerating or delaying labor: labor induction, unplanned cesarean section, etc.
+ 2) factors accelerating or delaying labor: labor induction, unplanned cesarean section, etc."
 ]]>
     </string>
     <string name="what_is_new">
