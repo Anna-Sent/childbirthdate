@@ -3,7 +3,7 @@
 
     <string name="google_app_name">Pregnancy Calculator</string>
     <string name="yandex_app_name">Pregnancy Calculator</string>
-    <string name="google_marketing_message">Calculation of expected date of delivery and expected gestational age by different methods</string>
+    <string name="google_marketing_message">Calculation of estimated due date and gestational age by different methods</string>
     <string name="description">
 <![CDATA[
 "With the help of this application you can calculate expected date of delivery (EDD) and expected gestational age on any date.
