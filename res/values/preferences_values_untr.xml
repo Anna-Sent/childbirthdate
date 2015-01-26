@@ -18,10 +18,6 @@
         <item>@style/AppTheme</item>
         <item>@style/AppThemeLight</item>
     </array>
-    <array name="style_dialog">
-        <item>@style/DialogTheme</item>
-        <item>@style/DialogThemeLight</item>
-    </array>
 
     <integer name="defaultTheme">0</integer>
 
