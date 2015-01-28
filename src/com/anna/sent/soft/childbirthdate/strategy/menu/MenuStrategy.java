@@ -44,4 +44,9 @@ public class MenuStrategy extends BaseStrategy {
 			return false;
 		}
 	}
+
+	@Override
+	public void release() {
+		mActivity = null;
+	}
 }
