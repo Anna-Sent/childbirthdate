@@ -72,6 +72,9 @@ public abstract class Builder {
 			Calendar currentDate = Calendar.getInstance();
 			p.setCurrentPoint(currentDate);
 			if (p.isCorrect()) {
+				int rest = p.getRestInDays();
+				countdown = countdown && rest > 0;
+
 				views.setTextViewText(
 						R.id.tv1,
 						countdown ? context
