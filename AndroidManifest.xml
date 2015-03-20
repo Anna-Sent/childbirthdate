@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.anna.sent.soft.childbirthdate"
+    android:versionCode="25"
+    android:versionName="2.9.3" >
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="19"
+        tools:ignore="OldTargetApi" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher_childbirthdate"
+        android:label="@string/app_name"
+        android:requiredAccountType="com.google"
+        android:supportsRtl="false"
+        android:theme="@android:style/Theme.Black.NoTitleBar"
+        tools:ignore="UnusedAttribute" >
+        <activity
+            android:name=".widget.MyPregnancyWidgetConfigureSmall"
+            android:label="@string/widget_small_name"
+            android:theme="@style/DialogBaseThemeLight" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".widget.MyPregnancyWidgetConfigureSimple"
+            android:label="@string/widget_simple_name"
+            android:theme="@style/DialogBaseThemeLight" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".widget.MyPregnancyWidgetConfigureAdditional"
+            android:label="@string/widget_additional_name"
+            android:theme="@style/DialogBaseThemeLight" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".widget.MyPregnancyWidgetSmall"
+            android:label="@string/widget_small_name" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+                <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
+                <action android:name="android.appwidget.action.APPWIDGET_DELETED" />
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/my_pregnancy_widget_provider_info_small" />
+        </receiver>
+        <receiver
+            android:name=".widget.MyPregnancyWidgetSimple"
+            android:label="@string/widget_simple_name" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+                <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
+                <action android:name="android.appwidget.action.APPWIDGET_DELETED" />
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/my_pregnancy_widget_provider_info_simple" />
+        </receiver>
+        <receiver
+            android:name=".widget.MyPregnancyWidgetAdditional"
+            android:label="@string/widget_additional_name" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+                <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
+                <action android:name="android.appwidget.action.APPWIDGET_DELETED" />
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/my_pregnancy_widget_provider_info_additional" />
+        </receiver>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings"
+            android:parentActivityName=".MainActivity"
+            tools:ignore="UnusedAttribute" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".HelpActivity"
+            android:label="@string/help"
+            android:parentActivityName=".MainActivity"
+            tools:ignore="UnusedAttribute" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".DetailsActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity"
+            tools:ignore="UnusedAttribute" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".ResultsActivity"
+            android:label="@string/calculation"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity"
+            tools:ignore="UnusedAttribute" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity" >
+            <intent-filter>
+                <action android:name="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity" >
+            <intent-filter>
+                <action android:name="com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.anna.sent.soft.childbirthdate.actions.EmailSupportActionActivity" >
+            <intent-filter>
+                <action android:name="com.anna.sent.soft.childbirthdate.actions.EmailSupportActionActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.anna.sent.soft.childbirthdate.actions.MarketWomanCycActionActivity" >
+            <intent-filter>
+                <action android:name="com.anna.sent.soft.childbirthdate.actions.MarketWomanCycActionActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.google.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            tools:ignore="MissingRegistered" />
+    </application>
+
+</manifest>

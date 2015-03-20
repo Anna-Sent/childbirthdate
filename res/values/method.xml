@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation" tools:locale="en">
+
+    <string name="titles0">%1$s; menstrual cycle length %2$d days; luteal phase length %3$d days</string>
+    <string name="titles1">%1$s</string>
+    <string name="titles2_gestational">on %1$s determined gestational age of %2$s</string>
+    <string name="titles2_emryonic">on %1$s determined fertilization age of %2$s</string>
+    <string name="titles3">on %1$s determined gestational age of %2$s</string>
+    <string name="titles4_first_pregnancy">%1$s; first pregnancy</string>
+    <string name="titles4_second_pregnancy">%1$s; second pregnancy</string>
+
+    <string-array name="methodNames">
+        <item>by last menstrual period</item>
+        <item>by ovulation (conception) date</item>
+        <item>by ultrasound</item>
+        <item>by clinical examination</item>
+        <item>by first fetal movement</item>
+    </string-array>
+    <string-array name="MethodNames">
+        <item>By last menstrual period</item>
+        <item>By ovulation (conception) date</item>
+        <item>By ultrasound</item>
+        <item>By clinical examination</item>
+        <item>By first fetal movement</item>
+    </string-array>
+    <string-array name="helpTitles">
+        <item>Accuracy of methods</item>
+        <item>By last menstrual period</item>
+        <item>By ovulation (conception) date</item>
+        <item>By ultrasound</item>
+        <item>By clinical examination</item>
+        <item>By first fetal movement</item>
+    </string-array>
+    <string-array name="helpParts">
+        <item>
+<![CDATA[
+<b><i>EDD</i></b> &mdash; estimated date of delivery.<br/><br/>
+
+Actual day of delivery <b><i>can vary from EDD by two weeks</b></i>.<br/><br/>
+
+Pregnancy lengths <b><i>between 38 and 42 weeks</i></b> are considered normal.<br/><br/>
+
+Calculation methods <b><i>by last menstrual period</i></b> and <b><i>by ovulation (conception) date</i></b> give more
+ accurate values for women with regular menses.<br/><br/>
+
+If you have used some methods to determine ovulation date before pregnancy, and you know
+ on which day of your cycle an ovulation occurs usually, then EDD will be calculated with high accuracy.<br/><br/>
+
+But many factors (physical and emotional,
+ stresses, illness, etc.)
+ can affect on the cycle length and the day when ovulation occurs
+ (the most fertile day).<br/><br/>
+
+If you have had single sexual intercourse after which you have got pregnant, then you can use the date of
+ this sexual intercourse as an expected conception date. But you should keep in mind
+ that conception can occur in few days after sexual intercourse.<br/><br/>
+
+Calculation method by ovulation (conception) date gives high accuracy for women who get pregnant with
+ In Vitro Fertilization (IVF)
+ and know the date of artificial insemination exactly.<br/><br/>
+
+Calculation method <b><i>by ultrasound</i></b> is the most accurate.
+ An ultrasound done between 9 and 13 weeks gives error in 1-3 days,
+ because there is very little variation in fetal size in the first trimester.
+ Ultrasound in late pregnancy is not so reliable.<br/><br/>
+
+Calculation method <b><i>by clinical examination</i></b> gives low accuracy.
+ EDD can be calculated with error in few weeks.
+ The doctor overseeing pregnancy can determine the gestational age and EDD suggesting
+ on the size and position of the uterus and other features.
+ The sooner a woman visit the doctor (preferably up to 12 weeks), the more accurate will be determined
+ gestational age.<br/><br/>
+
+Calculation method <b><i>by first fetal movement</i></b> gives very low accuracy.
+ Feeling of fetal movement depends on the individual characteristics of the woman.
+ The period when the woman feels the first fetal movement can vary from 16 to 25 weeks.<br/><br/>
+]]>
+        </item>
+        <item>
+<![CDATA[
+<b>MC</b> &mdash; menstrual cycle; <b>LP</b> &mdash; luteal phase (the second phase of MC);
+ <b>FP</b> &mdash; follicular phase (the first phase of MC).<br/><br/>
+
+Leave the default values for the length of MC or LF, if you can not specify them.<br/><br/>
+
+If menses are irregular, then use average length of
+ last three cycles as MC length.<br/><br/>
+
+The average <i>length of MC</i> lasts 28 days and varies
+ from 21 to 35 days.<br/><br/>
+
+The average <i>length of LP</i> lasts 14 days and varies
+ from 10 to 16 days.<br/><br/>
+
+While luteal phase length varies significantly from woman to woman,
+ for the same woman the length will be fairly consistent from cycle to cycle.
+ To get the most probable day of ovulation you should subtract LP length from MC length.
+ (For example, if you have cycle that lasts 35 days, LP that lasts 16 days, then ovulation occurs on 19th day of cycle).<br/><br/>
+
+<i><b>Refined EDD</b> = Last menstrual period + FP length + 38 weeks,</i><br/><br/>
+
+where <i>FP length = MC length - LP length,</i><br/><br/>
+
+<i>Last menstrual period</i> is the first day of last menstruation.<br/><br/>
+
+The application calculates refined EDD, since it is more accurate than gestational EDD.
+ If you leave default value of MC and LP,
+ then you get value of gestaional EDD calculated by the formula:
+ <i><b>Gestational EDD</b> = Last menstrual period + 40 weeks.</i><br/><br/>
+
+<b><i>Attention:</i></b> if lengths of MC and LP do not coincide with the average (28 and 14 days
+ respectively), the EDD can fall for pregnancy length other than 40 weeks.<br/><br/>
+
+<i><b>Gestational age</b> = Specified date - Last menstrual period.</i><br/><br/>
+]]>
+        </item>
+        <item>
+<![CDATA[
+<i><b>EDD by ovulation (conception)</b> = Ovulation (conception) date + 38 weeks,</i><br/><br/>
+
+where <i>Ovulation (conception) date</i> is expected date of ovulation, intercourse, or artifical insemination.<br/><br/>
+
+<b><i>Attention:</i></b> pregnancy length is considered to be 38 weeks in this case,
+ and EDD will correspond with pregnancy length in 38 weeks.<br/><br/>
+
+<i><b>Fertilization age</b> = Specified date - Ovulation (conception) date.</i><br/><br/>
+]]>
+        </item>
+        <item>
+<![CDATA[
+<i><b>EDD</b> = Ultrasound date + Expected pregnancy length -
+ Determined gestational (fertilization) age.</i><br/><br/>
+
+Expected pregnancy length is considered to be 40 weeks, if you select "Gestational age",
+ or 38 weeks, if you select "Fertilization age" (counted from ovulation, intercourse, or artificial insemination).
+ As a rule, if an ultrasound determines the embryo or fetus, the conclusion indicates "Gestational age",
+ if only the fertilized egg is determined, then you will get "Fertilization age".
+ Consult your doctor about it.<br/><br/>
+
+<b><i>Attention:</i></b> pregnancy length is considered to be 40 weeks, if gestational age is specified,
+ or 38 weeks, if fertilization age is specified.<br/><br/>
+
+<i><b>Gestational (fertilization) age</b> = Specified date - Starting point of pregnancy,</i><br/><br/>
+
+where <i>Starting point of pregnancy = Ultrasound date - Determined gestational (fertilization) age.</i><br/><br/>
+]]>
+        </item>
+        <item>
+<![CDATA[
+<i><b>EDD</b> = Date of examination - Determined gestational age + 40 weeks.</i><br/><br/>
+
+Expected pregnancy length is considered to be 40 weeks.<br/><br/>
+
+<i><b>Gestational age</b> = Specified date - Starting point of pregnancy,</i><br/><br/>
+
+where <i>Starting point of pregnancy = Date of examination - Determined gestational age.</i><br/><br/>
+]]>
+        </item>
+        <item>
+<![CDATA[
+If it is first pregnancy, <i><b>EDD</b> = First fetal movement date + 20 weeks.</i><br/><br/>
+
+If it is second pregnancy, <i><b>EDD</b> = First fetal movement date + 22 weeks.</i><br/><br/>
+
+Expected pregnancy length is considered to be 40 weeks.<br/><br/>
+
+<i><b>Gestational age</b> = Specified date - Starting point of pregnancy,</i><br/><br/>
+
+where <i>Starting point of pregnancy = First fetal movement date - 20 weeks (for first pregnancy)
+ or 18 weeks (for second pregnancy).</i><br/><br/>
+]]>
+        </item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ResultActivity" >
+
+    <ScrollView
+        style="@style/ScrollViewStyle"
+        android:layout_above="@+id/adView_ecd" >
+
+        <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    style="@style/TextViewStyle.Medium"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/onDate" />
+
+                <TextView
+                    android:id="@+id/textViewOnDate"
+                    style="@style/TextViewStyle.Medium"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+
+                <Button
+                    android:id="@+id/buttonShowHide"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/collapse"
+                    android:drawableLeft="?attr/iconCollapse"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout
+                android:id="@+id/animatedLayout"
+                style="@style/LinearLayoutHorizontalStyle"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center" >
+
+                <DatePicker
+                    android:id="@+id/datePicker"
+                    style="@style/DatePickerStyle" />
+
+                <LinearLayout
+                    style="@style/LinearLayoutVerticalStyle"
+                    android:layout_width="wrap_content" >
+
+                    <com.anna.sent.soft.childbirthdate.ui.LongPressedButton
+                        android:id="@+id/buttonPrevDay"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/prevDay"
+                        android:drawableLeft="?attr/iconPrevItem"
+                        android:gravity="center" />
+
+                    <Button
+                        android:id="@+id/buttonToday"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/today"
+                        android:drawableLeft="?attr/iconGoToToday"
+                        android:gravity="center" />
+
+                    <com.anna.sent.soft.childbirthdate.ui.LongPressedButton
+                        android:id="@+id/buttonNextDay"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/nextDay"
+                        android:drawableLeft="?attr/iconNextItem"
+                        android:gravity="center" />
+                </LinearLayout>
+            </com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout>
+
+            <TableLayout
+                android:id="@+id/table_ecd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/adview_margin"
+                android:shrinkColumns="*"
+                android:stretchColumns="*" />
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.ads.AdView
+        android:id="@+id/adView_ecd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/adUnitId"
+        ads:loadAdOnCreate="false"
+        ads:testDevices="TEST_EMULATOR"
+        android:gravity="center"
+        tools:ignore="MissingRegistered" />
+
+</RelativeLayout>
