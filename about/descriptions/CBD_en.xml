@@ -28,6 +28,9 @@ Please send your comments and suggestions at anna.sent@gmail.com.
     </string>
     <string name="what_is_new">
 <![CDATA[
+v2.9.4:
+* Fixed bug that leads to crash.
+
 v2.9:
 * English translation.
 Please send your comments and suggestions about translation at anna.sent@gmail.com.
