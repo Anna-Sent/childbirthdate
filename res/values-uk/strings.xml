@@ -31,7 +31,7 @@
     <string name="days">"д."</string>
     <string name="calculate">"Розрахувати"</string>
     <string name="calculateEcdAndGestationalAge">"Розрахувати ПДР і термін вагітності"</string>
-    <string name="sendto_app_not_available">"Додаток \"Поштовий клієнт\" недоступно"</string>
+    <string name="sendto_app_not_available">"Поштовий клієнт недоступний"</string>
     <string name="market_app_not_available">"Додаток market недоступно"</string>
     <string name="errorIncorrectGestationalAge">"Помилка"</string>
     <string name="errorIncorrectCurrentDateGreater">"Зазначена дата розрахунку набагато більша ПДР."</string>
