@@ -34,6 +34,7 @@ public class SickListUtils {
 
 			Days days = new Days(number);
 
+			// TODO не сохраняется в настройки, если попытка добавить второй раз
 			if (values.contains(days)) {
 				Toast.makeText(context,
 						context.getString(R.string.error_value_already_exists),
@@ -62,6 +63,7 @@ public class SickListUtils {
 			int d = numberPickerDays.getValue();
 			Age age = new Age(w, d);
 
+			// TODO не сохраняется в настройки, если попытка добавить второй раз
 			if (values.contains(age)) {
 				Toast.makeText(context,
 						context.getString(R.string.error_value_already_exists),
