@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <bool name="has_two_panes">true</bool>
+
+    <item name="activity_main" type="layout">@layout/activity_main_two_panes</item>
+    <item name="result_row" type="layout">@layout/result_row_wide</item>
+
+</resources>

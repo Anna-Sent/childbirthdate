@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget"
+    style="@style/WidgetBackground" >
+
+    <TextView
+        android:id="@+id/tv1"
+        style="@style/WidgetTextView1Style"
+        android:layout_gravity="center"
+        android:text="@string/emptyString" />
+
+    <TextView
+        android:id="@+id/tv2"
+        style="@style/WidgetTextView2Style"
+        android:layout_gravity="center"
+        android:text="@string/emptyString" />
+
+    <TextView
+        android:id="@+id/tv3"
+        style="@style/WidgetTextView34Style"
+        android:text="@string/emptyString" />
+
+    <TextView
+        android:id="@+id/tv4"
+        style="@style/WidgetTextView34Style"
+        android:text="@string/emptyString" />
+
+</LinearLayout>
