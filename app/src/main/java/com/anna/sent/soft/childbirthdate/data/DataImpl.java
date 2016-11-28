@@ -1,10 +1,6 @@
 package com.anna.sent.soft.childbirthdate.data;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -16,19 +12,25 @@ import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
+import com.google.firebase.crash.FirebaseCrash;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class DataImpl implements Data {
 	private static final String TAG = "moo";
 	private static final boolean DEBUG = false;
 
-	private static String wrapMsg(String msg) {
+    private static String wrapMsg(String msg) {
 		return DataImpl.class.getSimpleName() + ": " + msg;
 	}
 
 	@SuppressWarnings("unused")
 	private static void log(String msg) {
 		if (DEBUG) {
-			Log.d(TAG, wrapMsg(msg));
+			FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
 		}
 	}
 
@@ -36,10 +38,10 @@ public class DataImpl implements Data {
 		mContext = context;
 	}
 
-	private Context mContext;
+	private final Context mContext;
 
 	private boolean isEmbryonicAge, isFirstPregnancy;
-	private boolean[] byMethod = new boolean[Shared.Calculation.METHODS_COUNT];
+    private final boolean[] byMethod = new boolean[Shared.Calculation.METHODS_COUNT];
 	private Calendar lastMenstruationDate = Calendar.getInstance();
 	private Calendar ovulationDate = Calendar.getInstance();
 	private Calendar ultrasoundDate = Calendar.getInstance();
@@ -48,7 +50,7 @@ public class DataImpl implements Data {
 	private int menstrualCycleLen, lutealPhaseLen, ultrasoundWeeks,
 			ultrasoundDays, firstAppearanceWeeks;
 
-	@Override
+    @Override
 	public boolean[] byMethod() {
 		return byMethod;
 	}
@@ -140,8 +142,9 @@ public class DataImpl implements Data {
 		ultrasoundDays = value;
 	}
 
-	public void save() {
-		// log("save");
+	@SuppressLint("CommitPrefEdits")
+    public void save() {
+		log("save");
 		Editor editor = Settings.getSettings(mContext).edit();
 
 		editor.putBoolean(Shared.Saved.Calculation.EXTRA_BY_LMP,
@@ -189,7 +192,7 @@ public class DataImpl implements Data {
 	}
 
 	public void update() {
-		// log("update");
+		log("update");
 		SharedPreferences settings = Settings.getSettings(mContext);
 
 		updateDate(settings, lastMenstruationDate,
@@ -247,23 +250,23 @@ public class DataImpl implements Data {
 		SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT,
 				Locale.getDefault());
 		String value = formatter.format(date.getTime());
-		// log("save " + value);
+		log("save " + value);
 		editor.putString(extra, value);
 	}
 
 	private void updateDate(SharedPreferences settings, Calendar date,
-			String extra) {
+                            String extra) {
 		try {
 			SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT,
 					Locale.getDefault());
 			String value = settings.getString(extra, null);
 			Date date1 = formatter.parse(value);
 			date.setTime(date1);
-			// log("restore 1 " + DateUtils.toString(mContext, date));
+			log("restore 1 " + DateUtils.toString(mContext, date));
 		} catch (Exception e) {
 			date.setTimeInMillis(settings.getLong(extra,
 					System.currentTimeMillis()));
-			// log("restore 2 " + DateUtils.toString(mContext, date));
+			log("restore 2 " + DateUtils.toString(mContext, date));
 		}
 	}
 
@@ -307,7 +310,7 @@ public class DataImpl implements Data {
 		isFirstPregnancy = value;
 	}
 
-	@Override
+    @Override
 	public String[] getStrings2() {
 		String[] result = new String[Shared.Calculation.METHODS_COUNT];
 
@@ -320,7 +323,7 @@ public class DataImpl implements Data {
 				R.string.titles1, DateUtils.toString(mContext, ovulationDate));
 
 		result[Shared.Calculation.BY_ULTRASOUND - 1] = mContext.getString(
-				isEmbryonicAge ? R.string.titles2_emryonic
+				isEmbryonicAge ? R.string.titles2_embryonic
 						: R.string.titles2_gestational, DateUtils.toString(
 						mContext, ultrasoundDate), new Age(ultrasoundWeeks,
 						ultrasoundDays).toString(mContext));
@@ -340,11 +343,11 @@ public class DataImpl implements Data {
 
 	@Override
 	public boolean thereIsAtLeastOneSelectedMethod() {
-		for (int i = 0; i < byMethod.length; ++i) {
-			if (byMethod[i]) {
-				return true;
-			}
-		}
+        for (boolean aByMethod : byMethod) {
+            if (aByMethod) {
+                return true;
+            }
+        }
 
 		return false;
 	}
@@ -352,11 +355,11 @@ public class DataImpl implements Data {
 	@Override
 	public int getSelectedMethodsCount() {
 		int count = 0;
-		for (int i = 0; i < byMethod.length; ++i) {
-			if (byMethod[i]) {
-				++count;
-			}
-		}
+        for (boolean aByMethod : byMethod) {
+            if (aByMethod) {
+                ++count;
+            }
+        }
 
 		return count;
 	}

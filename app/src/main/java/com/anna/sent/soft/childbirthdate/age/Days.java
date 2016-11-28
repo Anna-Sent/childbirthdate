@@ -23,7 +23,7 @@ public class Days implements ISetting, Serializable {
 		return days;
 	}
 
-	public void setDays(int value) {
+	private void setDays(int value) {
 		if (value < 0) {
 			throw new IllegalArgumentException(
 					"Days value must be non-negative");
@@ -53,8 +53,7 @@ public class Days implements ISetting, Serializable {
 
 	@Override
 	public String toString(Context context) {
-		String result = days + " " + context.getString(R.string.days);
-		return result;
+		return days + " " + context.getString(R.string.days);
 	}
 
 	@Override
@@ -71,7 +70,7 @@ public class Days implements ISetting, Serializable {
 		try {
 			int d = Integer.parseInt(str);
 			return new Days(d);
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 
 		return null;

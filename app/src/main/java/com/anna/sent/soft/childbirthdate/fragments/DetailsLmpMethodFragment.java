@@ -19,7 +19,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 		OnClickListener, NumberPicker.OnValueChangeListener,
 		DatePicker.OnDateChangedListener {
 	private DatePicker datePicker;
-	private NumberPicker numberPickerMcl, numberPcikerLpl;
+	private NumberPicker numberPickerMcl, numberPickerLpl;
 
 	public DetailsLmpMethodFragment() {
 		super();
@@ -27,7 +27,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 		if (container == null) {
 			// We have different layouts, and in one of them this
 			// fragment's containing frame doesn't exist. The fragment
@@ -39,9 +39,8 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 			return null;
 		}
 
-		View v = inflater
+		return inflater
 				.inflate(R.layout.details_lmp_method, container, false);
-		return v;
 	}
 
 	@Override
@@ -59,11 +58,11 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 				.setMaxValue(PregnancyCalculator.MAX_MENSTRUAL_CYCLE_LEN);
 		numberPickerMcl.setOnValueChangedListener(this);
 
-		numberPcikerLpl = (NumberPicker) getActivity().findViewById(
+		numberPickerLpl = (NumberPicker) getActivity().findViewById(
 				R.id.numberPickerLutealPhaseLen);
-		numberPcikerLpl.setMinValue(PregnancyCalculator.MIN_LUTEAL_PHASE_LEN);
-		numberPcikerLpl.setMaxValue(PregnancyCalculator.MAX_LUTEAL_PHASE_LEN);
-		numberPcikerLpl.setOnValueChangedListener(this);
+		numberPickerLpl.setMinValue(PregnancyCalculator.MIN_LUTEAL_PHASE_LEN);
+		numberPickerLpl.setMaxValue(PregnancyCalculator.MAX_LUTEAL_PHASE_LEN);
+		numberPickerLpl.setOnValueChangedListener(this);
 
 		Button button = (Button) getActivity().findViewById(
 				R.id.buttonRestoreDefaultValues);
@@ -75,10 +74,10 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 		super.onPause();
 		datePicker.clearFocus();
 		numberPickerMcl.clearFocus();
-		numberPcikerLpl.clearFocus();
+		numberPickerLpl.clearFocus();
 	}
 
-	public void restoreDefaultValues() {
+	private void restoreDefaultValues() {
 		if (mData != null) {
 			int menstrualCycleLen = PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH;
 			int lutealPhaseLen = PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH;
@@ -86,7 +85,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 			numberPickerMcl.setValue(menstrualCycleLen);
 			mData.setMenstrualCycleLen(menstrualCycleLen);
 
-			numberPcikerLpl.setValue(lutealPhaseLen);
+			numberPickerLpl.setValue(lutealPhaseLen);
 			mData.setLutealPhaseLen(lutealPhaseLen);
 
 			dataChanged();
@@ -108,7 +107,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 			DateUtils.setDate(datePicker, mData.getLastMenstruationDate());
 
 			numberPickerMcl.setValue(mData.getMenstrualCycleLen());
-			numberPcikerLpl.setValue(mData.getLutealPhaseLen());
+			numberPickerLpl.setValue(mData.getLutealPhaseLen());
 		}
 	}
 
@@ -119,7 +118,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
 				int menstrualCycleLen = numberPickerMcl.getValue();
 				mData.setMenstrualCycleLen(menstrualCycleLen);
 			} else if (picker.getId() == R.id.numberPickerLutealPhaseLen) {
-				int lutealPhaseLen = numberPcikerLpl.getValue();
+				int lutealPhaseLen = numberPickerLpl.getValue();
 				mData.setLutealPhaseLen(lutealPhaseLen);
 			}
 

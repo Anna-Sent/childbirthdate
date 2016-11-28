@@ -25,7 +25,9 @@ public class EmailDataActionActivity extends EmailActionActivity {
 			if (byMethod[i]) {
 				Pregnancy p = PregnancyCalculator.Factory.get(data, i + 1);
 				if (p != null) {
-					result.append(strings1[i] + ": " + strings2[i]);
+					result.append(strings1[i]);
+					result.append(": ");
+					result.append(strings2[i]);
 					result.append("\n\t");
 					String ecd = DateUtils.toString(this, p.getEndPoint());
 					result.append(getString(R.string.ecdIs, ecd));

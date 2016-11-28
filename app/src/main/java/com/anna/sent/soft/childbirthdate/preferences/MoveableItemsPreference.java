@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate.preferences;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
@@ -21,6 +19,9 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.ISetting;
 import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
 import com.anna.sent.soft.childbirthdate.age.SettingsParser;
+import com.google.firebase.crash.FirebaseCrash;
+
+import java.util.List;
 
 public abstract class MoveableItemsPreference extends DialogPreference
 		implements OnClickListener {
@@ -34,7 +35,7 @@ public abstract class MoveableItemsPreference extends DialogPreference
 	@SuppressWarnings("unused")
 	private void log(String msg) {
 		if (DEBUG) {
-			Log.d(TAG, wrapMsg(msg));
+			FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
 		}
 	}
 
@@ -42,11 +43,11 @@ public abstract class MoveableItemsPreference extends DialogPreference
 	private MoveableItemsArrayAdapter mAdapter;
 	private ListView mListView;
 
-	public MoveableItemsPreference(Context context) {
+	protected MoveableItemsPreference(Context context) {
 		this(context, null);
 	}
 
-	public MoveableItemsPreference(Context context, AttributeSet attrs) {
+	protected MoveableItemsPreference(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mValue = getDefaultValue();
 		setDialogLayoutResource(R.layout.dialog_list);
@@ -145,7 +146,7 @@ public abstract class MoveableItemsPreference extends DialogPreference
 	protected abstract ISetting getElement();
 
 	private String toString(List<LocalizableObject> list) {
-		return SettingsParser.toString(list, getElement());
+		return SettingsParser.toString(list);
 	}
 
 	@Override
@@ -159,8 +160,8 @@ public abstract class MoveableItemsPreference extends DialogPreference
 		final SavedState myState = new SavedState(superState);
 		myState.value = saveAddValue();
 		if (mAdapter != null) {
-			myState.values = SettingsParser.toString(mAdapter.getValues(),
-					getElement());
+			myState.values = SettingsParser.toString(mAdapter.getValues()
+			);
 		} else {
 			myState.values = null;
 		}
@@ -227,11 +228,7 @@ public abstract class MoveableItemsPreference extends DialogPreference
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonAdd:
-			boolean result = addItem(mAdapter);
-			if (result) {
-				// scrollToBottom();
-			}
-
+			addItem(mAdapter);
 			break;
 		}
 	}
@@ -246,5 +243,5 @@ public abstract class MoveableItemsPreference extends DialogPreference
 		});
 	}
 
-	protected abstract boolean addItem(MoveableItemsArrayAdapter adapter);
+	protected abstract void addItem(MoveableItemsArrayAdapter adapter);
 }

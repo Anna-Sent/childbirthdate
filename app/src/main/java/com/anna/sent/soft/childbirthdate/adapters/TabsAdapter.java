@@ -29,16 +29,10 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
 	private final ViewPager mViewPager;
 	private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
 
-	private TabHost.OnTabChangeListener mOnTabChangeListner;
+	private TabHost.OnTabChangeListener mOnTabChangeListener;
 
 	public void setOnTabChangeListener(TabHost.OnTabChangeListener listener) {
-		mOnTabChangeListner = listener;
-	}
-
-	private ViewPager.OnPageChangeListener mOnPageChangeListener;
-
-	public void setOnTabChangeListener(ViewPager.OnPageChangeListener listener) {
-		mOnPageChangeListener = listener;
+		mOnTabChangeListener = listener;
 	}
 
 	private static final class TabInfo {
@@ -71,17 +65,17 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
 	}
 
 	public TabsAdapter(FragmentActivity activity, TabHost tabHost,
-			ViewPager pager) {
+					   ViewPager pager) {
 		super(activity.getSupportFragmentManager());
 		mContext = activity;
 		mTabHost = tabHost;
 		mViewPager = pager;
 		mTabHost.setOnTabChangedListener(this);
 		mViewPager.setAdapter(this);
-		mViewPager.setOnPageChangeListener(this);
+		mViewPager.addOnPageChangeListener(this);
 	}
 
-	public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args) {
+	public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, @SuppressWarnings("SameParameterValue") Bundle args) {
 		tabSpec.setContent(new DummyTabFactory(mContext));
 		String tag = tabSpec.getTag();
 		TabInfo info = new TabInfo(tag, clss, args);
@@ -106,18 +100,14 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
 		int position = mTabHost.getCurrentTab();
 		mViewPager.setCurrentItem(position);
 
-		if (mOnTabChangeListner != null) {
-			mOnTabChangeListner.onTabChanged(tabId);
+		if (mOnTabChangeListener != null) {
+			mOnTabChangeListener.onTabChanged(tabId);
 		}
 	}
 
 	@Override
 	public void onPageScrolled(int position, float positionOffset,
 			int positionOffsetPixels) {
-		if (mOnPageChangeListener != null) {
-			mOnPageChangeListener.onPageScrolled(position, positionOffset,
-					positionOffsetPixels);
-		}
 	}
 
 	@Override
@@ -132,16 +122,9 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
 		widget.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 		mTabHost.setCurrentTab(position);
 		widget.setDescendantFocusability(oldFocusability);
-
-		if (mOnPageChangeListener != null) {
-			mOnPageChangeListener.onPageSelected(position);
-		}
 	}
 
 	@Override
 	public void onPageScrollStateChanged(int state) {
-		if (mOnPageChangeListener != null) {
-			mOnPageChangeListener.onPageScrollStateChanged(state);
-		}
 	}
 }

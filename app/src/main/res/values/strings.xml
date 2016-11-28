@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress CheckTagEmptyBody -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
 
     <string name="ecdIs">EDD %s</string>
@@ -44,7 +45,7 @@
     <string name="zeroRest">; EDD</string>
     <string name="negativeRest"></string>
     <string name="errorInvalidAppWidgetId">Invalid widget identifier</string>
-    <string name="widgetSpecifyTheMethodOfCalculation">Specify preffered method of calculation:</string>
+    <string name="widgetSpecifyTheMethodOfCalculation">Specify preferred method of calculation:</string>
     <string name="errorNotSelectedCalculationMethod">Method of calculation is not specified</string>
     <string name="widgetAddWidget">Add widget</string>
     <string name="widgetStartTheApplicationToSpecifyNecessaryData">Run the application to fill out the necessary data</string>
@@ -72,9 +73,9 @@
     <string name="sick_list">Parental leave</string>
     <string name="sick_list_days">Number of days on which leave is granted</string>
     <string name="sick_list_age">Gestational age from which leave is started</string>
-    <string name="error_enter_value">Enter number from %1$s to %2$s</string>
+    <string name="error_enter_value">Enter number from %1$d to %2$d</string>
     <string name="error_value_already_exists">Number is already in list</string>
-    <string name="error_value_bounds">Number must be in range from %1$s to %2$s inclusive</string>
+    <string name="error_value_bounds">Number must be in range from %1$d to %2$d inclusive</string>
     <string name="persist_setting">Save in settings</string>
     <string name="when_the_duration_of_pregnancy">Gestational age from which leave is started</string>
     <string name="on">Number of days on which leave is granted</string>

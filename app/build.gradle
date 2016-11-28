@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 19
@@ -24,6 +23,9 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:19.1.0'
     compile 'com.google.firebase:firebase-ads:10.0.0'
+    compile 'com.google.firebase:firebase-crash:10.0.0'
     compile 'com.github.Anna-Sentyakova:NumberPickerLibrary:-SNAPSHOT'
     compile 'com.github.Anna-Sentyakova:CommonLibrary:-SNAPSHOT'
 }
+
+apply plugin: 'com.google.gms.google-services'

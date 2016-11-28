@@ -1,9 +1,8 @@
 package com.anna.sent.soft.childbirthdate.adapters;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -15,31 +14,34 @@ import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
+import com.google.firebase.crash.FirebaseCrash;
+
+import java.util.List;
 
 public class LocalizableSimpleSpinnerItemArrayAdapter extends
 		ArrayAdapter<LocalizableObject> {
 	private static final String TAG = "moo";
 	private static final boolean DEBUG = false;
 
-	private String wrapMsg(String msg) {
+    private String wrapMsg(String msg) {
 		return getClass().getSimpleName() + ": " + msg;
 	}
 
 	@SuppressWarnings("unused")
 	private void log(String msg) {
 		if (DEBUG) {
-			Log.d(TAG, wrapMsg(msg));
+			FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
 		}
 	}
 
-	private List<LocalizableObject> mObjects;
+    private final List<LocalizableObject> mObjects;
 
-	protected static class ViewHolder {
-		protected TextView textView;
+	static class ViewHolder {
+		TextView textView;
 	}
 
 	public LocalizableSimpleSpinnerItemArrayAdapter(Context context,
-			List<LocalizableObject> objects) {
+                                                    List<LocalizableObject> objects) {
 		super(context, android.R.layout.simple_spinner_item, objects);
 		mObjects = objects;
 	}
@@ -49,19 +51,20 @@ public class LocalizableSimpleSpinnerItemArrayAdapter extends
 		return mObjects.size();
 	}
 
-	@Override
-	public View getView(int position, View contentView, ViewGroup viewGroup) {
+    @NonNull
+    @Override
+	public View getView(int position, View contentView, @NonNull ViewGroup viewGroup) {
 		return getView(position, contentView, false);
 	}
 
-	@Override
-	public View getDropDownView(int position, View convertView, ViewGroup parent) {
+    @Override
+	public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
 		return getView(position, convertView, true);
 	}
 
-	private View getView(int position, View contentView, boolean isDropDownView) {
+    private View getView(int position, View contentView, boolean isDropDownView) {
 		View view;
-		ViewHolder viewHolder = null;
+		ViewHolder viewHolder;
 		if (contentView == null) {
 			LayoutInflater layoutInflater = (LayoutInflater) getContext()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -111,7 +114,7 @@ public class LocalizableSimpleSpinnerItemArrayAdapter extends
 		return size;
 	}
 
-	public List<LocalizableObject> getObjects() {
+    public List<LocalizableObject> getObjects() {
 		return mObjects;
 	}
 
@@ -119,11 +122,5 @@ public class LocalizableSimpleSpinnerItemArrayAdapter extends
 		mObjects.add(object);
 		notifyDataSetChanged();
 		return mObjects.size() - 1;
-	}
-
-	public void addObjects(List<LocalizableObject> objects) {
-		if (mObjects.addAll(objects)) {
-			notifyDataSetChanged();
-		}
 	}
 }

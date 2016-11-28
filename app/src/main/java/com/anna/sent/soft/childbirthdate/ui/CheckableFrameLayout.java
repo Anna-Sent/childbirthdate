@@ -12,7 +12,7 @@ public class CheckableFrameLayout extends FrameLayout implements Checkable {
 	private boolean mChecked;
 
 	public CheckableFrameLayout(Context context, AttributeSet attrs,
-			int defStyle) {
+								int defStyle) {
 		super(context, attrs, defStyle);
 	}
 

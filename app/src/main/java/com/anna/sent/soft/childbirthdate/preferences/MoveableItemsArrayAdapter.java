@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
+import com.google.firebase.crash.FirebaseCrash;
 
 public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		OnClickListener {
@@ -31,11 +33,11 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 	@SuppressWarnings("unused")
 	private void log(String msg, boolean scenario) {
 		if (scenario) {
-			Log.d(TAG, wrapMsg(msg));
+			FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
 		}
 	}
 
-	private List<LocalizableObject> mValues;
+	private final List<LocalizableObject> mValues;
 
 	public List<LocalizableObject> getValues() {
 		return mValues;
@@ -47,7 +49,7 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 	}
 
 	public MoveableItemsArrayAdapter(Context context,
-			List<LocalizableObject> values) {
+									 List<LocalizableObject> values) {
 		super(context, R.layout.dialog_list_item);
 		mValues = values;
 	}
@@ -57,9 +59,10 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		return mValues.size();
 	}
 
+	@NonNull
 	@SuppressLint("InflateParams")
 	@Override
-	public View getView(int position, View contentView, ViewGroup viewGroup) {
+	public View getView(int position, View contentView, @NonNull ViewGroup viewGroup) {
 		View view;
 		ViewHolder viewHolder;
 		if (contentView == null) {
@@ -108,24 +111,14 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		notifyDataSetChanged();
 	}
 
-	public void addItems(List<LocalizableObject> objects) {
-		mValues.addAll(objects);
-		notifyDataSetChanged();
-	}
-
-	public void removeItem(int position) {
+	private void removeItem(int position) {
 		if (position < mValues.size()) {
 			mValues.remove(position);
 			notifyDataSetChanged();
 		}
 	}
 
-	public void removeItems() {
-		mValues.clear();
-		notifyDataSetChanged();
-	}
-
-	public void upItem(int position) {
+	private void upItem(int position) {
 		if (position < 0 || position >= mValues.size()) {
 			return;
 		}
@@ -138,7 +131,7 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
 		}
 	}
 
-	public void downItem(int position) {
+	private void downItem(int position) {
 		if (position < 0 || position >= mValues.size()) {
 			return;
 		}

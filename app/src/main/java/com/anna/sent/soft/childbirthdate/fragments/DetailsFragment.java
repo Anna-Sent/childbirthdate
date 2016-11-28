@@ -7,6 +7,7 @@ import android.util.Log;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.google.firebase.crash.FirebaseCrash;
 
 public abstract class DetailsFragment extends Fragment implements DataClient {
 	private static final String TAG = "moo";
@@ -19,14 +20,14 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 	@SuppressWarnings("unused")
 	private void log(String msg) {
 		if (DEBUG) {
-			Log.d(TAG, wrapMsg(msg));
+			FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
 		}
 	}
 
 	@SuppressWarnings("unused")
 	private void log(String msg, boolean debug) {
 		if (DEBUG && debug) {
-			Log.d(TAG, wrapMsg(msg));
+			FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
 		}
 	}
 
@@ -40,7 +41,7 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 		mListener = listener;
 	}
 
-	protected Data mData = null;
+	Data mData = null;
 
 	@Override
 	public void setData(Data data) {
@@ -83,8 +84,8 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 		return getArguments().getInt(Shared.Titles.EXTRA_POSITION, -1);
 	}
 
-	protected void dataChanged() {
-		// log("data changed", false);
+	void dataChanged() {
+		log("data changed", false);
 		if (mListener != null) {
 			mListener.detailsChanged();
 		}
@@ -95,12 +96,7 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
 	@Override
 	public void onResume() {
 		super.onResume();
-		// log("resume, update ui");
+		log("resume, update ui");
 		updateData();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
 	}
 }

@@ -13,6 +13,7 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
+import com.google.firebase.crash.FirebaseCrash;
 
 public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 		implements NumberPicker.OnValueChangeListener,
@@ -20,14 +21,14 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 	private static final String TAG = "moo";
 	private static final boolean DEBUG = false;
 
-	private String wrapMsg(String msg) {
+    private String wrapMsg(String msg) {
 		return getClass().getSimpleName() + ": " + msg;
 	}
 
 	@SuppressWarnings("unused")
 	private void log(String msg) {
 		if (DEBUG) {
-			Log.d(TAG, wrapMsg(msg));
+            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
 		}
 	}
 
@@ -40,7 +41,7 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 		if (container == null) {
 			// We have different layouts, and in one of them this
 			// fragment's containing frame doesn't exist. The fragment
@@ -52,9 +53,8 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 			return null;
 		}
 
-		View v = inflater.inflate(R.layout.details_first_appearance_method,
-				container, false);
-		return v;
+        return inflater.inflate(R.layout.details_first_appearance_method,
+                container, false);
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
 			mData.setFirstAppearanceDate(value);
 
 			dataChanged();
-			// log("onDateChanged " + DateUtils.toString(getActivity(), value));
+			log("onDateChanged " + DateUtils.toString(getActivity(), value));
 		}
 	}
 }

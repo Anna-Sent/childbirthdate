@@ -9,13 +9,12 @@ import java.util.Calendar;
  * 
  */
 public final class CorrectedGestationalAge extends GestationalAge {
-	private int phollicularPhaseLen;
-	private int difference;
+	private final int difference;
 
 	public CorrectedGestationalAge(Calendar start, int menstrualCycleLen,
-			int lutealPhaseLen) {
+								   int lutealPhaseLen) {
 		super(start);
-		phollicularPhaseLen = menstrualCycleLen - lutealPhaseLen;
+		int phollicularPhaseLen = menstrualCycleLen - lutealPhaseLen;
 		difference = -PregnancyCalculator.AVG_PHOLLICULAR_PHASE_LENGTH
 				+ phollicularPhaseLen;
 	}

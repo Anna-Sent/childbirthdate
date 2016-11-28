@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress CheckTagEmptyBody, CheckTagEmptyBody -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <declare-styleable name="AppTheme">

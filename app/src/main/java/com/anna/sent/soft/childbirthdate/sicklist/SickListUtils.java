@@ -15,7 +15,7 @@ import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 public class SickListUtils {
 	public static Days checkDays(Context context, EditText editText,
-			List<LocalizableObject> values) {
+								 List<LocalizableObject> values) {
 		try {
 			String text = editText.getText().toString();
 
@@ -55,7 +55,7 @@ public class SickListUtils {
 	}
 
 	public static Age checkAge(Context context, NumberPicker numberPickerWeeks,
-			NumberPicker numberPickerDays, List<LocalizableObject> values) {
+							   NumberPicker numberPickerDays, List<LocalizableObject> values) {
 		numberPickerWeeks.clearFocus();
 		numberPickerDays.clearFocus();
 		try {
@@ -81,7 +81,7 @@ public class SickListUtils {
 	}
 
 	public static void setupAgeNumberPickers(NumberPicker numberPickerWeeks,
-			NumberPicker numberPickerDays) {
+											 NumberPicker numberPickerDays) {
 		numberPickerWeeks.setMinValue(0);
 		numberPickerWeeks
 				.setMaxValue(PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS - 1);

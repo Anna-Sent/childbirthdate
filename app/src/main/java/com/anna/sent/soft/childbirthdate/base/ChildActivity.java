@@ -1,5 +1,6 @@
 package com.anna.sent.soft.childbirthdate.base;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.TaskStackBuilder;
@@ -9,6 +10,7 @@ import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.ActionBarUtils;
 import com.anna.sent.soft.utils.NavigationUtils;
 
+@SuppressLint("Registered")
 public class ChildActivity extends DataKeeperActivity {
 	@Override
 	public void setViews(Bundle savedInstanceState) {

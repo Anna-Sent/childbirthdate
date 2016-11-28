@@ -11,7 +11,7 @@ import com.anna.sent.soft.childbirthdate.age.Age;
  * 
  */
 public class GestationalAge extends Pregnancy {
-	public GestationalAge(Calendar start) {
+	GestationalAge(Calendar start) {
 		super(start);
 	}
 
@@ -20,7 +20,7 @@ public class GestationalAge extends Pregnancy {
 	}
 
 	@Override
-	public int getFullDurationInDays() {
+	protected int getFullDurationInDays() {
 		return PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS
 				* Age.DAYS_IN_WEEK;
 	}

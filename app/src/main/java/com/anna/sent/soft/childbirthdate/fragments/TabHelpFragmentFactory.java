@@ -14,7 +14,7 @@ import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
 
 public class TabHelpFragmentFactory {
 	public static Fragment newInstance(int position) {
-		Fragment result = null;
+		Fragment result;
 		switch (position) {
 		case Shared.Calculation.UNKNOWN:
 			result = new TabHelpIntroductionFragment();
@@ -59,9 +59,8 @@ public class TabHelpFragmentFactory {
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View v = inflater.inflate(getLayoutResourceId(), container, false);
-			return v;
+								 Bundle savedInstanceState) {
+			return inflater.inflate(getLayoutResourceId(), container, false);
 		}
 
 		@Override

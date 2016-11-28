@@ -34,7 +34,7 @@ public class DetailsActivity extends ChildActivity implements
 		super.setViews(savedInstanceState);
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setOnPageChangeListener(this);
+		mViewPager.addOnPageChangeListener(this);
 		mTabsAdapter = new DetailsPagerAdapter(this,
 				getSupportFragmentManager());
 	}

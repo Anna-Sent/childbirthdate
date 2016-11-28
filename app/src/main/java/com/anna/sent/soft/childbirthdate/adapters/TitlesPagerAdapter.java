@@ -6,18 +6,13 @@ import android.support.v4.app.FragmentManager;
 public abstract class TitlesPagerAdapter extends MyFragmentPagerAdapter {
 	private String[] mTitles = null;
 
-	protected String[] getTitlesFromContext(Context context) {
+	String[] getTitlesFromContext(Context context) {
 		return null;
 	}
 
-	protected TitlesPagerAdapter(Context context, FragmentManager fm) {
+	TitlesPagerAdapter(Context context, FragmentManager fm) {
 		super(fm);
 		mTitles = getTitlesFromContext(context);
-	}
-
-	public TitlesPagerAdapter(FragmentManager fm, String[] titles) {
-		super(fm);
-		mTitles = titles;
 	}
 
 	@Override

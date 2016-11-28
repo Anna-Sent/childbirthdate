@@ -32,9 +32,9 @@ public class PregnancyCalculator {
 
 	public final static int AVG_PHOLLICULAR_PHASE_LENGTH = AVG_MENSTRUAL_CYCLE_LENGTH
 			- AVG_LUTEAL_PHASE_LENGTH;
-	public final static int MIN_PHOLLICULAR_PHASE_LENGTH = MIN_MENSTRUAL_CYCLE_LEN
+	private final static int MIN_PHOLLICULAR_PHASE_LENGTH = MIN_MENSTRUAL_CYCLE_LEN
 			- MAX_LUTEAL_PHASE_LEN;
-	public final static int MAX_PHOLLICULAR_PHASE_LENGTH = MAX_MENSTRUAL_CYCLE_LEN
+	private final static int MAX_PHOLLICULAR_PHASE_LENGTH = MAX_MENSTRUAL_CYCLE_LEN
 			- MIN_LUTEAL_PHASE_LEN;
 
 	public final static int GESTATIONAL_AVG_AGE_IN_WEEKS = 40;
@@ -86,7 +86,7 @@ public class PregnancyCalculator {
 						firstMovementsDate);
 			}
 
-			return null;
+			throw new IllegalArgumentException("Unknown calculation method");
 		}
 	}
 }

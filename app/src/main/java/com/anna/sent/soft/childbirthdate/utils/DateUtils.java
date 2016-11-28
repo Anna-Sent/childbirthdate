@@ -24,13 +24,13 @@ public class DateUtils {
 	}
 
 	public static void init(DatePicker datePicker,
-			DatePicker.OnDateChangedListener listener) {
+							DatePicker.OnDateChangedListener listener) {
 		Calendar today = Calendar.getInstance();
 		init(datePicker, today, listener);
 	}
 
 	public static void init(DatePicker datePicker, Calendar date,
-			DatePicker.OnDateChangedListener listener) {
+							DatePicker.OnDateChangedListener listener) {
 		int year = date.get(Calendar.YEAR), monthOfYear = date
 				.get(Calendar.MONTH), dayOfMonth = date
 				.get(Calendar.DAY_OF_MONTH);

@@ -21,7 +21,7 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 		if (container == null) {
 			// We have different layouts, and in one of them this
 			// fragment's containing frame doesn't exist. The fragment
@@ -33,9 +33,8 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
 			return null;
 		}
 
-		View v = inflater.inflate(R.layout.details_ovulation_method, container,
+		return inflater.inflate(R.layout.details_ovulation_method, container,
 				false);
-		return v;
 	}
 
 	@Override

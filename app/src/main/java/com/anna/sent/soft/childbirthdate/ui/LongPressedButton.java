@@ -49,7 +49,7 @@ public class LongPressedButton extends Button {
 	}
 
 	public interface Listener {
-		public void cancelLongPress();
+		void cancelLongPress();
 	}
 
 	private Listener mListener = null;

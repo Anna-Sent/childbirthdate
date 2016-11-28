@@ -40,399 +40,395 @@ import com.anna.sent.soft.childbirthdate.utils.AdUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
+import com.google.firebase.crash.FirebaseCrash;
 
 public class ResultSickListFragment extends StateSaverFragment implements
-		DataClient, OnClickListener, OnItemSelectedListener {
-	private static final String TAG = "moo";
-	private static final boolean DEBUG = false;
+        DataClient, OnClickListener, OnItemSelectedListener {
+    private static final String TAG = "moo";
+    private static final boolean DEBUG = false;
 
-	private String wrapMsg(String msg) {
-		return getClass().getSimpleName() + ": " + msg;
-	}
+    private String wrapMsg(String msg) {
+        return getClass().getSimpleName() + ": " + msg;
+    }
 
-	@SuppressWarnings("unused")
-	private void log(String msg) {
-		if (DEBUG) {
-			Log.d(TAG, wrapMsg(msg));
-		}
-	}
+    @SuppressWarnings("unused")
+    private void log(String msg) {
+        if (DEBUG) {
+            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
+        }
+    }
 
-	private TableLayout mTable;
-	private Spinner mSpinnerDays, mSpinnerAge;
-	private LocalizableSimpleSpinnerItemArrayAdapter mSpinnerDaysAdapter,
-			mSpinnerAgeAdapter;
-	private int mSpinnerDaysIndex, mSpinnerAgeIndex;
-	private ArrayList<Days> mTmpDaysList = new ArrayList<Days>();
-	private ArrayList<Age> mTmpAgeList = new ArrayList<Age>();
+    private TableLayout mTable;
+    private Spinner mSpinnerDays, mSpinnerAge;
+    private LocalizableSimpleSpinnerItemArrayAdapter mSpinnerDaysAdapter,
+            mSpinnerAgeAdapter;
+    private int mSpinnerDaysIndex, mSpinnerAgeIndex;
+    private ArrayList<Days> mTmpDaysList = new ArrayList<Days>();
+    private ArrayList<Age> mTmpAgeList = new ArrayList<Age>();
 
-	public ResultSickListFragment() {
-		super();
-	}
+    public ResultSickListFragment() {
+        super();
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.result_sick_list, container, false);
-		return v;
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.result_sick_list, container, false);
+    }
 
-	protected Data mData = null;
+    private Data mData = null;
 
-	@Override
-	public void setData(Data data) {
-		mData = data;
-	}
+    @Override
+    public void setData(Data data) {
+        mData = data;
+    }
 
-	private Data getData() {
-		return mData;
-	}
+    private Data getData() {
+        return mData;
+    }
 
-	@Override
-	public void setViews(Bundle savedInstanceState) {
-		AdUtils.setupAd(getData(), getActivity(), R.id.adView_sick_list, 300,
-				60);
+    @Override
+    public void setViews(Bundle savedInstanceState) {
+        AdUtils.setupAd(getData(), getActivity(), R.id.adView_sick_list, 300,
+                60);
 
-		mTable = (TableLayout) getActivity().findViewById(R.id.table_sick_list);
-		getActivity().findViewById(R.id.buttonEditDays)
-				.setOnClickListener(this);
-		getActivity().findViewById(R.id.buttonEditAge).setOnClickListener(this);
-		mSpinnerDays = (Spinner) getActivity().findViewById(R.id.spinnerDays);
-		mSpinnerAge = (Spinner) getActivity().findViewById(R.id.spinnerAge);
-	}
+        mTable = (TableLayout) getActivity().findViewById(R.id.table_sick_list);
+        getActivity().findViewById(R.id.buttonEditDays)
+                .setOnClickListener(this);
+        getActivity().findViewById(R.id.buttonEditAge).setOnClickListener(this);
+        mSpinnerDays = (Spinner) getActivity().findViewById(R.id.spinnerDays);
+        mSpinnerAge = (Spinner) getActivity().findViewById(R.id.spinnerAge);
+    }
 
-	private static final String KEY_SPINNER_DAYS_POSITION = "key_spinner_days_position";
-	private static final String KEY_SPINNER_AGE_POSITION = "key_spinner_age_position";
-	private static final String KEY_OTHER_DAYS = "key_other_days";
-	private static final String KEY_OTHER_AGE = "key_other_age";
+    private static final String KEY_SPINNER_DAYS_POSITION = "key_spinner_days_position";
+    private static final String KEY_SPINNER_AGE_POSITION = "key_spinner_age_position";
+    private static final String KEY_OTHER_DAYS = "key_other_days";
+    private static final String KEY_OTHER_AGE = "key_other_age";
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void restoreState(Bundle state) {
-		mSpinnerDaysIndex = state.getInt(KEY_SPINNER_DAYS_POSITION);
-		mSpinnerAgeIndex = state.getInt(KEY_SPINNER_AGE_POSITION);
+    @SuppressWarnings("unchecked")
+    @Override
+    public void restoreState(Bundle state) {
+        mSpinnerDaysIndex = state.getInt(KEY_SPINNER_DAYS_POSITION);
+        mSpinnerAgeIndex = state.getInt(KEY_SPINNER_AGE_POSITION);
 
-		mTmpDaysList = (ArrayList<Days>) state.getSerializable(KEY_OTHER_DAYS);
-		if (mTmpDaysList == null) {
-			mTmpDaysList = new ArrayList<Days>();
-		}
+        mTmpDaysList = (ArrayList<Days>) state.getSerializable(KEY_OTHER_DAYS);
+        if (mTmpDaysList == null) {
+            mTmpDaysList = new ArrayList<Days>();
+        }
 
-		mTmpAgeList = (ArrayList<Age>) state.getSerializable(KEY_OTHER_AGE);
-		if (mTmpAgeList == null) {
-			mTmpAgeList = new ArrayList<Age>();
-		}
-	}
+        mTmpAgeList = (ArrayList<Age>) state.getSerializable(KEY_OTHER_AGE);
+        if (mTmpAgeList == null) {
+            mTmpAgeList = new ArrayList<Age>();
+        }
+    }
 
-	@Override
-	public void saveState(Bundle state) {
-		int position = mSpinnerDays.getSelectedItemPosition();
-		state.putInt(KEY_SPINNER_DAYS_POSITION, position);
-		position = mSpinnerAge.getSelectedItemPosition();
-		state.putInt(KEY_SPINNER_AGE_POSITION, position);
-		state.putSerializable(KEY_OTHER_DAYS, mTmpDaysList);
-		state.putSerializable(KEY_OTHER_AGE, mTmpAgeList);
-	}
+    @Override
+    public void saveState(Bundle state) {
+        int position = mSpinnerDays.getSelectedItemPosition();
+        state.putInt(KEY_SPINNER_DAYS_POSITION, position);
+        position = mSpinnerAge.getSelectedItemPosition();
+        state.putInt(KEY_SPINNER_AGE_POSITION, position);
+        state.putSerializable(KEY_OTHER_DAYS, mTmpDaysList);
+        state.putSerializable(KEY_OTHER_AGE, mTmpAgeList);
+    }
 
-	@Override
-	public void onResume() {
-		super.onResume();
+    @Override
+    public void onResume() {
+        super.onResume();
 
-		setupSpinner(mSpinnerDays, Days.class);
-		setupSpinner(mSpinnerAge, Age.class);
+        setupSpinner(mSpinnerDays, Days.class);
+        setupSpinner(mSpinnerAge, Age.class);
 
-		fillResults();
-	}
+        fillResults();
+    }
 
-	private void setupSpinner(Spinner spinner, Class<? extends ISetting> cls) {
-		List<LocalizableObject> objects = Settings.getList(getActivity(), cls);
+    private void setupSpinner(Spinner spinner, Class<? extends ISetting> cls) {
+        List<LocalizableObject> objects = Settings.getList(getActivity(), cls);
 
-		if (cls == Days.class) {
-			objects.addAll(mTmpDaysList);
-		} else if (cls == Age.class) {
-			objects.addAll(mTmpAgeList);
-		}
+        if (cls == Days.class) {
+            objects.addAll(mTmpDaysList);
+        } else if (cls == Age.class) {
+            objects.addAll(mTmpAgeList);
+        }
 
-		LocalizableSimpleSpinnerItemArrayAdapter adapter = new LocalizableSimpleSpinnerItemArrayAdapter(
-				getActivity(), objects);
+        LocalizableSimpleSpinnerItemArrayAdapter adapter = new LocalizableSimpleSpinnerItemArrayAdapter(
+                getActivity(), objects);
 
-		int position = 0;
-		if (cls == Days.class) {
-			mSpinnerDaysAdapter = adapter;
-			position = mSpinnerDaysIndex;
-		} else if (cls == Age.class) {
-			mSpinnerAgeAdapter = adapter;
-			position = mSpinnerAgeIndex;
-		}
+        int position = 0;
+        if (cls == Days.class) {
+            mSpinnerDaysAdapter = adapter;
+            position = mSpinnerDaysIndex;
+        } else if (cls == Age.class) {
+            mSpinnerAgeAdapter = adapter;
+            position = mSpinnerAgeIndex;
+        }
 
-		spinner.setAdapter(adapter);
-		spinner.setOnItemSelectedListener(this);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
-		if (position >= 0 && position < objects.size()) {
-			spinner.setSelection(position);
-		} else {
-			spinner.setSelection(0);
-		}
-	}
+        if (position >= 0 && position < objects.size()) {
+            spinner.setSelection(position);
+        } else {
+            spinner.setSelection(0);
+        }
+    }
 
-	@SuppressLint("InflateParams")
-	private void fillResults() {
-		Days days = getSelectedDays();
-		Age age = getSelectedAge();
+    @SuppressLint("InflateParams")
+    private void fillResults() {
+        Days days = getSelectedDays();
+        Age age = getSelectedAge();
 
-		mTable.removeAllViews();
+        mTable.removeAllViews();
 
-		if (age == null || days == null) {
-			return;
-		}
+        //noinspection ConstantConditions
+        if (age == null || days == null) {
+            return;
+        }
 
-		String[] methodNames = getResources().getStringArray(
-				R.array.methodNames);
-		for (int i = 0; i < getData().byMethod().length; ++i) {
-			if (getData().byMethod()[i]) {
-				View row = getActivity().getLayoutInflater().inflate(
-						R.layout.result_row, null);
-				TextView textView = (TextView) row.findViewById(R.id.textView);
-				textView.setText(methodNames[i]);
+        String[] methodNames = getResources().getStringArray(
+                R.array.methodNames);
+        for (int i = 0; i < getData().byMethod().length; ++i) {
+            if (getData().byMethod()[i]) {
+                View row = getActivity().getLayoutInflater().inflate(
+                        R.layout.result_row, null);
+                TextView textView = (TextView) row.findViewById(R.id.textView);
+                textView.setText(methodNames[i]);
 
-				Pregnancy pregnancy = PregnancyCalculator.Factory.get(
-						getData(), i + 1);
+                Pregnancy pregnancy = PregnancyCalculator.Factory.get(
+                        getData(), i + 1);
 
-				fillRows(pregnancy, age, days, row);
+                fillRows(pregnancy, age, days, row);
 
-				mTable.addView(row);
-				row.setTag(pregnancy);
-				row.setOnClickListener(this);
-			}
-		}
-	}
+                mTable.addView(row);
+                row.setTag(pregnancy);
+                row.setOnClickListener(this);
+            }
+        }
+    }
 
-	private void updateResults() {
-		Days days = getSelectedDays();
-		Age age = getSelectedAge();
+    private void updateResults() {
+        Days days = getSelectedDays();
+        Age age = getSelectedAge();
 
-		if (age == null || days == null) {
-			mTable.removeAllViews();
-			return;
-		}
+        if (age == null || days == null) {
+            mTable.removeAllViews();
+            return;
+        }
 
-		for (int i = 0; i < mTable.getChildCount(); ++i) {
-			View row = mTable.getChildAt(i);
+        for (int i = 0; i < mTable.getChildCount(); ++i) {
+            View row = mTable.getChildAt(i);
 
-			Pregnancy pregnancy = (Pregnancy) row.getTag();
+            Pregnancy pregnancy = (Pregnancy) row.getTag();
 
-			fillRows(pregnancy, age, days, row);
-		}
-	}
+            fillRows(pregnancy, age, days, row);
+        }
+    }
 
-	private void fillRows(Pregnancy pregnancy, Age age, Days days, View row) {
-		pregnancy.setAge(age);
+    private void fillRows(Pregnancy pregnancy, Age age, Days days, View row) {
+        pregnancy.setAge(age);
 
-		String res1 = null, res2 = null, msg = null;
+        String res1 = null, res2 = null, msg = null;
 
-		Calendar current = pregnancy.getCurrentPoint();
+        Calendar current = pregnancy.getCurrentPoint();
 
-		if (pregnancy.isCorrect()) {
-			Calendar to = (Calendar) current.clone();
-			to.add(Calendar.DAY_OF_MONTH, days.getDays() - 1);
+        if (pregnancy.isCorrect()) {
+            Calendar to = (Calendar) current.clone();
+            to.add(Calendar.DAY_OF_MONTH, days.getDays() - 1);
 
-			if (DateUtils.areEqual(current, to)) {
-				res2 = DateUtils.toString(getActivity(), current);
-			} else {
-				res2 = DateUtils.toString(getActivity(), current) + " - "
-						+ DateUtils.toString(getActivity(), to);
-			}
-		} else {
-			res1 = getString(R.string.errorIncorrectGestationalAge);
-			Calendar end = pregnancy.getEndPoint();
-			if (current.before(end)) {
-				msg = getString(R.string.errorIncorrectCurrentDateSmaller);
-			} else {
-				msg = getString(R.string.errorIncorrectCurrentDateGreater);
-			}
-		}
+            if (DateUtils.areEqual(current, to)) {
+                res2 = DateUtils.toString(getActivity(), current);
+            } else {
+                res2 = DateUtils.toString(getActivity(), current) + " - "
+                        + DateUtils.toString(getActivity(), to);
+            }
+        } else {
+            res1 = getString(R.string.errorIncorrectGestationalAge);
+            Calendar end = pregnancy.getEndPoint();
+            if (current.before(end)) {
+                msg = getString(R.string.errorIncorrectCurrentDateSmaller);
+            } else {
+                msg = getString(R.string.errorIncorrectCurrentDateGreater);
+            }
+        }
 
-		TextView result1 = (TextView) row.findViewById(R.id.result1);
-		result1.setText(res1);
-		result1.setVisibility(res1 == null ? View.GONE : View.VISIBLE);
-		TextView result2 = (TextView) row.findViewById(R.id.result2);
-		result2.setText(res2);
-		result2.setVisibility(res2 == null ? View.GONE : View.VISIBLE);
-		TextView message = (TextView) row.findViewById(R.id.message);
-		message.setText(msg);
-		message.setVisibility(msg == null ? View.GONE : View.VISIBLE);
-	}
+        TextView result1 = (TextView) row.findViewById(R.id.result1);
+        result1.setText(res1);
+        result1.setVisibility(res1 == null ? View.GONE : View.VISIBLE);
+        TextView result2 = (TextView) row.findViewById(R.id.result2);
+        result2.setText(res2);
+        result2.setVisibility(res2 == null ? View.GONE : View.VISIBLE);
+        TextView message = (TextView) row.findViewById(R.id.message);
+        message.setText(msg);
+        message.setVisibility(msg == null ? View.GONE : View.VISIBLE);
+    }
 
-	private View mSelectedRow = null;
+    private View mSelectedRow = null;
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public void onClick(View v) {
-		if (v instanceof TableRow) {
-			if (mSelectedRow != null) {
-				mSelectedRow.setBackgroundDrawable(null);
-			}
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onClick(View v) {
+        if (v instanceof TableRow) {
+            if (mSelectedRow != null) {
+                mSelectedRow.setBackgroundDrawable(null);
+            }
 
-			v.setBackgroundDrawable(getResources().getDrawable(
-					R.drawable.bg_selected_view));
-			mSelectedRow = v;
-		} else {
-			switch (v.getId()) {
-			case R.id.buttonEditDays:
-				editDays();
-				break;
-			case R.id.buttonEditAge:
-				editAge();
-				break;
-			}
-		}
-	}
+            v.setBackgroundDrawable(getResources().getDrawable(
+                    R.drawable.bg_selected_view));
+            mSelectedRow = v;
+        } else {
+            switch (v.getId()) {
+                case R.id.buttonEditDays:
+                    editDays();
+                    break;
+                case R.id.buttonEditAge:
+                    editAge();
+                    break;
+            }
+        }
+    }
 
-	@SuppressLint("InflateParams")
-	public static void showSickListInfoDialog(final Context context) {
-		if (Settings.showSickListInfoDialog(context)) {
-			LayoutInflater inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View view = inflater.inflate(R.layout.dialog_info, null);
-			TextView textView = (TextView) view.findViewById(R.id.textView);
-			textView.setText(R.string.dialog_sick_list);
-			final CheckBox checkBox = (CheckBox) view
-					.findViewById(R.id.checkBox);
+    @SuppressLint("InflateParams")
+    public static void showSickListInfoDialog(final Context context) {
+        if (Settings.showSickListInfoDialog(context)) {
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.dialog_info, null);
+            TextView textView = (TextView) view.findViewById(R.id.textView);
+            textView.setText(R.string.dialog_sick_list);
+            final CheckBox checkBox = (CheckBox) view
+                    .findViewById(R.id.checkBox);
 
-			AlertDialog.Builder builder = new AlertDialog.Builder(context);
-			builder.setTitle(R.string.sick_list_days)
-					.setView(view)
-					.setPositiveButton(android.R.string.ok,
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int id) {
-									if (checkBox.isChecked()) {
-										Settings.doNotShowSickListInfoDialog(context);
-									}
-								}
-							});
-			builder.create().show();
-		}
-	}
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(R.string.sick_list_days)
+                    .setView(view)
+                    .setPositiveButton(android.R.string.ok,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                    if (checkBox.isChecked()) {
+                                        Settings.doNotShowSickListInfoDialog(context);
+                                    }
+                                }
+                            });
+            builder.create().show();
+        }
+    }
 
-	@SuppressLint("InflateParams")
-	private void editDays() {
-		LayoutInflater inflater = (LayoutInflater) getActivity()
-				.getLayoutInflater();
-		View view = inflater.inflate(R.layout.dialog_sick_list_days, null);
-		final EditText editTextItem = (EditText) view
-				.findViewById(R.id.editTextItem);
+    @SuppressLint("InflateParams")
+    private void editDays() {
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_sick_list_days, null);
+        final EditText editTextItem = (EditText) view
+                .findViewById(R.id.editTextItem);
 
-		view = wrapWithCheckBox(view);
+        view = wrapWithCheckBox(view);
 
-		final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.sick_list_days)
-				.setView(view)
-				.setPositiveButton(android.R.string.ok,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								Days days = SickListUtils.checkDays(
-										getActivity(), editTextItem,
-										mSpinnerDaysAdapter.getObjects());
-								if (days != null) {
-									mTmpDaysList.add(days);
-									int index = mSpinnerDaysAdapter
-											.addObject(days);
-									mSpinnerDays.setSelection(index);
-									mSpinnerDaysIndex = index;
-									updateResults();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.sick_list_days)
+                .setView(view)
+                .setPositiveButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Days days = SickListUtils.checkDays(
+                                        getActivity(), editTextItem,
+                                        mSpinnerDaysAdapter.getObjects());
+                                if (days != null) {
+                                    mTmpDaysList.add(days);
+                                    int index = mSpinnerDaysAdapter
+                                            .addObject(days);
+                                    mSpinnerDays.setSelection(index);
+                                    mSpinnerDaysIndex = index;
+                                    updateResults();
 
-									if (checkBox.isChecked()) {
-										List<LocalizableObject> list = Settings
-												.getDays(getActivity());
-										list.add(days);
-										Settings.setDays(getActivity(), list);
-									}
-								}
-							}
-						}).setNegativeButton(android.R.string.cancel, null);
-		builder.create().show();
-	}
+                                    if (checkBox.isChecked()) {
+                                        List<LocalizableObject> list = Settings
+                                                .getDays(getActivity());
+                                        list.add(days);
+                                        Settings.setDays(getActivity(), list);
+                                    }
+                                }
+                            }
+                        }).setNegativeButton(android.R.string.cancel, null);
+        builder.create().show();
+    }
 
-	@SuppressLint("InflateParams")
-	private void editAge() {
-		LayoutInflater inflater = (LayoutInflater) getActivity()
-				.getLayoutInflater();
-		View view = inflater.inflate(R.layout.dialog_sick_list_age, null);
-		final NumberPicker numberPickerWeeks = (NumberPicker) view
-				.findViewById(R.id.numberPickerWeeks);
-		final NumberPicker numberPickerDays = (NumberPicker) view
-				.findViewById(R.id.numberPickerDays);
-		SickListUtils
-				.setupAgeNumberPickers(numberPickerWeeks, numberPickerDays);
+    @SuppressLint("InflateParams")
+    private void editAge() {
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_sick_list_age, null);
+        final NumberPicker numberPickerWeeks = (NumberPicker) view
+                .findViewById(R.id.numberPickerWeeks);
+        final NumberPicker numberPickerDays = (NumberPicker) view
+                .findViewById(R.id.numberPickerDays);
+        SickListUtils
+                .setupAgeNumberPickers(numberPickerWeeks, numberPickerDays);
 
-		view = wrapWithCheckBox(view);
+        view = wrapWithCheckBox(view);
 
-		final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.sick_list_age)
-				.setView(view)
-				.setPositiveButton(android.R.string.ok,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								Age age = SickListUtils.checkAge(getActivity(),
-										numberPickerWeeks, numberPickerDays,
-										mSpinnerAgeAdapter.getObjects());
-								if (age != null) {
-									mTmpAgeList.add(age);
-									int index = mSpinnerAgeAdapter
-											.addObject(age);
-									mSpinnerAge.setSelection(index);
-									mSpinnerAgeIndex = index;
-									updateResults();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.sick_list_age)
+                .setView(view)
+                .setPositiveButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Age age = SickListUtils.checkAge(getActivity(),
+                                        numberPickerWeeks, numberPickerDays,
+                                        mSpinnerAgeAdapter.getObjects());
+                                if (age != null) {
+                                    mTmpAgeList.add(age);
+                                    int index = mSpinnerAgeAdapter
+                                            .addObject(age);
+                                    mSpinnerAge.setSelection(index);
+                                    mSpinnerAgeIndex = index;
+                                    updateResults();
 
-									if (checkBox.isChecked()) {
-										List<LocalizableObject> list = Settings
-												.getAge(getActivity());
-										list.add(age);
-										Settings.setAge(getActivity(), list);
-									}
-								}
-							}
-						}).setNegativeButton(android.R.string.cancel, null);
-		builder.create().show();
-	}
+                                    if (checkBox.isChecked()) {
+                                        List<LocalizableObject> list = Settings
+                                                .getAge(getActivity());
+                                        list.add(age);
+                                        Settings.setAge(getActivity(), list);
+                                    }
+                                }
+                            }
+                        }).setNegativeButton(android.R.string.cancel, null);
+        builder.create().show();
+    }
 
-	@SuppressLint("InflateParams")
-	private View wrapWithCheckBox(View child) {
-		LayoutInflater inflater = (LayoutInflater) getActivity()
-				.getLayoutInflater();
-		View view = inflater.inflate(R.layout.dialog_edit, null);
-		ViewGroup viewGroup = (ViewGroup) view.findViewById(R.id.lastItem);
-		viewGroup.addView(child, new LayoutParams(LayoutParams.MATCH_PARENT,
-				LayoutParams.WRAP_CONTENT));
-		return view;
-	}
+    @SuppressLint("InflateParams")
+    private View wrapWithCheckBox(View child) {
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_edit, null);
+        ViewGroup viewGroup = (ViewGroup) view.findViewById(R.id.lastItem);
+        viewGroup.addView(child, new LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT));
+        return view;
+    }
 
-	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int position,
-			long id) {
-		if (parent == mSpinnerDays) {
-			mSpinnerDaysIndex = position;
-		} else if (parent == mSpinnerAge) {
-			mSpinnerAgeIndex = position;
-		}
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                               long id) {
+        if (parent == mSpinnerDays) {
+            mSpinnerDaysIndex = position;
+        } else if (parent == mSpinnerAge) {
+            mSpinnerAgeIndex = position;
+        }
 
-		updateResults();
-	}
+        updateResults();
+    }
 
-	@Override
-	public void onNothingSelected(AdapterView<?> parent) {
-	}
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
 
-	private Days getSelectedDays() {
-		Days days = (Days) mSpinnerDays.getSelectedItem();
-		return days;
-	}
+    private Days getSelectedDays() {
+        return (Days) mSpinnerDays.getSelectedItem();
+    }
 
-	private Age getSelectedAge() {
-		Age age = (Age) mSpinnerAge.getSelectedItem();
-		return age;
-	}
+    private Age getSelectedAge() {
+        return (Age) mSpinnerAge.getSelectedItem();
+    }
 }

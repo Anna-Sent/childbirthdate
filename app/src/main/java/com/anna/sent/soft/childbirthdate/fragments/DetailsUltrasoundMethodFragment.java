@@ -31,7 +31,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 		if (container == null) {
 			// We have different layouts, and in one of them this
 			// fragment's containing frame doesn't exist. The fragment
@@ -43,9 +43,8 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 			return null;
 		}
 
-		View v = inflater.inflate(R.layout.details_ultrasound_method,
+		return inflater.inflate(R.layout.details_ultrasound_method,
 				container, false);
-		return v;
 	}
 
 	@Override

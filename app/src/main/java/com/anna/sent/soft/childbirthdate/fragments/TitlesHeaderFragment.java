@@ -23,9 +23,8 @@ public class TitlesHeaderFragment extends Fragment implements DataClient,
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.titles_header, container, false);
-		return v;
+							 Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.titles_header, container, false);
 	}
 
 	@Override

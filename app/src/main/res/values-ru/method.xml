@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <string name="titles0">%1$s; МЦ %2$d д.; ЛФ %3$d д.</string>
     <string name="titles1">%1$s</string>
     <string name="titles2_gestational">на %1$s диагностирован акушерский срок беременности %2$s</string>
-    <string name="titles2_emryonic">на %1$s диагностирован эмбриональный срок беременности %2$s</string>
+    <string name="titles2_embryonic">на %1$s диагностирован эмбриональный срок беременности %2$s</string>
     <string name="titles3">на %1$s диагностирован срок беременности %2$s</string>
     <string name="titles4_first_pregnancy">%1$s; первая беременность</string>
     <string name="titles4_second_pregnancy">%1$s; повторная беременность</string>

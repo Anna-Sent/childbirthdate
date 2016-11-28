@@ -57,7 +57,7 @@ public class MainActivity extends DataKeeperActivity {
 
 	@Override
 	protected void onNewIntent(Intent intent) {
-		// log("onNewIntent");
+		log("onNewIntent");
 		super.onNewIntent(intent);
 		Bundle extras = intent.getExtras();
 		if (extras != null && extras.containsKey(EXTRA_CONFIGURATION_CHANGED)) {

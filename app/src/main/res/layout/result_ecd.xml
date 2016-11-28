@@ -102,8 +102,6 @@
         android:gravity="center"
         ads:adSize="BANNER"
         ads:adUnitId="@string/adUnitId"
-        ads:loadAdOnCreate="false"
-        ads:testDevices="TEST_EMULATOR"
         tools:ignore="MissingRegistered" />
 
 </RelativeLayout>

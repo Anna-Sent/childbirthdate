@@ -16,7 +16,7 @@
         android:requiredAccountType="com.google"
         android:supportsRtl="false"
         android:theme="@android:style/Theme.Black.NoTitleBar"
-        tools:ignore="UnusedAttribute">
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
         <activity
             android:name="com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidgetConfigureSmall"
             android:label="@string/widget_small_name"

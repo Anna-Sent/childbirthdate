@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<!--suppress CheckTagEmptyBody -->
+<resources>
 
     <string name="ecdIs">"ПДР %s"</string>
     <string name="collapse">"Згорнути"</string>
@@ -72,9 +73,9 @@
     <string name="sick_list">"Лікарняний лист"</string>
     <string name="sick_list_days">"Кількість днів"</string>
     <string name="sick_list_age">"Термін вагітності"</string>
-    <string name="error_enter_value">"Введіть число від %1$s до %2$s"</string>
+    <string name="error_enter_value">"Введіть число від %1$d до %2$d"</string>
     <string name="error_value_already_exists">"Таке значення вже є в списку"</string>
-    <string name="error_value_bounds">"Значення має бути в межах від %1$s до %2$s включно"</string>
+    <string name="error_value_bounds">"Значення має бути в межах від %1$d до %2$d включно"</string>
     <string name="persist_setting">"Зберегти в налаштуваннях"</string>
     <string name="when_the_duration_of_pregnancy">"при досягненні терміну вагітності"</string>
     <string name="on">"на"</string>

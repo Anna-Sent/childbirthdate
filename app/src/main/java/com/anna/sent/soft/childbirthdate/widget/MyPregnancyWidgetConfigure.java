@@ -1,5 +1,6 @@
 package com.anna.sent.soft.childbirthdate.widget;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
@@ -26,10 +27,8 @@ import com.anna.sent.soft.utils.LanguageUtils;
 public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		OnClickListener {
 	private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
-	private TextView textView;
-	private RadioButton[] radio = new RadioButton[Shared.Calculation.METHODS_COUNT];
+	private final RadioButton[] radio = new RadioButton[Shared.Calculation.METHODS_COUNT];
 	private CheckBox checkBoxCountdown, checkBoxShowCalculationMethod;
-	private Button button;
 	private boolean doCalculation = false;
 
 	protected abstract int getTitleStringResourceId();
@@ -91,7 +90,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
 	protected abstract Class<?> getWidgetProviderClass();
 
-	public void addWidget() {
+	private void addWidget() {
 		int radioIndex = getCheckedRadioIndex();
 		if (radioIndex != -1) {
 			// When the configuration is complete, get an instance of the
@@ -153,7 +152,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		DataImpl data = new DataImpl(this);
 		data.update();
 		doCalculation = data.thereIsAtLeastOneSelectedMethod();
-		textView = (TextView) findViewById(R.id.widgetConfigureTextView);
+		TextView textView = (TextView) findViewById(R.id.widgetConfigureTextView);
 		textView.setText(doCalculation ? getString(R.string.widgetSpecifyTheMethodOfCalculation)
 				: getString(R.string.widgetStartTheApplicationToSpecifyNecessaryData));
 		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -176,12 +175,13 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 		checkBoxShowCalculationMethod.setVisibility(hasShowCalculationMethod()
 				&& doCalculation ? View.VISIBLE : View.GONE);
 
-		button = (Button) findViewById(R.id.widgetConfigureButton);
+		Button button = (Button) findViewById(R.id.widgetConfigureButton);
 		button.setText(doCalculation ? getString(R.string.widgetAddWidget)
 				: getString(R.string.widgetStartTheApplication));
 		button.setOnClickListener(this);
 	}
 
+	@SuppressLint("CommitPrefEdits")
 	private void saveWidgetParams() {
 		SharedPreferences settings = Settings.getSettings(this);
 		Editor editor = settings.edit();

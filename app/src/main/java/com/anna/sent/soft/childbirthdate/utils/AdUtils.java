@@ -31,6 +31,7 @@ public class AdUtils {
                     AdRequest adRequest = new AdRequest.Builder()
                             .setGender(AdRequest.GENDER_FEMALE)
                             .addTestDevice("2600D922057328C48F2E6DBAB33639C1")
+                            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                             .build();
                     adView.loadAd(adRequest);
                 }

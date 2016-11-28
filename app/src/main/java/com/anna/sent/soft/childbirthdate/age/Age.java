@@ -17,6 +17,10 @@ public class Age implements ISetting, Serializable {
 		this(0, 0);
 	}
 
+	public Age(Age age) {
+		set(age);
+	}
+
 	public Age(int weeks, int days) {
 		setWeeks(weeks);
 		setDays(days);
@@ -123,7 +127,7 @@ public class Age implements ISetting, Serializable {
 				int w = Integer.parseInt(tokens[0]);
 				int d = Integer.parseInt(tokens[1]);
 				return new Age(w, d);
-			} catch (Exception e) {
+			} catch (Exception ignored) {
 			}
 		}
 

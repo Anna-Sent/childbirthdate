@@ -19,6 +19,7 @@ import com.anna.sent.soft.utils.LanguageUtils;
 import com.anna.sent.soft.utils.NavigationUtils;
 import com.anna.sent.soft.utils.TaskStackBuilderUtils;
 import com.anna.sent.soft.utils.ThemeUtils;
+import com.google.firebase.crash.FirebaseCrash;
 
 @SuppressWarnings("deprecation")
 public class SettingsActivity extends PreferenceActivity implements
@@ -26,20 +27,20 @@ public class SettingsActivity extends PreferenceActivity implements
 	private static final String TAG = "moo";
 	private static final boolean DEBUG = false;
 
-	private String wrapMsg(String msg) {
+    private String wrapMsg(String msg) {
 		return getClass().getSimpleName() + ": " + msg;
 	}
 
 	private void log(String msg) {
 		if (DEBUG) {
-			Log.d(TAG, wrapMsg(msg));
+			FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
 		}
 	}
 
 	@SuppressWarnings("unused")
 	private void log(String msg, boolean debug) {
 		if (DEBUG && debug) {
-			Log.d(TAG, wrapMsg(msg));
+			FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
 		}
 	}
 
@@ -134,7 +135,7 @@ public class SettingsActivity extends PreferenceActivity implements
 							MainActivity.EXTRA_CONFIGURATION_CHANGED);
 					return true;
 				}
-			} catch (NumberFormatException e) {
+			} catch (NumberFormatException ignored) {
 			}
 		} else if (key.equals(Settings.settingsTheme.getThemeKey(this))) {
 			try {
@@ -148,7 +149,7 @@ public class SettingsActivity extends PreferenceActivity implements
 							MainActivity.EXTRA_CONFIGURATION_CHANGED);
 					return true;
 				}
-			} catch (NumberFormatException e) {
+			} catch (NumberFormatException ignored) {
 			}
 		} else if (key.equals(getString(R.string.pref_sick_list_days_key))) {
 			SickListDaysPreference prefDays = (SickListDaysPreference) preference;
@@ -163,7 +164,7 @@ public class SettingsActivity extends PreferenceActivity implements
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-			String key) {
+                                          String key) {
 		if (key.equals(getString(R.string.pref_sick_list_days_key))) {
 			setupSickListDaysPreference();
 		} else if (key.equals(getString(R.string.pref_sick_list_age_key))) {
@@ -171,7 +172,7 @@ public class SettingsActivity extends PreferenceActivity implements
 		}
 	}
 
-	@Override
+    @Override
 	public SharedPreferences getSharedPreferences(String name, int mode) {
 		return Settings.getSettings(this);
 	}

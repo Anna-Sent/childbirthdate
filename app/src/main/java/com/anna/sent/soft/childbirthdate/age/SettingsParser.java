@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsParser {
-	public static String DELIMITER_LIST = ";";
+	private static final String DELIMITER_LIST = ";";
 
-	public static String saveList(List<ISetting> list) {
+	private static String saveList(List<ISetting> list) {
 		String result = "";
 		for (int i = 0; i < list.size(); ++i) {
 			result += list.get(i).save()
@@ -16,13 +16,13 @@ public class SettingsParser {
 		return result;
 	}
 
-	public static List<ISetting> loadList(String str, ISetting element) {
+	private static List<ISetting> loadList(String str, ISetting element) {
 		List<ISetting> result = new ArrayList<ISetting>();
 
 		if (str != null) {
 			String[] tokens = str.split(DELIMITER_LIST);
-			for (int i = 0; i < tokens.length; ++i) {
-				ISetting obj = element.load(tokens[i]);
+			for (String token : tokens) {
+				ISetting obj = element.load(token);
 				if (obj != null) {
 					result.add(obj);
 				}
@@ -43,12 +43,11 @@ public class SettingsParser {
 		return destination;
 	}
 
-	public static String toString(List<LocalizableObject> list, ISetting element) {
-		List<LocalizableObject> source = list;
+	public static String toString(List<LocalizableObject> list) {
 		List<ISetting> destination = new ArrayList<ISetting>();
 
-		for (int i = 0; i < source.size(); ++i) {
-			destination.add((ISetting) source.get(i));
+		for (int i = 0; i < list.size(); ++i) {
+			destination.add((ISetting) list.get(i));
 		}
 
 		return SettingsParser.saveList(destination);
