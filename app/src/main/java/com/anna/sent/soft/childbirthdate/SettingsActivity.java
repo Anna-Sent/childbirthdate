@@ -135,7 +135,8 @@ public class SettingsActivity extends PreferenceActivity implements
                             MainActivity.EXTRA_CONFIGURATION_CHANGED);
                     return true;
                 }
-            } catch (NumberFormatException ignored) {
+            } catch (NumberFormatException e) {
+                FirebaseCrash.logcat(Log.ERROR, e.getMessage(), e.toString());
             }
         } else if (key.equals(Settings.settingsTheme.getThemeKey(this))) {
             try {
@@ -149,7 +150,8 @@ public class SettingsActivity extends PreferenceActivity implements
                             MainActivity.EXTRA_CONFIGURATION_CHANGED);
                     return true;
                 }
-            } catch (NumberFormatException ignored) {
+            } catch (NumberFormatException e) {
+                FirebaseCrash.logcat(Log.ERROR, e.getMessage(), e.toString());
             }
         } else if (key.equals(getString(R.string.pref_sick_list_days_key))) {
             SickListDaysPreference prefDays = (SickListDaysPreference) preference;
