@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--suppress CheckTagEmptyBody -->
 <resources>
 
     <string name="ecdIs">ПДР %s</string>
@@ -43,7 +42,7 @@
     <string name="additionalInfo">триместр %1$s; полный срок %2$s%3$s</string>
     <string name="positiveRest">; до ПДР осталось %s</string>
     <string name="zeroRest">; ПДР</string>
-    <string name="negativeRest"></string>
+    <string name="negativeRest" />
     <string name="errorInvalidAppWidgetId">Некорректный идентификатор виджета</string>
     <string name="widgetSpecifyTheMethodOfCalculation">Задайте предпочтительный метод расчета:</string>
     <string name="errorNotSelectedCalculationMethod">Не выбран способ расчета</string>
@@ -64,7 +63,7 @@
     <string name="pref_language_title">Язык</string>
     <string name="pref_other_settings_title">Другое</string>
     <string name="pref_rate_title">Оценить приложение</string>
-    <string name="pref_rate_summary"></string>
+    <string name="pref_rate_summary" />
     <string name="pref_support_title">Написать разработчику</string>
     <string name="pref_support_summary">Отправить отзыв, замечание, предложение.</string>
     <string name="pref_womancyc_title">Календарь женских циклов</string>

@@ -5,7 +5,7 @@
     <RelativeLayout
         android:id="@+id/lastItem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></RelativeLayout>
+        android:layout_height="wrap_content" />
 
     <CheckBox
         android:id="@+id/checkBox"

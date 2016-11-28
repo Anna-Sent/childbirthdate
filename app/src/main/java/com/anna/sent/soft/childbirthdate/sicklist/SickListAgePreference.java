@@ -40,15 +40,12 @@ public class SickListAgePreference extends MoveableItemsPreference {
     }
 
     @Override
-    protected boolean addItem(MoveableItemsArrayAdapter adapter) {
+    protected void addItem(MoveableItemsArrayAdapter adapter) {
         Age age = SickListUtils.checkAge(getContext(), mNumberPickerWeeks,
                 mNumberPickerDays, adapter.getValues());
         if (age != null) {
             adapter.addItem(age);
-            return true;
         }
-
-        return false;
     }
 
     @Override

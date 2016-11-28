@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--suppress CheckTagEmptyBody -->
 <resources>
 
     <string name="ecdIs">"ПДР %s"</string>
@@ -64,7 +63,7 @@
     <string name="pref_language_title">"Мова"</string>
     <string name="pref_other_settings_title">"Інша"</string>
     <string name="pref_rate_title">"Оцінити додаток"</string>
-    <string name="pref_rate_summary"></string>
+    <string name="pref_rate_summary" />
     <string name="pref_support_title">"Написати розробнику"</string>
     <string name="pref_support_summary">"Надіслати відгук, зауваження, пропозицію."</string>
     <string name="pref_womancyc_title">"Календар жіночих циклів"</string>

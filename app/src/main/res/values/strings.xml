@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--suppress CheckTagEmptyBody -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
 
     <string name="ecdIs">EDD %s</string>
@@ -43,7 +42,7 @@
     <string name="additionalInfo">trimester number is %1$s; expected pregnancy length is %2$s%3$s</string>
     <string name="positiveRest">; %s left before the EDD</string>
     <string name="zeroRest">; EDD</string>
-    <string name="negativeRest"></string>
+    <string name="negativeRest" />
     <string name="errorInvalidAppWidgetId">Invalid widget identifier</string>
     <string name="widgetSpecifyTheMethodOfCalculation">Specify preferred method of calculation:</string>
     <string name="errorNotSelectedCalculationMethod">Method of calculation is not specified</string>
@@ -64,7 +63,7 @@
     <string name="pref_language_title">Language</string>
     <string name="pref_other_settings_title">Other</string>
     <string name="pref_rate_title">Rate the application</string>
-    <string name="pref_rate_summary"></string>
+    <string name="pref_rate_summary" />
     <string name="pref_support_title">Feedback</string>
     <string name="pref_support_summary">Send review, comment, suggestion.</string>
     <string name="pref_womancyc_title">"Calendar of women's cycles"</string>

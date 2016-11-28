@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--suppress CheckTagEmptyBody, CheckTagEmptyBody -->
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <declare-styleable name="AppTheme">
@@ -45,9 +45,9 @@
         <item name="iconEdit">@drawable/ic_edit_light</item>
     </style>
 
-    <style name="AppTheme" parent="AppBaseTheme"></style>
+    <style name="AppTheme" parent="AppBaseTheme" />
 
-    <style name="AppThemeLight" parent="AppBaseThemeLight"></style>
+    <style name="AppThemeLight" parent="AppBaseThemeLight" />
 
     <style name="DialogBaseTheme" parent="android:Theme.Dialog">
         <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
