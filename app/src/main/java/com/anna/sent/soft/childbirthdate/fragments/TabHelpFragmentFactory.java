@@ -13,146 +13,146 @@ import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
 
 public class TabHelpFragmentFactory {
-	public static Fragment newInstance(int position) {
-		Fragment result;
-		switch (position) {
-		case Shared.Calculation.UNKNOWN:
-			result = new TabHelpIntroductionFragment();
-			break;
-		case Shared.Calculation.BY_LMP:
-			result = new TabHelpLmpFragment();
-			break;
-		case Shared.Calculation.BY_OVULATION:
-			result = new TabHelpOvulationFragment();
-			break;
-		case Shared.Calculation.BY_ULTRASOUND:
-			result = new TabHelpUltrasoundFragment();
-			break;
-		case Shared.Calculation.BY_FIRST_APPEARANCE:
-			result = new TabHelpFirstAppearanceFragment();
-			break;
-		case Shared.Calculation.BY_FIRST_MOVEMENTS:
-			result = new TabHelpFirstMovementsFragment();
-			break;
-		default:
-			result = new Fragment();
-			break;
-		}
+    public static Fragment newInstance(int position) {
+        Fragment result;
+        switch (position) {
+            case Shared.Calculation.UNKNOWN:
+                result = new TabHelpIntroductionFragment();
+                break;
+            case Shared.Calculation.BY_LMP:
+                result = new TabHelpLmpFragment();
+                break;
+            case Shared.Calculation.BY_OVULATION:
+                result = new TabHelpOvulationFragment();
+                break;
+            case Shared.Calculation.BY_ULTRASOUND:
+                result = new TabHelpUltrasoundFragment();
+                break;
+            case Shared.Calculation.BY_FIRST_APPEARANCE:
+                result = new TabHelpFirstAppearanceFragment();
+                break;
+            case Shared.Calculation.BY_FIRST_MOVEMENTS:
+                result = new TabHelpFirstMovementsFragment();
+                break;
+            default:
+                result = new Fragment();
+                break;
+        }
 
-		Bundle args = new Bundle();
-		args.putInt("position", position);
-		result.setArguments(args);
+        Bundle args = new Bundle();
+        args.putInt("position", position);
+        result.setArguments(args);
 
-		return result;
-	}
+        return result;
+    }
 
-	public abstract static class TabHelpFragment extends StateSaverFragment {
-		private TextView textViewHelp;
+    public abstract static class TabHelpFragment extends StateSaverFragment {
+        private TextView textViewHelp;
 
-		public TabHelpFragment() {
-			super();
-		}
+        public TabHelpFragment() {
+            super();
+        }
 
-		protected abstract int getLayoutResourceId();
+        protected abstract int getLayoutResourceId();
 
-		protected abstract int getTextViewResourceId();
+        protected abstract int getTextViewResourceId();
 
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-								 Bundle savedInstanceState) {
-			return inflater.inflate(getLayoutResourceId(), container, false);
-		}
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            return inflater.inflate(getLayoutResourceId(), container, false);
+        }
 
-		@Override
-		public void setViews(Bundle savedInstanceState) {
-			int position = getArguments().getInt("position");
-			String[] help = getActivity().getResources().getStringArray(
-					R.array.helpParts);
-			String text = position >= 0 && position < help.length ? help[position]
-					: null;
-			textViewHelp = (TextView) getActivity().findViewById(
-					getTextViewResourceId());
-			textViewHelp.setText(Html.fromHtml(text));
-		}
+        @Override
+        public void setViews(Bundle savedInstanceState) {
+            int position = getArguments().getInt("position");
+            String[] help = getActivity().getResources().getStringArray(
+                    R.array.helpParts);
+            String text = position >= 0 && position < help.length ? help[position]
+                    : null;
+            textViewHelp = (TextView) getActivity().findViewById(
+                    getTextViewResourceId());
+            textViewHelp.setText(Html.fromHtml(text));
+        }
 
-		@Override
-		public void restoreState(Bundle state) {
-		}
+        @Override
+        public void restoreState(Bundle state) {
+        }
 
-		@Override
-		public void saveState(Bundle state) {
-		}
-	}
+        @Override
+        public void saveState(Bundle state) {
+        }
+    }
 
-	public static class TabHelpIntroductionFragment extends TabHelpFragment {
-		@Override
-		protected int getLayoutResourceId() {
-			return R.layout.tab_help_intro;
-		}
+    public static class TabHelpIntroductionFragment extends TabHelpFragment {
+        @Override
+        protected int getLayoutResourceId() {
+            return R.layout.tab_help_intro;
+        }
 
-		@Override
-		protected int getTextViewResourceId() {
-			return R.id.textViewHelpIntro;
-		}
-	}
+        @Override
+        protected int getTextViewResourceId() {
+            return R.id.textViewHelpIntro;
+        }
+    }
 
-	public static class TabHelpLmpFragment extends TabHelpFragment {
-		@Override
-		protected int getLayoutResourceId() {
-			return R.layout.tab_help_lmp;
-		}
+    public static class TabHelpLmpFragment extends TabHelpFragment {
+        @Override
+        protected int getLayoutResourceId() {
+            return R.layout.tab_help_lmp;
+        }
 
-		@Override
-		protected int getTextViewResourceId() {
-			return R.id.textViewHelpLmp;
-		}
-	}
+        @Override
+        protected int getTextViewResourceId() {
+            return R.id.textViewHelpLmp;
+        }
+    }
 
-	public static class TabHelpOvulationFragment extends TabHelpFragment {
-		@Override
-		protected int getLayoutResourceId() {
-			return R.layout.tab_help_ovulation;
-		}
+    public static class TabHelpOvulationFragment extends TabHelpFragment {
+        @Override
+        protected int getLayoutResourceId() {
+            return R.layout.tab_help_ovulation;
+        }
 
-		@Override
-		protected int getTextViewResourceId() {
-			return R.id.textViewHelpOvulation;
-		}
-	}
+        @Override
+        protected int getTextViewResourceId() {
+            return R.id.textViewHelpOvulation;
+        }
+    }
 
-	public static class TabHelpUltrasoundFragment extends TabHelpFragment {
-		@Override
-		protected int getLayoutResourceId() {
-			return R.layout.tab_help_ultrasound;
-		}
+    public static class TabHelpUltrasoundFragment extends TabHelpFragment {
+        @Override
+        protected int getLayoutResourceId() {
+            return R.layout.tab_help_ultrasound;
+        }
 
-		@Override
-		protected int getTextViewResourceId() {
-			return R.id.textViewHelpUltrasound;
-		}
-	}
+        @Override
+        protected int getTextViewResourceId() {
+            return R.id.textViewHelpUltrasound;
+        }
+    }
 
-	public static class TabHelpFirstAppearanceFragment extends TabHelpFragment {
-		@Override
-		protected int getLayoutResourceId() {
-			return R.layout.tab_help_first_appearance;
-		}
+    public static class TabHelpFirstAppearanceFragment extends TabHelpFragment {
+        @Override
+        protected int getLayoutResourceId() {
+            return R.layout.tab_help_first_appearance;
+        }
 
-		@Override
-		protected int getTextViewResourceId() {
-			return R.id.textViewHelpFirstAppearance;
-		}
-	}
+        @Override
+        protected int getTextViewResourceId() {
+            return R.id.textViewHelpFirstAppearance;
+        }
+    }
 
-	public static class TabHelpFirstMovementsFragment extends TabHelpFragment {
-		@Override
-		protected int getLayoutResourceId() {
-			return R.layout.tab_help_first_movements;
-		}
+    public static class TabHelpFirstMovementsFragment extends TabHelpFragment {
+        @Override
+        protected int getLayoutResourceId() {
+            return R.layout.tab_help_first_movements;
+        }
 
-		@Override
-		protected int getTextViewResourceId() {
-			return R.id.textViewHelpFirstMovements;
-		}
-	}
+        @Override
+        protected int getTextViewResourceId() {
+            return R.id.textViewHelpFirstMovements;
+        }
+    }
 }

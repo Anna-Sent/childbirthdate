@@ -3,61 +3,61 @@ package com.anna.sent.soft.childbirthdate.data;
 import java.util.Calendar;
 
 public interface Data {
-	boolean[] byMethod();
+    boolean[] byMethod();
 
-	void byMethod(int index, boolean value);
+    void byMethod(int index, boolean value);
 
-	boolean thereIsAtLeastOneSelectedMethod();
+    boolean thereIsAtLeastOneSelectedMethod();
 
-	int getSelectedMethodsCount();
+    int getSelectedMethodsCount();
 
-	String[] getStrings2();
+    String[] getStrings2();
 
-	int getMenstrualCycleLen();
+    int getMenstrualCycleLen();
 
-	void setMenstrualCycleLen(int value);
+    void setMenstrualCycleLen(int value);
 
-	int getLutealPhaseLen();
+    int getLutealPhaseLen();
 
-	void setLutealPhaseLen(int value);
+    void setLutealPhaseLen(int value);
 
-	Calendar getLastMenstruationDate();
+    Calendar getLastMenstruationDate();
 
-	void setLastMenstruationDate(Calendar value);
+    void setLastMenstruationDate(Calendar value);
 
-	Calendar getOvulationDate();
+    Calendar getOvulationDate();
 
-	void setOvulationDate(Calendar value);
+    void setOvulationDate(Calendar value);
 
-	Calendar getUltrasoundDate();
+    Calendar getUltrasoundDate();
 
-	void setUltrasoundDate(Calendar value);
+    void setUltrasoundDate(Calendar value);
 
-	int getUltrasoundWeeks();
+    int getUltrasoundWeeks();
 
-	void setUltrasoundWeeks(int value);
+    void setUltrasoundWeeks(int value);
 
-	int getUltrasoundDays();
+    int getUltrasoundDays();
 
-	void setUltrasoundDays(int value);
+    void setUltrasoundDays(int value);
 
-	boolean isEmbryonicAge();
+    boolean isEmbryonicAge();
 
-	void isEmbryonicAge(boolean value);
+    void isEmbryonicAge(boolean value);
 
-	Calendar getFirstAppearanceDate();
+    Calendar getFirstAppearanceDate();
 
-	void setFirstAppearanceDate(Calendar value);
+    void setFirstAppearanceDate(Calendar value);
 
-	int getFirstAppearanceWeeks();
+    int getFirstAppearanceWeeks();
 
-	void setFirstAppearanceWeeks(int value);
+    void setFirstAppearanceWeeks(int value);
 
-	Calendar getFirstMovementsDate();
+    Calendar getFirstMovementsDate();
 
-	void setFirstMovementsDate(Calendar value);
+    void setFirstMovementsDate(Calendar value);
 
-	boolean isFirstPregnancy();
+    boolean isFirstPregnancy();
 
-	void isFirstPregnancy(boolean value);
+    void isFirstPregnancy(boolean value);
 }

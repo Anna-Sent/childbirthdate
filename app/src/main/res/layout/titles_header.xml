@@ -4,7 +4,7 @@
     android:paddingBottom="@dimen/layout_vertical_padding"
     android:paddingLeft="@dimen/layout_horizontal_padding"
     android:paddingRight="@dimen/layout_horizontal_padding"
-    android:paddingTop="@dimen/layout_vertical_padding" >
+    android:paddingTop="@dimen/layout_vertical_padding">
 
     <Button
         android:id="@+id/buttonCalculate"

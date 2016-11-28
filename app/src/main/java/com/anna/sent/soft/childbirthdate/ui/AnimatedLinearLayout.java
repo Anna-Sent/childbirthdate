@@ -16,7 +16,6 @@ public class AnimatedLinearLayout extends LinearLayout {
 
     public AnimatedLinearLayout(Context context) {
         super(context);
-
     }
 
     public AnimatedLinearLayout(Context context, AttributeSet attrs) {

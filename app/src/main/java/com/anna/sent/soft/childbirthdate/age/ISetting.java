@@ -1,7 +1,7 @@
 package com.anna.sent.soft.childbirthdate.age;
 
 public interface ISetting extends LocalizableObject {
-	String save();
+    String save();
 
-	ISetting load(String str);
+    ISetting load(String str);
 }

@@ -23,108 +23,108 @@ import android.widget.TabWidget;
  * the ViewPager whenever the selected tab changes.
  */
 public class TabsAdapter extends MyFragmentPagerAdapter implements
-		TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
-	private final Context mContext;
-	private final TabHost mTabHost;
-	private final ViewPager mViewPager;
-	private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
+        TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
+    private final Context mContext;
+    private final TabHost mTabHost;
+    private final ViewPager mViewPager;
+    private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
 
-	private TabHost.OnTabChangeListener mOnTabChangeListener;
+    private TabHost.OnTabChangeListener mOnTabChangeListener;
 
-	public void setOnTabChangeListener(TabHost.OnTabChangeListener listener) {
-		mOnTabChangeListener = listener;
-	}
+    public void setOnTabChangeListener(TabHost.OnTabChangeListener listener) {
+        mOnTabChangeListener = listener;
+    }
 
-	private static final class TabInfo {
-		@SuppressWarnings("unused")
-		private final String tag;
-		private final Class<?> clss;
-		private final Bundle args;
+    private static final class TabInfo {
+        @SuppressWarnings("unused")
+        private final String tag;
+        private final Class<?> clss;
+        private final Bundle args;
 
-		TabInfo(String _tag, Class<?> _class, Bundle _args) {
-			tag = _tag;
-			clss = _class;
-			args = _args;
-		}
-	}
+        TabInfo(String _tag, Class<?> _class, Bundle _args) {
+            tag = _tag;
+            clss = _class;
+            args = _args;
+        }
+    }
 
-	private static class DummyTabFactory implements TabHost.TabContentFactory {
-		private final Context mContext;
+    private static class DummyTabFactory implements TabHost.TabContentFactory {
+        private final Context mContext;
 
-		public DummyTabFactory(Context context) {
-			mContext = context;
-		}
+        public DummyTabFactory(Context context) {
+            mContext = context;
+        }
 
-		@Override
-		public View createTabContent(String tag) {
-			View v = new View(mContext);
-			v.setMinimumWidth(0);
-			v.setMinimumHeight(0);
-			return v;
-		}
-	}
+        @Override
+        public View createTabContent(String tag) {
+            View v = new View(mContext);
+            v.setMinimumWidth(0);
+            v.setMinimumHeight(0);
+            return v;
+        }
+    }
 
-	public TabsAdapter(FragmentActivity activity, TabHost tabHost,
-					   ViewPager pager) {
-		super(activity.getSupportFragmentManager());
-		mContext = activity;
-		mTabHost = tabHost;
-		mViewPager = pager;
-		mTabHost.setOnTabChangedListener(this);
-		mViewPager.setAdapter(this);
-		mViewPager.addOnPageChangeListener(this);
-	}
+    public TabsAdapter(FragmentActivity activity, TabHost tabHost,
+                       ViewPager pager) {
+        super(activity.getSupportFragmentManager());
+        mContext = activity;
+        mTabHost = tabHost;
+        mViewPager = pager;
+        mTabHost.setOnTabChangedListener(this);
+        mViewPager.setAdapter(this);
+        mViewPager.addOnPageChangeListener(this);
+    }
 
-	public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, @SuppressWarnings("SameParameterValue") Bundle args) {
-		tabSpec.setContent(new DummyTabFactory(mContext));
-		String tag = tabSpec.getTag();
-		TabInfo info = new TabInfo(tag, clss, args);
-		mTabs.add(info);
-		mTabHost.addTab(tabSpec);
-		notifyDataSetChanged();
-	}
+    public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, @SuppressWarnings("SameParameterValue") Bundle args) {
+        tabSpec.setContent(new DummyTabFactory(mContext));
+        String tag = tabSpec.getTag();
+        TabInfo info = new TabInfo(tag, clss, args);
+        mTabs.add(info);
+        mTabHost.addTab(tabSpec);
+        notifyDataSetChanged();
+    }
 
-	@Override
-	public int getCount() {
-		return mTabs.size();
-	}
+    @Override
+    public int getCount() {
+        return mTabs.size();
+    }
 
-	@Override
-	public Fragment getItem(int position) {
-		TabInfo info = mTabs.get(position);
-		return Fragment.instantiate(mContext, info.clss.getName(), info.args);
-	}
+    @Override
+    public Fragment getItem(int position) {
+        TabInfo info = mTabs.get(position);
+        return Fragment.instantiate(mContext, info.clss.getName(), info.args);
+    }
 
-	@Override
-	public void onTabChanged(String tabId) {
-		int position = mTabHost.getCurrentTab();
-		mViewPager.setCurrentItem(position);
+    @Override
+    public void onTabChanged(String tabId) {
+        int position = mTabHost.getCurrentTab();
+        mViewPager.setCurrentItem(position);
 
-		if (mOnTabChangeListener != null) {
-			mOnTabChangeListener.onTabChanged(tabId);
-		}
-	}
+        if (mOnTabChangeListener != null) {
+            mOnTabChangeListener.onTabChanged(tabId);
+        }
+    }
 
-	@Override
-	public void onPageScrolled(int position, float positionOffset,
-			int positionOffsetPixels) {
-	}
+    @Override
+    public void onPageScrolled(int position, float positionOffset,
+                               int positionOffsetPixels) {
+    }
 
-	@Override
-	public void onPageSelected(int position) {
-		// Unfortunately when TabHost changes the current tab, it kindly
-		// also takes care of putting focus on it when not in touch mode.
-		// The jerk.
-		// This hack tries to prevent this from pulling focus out of our
-		// ViewPager.
-		TabWidget widget = mTabHost.getTabWidget();
-		int oldFocusability = widget.getDescendantFocusability();
-		widget.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-		mTabHost.setCurrentTab(position);
-		widget.setDescendantFocusability(oldFocusability);
-	}
+    @Override
+    public void onPageSelected(int position) {
+        // Unfortunately when TabHost changes the current tab, it kindly
+        // also takes care of putting focus on it when not in touch mode.
+        // The jerk.
+        // This hack tries to prevent this from pulling focus out of our
+        // ViewPager.
+        TabWidget widget = mTabHost.getTabWidget();
+        int oldFocusability = widget.getDescendantFocusability();
+        widget.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+        mTabHost.setCurrentTab(position);
+        widget.setDescendantFocusability(oldFocusability);
+    }
 
-	@Override
-	public void onPageScrollStateChanged(int state) {
-	}
+    @Override
+    public void onPageScrollStateChanged(int state) {
+    }
 }

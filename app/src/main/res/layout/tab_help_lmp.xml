@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tabHelpLmp"
     style="@style/ScrollViewStyle"
-    tools:ignore="UnusedAttribute" >
+    tools:ignore="UnusedAttribute">
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding">
 
         <TextView
             android:id="@+id/textViewHelpLmp"

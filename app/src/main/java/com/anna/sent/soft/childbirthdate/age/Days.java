@@ -7,72 +7,72 @@ import android.content.Context;
 import com.anna.sent.soft.childbirthdate.R;
 
 public class Days implements ISetting, Serializable {
-	private static final long serialVersionUID = -2116357134482613794L;
+    private static final long serialVersionUID = -2116357134482613794L;
 
-	private int days;
+    private int days;
 
-	public Days() {
-		this(0);
-	}
+    public Days() {
+        this(0);
+    }
 
-	public Days(int days) {
-		setDays(days);
-	}
+    public Days(int days) {
+        setDays(days);
+    }
 
-	public int getDays() {
-		return days;
-	}
+    public int getDays() {
+        return days;
+    }
 
-	private void setDays(int value) {
-		if (value < 0) {
-			throw new IllegalArgumentException(
-					"Days value must be non-negative");
-		}
+    private void setDays(int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException(
+                    "Days value must be non-negative");
+        }
 
-		days = value;
-	}
+        days = value;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == this) {
-			return true;
-		}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
 
-		if (obj == null || obj.getClass() != getClass()) {
-			return false;
-		}
+        if (obj == null || obj.getClass() != getClass()) {
+            return false;
+        }
 
-		Days d = (Days) obj;
-		return days == d.days;
-	}
+        Days d = (Days) obj;
+        return days == d.days;
+    }
 
-	@Override
-	public String toString() {
-		return save();
-	}
+    @Override
+    public String toString() {
+        return save();
+    }
 
-	@Override
-	public String toString(Context context) {
-		return days + " " + context.getString(R.string.days);
-	}
+    @Override
+    public String toString(Context context) {
+        return days + " " + context.getString(R.string.days);
+    }
 
-	@Override
-	public String save() {
-		return String.valueOf(days);
-	}
+    @Override
+    public String save() {
+        return String.valueOf(days);
+    }
 
-	@Override
-	public ISetting load(String str) {
-		if (str == null) {
-			return null;
-		}
+    @Override
+    public ISetting load(String str) {
+        if (str == null) {
+            return null;
+        }
 
-		try {
-			int d = Integer.parseInt(str);
-			return new Days(d);
-		} catch (Exception ignored) {
-		}
+        try {
+            int d = Integer.parseInt(str);
+            return new Days(d);
+        } catch (Exception ignored) {
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

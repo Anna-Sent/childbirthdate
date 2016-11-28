@@ -16,46 +16,46 @@ import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 
 public class TitlesHeaderFragment extends Fragment implements DataClient,
-		OnClickListener {
-	public TitlesHeaderFragment() {
-		super();
-	}
+        OnClickListener {
+    public TitlesHeaderFragment() {
+        super();
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.titles_header, container, false);
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.titles_header, container, false);
+    }
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		Button buttonCalculate = (Button) getActivity().findViewById(
-				R.id.buttonCalculate);
-		buttonCalculate.setOnClickListener(this);
-	}
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Button buttonCalculate = (Button) getActivity().findViewById(
+                R.id.buttonCalculate);
+        buttonCalculate.setOnClickListener(this);
+    }
 
-	private Data mData = null;
+    private Data mData = null;
 
-	@Override
-	public void setData(Data data) {
-		mData = data;
-	}
+    @Override
+    public void setData(Data data) {
+        mData = data;
+    }
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.buttonCalculate:
-			if (mData != null && mData.thereIsAtLeastOneSelectedMethod()) {
-				Intent intent = new Intent(getActivity(), ResultsActivity.class);
-				startActivity(intent);
-			} else {
-				Toast.makeText(getActivity(),
-						getString(R.string.errorNotSelectedCalculationMethod),
-						Toast.LENGTH_LONG).show();
-			}
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.buttonCalculate:
+                if (mData != null && mData.thereIsAtLeastOneSelectedMethod()) {
+                    Intent intent = new Intent(getActivity(), ResultsActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(),
+                            getString(R.string.errorNotSelectedCalculationMethod),
+                            Toast.LENGTH_LONG).show();
+                }
 
-			break;
-		}
-	}
+                break;
+        }
+    }
 }

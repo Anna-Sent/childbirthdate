@@ -25,198 +25,198 @@ import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.utils.LanguageUtils;
 
 public abstract class MyPregnancyWidgetConfigure extends Activity implements
-		OnClickListener {
-	private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
-	private final RadioButton[] radio = new RadioButton[Shared.Calculation.METHODS_COUNT];
-	private CheckBox checkBoxCountdown, checkBoxShowCalculationMethod;
-	private boolean doCalculation = false;
+        OnClickListener {
+    private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+    private final RadioButton[] radio = new RadioButton[Shared.Calculation.METHODS_COUNT];
+    private CheckBox checkBoxCountdown, checkBoxShowCalculationMethod;
+    private boolean doCalculation = false;
 
-	protected abstract int getTitleStringResourceId();
+    protected abstract int getTitleStringResourceId();
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		/*
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        /*
 		 * ThemeUtils.setupThemeBeforeOnActivityCreate(this,
 		 * Settings.settingsTheme.getStyle(this, R.array.style_dialog,
 		 * R.style.DialogTheme));
 		 */
-		super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
-		LanguageUtils.setupLanguageAfterOnActivityCreate(this,
-				Settings.settingsLanguage.isLanguageSetByUser(this),
-				Settings.settingsLanguage.getLocale(this));
+        LanguageUtils.setupLanguageAfterOnActivityCreate(this,
+                Settings.settingsLanguage.isLanguageSetByUser(this),
+                Settings.settingsLanguage.getLocale(this));
 
-		setTitle(getTitleStringResourceId());
-		setContentView(R.layout.my_pregnancy_widget_configure_layout);
-		setResult(RESULT_CANCELED);
+        setTitle(getTitleStringResourceId());
+        setContentView(R.layout.my_pregnancy_widget_configure_layout);
+        setResult(RESULT_CANCELED);
 
-		// First, get the App Widget ID from the Intent that launched the
-		// Activity:
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
-					AppWidgetManager.INVALID_APPWIDGET_ID);
-		}
+        // First, get the App Widget ID from the Intent that launched the
+        // Activity:
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                    AppWidgetManager.INVALID_APPWIDGET_ID);
+        }
 
-		if (mAppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
-			Toast.makeText(this, R.string.errorInvalidAppWidgetId,
-					Toast.LENGTH_LONG).show();
-			finish();
-			return;
-		}
+        if (mAppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
+            Toast.makeText(this, R.string.errorInvalidAppWidgetId,
+                    Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
 
-		// Perform App Widget configuration.
-		init();
-		int defaultValue = getDefaultRadioIndex();
-		int radioIndex = defaultValue;
-		if (savedInstanceState != null) {
-			radioIndex = savedInstanceState.getInt(KEY_CHECKED_RADIO_INDEX,
-					defaultValue);
-		}
+        // Perform App Widget configuration.
+        init();
+        int defaultValue = getDefaultRadioIndex();
+        int radioIndex = defaultValue;
+        if (savedInstanceState != null) {
+            radioIndex = savedInstanceState.getInt(KEY_CHECKED_RADIO_INDEX,
+                    defaultValue);
+        }
 
-		if (radioIndex != -1) {
-			radio[radioIndex].setChecked(true);
-		}
-	}
+        if (radioIndex != -1) {
+            radio[radioIndex].setChecked(true);
+        }
+    }
 
-	private static final String KEY_CHECKED_RADIO_INDEX = "checkedRadioIndex";
+    private static final String KEY_CHECKED_RADIO_INDEX = "checkedRadioIndex";
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		int radioIndex = getCheckedRadioIndex();
-		outState.putInt(KEY_CHECKED_RADIO_INDEX, radioIndex);
-	}
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int radioIndex = getCheckedRadioIndex();
+        outState.putInt(KEY_CHECKED_RADIO_INDEX, radioIndex);
+    }
 
-	protected abstract Class<?> getWidgetProviderClass();
+    protected abstract Class<?> getWidgetProviderClass();
 
-	private void addWidget() {
-		int radioIndex = getCheckedRadioIndex();
-		if (radioIndex != -1) {
-			// When the configuration is complete, get an instance of the
-			// AppWidgetManager
-			AppWidgetManager appWidgetManager = AppWidgetManager
-					.getInstance(this);
+    private void addWidget() {
+        int radioIndex = getCheckedRadioIndex();
+        if (radioIndex != -1) {
+            // When the configuration is complete, get an instance of the
+            // AppWidgetManager
+            AppWidgetManager appWidgetManager = AppWidgetManager
+                    .getInstance(this);
 
-			// First
-			saveWidgetParams();
+            // First
+            saveWidgetParams();
 
-			// Second. Update the App Widget with a RemoteViews layout
-			RemoteViews views = getBuilder().buildViews(this, mAppWidgetId);
-			appWidgetManager.updateAppWidget(mAppWidgetId, views);
+            // Second. Update the App Widget with a RemoteViews layout
+            RemoteViews views = getBuilder().buildViews(this, mAppWidgetId);
+            appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
-			MyPregnancyWidget.installAlarms(this, getWidgetProviderClass());
+            MyPregnancyWidget.installAlarms(this, getWidgetProviderClass());
 
-			// Finally, create the return Intent, set it with the Activity
-			// result, and finish the Activity:
-			Intent resultValue = new Intent();
-			resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-					mAppWidgetId);
+            // Finally, create the return Intent, set it with the Activity
+            // result, and finish the Activity:
+            Intent resultValue = new Intent();
+            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                    mAppWidgetId);
 
-			setResult(RESULT_OK, resultValue);
+            setResult(RESULT_OK, resultValue);
 
-			finish();
-		} else {
-			Toast.makeText(this,
-					getString(R.string.errorNotSelectedCalculationMethod),
-					Toast.LENGTH_LONG).show();
-		}
-	}
+            finish();
+        } else {
+            Toast.makeText(this,
+                    getString(R.string.errorNotSelectedCalculationMethod),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
 
-	protected abstract Builder getBuilder();
+    protected abstract Builder getBuilder();
 
-	private void startTheApplication() {
-		Intent intent = new Intent(this, MainActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-				| Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(intent);
-		finish();
-	}
+    private void startTheApplication() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+    }
 
-	@Override
-	public void onClick(View arg0) {
-		if (arg0.getId() == R.id.widgetConfigureButton) {
-			if (doCalculation) {
-				addWidget();
-			} else {
-				startTheApplication();
-			}
-		}
-	}
+    @Override
+    public void onClick(View arg0) {
+        if (arg0.getId() == R.id.widgetConfigureButton) {
+            if (doCalculation) {
+                addWidget();
+            } else {
+                startTheApplication();
+            }
+        }
+    }
 
-	protected abstract boolean hasCountdown();
+    protected abstract boolean hasCountdown();
 
-	protected abstract boolean hasShowCalculationMethod();
+    protected abstract boolean hasShowCalculationMethod();
 
-	private void init() {
-		DataImpl data = new DataImpl(this);
-		data.update();
-		doCalculation = data.thereIsAtLeastOneSelectedMethod();
-		TextView textView = (TextView) findViewById(R.id.widgetConfigureTextView);
-		textView.setText(doCalculation ? getString(R.string.widgetSpecifyTheMethodOfCalculation)
-				: getString(R.string.widgetStartTheApplicationToSpecifyNecessaryData));
-		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-		String[] methodNames = getResources().getStringArray(
-				R.array.methodNames);
-		boolean byMethod[] = data.byMethod();
-		for (int i = 0; i < radio.length; ++i) {
-			radio[i] = new RadioButton(this);
-			radio[i].setVisibility(byMethod[i] ? View.VISIBLE : View.GONE);
-			radio[i].setText(methodNames[i]);
-			radioGroup.addView(radio[i]);
-		}
+    private void init() {
+        DataImpl data = new DataImpl(this);
+        data.update();
+        doCalculation = data.thereIsAtLeastOneSelectedMethod();
+        TextView textView = (TextView) findViewById(R.id.widgetConfigureTextView);
+        textView.setText(doCalculation ? getString(R.string.widgetSpecifyTheMethodOfCalculation)
+                : getString(R.string.widgetStartTheApplicationToSpecifyNecessaryData));
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        String[] methodNames = getResources().getStringArray(
+                R.array.methodNames);
+        boolean byMethod[] = data.byMethod();
+        for (int i = 0; i < radio.length; ++i) {
+            radio[i] = new RadioButton(this);
+            radio[i].setVisibility(byMethod[i] ? View.VISIBLE : View.GONE);
+            radio[i].setText(methodNames[i]);
+            radioGroup.addView(radio[i]);
+        }
 
-		checkBoxCountdown = (CheckBox) findViewById(R.id.checkBoxCountdown);
-		checkBoxCountdown
-				.setVisibility(hasCountdown() && doCalculation ? View.VISIBLE
-						: View.GONE);
+        checkBoxCountdown = (CheckBox) findViewById(R.id.checkBoxCountdown);
+        checkBoxCountdown
+                .setVisibility(hasCountdown() && doCalculation ? View.VISIBLE
+                        : View.GONE);
 
-		checkBoxShowCalculationMethod = (CheckBox) findViewById(R.id.checkBoxShowCalculationMethod);
-		checkBoxShowCalculationMethod.setVisibility(hasShowCalculationMethod()
-				&& doCalculation ? View.VISIBLE : View.GONE);
+        checkBoxShowCalculationMethod = (CheckBox) findViewById(R.id.checkBoxShowCalculationMethod);
+        checkBoxShowCalculationMethod.setVisibility(hasShowCalculationMethod()
+                && doCalculation ? View.VISIBLE : View.GONE);
 
-		Button button = (Button) findViewById(R.id.widgetConfigureButton);
-		button.setText(doCalculation ? getString(R.string.widgetAddWidget)
-				: getString(R.string.widgetStartTheApplication));
-		button.setOnClickListener(this);
-	}
+        Button button = (Button) findViewById(R.id.widgetConfigureButton);
+        button.setText(doCalculation ? getString(R.string.widgetAddWidget)
+                : getString(R.string.widgetStartTheApplication));
+        button.setOnClickListener(this);
+    }
 
-	@SuppressLint("CommitPrefEdits")
-	private void saveWidgetParams() {
-		SharedPreferences settings = Settings.getSettings(this);
-		Editor editor = settings.edit();
+    @SuppressLint("CommitPrefEdits")
+    private void saveWidgetParams() {
+        SharedPreferences settings = Settings.getSettings(this);
+        Editor editor = settings.edit();
 
-		int methodIndex = getCheckedRadioIndex() + 1;
-		editor.putInt(Shared.Saved.Widget.EXTRA_CALCULATION_METHOD
-				+ mAppWidgetId, methodIndex);
+        int methodIndex = getCheckedRadioIndex() + 1;
+        editor.putInt(Shared.Saved.Widget.EXTRA_CALCULATION_METHOD
+                + mAppWidgetId, methodIndex);
 
-		editor.putBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN + mAppWidgetId,
-				hasCountdown() && checkBoxCountdown.isChecked());
+        editor.putBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN + mAppWidgetId,
+                hasCountdown() && checkBoxCountdown.isChecked());
 
-		editor.putBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD
-				+ mAppWidgetId, hasShowCalculationMethod()
-				&& checkBoxShowCalculationMethod.isChecked());
+        editor.putBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD
+                + mAppWidgetId, hasShowCalculationMethod()
+                && checkBoxShowCalculationMethod.isChecked());
 
-		editor.commit();
-	}
+        editor.commit();
+    }
 
-	private int getCheckedRadioIndex() {
-		for (int i = 0; i < radio.length; ++i) {
-			if (radio[i].isChecked()) {
-				return i;
-			}
-		}
+    private int getCheckedRadioIndex() {
+        for (int i = 0; i < radio.length; ++i) {
+            if (radio[i].isChecked()) {
+                return i;
+            }
+        }
 
-		return -1;
-	}
+        return -1;
+    }
 
-	private int getDefaultRadioIndex() {
-		for (int i = 0; i < radio.length; ++i) {
-			if (radio[i].getVisibility() == View.VISIBLE) {
-				return i;
-			}
-		}
+    private int getDefaultRadioIndex() {
+        for (int i = 0; i < radio.length; ++i) {
+            if (radio[i].getVisibility() == View.VISIBLE) {
+                return i;
+            }
+        }
 
-		return -1;
-	}
+        return -1;
+    }
 }

@@ -10,93 +10,93 @@ import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.google.firebase.crash.FirebaseCrash;
 
 public abstract class DetailsFragment extends Fragment implements DataClient {
-	private static final String TAG = "moo";
-	private static final boolean DEBUG = false;
+    private static final String TAG = "moo";
+    private static final boolean DEBUG = false;
 
-	private String wrapMsg(String msg) {
-		return getClass().getSimpleName() + ": " + msg;
-	}
+    private String wrapMsg(String msg) {
+        return getClass().getSimpleName() + ": " + msg;
+    }
 
-	@SuppressWarnings("unused")
-	private void log(String msg) {
-		if (DEBUG) {
-			FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-		}
-	}
+    @SuppressWarnings("unused")
+    private void log(String msg) {
+        if (DEBUG) {
+            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
+        }
+    }
 
-	@SuppressWarnings("unused")
-	private void log(String msg, boolean debug) {
-		if (DEBUG && debug) {
-			FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-		}
-	}
+    @SuppressWarnings("unused")
+    private void log(String msg, boolean debug) {
+        if (DEBUG && debug) {
+            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
+        }
+    }
 
-	public interface OnDetailsChangedListener {
-		void detailsChanged();
-	}
+    public interface OnDetailsChangedListener {
+        void detailsChanged();
+    }
 
-	private OnDetailsChangedListener mListener = null;
+    private OnDetailsChangedListener mListener = null;
 
-	public void setOnDetailsChangedListener(OnDetailsChangedListener listener) {
-		mListener = listener;
-	}
+    public void setOnDetailsChangedListener(OnDetailsChangedListener listener) {
+        mListener = listener;
+    }
 
-	Data mData = null;
+    Data mData = null;
 
-	@Override
-	public void setData(Data data) {
-		mData = data;
-	}
+    @Override
+    public void setData(Data data) {
+        mData = data;
+    }
 
-	public DetailsFragment() {
-		super();
-	}
+    public DetailsFragment() {
+        super();
+    }
 
-	public static DetailsFragment newInstance(int index) {
-		DetailsFragment details;
-		switch (index + 1) {
-		case Shared.Calculation.BY_LMP:
-			details = new DetailsLmpMethodFragment();
-			break;
-		case Shared.Calculation.BY_OVULATION:
-			details = new DetailsOvulationMethodFragment();
-			break;
-		case Shared.Calculation.BY_ULTRASOUND:
-			details = new DetailsUltrasoundMethodFragment();
-			break;
-		case Shared.Calculation.BY_FIRST_APPEARANCE:
-			details = new DetailsFirstAppearanceMethodFragment();
-			break;
-		case Shared.Calculation.BY_FIRST_MOVEMENTS:
-			details = new DetailsFirstMovementsMethodFragment();
-			break;
-		default:
-			return null;
-		}
+    public static DetailsFragment newInstance(int index) {
+        DetailsFragment details;
+        switch (index + 1) {
+            case Shared.Calculation.BY_LMP:
+                details = new DetailsLmpMethodFragment();
+                break;
+            case Shared.Calculation.BY_OVULATION:
+                details = new DetailsOvulationMethodFragment();
+                break;
+            case Shared.Calculation.BY_ULTRASOUND:
+                details = new DetailsUltrasoundMethodFragment();
+                break;
+            case Shared.Calculation.BY_FIRST_APPEARANCE:
+                details = new DetailsFirstAppearanceMethodFragment();
+                break;
+            case Shared.Calculation.BY_FIRST_MOVEMENTS:
+                details = new DetailsFirstMovementsMethodFragment();
+                break;
+            default:
+                return null;
+        }
 
-		Bundle args = new Bundle();
-		args.putInt(Shared.Titles.EXTRA_POSITION, index);
-		details.setArguments(args);
-		return details;
-	}
+        Bundle args = new Bundle();
+        args.putInt(Shared.Titles.EXTRA_POSITION, index);
+        details.setArguments(args);
+        return details;
+    }
 
-	public int getShownIndex() {
-		return getArguments().getInt(Shared.Titles.EXTRA_POSITION, -1);
-	}
+    public int getShownIndex() {
+        return getArguments().getInt(Shared.Titles.EXTRA_POSITION, -1);
+    }
 
-	void dataChanged() {
-		log("data changed", false);
-		if (mListener != null) {
-			mListener.detailsChanged();
-		}
-	}
+    void dataChanged() {
+        log("data changed", false);
+        if (mListener != null) {
+            mListener.detailsChanged();
+        }
+    }
 
-	protected abstract void updateData();
+    protected abstract void updateData();
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		log("resume, update ui");
-		updateData();
-	}
+    @Override
+    public void onResume() {
+        super.onResume();
+        log("resume, update ui");
+        updateData();
+    }
 }

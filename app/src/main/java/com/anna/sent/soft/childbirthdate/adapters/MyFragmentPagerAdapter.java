@@ -7,28 +7,28 @@ import android.util.SparseArray;
 import android.view.ViewGroup;
 
 public abstract class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-	private final SparseArray<Fragment> mFragments = new SparseArray<Fragment>();
+    private final SparseArray<Fragment> mFragments = new SparseArray<Fragment>();
 
-	MyFragmentPagerAdapter(FragmentManager fm) {
-		super(fm);
-	}
+    MyFragmentPagerAdapter(FragmentManager fm) {
+        super(fm);
+    }
 
-	@Override
-	public Object instantiateItem(ViewGroup container, int position) {
-		Fragment fragment = (Fragment) super.instantiateItem(container,
-				position);
-		mFragments.put(position, fragment);
-		return fragment;
-	}
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        Fragment fragment = (Fragment) super.instantiateItem(container,
+                position);
+        mFragments.put(position, fragment);
+        return fragment;
+    }
 
-	@Override
-	public void destroyItem(ViewGroup container, int position, Object object) {
-		mFragments.remove(position);
-		super.destroyItem(container, position, object);
-	}
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        mFragments.remove(position);
+        super.destroyItem(container, position, object);
+    }
 
-	public Fragment getFragment(int position) {
-		return position >= 0 && position < mFragments.size() ? mFragments
-				.get(position) : null;
-	}
+    public Fragment getFragment(int position) {
+        return position >= 0 && position < mFragments.size() ? mFragments
+                .get(position) : null;
+    }
 }

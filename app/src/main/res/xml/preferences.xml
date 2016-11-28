@@ -3,7 +3,7 @@
 
     <PreferenceCategory
         android:key="@string/pref_sick_list_key"
-        android:title="@string/sick_list" >
+        android:title="@string/sick_list">
         <com.anna.sent.soft.childbirthdate.sicklist.SickListDaysPreference
             android:dialogTitle="@string/sick_list_days"
             android:key="@string/pref_sick_list_days_key"
@@ -16,7 +16,7 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:key="@string/pref_ui_settings_key"
-        android:title="@string/pref_ui_settings_title" >
+        android:title="@string/pref_ui_settings_title">
         <ListPreference
             android:defaultValue="@integer/defaultTheme"
             android:dialogTitle="@string/pref_theme_title"
@@ -25,20 +25,20 @@
             android:key="@string/pref_theme_key"
             android:title="@string/pref_theme_title" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/pref_other_settings_title" >
+    <PreferenceCategory android:title="@string/pref_other_settings_title">
         <Preference
             android:summary="@string/pref_rate_summary"
-            android:title="@string/pref_rate_title" >
+            android:title="@string/pref_rate_title">
             <intent android:action="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity" />
         </Preference>
         <Preference
             android:summary="@string/pref_support_summary"
-            android:title="@string/pref_support_title" >
+            android:title="@string/pref_support_title">
             <intent android:action="com.anna.sent.soft.childbirthdate.actions.EmailSupportActionActivity" />
         </Preference>
         <Preference
             android:summary="@string/pref_womancyc_summary"
-            android:title="@string/pref_womancyc_title" >
+            android:title="@string/pref_womancyc_title">
             <intent android:action="com.anna.sent.soft.childbirthdate.actions.MarketWomanCycActionActivity" />
         </Preference>
     </PreferenceCategory>

@@ -24,224 +24,224 @@ import com.google.firebase.crash.FirebaseCrash;
 import java.util.List;
 
 public abstract class MoveableItemsPreference extends DialogPreference
-		implements OnClickListener {
-	private static final String TAG = "moo";
-	private static final boolean DEBUG = false;
+        implements OnClickListener {
+    private static final String TAG = "moo";
+    private static final boolean DEBUG = false;
 
-	private String wrapMsg(String msg) {
-		return getClass().getSimpleName() + ": " + msg;
-	}
+    private String wrapMsg(String msg) {
+        return getClass().getSimpleName() + ": " + msg;
+    }
 
-	@SuppressWarnings("unused")
-	private void log(String msg) {
-		if (DEBUG) {
-			FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-		}
-	}
+    @SuppressWarnings("unused")
+    private void log(String msg) {
+        if (DEBUG) {
+            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
+        }
+    }
 
-	private String mValue;
-	private MoveableItemsArrayAdapter mAdapter;
-	private ListView mListView;
+    private String mValue;
+    private MoveableItemsArrayAdapter mAdapter;
+    private ListView mListView;
 
-	protected MoveableItemsPreference(Context context) {
-		this(context, null);
-	}
+    protected MoveableItemsPreference(Context context) {
+        this(context, null);
+    }
 
-	protected MoveableItemsPreference(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		mValue = getDefaultValue();
-		setDialogLayoutResource(R.layout.dialog_list);
-		setPositiveButtonText(android.R.string.ok);
-		setNegativeButtonText(android.R.string.cancel);
-		setDialogIcon(null);
-	}
+    protected MoveableItemsPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        mValue = getDefaultValue();
+        setDialogLayoutResource(R.layout.dialog_list);
+        setPositiveButtonText(android.R.string.ok);
+        setNegativeButtonText(android.R.string.cancel);
+        setDialogIcon(null);
+    }
 
-	@Override
-	protected void onSetInitialValue(boolean restore, Object defaultValue) {
-		setValue(restore ? getPersistedString(getDefaultValue())
-				: (String) defaultValue);
-	}
+    @Override
+    protected void onSetInitialValue(boolean restore, Object defaultValue) {
+        setValue(restore ? getPersistedString(getDefaultValue())
+                : (String) defaultValue);
+    }
 
-	@Override
-	protected Object onGetDefaultValue(TypedArray a, int index) {
-		return a.getString(index);
-	}
+    @Override
+    protected Object onGetDefaultValue(TypedArray a, int index) {
+        return a.getString(index);
+    }
 
-	@Override
-	protected void onBindDialogView(View view) {
-		super.onBindDialogView(view);
+    @Override
+    protected void onBindDialogView(View view) {
+        super.onBindDialogView(view);
 
-		// get inflater
-		LayoutInflater inflater = (LayoutInflater) getContext()
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        // get inflater
+        LayoutInflater inflater = (LayoutInflater) getContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		// get button 'add'
-		Button buttonAdd = (Button) view.findViewById(R.id.buttonAdd);
-		buttonAdd.setOnClickListener(this);
+        // get button 'add'
+        Button buttonAdd = (Button) view.findViewById(R.id.buttonAdd);
+        buttonAdd.setOnClickListener(this);
 
-		// inflate view 'add'
-		View viewAdd = inflater.inflate(getAddLayoutResourceId(), null);
+        // inflate view 'add'
+        View viewAdd = inflater.inflate(getAddLayoutResourceId(), null);
 
-		// find parent of view 'add'
-		ViewGroup viewAddParent = (ViewGroup) view.findViewById(R.id.lastItem);
+        // find parent of view 'add'
+        ViewGroup viewAddParent = (ViewGroup) view.findViewById(R.id.lastItem);
 
-		// add view 'add' to parent
-		viewAddParent.addView(viewAdd, new LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        // add view 'add' to parent
+        viewAddParent.addView(viewAdd, new LayoutParams(
+                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-		// get list view
-		mListView = (ListView) view.findViewById(R.id.listView);
+        // get list view
+        mListView = (ListView) view.findViewById(R.id.listView);
 
-		// and then setup adapter
-		mAdapter = new MoveableItemsArrayAdapter(getContext(), toList(mValue));
-		mListView.setAdapter(mAdapter);
+        // and then setup adapter
+        mAdapter = new MoveableItemsArrayAdapter(getContext(), toList(mValue));
+        mListView.setAdapter(mAdapter);
 
-		setupViewAdd(viewAdd);
-	}
+        setupViewAdd(viewAdd);
+    }
 
-	protected abstract String getDefaultValue();
+    protected abstract String getDefaultValue();
 
-	protected abstract int getAddLayoutResourceId();
+    protected abstract int getAddLayoutResourceId();
 
-	protected abstract void setupViewAdd(View viewAdd);
+    protected abstract void setupViewAdd(View viewAdd);
 
-	@Override
-	protected void onDialogClosed(boolean positiveResult) {
-		super.onDialogClosed(positiveResult);
+    @Override
+    protected void onDialogClosed(boolean positiveResult) {
+        super.onDialogClosed(positiveResult);
 
-		if (positiveResult) {
-			List<LocalizableObject> list = mAdapter.getValues();
-			setValue(toString(list));
-		}
-	}
+        if (positiveResult) {
+            List<LocalizableObject> list = mAdapter.getValues();
+            setValue(toString(list));
+        }
+    }
 
-	private void setValue(String value) {
-		if (!value.equals(mValue)) {
-			mValue = value;
-			persistString(value);
-			notifyChanged();
-		}
-	}
+    private void setValue(String value) {
+        if (!value.equals(mValue)) {
+            mValue = value;
+            persistString(value);
+            notifyChanged();
+        }
+    }
 
-	public String getValueToShow() {
-		return getValueToShow(mValue);
-	}
+    public String getValueToShow() {
+        return getValueToShow(mValue);
+    }
 
-	public String getValueToShow(String value) {
-		String result = "";
+    public String getValueToShow(String value) {
+        String result = "";
 
-		List<LocalizableObject> list = toList(value);
-		for (int i = 0; i < list.size(); ++i) {
-			result += list.get(i).toString(getContext())
-					+ (i == list.size() - 1 ? "" : "; ");
-		}
+        List<LocalizableObject> list = toList(value);
+        for (int i = 0; i < list.size(); ++i) {
+            result += list.get(i).toString(getContext())
+                    + (i == list.size() - 1 ? "" : "; ");
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	private List<LocalizableObject> toList(String str) {
-		return SettingsParser.toList(str, getElement());
-	}
+    private List<LocalizableObject> toList(String str) {
+        return SettingsParser.toList(str, getElement());
+    }
 
-	protected abstract ISetting getElement();
+    protected abstract ISetting getElement();
 
-	private String toString(List<LocalizableObject> list) {
-		return SettingsParser.toString(list);
-	}
+    private String toString(List<LocalizableObject> list) {
+        return SettingsParser.toString(list);
+    }
 
-	@Override
-	protected Parcelable onSaveInstanceState() {
-		final Parcelable superState = super.onSaveInstanceState();
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        final Parcelable superState = super.onSaveInstanceState();
 
 		/*
-		 * if (isPersistent()) { return superState; }
+         * if (isPersistent()) { return superState; }
 		 */
 
-		final SavedState myState = new SavedState(superState);
-		myState.value = saveAddValue();
-		if (mAdapter != null) {
-			myState.values = SettingsParser.toString(mAdapter.getValues()
-			);
-		} else {
-			myState.values = null;
-		}
+        final SavedState myState = new SavedState(superState);
+        myState.value = saveAddValue();
+        if (mAdapter != null) {
+            myState.values = SettingsParser.toString(mAdapter.getValues()
+            );
+        } else {
+            myState.values = null;
+        }
 
-		return myState;
-	}
+        return myState;
+    }
 
-	protected abstract String saveAddValue();
+    protected abstract String saveAddValue();
 
-	@Override
-	protected void onRestoreInstanceState(Parcelable state) {
-		if (state == null || !state.getClass().equals(SavedState.class)) {
-			super.onRestoreInstanceState(state);
-			return;
-		}
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (state == null || !state.getClass().equals(SavedState.class)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
 
-		SavedState myState = (SavedState) state;
-		super.onRestoreInstanceState(myState.getSuperState());
-		restoreAddValue(myState.value);
-		if (mAdapter != null) {
-			mAdapter.setItems(SettingsParser.toList(myState.values,
-					getElement()));
-		}
-	}
+        SavedState myState = (SavedState) state;
+        super.onRestoreInstanceState(myState.getSuperState());
+        restoreAddValue(myState.value);
+        if (mAdapter != null) {
+            mAdapter.setItems(SettingsParser.toList(myState.values,
+                    getElement()));
+        }
+    }
 
-	protected abstract void restoreAddValue(String value);
+    protected abstract void restoreAddValue(String value);
 
-	private static class SavedState extends BaseSavedState {
-		public String value;
-		private String values;
+    private static class SavedState extends BaseSavedState {
+        public String value;
+        private String values;
 
-		public SavedState(Parcelable superState) {
-			super(superState);
-		}
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
 
-		public SavedState(Parcel source) {
-			super(source);
-			value = source.readString();
-			values = source.readString();
-		}
+        public SavedState(Parcel source) {
+            super(source);
+            value = source.readString();
+            values = source.readString();
+        }
 
-		@Override
-		public void writeToParcel(Parcel dest, int flags) {
-			super.writeToParcel(dest, flags);
-			dest.writeString(value);
-			dest.writeString(values);
-		}
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            super.writeToParcel(dest, flags);
+            dest.writeString(value);
+            dest.writeString(values);
+        }
 
-		@SuppressWarnings("unused")
-		public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
-			@Override
-			public SavedState createFromParcel(Parcel in) {
-				return new SavedState(in);
-			}
+        @SuppressWarnings("unused")
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
 
-			@Override
-			public SavedState[] newArray(int size) {
-				return new SavedState[size];
-			}
-		};
-	}
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+    }
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.buttonAdd:
-			addItem(mAdapter);
-			break;
-		}
-	}
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.buttonAdd:
+                addItem(mAdapter);
+                break;
+        }
+    }
 
-	@SuppressWarnings("unused")
-	private void scrollToBottom() {
-		mListView.post(new Runnable() {
-			@Override
-			public void run() {
-				mListView.setSelection(mAdapter.getCount() - 1);
-			}
-		});
-	}
+    @SuppressWarnings("unused")
+    private void scrollToBottom() {
+        mListView.post(new Runnable() {
+            @Override
+            public void run() {
+                mListView.setSelection(mAdapter.getCount() - 1);
+            }
+        });
+    }
 
-	protected abstract void addItem(MoveableItemsArrayAdapter adapter);
+    protected abstract void addItem(MoveableItemsArrayAdapter adapter);
 }

@@ -7,130 +7,130 @@ import android.content.Context;
 import com.anna.sent.soft.childbirthdate.R;
 
 public class Age implements ISetting, Serializable {
-	private static final long serialVersionUID = 2407705304970505309L;
+    private static final long serialVersionUID = 2407705304970505309L;
 
-	public static final int DAYS_IN_WEEK = 7;
+    public static final int DAYS_IN_WEEK = 7;
 
-	private int weeks, days;
+    private int weeks, days;
 
-	public Age() {
-		this(0, 0);
-	}
+    public Age() {
+        this(0, 0);
+    }
 
-	public Age(Age age) {
-		set(age);
-	}
+    public Age(Age age) {
+        set(age);
+    }
 
-	public Age(int weeks, int days) {
-		setWeeks(weeks);
-		setDays(days);
-	}
+    public Age(int weeks, int days) {
+        setWeeks(weeks);
+        setDays(days);
+    }
 
-	public int getWeeks() {
-		return weeks;
-	}
+    public int getWeeks() {
+        return weeks;
+    }
 
-	public void set(Age age) {
-		if (age == null) {
-			throw new IllegalArgumentException("Age must be not null");
-		}
+    public void set(Age age) {
+        if (age == null) {
+            throw new IllegalArgumentException("Age must be not null");
+        }
 
-		weeks = age.weeks;
-		days = age.days;
-	}
+        weeks = age.weeks;
+        days = age.days;
+    }
 
-	public void setWeeks(int value) {
-		if (value < 0) {
-			throw new IllegalArgumentException(
-					"Weeks value must be non-negative");
-		}
+    public void setWeeks(int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException(
+                    "Weeks value must be non-negative");
+        }
 
-		weeks = value;
-	}
+        weeks = value;
+    }
 
-	public int getDays() {
-		return days;
-	}
+    public int getDays() {
+        return days;
+    }
 
-	public void setDays(int value) {
-		if (value < 0) {
-			throw new IllegalArgumentException(
-					"Days value must be non-negative");
-		}
+    public void setDays(int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException(
+                    "Days value must be non-negative");
+        }
 
-		if (value >= DAYS_IN_WEEK) {
-			throw new IllegalArgumentException("Days value must be less then "
-					+ DAYS_IN_WEEK);
-		}
+        if (value >= DAYS_IN_WEEK) {
+            throw new IllegalArgumentException("Days value must be less then "
+                    + DAYS_IN_WEEK);
+        }
 
-		days = value;
-	}
+        days = value;
+    }
 
-	public int getDurationInDays() {
-		return weeks * DAYS_IN_WEEK + days;
-	}
+    public int getDurationInDays() {
+        return weeks * DAYS_IN_WEEK + days;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == this) {
-			return true;
-		}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
 
-		if (obj == null || obj.getClass() != getClass()) {
-			return false;
-		}
+        if (obj == null || obj.getClass() != getClass()) {
+            return false;
+        }
 
-		Age age = (Age) obj;
-		return weeks == age.weeks && days == age.days;
-	}
+        Age age = (Age) obj;
+        return weeks == age.weeks && days == age.days;
+    }
 
-	@Override
-	public String toString() {
-		return save();
-	}
+    @Override
+    public String toString() {
+        return save();
+    }
 
-	@Override
-	public String toString(Context context) {
-		String result = "";
-		if (weeks > 0) {
-			result += weeks + " " + context.getString(R.string.weeks)
-					+ (days > 0 ? " " : "");
-		}
+    @Override
+    public String toString(Context context) {
+        String result = "";
+        if (weeks > 0) {
+            result += weeks + " " + context.getString(R.string.weeks)
+                    + (days > 0 ? " " : "");
+        }
 
-		if (days > 0) {
-			result += days + " " + context.getString(R.string.days);
-		}
+        if (days > 0) {
+            result += days + " " + context.getString(R.string.days);
+        }
 
-		if (weeks == 0 && days == 0) {
-			result = "0 " + context.getString(R.string.days);
-		}
+        if (weeks == 0 && days == 0) {
+            result = "0 " + context.getString(R.string.days);
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	private static final String DELIMITER = ",";
+    private static final String DELIMITER = ",";
 
-	@Override
-	public String save() {
-		return weeks + DELIMITER + days;
-	}
+    @Override
+    public String save() {
+        return weeks + DELIMITER + days;
+    }
 
-	@Override
-	public ISetting load(String str) {
-		if (str == null) {
-			return null;
-		}
+    @Override
+    public ISetting load(String str) {
+        if (str == null) {
+            return null;
+        }
 
-		String[] tokens = str.split(DELIMITER);
-		if (tokens.length == 2) {
-			try {
-				int w = Integer.parseInt(tokens[0]);
-				int d = Integer.parseInt(tokens[1]);
-				return new Age(w, d);
-			} catch (Exception ignored) {
-			}
-		}
+        String[] tokens = str.split(DELIMITER);
+        if (tokens.length == 2) {
+            try {
+                int w = Integer.parseInt(tokens[0]);
+                int d = Integer.parseInt(tokens[1]);
+                return new Age(w, d);
+            } catch (Exception ignored) {
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/LinearLayoutHorizontalStyle"
-    android:baselineAligned="false" >
+    android:baselineAligned="false">
 
     <LinearLayout
         style="@style/LinearLayoutVerticalStyle"
         android:layout_width="0px"
         android:layout_height="wrap_content"
-        android:layout_weight="1" >
+        android:layout_weight="1">
 
         <fragment
             android:id="@+id/titlesHeader"

@@ -12,34 +12,34 @@ import com.anna.sent.soft.utils.NavigationUtils;
 
 @SuppressLint("Registered")
 public class ChildActivity extends DataKeeperActivity {
-	@Override
-	public void setViews(Bundle savedInstanceState) {
-		ActionBarUtils.setupActionBar(this);
-	}
+    @Override
+    public void setViews(Bundle savedInstanceState) {
+        ActionBarUtils.setupActionBar(this);
+    }
 
-	@Override
-	public void onBackPressed() {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-			boolean isStartedFromWidget = getIntent().getBooleanExtra(
-					Shared.Child.EXTRA_IS_STARTED_FROM_WIDGET, false);
-			if (isStartedFromWidget) {
-				TaskStackBuilder tsb = TaskStackBuilder.create(this)
-						.addParentStack(this);
-				tsb.startActivities();
-			}
-		}
+    @Override
+    public void onBackPressed() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            boolean isStartedFromWidget = getIntent().getBooleanExtra(
+                    Shared.Child.EXTRA_IS_STARTED_FROM_WIDGET, false);
+            if (isStartedFromWidget) {
+                TaskStackBuilder tsb = TaskStackBuilder.create(this)
+                        .addParentStack(this);
+                tsb.startActivities();
+            }
+        }
 
-		super.onBackPressed();
-	}
+        super.onBackPressed();
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			NavigationUtils.navigateUp(this);
-			return true;
-		}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavigationUtils.navigateUp(this);
+                return true;
+        }
 
-		return super.onOptionsItemSelected(item);
-	}
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -2,9 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ScrollViewStyle"
-    tools:context=".DetailsActivity" >
+    tools:context=".DetailsActivity">
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding">
 
         <TextView
             style="@style/TextViewStyle"
@@ -16,7 +16,7 @@
 
         <LinearLayout
             style="@style/LinearLayoutVerticalStyle"
-            android:layout_width="wrap_content" >
+            android:layout_width="wrap_content">
 
             <TextView
                 android:id="@+id/textViewDiagnosedAge"
@@ -27,7 +27,7 @@
 
             <LinearLayout
                 style="@style/LinearLayoutHorizontalStyle"
-                android:gravity="center" >
+                android:gravity="center">
 
                 <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                     android:id="@+id/numberPickerUltrasoundWeeks"
@@ -50,7 +50,7 @@
 
         <RadioGroup
             style="@style/RadioGroupStyle"
-            android:layout_marginTop="@dimen/view_vertical_margin" >
+            android:layout_marginTop="@dimen/view_vertical_margin">
 
             <RadioButton
                 android:id="@+id/radioIsGestationalAge"

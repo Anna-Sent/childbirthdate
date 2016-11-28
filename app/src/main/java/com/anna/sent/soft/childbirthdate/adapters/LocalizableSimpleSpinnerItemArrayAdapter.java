@@ -19,108 +19,108 @@ import com.google.firebase.crash.FirebaseCrash;
 import java.util.List;
 
 public class LocalizableSimpleSpinnerItemArrayAdapter extends
-		ArrayAdapter<LocalizableObject> {
-	private static final String TAG = "moo";
-	private static final boolean DEBUG = false;
+        ArrayAdapter<LocalizableObject> {
+    private static final String TAG = "moo";
+    private static final boolean DEBUG = false;
 
     private String wrapMsg(String msg) {
-		return getClass().getSimpleName() + ": " + msg;
-	}
+        return getClass().getSimpleName() + ": " + msg;
+    }
 
-	@SuppressWarnings("unused")
-	private void log(String msg) {
-		if (DEBUG) {
-			FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-		}
-	}
+    @SuppressWarnings("unused")
+    private void log(String msg) {
+        if (DEBUG) {
+            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
+        }
+    }
 
     private final List<LocalizableObject> mObjects;
 
-	static class ViewHolder {
-		TextView textView;
-	}
+    static class ViewHolder {
+        TextView textView;
+    }
 
-	public LocalizableSimpleSpinnerItemArrayAdapter(Context context,
+    public LocalizableSimpleSpinnerItemArrayAdapter(Context context,
                                                     List<LocalizableObject> objects) {
-		super(context, android.R.layout.simple_spinner_item, objects);
-		mObjects = objects;
-	}
+        super(context, android.R.layout.simple_spinner_item, objects);
+        mObjects = objects;
+    }
 
-	@Override
-	public int getCount() {
-		return mObjects.size();
-	}
+    @Override
+    public int getCount() {
+        return mObjects.size();
+    }
 
     @NonNull
     @Override
-	public View getView(int position, View contentView, @NonNull ViewGroup viewGroup) {
-		return getView(position, contentView, false);
-	}
+    public View getView(int position, View contentView, @NonNull ViewGroup viewGroup) {
+        return getView(position, contentView, false);
+    }
 
     @Override
-	public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
-		return getView(position, convertView, true);
-	}
+    public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
+        return getView(position, convertView, true);
+    }
 
     private View getView(int position, View contentView, boolean isDropDownView) {
-		View view;
-		ViewHolder viewHolder;
-		if (contentView == null) {
-			LayoutInflater layoutInflater = (LayoutInflater) getContext()
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = layoutInflater
-					.inflate(
-							isDropDownView ? android.R.layout.simple_spinner_dropdown_item
-									: android.R.layout.simple_spinner_item,
-							null);
-			viewHolder = new ViewHolder();
-			viewHolder.textView = (TextView) view
-					.findViewById(android.R.id.text1);
+        View view;
+        ViewHolder viewHolder;
+        if (contentView == null) {
+            LayoutInflater layoutInflater = (LayoutInflater) getContext()
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = layoutInflater
+                    .inflate(
+                            isDropDownView ? android.R.layout.simple_spinner_dropdown_item
+                                    : android.R.layout.simple_spinner_item,
+                            null);
+            viewHolder = new ViewHolder();
+            viewHolder.textView = (TextView) view
+                    .findViewById(android.R.id.text1);
 
-			viewHolder.textView.setMinHeight(getItemHeight()); // getListPreferredItemHeight());
-			viewHolder.textView.setGravity(Gravity.CENTER_VERTICAL);
+            viewHolder.textView.setMinHeight(getItemHeight()); // getListPreferredItemHeight());
+            viewHolder.textView.setGravity(Gravity.CENTER_VERTICAL);
 
-			view.setTag(viewHolder);
-		} else {
-			view = contentView;
-			viewHolder = (ViewHolder) view.getTag();
-		}
+            view.setTag(viewHolder);
+        } else {
+            view = contentView;
+            viewHolder = (ViewHolder) view.getTag();
+        }
 
-		viewHolder.textView.setText(mObjects.get(position).toString(
-				getContext()));
+        viewHolder.textView.setText(mObjects.get(position).toString(
+                getContext()));
 
-		return view;
-	}
+        return view;
+    }
 
-	private int getItemHeight() {
-		return getContext().getResources()
-				.getDimensionPixelSize(R.dimen.height);
-	}
+    private int getItemHeight() {
+        return getContext().getResources()
+                .getDimensionPixelSize(R.dimen.height);
+    }
 
-	@SuppressWarnings("unused")
-	private int getListPreferredItemHeight() {
-		TypedValue typedValue = new TypedValue();
-		getContext().getTheme().resolveAttribute(
-				android.R.attr.listPreferredItemHeight, typedValue, true);
+    @SuppressWarnings("unused")
+    private int getListPreferredItemHeight() {
+        TypedValue typedValue = new TypedValue();
+        getContext().getTheme().resolveAttribute(
+                android.R.attr.listPreferredItemHeight, typedValue, true);
 
-		int[] attrs = new int[] { android.R.attr.listPreferredItemHeight };
-		int indexOfAttr = 0;
+        int[] attrs = new int[]{android.R.attr.listPreferredItemHeight};
+        int indexOfAttr = 0;
 
-		TypedArray a = getContext().obtainStyledAttributes(typedValue.data,
-				attrs);
-		int size = a.getDimensionPixelSize(indexOfAttr, -1);
-		a.recycle();
+        TypedArray a = getContext().obtainStyledAttributes(typedValue.data,
+                attrs);
+        int size = a.getDimensionPixelSize(indexOfAttr, -1);
+        a.recycle();
 
-		return size;
-	}
+        return size;
+    }
 
     public List<LocalizableObject> getObjects() {
-		return mObjects;
-	}
+        return mObjects;
+    }
 
-	public int addObject(LocalizableObject object) {
-		mObjects.add(object);
-		notifyDataSetChanged();
-		return mObjects.size() - 1;
-	}
+    public int addObject(LocalizableObject object) {
+        mObjects.add(object);
+        notifyDataSetChanged();
+        return mObjects.size() - 1;
+    }
 }

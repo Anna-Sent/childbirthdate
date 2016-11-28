@@ -2,9 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ScrollViewStyle"
-    tools:context=".DetailsActivity" >
+    tools:context=".DetailsActivity">
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding">
 
         <TextView
             style="@style/TextViewStyle"
@@ -16,12 +16,12 @@
 
         <LinearLayout
             style="@style/LinearLayoutHorizontalStyle"
-            android:layout_marginTop="@dimen/view_vertical_margin" >
+            android:layout_marginTop="@dimen/view_vertical_margin">
 
             <LinearLayout
                 style="@style/LinearLayoutVerticalStyle"
                 android:layout_width="wrap_content"
-                android:gravity="center" >
+                android:gravity="center">
 
                 <TextView
                     style="@style/TextViewStyle"
@@ -31,7 +31,7 @@
                 <LinearLayout
                     style="@style/LinearLayoutHorizontalStyle"
                     android:layout_width="wrap_content"
-                    android:gravity="center" >
+                    android:gravity="center">
 
                     <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                         android:id="@+id/numberPickerMenstrualCycleLen"
@@ -47,7 +47,7 @@
                 style="@style/LinearLayoutVerticalStyle"
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="@dimen/view_horizontal_margin"
-                android:gravity="center" >
+                android:gravity="center">
 
                 <TextView
                     style="@style/TextViewStyle"
@@ -57,7 +57,7 @@
                 <LinearLayout
                     style="@style/LinearLayoutHorizontalStyle"
                     android:layout_width="wrap_content"
-                    android:gravity="center" >
+                    android:gravity="center">
 
                     <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                         android:id="@+id/numberPickerLutealPhaseLen"

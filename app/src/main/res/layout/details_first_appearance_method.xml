@@ -2,9 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ScrollViewStyle"
-    tools:context=".DetailsActivity" >
+    tools:context=".DetailsActivity">
 
-    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding" >
+    <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding">
 
         <TextView
             style="@style/TextViewStyle"
@@ -16,7 +16,7 @@
 
         <LinearLayout
             style="@style/LinearLayoutVerticalStyle"
-            android:layout_width="wrap_content" >
+            android:layout_width="wrap_content">
 
             <TextView
                 style="@style/TextViewStyle"
@@ -26,7 +26,7 @@
 
             <LinearLayout
                 style="@style/LinearLayoutHorizontalStyle"
-                android:gravity="center" >
+                android:gravity="center">
 
                 <com.anna.sent.soft.numberpickerlibrary.NumberPicker
                     android:id="@+id/numberPickerFirstAppearanceWeeks"

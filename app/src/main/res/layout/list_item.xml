@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.anna.sent.soft.childbirthdate.ui.CheckableFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
     <LinearLayout
         style="@style/LinearLayoutHorizontalStyle"
         android:minHeight="?android:attr/listPreferredItemHeight"
-        android:paddingLeft="@dimen/layout_horizontal_padding" >
+        android:paddingLeft="@dimen/layout_horizontal_padding">
 
         <CheckBox
             android:id="@+id/checkBox"
@@ -21,7 +21,7 @@
 
         <LinearLayout
             style="@style/LinearLayoutVerticalStyle"
-            android:layout_gravity="center_vertical" >
+            android:layout_gravity="center_vertical">
 
             <TextView
                 android:id="@+id/text1"

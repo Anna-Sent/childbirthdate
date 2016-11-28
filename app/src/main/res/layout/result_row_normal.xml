@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
-    tools:ignore="UselessParent" >
+    tools:ignore="UselessParent">
 
     <LinearLayout
         style="@style/LinearLayoutVerticalStyle"
-        android:layout_margin="@dimen/row_padding" >
+        android:layout_margin="@dimen/row_padding">
 
         <LinearLayout
             style="@style/LinearLayoutHorizontalStyle"
-            android:gravity="center_vertical" >
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/textView"
@@ -27,7 +27,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center" >
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/result1"
