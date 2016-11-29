@@ -1,9 +1,5 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -40,7 +36,12 @@ import com.anna.sent.soft.childbirthdate.utils.AdUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.crash.FirebaseCrash;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class ResultSickListFragment extends StateSaverFragment implements
         DataClient, OnClickListener, OnItemSelectedListener {
@@ -58,6 +59,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
         }
     }
 
+    private AdView mAdView;
     private TableLayout mTable;
     private Spinner mSpinnerDays, mSpinnerAge;
     private LocalizableSimpleSpinnerItemArrayAdapter mSpinnerDaysAdapter,
@@ -89,7 +91,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
 
     @Override
     public void setViews(Bundle savedInstanceState) {
-        AdUtils.setupAd(getData(), getActivity(), R.id.adView_sick_list, 300,
+        mAdView = AdUtils.setupAd(getData(), getActivity(), R.id.adView_sick_list, 300,
                 60);
 
         mTable = (TableLayout) getActivity().findViewById(R.id.table_sick_list);
@@ -136,10 +138,32 @@ public class ResultSickListFragment extends StateSaverFragment implements
     public void onResume() {
         super.onResume();
 
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+
         setupSpinner(mSpinnerDays, Days.class);
         setupSpinner(mSpinnerAge, Age.class);
 
         fillResults();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+
+        super.onDestroy();
     }
 
     private void setupSpinner(Spinner spinner, Class<? extends ISetting> cls) {

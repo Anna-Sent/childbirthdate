@@ -27,6 +27,7 @@ import com.anna.sent.soft.childbirthdate.ui.LongPressedButton;
 import com.anna.sent.soft.childbirthdate.utils.AdUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.crash.FirebaseCrash;
 
 import java.util.Calendar;
@@ -48,6 +49,7 @@ public class ResultEcdFragment extends StateSaverFragment implements
         }
     }
 
+    private AdView mAdView;
     private TableLayout mTable;
     private DatePicker mDatePicker;
     private Calendar mDate = null;
@@ -75,7 +77,7 @@ public class ResultEcdFragment extends StateSaverFragment implements
 
     @Override
     public void setViews(Bundle savedInstanceState) {
-        AdUtils.setupAd(getData(), getActivity(), R.id.adView_ecd, 200, 100);
+        mAdView = AdUtils.setupAd(getData(), getActivity(), R.id.adView_ecd, 200, 100);
 
         mTable = (TableLayout) getActivity().findViewById(R.id.table_ecd);
         mDatePicker = (DatePicker) getActivity().findViewById(R.id.datePicker);
@@ -239,10 +241,34 @@ public class ResultEcdFragment extends StateSaverFragment implements
         updateResults();
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
+
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+
         fillResults();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+
+        super.onDestroy();
     }
 
     @Override

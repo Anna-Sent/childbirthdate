@@ -6,9 +6,7 @@
     android:layout_height="wrap_content"
     tools:context=".ResultsActivity">
 
-    <ScrollView
-        style="@style/ScrollViewStyle"
-        android:layout_above="@+id/adView_sick_list">
+    <ScrollView style="@style/ScrollViewStyle">
 
         <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding">
 
@@ -78,17 +76,18 @@
                 android:paddingBottom="@dimen/adview_margin"
                 android:shrinkColumns="*"
                 android:stretchColumns="*" />
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView_sick_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/adUnitId"
+                tools:ignore="MissingRegistered" />
         </LinearLayout>
     </ScrollView>
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView_sick_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/adUnitId"
-        tools:ignore="MissingRegistered" />
 
 </RelativeLayout>
