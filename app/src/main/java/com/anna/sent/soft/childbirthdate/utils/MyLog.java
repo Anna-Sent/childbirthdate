@@ -49,7 +49,7 @@ public class MyLog {
         }
     }
 
-    private static void noFirebaseLogcat(int level, @SuppressWarnings("SameParameterValue") String tag, String msg) {
+    private static void noFirebaseLogcat(int level, String tag, String msg) {
         switch (level) {
             case Log.ASSERT:
                 Log.wtf(tag, msg);

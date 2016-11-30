@@ -75,7 +75,7 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
         mViewPager.addOnPageChangeListener(this);
     }
 
-    public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, @SuppressWarnings("SameParameterValue") Bundle args) {
+    public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args) {
         tabSpec.setContent(new DummyTabFactory(mContext));
         String tag = tabSpec.getTag();
         TabInfo info = new TabInfo(tag, clss, args);

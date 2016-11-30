@@ -193,8 +193,7 @@ public class ResultEcdFragment extends StateSaverFragment implements
         mDatePicker.removeCallbacks(mChangeCurrentByOneFromLongPressCommand);
     }
 
-    private void postChangeCurrentByOneFromLongPress(boolean increment,
-                                                     @SuppressWarnings("SameParameterValue") long delayMillis) {
+    private void postChangeCurrentByOneFromLongPress(boolean increment, long delayMillis) {
         if (mChangeCurrentByOneFromLongPressCommand == null) {
             mChangeCurrentByOneFromLongPressCommand = new ChangeCurrentByOneFromLongPressCommand();
         } else {

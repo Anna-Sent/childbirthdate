@@ -191,14 +191,13 @@ public class ResultSickListFragment extends StateSaverFragment implements
         }
     }
 
-    @SuppressLint("InflateParams")
+    @SuppressLint({"InflateParams", "ConstantConditions"})
     private void fillResults() {
         Days days = getSelectedDays();
         Age age = getSelectedAge();
 
         mTable.removeAllViews();
 
-        //noinspection ConstantConditions
         if (age == null || days == null) {
             return;
         }
