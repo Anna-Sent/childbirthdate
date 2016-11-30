@@ -1,5 +1,6 @@
 package com.anna.sent.soft.childbirthdate.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.provider.Settings;
@@ -65,9 +66,9 @@ public class AdUtils {
     }
 
     private static String getTestDeviceId(Context context) {
+        @SuppressLint("HardwareIds")
         String androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceId = getMD5(androidId);
-        return deviceId;
+        return getMD5(androidId);
     }
 
     private static String getMD5(String s) {

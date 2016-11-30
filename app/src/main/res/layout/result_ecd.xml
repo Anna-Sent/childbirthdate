@@ -94,7 +94,6 @@
                 android:id="@+id/adView_ecd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:gravity="center"
                 ads:adSize="BANNER"
                 ads:adUnitId="@string/adUnitId"
