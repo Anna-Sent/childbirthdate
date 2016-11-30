@@ -16,7 +16,7 @@ import android.widget.RemoteViews;
 
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.google.firebase.crash.FirebaseCrash;
+import com.anna.sent.soft.childbirthdate.utils.MyLog;
 
 import java.util.Calendar;
 
@@ -38,7 +38,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
                 int[] appWidgetIds = appWidgetManager
                         .getAppWidgetIds(new ComponentName(context, getClass()));
                 if (appWidgetIds.length > 0) {
-                    FirebaseCrash.logcat(Log.DEBUG, "moo", getClass().getSimpleName() + " got action " + action);
+                    MyLog.getInstance().logcat(Log.DEBUG, getClass().getSimpleName() + " got action " + action);
 
                     onUpdate(context, appWidgetManager, appWidgetIds);
 
@@ -113,7 +113,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
     public void onDisabled(Context context) {
         super.onDisabled(context);
 
-        FirebaseCrash.logcat(Log.DEBUG, "moo", getClass().getSimpleName() + " cancel alarm");
+        MyLog.getInstance().logcat(Log.DEBUG, getClass().getSimpleName() + " cancel alarm");
 
         AlarmManager alarmManager = (AlarmManager) context
                 .getSystemService(Context.ALARM_SERVICE);

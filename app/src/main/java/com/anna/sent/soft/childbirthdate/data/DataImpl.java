@@ -12,7 +12,7 @@ import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
-import com.google.firebase.crash.FirebaseCrash;
+import com.anna.sent.soft.childbirthdate.utils.MyLog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,18 +20,12 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DataImpl implements Data {
-    private static final String TAG = "moo";
-    private static final boolean DEBUG = false;
-
-    private static String wrapMsg(String msg) {
-        return DataImpl.class.getSimpleName() + ": " + msg;
+    private String wrapMsg(String msg) {
+        return getClass().getSimpleName() + ": " + msg;
     }
 
-    @SuppressWarnings("unused")
-    private static void log(String msg) {
-        if (DEBUG) {
-            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-        }
+    private void log(String msg) {
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
     public DataImpl(Context context) {

@@ -14,7 +14,6 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.firebase.crash.FirebaseCrash;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -29,7 +28,7 @@ public class AdUtils {
     public static AdView setupAd(Data data, Activity activity, int adViewId,
                                  int initH, int rowH) {
         if (!isAdFreeVersion(activity)) {
-            FirebaseCrash.logcat(Log.INFO, "ad", "ad: Device id is " + getTestDeviceId(activity));
+            MyLog.getInstance().logcat(Log.INFO, "ad: Device id is " + getTestDeviceId(activity));
             int count = data.getSelectedMethodsCount();
             int expectedHeightDp = initH + count * rowH;
 
@@ -40,7 +39,7 @@ public class AdUtils {
                 AdView adView = (AdView) activity.findViewById(adViewId);
                 if (adView != null) {
                     if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(activity) != ConnectionResult.SUCCESS) {
-                        FirebaseCrash.logcat(Log.INFO, "ad", "ad: GooglePlayServices not available");
+                        MyLog.getInstance().logcat(Log.INFO, "ad: GooglePlayServices not available");
                         return null;
                     }
 
@@ -54,7 +53,7 @@ public class AdUtils {
                             .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                             .build();
 
-                    FirebaseCrash.logcat(Log.INFO, "ad", "ad: isTestDevice = " + adRequest.isTestDevice(activity));
+                    MyLog.getInstance().logcat(Log.INFO, "ad: isTestDevice = " + adRequest.isTestDevice(activity));
 
                     adView.loadAd(adRequest);
                     return adView;
@@ -77,7 +76,7 @@ public class AdUtils {
             digest.update(s.getBytes());
             return String.format(Locale.US, "%032X", new BigInteger(1, digest.digest()));
         } catch (NoSuchAlgorithmException e) {
-            FirebaseCrash.logcat(Log.WARN, e.getMessage(), e.toString());
+            MyLog.getInstance().report(e);
         }
 
         return "";

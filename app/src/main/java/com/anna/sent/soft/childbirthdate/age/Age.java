@@ -1,12 +1,12 @@
 package com.anna.sent.soft.childbirthdate.age;
 
-import java.io.Serializable;
-
 import android.content.Context;
 import android.util.Log;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.google.firebase.crash.FirebaseCrash;
+import com.anna.sent.soft.childbirthdate.utils.MyLog;
+
+import java.io.Serializable;
 
 public class Age implements ISetting, Serializable {
     private static final long serialVersionUID = 2407705304970505309L;
@@ -130,7 +130,7 @@ public class Age implements ISetting, Serializable {
                 int d = Integer.parseInt(tokens[1]);
                 return new Age(w, d);
             } catch (Exception e) {
-                FirebaseCrash.logcat(Log.ERROR, e.getMessage(), e.toString());
+                MyLog.getInstance().logcat(Log.ERROR, e.toString());
             }
         }
 

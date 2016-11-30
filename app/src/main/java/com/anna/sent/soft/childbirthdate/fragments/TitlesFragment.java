@@ -18,39 +18,18 @@ import com.anna.sent.soft.childbirthdate.adapters.ListItemArrayAdapter;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
+import com.anna.sent.soft.childbirthdate.utils.MyLog;
 import com.anna.sent.soft.strategy.statesaver.StateSaver;
-import com.google.firebase.crash.FirebaseCrash;
 
 public class TitlesFragment extends ListFragment implements
         DetailsFragment.OnDetailsChangedListener, StateSaver,
         ListItemArrayAdapter.OnCheckedListener, DataClient {
-    private static final String TAG = "moo";
-    private static final boolean DEBUG = false;
-    private static final boolean DEBUG_INDEX = false;
-
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
 
-    @SuppressWarnings("unused")
     private void log(String msg) {
-        if (DEBUG) {
-            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-        }
-    }
-
-    @SuppressWarnings("unused")
-    private void log(String msg, boolean debug) {
-        if (DEBUG && debug) {
-            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-        }
-    }
-
-    @SuppressWarnings("unused")
-    private void log(String msg, int index) {
-        if (DEBUG_INDEX) {
-            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg + index));
-        }
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
     private final static int REQUEST_POSITION = 1;
@@ -68,19 +47,19 @@ public class TitlesFragment extends ListFragment implements
 
     public TitlesFragment() {
         super();
-        log("create", false);
+        log("create");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        log("onCreateView", false);
+        log("onCreateView");
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        log("onActivityCreated", false);
+        log("onActivityCreated");
         super.onActivityCreated(savedInstanceState);
 
         setViews(savedInstanceState);
@@ -107,28 +86,28 @@ public class TitlesFragment extends ListFragment implements
                 mDualPane ? ListView.CHOICE_MODE_SINGLE
                         : ListView.CHOICE_MODE_NONE);
 
-        log("init index=", mSelectedItem);
+        log("init index=" + mSelectedItem);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        log("onSaveInstanceState", false);
+        log("onSaveInstanceState");
         saveState(outState);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void restoreState(Bundle state) {
-        log("restore state", false);
+        log("restore state");
         mSelectedItem = state.getInt(Shared.Titles.EXTRA_POSITION, 0);
-        log("restore index=", mSelectedItem);
+        log("restore index=" + mSelectedItem);
     }
 
     @Override
     public void saveState(Bundle state) {
-        log("save state", false);
+        log("save state");
         state.putInt(Shared.Titles.EXTRA_POSITION, mSelectedItem);
-        log("save index=", mSelectedItem);
+        log("save index=" + mSelectedItem);
     }
 
     @Override
@@ -137,7 +116,7 @@ public class TitlesFragment extends ListFragment implements
 
         if (mDualPane) {
             showDetails();
-            log("start with index=", mSelectedItem);
+            log("start with index=" + mSelectedItem);
         }
     }
 
@@ -149,7 +128,7 @@ public class TitlesFragment extends ListFragment implements
 
     private void showDetails() {
         getListView().setItemChecked(mSelectedItem, true);
-        log("update index=", mSelectedItem);
+        log("update index=" + mSelectedItem);
         if (mDualPane) {
             FragmentManager fm = getFragmentManager();
             DetailsFragment details = (DetailsFragment) fm
@@ -157,13 +136,13 @@ public class TitlesFragment extends ListFragment implements
             if (details == null || details.getShownIndex() != mSelectedItem) {
                 DetailsFragment newDetails = getDetailsFragmentInstance(mSelectedItem);
                 if (newDetails != null) {
-                    log("update details " + newDetails.getShownIndex(), false);
+                    log("update details " + newDetails.getShownIndex());
                     FragmentTransaction ft = fm.beginTransaction();
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     ft.replace(R.id.details, newDetails);
                     ft.commit();
                 } else if (details != null) {
-                    log("remove details" + details.getShownIndex(), false);
+                    log("remove details" + details.getShownIndex());
                     FragmentTransaction ft = fm.beginTransaction();
                     ft.remove(details);
                     ft.commit();
@@ -197,7 +176,7 @@ public class TitlesFragment extends ListFragment implements
             if (resultCode == Activity.RESULT_OK) {
                 mSelectedItem = data.getIntExtra(Shared.Titles.EXTRA_POSITION,
                         mSelectedItem);
-                log("got index=", mSelectedItem);
+                log("got index=" + mSelectedItem);
                 if (mDualPane) {
                     showDetails();
                 }

@@ -26,27 +26,21 @@ import com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout;
 import com.anna.sent.soft.childbirthdate.ui.LongPressedButton;
 import com.anna.sent.soft.childbirthdate.utils.AdUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
+import com.anna.sent.soft.childbirthdate.utils.MyLog;
 import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
 import com.google.android.gms.ads.AdView;
-import com.google.firebase.crash.FirebaseCrash;
 
 import java.util.Calendar;
 
 public class ResultEcdFragment extends StateSaverFragment implements
         DataClient, OnClickListener, OnDateChangedListener,
         LongPressedButton.Listener {
-    private static final String TAG = "moo";
-    private static final boolean DEBUG = false;
-
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
 
-    @SuppressWarnings("unused")
     private void log(String msg) {
-        if (DEBUG) {
-            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-        }
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
     private AdView mAdView;

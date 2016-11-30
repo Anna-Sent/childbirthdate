@@ -19,24 +19,18 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.ISetting;
 import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
 import com.anna.sent.soft.childbirthdate.age.SettingsParser;
-import com.google.firebase.crash.FirebaseCrash;
+import com.anna.sent.soft.childbirthdate.utils.MyLog;
 
 import java.util.List;
 
 public abstract class MoveableItemsPreference extends DialogPreference
         implements OnClickListener {
-    private static final String TAG = "moo";
-    private static final boolean DEBUG = false;
-
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
 
-    @SuppressWarnings("unused")
     private void log(String msg) {
-        if (DEBUG) {
-            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-        }
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
     private String mValue;

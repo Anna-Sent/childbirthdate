@@ -14,34 +14,23 @@ import android.view.MenuItem;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListAgePreference;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListDaysPreference;
+import com.anna.sent.soft.childbirthdate.utils.MyLog;
 import com.anna.sent.soft.utils.ActionBarUtils;
 import com.anna.sent.soft.utils.LanguageUtils;
 import com.anna.sent.soft.utils.NavigationUtils;
 import com.anna.sent.soft.utils.TaskStackBuilderUtils;
 import com.anna.sent.soft.utils.ThemeUtils;
-import com.google.firebase.crash.FirebaseCrash;
 
 @SuppressWarnings("deprecation")
 public class SettingsActivity extends PreferenceActivity implements
         OnPreferenceChangeListener, OnSharedPreferenceChangeListener {
-    private static final String TAG = "moo";
-    private static final boolean DEBUG = false;
-
     private String wrapMsg(String msg) {
-        return getClass().getSimpleName() + ": " + msg;
+        return getClass().getSimpleName() + '@'
+                + Integer.toHexString(hashCode()) + ": " + msg;
     }
 
     private void log(String msg) {
-        if (DEBUG) {
-            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-        }
-    }
-
-    @SuppressWarnings("unused")
-    private void log(String msg, boolean debug) {
-        if (DEBUG && debug) {
-            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-        }
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
     @Override
@@ -136,7 +125,7 @@ public class SettingsActivity extends PreferenceActivity implements
                     return true;
                 }
             } catch (NumberFormatException e) {
-                FirebaseCrash.logcat(Log.ERROR, e.getMessage(), e.toString());
+                MyLog.getInstance().logcat(Log.ERROR, e.toString());
             }
         } else if (key.equals(Settings.settingsTheme.getThemeKey(this))) {
             try {
@@ -151,7 +140,7 @@ public class SettingsActivity extends PreferenceActivity implements
                     return true;
                 }
             } catch (NumberFormatException e) {
-                FirebaseCrash.logcat(Log.ERROR, e.getMessage(), e.toString());
+                MyLog.getInstance().logcat(Log.ERROR, e.toString());
             }
         } else if (key.equals(getString(R.string.pref_sick_list_days_key))) {
             SickListDaysPreference prefDays = (SickListDaysPreference) preference;

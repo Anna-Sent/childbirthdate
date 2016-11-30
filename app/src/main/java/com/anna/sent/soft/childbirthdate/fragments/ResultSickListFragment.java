@@ -34,10 +34,10 @@ import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListUtils;
 import com.anna.sent.soft.childbirthdate.utils.AdUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
+import com.anna.sent.soft.childbirthdate.utils.MyLog;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
 import com.google.android.gms.ads.AdView;
-import com.google.firebase.crash.FirebaseCrash;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,18 +45,12 @@ import java.util.List;
 
 public class ResultSickListFragment extends StateSaverFragment implements
         DataClient, OnClickListener, OnItemSelectedListener {
-    private static final String TAG = "moo";
-    private static final boolean DEBUG = false;
-
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
 
-    @SuppressWarnings("unused")
     private void log(String msg) {
-        if (DEBUG) {
-            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-        }
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
     private AdView mAdView;

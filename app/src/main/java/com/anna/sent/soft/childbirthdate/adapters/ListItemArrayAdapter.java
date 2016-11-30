@@ -13,25 +13,16 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.google.firebase.crash.FirebaseCrash;
+import com.anna.sent.soft.childbirthdate.utils.MyLog;
 
 public class ListItemArrayAdapter extends ArrayAdapter<String> implements
         OnClickListener {
-    private static final String TAG = "moo";
-    @SuppressWarnings("unused")
-    private static final boolean DEBUG = false;
-    @SuppressWarnings("unused")
-    private static final boolean DEBUG_CREATION = false;
-
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
 
-    @SuppressWarnings("unused")
-    private void log(String msg, boolean scenario) {
-        if (scenario) {
-            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-        }
+    private void log(String msg) {
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
     public interface OnCheckedListener {
@@ -83,7 +74,7 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
             LayoutInflater layoutInflater = (LayoutInflater) getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = layoutInflater.inflate(R.layout.list_item, null);
-            log(position + " created view " + view.toString(), DEBUG_CREATION);
+            // log(position + " created view " + view.toString());
             viewHolder = new ViewHolder();
             viewHolder.checkBox = (CheckBox) view.findViewById(R.id.checkBox);
             viewHolder.text1 = (TextView) view.findViewById(R.id.text1);
@@ -91,7 +82,7 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
             view.setTag(viewHolder);
         } else {
             view = contentView;
-            log(position + " existing view " + view.toString(), DEBUG_CREATION);
+            // log(position + " existing view " + view.toString());
             viewHolder = (ViewHolder) view.getTag();
         }
 
@@ -121,7 +112,7 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 
     public void updateValues(boolean[] checked, String[] strings2) {
         if (checked.length == mCount && strings2.length == mCount) {
-            log("update values", DEBUG);
+            log("update values");
             mChecked = checked;
             mStrings2 = strings2;
 
@@ -131,7 +122,7 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 
     public void updateValues(String[] strings2) {
         if (strings2.length == mCount) {
-            log("update values", DEBUG);
+            log("update values");
             mStrings2 = strings2;
 
             notifyDataSetChanged();

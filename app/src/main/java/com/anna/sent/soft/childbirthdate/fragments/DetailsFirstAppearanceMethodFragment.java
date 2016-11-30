@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
-import java.util.Calendar;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,24 +10,20 @@ import android.widget.DatePicker;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
+import com.anna.sent.soft.childbirthdate.utils.MyLog;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
-import com.google.firebase.crash.FirebaseCrash;
+
+import java.util.Calendar;
 
 public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
         implements NumberPicker.OnValueChangeListener,
         DatePicker.OnDateChangedListener {
-    private static final String TAG = "moo";
-    private static final boolean DEBUG = false;
-
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
 
-    @SuppressWarnings("unused")
     private void log(String msg) {
-        if (DEBUG) {
-            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-        }
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
     private DatePicker datePicker;

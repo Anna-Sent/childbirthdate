@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate.preferences;
 
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -16,25 +14,18 @@ import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
-import com.google.firebase.crash.FirebaseCrash;
+import com.anna.sent.soft.childbirthdate.utils.MyLog;
+
+import java.util.List;
 
 public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
         OnClickListener {
-    private static final String TAG = "moo";
-    @SuppressWarnings("unused")
-    private static final boolean DEBUG = false;
-    @SuppressWarnings("unused")
-    private static final boolean DEBUG_CREATION = false;
-
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
 
-    @SuppressWarnings("unused")
-    private void log(String msg, boolean scenario) {
-        if (scenario) {
-            FirebaseCrash.logcat(Log.DEBUG, TAG, wrapMsg(msg));
-        }
+    private void log(String msg) {
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
     private final List<LocalizableObject> mValues;
