@@ -40,14 +40,14 @@ public class PregnancyCalculator {
     public final static int EMBRYONIC_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS = GESTATIONAL_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS - 2;
     private final static int MIN_PHOLLICULAR_PHASE_LENGTH = MIN_MENSTRUAL_CYCLE_LEN
             - MAX_LUTEAL_PHASE_LEN;
+    public final static int EMBRYONIC_MAX_AGE_DURATION = GESTATIONAL_MAX_AGE_DURATION
+            - MIN_PHOLLICULAR_PHASE_LENGTH;
     private final static int MAX_PHOLLICULAR_PHASE_LENGTH = MAX_MENSTRUAL_CYCLE_LEN
             - MIN_LUTEAL_PHASE_LEN;
     public final static int GESTATIONAL_MAX_AGE_DURATION = GESTATIONAL_AVG_AGE_IN_WEEKS
             * Age.DAYS_IN_WEEK
             - AVG_PHOLLICULAR_PHASE_LENGTH
             + MAX_PHOLLICULAR_PHASE_LENGTH;
-    public final static int EMBRYONIC_MAX_AGE_DURATION = GESTATIONAL_MAX_AGE_DURATION
-            - MIN_PHOLLICULAR_PHASE_LENGTH;
 
     public static class Factory {
         public static Pregnancy get(Data data, int index) {
