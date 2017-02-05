@@ -12,6 +12,8 @@ import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsArrayAdapter;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsPreference;
 
 public class SickListDaysPreference extends MoveableItemsPreference {
+    private EditText mEditText;
+
     public SickListDaysPreference(Context context) {
         super(context);
     }
@@ -19,8 +21,6 @@ public class SickListDaysPreference extends MoveableItemsPreference {
     public SickListDaysPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-
-    private EditText mEditText;
 
     @Override
     protected String getDefaultValue() {

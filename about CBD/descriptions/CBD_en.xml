@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <string name="google_app_name">Pregnancy Calculator</string>
     <string name="yandex_app_name">Pregnancy Calculator</string>
-    <string name="google_marketing_message">Calculation of estimated due date and gestational age by different methods</string>
+    <string name="google_marketing_message">Calculation of estimated due date and gestational age by
+        different methods
+    </string>
     <string name="description">
-<![CDATA[
+        <![CDATA[
 With the help of this application you can calculate expected date of delivery (EDD) and expected gestational age on any date.
 
 Available calculation methods:
@@ -27,7 +29,7 @@ Please send your comments and suggestions at anna.sent@gmail.com.
 ]]>
     </string>
     <string name="what_is_new">
-<![CDATA[
+        <![CDATA[
 v2.9.4:
 * Fixed bug that leads to crash.
 

@@ -1,9 +1,9 @@
 package com.anna.sent.soft.childbirthdate.actions;
 
-import com.anna.sent.soft.childbirthdate.R;
-
 import android.content.Intent;
 import android.net.Uri;
+
+import com.anna.sent.soft.childbirthdate.R;
 
 public abstract class MarketActionActivity extends ActionActivity {
     @Override

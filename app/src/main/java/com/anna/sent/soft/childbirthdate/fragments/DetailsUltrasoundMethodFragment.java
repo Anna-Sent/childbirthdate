@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
-import java.util.Calendar;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +14,8 @@ import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
+
+import java.util.Calendar;
 
 public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
         OnClickListener, NumberPicker.OnValueChangeListener,

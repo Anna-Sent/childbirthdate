@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <string name="google_app_name">Дата родов</string>
     <string name="yandex_app_name">Калькулятор беременности</string>
-    <string name="google_marketing_message">Расчет даты родов, срока беременности разными методами</string>
+    <string name="google_marketing_message">Расчет даты родов, срока беременности разными методами
+    </string>
     <string name="description">
-<![CDATA[
+        <![CDATA[
 С помощью приложения Вы можете самостоятельно (так же, как сделал бы врач в женской консультации) рассчитать предполагаемую дату родов (ПДР) и предполагаемый срок беременности на произвольно заданную дату, не отсчитывая вручную дни и недели в календаре.
 
 Доступные методы расчета:
@@ -27,7 +28,7 @@
 ]]>
     </string>
     <string name="what_is_new">
-<![CDATA[
+        <![CDATA[
 В версии 2.9.4:
 * Исправлена ошибка, приводящая к крашу приложения.
 

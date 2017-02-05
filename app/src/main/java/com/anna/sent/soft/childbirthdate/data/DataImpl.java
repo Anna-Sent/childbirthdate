@@ -20,22 +20,10 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DataImpl implements Data {
-    private String wrapMsg(String msg) {
-        return getClass().getSimpleName() + ": " + msg;
-    }
-
-    private void log(String msg) {
-        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
-    }
-
-    public DataImpl(Context context) {
-        mContext = context;
-    }
-
+    private final static String DATE_FORMAT = "yyyy-MM-dd";
     private final Context mContext;
-
-    private boolean isEmbryonicAge, isFirstPregnancy;
     private final boolean[] byMethod = new boolean[Shared.Calculation.METHODS_COUNT];
+    private boolean isEmbryonicAge, isFirstPregnancy;
     private Calendar lastMenstruationDate = Calendar.getInstance();
     private Calendar ovulationDate = Calendar.getInstance();
     private Calendar ultrasoundDate = Calendar.getInstance();
@@ -43,6 +31,18 @@ public class DataImpl implements Data {
     private Calendar firstMovementsDate = Calendar.getInstance();
     private int menstrualCycleLen, lutealPhaseLen, ultrasoundWeeks,
             ultrasoundDays, firstAppearanceWeeks;
+
+    public DataImpl(Context context) {
+        mContext = context;
+    }
+
+    private String wrapMsg(String msg) {
+        return getClass().getSimpleName() + ": " + msg;
+    }
+
+    private void log(String msg) {
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
+    }
 
     @Override
     public boolean[] byMethod() {
@@ -60,8 +60,18 @@ public class DataImpl implements Data {
     }
 
     @Override
+    public void setLastMenstruationDate(Calendar value) {
+        lastMenstruationDate = value;
+    }
+
+    @Override
     public Calendar getOvulationDate() {
         return ovulationDate;
+    }
+
+    @Override
+    public void setOvulationDate(Calendar value) {
+        ovulationDate = value;
     }
 
     @Override
@@ -70,8 +80,18 @@ public class DataImpl implements Data {
     }
 
     @Override
+    public void setUltrasoundDate(Calendar value) {
+        ultrasoundDate = value;
+    }
+
+    @Override
     public int getMenstrualCycleLen() {
         return menstrualCycleLen;
+    }
+
+    @Override
+    public void setMenstrualCycleLen(int value) {
+        menstrualCycleLen = value;
     }
 
     @Override
@@ -80,13 +100,28 @@ public class DataImpl implements Data {
     }
 
     @Override
+    public void setLutealPhaseLen(int value) {
+        lutealPhaseLen = value;
+    }
+
+    @Override
     public int getUltrasoundWeeks() {
         return ultrasoundWeeks;
     }
 
     @Override
+    public void setUltrasoundWeeks(int value) {
+        ultrasoundWeeks = value;
+    }
+
+    @Override
     public int getUltrasoundDays() {
         return ultrasoundDays;
+    }
+
+    @Override
+    public void setUltrasoundDays(int value) {
+        ultrasoundDays = value;
     }
 
     @Override
@@ -99,41 +134,6 @@ public class DataImpl implements Data {
     @Override
     public void isEmbryonicAge(boolean value) {
         isEmbryonicAge = value;
-    }
-
-    @Override
-    public void setLastMenstruationDate(Calendar value) {
-        lastMenstruationDate = value;
-    }
-
-    @Override
-    public void setOvulationDate(Calendar value) {
-        ovulationDate = value;
-    }
-
-    @Override
-    public void setUltrasoundDate(Calendar value) {
-        ultrasoundDate = value;
-    }
-
-    @Override
-    public void setMenstrualCycleLen(int value) {
-        menstrualCycleLen = value;
-    }
-
-    @Override
-    public void setLutealPhaseLen(int value) {
-        lutealPhaseLen = value;
-    }
-
-    @Override
-    public void setUltrasoundWeeks(int value) {
-        ultrasoundWeeks = value;
-    }
-
-    @Override
-    public void setUltrasoundDays(int value) {
-        ultrasoundDays = value;
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -236,8 +236,6 @@ public class DataImpl implements Data {
                 .getBoolean(Shared.Saved.Calculation.EXTRA_BY_FIRST_MOVEMENTS,
                         false);
     }
-
-    private final static String DATE_FORMAT = "yyyy-MM-dd";
 
     private void saveDate(Editor editor, String extra, Calendar date) {
         // editor.putLong(extra, date.getTimeInMillis());

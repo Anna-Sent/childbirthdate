@@ -45,6 +45,52 @@ import java.util.List;
 
 public class ResultSickListFragment extends StateSaverFragment implements
         DataClient, OnClickListener, OnItemSelectedListener {
+    private static final String KEY_SPINNER_DAYS_POSITION = "key_spinner_days_position";
+    private static final String KEY_SPINNER_AGE_POSITION = "key_spinner_age_position";
+    private static final String KEY_OTHER_DAYS = "key_other_days";
+    private static final String KEY_OTHER_AGE = "key_other_age";
+    private AdView mAdView;
+    private TableLayout mTable;
+    private Spinner mSpinnerDays, mSpinnerAge;
+    private LocalizableSimpleSpinnerItemArrayAdapter mSpinnerDaysAdapter,
+            mSpinnerAgeAdapter;
+    private int mSpinnerDaysIndex, mSpinnerAgeIndex;
+    private ArrayList<Days> mTmpDaysList = new ArrayList<>();
+    private ArrayList<Age> mTmpAgeList = new ArrayList<>();
+    private Data mData = null;
+    private View mSelectedRow = null;
+
+    public ResultSickListFragment() {
+        super();
+    }
+
+    @SuppressLint("InflateParams")
+    public static void showSickListInfoDialog(final Context context) {
+        if (Settings.showSickListInfoDialog(context)) {
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.dialog_info, null);
+            TextView textView = (TextView) view.findViewById(R.id.textView);
+            textView.setText(R.string.dialog_sick_list);
+            final CheckBox checkBox = (CheckBox) view
+                    .findViewById(R.id.checkBox);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(R.string.sick_list_days)
+                    .setView(view)
+                    .setPositiveButton(android.R.string.ok,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                    if (checkBox.isChecked()) {
+                                        Settings.doNotShowSickListInfoDialog(context);
+                                    }
+                                }
+                            });
+            builder.create().show();
+        }
+    }
+
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
@@ -53,34 +99,19 @@ public class ResultSickListFragment extends StateSaverFragment implements
         MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
-    private AdView mAdView;
-    private TableLayout mTable;
-    private Spinner mSpinnerDays, mSpinnerAge;
-    private LocalizableSimpleSpinnerItemArrayAdapter mSpinnerDaysAdapter,
-            mSpinnerAgeAdapter;
-    private int mSpinnerDaysIndex, mSpinnerAgeIndex;
-    private ArrayList<Days> mTmpDaysList = new ArrayList<Days>();
-    private ArrayList<Age> mTmpAgeList = new ArrayList<Age>();
-
-    public ResultSickListFragment() {
-        super();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.result_sick_list, container, false);
     }
 
-    private Data mData = null;
+    private Data getData() {
+        return mData;
+    }
 
     @Override
     public void setData(Data data) {
         mData = data;
-    }
-
-    private Data getData() {
-        return mData;
     }
 
     @Override
@@ -96,11 +127,6 @@ public class ResultSickListFragment extends StateSaverFragment implements
         mSpinnerAge = (Spinner) getActivity().findViewById(R.id.spinnerAge);
     }
 
-    private static final String KEY_SPINNER_DAYS_POSITION = "key_spinner_days_position";
-    private static final String KEY_SPINNER_AGE_POSITION = "key_spinner_age_position";
-    private static final String KEY_OTHER_DAYS = "key_other_days";
-    private static final String KEY_OTHER_AGE = "key_other_age";
-
     @SuppressWarnings("unchecked")
     @Override
     public void restoreState(Bundle state) {
@@ -109,12 +135,12 @@ public class ResultSickListFragment extends StateSaverFragment implements
 
         mTmpDaysList = (ArrayList<Days>) state.getSerializable(KEY_OTHER_DAYS);
         if (mTmpDaysList == null) {
-            mTmpDaysList = new ArrayList<Days>();
+            mTmpDaysList = new ArrayList<>();
         }
 
         mTmpAgeList = (ArrayList<Age>) state.getSerializable(KEY_OTHER_AGE);
         if (mTmpAgeList == null) {
-            mTmpAgeList = new ArrayList<Age>();
+            mTmpAgeList = new ArrayList<>();
         }
     }
 
@@ -279,8 +305,6 @@ public class ResultSickListFragment extends StateSaverFragment implements
         message.setVisibility(msg == null ? View.GONE : View.VISIBLE);
     }
 
-    private View mSelectedRow = null;
-
     @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
@@ -301,33 +325,6 @@ public class ResultSickListFragment extends StateSaverFragment implements
                     editAge();
                     break;
             }
-        }
-    }
-
-    @SuppressLint("InflateParams")
-    public static void showSickListInfoDialog(final Context context) {
-        if (Settings.showSickListInfoDialog(context)) {
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.dialog_info, null);
-            TextView textView = (TextView) view.findViewById(R.id.textView);
-            textView.setText(R.string.dialog_sick_list);
-            final CheckBox checkBox = (CheckBox) view
-                    .findViewById(R.id.checkBox);
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle(R.string.sick_list_days)
-                    .setView(view)
-                    .setPositiveButton(android.R.string.ok,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                                    int id) {
-                                    if (checkBox.isChecked()) {
-                                        Settings.doNotShowSickListInfoDialog(context);
-                                    }
-                                }
-                            });
-            builder.create().show();
         }
     }
 

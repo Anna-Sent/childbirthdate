@@ -25,14 +25,6 @@ import java.util.List;
 
 public abstract class MoveableItemsPreference extends DialogPreference
         implements OnClickListener {
-    private String wrapMsg(String msg) {
-        return getClass().getSimpleName() + ": " + msg;
-    }
-
-    private void log(String msg) {
-        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
-    }
-
     private String mValue;
     private MoveableItemsArrayAdapter mAdapter;
     private ListView mListView;
@@ -48,6 +40,14 @@ public abstract class MoveableItemsPreference extends DialogPreference
         setPositiveButtonText(android.R.string.ok);
         setNegativeButtonText(android.R.string.cancel);
         setDialogIcon(null);
+    }
+
+    private String wrapMsg(String msg) {
+        return getClass().getSimpleName() + ": " + msg;
+    }
+
+    private void log(String msg) {
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
     @Override
@@ -183,41 +183,6 @@ public abstract class MoveableItemsPreference extends DialogPreference
 
     protected abstract void restoreAddValue(String value);
 
-    private static class SavedState extends BaseSavedState {
-        public String value;
-        private String values;
-
-        public SavedState(Parcelable superState) {
-            super(superState);
-        }
-
-        public SavedState(Parcel source) {
-            super(source);
-            value = source.readString();
-            values = source.readString();
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            super.writeToParcel(dest, flags);
-            dest.writeString(value);
-            dest.writeString(values);
-        }
-
-        @SuppressWarnings("unused")
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
-            @Override
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
-
-            @Override
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -238,4 +203,38 @@ public abstract class MoveableItemsPreference extends DialogPreference
     }
 
     protected abstract void addItem(MoveableItemsArrayAdapter adapter);
+
+    private static class SavedState extends BaseSavedState {
+        @SuppressWarnings("unused")
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+        public String value;
+        private String values;
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        public SavedState(Parcel source) {
+            super(source);
+            value = source.readString();
+            values = source.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            super.writeToParcel(dest, flags);
+            dest.writeString(value);
+            dest.writeString(values);
+        }
+    }
 }

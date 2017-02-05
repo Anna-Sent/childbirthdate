@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
-import java.util.Calendar;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +8,8 @@ import android.widget.DatePicker;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
+
+import java.util.Calendar;
 
 public class DetailsOvulationMethodFragment extends DetailsFragment implements
         DatePicker.OnDateChangedListener {

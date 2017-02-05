@@ -20,24 +20,20 @@ import java.util.List;
 
 public class LocalizableSimpleSpinnerItemArrayAdapter extends
         ArrayAdapter<LocalizableObject> {
+    private final List<LocalizableObject> mObjects;
+
+    public LocalizableSimpleSpinnerItemArrayAdapter(Context context,
+                                                    List<LocalizableObject> objects) {
+        super(context, android.R.layout.simple_spinner_item, objects);
+        mObjects = objects;
+    }
+
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
 
     private void log(String msg) {
         MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
-    }
-
-    private final List<LocalizableObject> mObjects;
-
-    static class ViewHolder {
-        TextView textView;
-    }
-
-    public LocalizableSimpleSpinnerItemArrayAdapter(Context context,
-                                                    List<LocalizableObject> objects) {
-        super(context, android.R.layout.simple_spinner_item, objects);
-        mObjects = objects;
     }
 
     @Override
@@ -116,5 +112,9 @@ public class LocalizableSimpleSpinnerItemArrayAdapter extends
         mObjects.add(object);
         notifyDataSetChanged();
         return mObjects.size() - 1;
+    }
+
+    static class ViewHolder {
+        TextView textView;
     }
 }

@@ -20,6 +20,14 @@ import java.util.List;
 
 public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
         OnClickListener {
+    private final List<LocalizableObject> mValues;
+
+    public MoveableItemsArrayAdapter(Context context,
+                                     List<LocalizableObject> values) {
+        super(context, R.layout.dialog_list_item);
+        mValues = values;
+    }
+
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
@@ -28,21 +36,8 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
         MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
-    private final List<LocalizableObject> mValues;
-
     public List<LocalizableObject> getValues() {
         return mValues;
-    }
-
-    private static class ViewHolder {
-        private int position;
-        private TextView textView;
-    }
-
-    public MoveableItemsArrayAdapter(Context context,
-                                     List<LocalizableObject> values) {
-        super(context, R.layout.dialog_list_item);
-        mValues = values;
     }
 
     @Override
@@ -152,5 +147,10 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
                     break;
             }
         }
+    }
+
+    private static class ViewHolder {
+        private int position;
+        private TextView textView;
     }
 }

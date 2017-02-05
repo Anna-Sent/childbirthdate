@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate.widget;
 
-import java.util.Calendar;
-
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +15,8 @@ import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
+
+import java.util.Calendar;
 
 public abstract class Builder {
     protected abstract boolean hasTV1();

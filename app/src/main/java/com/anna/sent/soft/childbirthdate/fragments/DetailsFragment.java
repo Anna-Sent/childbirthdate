@@ -10,30 +10,8 @@ import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.childbirthdate.utils.MyLog;
 
 public abstract class DetailsFragment extends Fragment implements DataClient {
-    private String wrapMsg(String msg) {
-        return getClass().getSimpleName() + ": " + msg;
-    }
-
-    private void log(String msg) {
-        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
-    }
-
-    public interface OnDetailsChangedListener {
-        void detailsChanged();
-    }
-
-    private OnDetailsChangedListener mListener = null;
-
-    public void setOnDetailsChangedListener(OnDetailsChangedListener listener) {
-        mListener = listener;
-    }
-
     Data mData = null;
-
-    @Override
-    public void setData(Data data) {
-        mData = data;
-    }
+    private OnDetailsChangedListener mListener = null;
 
     public DetailsFragment() {
         super();
@@ -67,6 +45,23 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
         return details;
     }
 
+    private String wrapMsg(String msg) {
+        return getClass().getSimpleName() + ": " + msg;
+    }
+
+    private void log(String msg) {
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
+    }
+
+    public void setOnDetailsChangedListener(OnDetailsChangedListener listener) {
+        mListener = listener;
+    }
+
+    @Override
+    public void setData(Data data) {
+        mData = data;
+    }
+
     public int getShownIndex() {
         return getArguments().getInt(Shared.Titles.EXTRA_POSITION, -1);
     }
@@ -85,5 +80,9 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
         super.onResume();
         log("resume, update ui");
         updateData();
+    }
+
+    public interface OnDetailsChangedListener {
+        void detailsChanged();
     }
 }

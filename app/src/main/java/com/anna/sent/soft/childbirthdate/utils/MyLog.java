@@ -11,6 +11,8 @@ public class MyLog {
     private static final String DEFAULT_TAG = "CBD";
 
     private static MyLog sInstance;
+    private boolean mIsInitialized;
+    private boolean mIsGooglePlayServicesAvailable;
 
     public static MyLog getInstance() {
         if (sInstance == null) {
@@ -18,35 +20,6 @@ public class MyLog {
         }
 
         return sInstance;
-    }
-
-    private boolean mIsInitialized;
-    private boolean mIsGooglePlayServicesAvailable;
-
-    public void init(Context context) {
-        if (mIsInitialized) {
-            return;
-        }
-
-        mIsInitialized = true;
-        mIsGooglePlayServicesAvailable = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS;
-        logcat(Log.INFO, "GooglePlayServices is" + (mIsGooglePlayServicesAvailable ? "" : "n't") + " available");
-    }
-
-    public void logcat(int level, String msg) {
-        if (mIsInitialized && mIsGooglePlayServicesAvailable) {
-            FirebaseCrash.logcat(level, DEFAULT_TAG, msg);
-        } else {
-            noFirebaseLogcat(level, DEFAULT_TAG, msg);
-        }
-    }
-
-    public void report(Throwable throwable) {
-        if (mIsInitialized && mIsGooglePlayServicesAvailable) {
-            FirebaseCrash.report(throwable);
-        } else {
-            noFirebaseLogcat(Log.WARN, DEFAULT_TAG, throwable.toString());
-        }
     }
 
     private static void noFirebaseLogcat(int level, String tag, String msg) {
@@ -72,6 +45,32 @@ public class MyLog {
             default:
                 Log.println(level, tag, msg);
                 break;
+        }
+    }
+
+    public void init(Context context) {
+        if (mIsInitialized) {
+            return;
+        }
+
+        mIsInitialized = true;
+        mIsGooglePlayServicesAvailable = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS;
+        logcat(Log.INFO, "GooglePlayServices is" + (mIsGooglePlayServicesAvailable ? "" : "n't") + " available");
+    }
+
+    public void logcat(int level, String msg) {
+        if (mIsInitialized && mIsGooglePlayServicesAvailable) {
+            FirebaseCrash.logcat(level, DEFAULT_TAG, msg);
+        } else {
+            noFirebaseLogcat(level, DEFAULT_TAG, msg);
+        }
+    }
+
+    public void report(Throwable throwable) {
+        if (mIsInitialized && mIsGooglePlayServicesAvailable) {
+            FirebaseCrash.report(throwable);
+        } else {
+            noFirebaseLogcat(Log.WARN, DEFAULT_TAG, throwable.toString());
         }
     }
 }

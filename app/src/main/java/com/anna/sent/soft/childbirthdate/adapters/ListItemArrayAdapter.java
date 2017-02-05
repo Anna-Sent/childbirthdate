@@ -17,35 +17,11 @@ import com.anna.sent.soft.childbirthdate.utils.MyLog;
 
 public class ListItemArrayAdapter extends ArrayAdapter<String> implements
         OnClickListener {
-    private String wrapMsg(String msg) {
-        return getClass().getSimpleName() + ": " + msg;
-    }
-
-    private void log(String msg) {
-        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
-    }
-
-    public interface OnCheckedListener {
-        void checked(int position, boolean isChecked);
-    }
-
-    private OnCheckedListener mListener = null;
-
-    public void setOnCheckedListener(OnCheckedListener listener) {
-        mListener = listener;
-    }
-
     private final String[] mStrings1;
+    private final int mCount;
+    private OnCheckedListener mListener = null;
     private String[] mStrings2;
     private boolean[] mChecked;
-    private final int mCount;
-
-    private static class ViewHolder {
-        private int position;
-        private CheckBox checkBox;
-        private TextView text1;
-        private TextView text2;
-    }
 
     public ListItemArrayAdapter(Context context, String[] strings1) {
         super(context, R.layout.list_item, R.id.text1, strings1);
@@ -57,6 +33,18 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
             mChecked[i] = false;
             mStrings2[i] = "";
         }
+    }
+
+    private String wrapMsg(String msg) {
+        return getClass().getSimpleName() + ": " + msg;
+    }
+
+    private void log(String msg) {
+        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
+    }
+
+    public void setOnCheckedListener(OnCheckedListener listener) {
+        mListener = listener;
     }
 
     @Override
@@ -127,5 +115,16 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
 
             notifyDataSetChanged();
         }
+    }
+
+    public interface OnCheckedListener {
+        void checked(int position, boolean isChecked);
+    }
+
+    private static class ViewHolder {
+        private int position;
+        private CheckBox checkBox;
+        private TextView text1;
+        private TextView text2;
     }
 }

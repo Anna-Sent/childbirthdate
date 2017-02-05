@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate.shared;
 
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,8 +16,13 @@ import com.anna.sent.soft.settings.SettingsLanguage;
 import com.anna.sent.soft.settings.SettingsTheme;
 import com.anna.sent.soft.settings.SharedPreferencesWrapper;
 
+import java.util.List;
+
 public class Settings {
+    public static final SettingsLanguageImpl settingsLanguage = new SettingsLanguageImpl();
+    public static final SettingsThemeImpl settingsTheme = new SettingsThemeImpl();
     private static final String SETTINGS_FILE = "childbirthdatesettings";
+    private static final String KEY_PREF_DO_NOT_SHOW_SICK_LIST_INFO_DIALOG = "com.anna.sent.soft.childbirthdate.donotshowsicklistinfodialog";
 
     public static SharedPreferences getSettings(Context context) {
         return new SharedPreferencesWrapper(context.getApplicationContext()
@@ -83,8 +86,6 @@ public class Settings {
         editor.commit();
     }
 
-    private static final String KEY_PREF_DO_NOT_SHOW_SICK_LIST_INFO_DIALOG = "com.anna.sent.soft.childbirthdate.donotshowsicklistinfodialog";
-
     public static boolean showSickListInfoDialog(Context context) {
         SharedPreferences settings = getSettings(context);
         return !settings.getBoolean(KEY_PREF_DO_NOT_SHOW_SICK_LIST_INFO_DIALOG,
@@ -104,9 +105,9 @@ public class Settings {
         getSettings(context).edit().clear().commit();
     }
 
-    public static final SettingsLanguageImpl settingsLanguage = new SettingsLanguageImpl();
-
     public static class SettingsLanguageImpl extends SettingsLanguage {
+        private static final String KEY_PREF_IS_LANGUAGE_SET_BY_USER = "com.anna.sent.soft.childbirthdate.islanguagesetbyuser";
+
         @Override
         protected SharedPreferences getSettings(Context context) {
             return Settings.getSettings(context);
@@ -116,8 +117,6 @@ public class Settings {
         public String getLanguageKey(Context context) {
             return context.getResources().getString(R.string.pref_language_key);
         }
-
-        private static final String KEY_PREF_IS_LANGUAGE_SET_BY_USER = "com.anna.sent.soft.childbirthdate.islanguagesetbyuser";
 
         @Override
         protected String getIsLanguageSetByUserKey(Context context) {
@@ -139,8 +138,6 @@ public class Settings {
             return context.getResources().getInteger(R.integer.defaultLanguage);
         }
     }
-
-    public static final SettingsThemeImpl settingsTheme = new SettingsThemeImpl();
 
     public static class SettingsThemeImpl extends SettingsTheme {
         @Override

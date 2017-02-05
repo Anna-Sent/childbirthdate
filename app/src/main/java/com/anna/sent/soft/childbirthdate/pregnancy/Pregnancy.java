@@ -1,11 +1,11 @@
 package com.anna.sent.soft.childbirthdate.pregnancy;
 
-import java.util.Calendar;
-
 import android.content.Context;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.Age;
+
+import java.util.Calendar;
 
 public abstract class Pregnancy {
     private static final int FIRST_TRIMESTER = 1;
@@ -37,6 +37,32 @@ public abstract class Pregnancy {
         currentPoint = startPoint;
     }
 
+    @SuppressWarnings("unused")
+    public static String getTrimesterString(Context context, int trimester) {
+        switch (trimester) {
+            case Pregnancy.FIRST_TRIMESTER:
+                return context.getString(R.string.firstTrimester);
+            case Pregnancy.SECOND_TRIMESTER:
+                return context.getString(R.string.secondTrimester);
+            case Pregnancy.THIRD_TRIMESTER:
+                return context.getString(R.string.thirdTrimester);
+        }
+
+        return "?";
+    }
+
+    private static void zeroDate(Calendar date) {
+        date.set(Calendar.HOUR, 0);
+        date.set(Calendar.MINUTE, 0);
+        date.set(Calendar.SECOND, 0);
+        date.set(Calendar.MILLISECOND, 0);
+        date.set(Calendar.AM_PM, Calendar.AM);
+    }
+
+    public Calendar getCurrentPoint() {
+        return currentPoint;
+    }
+
     public void setCurrentPoint(Calendar current) {
         currentPoint = (Calendar) current.clone();
         zeroDate(currentPoint);
@@ -55,10 +81,6 @@ public abstract class Pregnancy {
         } catch (Exception e) {
             age = null;
         }
-    }
-
-    public Calendar getCurrentPoint() {
-        return currentPoint;
     }
 
     public void setAge(Age age) {
@@ -182,27 +204,5 @@ public abstract class Pregnancy {
                         getFullDurationDays()).toString(context), result);
 
         return result;
-    }
-
-    @SuppressWarnings("unused")
-    public static String getTrimesterString(Context context, int trimester) {
-        switch (trimester) {
-            case Pregnancy.FIRST_TRIMESTER:
-                return context.getString(R.string.firstTrimester);
-            case Pregnancy.SECOND_TRIMESTER:
-                return context.getString(R.string.secondTrimester);
-            case Pregnancy.THIRD_TRIMESTER:
-                return context.getString(R.string.thirdTrimester);
-        }
-
-        return "?";
-    }
-
-    private static void zeroDate(Calendar date) {
-        date.set(Calendar.HOUR, 0);
-        date.set(Calendar.MINUTE, 0);
-        date.set(Calendar.SECOND, 0);
-        date.set(Calendar.MILLISECOND, 0);
-        date.set(Calendar.AM_PM, Calendar.AM);
     }
 }

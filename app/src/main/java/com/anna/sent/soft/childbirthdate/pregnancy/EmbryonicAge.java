@@ -1,8 +1,8 @@
 package com.anna.sent.soft.childbirthdate.pregnancy;
 
-import java.util.Calendar;
-
 import com.anna.sent.soft.childbirthdate.age.Age;
+
+import java.util.Calendar;
 
 /**
  * The class represents embryonic age in weeks and days.

@@ -18,19 +18,19 @@ import java.util.Calendar;
 public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
         implements NumberPicker.OnValueChangeListener,
         DatePicker.OnDateChangedListener {
+    private DatePicker datePicker;
+    private NumberPicker numberPicker;
+
+    public DetailsFirstAppearanceMethodFragment() {
+        super();
+    }
+
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
 
     private void log(String msg) {
         MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
-    }
-
-    private DatePicker datePicker;
-    private NumberPicker numberPicker;
-
-    public DetailsFirstAppearanceMethodFragment() {
-        super();
     }
 
     @Override

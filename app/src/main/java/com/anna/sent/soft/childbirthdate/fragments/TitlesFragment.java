@@ -24,6 +24,17 @@ import com.anna.sent.soft.strategy.statesaver.StateSaver;
 public class TitlesFragment extends ListFragment implements
         DetailsFragment.OnDetailsChangedListener, StateSaver,
         ListItemArrayAdapter.OnCheckedListener, DataClient {
+    private final static int REQUEST_POSITION = 1;
+    private ListItemArrayAdapter mListAdapter;
+    private boolean mDualPane;
+    private int mSelectedItem = 0;
+    private Data mData = null;
+
+    public TitlesFragment() {
+        super();
+        log("create");
+    }
+
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
@@ -32,22 +43,9 @@ public class TitlesFragment extends ListFragment implements
         MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
-    private final static int REQUEST_POSITION = 1;
-
-    private ListItemArrayAdapter mListAdapter;
-    private boolean mDualPane;
-    private int mSelectedItem = 0;
-
-    private Data mData = null;
-
     @Override
     public void setData(Data data) {
         mData = data;
-    }
-
-    public TitlesFragment() {
-        super();
-        log("create");
     }
 
     @Override

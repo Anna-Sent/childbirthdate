@@ -1,10 +1,10 @@
 package com.anna.sent.soft.childbirthdate.utils;
 
-import java.util.Calendar;
-
 import android.content.Context;
 import android.text.format.DateFormat;
 import android.widget.DatePicker;
+
+import java.util.Calendar;
 
 public class DateUtils {
     public static Calendar getDate(DatePicker datePicker) {

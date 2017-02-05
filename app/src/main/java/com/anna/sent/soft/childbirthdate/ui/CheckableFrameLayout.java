@@ -24,15 +24,15 @@ public class CheckableFrameLayout extends FrameLayout implements Checkable {
         super(context);
     }
 
+    public boolean isChecked() {
+        return mChecked;
+    }
+
     @SuppressWarnings("deprecation")
     public void setChecked(boolean checked) {
         mChecked = checked;
         setBackgroundDrawable(checked ? new ColorDrawable(getResources()
                 .getColor(R.color.blue)) : null);
-    }
-
-    public boolean isChecked() {
-        return mChecked;
     }
 
     public void toggle() {

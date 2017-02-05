@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate.sicklist;
 
-import java.util.List;
-
 import android.content.Context;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,6 +10,8 @@ import com.anna.sent.soft.childbirthdate.age.Days;
 import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
+
+import java.util.List;
 
 public class SickListUtils {
     public static Days checkDays(Context context, EditText editText,

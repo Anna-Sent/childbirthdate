@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 import android.widget.Button;
 
 public class LongPressedButton extends Button {
+    private Listener mListener = null;
+
     public LongPressedButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
@@ -48,12 +50,6 @@ public class LongPressedButton extends Button {
         }
     }
 
-    public interface Listener {
-        void cancelLongPress();
-    }
-
-    private Listener mListener = null;
-
     public void setListener(Listener listener) {
         mListener = listener;
     }
@@ -62,5 +58,9 @@ public class LongPressedButton extends Button {
         if (mListener != null) {
             mListener.cancelLongPress();
         }
+    }
+
+    public interface Listener {
+        void cancelLongPress();
     }
 }

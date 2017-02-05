@@ -26,8 +26,9 @@ import com.anna.sent.soft.utils.LanguageUtils;
 
 public abstract class MyPregnancyWidgetConfigure extends Activity implements
         OnClickListener {
-    private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+    private static final String KEY_CHECKED_RADIO_INDEX = "checkedRadioIndex";
     private final RadioButton[] radio = new RadioButton[Shared.Calculation.METHODS_COUNT];
+    private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     private CheckBox checkBoxCountdown, checkBoxShowCalculationMethod;
     private boolean doCalculation = false;
 
@@ -36,7 +37,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         /*
-		 * ThemeUtils.setupThemeBeforeOnActivityCreate(this,
+         * ThemeUtils.setupThemeBeforeOnActivityCreate(this,
 		 * Settings.settingsTheme.getStyle(this, R.array.style_dialog,
 		 * R.style.DialogTheme));
 		 */
@@ -78,8 +79,6 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
             radio[radioIndex].setChecked(true);
         }
     }
-
-    private static final String KEY_CHECKED_RADIO_INDEX = "checkedRadioIndex";
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

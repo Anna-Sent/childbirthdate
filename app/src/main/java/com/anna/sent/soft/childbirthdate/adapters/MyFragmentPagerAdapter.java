@@ -7,7 +7,7 @@ import android.util.SparseArray;
 import android.view.ViewGroup;
 
 public abstract class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-    private final SparseArray<Fragment> mFragments = new SparseArray<Fragment>();
+    private final SparseArray<Fragment> mFragments = new SparseArray<>();
 
     MyFragmentPagerAdapter(FragmentManager fm) {
         super(fm);

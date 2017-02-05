@@ -35,6 +35,26 @@ import java.util.Calendar;
 public class ResultEcdFragment extends StateSaverFragment implements
         DataClient, OnClickListener, OnDateChangedListener,
         LongPressedButton.Listener {
+    private static final String KEY_IS_ANIMATED_ACTIVITY_VISIBLE = "isAnimatedActivityVisible";
+    private static final boolean DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE = false;
+    private static final boolean USE_ANIMATION = false;
+    private AdView mAdView;
+    private TableLayout mTable;
+    private DatePicker mDatePicker;
+    private Calendar mDate = null;
+    private Data mData;
+    private AnimatedLinearLayout animatedLayout;
+    private TextView textViewOnDate;
+    private Button buttonShowHide;
+    private boolean mIsVisible = DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE;
+    private Drawable mCollapseDrawable, mExpandDrawable;
+    private ChangeCurrentByOneFromLongPressCommand mChangeCurrentByOneFromLongPressCommand = null;
+    private View mSelectedRow = null;
+
+    public ResultEcdFragment() {
+        super();
+    }
+
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }
@@ -43,30 +63,19 @@ public class ResultEcdFragment extends StateSaverFragment implements
         MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
-    private AdView mAdView;
-    private TableLayout mTable;
-    private DatePicker mDatePicker;
-    private Calendar mDate = null;
-
-    public ResultEcdFragment() {
-        super();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.result_ecd, container, false);
     }
 
-    private Data mData;
+    private Data getData() {
+        return mData;
+    }
 
     @Override
     public void setData(Data data) {
         mData = data;
-    }
-
-    private Data getData() {
-        return mData;
     }
 
     @Override
@@ -132,11 +141,6 @@ public class ResultEcdFragment extends StateSaverFragment implements
         mExpandDrawable = getDrawableFromTheme(R.attr.iconExpand);
     }
 
-    private static final String KEY_IS_ANIMATED_ACTIVITY_VISIBLE = "isAnimatedActivityVisible";
-    private static final boolean DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE = false;
-
-    private static final boolean USE_ANIMATION = false;
-
     @Override
     public void restoreState(Bundle state) {
         mIsVisible = state.getBoolean(KEY_IS_ANIMATED_ACTIVITY_VISIBLE,
@@ -156,11 +160,6 @@ public class ResultEcdFragment extends StateSaverFragment implements
         setVisibility(mIsVisible, false);
     }
 
-    private AnimatedLinearLayout animatedLayout;
-    private TextView textViewOnDate;
-    private Button buttonShowHide;
-    private boolean mIsVisible = DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE;
-
     private void setVisibility(boolean isVisible, boolean withAnimation) {
         if (isVisible) {
             animatedLayout.show(withAnimation);
@@ -177,8 +176,6 @@ public class ResultEcdFragment extends StateSaverFragment implements
             buttonShowHide.setContentDescription(getString(R.string.expand));
         }
     }
-
-    private Drawable mCollapseDrawable, mExpandDrawable;
 
     private Drawable getDrawableFromTheme(int attribute) {
         int[] attrs = new int[]{attribute};
@@ -204,22 +201,6 @@ public class ResultEcdFragment extends StateSaverFragment implements
         mChangeCurrentByOneFromLongPressCommand.setStep(increment);
         mDatePicker.postDelayed(mChangeCurrentByOneFromLongPressCommand,
                 delayMillis);
-    }
-
-    private ChangeCurrentByOneFromLongPressCommand mChangeCurrentByOneFromLongPressCommand = null;
-
-    private class ChangeCurrentByOneFromLongPressCommand implements Runnable {
-        private boolean mIncrement;
-
-        private void setStep(boolean increment) {
-            mIncrement = increment;
-        }
-
-        @Override
-        public void run() {
-            changeValueByOne(mIncrement);
-            mDatePicker.postDelayed(this, 10);
-        }
     }
 
     private void changeValueByOne(boolean increment) {
@@ -341,8 +322,6 @@ public class ResultEcdFragment extends StateSaverFragment implements
         message.setVisibility(msg == null ? View.GONE : View.VISIBLE);
     }
 
-    private View mSelectedRow = null;
-
     @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
@@ -354,6 +333,20 @@ public class ResultEcdFragment extends StateSaverFragment implements
             v.setBackgroundDrawable(getResources().getDrawable(
                     R.drawable.bg_selected_view));
             mSelectedRow = v;
+        }
+    }
+
+    private class ChangeCurrentByOneFromLongPressCommand implements Runnable {
+        private boolean mIncrement;
+
+        private void setStep(boolean increment) {
+            mIncrement = increment;
+        }
+
+        @Override
+        public void run() {
+            changeValueByOne(mIncrement);
+            mDatePicker.postDelayed(this, 10);
         }
     }
 }

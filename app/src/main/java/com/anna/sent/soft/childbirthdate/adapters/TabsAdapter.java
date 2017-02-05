@@ -1,7 +1,5 @@
 package com.anna.sent.soft.childbirthdate.adapters;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabWidget;
+
+import java.util.ArrayList;
 
 /**
  * This is a helper class that implements the management of tabs and all details
@@ -27,42 +27,9 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
     private final Context mContext;
     private final TabHost mTabHost;
     private final ViewPager mViewPager;
-    private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
+    private final ArrayList<TabInfo> mTabs = new ArrayList<>();
 
     private TabHost.OnTabChangeListener mOnTabChangeListener;
-
-    public void setOnTabChangeListener(TabHost.OnTabChangeListener listener) {
-        mOnTabChangeListener = listener;
-    }
-
-    private static final class TabInfo {
-        @SuppressWarnings("unused")
-        private final String tag;
-        private final Class<?> clss;
-        private final Bundle args;
-
-        TabInfo(String _tag, Class<?> _class, Bundle _args) {
-            tag = _tag;
-            clss = _class;
-            args = _args;
-        }
-    }
-
-    private static class DummyTabFactory implements TabHost.TabContentFactory {
-        private final Context mContext;
-
-        public DummyTabFactory(Context context) {
-            mContext = context;
-        }
-
-        @Override
-        public View createTabContent(String tag) {
-            View v = new View(mContext);
-            v.setMinimumWidth(0);
-            v.setMinimumHeight(0);
-            return v;
-        }
-    }
 
     public TabsAdapter(FragmentActivity activity, TabHost tabHost,
                        ViewPager pager) {
@@ -73,6 +40,10 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
         mTabHost.setOnTabChangedListener(this);
         mViewPager.setAdapter(this);
         mViewPager.addOnPageChangeListener(this);
+    }
+
+    public void setOnTabChangeListener(TabHost.OnTabChangeListener listener) {
+        mOnTabChangeListener = listener;
     }
 
     public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args) {
@@ -126,5 +97,34 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
 
     @Override
     public void onPageScrollStateChanged(int state) {
+    }
+
+    private static final class TabInfo {
+        @SuppressWarnings("unused")
+        private final String tag;
+        private final Class<?> clss;
+        private final Bundle args;
+
+        TabInfo(String _tag, Class<?> _class, Bundle _args) {
+            tag = _tag;
+            clss = _class;
+            args = _args;
+        }
+    }
+
+    private static class DummyTabFactory implements TabHost.TabContentFactory {
+        private final Context mContext;
+
+        public DummyTabFactory(Context context) {
+            mContext = context;
+        }
+
+        @Override
+        public View createTabContent(String tag) {
+            View v = new View(mContext);
+            v.setMinimumWidth(0);
+            v.setMinimumHeight(0);
+            return v;
+        }
     }
 }

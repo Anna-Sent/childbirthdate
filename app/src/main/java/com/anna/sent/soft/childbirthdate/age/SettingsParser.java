@@ -17,7 +17,7 @@ public class SettingsParser {
     }
 
     private static List<ISetting> loadList(String str, ISetting element) {
-        List<ISetting> result = new ArrayList<ISetting>();
+        List<ISetting> result = new ArrayList<>();
 
         if (str != null) {
             String[] tokens = str.split(DELIMITER_LIST);
@@ -34,7 +34,7 @@ public class SettingsParser {
 
     public static List<LocalizableObject> toList(String str, ISetting element) {
         List<ISetting> source = SettingsParser.loadList(str, element);
-        List<LocalizableObject> destination = new ArrayList<LocalizableObject>();
+        List<LocalizableObject> destination = new ArrayList<>();
 
         for (int i = 0; i < source.size(); ++i) {
             destination.add(source.get(i));
@@ -44,7 +44,7 @@ public class SettingsParser {
     }
 
     public static String toString(List<LocalizableObject> list) {
-        List<ISetting> destination = new ArrayList<ISetting>();
+        List<ISetting> destination = new ArrayList<>();
 
         for (int i = 0; i < list.size(); ++i) {
             destination.add((ISetting) list.get(i));

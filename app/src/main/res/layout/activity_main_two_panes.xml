@@ -11,15 +11,15 @@
 
         <fragment
             android:id="@+id/titlesHeader"
+            class="com.anna.sent.soft.childbirthdate.fragments.TitlesHeaderFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            class="com.anna.sent.soft.childbirthdate.fragments.TitlesHeaderFragment" />
+            android:layout_height="wrap_content" />
 
         <fragment
             android:id="@+id/titles"
+            class="com.anna.sent.soft.childbirthdate.fragments.TitlesFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            class="com.anna.sent.soft.childbirthdate.fragments.TitlesFragment" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <FrameLayout

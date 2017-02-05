@@ -12,6 +12,8 @@ import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsPreference;
 import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 public class SickListAgePreference extends MoveableItemsPreference {
+    private NumberPicker mNumberPickerWeeks, mNumberPickerDays;
+
     public SickListAgePreference(Context context) {
         super(context);
     }
@@ -27,8 +29,6 @@ public class SickListAgePreference extends MoveableItemsPreference {
     protected int getAddLayoutResourceId() {
         return R.layout.dialog_sick_list_age;
     }
-
-    private NumberPicker mNumberPickerWeeks, mNumberPickerDays;
 
     protected void setupViewAdd(View viewAdd) {
         mNumberPickerWeeks = (NumberPicker) viewAdd

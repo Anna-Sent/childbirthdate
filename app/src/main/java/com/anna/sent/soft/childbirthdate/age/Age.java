@@ -9,10 +9,9 @@ import com.anna.sent.soft.childbirthdate.utils.MyLog;
 import java.io.Serializable;
 
 public class Age implements ISetting, Serializable {
-    private static final long serialVersionUID = 2407705304970505309L;
-
     public static final int DAYS_IN_WEEK = 7;
-
+    private static final long serialVersionUID = 2407705304970505309L;
+    private static final String DELIMITER = ",";
     private int weeks, days;
 
     public Age() {
@@ -32,15 +31,6 @@ public class Age implements ISetting, Serializable {
         return weeks;
     }
 
-    public void set(Age age) {
-        if (age == null) {
-            throw new IllegalArgumentException("Age must be not null");
-        }
-
-        weeks = age.weeks;
-        days = age.days;
-    }
-
     public void setWeeks(int value) {
         if (value < 0) {
             throw new IllegalArgumentException(
@@ -48,6 +38,15 @@ public class Age implements ISetting, Serializable {
         }
 
         weeks = value;
+    }
+
+    public void set(Age age) {
+        if (age == null) {
+            throw new IllegalArgumentException("Age must be not null");
+        }
+
+        weeks = age.weeks;
+        days = age.days;
     }
 
     public int getDays() {
@@ -109,8 +108,6 @@ public class Age implements ISetting, Serializable {
 
         return result;
     }
-
-    private static final String DELIMITER = ",";
 
     @Override
     public String save() {

@@ -17,6 +17,8 @@ import com.anna.sent.soft.childbirthdate.data.DataClient;
 
 public class TitlesHeaderFragment extends Fragment implements DataClient,
         OnClickListener {
+    private Data mData = null;
+
     public TitlesHeaderFragment() {
         super();
     }
@@ -34,8 +36,6 @@ public class TitlesHeaderFragment extends Fragment implements DataClient,
                 R.id.buttonCalculate);
         buttonCalculate.setOnClickListener(this);
     }
-
-    private Data mData = null;
 
     @Override
     public void setData(Data data) {

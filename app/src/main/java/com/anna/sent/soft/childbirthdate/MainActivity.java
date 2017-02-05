@@ -12,6 +12,7 @@ import com.anna.sent.soft.childbirthdate.strategy.menu.MenuStrategy;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 
 public class MainActivity extends DataKeeperActivity {
+    public final static String EXTRA_CONFIGURATION_CHANGED = "extra_configuration_changed";
     private static final boolean TEST_CLEAR_SETTINGS = false;
 
     @Override
@@ -52,8 +53,6 @@ public class MainActivity extends DataKeeperActivity {
         // update all widgets
         MyPregnancyWidget.updateAllWidgets(this);
     }
-
-    public final static String EXTRA_CONFIGURATION_CHANGED = "extra_configuration_changed";
 
     @Override
     protected void onNewIntent(Intent intent) {

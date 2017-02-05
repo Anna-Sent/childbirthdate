@@ -50,6 +50,7 @@ public class AdUtils {
                             .addTestDevice("9181DC11966389868E60DE66CAC818A3")
                             .addTestDevice("0A2245B8887D4B05DF59EB37AD741C46")
                             .addTestDevice("47D9C39F51DAC2173986C7832B6CAB57")
+                            .addTestDevice("2F2B82AD62F209D48AFC29A0C88065FA")
                             .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                             .build();
 
