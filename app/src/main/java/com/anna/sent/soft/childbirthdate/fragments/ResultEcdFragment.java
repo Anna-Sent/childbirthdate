@@ -152,7 +152,6 @@ public class ResultEcdFragment extends StateSaverFragment implements
         state.putBoolean(KEY_IS_ANIMATED_ACTIVITY_VISIBLE, mIsVisible);
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public void onStart() {
         super.onStart();

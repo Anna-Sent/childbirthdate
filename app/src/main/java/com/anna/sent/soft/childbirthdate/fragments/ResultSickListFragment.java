@@ -217,7 +217,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
         }
     }
 
-    @SuppressLint({"InflateParams", "ConstantConditions"})
+    @SuppressLint("InflateParams")
     private void fillResults() {
         Days days = getSelectedDays();
         Age age = getSelectedAge();
