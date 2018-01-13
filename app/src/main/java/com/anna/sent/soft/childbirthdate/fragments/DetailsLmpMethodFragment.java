@@ -7,23 +7,18 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.NumberPicker;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
-import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 import java.util.Calendar;
 
 public class DetailsLmpMethodFragment extends DetailsFragment implements
-        OnClickListener, NumberPicker.OnValueChangeListener,
-        DatePicker.OnDateChangedListener {
+        OnClickListener, NumberPicker.OnValueChangeListener, DatePicker.OnDateChangedListener {
     private DatePicker datePicker;
     private NumberPicker numberPickerMcl, numberPickerLpl;
-
-    public DetailsLmpMethodFragment() {
-        super();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,26 +41,20 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        datePicker = (DatePicker) getActivity().findViewById(
-                R.id.datePickerLastMenstruationDate);
+        datePicker = getActivity().findViewById(R.id.datePickerLastMenstruationDate);
         DateUtils.init(datePicker, this);
 
-        numberPickerMcl = (NumberPicker) getActivity().findViewById(
-                R.id.numberPickerMenstrualCycleLen);
-        numberPickerMcl
-                .setMinValue(PregnancyCalculator.MIN_MENSTRUAL_CYCLE_LEN);
-        numberPickerMcl
-                .setMaxValue(PregnancyCalculator.MAX_MENSTRUAL_CYCLE_LEN);
+        numberPickerMcl = getActivity().findViewById(R.id.numberPickerMenstrualCycleLen);
+        numberPickerMcl.setMinValue(PregnancyCalculator.MIN_MENSTRUAL_CYCLE_LEN);
+        numberPickerMcl.setMaxValue(PregnancyCalculator.MAX_MENSTRUAL_CYCLE_LEN);
         numberPickerMcl.setOnValueChangedListener(this);
 
-        numberPickerLpl = (NumberPicker) getActivity().findViewById(
-                R.id.numberPickerLutealPhaseLen);
+        numberPickerLpl = getActivity().findViewById(R.id.numberPickerLutealPhaseLen);
         numberPickerLpl.setMinValue(PregnancyCalculator.MIN_LUTEAL_PHASE_LEN);
         numberPickerLpl.setMaxValue(PregnancyCalculator.MAX_LUTEAL_PHASE_LEN);
         numberPickerLpl.setOnValueChangedListener(this);
 
-        Button button = (Button) getActivity().findViewById(
-                R.id.buttonRestoreDefaultValues);
+        Button button = getActivity().findViewById(R.id.buttonRestoreDefaultValues);
         button.setOnClickListener(this);
     }
 

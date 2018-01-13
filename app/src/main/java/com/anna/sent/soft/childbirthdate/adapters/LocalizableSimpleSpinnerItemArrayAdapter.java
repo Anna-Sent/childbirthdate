@@ -56,16 +56,14 @@ public class LocalizableSimpleSpinnerItemArrayAdapter extends
         View view;
         ViewHolder viewHolder;
         if (contentView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) getContext()
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = layoutInflater
-                    .inflate(
-                            isDropDownView ? android.R.layout.simple_spinner_dropdown_item
-                                    : android.R.layout.simple_spinner_item,
-                            null);
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            view = inflater.inflate(
+                    isDropDownView
+                            ? android.R.layout.simple_spinner_dropdown_item
+                            : android.R.layout.simple_spinner_item,
+                    null);
             viewHolder = new ViewHolder();
-            viewHolder.textView = (TextView) view
-                    .findViewById(android.R.id.text1);
+            viewHolder.textView = view.findViewById(android.R.id.text1);
 
             viewHolder.textView.setMinHeight(getItemHeight()); // getListPreferredItemHeight());
             viewHolder.textView.setGravity(Gravity.CENTER_VERTICAL);

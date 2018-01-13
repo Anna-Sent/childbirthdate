@@ -4,8 +4,7 @@
     <style name="WidgetBackground" parent="LinearLayoutVerticalStyle">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:background">@drawable/widget_bg</item>
-        <item name="android:layout_margin">@dimen/widget_margin</item>
+        <item name="android:background">@drawable/bg_widget</item>
     </style>
 
     <style name="WidgetTextView1Style" parent="TextViewStyle.Medium">
@@ -18,5 +17,4 @@
         <item name="android:paddingLeft">@dimen/widget_padding</item>
         <item name="android:textColor">@android:color/secondary_text_light</item>
     </style>
-
 </resources>

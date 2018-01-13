@@ -1,9 +1,7 @@
 package com.anna.sent.soft.childbirthdate.preferences;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,26 +12,15 @@ import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
-import com.anna.sent.soft.childbirthdate.utils.MyLog;
 
 import java.util.List;
 
-public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
-        OnClickListener {
+public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements OnClickListener {
     private final List<LocalizableObject> mValues;
 
-    public MoveableItemsArrayAdapter(Context context,
-                                     List<LocalizableObject> values) {
+    MoveableItemsArrayAdapter(Context context, List<LocalizableObject> values) {
         super(context, R.layout.dialog_list_item);
         mValues = values;
-    }
-
-    private String wrapMsg(String msg) {
-        return getClass().getSimpleName() + ": " + msg;
-    }
-
-    private void log(String msg) {
-        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
     public List<LocalizableObject> getValues() {
@@ -46,32 +33,30 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
     }
 
     @NonNull
-    @SuppressLint("InflateParams")
+    @SuppressWarnings("InflateParams")
     @Override
     public View getView(int position, View contentView, @NonNull ViewGroup viewGroup) {
         View view;
         ViewHolder viewHolder;
         if (contentView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) getContext()
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = layoutInflater.inflate(R.layout.dialog_list_item, null);
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            view = inflater.inflate(R.layout.dialog_list_item, null);
 
             viewHolder = new ViewHolder();
 
             view.setTag(viewHolder);
 
-            viewHolder.textView = (TextView) view
-                    .findViewById(R.id.textViewItem);
+            viewHolder.textView = view.findViewById(R.id.textViewItem);
 
-            Button buttonUp = (Button) view.findViewById(R.id.buttonUp);
+            Button buttonUp = view.findViewById(R.id.buttonUp);
             buttonUp.setTag(viewHolder);
             buttonUp.setOnClickListener(this);
 
-            Button buttonDown = (Button) view.findViewById(R.id.buttonDown);
+            Button buttonDown = view.findViewById(R.id.buttonDown);
             buttonDown.setTag(viewHolder);
             buttonDown.setOnClickListener(this);
 
-            Button buttonDelete = (Button) view.findViewById(R.id.buttonDelete);
+            Button buttonDelete = view.findViewById(R.id.buttonDelete);
             buttonDelete.setTag(viewHolder);
             buttonDelete.setOnClickListener(this);
         } else {
@@ -80,13 +65,12 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements
         }
 
         viewHolder.position = position;
-        viewHolder.textView.setText(mValues.get(position)
-                .toString(getContext()));
+        viewHolder.textView.setText(mValues.get(position).toString(getContext()));
 
         return view;
     }
 
-    public void setItems(List<LocalizableObject> objects) {
+    void setItems(List<LocalizableObject> objects) {
         mValues.clear();
         mValues.addAll(objects);
         notifyDataSetChanged();

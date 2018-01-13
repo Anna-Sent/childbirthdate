@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import com.anna.sent.soft.childbirthdate.strategy.menu.MenuStrategy;
 import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 
 public class MainActivity extends DataKeeperActivity {
-    public final static String EXTRA_CONFIGURATION_CHANGED = "extra_configuration_changed";
     private static final boolean TEST_CLEAR_SETTINGS = false;
 
     @Override
@@ -42,29 +40,10 @@ public class MainActivity extends DataKeeperActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
 
         // update all widgets
         MyPregnancyWidget.updateAllWidgets(this);
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        log("onNewIntent");
-        super.onNewIntent(intent);
-        Bundle extras = intent.getExtras();
-        if (extras != null && extras.containsKey(EXTRA_CONFIGURATION_CHANGED)) {
-            Bundle state = new Bundle();
-            saveState(state);
-            finish();
-            intent.putExtras(state);
-            startActivity(intent);
-        }
     }
 }

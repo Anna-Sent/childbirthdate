@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
-
+<resources>
     <string name="ecdIs">EDD %s</string>
     <string name="collapse">Collapse</string>
     <string name="expand">Expand</string>
@@ -80,5 +79,4 @@
     <string name="on">Number of days on which leave is granted</string>
     <string name="dialog_sick_list">You can edit lists of values in \"Menu-Settings-Parental leave\"</string>
     <string name="do_not_show">Do not show again</string>
-
 </resources>

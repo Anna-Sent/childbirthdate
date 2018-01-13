@@ -19,5 +19,4 @@
     <TextView
         style="@style/TextViewStyle"
         android:text="@string/days" />
-
 </LinearLayout>

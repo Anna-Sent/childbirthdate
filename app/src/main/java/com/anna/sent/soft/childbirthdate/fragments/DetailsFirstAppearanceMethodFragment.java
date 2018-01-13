@@ -1,17 +1,18 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.NumberPicker;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.childbirthdate.utils.MyLog;
-import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 import java.util.Calendar;
 
@@ -20,10 +21,6 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
         DatePicker.OnDateChangedListener {
     private DatePicker datePicker;
     private NumberPicker numberPicker;
-
-    public DetailsFirstAppearanceMethodFragment() {
-        super();
-    }
 
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
@@ -34,7 +31,7 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (container == null) {
             // We have different layouts, and in one of them this

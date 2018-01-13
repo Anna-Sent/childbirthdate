@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="ecdIs">"ПДР %s"</string>
     <string name="collapse">"Згорнути"</string>
     <string name="expand">"Розгорнути"</string>
@@ -80,5 +79,4 @@
     <string name="on">"на"</string>
     <string name="dialog_sick_list">"Ви можете редагувати списки значень в \"Меню-Налаштування-Лікарняний лист\""</string>
     <string name="do_not_show">"Більше не показувати"</string>
-
 </resources>

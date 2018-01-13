@@ -26,5 +26,4 @@
         <item name="android:paddingRight">@dimen/layout_horizontal_padding</item>
         <item name="android:paddingTop">@dimen/layout_vertical_padding</item>
     </style>
-
 </resources>

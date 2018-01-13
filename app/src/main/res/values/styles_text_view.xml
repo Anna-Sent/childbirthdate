@@ -18,5 +18,4 @@
     <style name="TextViewStyle.Medium.Blue">
         <item name="android:textColor">@color/blue</item>
     </style>
-
 </resources>

@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate.utils;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.provider.Settings;
@@ -12,8 +11,6 @@ import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.utils.DisplayUtils;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -32,17 +29,11 @@ public class AdUtils {
             int count = data.getSelectedMethodsCount();
             int expectedHeightDp = initH + count * rowH;
 
-            int actualHeightDp = DisplayUtils
-                    .getScreenSizeInDpWrapped(activity).y;
+            int actualHeightDp = DisplayUtils.getScreenSizeInDp().y;
 
             if (expectedHeightDp < actualHeightDp) {
-                AdView adView = (AdView) activity.findViewById(adViewId);
+                AdView adView = activity.findViewById(adViewId);
                 if (adView != null) {
-                    if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(activity) != ConnectionResult.SUCCESS) {
-                        MyLog.getInstance().logcat(Log.INFO, "ad: GooglePlayServices not available");
-                        return null;
-                    }
-
                     MobileAds.initialize(activity.getApplicationContext(), activity.getString(R.string.adUnitId));
                     com.google.android.gms.ads.AdRequest.Builder adRequestBuilder = new com.google.android.gms.ads.AdRequest.Builder()
                             .setGender(com.google.android.gms.ads.AdRequest.GENDER_FEMALE);
@@ -71,7 +62,7 @@ public class AdUtils {
     }
 
     private static String getTestDeviceId(Context context) {
-        @SuppressLint("HardwareIds")
+        @SuppressWarnings("HardwareIds")
         String androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         return getMD5(androidId);
     }

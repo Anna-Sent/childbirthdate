@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate.data;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -136,7 +135,6 @@ public class DataImpl implements Data {
         isEmbryonicAge = value;
     }
 
-    @SuppressLint("CommitPrefEdits")
     public void save() {
         log("save");
         Editor editor = Settings.getSettings(mContext).edit();
@@ -182,7 +180,7 @@ public class DataImpl implements Data {
                 Shared.Saved.Calculation.EXTRA_FIRST_MOVEMENTS_IS_FIRST_PREGNANCY,
                 isFirstPregnancy);
 
-        editor.commit();
+        editor.apply();
     }
 
     public void update() {

@@ -2,6 +2,7 @@ package com.anna.sent.soft.childbirthdate.sicklist;
 
 import android.content.Context;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
@@ -9,7 +10,6 @@ import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.age.Days;
 import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
-import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 import java.util.List;
 
@@ -54,8 +54,9 @@ public class SickListUtils {
         }
     }
 
-    public static Age checkAge(Context context, NumberPicker numberPickerWeeks,
-                               NumberPicker numberPickerDays, List<LocalizableObject> values) {
+    public static Age checkAge(Context context,
+                               NumberPicker numberPickerWeeks, NumberPicker numberPickerDays,
+                               List<LocalizableObject> values) {
         numberPickerWeeks.clearFocus();
         numberPickerDays.clearFocus();
         try {

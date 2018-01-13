@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -27,12 +26,12 @@ import com.anna.sent.soft.childbirthdate.ui.LongPressedButton;
 import com.anna.sent.soft.childbirthdate.utils.AdUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.childbirthdate.utils.MyLog;
-import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
+import com.anna.sent.soft.strategy.statesaver.StateSaverBaseFragment;
 import com.google.android.gms.ads.AdView;
 
 import java.util.Calendar;
 
-public class ResultEcdFragment extends StateSaverFragment implements
+public class ResultEcdFragment extends StateSaverBaseFragment implements
         DataClient, OnClickListener, OnDateChangedListener,
         LongPressedButton.Listener {
     private static final String KEY_IS_ANIMATED_ACTIVITY_VISIBLE = "isAnimatedActivityVisible";
@@ -50,10 +49,6 @@ public class ResultEcdFragment extends StateSaverFragment implements
     private Drawable mCollapseDrawable, mExpandDrawable;
     private ChangeCurrentByOneFromLongPressCommand mChangeCurrentByOneFromLongPressCommand = null;
     private View mSelectedRow = null;
-
-    public ResultEcdFragment() {
-        super();
-    }
 
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
@@ -82,17 +77,17 @@ public class ResultEcdFragment extends StateSaverFragment implements
     public void setViews(Bundle savedInstanceState) {
         mAdView = AdUtils.setupAd(getData(), getActivity(), R.id.adView_ecd, 200, 100);
 
-        mTable = (TableLayout) getActivity().findViewById(R.id.table_ecd);
-        mDatePicker = (DatePicker) getActivity().findViewById(R.id.datePicker);
+        mTable = getActivity().findViewById(R.id.table_ecd);
+        mDatePicker = getActivity().findViewById(R.id.datePicker);
         DateUtils.init(mDatePicker, Calendar.getInstance(), this);
-        Button today = (Button) getActivity().findViewById(R.id.buttonToday);
+        Button today = getActivity().findViewById(R.id.buttonToday);
         today.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 setDate(Calendar.getInstance());
             }
         });
-        LongPressedButton nextDay = (LongPressedButton) getActivity()
+        LongPressedButton nextDay = getActivity()
                 .findViewById(R.id.buttonNextDay);
         nextDay.setOnClickListener(new OnClickListener() {
             @Override
@@ -108,7 +103,7 @@ public class ResultEcdFragment extends StateSaverFragment implements
             }
         });
         nextDay.setListener(this);
-        LongPressedButton prevDay = (LongPressedButton) getActivity()
+        LongPressedButton prevDay = getActivity()
                 .findViewById(R.id.buttonPrevDay);
         prevDay.setOnClickListener(new OnClickListener() {
             @Override
@@ -124,12 +119,9 @@ public class ResultEcdFragment extends StateSaverFragment implements
             }
         });
         prevDay.setListener(this);
-        animatedLayout = (AnimatedLinearLayout) getActivity().findViewById(
-                R.id.animatedLayout);
-        textViewOnDate = (TextView) getActivity().findViewById(
-                R.id.textViewOnDate);
-        buttonShowHide = (Button) getActivity().findViewById(
-                R.id.buttonShowHide);
+        animatedLayout = getActivity().findViewById(R.id.animatedLayout);
+        textViewOnDate = getActivity().findViewById(R.id.textViewOnDate);
+        buttonShowHide = getActivity().findViewById(R.id.buttonShowHide);
         buttonShowHide.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -250,7 +242,7 @@ public class ResultEcdFragment extends StateSaverFragment implements
         updateResults();
     }
 
-    @SuppressLint("InflateParams")
+    @SuppressWarnings("InflateParams")
     private void fillResults() {
         mDate = DateUtils.getDate(mDatePicker);
         mTable.removeAllViews();
@@ -258,9 +250,9 @@ public class ResultEcdFragment extends StateSaverFragment implements
                 R.array.methodNames);
         for (int i = 0; i < getData().byMethod().length; ++i) {
             if (getData().byMethod()[i]) {
-                View row = getActivity().getLayoutInflater().inflate(
-                        R.layout.result_row, null);
-                TextView textView = (TextView) row.findViewById(R.id.textView);
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
+                View row = inflater.inflate(R.layout.result_row, null);
+                TextView textView = row.findViewById(R.id.textView);
                 textView.setText(methodNames[i]);
 
                 Pregnancy pregnancy = PregnancyCalculator.Factory.get(
@@ -310,27 +302,25 @@ public class ResultEcdFragment extends StateSaverFragment implements
             }
         }
 
-        TextView result1 = (TextView) row.findViewById(R.id.result1);
+        TextView result1 = row.findViewById(R.id.result1);
         result1.setText(res1);
         result1.setVisibility(res1 == null ? View.GONE : View.VISIBLE);
-        TextView result2 = (TextView) row.findViewById(R.id.result2);
+        TextView result2 = row.findViewById(R.id.result2);
         result2.setText(res2);
         result2.setVisibility(res2 == null ? View.GONE : View.VISIBLE);
-        TextView message = (TextView) row.findViewById(R.id.message);
+        TextView message = row.findViewById(R.id.message);
         message.setText(msg);
         message.setVisibility(msg == null ? View.GONE : View.VISIBLE);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
         if (v instanceof TableRow) {
             if (mSelectedRow != null) {
-                mSelectedRow.setBackgroundDrawable(null);
+                mSelectedRow.setBackgroundResource(0);
             }
 
-            v.setBackgroundDrawable(getResources().getDrawable(
-                    R.drawable.bg_selected_view));
+            v.setBackgroundResource(R.drawable.bg_selected_view);
             mSelectedRow = v;
         }
     }

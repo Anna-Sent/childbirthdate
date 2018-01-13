@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate.widget;
 
-import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.PendingIntent.CanceledException;
@@ -110,7 +109,6 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 
     protected abstract Builder getBuilder();
 
-    @SuppressLint("CommitPrefEdits")
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
@@ -124,7 +122,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
                     + appWidgetId);
         }
 
-        editor.commit();
+        editor.apply();
     }
 
     @Override

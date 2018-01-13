@@ -3,13 +3,13 @@ package com.anna.sent.soft.childbirthdate.sicklist;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.NumberPicker;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.age.ISetting;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsArrayAdapter;
 import com.anna.sent.soft.childbirthdate.preferences.MoveableItemsPreference;
-import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 public class SickListAgePreference extends MoveableItemsPreference {
     private NumberPicker mNumberPickerWeeks, mNumberPickerDays;
@@ -31,18 +31,15 @@ public class SickListAgePreference extends MoveableItemsPreference {
     }
 
     protected void setupViewAdd(View viewAdd) {
-        mNumberPickerWeeks = (NumberPicker) viewAdd
-                .findViewById(R.id.numberPickerWeeks);
-        mNumberPickerDays = (NumberPicker) viewAdd
-                .findViewById(R.id.numberPickerDays);
-        SickListUtils.setupAgeNumberPickers(mNumberPickerWeeks,
-                mNumberPickerDays);
+        mNumberPickerWeeks = viewAdd.findViewById(R.id.numberPickerWeeks);
+        mNumberPickerDays = viewAdd.findViewById(R.id.numberPickerDays);
+        SickListUtils.setupAgeNumberPickers(mNumberPickerWeeks, mNumberPickerDays);
     }
 
     @Override
     protected void addItem(MoveableItemsArrayAdapter adapter) {
-        Age age = SickListUtils.checkAge(getContext(), mNumberPickerWeeks,
-                mNumberPickerDays, adapter.getValues());
+        Age age = SickListUtils.checkAge(getContext(),
+                mNumberPickerWeeks, mNumberPickerDays, adapter.getValues());
         if (age != null) {
             adapter.addItem(age);
         }

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tabHelpFirstMovements"
-    style="@style/ScrollViewStyle"
-    tools:ignore="UnusedAttribute">
+    style="@style/ScrollViewStyle">
 
     <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding">
 
@@ -12,5 +10,4 @@
             style="@style/TextViewStyle"
             android:textIsSelectable="true" />
     </LinearLayout>
-
 </ScrollView>

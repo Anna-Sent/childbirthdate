@@ -28,11 +28,11 @@ public class CheckableFrameLayout extends FrameLayout implements Checkable {
         return mChecked;
     }
 
-    @SuppressWarnings("deprecation")
     public void setChecked(boolean checked) {
         mChecked = checked;
-        setBackgroundDrawable(checked ? new ColorDrawable(getResources()
-                .getColor(R.color.blue)) : null);
+        setBackgroundDrawable(checked
+                ? new ColorDrawable(getResources().getColor(R.color.blue))
+                : null);
     }
 
     public void toggle() {

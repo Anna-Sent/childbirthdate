@@ -22,15 +22,13 @@ public class AnimatedLinearLayout extends LinearLayout {
         super(context, attrs);
     }
 
-    public AnimatedLinearLayout(Context context, AttributeSet attrs,
-                                int defStyle) {
+    public AnimatedLinearLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
     }
 
     private int getHeightForAnimation() {
         int measureSpec = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ? 0
-                : MeasureSpec.makeMeasureSpec(LayoutParams.WRAP_CONTENT,
-                MeasureSpec.EXACTLY);
+                : MeasureSpec.makeMeasureSpec(LayoutParams.WRAP_CONTENT, MeasureSpec.EXACTLY);
         measure(measureSpec, measureSpec);
         return getMeasuredHeight();
     }

@@ -1,10 +1,10 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -35,15 +36,14 @@ import com.anna.sent.soft.childbirthdate.sicklist.SickListUtils;
 import com.anna.sent.soft.childbirthdate.utils.AdUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 import com.anna.sent.soft.childbirthdate.utils.MyLog;
-import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
-import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
+import com.anna.sent.soft.strategy.statesaver.StateSaverBaseFragment;
 import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class ResultSickListFragment extends StateSaverFragment implements
+public class ResultSickListFragment extends StateSaverBaseFragment implements
         DataClient, OnClickListener, OnItemSelectedListener {
     private static final String KEY_SPINNER_DAYS_POSITION = "key_spinner_days_position";
     private static final String KEY_SPINNER_AGE_POSITION = "key_spinner_age_position";
@@ -60,20 +60,14 @@ public class ResultSickListFragment extends StateSaverFragment implements
     private Data mData = null;
     private View mSelectedRow = null;
 
-    public ResultSickListFragment() {
-        super();
-    }
-
-    @SuppressLint("InflateParams")
+    @SuppressWarnings("InflateParams")
     public static void showSickListInfoDialog(final Context context) {
         if (Settings.showSickListInfoDialog(context)) {
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = LayoutInflater.from(context);
             View view = inflater.inflate(R.layout.dialog_info, null);
-            TextView textView = (TextView) view.findViewById(R.id.textView);
+            TextView textView = view.findViewById(R.id.textView);
             textView.setText(R.string.dialog_sick_list);
-            final CheckBox checkBox = (CheckBox) view
-                    .findViewById(R.id.checkBox);
+            final CheckBox checkBox = view.findViewById(R.id.checkBox);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle(R.string.sick_list_days)
@@ -100,7 +94,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.result_sick_list, container, false);
     }
@@ -119,12 +113,16 @@ public class ResultSickListFragment extends StateSaverFragment implements
         mAdView = AdUtils.setupAd(getData(), getActivity(), R.id.adView_sick_list, 300,
                 60);
 
-        mTable = (TableLayout) getActivity().findViewById(R.id.table_sick_list);
-        getActivity().findViewById(R.id.buttonEditDays)
-                .setOnClickListener(this);
+        if (getActivity() == null) {
+            log("activity is null");
+            return;
+        }
+
+        mTable = getActivity().findViewById(R.id.table_sick_list);
+        getActivity().findViewById(R.id.buttonEditDays).setOnClickListener(this);
         getActivity().findViewById(R.id.buttonEditAge).setOnClickListener(this);
-        mSpinnerDays = (Spinner) getActivity().findViewById(R.id.spinnerDays);
-        mSpinnerAge = (Spinner) getActivity().findViewById(R.id.spinnerAge);
+        mSpinnerDays = getActivity().findViewById(R.id.spinnerDays);
+        mSpinnerAge = getActivity().findViewById(R.id.spinnerAge);
     }
 
     @SuppressWarnings("unchecked")
@@ -217,7 +215,7 @@ public class ResultSickListFragment extends StateSaverFragment implements
         }
     }
 
-    @SuppressLint("InflateParams")
+    @SuppressWarnings("InflateParams")
     private void fillResults() {
         Days days = getSelectedDays();
         Age age = getSelectedAge();
@@ -228,17 +226,15 @@ public class ResultSickListFragment extends StateSaverFragment implements
             return;
         }
 
-        String[] methodNames = getResources().getStringArray(
-                R.array.methodNames);
+        String[] methodNames = getResources().getStringArray(R.array.methodNames);
         for (int i = 0; i < getData().byMethod().length; ++i) {
             if (getData().byMethod()[i]) {
-                View row = getActivity().getLayoutInflater().inflate(
-                        R.layout.result_row, null);
-                TextView textView = (TextView) row.findViewById(R.id.textView);
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
+                View row = inflater.inflate(R.layout.result_row, null);
+                TextView textView = row.findViewById(R.id.textView);
                 textView.setText(methodNames[i]);
 
-                Pregnancy pregnancy = PregnancyCalculator.Factory.get(
-                        getData(), i + 1);
+                Pregnancy pregnancy = PregnancyCalculator.Factory.get(getData(), i + 1);
 
                 fillRows(pregnancy, age, days, row);
 
@@ -294,27 +290,25 @@ public class ResultSickListFragment extends StateSaverFragment implements
             }
         }
 
-        TextView result1 = (TextView) row.findViewById(R.id.result1);
+        TextView result1 = row.findViewById(R.id.result1);
         result1.setText(res1);
         result1.setVisibility(res1 == null ? View.GONE : View.VISIBLE);
-        TextView result2 = (TextView) row.findViewById(R.id.result2);
+        TextView result2 = row.findViewById(R.id.result2);
         result2.setText(res2);
         result2.setVisibility(res2 == null ? View.GONE : View.VISIBLE);
-        TextView message = (TextView) row.findViewById(R.id.message);
+        TextView message = row.findViewById(R.id.message);
         message.setText(msg);
         message.setVisibility(msg == null ? View.GONE : View.VISIBLE);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
         if (v instanceof TableRow) {
             if (mSelectedRow != null) {
-                mSelectedRow.setBackgroundDrawable(null);
+                mSelectedRow.setBackgroundResource(0);
             }
 
-            v.setBackgroundDrawable(getResources().getDrawable(
-                    R.drawable.bg_selected_view));
+            v.setBackgroundResource(R.drawable.bg_selected_view);
             mSelectedRow = v;
         } else {
             switch (v.getId()) {
@@ -328,16 +322,15 @@ public class ResultSickListFragment extends StateSaverFragment implements
         }
     }
 
-    @SuppressLint("InflateParams")
+    @SuppressWarnings("InflateParams")
     private void editDays() {
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
         View view = inflater.inflate(R.layout.dialog_sick_list_days, null);
-        final EditText editTextItem = (EditText) view
-                .findViewById(R.id.editTextItem);
+        final EditText editTextItem = view.findViewById(R.id.editTextItem);
 
         view = wrapWithCheckBox(view);
 
-        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+        final CheckBox checkBox = view.findViewById(R.id.checkBox);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.sick_list_days)
@@ -350,15 +343,13 @@ public class ResultSickListFragment extends StateSaverFragment implements
                                         mSpinnerDaysAdapter.getObjects());
                                 if (days != null) {
                                     mTmpDaysList.add(days);
-                                    int index = mSpinnerDaysAdapter
-                                            .addObject(days);
+                                    int index = mSpinnerDaysAdapter.addObject(days);
                                     mSpinnerDays.setSelection(index);
                                     mSpinnerDaysIndex = index;
                                     updateResults();
 
                                     if (checkBox.isChecked()) {
-                                        List<LocalizableObject> list = Settings
-                                                .getDays(getActivity());
+                                        List<LocalizableObject> list = Settings.getDays(getActivity());
                                         list.add(days);
                                         Settings.setDays(getActivity(), list);
                                     }
@@ -368,20 +359,17 @@ public class ResultSickListFragment extends StateSaverFragment implements
         builder.create().show();
     }
 
-    @SuppressLint("InflateParams")
+    @SuppressWarnings("InflateParams")
     private void editAge() {
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
         View view = inflater.inflate(R.layout.dialog_sick_list_age, null);
-        final NumberPicker numberPickerWeeks = (NumberPicker) view
-                .findViewById(R.id.numberPickerWeeks);
-        final NumberPicker numberPickerDays = (NumberPicker) view
-                .findViewById(R.id.numberPickerDays);
-        SickListUtils
-                .setupAgeNumberPickers(numberPickerWeeks, numberPickerDays);
+        final NumberPicker numberPickerWeeks = view.findViewById(R.id.numberPickerWeeks);
+        final NumberPicker numberPickerDays = view.findViewById(R.id.numberPickerDays);
+        SickListUtils.setupAgeNumberPickers(numberPickerWeeks, numberPickerDays);
 
         view = wrapWithCheckBox(view);
 
-        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+        final CheckBox checkBox = view.findViewById(R.id.checkBox);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.sick_list_age)
@@ -394,15 +382,13 @@ public class ResultSickListFragment extends StateSaverFragment implements
                                         mSpinnerAgeAdapter.getObjects());
                                 if (age != null) {
                                     mTmpAgeList.add(age);
-                                    int index = mSpinnerAgeAdapter
-                                            .addObject(age);
+                                    int index = mSpinnerAgeAdapter.addObject(age);
                                     mSpinnerAge.setSelection(index);
                                     mSpinnerAgeIndex = index;
                                     updateResults();
 
                                     if (checkBox.isChecked()) {
-                                        List<LocalizableObject> list = Settings
-                                                .getAge(getActivity());
+                                        List<LocalizableObject> list = Settings.getAge(getActivity());
                                         list.add(age);
                                         Settings.setAge(getActivity(), list);
                                     }
@@ -412,19 +398,18 @@ public class ResultSickListFragment extends StateSaverFragment implements
         builder.create().show();
     }
 
-    @SuppressLint("InflateParams")
+    @SuppressWarnings("InflateParams")
     private View wrapWithCheckBox(View child) {
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
         View view = inflater.inflate(R.layout.dialog_edit, null);
-        ViewGroup viewGroup = (ViewGroup) view.findViewById(R.id.lastItem);
-        viewGroup.addView(child, new LayoutParams(LayoutParams.MATCH_PARENT,
-                LayoutParams.WRAP_CONTENT));
+        ViewGroup viewGroup = view.findViewById(R.id.lastItem);
+        viewGroup.addView(child,
+                new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         return view;
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position,
-                               long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent == mSpinnerDays) {
             mSpinnerDaysIndex = position;
         } else if (parent == mSpinnerAge) {

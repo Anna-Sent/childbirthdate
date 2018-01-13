@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <dimen name="view_vertical_margin">16dp</dimen>
-    <dimen name="layout_horizontal_padding">16dp</dimen>
-    <dimen name="layout_vertical_padding">16dp</dimen>
-
-</resources>

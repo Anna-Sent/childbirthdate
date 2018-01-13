@@ -24,5 +24,4 @@
         android:id="@+id/tv4"
         style="@style/WidgetTextView34Style"
         android:text="@string/emptyString" />
-
 </LinearLayout>

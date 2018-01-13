@@ -1,11 +1,13 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -13,7 +15,6 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
-import com.anna.sent.soft.numberpickerlibrary.NumberPicker;
 
 import java.util.Calendar;
 
@@ -25,12 +26,8 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
     private DatePicker datePicker;
     private RadioButton radioButtonIsGestationalAge, radioButtonIsEmbryonicAge;
 
-    public DetailsUltrasoundMethodFragment() {
-        super();
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (container == null) {
             // We have different layouts, and in one of them this
@@ -51,27 +48,21 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        textViewDiagnosedAge = (TextView) getActivity().findViewById(
-                R.id.textViewDiagnosedAge);
+        textViewDiagnosedAge = getActivity().findViewById(R.id.textViewDiagnosedAge);
 
-        datePicker = (DatePicker) getActivity().findViewById(
-                R.id.datePickerUltrasoundDate);
+        datePicker = getActivity().findViewById(R.id.datePickerUltrasoundDate);
         DateUtils.init(datePicker, this);
 
-        radioButtonIsGestationalAge = (RadioButton) getActivity().findViewById(
-                R.id.radioIsGestationalAge);
+        radioButtonIsGestationalAge = getActivity().findViewById(R.id.radioIsGestationalAge);
         radioButtonIsGestationalAge.setOnClickListener(this);
-        radioButtonIsEmbryonicAge = (RadioButton) getActivity().findViewById(
-                R.id.radioIsEmbryonicAge);
+        radioButtonIsEmbryonicAge = getActivity().findViewById(R.id.radioIsEmbryonicAge);
         radioButtonIsEmbryonicAge.setOnClickListener(this);
 
-        numberPickerWeeks = (NumberPicker) getActivity().findViewById(
-                R.id.numberPickerUltrasoundWeeks);
+        numberPickerWeeks = getActivity().findViewById(R.id.numberPickerUltrasoundWeeks);
         numberPickerWeeks.setMinValue(0);
         numberPickerWeeks.setOnValueChangedListener(this);
 
-        numberPickerDays = (NumberPicker) getActivity().findViewById(
-                R.id.numberPickerUltrasoundDays);
+        numberPickerDays = getActivity().findViewById(R.id.numberPickerUltrasoundDays);
         numberPickerDays.setMinValue(0);
         numberPickerDays.setMaxValue(Age.DAYS_IN_WEEK - 1);
         numberPickerDays.setOnValueChangedListener(this);
@@ -128,12 +119,12 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
 
     private void setMaxWeeks() {
         boolean isEmbryonicAge = radioButtonIsEmbryonicAge.isChecked();
-        textViewDiagnosedAge
-                .setText(isEmbryonicAge ? R.string.diagnosedEmbryonicAge
-                        : R.string.diagnosedGestationalAge);
-        numberPickerWeeks
-                .setMaxValue((isEmbryonicAge ? PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS
-                        : PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS) - 1);
+        textViewDiagnosedAge.setText(isEmbryonicAge
+                ? R.string.diagnosedEmbryonicAge
+                : R.string.diagnosedGestationalAge);
+        numberPickerWeeks.setMaxValue((isEmbryonicAge
+                ? PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS
+                : PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS) - 1);
     }
 
     @Override

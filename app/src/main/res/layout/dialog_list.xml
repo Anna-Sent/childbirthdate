@@ -53,5 +53,4 @@
             android:drawableLeft="?attr/iconAdd"
             android:text="" />
     </RelativeLayout>
-
 </RelativeLayout>

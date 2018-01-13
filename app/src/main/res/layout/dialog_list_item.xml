@@ -42,5 +42,4 @@
         android:layout_centerVertical="true"
         android:drawableLeft="?attr/iconDelete"
         android:text="" />
-
 </RelativeLayout>

@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate.widget;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
@@ -180,7 +179,6 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
         button.setOnClickListener(this);
     }
 
-    @SuppressLint("CommitPrefEdits")
     private void saveWidgetParams() {
         SharedPreferences settings = Settings.getSettings(this);
         Editor editor = settings.edit();
@@ -196,7 +194,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
                 + mAppWidgetId, hasShowCalculationMethod()
                 && checkBoxShowCalculationMethod.isChecked());
 
-        editor.commit();
+        editor.apply();
     }
 
     private int getCheckedRadioIndex() {

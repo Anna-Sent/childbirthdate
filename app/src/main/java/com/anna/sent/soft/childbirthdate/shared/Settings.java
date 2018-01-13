@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate.shared;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -76,14 +75,13 @@ public class Settings {
         setList(context, R.string.pref_sick_list_age_key, list);
     }
 
-    @SuppressLint("CommitPrefEdits")
     private static void setList(Context context, int keyStringRes,
                                 List<LocalizableObject> list) {
         SharedPreferences settings = getSettings(context);
         Editor editor = settings.edit();
         String value = SettingsParser.toString(list);
         editor.putString(context.getString(keyStringRes), value);
-        editor.commit();
+        editor.apply();
     }
 
     public static boolean showSickListInfoDialog(Context context) {
@@ -92,17 +90,15 @@ public class Settings {
                 false);
     }
 
-    @SuppressLint("CommitPrefEdits")
     public static void doNotShowSickListInfoDialog(Context context) {
         SharedPreferences settings = getSettings(context);
         Editor editor = settings.edit();
         editor.putBoolean(KEY_PREF_DO_NOT_SHOW_SICK_LIST_INFO_DIALOG, true);
-        editor.commit();
+        editor.apply();
     }
 
-    @SuppressLint("CommitPrefEdits")
     public static void clear(Context context) {
-        getSettings(context).edit().clear().commit();
+        getSettings(context).edit().clear().apply();
     }
 
     public static class SettingsLanguageImpl extends SettingsLanguage {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation" tools:locale="en">
-
+<resources>
     <string name="titles0">%1$s; menstrual cycle length %2$d days; luteal phase length %3$d days</string>
     <string name="titles1">%1$s</string>
     <string name="titles2_gestational">on %1$s determined gestational age of %2$s</string>
@@ -8,7 +7,6 @@
     <string name="titles3">on %1$s determined gestational age of %2$s</string>
     <string name="titles4_first_pregnancy">%1$s; first pregnancy</string>
     <string name="titles4_second_pregnancy">%1$s; second pregnancy</string>
-
     <string-array name="methodNames">
         <item>by last menstrual period</item>
         <item>by ovulation (conception) date</item>
@@ -171,5 +169,4 @@ where <i>Starting point of pregnancy = First fetal movement date - 20 weeks (for
 ]]>
         </item>
     </string-array>
-
 </resources>

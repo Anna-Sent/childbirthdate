@@ -19,10 +19,6 @@ public class TitlesHeaderFragment extends Fragment implements DataClient,
         OnClickListener {
     private Data mData = null;
 
-    public TitlesHeaderFragment() {
-        super();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

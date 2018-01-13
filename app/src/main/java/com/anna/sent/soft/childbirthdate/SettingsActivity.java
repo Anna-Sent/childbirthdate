@@ -16,12 +16,12 @@ import com.anna.sent.soft.childbirthdate.sicklist.SickListAgePreference;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListDaysPreference;
 import com.anna.sent.soft.childbirthdate.utils.MyLog;
 import com.anna.sent.soft.utils.ActionBarUtils;
+import com.anna.sent.soft.utils.ActivityUtils;
 import com.anna.sent.soft.utils.LanguageUtils;
 import com.anna.sent.soft.utils.NavigationUtils;
-import com.anna.sent.soft.utils.TaskStackBuilderUtils;
 import com.anna.sent.soft.utils.ThemeUtils;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings("deprecated")
 public class SettingsActivity extends PreferenceActivity implements
         OnPreferenceChangeListener, OnSharedPreferenceChangeListener {
     private String wrapMsg(String msg) {
@@ -36,8 +36,7 @@ public class SettingsActivity extends PreferenceActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         ThemeUtils.setupThemeBeforeOnActivityCreate(this,
-                Settings.settingsTheme.getStyle(this, R.array.style,
-                        R.style.AppTheme));
+                Settings.settingsTheme.getStyle(this, R.array.style, R.style.AppTheme));
 
         super.onCreate(savedInstanceState);
 
@@ -119,9 +118,7 @@ public class SettingsActivity extends PreferenceActivity implements
                 if (value != current) {
                     log("language changed");
                     Settings.settingsLanguage.setLanguage(this, value);
-                    TaskStackBuilderUtils.restartFromSettings(this,
-                            MainActivity.class,
-                            MainActivity.EXTRA_CONFIGURATION_CHANGED);
+                    ActivityUtils.restartActivity(this);
                     return true;
                 }
             } catch (NumberFormatException e) {
@@ -134,9 +131,7 @@ public class SettingsActivity extends PreferenceActivity implements
                 if (value != current) {
                     log("theme changed");
                     Settings.settingsTheme.setTheme(this, value);
-                    TaskStackBuilderUtils.restartFromSettings(this,
-                            MainActivity.class,
-                            MainActivity.EXTRA_CONFIGURATION_CHANGED);
+                    ActivityUtils.restartActivity(this);
                     return true;
                 }
             } catch (NumberFormatException e) {

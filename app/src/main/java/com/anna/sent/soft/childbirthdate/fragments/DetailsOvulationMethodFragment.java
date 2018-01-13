@@ -15,10 +15,6 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
         DatePicker.OnDateChangedListener {
     private DatePicker datePicker;
 
-    public DetailsOvulationMethodFragment() {
-        super();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

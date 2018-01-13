@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-
     <declare-styleable name="AppTheme">
         <attr name="menuIconHelp" format="reference" />
         <attr name="menuIconSettings" format="reference" />
@@ -15,8 +14,7 @@
         <attr name="iconEdit" format="reference" />
     </declare-styleable>
 
-    <style name="AppBaseTheme" parent="android:Theme">
-        <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
+    <style name="AppBaseTheme" parent="android:Theme.Holo">
         <item name="menuIconHelp">@drawable/ic_menu_help_light</item>
         <item name="menuIconSettings">@drawable/ic_menu_settings_light</item>
         <item name="menuIconEmail">@drawable/ic_menu_email_light</item>
@@ -30,11 +28,10 @@
         <item name="iconEdit">@drawable/ic_edit_light</item>
     </style>
 
-    <style name="AppBaseThemeLight" parent="android:Theme.Light">
-        <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
-        <item name="menuIconHelp">@drawable/ic_menu_help_light</item>
+    <style name="AppBaseThemeLight" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="menuIconHelp">@drawable/ic_menu_help_dark</item>
         <item name="menuIconSettings">@drawable/ic_menu_settings_light</item>
-        <item name="menuIconEmail">@drawable/ic_menu_email_light</item>
+        <item name="menuIconEmail">@drawable/ic_menu_email_dark</item>
         <item name="iconGoToToday">@drawable/ic_go_to_today_light</item>
         <item name="iconNextItem">@drawable/ic_next_item_light</item>
         <item name="iconPrevItem">@drawable/ic_previous_item_light</item>
@@ -43,21 +40,16 @@
         <item name="iconAdd">@drawable/ic_new_light</item>
         <item name="iconDelete">@drawable/ic_remove_content_light</item>
         <item name="iconEdit">@drawable/ic_edit_light</item>
+        <item name="android:windowActionBar">true</item>
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme" />
 
     <style name="AppThemeLight" parent="AppBaseThemeLight" />
 
-    <style name="DialogBaseTheme" parent="android:Theme.Dialog">
-        <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
-    </style>
+    <style name="DialogBaseTheme" parent="android:Theme.Holo.Dialog" />
 
-    <style name="DialogBaseThemeLight" parent="android:Theme.Dialog">
-        <item name="numberPickerStyle">@style/Widget.NumberPicker</item>
-    </style>
-
-    <color name="opaque_50">#80000000</color>
+    <style name="DialogBaseThemeLight" parent="android:Theme.Holo.Light.Dialog" />
 
     <style name="DialogTheme" parent="DialogBaseTheme">
         <item name="android:windowNoTitle">true</item>
@@ -72,5 +64,4 @@
         <item name="android:windowBackground">@color/opaque_50</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
-
 </resources>

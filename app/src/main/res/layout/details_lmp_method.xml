@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/ScrollViewStyle"
-    tools:context=".DetailsActivity">
+    style="@style/ScrollViewStyle">
 
     <LinearLayout style="@style/LinearLayoutVerticalStyle.WithPadding">
 
@@ -77,5 +75,4 @@
             android:layout_marginTop="@dimen/view_vertical_margin"
             android:text="@string/restoreDefaultValues" />
     </LinearLayout>
-
 </ScrollView>

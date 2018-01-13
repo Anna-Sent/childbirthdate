@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
     <PreferenceCategory
         android:key="@string/pref_sick_list_key"
         android:title="@string/sick_list">
@@ -8,7 +7,6 @@
             android:dialogTitle="@string/sick_list_days"
             android:key="@string/pref_sick_list_days_key"
             android:title="@string/sick_list_days" />
-
         <com.anna.sent.soft.childbirthdate.sicklist.SickListAgePreference
             android:dialogTitle="@string/sick_list_age"
             android:key="@string/pref_sick_list_age_key"
@@ -42,5 +40,4 @@
             <intent android:action="com.anna.sent.soft.childbirthdate.actions.MarketWomanCycActionActivity" />
         </Preference>
     </PreferenceCategory>
-
 </PreferenceScreen>

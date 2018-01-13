@@ -1,8 +1,8 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.strategy.statesaver.StateSaverFragment;
+import com.anna.sent.soft.strategy.statesaver.StateSaverBaseFragment;
+import com.anna.sent.soft.utils.HtmlUtils;
 
 public class TabHelpFragmentFactory {
     public static Fragment newInstance(int position) {
@@ -46,19 +47,15 @@ public class TabHelpFragmentFactory {
         return result;
     }
 
-    public abstract static class TabHelpFragment extends StateSaverFragment {
+    public abstract static class TabHelpFragment extends StateSaverBaseFragment {
         private TextView textViewHelp;
-
-        public TabHelpFragment() {
-            super();
-        }
 
         protected abstract int getLayoutResourceId();
 
         protected abstract int getTextViewResourceId();
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             return inflater.inflate(getLayoutResourceId(), container, false);
         }
@@ -66,13 +63,15 @@ public class TabHelpFragmentFactory {
         @Override
         public void setViews(Bundle savedInstanceState) {
             int position = getArguments().getInt("position");
-            String[] help = getActivity().getResources().getStringArray(
-                    R.array.helpParts);
-            String text = position >= 0 && position < help.length ? help[position]
-                    : null;
-            textViewHelp = (TextView) getActivity().findViewById(
-                    getTextViewResourceId());
-            textViewHelp.setText(Html.fromHtml(text));
+            String[] help = getActivity().getResources().getStringArray(R.array.helpParts);
+            String text = position >= 0 && position < help.length ? help[position] : null;
+            textViewHelp = getActivity().findViewById(getTextViewResourceId());
+            textViewHelp.setText(HtmlUtils.fromHtml(text));
+        }
+
+        @Override
+        public void setRetainInstance(boolean retain) {
+            super.setRetainInstance(retain);
         }
 
         @Override

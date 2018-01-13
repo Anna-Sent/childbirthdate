@@ -1,13 +1,12 @@
 package com.anna.sent.soft.childbirthdate.base;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.data.DataImpl;
 
-@SuppressLint("Registered")
+@SuppressWarnings("Registered")
 public class DataKeeperActivity extends StateSaverActivity {
     private DataImpl mConcreteData;
 

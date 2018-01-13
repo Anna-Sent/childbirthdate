@@ -18,10 +18,6 @@ public class DetailsFirstMovementsMethodFragment extends DetailsFragment
     private DatePicker datePicker;
     private CheckBox checkBox;
 
-    public DetailsFirstMovementsMethodFragment() {
-        super();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

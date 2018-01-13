@@ -30,11 +30,6 @@ public class TitlesFragment extends ListFragment implements
     private int mSelectedItem = 0;
     private Data mData = null;
 
-    public TitlesFragment() {
-        super();
-        log("create");
-    }
-
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
     }

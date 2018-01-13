@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +18,6 @@ import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.ISetting;
 import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
 import com.anna.sent.soft.childbirthdate.age.SettingsParser;
-import com.anna.sent.soft.childbirthdate.utils.MyLog;
 
 import java.util.List;
 
@@ -42,18 +40,9 @@ public abstract class MoveableItemsPreference extends DialogPreference
         setDialogIcon(null);
     }
 
-    private String wrapMsg(String msg) {
-        return getClass().getSimpleName() + ": " + msg;
-    }
-
-    private void log(String msg) {
-        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
-    }
-
     @Override
     protected void onSetInitialValue(boolean restore, Object defaultValue) {
-        setValue(restore ? getPersistedString(getDefaultValue())
-                : (String) defaultValue);
+        setValue(restore ? getPersistedString(getDefaultValue()) : (String) defaultValue);
     }
 
     @Override
@@ -66,25 +55,24 @@ public abstract class MoveableItemsPreference extends DialogPreference
         super.onBindDialogView(view);
 
         // get inflater
-        LayoutInflater inflater = (LayoutInflater) getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = LayoutInflater.from(getContext());
 
         // get button 'add'
-        Button buttonAdd = (Button) view.findViewById(R.id.buttonAdd);
+        Button buttonAdd = view.findViewById(R.id.buttonAdd);
         buttonAdd.setOnClickListener(this);
 
         // inflate view 'add'
         View viewAdd = inflater.inflate(getAddLayoutResourceId(), null);
 
         // find parent of view 'add'
-        ViewGroup viewAddParent = (ViewGroup) view.findViewById(R.id.lastItem);
+        ViewGroup viewAddParent = view.findViewById(R.id.lastItem);
 
         // add view 'add' to parent
         viewAddParent.addView(viewAdd, new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
         // get list view
-        mListView = (ListView) view.findViewById(R.id.listView);
+        mListView = view.findViewById(R.id.listView);
 
         // and then setup adapter
         mAdapter = new MoveableItemsArrayAdapter(getContext(), toList(mValue));
@@ -122,15 +110,15 @@ public abstract class MoveableItemsPreference extends DialogPreference
     }
 
     public String getValueToShow(String value) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
 
         List<LocalizableObject> list = toList(value);
         for (int i = 0; i < list.size(); ++i) {
-            result += list.get(i).toString(getContext())
-                    + (i == list.size() - 1 ? "" : "; ");
+            result.append(list.get(i).toString(getContext()));
+            result.append(i == list.size() - 1 ? "" : "; ");
         }
 
-        return result;
+        return result.toString();
     }
 
     private List<LocalizableObject> toList(String str) {
@@ -192,16 +180,6 @@ public abstract class MoveableItemsPreference extends DialogPreference
         }
     }
 
-    @SuppressWarnings("unused")
-    private void scrollToBottom() {
-        mListView.post(new Runnable() {
-            @Override
-            public void run() {
-                mListView.setSelection(mAdapter.getCount() - 1);
-            }
-        });
-    }
-
     protected abstract void addItem(MoveableItemsArrayAdapter adapter);
 
     private static class SavedState extends BaseSavedState {
@@ -220,11 +198,11 @@ public abstract class MoveableItemsPreference extends DialogPreference
         public String value;
         private String values;
 
-        public SavedState(Parcelable superState) {
+        SavedState(Parcelable superState) {
             super(superState);
         }
 
-        public SavedState(Parcel source) {
+        SavedState(Parcel source) {
             super(source);
             value = source.readString();
             values = source.readString();

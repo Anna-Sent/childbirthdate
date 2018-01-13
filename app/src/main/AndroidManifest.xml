@@ -7,10 +7,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!--uses-permission android:name="android.permission.GET_ACCOUNTS" /-->
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@drawable/ic_launcher_childbirthdate"
         android:label="@string/app_name"
         android:requiredAccountType="com.google"
@@ -55,7 +55,6 @@
                 <action android:name="android.intent.action.TIMEZONE_CHANGED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/my_pregnancy_widget_provider_info_small" />
@@ -73,7 +72,6 @@
                 <action android:name="android.intent.action.TIMEZONE_CHANGED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/my_pregnancy_widget_provider_info_simple" />
@@ -91,7 +89,6 @@
                 <action android:name="android.intent.action.TIMEZONE_CHANGED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/my_pregnancy_widget_provider_info_additional" />
@@ -103,15 +100,13 @@
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.anna.sent.soft.childbirthdate.SettingsActivity"
             android:label="@string/settings"
-            android:parentActivityName="com.anna.sent.soft.childbirthdate.MainActivity"
-            tools:ignore="UnusedAttribute">
+            android:parentActivityName="com.anna.sent.soft.childbirthdate.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anna.sent.soft.childbirthdate.MainActivity" />
@@ -119,8 +114,7 @@
         <activity
             android:name="com.anna.sent.soft.childbirthdate.HelpActivity"
             android:label="@string/help"
-            android:parentActivityName="com.anna.sent.soft.childbirthdate.MainActivity"
-            tools:ignore="UnusedAttribute">
+            android:parentActivityName="com.anna.sent.soft.childbirthdate.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anna.sent.soft.childbirthdate.MainActivity" />
@@ -128,8 +122,7 @@
         <activity
             android:name="com.anna.sent.soft.childbirthdate.DetailsActivity"
             android:label="@string/app_name"
-            android:parentActivityName="com.anna.sent.soft.childbirthdate.MainActivity"
-            tools:ignore="UnusedAttribute">
+            android:parentActivityName="com.anna.sent.soft.childbirthdate.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anna.sent.soft.childbirthdate.MainActivity" />
@@ -138,8 +131,7 @@
             android:name="com.anna.sent.soft.childbirthdate.ResultsActivity"
             android:label="@string/calculation"
             android:launchMode="singleTop"
-            android:parentActivityName="com.anna.sent.soft.childbirthdate.MainActivity"
-            tools:ignore="UnusedAttribute">
+            android:parentActivityName="com.anna.sent.soft.childbirthdate.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anna.sent.soft.childbirthdate.MainActivity" />
@@ -147,35 +139,29 @@
         <activity android:name="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity">
             <intent-filter>
                 <action android:name="com.anna.sent.soft.childbirthdate.actions.MarketChildbirthDateActionActivity" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name="com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity">
             <intent-filter>
                 <action android:name="com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name="com.anna.sent.soft.childbirthdate.actions.EmailSupportActionActivity">
             <intent-filter>
                 <action android:name="com.anna.sent.soft.childbirthdate.actions.EmailSupportActionActivity" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name="com.anna.sent.soft.childbirthdate.actions.MarketWomanCycActionActivity">
             <intent-filter>
                 <action android:name="com.anna.sent.soft.childbirthdate.actions.MarketWomanCycActionActivity" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            tools:ignore="MissingRegistered" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
     </application>
-
 </manifest>

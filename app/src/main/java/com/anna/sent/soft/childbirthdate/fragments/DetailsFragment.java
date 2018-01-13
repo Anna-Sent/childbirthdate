@@ -13,10 +13,6 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
     Data mData = null;
     private OnDetailsChangedListener mListener = null;
 
-    public DetailsFragment() {
-        super();
-    }
-
     public static DetailsFragment newInstance(int index) {
         DetailsFragment details;
         switch (index + 1) {

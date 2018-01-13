@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="ecdIs">ПДР %s</string>
     <string name="collapse">Свернуть</string>
     <string name="expand">Развернуть</string>
@@ -80,5 +79,4 @@
     <string name="on">на</string>
     <string name="dialog_sick_list">Вы можете редактировать списки значений в \"Меню-Настройки-Больничный лист\"</string>
     <string name="do_not_show">Больше не показывать</string>
-
 </resources>

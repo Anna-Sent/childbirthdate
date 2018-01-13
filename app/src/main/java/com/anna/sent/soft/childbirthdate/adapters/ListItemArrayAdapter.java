@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -53,20 +52,19 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
     }
 
     @NonNull
-    @SuppressLint("InflateParams")
+    @SuppressWarnings("InflateParams")
     @Override
     public View getView(int position, View contentView, @NonNull ViewGroup viewGroup) {
         View view;
         ViewHolder viewHolder;
         if (contentView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) getContext()
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = layoutInflater.inflate(R.layout.list_item, null);
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            view = inflater.inflate(R.layout.list_item, null);
             // log(position + " created view " + view.toString());
             viewHolder = new ViewHolder();
-            viewHolder.checkBox = (CheckBox) view.findViewById(R.id.checkBox);
-            viewHolder.text1 = (TextView) view.findViewById(R.id.text1);
-            viewHolder.text2 = (TextView) view.findViewById(R.id.text2);
+            viewHolder.checkBox = view.findViewById(R.id.checkBox);
+            viewHolder.text1 = view.findViewById(R.id.text1);
+            viewHolder.text2 = view.findViewById(R.id.text2);
             view.setTag(viewHolder);
         } else {
             view = contentView;
@@ -80,14 +78,14 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
         viewHolder.checkBox.setTag(viewHolder);
         viewHolder.text1.setText(mStrings1[position]);
         viewHolder.text2.setText(mStrings2[position]);
-        viewHolder.text2.setVisibility(mChecked[position] ? View.VISIBLE
-                : View.GONE);
+        viewHolder.text2.setVisibility(mChecked[position] ? View.VISIBLE : View.GONE);
 
         return view;
     }
 
     @Override
     public void onClick(View v) {
+        log("onClick");
         ViewHolder viewHolder = (ViewHolder) v.getTag();
         int position = viewHolder.position;
         mChecked[position] = viewHolder.checkBox.isChecked();

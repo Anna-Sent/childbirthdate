@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="titles0">"%1$s; МЦ %2$d д.; ЛФ %3$d д."</string>
     <string name="titles1">"%1$s"</string>
     <string name="titles2_gestational">"на %1$s діагностований акушерський термін вагітності %2$s"</string>
@@ -8,7 +7,6 @@
     <string name="titles3">"на %1$s діагностований термін вагітності %2$s"</string>
     <string name="titles4_first_pregnancy">"%1$s; перша вагітність"</string>
     <string name="titles4_second_pregnancy">"%1$s; повторна вагітність"</string>
-
     <string-array name="methodNames">
         <item>"за датою останньої менструації"</item>
         <item>"за датою овуляції (зачаття)"</item>
@@ -171,5 +169,4 @@
 ]]>
         </item>
     </string-array>
-
 </resources>
