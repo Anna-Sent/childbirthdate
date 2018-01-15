@@ -11,6 +11,7 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a helper class that implements the management of tabs and all details
@@ -27,7 +28,7 @@ public class TabsAdapter extends MyFragmentPagerAdapter implements
     private final Context mContext;
     private final TabHost mTabHost;
     private final ViewPager mViewPager;
-    private final ArrayList<TabInfo> mTabs = new ArrayList<>();
+    private final List<TabInfo> mTabs = new ArrayList<>();
 
     private TabHost.OnTabChangeListener mOnTabChangeListener;
 

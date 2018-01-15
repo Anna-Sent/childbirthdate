@@ -9,7 +9,7 @@ import com.anna.sent.soft.childbirthdate.HelpActivity;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.SettingsActivity;
 import com.anna.sent.soft.childbirthdate.actions.EmailDataActionActivity;
-import com.anna.sent.soft.strategy.BaseStrategy;
+import com.anna.sent.soft.strategy.base.BaseStrategy;
 
 public class MenuStrategy extends BaseStrategy {
     private Activity mActivity;

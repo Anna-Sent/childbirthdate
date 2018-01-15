@@ -3,7 +3,7 @@ package com.anna.sent.soft.childbirthdate.fragments;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +17,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.base.CbdFragment;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
@@ -25,15 +26,12 @@ import com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout;
 import com.anna.sent.soft.childbirthdate.ui.LongPressedButton;
 import com.anna.sent.soft.childbirthdate.utils.AdUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
-import com.anna.sent.soft.childbirthdate.utils.MyLog;
-import com.anna.sent.soft.strategy.statesaver.StateSaverBaseFragment;
 import com.google.android.gms.ads.AdView;
 
 import java.util.Calendar;
 
-public class ResultEcdFragment extends StateSaverBaseFragment implements
-        DataClient, OnClickListener, OnDateChangedListener,
-        LongPressedButton.Listener {
+public class ResultEcdFragment extends CbdFragment implements
+        DataClient, OnClickListener, OnDateChangedListener, LongPressedButton.Listener {
     private static final String KEY_IS_ANIMATED_ACTIVITY_VISIBLE = "isAnimatedActivityVisible";
     private static final boolean DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE = false;
     private static final boolean USE_ANIMATION = false;
@@ -50,16 +48,8 @@ public class ResultEcdFragment extends StateSaverBaseFragment implements
     private ChangeCurrentByOneFromLongPressCommand mChangeCurrentByOneFromLongPressCommand = null;
     private View mSelectedRow = null;
 
-    private String wrapMsg(String msg) {
-        return getClass().getSimpleName() + ": " + msg;
-    }
-
-    private void log(String msg) {
-        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.result_ecd, container, false);
     }
@@ -74,7 +64,9 @@ public class ResultEcdFragment extends StateSaverBaseFragment implements
     }
 
     @Override
-    public void setViews(Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         mAdView = AdUtils.setupAd(getData(), getActivity(), R.id.adView_ecd, 200, 100);
 
         mTable = getActivity().findViewById(R.id.table_ecd);
@@ -131,17 +123,15 @@ public class ResultEcdFragment extends StateSaverBaseFragment implements
         });
         mCollapseDrawable = getDrawableFromTheme(R.attr.iconCollapse);
         mExpandDrawable = getDrawableFromTheme(R.attr.iconExpand);
+        mIsVisible = savedInstanceState == null
+                ? DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE
+                : savedInstanceState.getBoolean(KEY_IS_ANIMATED_ACTIVITY_VISIBLE, DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE);
     }
 
     @Override
-    public void restoreState(Bundle state) {
-        mIsVisible = state.getBoolean(KEY_IS_ANIMATED_ACTIVITY_VISIBLE,
-                DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE);
-    }
-
-    @Override
-    public void saveState(Bundle state) {
-        state.putBoolean(KEY_IS_ANIMATED_ACTIVITY_VISIBLE, mIsVisible);
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_IS_ANIMATED_ACTIVITY_VISIBLE, mIsVisible);
     }
 
     @Override

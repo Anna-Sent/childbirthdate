@@ -11,28 +11,25 @@ import com.anna.sent.soft.childbirthdate.fragments.ResultEcdFragment;
 import com.anna.sent.soft.childbirthdate.fragments.ResultSickListFragment;
 import com.anna.sent.soft.childbirthdate.strategy.menu.MenuStrategy;
 
-public class ResultsActivity extends ChildActivity implements
-        OnTabChangeListener {
+public class ResultsActivity extends ChildActivity implements OnTabChangeListener {
     @Override
-    public void setViews(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         setTitle(R.string.calculation);
         setContentView(R.layout.activity_results);
-        super.setViews(savedInstanceState);
 
-        TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
+        TabHost tabHost = findViewById(android.R.id.tabhost);
         tabHost.setup();
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        ViewPager viewPager = findViewById(R.id.pager);
 
         TabsAdapter tabsAdapter = new TabsAdapter(this, tabHost, viewPager);
         tabsAdapter
-                .addTab(tabHost.newTabSpec(
-                        ResultEcdFragment.class.getSimpleName()).setIndicator(
-                        getString(R.string.ecdAndGestationalAge)),
+                .addTab(tabHost.newTabSpec(ResultEcdFragment.class.getSimpleName())
+                                .setIndicator(getString(R.string.ecdAndGestationalAge)),
                         ResultEcdFragment.class, null);
-        tabsAdapter.addTab(
-                tabHost.newTabSpec(
-                        ResultSickListFragment.class.getSimpleName())
+        tabsAdapter.addTab(tabHost.newTabSpec(ResultSickListFragment.class.getSimpleName())
                         .setIndicator(getString(R.string.sick_list)),
                 ResultSickListFragment.class, null);
         tabsAdapter.setOnTabChangeListener(this);

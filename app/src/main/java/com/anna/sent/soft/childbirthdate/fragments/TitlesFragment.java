@@ -19,11 +19,9 @@ import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.childbirthdate.utils.MyLog;
-import com.anna.sent.soft.strategy.statesaver.StateSaver;
 
 public class TitlesFragment extends ListFragment implements
-        DetailsFragment.OnDetailsChangedListener, StateSaver,
-        ListItemArrayAdapter.OnCheckedListener, DataClient {
+        DetailsFragment.OnDetailsChangedListener, ListItemArrayAdapter.OnCheckedListener, DataClient {
     private final static int REQUEST_POSITION = 1;
     private ListItemArrayAdapter mListAdapter;
     private boolean mDualPane;
@@ -55,20 +53,6 @@ public class TitlesFragment extends ListFragment implements
         log("onActivityCreated");
         super.onActivityCreated(savedInstanceState);
 
-        setViews(savedInstanceState);
-
-        if (savedInstanceState != null) {
-            restoreState(savedInstanceState);
-        } else {
-            savedInstanceState = getActivity().getIntent().getExtras();
-            if (savedInstanceState != null) {
-                restoreState(savedInstanceState);
-            }
-        }
-    }
-
-    @Override
-    public void setViews(Bundle savedInstanceState) {
         mListAdapter = new ListItemArrayAdapter(getActivity(), getStrings1());
         mListAdapter.setOnCheckedListener(this);
         setListAdapter(mListAdapter);
@@ -79,28 +63,15 @@ public class TitlesFragment extends ListFragment implements
                 mDualPane ? ListView.CHOICE_MODE_SINGLE
                         : ListView.CHOICE_MODE_NONE);
 
-        log("init index=" + mSelectedItem);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        log("onSaveInstanceState");
-        saveState(outState);
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void restoreState(Bundle state) {
-        log("restore state");
-        mSelectedItem = state.getInt(Shared.Titles.EXTRA_POSITION, 0);
+        mSelectedItem = savedInstanceState == null ? 0
+                : savedInstanceState.getInt(Shared.Titles.EXTRA_POSITION, 0);
         log("restore index=" + mSelectedItem);
     }
 
     @Override
-    public void saveState(Bundle state) {
-        log("save state");
-        state.putInt(Shared.Titles.EXTRA_POSITION, mSelectedItem);
-        log("save index=" + mSelectedItem);
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(Shared.Titles.EXTRA_POSITION, mSelectedItem);
     }
 
     @Override
@@ -124,8 +95,7 @@ public class TitlesFragment extends ListFragment implements
         log("update index=" + mSelectedItem);
         if (mDualPane) {
             FragmentManager fm = getFragmentManager();
-            DetailsFragment details = (DetailsFragment) fm
-                    .findFragmentById(R.id.details);
+            DetailsFragment details = (DetailsFragment) fm.findFragmentById(R.id.details);
             if (details == null || details.getShownIndex() != mSelectedItem) {
                 DetailsFragment newDetails = getDetailsFragmentInstance(mSelectedItem);
                 if (newDetails != null) {

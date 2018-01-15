@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +26,7 @@ import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.age.Days;
 import com.anna.sent.soft.childbirthdate.age.ISetting;
 import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
+import com.anna.sent.soft.childbirthdate.base.CbdFragment;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
@@ -35,15 +35,13 @@ import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListUtils;
 import com.anna.sent.soft.childbirthdate.utils.AdUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
-import com.anna.sent.soft.childbirthdate.utils.MyLog;
-import com.anna.sent.soft.strategy.statesaver.StateSaverBaseFragment;
 import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class ResultSickListFragment extends StateSaverBaseFragment implements
+public class ResultSickListFragment extends CbdFragment implements
         DataClient, OnClickListener, OnItemSelectedListener {
     private static final String KEY_SPINNER_DAYS_POSITION = "key_spinner_days_position";
     private static final String KEY_SPINNER_AGE_POSITION = "key_spinner_age_position";
@@ -55,8 +53,8 @@ public class ResultSickListFragment extends StateSaverBaseFragment implements
     private LocalizableSimpleSpinnerItemArrayAdapter mSpinnerDaysAdapter,
             mSpinnerAgeAdapter;
     private int mSpinnerDaysIndex, mSpinnerAgeIndex;
-    private ArrayList<Days> mTmpDaysList = new ArrayList<>();
-    private ArrayList<Age> mTmpAgeList = new ArrayList<>();
+    private List<Days> mTmpDaysList = new ArrayList<>();
+    private List<Age> mTmpAgeList = new ArrayList<>();
     private Data mData = null;
     private View mSelectedRow = null;
 
@@ -85,14 +83,6 @@ public class ResultSickListFragment extends StateSaverBaseFragment implements
         }
     }
 
-    private String wrapMsg(String msg) {
-        return getClass().getSimpleName() + ": " + msg;
-    }
-
-    private void log(String msg) {
-        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -109,7 +99,8 @@ public class ResultSickListFragment extends StateSaverBaseFragment implements
     }
 
     @Override
-    public void setViews(Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         mAdView = AdUtils.setupAd(getData(), getActivity(), R.id.adView_sick_list, 300,
                 60);
 
@@ -123,33 +114,31 @@ public class ResultSickListFragment extends StateSaverBaseFragment implements
         getActivity().findViewById(R.id.buttonEditAge).setOnClickListener(this);
         mSpinnerDays = getActivity().findViewById(R.id.spinnerDays);
         mSpinnerAge = getActivity().findViewById(R.id.spinnerAge);
-    }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public void restoreState(Bundle state) {
-        mSpinnerDaysIndex = state.getInt(KEY_SPINNER_DAYS_POSITION);
-        mSpinnerAgeIndex = state.getInt(KEY_SPINNER_AGE_POSITION);
+        mSpinnerDaysIndex = savedInstanceState == null
+                ? 0
+                : savedInstanceState.getInt(KEY_SPINNER_DAYS_POSITION);
+        mSpinnerAgeIndex = savedInstanceState == null
+                ? 0
+                : savedInstanceState.getInt(KEY_SPINNER_AGE_POSITION);
 
-        mTmpDaysList = (ArrayList<Days>) state.getSerializable(KEY_OTHER_DAYS);
-        if (mTmpDaysList == null) {
-            mTmpDaysList = new ArrayList<>();
-        }
-
-        mTmpAgeList = (ArrayList<Age>) state.getSerializable(KEY_OTHER_AGE);
-        if (mTmpAgeList == null) {
-            mTmpAgeList = new ArrayList<>();
-        }
+        mTmpDaysList = savedInstanceState == null
+                ? new ArrayList<Days>()
+                : (ArrayList<Days>) savedInstanceState.getSerializable(KEY_OTHER_DAYS);
+        mTmpAgeList = savedInstanceState == null
+                ? new ArrayList<Age>()
+                : (ArrayList<Age>) savedInstanceState.getSerializable(KEY_OTHER_AGE);
     }
 
     @Override
-    public void saveState(Bundle state) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
         int position = mSpinnerDays.getSelectedItemPosition();
-        state.putInt(KEY_SPINNER_DAYS_POSITION, position);
+        outState.putInt(KEY_SPINNER_DAYS_POSITION, position);
         position = mSpinnerAge.getSelectedItemPosition();
-        state.putInt(KEY_SPINNER_AGE_POSITION, position);
-        state.putSerializable(KEY_OTHER_DAYS, mTmpDaysList);
-        state.putSerializable(KEY_OTHER_AGE, mTmpAgeList);
+        outState.putInt(KEY_SPINNER_AGE_POSITION, position);
+        outState.putSerializable(KEY_OTHER_DAYS, new ArrayList<>(mTmpDaysList));
+        outState.putSerializable(KEY_OTHER_AGE, new ArrayList<>(mTmpAgeList));
     }
 
     @Override

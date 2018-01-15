@@ -7,7 +7,7 @@ import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.data.DataImpl;
 
 @SuppressWarnings("Registered")
-public class DataKeeperActivity extends StateSaverActivity {
+public class DataKeeperActivity extends CbdActivity {
     private DataImpl mConcreteData;
 
     @Override

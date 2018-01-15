@@ -2,9 +2,7 @@ package com.anna.sent.soft.childbirthdate;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.os.PersistableBundle;
 import android.support.v4.view.ViewPager;
 
 import com.anna.sent.soft.childbirthdate.adapters.DetailsPagerAdapter;
@@ -18,12 +16,9 @@ public class DetailsActivity extends ChildActivity implements
     private int mIndex = 0;
 
     @Override
-    public void setViews(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         if (getResources().getBoolean(R.bool.has_two_panes)) {
-            if (savedInstanceState != null) {
-                restoreState(savedInstanceState);
-            }
-
             setResult();
             finish();
             return;
@@ -31,35 +26,19 @@ public class DetailsActivity extends ChildActivity implements
 
         setTitle(R.string.app_name);
         setContentView(R.layout.activity_details);
-        super.setViews(savedInstanceState);
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager = findViewById(R.id.pager);
         mViewPager.addOnPageChangeListener(this);
         mTabsAdapter = new DetailsPagerAdapter(this,
                 getSupportFragmentManager());
+
+        mIndex = savedInstanceState == null ? 0 : savedInstanceState.getInt(Shared.Titles.EXTRA_POSITION, 0);
     }
 
     @Override
-    public void restoreState(Bundle state) {
-        mIndex = state.getInt(Shared.Titles.EXTRA_POSITION, 0);
-    }
-
-    @Override
-    public void beforeOnSaveInstanceState() {
-        FragmentManager fm = getSupportFragmentManager();
-        for (int i = 0; i < mTabsAdapter.getCount(); ++i) {
-            Fragment details = mTabsAdapter.getFragment(i);
-            if (details != null) {
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.detach(details);
-                ft.commit();
-            }
-        }
-    }
-
-    @Override
-    protected void saveActivityState(Bundle state) {
-        state.putInt(Shared.Titles.EXTRA_POSITION, mIndex);
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putInt(Shared.Titles.EXTRA_POSITION, mIndex);
     }
 
     @Override

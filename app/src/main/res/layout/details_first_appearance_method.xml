@@ -26,7 +26,7 @@
                 style="@style/LinearLayoutHorizontalStyle"
                 android:gravity="center">
 
-                <com.anna.sent.soft.numberpickerlibrary.NumberPicker
+                <NumberPicker
                     android:id="@+id/numberPickerFirstAppearanceWeeks"
                     style="@style/NumberPickerStyle" />
 

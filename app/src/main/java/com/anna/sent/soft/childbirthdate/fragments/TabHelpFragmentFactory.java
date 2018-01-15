@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.base.CbdFragment;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.strategy.statesaver.StateSaverBaseFragment;
 import com.anna.sent.soft.utils.HtmlUtils;
 
 public class TabHelpFragmentFactory {
@@ -47,7 +47,7 @@ public class TabHelpFragmentFactory {
         return result;
     }
 
-    public abstract static class TabHelpFragment extends StateSaverBaseFragment {
+    public abstract static class TabHelpFragment extends CbdFragment {
         private TextView textViewHelp;
 
         protected abstract int getLayoutResourceId();
@@ -61,7 +61,8 @@ public class TabHelpFragmentFactory {
         }
 
         @Override
-        public void setViews(Bundle savedInstanceState) {
+        public void onActivityCreated(Bundle savedInstanceState) {
+            super.onActivityCreated(savedInstanceState);
             int position = getArguments().getInt("position");
             String[] help = getActivity().getResources().getStringArray(R.array.helpParts);
             String text = position >= 0 && position < help.length ? help[position] : null;
@@ -72,14 +73,6 @@ public class TabHelpFragmentFactory {
         @Override
         public void setRetainInstance(boolean retain) {
             super.setRetainInstance(retain);
-        }
-
-        @Override
-        public void restoreState(Bundle state) {
-        }
-
-        @Override
-        public void saveState(Bundle state) {
         }
     }
 

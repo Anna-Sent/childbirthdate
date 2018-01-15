@@ -1,6 +1,5 @@
 package com.anna.sent.soft.childbirthdate.widget;
 
-import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,12 +17,12 @@ import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.MainActivity;
 import com.anna.sent.soft.childbirthdate.R;
+import com.anna.sent.soft.childbirthdate.base.CbdActivity;
 import com.anna.sent.soft.childbirthdate.data.DataImpl;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.utils.LanguageUtils;
 
-public abstract class MyPregnancyWidgetConfigure extends Activity implements
+public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements
         OnClickListener {
     private static final String KEY_CHECKED_RADIO_INDEX = "checkedRadioIndex";
     private final RadioButton[] radio = new RadioButton[Shared.Calculation.METHODS_COUNT];
@@ -35,16 +34,7 @@ public abstract class MyPregnancyWidgetConfigure extends Activity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*
-         * ThemeUtils.setupThemeBeforeOnActivityCreate(this,
-		 * Settings.settingsTheme.getStyle(this, R.array.style_dialog,
-		 * R.style.DialogTheme));
-		 */
         super.onCreate(savedInstanceState);
-
-        LanguageUtils.setupLanguageAfterOnActivityCreate(this,
-                Settings.settingsLanguage.isLanguageSetByUser(this),
-                Settings.settingsLanguage.getLocale(this));
 
         setTitle(getTitleStringResourceId());
         setContentView(R.layout.my_pregnancy_widget_configure_layout);
