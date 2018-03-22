@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ru">
     <string name="titles0">%1$s; МЦ %2$d д.; ЛФ %3$d д.</string>
     <string name="titles1">%1$s</string>
     <string name="titles2_gestational">на %1$s диагностирован акушерский срок беременности %2$s</string>

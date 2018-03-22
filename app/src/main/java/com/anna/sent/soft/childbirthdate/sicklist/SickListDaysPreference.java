@@ -34,7 +34,7 @@ public class SickListDaysPreference extends MoveableItemsPreference {
 
     @Override
     protected void setupViewAdd(View viewAdd) {
-        mEditText = (EditText) viewAdd.findViewById(R.id.editTextItem);
+        mEditText = viewAdd.findViewById(R.id.editTextItem);
     }
 
     @Override

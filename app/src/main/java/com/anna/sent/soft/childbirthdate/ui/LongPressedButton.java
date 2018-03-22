@@ -1,5 +1,6 @@
 package com.anna.sent.soft.childbirthdate.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -7,7 +8,7 @@ import android.view.MotionEvent;
 import android.widget.Button;
 
 public class LongPressedButton extends Button {
-    private Listener mListener = null;
+    private Listener mListener;
 
     public LongPressedButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -21,6 +22,7 @@ public class LongPressedButton extends Button {
         super(context);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         cancelLongpressIfRequired(event);

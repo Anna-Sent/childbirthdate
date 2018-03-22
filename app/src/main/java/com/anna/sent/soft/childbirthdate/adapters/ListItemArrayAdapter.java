@@ -12,13 +12,13 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.childbirthdate.utils.MyLog;
+import com.anna.sent.soft.logging.MyLog;
 
 public class ListItemArrayAdapter extends ArrayAdapter<String> implements
         OnClickListener {
     private final String[] mStrings1;
     private final int mCount;
-    private OnCheckedListener mListener = null;
+    private OnCheckedListener mListener;
     private String[] mStrings2;
     private boolean[] mChecked;
 
@@ -60,7 +60,6 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
         if (contentView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.list_item, null);
-            // log(position + " created view " + view.toString());
             viewHolder = new ViewHolder();
             viewHolder.checkBox = view.findViewById(R.id.checkBox);
             viewHolder.text1 = view.findViewById(R.id.text1);
@@ -68,7 +67,6 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
             view.setTag(viewHolder);
         } else {
             view = contentView;
-            // log(position + " existing view " + view.toString());
             viewHolder = (ViewHolder) view.getTag();
         }
 
@@ -89,8 +87,7 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements
         ViewHolder viewHolder = (ViewHolder) v.getTag();
         int position = viewHolder.position;
         mChecked[position] = viewHolder.checkBox.isChecked();
-        viewHolder.text2.setVisibility(mChecked[position] ? View.VISIBLE
-                : View.GONE);
+        viewHolder.text2.setVisibility(mChecked[position] ? View.VISIBLE : View.GONE);
         if (mListener != null) {
             mListener.checked(position, mChecked[position]);
         }

@@ -15,6 +15,7 @@
                 <TextView
                     style="@style/TextViewStyle.Medium"
                     android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:text="@string/onDate" />
 
@@ -29,10 +30,12 @@
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@string/collapse"
                     android:drawableLeft="?attr/iconCollapse"
+                    android:drawableStart="?attr/iconCollapse"
                     android:gravity="center" />
             </RelativeLayout>
 
@@ -58,6 +61,7 @@
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/prevDay"
                         android:drawableLeft="?attr/iconPrevItem"
+                        android:drawableStart="?attr/iconPrevItem"
                         android:gravity="center" />
 
                     <Button
@@ -67,6 +71,7 @@
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/today"
                         android:drawableLeft="?attr/iconGoToToday"
+                        android:drawableStart="?attr/iconGoToToday"
                         android:gravity="center" />
 
                     <com.anna.sent.soft.childbirthdate.ui.LongPressedButton
@@ -76,6 +81,7 @@
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/nextDay"
                         android:drawableLeft="?attr/iconNextItem"
+                        android:drawableStart="?attr/iconNextItem"
                         android:gravity="center" />
                 </LinearLayout>
             </com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout>

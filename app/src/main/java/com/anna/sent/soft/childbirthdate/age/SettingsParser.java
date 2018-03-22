@@ -7,13 +7,13 @@ public class SettingsParser {
     private static final String DELIMITER_LIST = ";";
 
     private static String saveList(List<ISetting> list) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < list.size(); ++i) {
-            result += list.get(i).save()
-                    + (i == list.size() - 1 ? "" : DELIMITER_LIST);
+            result.append(list.get(i).save())
+                    .append(i == list.size() - 1 ? "" : DELIMITER_LIST);
         }
 
-        return result;
+        return result.toString();
     }
 
     private static List<ISetting> loadList(String str, ISetting element) {
@@ -35,11 +35,7 @@ public class SettingsParser {
     public static List<LocalizableObject> toList(String str, ISetting element) {
         List<ISetting> source = SettingsParser.loadList(str, element);
         List<LocalizableObject> destination = new ArrayList<>();
-
-        for (int i = 0; i < source.size(); ++i) {
-            destination.add(source.get(i));
-        }
-
+        destination.addAll(source);
         return destination;
     }
 

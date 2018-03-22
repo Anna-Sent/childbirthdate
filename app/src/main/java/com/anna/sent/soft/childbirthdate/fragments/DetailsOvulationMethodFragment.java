@@ -1,6 +1,7 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
     private DatePicker datePicker;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (container == null) {
             // We have different layouts, and in one of them this
@@ -36,8 +37,7 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        datePicker = (DatePicker) getActivity().findViewById(
-                R.id.datePickerOvulationDate);
+        datePicker = getActivity().findViewById(R.id.datePickerOvulationDate);
         DateUtils.init(datePicker, this);
     }
 

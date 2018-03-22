@@ -40,8 +40,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
             return null;
         }
 
-        return inflater.inflate(R.layout.details_ultrasound_method,
-                container, false);
+        return inflater.inflate(R.layout.details_ultrasound_method, container, false);
     }
 
     @Override

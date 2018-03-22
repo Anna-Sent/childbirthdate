@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
-public abstract class MyFragmentPagerAdapter extends FragmentPagerAdapter {
+abstract class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     private final SparseArray<Fragment> mFragments = new SparseArray<>();
 
     MyFragmentPagerAdapter(FragmentManager fm) {
@@ -15,8 +15,7 @@ public abstract class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        Fragment fragment = (Fragment) super.instantiateItem(container,
-                position);
+        Fragment fragment = (Fragment) super.instantiateItem(container, position);
         mFragments.put(position, fragment);
         return fragment;
     }

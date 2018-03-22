@@ -20,6 +20,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.anna.sent.soft.ad.AdUtils;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.adapters.LocalizableSimpleSpinnerItemArrayAdapter;
 import com.anna.sent.soft.childbirthdate.age.Age;
@@ -33,8 +34,8 @@ import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListUtils;
-import com.anna.sent.soft.childbirthdate.utils.AdUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
+import com.anna.sent.soft.utils.DisplayUtils;
 import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
@@ -55,8 +56,8 @@ public class ResultSickListFragment extends CbdFragment implements
     private int mSpinnerDaysIndex, mSpinnerAgeIndex;
     private List<Days> mTmpDaysList = new ArrayList<>();
     private List<Age> mTmpAgeList = new ArrayList<>();
-    private Data mData = null;
-    private View mSelectedRow = null;
+    private Data mData;
+    private View mSelectedRow;
 
     @SuppressWarnings("InflateParams")
     public static void showSickListInfoDialog(final Context context) {
@@ -101,8 +102,13 @@ public class ResultSickListFragment extends CbdFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mAdView = AdUtils.setupAd(getData(), getActivity(), R.id.adView_sick_list, 300,
-                60);
+
+        int initH = 300, rowH = 60;
+        int count = mData.getSelectedMethodsCount();
+        int expectedHeightDp = initH + count * rowH;
+        int actualHeightDp = DisplayUtils.getScreenSizeInDp().y;
+        boolean showAd = expectedHeightDp < actualHeightDp;
+        mAdView = AdUtils.setupAd(getActivity(), R.id.adView_sick_list, R.string.adUnitId, showAd);
 
         if (getActivity() == null) {
             log("activity is null");
@@ -122,9 +128,11 @@ public class ResultSickListFragment extends CbdFragment implements
                 ? 0
                 : savedInstanceState.getInt(KEY_SPINNER_AGE_POSITION);
 
+        //noinspection unchecked
         mTmpDaysList = savedInstanceState == null
                 ? new ArrayList<Days>()
                 : (ArrayList<Days>) savedInstanceState.getSerializable(KEY_OTHER_DAYS);
+        //noinspection unchecked
         mTmpAgeList = savedInstanceState == null
                 ? new ArrayList<Age>()
                 : (ArrayList<Age>) savedInstanceState.getSerializable(KEY_OTHER_AGE);

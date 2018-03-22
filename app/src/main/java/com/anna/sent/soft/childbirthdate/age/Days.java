@@ -4,13 +4,11 @@ import android.content.Context;
 import android.util.Log;
 
 import com.anna.sent.soft.childbirthdate.R;
-import com.anna.sent.soft.childbirthdate.utils.MyLog;
+import com.anna.sent.soft.logging.MyLog;
 
 import java.io.Serializable;
 
 public class Days implements ISetting, Serializable {
-    private static final long serialVersionUID = -2116357134482613794L;
-
     private int days;
 
     public Days() {
@@ -27,8 +25,7 @@ public class Days implements ISetting, Serializable {
 
     private void setDays(int value) {
         if (value < 0) {
-            throw new IllegalArgumentException(
-                    "Days value must be non-negative");
+            throw new IllegalArgumentException("Days value must be non-negative");
         }
 
         days = value;

@@ -11,7 +11,7 @@ import com.anna.sent.soft.childbirthdate.base.CbdSettingsActivity;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListAgePreference;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListDaysPreference;
-import com.anna.sent.soft.childbirthdate.utils.MyLog;
+import com.anna.sent.soft.logging.MyLog;
 import com.anna.sent.soft.utils.ActionBarUtils;
 import com.anna.sent.soft.utils.ActivityUtils;
 
@@ -37,7 +37,7 @@ public class SettingsActivity extends CbdSettingsActivity {
     private void createLanguagePreference() {
         log("create language preference");
         PreferenceCategory category = (PreferenceCategory) findPreference(getString(R.string.pref_ui_settings_key));
-        final ListPreference pref = new ListPreference(this);
+        ListPreference pref = new ListPreference(this);
         pref.setKey(settingsLanguage.getLanguageKey());
         String[] entries = getResources().getStringArray(R.array.language);
         pref.setEntries(entries);

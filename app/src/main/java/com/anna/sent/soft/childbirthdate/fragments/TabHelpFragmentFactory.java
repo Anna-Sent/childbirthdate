@@ -69,11 +69,6 @@ public class TabHelpFragmentFactory {
             textViewHelp = getActivity().findViewById(getTextViewResourceId());
             textViewHelp.setText(HtmlUtils.fromHtml(text));
         }
-
-        @Override
-        public void setRetainInstance(boolean retain) {
-            super.setRetainInstance(retain);
-        }
     }
 
     public static class TabHelpIntroductionFragment extends TabHelpFragment {

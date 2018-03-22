@@ -140,10 +140,10 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements
         DataImpl data = new DataImpl(this);
         data.update();
         doCalculation = data.thereIsAtLeastOneSelectedMethod();
-        TextView textView = (TextView) findViewById(R.id.widgetConfigureTextView);
+        TextView textView = findViewById(R.id.widgetConfigureTextView);
         textView.setText(doCalculation ? getString(R.string.widgetSpecifyTheMethodOfCalculation)
                 : getString(R.string.widgetStartTheApplicationToSpecifyNecessaryData));
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        RadioGroup radioGroup = findViewById(R.id.radioGroup);
         String[] methodNames = getResources().getStringArray(
                 R.array.methodNames);
         boolean byMethod[] = data.byMethod();
@@ -154,18 +154,15 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements
             radioGroup.addView(radio[i]);
         }
 
-        checkBoxCountdown = (CheckBox) findViewById(R.id.checkBoxCountdown);
-        checkBoxCountdown
-                .setVisibility(hasCountdown() && doCalculation ? View.VISIBLE
-                        : View.GONE);
+        checkBoxCountdown = findViewById(R.id.checkBoxCountdown);
+        checkBoxCountdown.setVisibility(hasCountdown() && doCalculation ? View.VISIBLE : View.GONE);
 
-        checkBoxShowCalculationMethod = (CheckBox) findViewById(R.id.checkBoxShowCalculationMethod);
+        checkBoxShowCalculationMethod = findViewById(R.id.checkBoxShowCalculationMethod);
         checkBoxShowCalculationMethod.setVisibility(hasShowCalculationMethod()
                 && doCalculation ? View.VISIBLE : View.GONE);
 
-        Button button = (Button) findViewById(R.id.widgetConfigureButton);
-        button.setText(doCalculation ? getString(R.string.widgetAddWidget)
-                : getString(R.string.widgetStartTheApplication));
+        Button button = findViewById(R.id.widgetConfigureButton);
+        button.setText(doCalculation ? getString(R.string.widgetAddWidget) : getString(R.string.widgetStartTheApplication));
         button.setOnClickListener(this);
     }
 

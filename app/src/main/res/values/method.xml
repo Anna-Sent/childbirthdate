@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="titles0">%1$s; menstrual cycle length %2$d days; luteal phase length %3$d days</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="titles0" tools:ignore="PluralsCandidate">%1$s; menstrual cycle length %2$d days; luteal phase length %3$d days</string>
     <string name="titles1">%1$s</string>
     <string name="titles2_gestational">on %1$s determined gestational age of %2$s</string>
     <string name="titles2_embryonic">on %1$s determined fertilization age of %2$s</string>

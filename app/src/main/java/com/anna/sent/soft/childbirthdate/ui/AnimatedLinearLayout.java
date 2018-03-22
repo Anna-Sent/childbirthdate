@@ -9,10 +9,8 @@ import android.view.animation.Transformation;
 import android.widget.LinearLayout;
 
 public class AnimatedLinearLayout extends LinearLayout {
-    private
-    Animation mInAnimation = null;
-    private
-    Animation mOutAnimation = null;
+    private Animation mInAnimation;
+    private Animation mOutAnimation;
 
     public AnimatedLinearLayout(Context context) {
         super(context);

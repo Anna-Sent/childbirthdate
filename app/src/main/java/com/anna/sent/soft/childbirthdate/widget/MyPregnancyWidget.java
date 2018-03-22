@@ -15,7 +15,7 @@ import android.widget.RemoteViews;
 
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.childbirthdate.utils.MyLog;
+import com.anna.sent.soft.logging.MyLog;
 
 import java.util.Calendar;
 
@@ -44,8 +44,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
     }
 
     public static void installAlarms(Context context, Class<?> cls) {
-        AlarmManager alarmManager = (AlarmManager) context
-                .getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Calendar midnight = Calendar.getInstance();
         // midnight.set(Calendar.HOUR_OF_DAY, 0);
         midnight.set(Calendar.HOUR, 0);
@@ -55,6 +54,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
         midnight.set(Calendar.AM_PM, Calendar.AM);
         midnight.add(Calendar.DAY_OF_MONTH, 1);
         PendingIntent operation = getPendingIntent(context, cls);
+        //noinspection ConstantConditions
         alarmManager.cancel(operation);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
                 midnight.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
@@ -131,8 +131,8 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
 
         MyLog.getInstance().logcat(Log.DEBUG, getClass().getSimpleName() + " cancel alarm");
 
-        AlarmManager alarmManager = (AlarmManager) context
-                .getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        //noinspection ConstantConditions
         alarmManager.cancel(getPendingIntent(context, getClass()));
     }
 }

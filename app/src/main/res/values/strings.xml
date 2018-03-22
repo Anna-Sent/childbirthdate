@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="ecdIs">EDD %s</string>
     <string name="collapse">Collapse</string>
     <string name="expand">Expand</string>
     <string name="onDate">on date</string>
-    <string name="emptyString">empty</string>
+    <string name="emptyString" />
     <string name="sendData">Send data</string>
     <string name="settings">Settings</string>
     <string name="help">Help</string>
@@ -65,7 +65,7 @@
     <string name="pref_rate_summary" />
     <string name="pref_support_title">Feedback</string>
     <string name="pref_support_summary">Send review, comment, suggestion.</string>
-    <string name="pref_womancyc_title">"Calendar of women's cycles"</string>
+    <string name="pref_womancyc_title">Calendar of women\'s cycles</string>
     <string name="pref_womancyc_summary">\"WomanCyc\": simple period tracker application.</string>
     <string name="calculation">Calculation</string>
     <string name="sick_list">Parental leave</string>
@@ -73,7 +73,7 @@
     <string name="sick_list_age">Gestational age from which leave is started</string>
     <string name="error_enter_value">Enter number from %1$d to %2$d</string>
     <string name="error_value_already_exists">Number is already in list</string>
-    <string name="error_value_bounds">Number must be in range from %1$d to %2$d inclusive</string>
+    <string name="error_value_bounds" tools:ignore="PluralsCandidate">Number must be in range from %1$d to %2$d inclusive</string>
     <string name="persist_setting">Save in settings</string>
     <string name="when_the_duration_of_pregnancy">Gestational age from which leave is started</string>
     <string name="on">Number of days on which leave is granted</string>

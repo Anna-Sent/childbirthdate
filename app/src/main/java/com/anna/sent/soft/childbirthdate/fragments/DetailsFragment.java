@@ -7,11 +7,12 @@ import android.util.Log;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.childbirthdate.utils.MyLog;
+import com.anna.sent.soft.logging.MyLog;
 
 public abstract class DetailsFragment extends Fragment implements DataClient {
-    Data mData = null;
-    private OnDetailsChangedListener mListener = null;
+    @SuppressWarnings("WeakerAccess")
+    protected Data mData;
+    private OnDetailsChangedListener mListener;
 
     public static DetailsFragment newInstance(int index) {
         DetailsFragment details;
@@ -59,7 +60,7 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
     }
 
     public int getShownIndex() {
-        return getArguments().getInt(Shared.Titles.EXTRA_POSITION, -1);
+        return getArguments() == null ? -1 : getArguments().getInt(Shared.Titles.EXTRA_POSITION, -1);
     }
 
     void dataChanged() {

@@ -16,6 +16,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.anna.sent.soft.ad.AdUtils;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.base.CbdFragment;
 import com.anna.sent.soft.childbirthdate.data.Data;
@@ -24,8 +25,8 @@ import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.ui.AnimatedLinearLayout;
 import com.anna.sent.soft.childbirthdate.ui.LongPressedButton;
-import com.anna.sent.soft.childbirthdate.utils.AdUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
+import com.anna.sent.soft.utils.DisplayUtils;
 import com.google.android.gms.ads.AdView;
 
 import java.util.Calendar;
@@ -38,15 +39,15 @@ public class ResultEcdFragment extends CbdFragment implements
     private AdView mAdView;
     private TableLayout mTable;
     private DatePicker mDatePicker;
-    private Calendar mDate = null;
+    private Calendar mDate;
     private Data mData;
     private AnimatedLinearLayout animatedLayout;
     private TextView textViewOnDate;
     private Button buttonShowHide;
     private boolean mIsVisible = DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE;
     private Drawable mCollapseDrawable, mExpandDrawable;
-    private ChangeCurrentByOneFromLongPressCommand mChangeCurrentByOneFromLongPressCommand = null;
-    private View mSelectedRow = null;
+    private ChangeCurrentByOneFromLongPressCommand mChangeCurrentByOneFromLongPressCommand;
+    private View mSelectedRow;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -67,7 +68,12 @@ public class ResultEcdFragment extends CbdFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mAdView = AdUtils.setupAd(getData(), getActivity(), R.id.adView_ecd, 200, 100);
+        int initH = 200, rowH = 100;
+        int count = mData.getSelectedMethodsCount();
+        int expectedHeightDp = initH + count * rowH;
+        int actualHeightDp = DisplayUtils.getScreenSizeInDp().y;
+        boolean showAd = expectedHeightDp < actualHeightDp;
+        mAdView = AdUtils.setupAd(getActivity(), R.id.adView_sick_list, R.string.adUnitId, showAd);
 
         mTable = getActivity().findViewById(R.id.table_ecd);
         mDatePicker = getActivity().findViewById(R.id.datePicker);
@@ -171,17 +177,15 @@ public class ResultEcdFragment extends CbdFragment implements
         mDatePicker.removeCallbacks(mChangeCurrentByOneFromLongPressCommand);
     }
 
-    private void postChangeCurrentByOneFromLongPress(boolean increment, long delayMillis) {
+    private void postChangeCurrentByOneFromLongPress(boolean increment, @SuppressWarnings("SameParameterValue") long delayMillis) {
         if (mChangeCurrentByOneFromLongPressCommand == null) {
             mChangeCurrentByOneFromLongPressCommand = new ChangeCurrentByOneFromLongPressCommand();
         } else {
-            mDatePicker
-                    .removeCallbacks(mChangeCurrentByOneFromLongPressCommand);
+            mDatePicker.removeCallbacks(mChangeCurrentByOneFromLongPressCommand);
         }
 
         mChangeCurrentByOneFromLongPressCommand.setStep(increment);
-        mDatePicker.postDelayed(mChangeCurrentByOneFromLongPressCommand,
-                delayMillis);
+        mDatePicker.postDelayed(mChangeCurrentByOneFromLongPressCommand, delayMillis);
     }
 
     private void changeValueByOne(boolean increment) {
@@ -195,7 +199,6 @@ public class ResultEcdFragment extends CbdFragment implements
         DateUtils.setDate(mDatePicker, date);
         updateResults();
     }
-
 
     @Override
     public void onResume() {

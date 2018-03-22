@@ -12,7 +12,7 @@ import android.widget.NumberPicker;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
-import com.anna.sent.soft.childbirthdate.utils.MyLog;
+import com.anna.sent.soft.logging.MyLog;
 
 import java.util.Calendar;
 
@@ -51,14 +51,11 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        datePicker = (DatePicker) getActivity().findViewById(
-                R.id.datePickerFirstAppearanceDate);
+        datePicker = getActivity().findViewById(R.id.datePickerFirstAppearanceDate);
         DateUtils.init(datePicker, this);
-        numberPicker = (NumberPicker) getActivity().findViewById(
-                R.id.numberPickerFirstAppearanceWeeks);
+        numberPicker = getActivity().findViewById(R.id.numberPickerFirstAppearanceWeeks);
         numberPicker.setMinValue(0);
-        numberPicker
-                .setMaxValue(PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS - 1);
+        numberPicker.setMaxValue(PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS - 1);
         numberPicker.setOnValueChangedListener(this);
     }
 

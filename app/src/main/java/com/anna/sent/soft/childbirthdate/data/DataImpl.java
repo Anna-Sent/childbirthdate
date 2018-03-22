@@ -11,7 +11,7 @@ import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
-import com.anna.sent.soft.childbirthdate.utils.MyLog;
+import com.anna.sent.soft.logging.MyLog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DataImpl implements Data {
-    private final static String DATE_FORMAT = "yyyy-MM-dd";
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
     private final Context mContext;
     private final boolean[] byMethod = new boolean[Shared.Calculation.METHODS_COUNT];
     private boolean isEmbryonicAge, isFirstPregnancy;
@@ -236,7 +236,6 @@ public class DataImpl implements Data {
     }
 
     private void saveDate(Editor editor, String extra, Calendar date) {
-        // editor.putLong(extra, date.getTimeInMillis());
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT,
                 Locale.getDefault());
         String value = formatter.format(date.getTime());

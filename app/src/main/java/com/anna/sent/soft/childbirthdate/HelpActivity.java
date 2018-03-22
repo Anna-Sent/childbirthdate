@@ -14,7 +14,7 @@ public class HelpActivity extends ChildActivity {
         setTitle(R.string.help);
         setContentView(R.layout.activity_details);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        ViewPager viewPager = findViewById(R.id.pager);
         HelpPagerAdapter tabsAdapter = new HelpPagerAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(tabsAdapter);
         viewPager.setOffscreenPageLimit(tabsAdapter.getCount() - 1);

@@ -133,13 +133,9 @@ public abstract class MoveableItemsPreference extends DialogPreference
 
     @Override
     protected Parcelable onSaveInstanceState() {
-        final Parcelable superState = super.onSaveInstanceState();
+        Parcelable superState = super.onSaveInstanceState();
 
-		/*
-         * if (isPersistent()) { return superState; }
-		 */
-
-        final SavedState myState = new SavedState(superState);
+        SavedState myState = new SavedState(superState);
         myState.value = saveAddValue();
         if (mAdapter != null) {
             myState.values = SettingsParser.toString(mAdapter.getValues()

@@ -9,8 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:paddingLeft="@dimen/row_padding"
+        android:layout_marginLeft="@dimen/row_padding"
+        android:layout_marginStart="@dimen/row_padding"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
@@ -20,7 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/buttonDown"
+        android:layout_toStartOf="@+id/buttonDown"
         android:drawableLeft="?attr/iconCollapse"
+        android:drawableStart="?attr/iconCollapse"
         android:text="" />
 
     <Button
@@ -30,7 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/buttonDelete"
+        android:layout_toStartOf="@+id/buttonDelete"
         android:drawableLeft="?attr/iconExpand"
+        android:drawableStart="?attr/iconExpand"
         android:text="" />
 
     <Button
@@ -38,8 +44,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:drawableLeft="?attr/iconDelete"
+        android:drawableStart="?attr/iconDelete"
         android:text="" />
 </RelativeLayout>

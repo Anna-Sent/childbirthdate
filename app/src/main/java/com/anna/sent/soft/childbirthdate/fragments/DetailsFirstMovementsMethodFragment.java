@@ -1,6 +1,7 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +20,7 @@ public class DetailsFirstMovementsMethodFragment extends DetailsFragment
     private CheckBox checkBox;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (container == null) {
             // We have different layouts, and in one of them this
@@ -39,11 +40,9 @@ public class DetailsFirstMovementsMethodFragment extends DetailsFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        datePicker = (DatePicker) getActivity().findViewById(
-                R.id.datePickerFirstMovementsDate);
+        datePicker = getActivity().findViewById(R.id.datePickerFirstMovementsDate);
         DateUtils.init(datePicker, this);
-        checkBox = (CheckBox) getActivity().findViewById(
-                R.id.checkBoxIsFirstPregnancy);
+        checkBox = getActivity().findViewById(R.id.checkBoxIsFirstPregnancy);
         checkBox.setOnClickListener(this);
     }
 

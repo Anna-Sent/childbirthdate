@@ -3,6 +3,7 @@ package com.anna.sent.soft.childbirthdate.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
@@ -18,15 +19,15 @@ import com.anna.sent.soft.childbirthdate.adapters.ListItemArrayAdapter;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.childbirthdate.utils.MyLog;
+import com.anna.sent.soft.logging.MyLog;
 
 public class TitlesFragment extends ListFragment implements
         DetailsFragment.OnDetailsChangedListener, ListItemArrayAdapter.OnCheckedListener, DataClient {
-    private final static int REQUEST_POSITION = 1;
+    private static final int REQUEST_POSITION = 1;
     private ListItemArrayAdapter mListAdapter;
     private boolean mDualPane;
     private int mSelectedItem = 0;
-    private Data mData = null;
+    private Data mData;
 
     private String wrapMsg(String msg) {
         return getClass().getSimpleName() + ": " + msg;
@@ -69,7 +70,7 @@ public class TitlesFragment extends ListFragment implements
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(Shared.Titles.EXTRA_POSITION, mSelectedItem);
     }
