@@ -1,6 +1,7 @@
 package com.anna.sent.soft.childbirthdate.age;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.anna.sent.soft.childbirthdate.R;
@@ -38,11 +39,7 @@ public class Age implements ISetting, Serializable {
         weeks = value;
     }
 
-    public void set(Age age) {
-        if (age == null) {
-            throw new IllegalArgumentException("Age must be not null");
-        }
-
+    public void set(@NonNull Age age) {
         weeks = age.weeks;
         days = age.days;
     }

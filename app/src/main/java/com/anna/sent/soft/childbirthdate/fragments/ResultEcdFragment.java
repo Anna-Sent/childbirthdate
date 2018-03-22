@@ -35,7 +35,7 @@ public class ResultEcdFragment extends CbdFragment implements
         DataClient, OnClickListener, OnDateChangedListener, LongPressedButton.Listener {
     private static final String KEY_IS_ANIMATED_ACTIVITY_VISIBLE = "isAnimatedActivityVisible";
     private static final boolean DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE = false;
-    private static final boolean USE_ANIMATION = false;
+    private static final boolean USE_ANIMATION = true;
     private AdView mAdView;
     private TableLayout mTable;
     private DatePicker mDatePicker;
@@ -75,6 +75,7 @@ public class ResultEcdFragment extends CbdFragment implements
         boolean showAd = expectedHeightDp < actualHeightDp;
         mAdView = AdUtils.setupAd(getActivity(), R.id.adView_sick_list, R.string.adUnitId, showAd);
 
+        //noinspection ConstantConditions
         mTable = getActivity().findViewById(R.id.table_ecd);
         mDatePicker = getActivity().findViewById(R.id.datePicker);
         DateUtils.init(mDatePicker, Calendar.getInstance(), this);
@@ -143,7 +144,6 @@ public class ResultEcdFragment extends CbdFragment implements
     @Override
     public void onStart() {
         super.onStart();
-        mIsVisible = USE_ANIMATION || mIsVisible;
         setVisibility(mIsVisible, false);
     }
 
@@ -166,6 +166,7 @@ public class ResultEcdFragment extends CbdFragment implements
 
     private Drawable getDrawableFromTheme(int attribute) {
         int[] attrs = new int[]{attribute};
+        //noinspection ConstantConditions
         TypedArray ta = getActivity().obtainStyledAttributes(attrs);
         Drawable result = ta.getDrawable(0);
         ta.recycle();
@@ -177,7 +178,7 @@ public class ResultEcdFragment extends CbdFragment implements
         mDatePicker.removeCallbacks(mChangeCurrentByOneFromLongPressCommand);
     }
 
-    private void postChangeCurrentByOneFromLongPress(boolean increment, @SuppressWarnings("SameParameterValue") long delayMillis) {
+    private void postChangeCurrentByOneFromLongPress(boolean increment, long delayMillis) {
         if (mChangeCurrentByOneFromLongPressCommand == null) {
             mChangeCurrentByOneFromLongPressCommand = new ChangeCurrentByOneFromLongPressCommand();
         } else {

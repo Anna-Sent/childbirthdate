@@ -10,7 +10,6 @@ import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.logging.MyLog;
 
 public abstract class DetailsFragment extends Fragment implements DataClient {
-    @SuppressWarnings("WeakerAccess")
     protected Data mData;
     private OnDetailsChangedListener mListener;
 

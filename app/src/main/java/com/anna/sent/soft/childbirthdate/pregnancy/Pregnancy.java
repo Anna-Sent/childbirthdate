@@ -1,6 +1,8 @@
 package com.anna.sent.soft.childbirthdate.pregnancy;
 
 import android.content.Context;
+import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.age.Age;
@@ -18,7 +20,7 @@ public abstract class Pregnancy {
     /**
      * @param start start point of pregnancy, must be not null
      */
-    Pregnancy(Calendar start) {
+    Pregnancy(@NonNull Calendar start) {
         startPoint = (Calendar) start.clone();
         zeroDate(startPoint);
         currentPoint = startPoint;
@@ -29,7 +31,7 @@ public abstract class Pregnancy {
      * @param days    number of days pregnancy lengths, should be in range from 0 to 6
      * @param current current date, must be not null
      */
-    Pregnancy(int weeks, int days, Calendar current) {
+    Pregnancy(int weeks, @IntRange(from = 0, to = 6) int days, @NonNull Calendar current) {
         age = new Age(weeks, days);
         startPoint = (Calendar) current.clone();
         zeroDate(startPoint);
