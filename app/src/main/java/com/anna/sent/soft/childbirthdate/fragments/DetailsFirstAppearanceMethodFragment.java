@@ -51,6 +51,7 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //noinspection ConstantConditions
         datePicker = getActivity().findViewById(R.id.datePickerFirstAppearanceDate);
         DateUtils.init(datePicker, this);
         numberPicker = getActivity().findViewById(R.id.numberPickerFirstAppearanceWeeks);

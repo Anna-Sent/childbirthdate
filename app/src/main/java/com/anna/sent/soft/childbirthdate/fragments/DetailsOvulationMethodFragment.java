@@ -37,6 +37,7 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //noinspection ConstantConditions
         datePicker = getActivity().findViewById(R.id.datePickerOvulationDate);
         DateUtils.init(datePicker, this);
     }

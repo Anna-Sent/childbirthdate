@@ -91,8 +91,4 @@ public class Settings {
         editor.putBoolean(KEY_PREF_DO_NOT_SHOW_SICK_LIST_INFO_DIALOG, true);
         editor.apply();
     }
-
-    public static void clear(Context context) {
-        getSettings(context).edit().clear().apply();
-    }
 }

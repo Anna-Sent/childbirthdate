@@ -45,75 +45,53 @@ public abstract class Builder {
         int calculationMethod = settings.getInt(
                 Shared.Saved.Widget.EXTRA_CALCULATION_METHOD + appWidgetId,
                 Shared.Calculation.UNKNOWN);
-        boolean countdown = settings.getBoolean(
-                Shared.Saved.Widget.EXTRA_COUNTDOWN + appWidgetId, false);
-        boolean showCalculationMethod = settings
-                .getBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD
-                        + appWidgetId, false);
+        boolean countdown = settings.getBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN + appWidgetId, false);
+        boolean showCalculationMethod = settings.getBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD + appWidgetId, false);
 
         DataImpl data = new DataImpl(context);
         data.update();
 
         Pregnancy p = PregnancyCalculator.Factory.get(data, calculationMethod);
 
-        if (p == null) {
-            views.setViewVisibility(R.id.tv1, View.GONE);
-            views.setTextViewText(R.id.tv2,
-                    context.getString(R.string.errorIncorrectGestationalAge));
-            views.setViewVisibility(R.id.tv3, View.GONE);
-            views.setTextViewText(R.id.tv4, context
-                    .getString(R.string.errorNotSelectedCalculationMethod));
-            views.setViewVisibility(R.id.tv4,
-                    showCalculationMethod ? View.VISIBLE : View.GONE);
+        String[] methodNames = context.getResources().getStringArray(
+                R.array.methodNames);
+        String calculationMethodString = methodNames[calculationMethod - 1];
+        Calendar currentDate = Calendar.getInstance();
+        p.setCurrentPoint(currentDate);
+        if (p.isCorrect()) {
+            int rest = p.getRestInDays();
+            countdown = countdown && rest > 0;
+
+            views.setTextViewText(R.id.tv1, countdown ? context
+                    .getString(R.string.widgetTextRestInfo) : context.getString(R.string.widgetTextInfo));
+            views.setViewVisibility(R.id.tv1, hasTV1() ? View.VISIBLE : View.GONE);
+
+            views.setTextViewText(R.id.tv2, countdown ? p.getRestInfo(context) : p.getInfo(context));
+            views.setTextViewText(R.id.tv3, p.getAdditionalInfo(context));
+            views.setViewVisibility(R.id.tv3, hasTV3() && !countdown ? View.VISIBLE : View.GONE);
         } else {
-            String[] methodNames = context.getResources().getStringArray(
-                    R.array.methodNames);
-            String calculationMethodString = methodNames[calculationMethod - 1];
-            Calendar currentDate = Calendar.getInstance();
-            p.setCurrentPoint(currentDate);
-            if (p.isCorrect()) {
-                int rest = p.getRestInDays();
-                countdown = countdown && rest > 0;
-
+            views.setViewVisibility(R.id.tv1, View.GONE);
+            views.setTextViewText(R.id.tv2, context
+                    .getString(R.string.errorIncorrectGestationalAge));
+            Calendar start = p.getStartPoint(), end = p.getEndPoint();
+            if (currentDate.before(start)) {
                 views.setTextViewText(
-                        R.id.tv1,
-                        countdown ? context
-                                .getString(R.string.widgetTextRestInfo)
-                                : context.getString(R.string.widgetTextInfo));
-                views.setViewVisibility(R.id.tv1, hasTV1() ? View.VISIBLE
-                        : View.GONE);
-
-                views.setTextViewText(R.id.tv2,
-                        countdown ? p.getRestInfo(context) : p.getInfo(context));
-                views.setTextViewText(R.id.tv3, p.getAdditionalInfo(context));
-                views.setViewVisibility(R.id.tv3,
-                        hasTV3() && !countdown ? View.VISIBLE : View.GONE);
+                        R.id.tv3,
+                        context.getString(R.string.errorIncorrectCurrentDateSmaller));
+            } else if (currentDate.after(end)) {
+                views.setTextViewText(
+                        R.id.tv3,
+                        context.getString(R.string.errorIncorrectCurrentDateGreater));
             } else {
-                views.setViewVisibility(R.id.tv1, View.GONE);
-                views.setTextViewText(R.id.tv2, context
-                        .getString(R.string.errorIncorrectGestationalAge));
-                Calendar start = p.getStartPoint(), end = p.getEndPoint();
-                if (currentDate.before(start)) {
-                    views.setTextViewText(
-                            R.id.tv3,
-                            context.getString(R.string.errorIncorrectCurrentDateSmaller));
-                } else if (currentDate.after(end)) {
-                    views.setTextViewText(
-                            R.id.tv3,
-                            context.getString(R.string.errorIncorrectCurrentDateGreater));
-                } else {
-                    views.setTextViewText(R.id.tv3, "?");
-                }
-
-                views.setViewVisibility(R.id.tv3, hasTV3() ? View.VISIBLE
-                        : View.GONE);
+                views.setTextViewText(R.id.tv3, "?");
             }
 
-            views.setTextViewText(R.id.tv4, context.getString(
-                    R.string.widgetCalculationMethod, calculationMethodString));
-            views.setViewVisibility(R.id.tv4,
-                    showCalculationMethod ? View.VISIBLE : View.GONE);
+            views.setViewVisibility(R.id.tv3, hasTV3() ? View.VISIBLE : View.GONE);
         }
+
+        views.setTextViewText(R.id.tv4, context.getString(
+                R.string.widgetCalculationMethod, calculationMethodString));
+        views.setViewVisibility(R.id.tv4, showCalculationMethod ? View.VISIBLE : View.GONE);
 
         return views;
     }

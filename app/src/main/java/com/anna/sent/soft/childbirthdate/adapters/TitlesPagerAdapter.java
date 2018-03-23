@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
 public abstract class TitlesPagerAdapter extends MyFragmentPagerAdapter {
-    private String[] mTitles;
+    private final String[] mTitles;
 
     TitlesPagerAdapter(Context context, FragmentManager fm) {
         super(fm);

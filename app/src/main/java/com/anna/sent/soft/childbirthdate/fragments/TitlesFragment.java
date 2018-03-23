@@ -96,6 +96,7 @@ public class TitlesFragment extends ListFragment implements
         log("update index=" + mSelectedItem);
         if (mDualPane) {
             FragmentManager fm = getFragmentManager();
+            //noinspection ConstantConditions
             DetailsFragment details = (DetailsFragment) fm.findFragmentById(R.id.details);
             if (details == null || details.getShownIndex() != mSelectedItem) {
                 DetailsFragment newDetails = getDetailsFragmentInstance(mSelectedItem);

@@ -29,6 +29,7 @@ public class TitlesHeaderFragment extends Fragment implements DataClient,
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //noinspection ConstantConditions
         Button buttonCalculate = getActivity().findViewById(R.id.buttonCalculate);
         buttonCalculate.setOnClickListener(this);
     }

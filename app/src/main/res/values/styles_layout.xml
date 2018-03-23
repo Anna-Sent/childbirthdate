@@ -20,10 +20,4 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
-    <style name="LinearLayoutHorizontalStyle.WithPadding">
-        <item name="android:paddingBottom">@dimen/layout_vertical_padding</item>
-        <item name="android:paddingLeft">@dimen/layout_horizontal_padding</item>
-        <item name="android:paddingRight">@dimen/layout_horizontal_padding</item>
-        <item name="android:paddingTop">@dimen/layout_vertical_padding</item>
-    </style>
 </resources>

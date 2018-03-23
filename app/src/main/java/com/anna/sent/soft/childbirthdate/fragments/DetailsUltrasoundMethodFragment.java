@@ -47,6 +47,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        //noinspection ConstantConditions
         textViewDiagnosedAge = getActivity().findViewById(R.id.textViewDiagnosedAge);
 
         datePicker = getActivity().findViewById(R.id.datePickerUltrasoundDate);

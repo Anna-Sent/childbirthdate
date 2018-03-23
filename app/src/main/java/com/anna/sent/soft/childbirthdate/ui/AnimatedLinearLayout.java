@@ -26,7 +26,7 @@ public class AnimatedLinearLayout extends LinearLayout {
 
     private int getHeightForAnimation() {
         int measureSpec = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ? 0
-                : MeasureSpec.makeMeasureSpec(LayoutParams.WRAP_CONTENT, MeasureSpec.EXACTLY);
+                : MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY);
         measure(measureSpec, measureSpec);
         return getMeasuredHeight();
     }

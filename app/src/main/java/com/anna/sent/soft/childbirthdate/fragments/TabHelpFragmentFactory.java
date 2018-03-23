@@ -63,7 +63,9 @@ public class TabHelpFragmentFactory {
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
+            //noinspection ConstantConditions
             int position = getArguments().getInt("position");
+            //noinspection ConstantConditions
             String[] help = getActivity().getResources().getStringArray(R.array.helpParts);
             String text = position >= 0 && position < help.length ? help[position] : null;
             textViewHelp = getActivity().findViewById(getTextViewResourceId());

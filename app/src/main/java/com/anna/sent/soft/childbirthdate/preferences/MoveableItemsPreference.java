@@ -25,7 +25,6 @@ public abstract class MoveableItemsPreference extends DialogPreference
         implements OnClickListener {
     private String mValue;
     private MoveableItemsArrayAdapter mAdapter;
-    private ListView mListView;
 
     protected MoveableItemsPreference(Context context) {
         this(context, null);
@@ -72,11 +71,11 @@ public abstract class MoveableItemsPreference extends DialogPreference
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
         // get list view
-        mListView = view.findViewById(R.id.listView);
+        ListView listView = view.findViewById(R.id.listView);
 
         // and then setup adapter
         mAdapter = new MoveableItemsArrayAdapter(getContext(), toList(mValue));
-        mListView.setAdapter(mAdapter);
+        listView.setAdapter(mAdapter);
 
         setupViewAdd(viewAdd);
     }

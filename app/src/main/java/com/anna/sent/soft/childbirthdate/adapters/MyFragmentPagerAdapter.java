@@ -1,5 +1,6 @@
 package com.anna.sent.soft.childbirthdate.adapters;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,6 +14,7 @@ abstract class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
+    @NonNull
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         Fragment fragment = (Fragment) super.instantiateItem(container, position);
@@ -24,10 +26,5 @@ abstract class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         mFragments.remove(position);
         super.destroyItem(container, position, object);
-    }
-
-    public Fragment getFragment(int position) {
-        return position >= 0 && position < mFragments.size() ? mFragments
-                .get(position) : null;
     }
 }

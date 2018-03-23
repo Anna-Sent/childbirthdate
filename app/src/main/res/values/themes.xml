@@ -47,21 +47,6 @@
 
     <style name="AppThemeLight" parent="AppBaseThemeLight" />
 
-    <style name="DialogBaseTheme" parent="android:Theme.Holo.Dialog" />
-
     <style name="DialogBaseThemeLight" parent="android:Theme.Holo.Light.Dialog" />
 
-    <style name="DialogTheme" parent="DialogBaseTheme">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@color/opaque_50</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
-
-    <style name="DialogThemeLight" parent="DialogBaseThemeLight">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@color/opaque_50</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
 </resources>

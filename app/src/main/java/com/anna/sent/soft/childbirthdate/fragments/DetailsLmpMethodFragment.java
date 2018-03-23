@@ -42,6 +42,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //noinspection ConstantConditions
         datePicker = getActivity().findViewById(R.id.datePickerLastMenstruationDate);
         DateUtils.init(datePicker, this);
 

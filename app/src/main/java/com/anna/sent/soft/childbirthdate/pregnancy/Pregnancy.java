@@ -14,8 +14,9 @@ public abstract class Pregnancy {
     private static final int SECOND_TRIMESTER = 2;
     private static final int THIRD_TRIMESTER = 3;
 
+    private final Calendar startPoint;
+    private Calendar currentPoint;
     private Age age;
-    private Calendar startPoint, currentPoint;
 
     /**
      * @param start start point of pregnancy, must be not null

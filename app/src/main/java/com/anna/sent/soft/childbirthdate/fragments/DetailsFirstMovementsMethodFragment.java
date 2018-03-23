@@ -40,6 +40,7 @@ public class DetailsFirstMovementsMethodFragment extends DetailsFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //noinspection ConstantConditions
         datePicker = getActivity().findViewById(R.id.datePickerFirstMovementsDate);
         DateUtils.init(datePicker, this);
         checkBox = getActivity().findViewById(R.id.checkBoxIsFirstPregnancy);
