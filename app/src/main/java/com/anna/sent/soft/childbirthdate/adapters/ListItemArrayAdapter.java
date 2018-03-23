@@ -14,8 +14,7 @@ import android.widget.TextView;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.logging.MyLog;
 
-public class ListItemArrayAdapter extends ArrayAdapter<String> implements
-        OnClickListener {
+public class ListItemArrayAdapter extends ArrayAdapter<String> implements OnClickListener {
     private final String[] mStrings1;
     private final int mCount;
     private OnCheckedListener mListener;

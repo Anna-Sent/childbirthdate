@@ -16,8 +16,7 @@ import com.anna.sent.soft.childbirthdate.age.LocalizableObject;
 
 import java.util.List;
 
-public class LocalizableSimpleSpinnerItemArrayAdapter extends
-        ArrayAdapter<LocalizableObject> {
+public class LocalizableSimpleSpinnerItemArrayAdapter extends ArrayAdapter<LocalizableObject> {
     private final List<LocalizableObject> mObjects;
 
     public LocalizableSimpleSpinnerItemArrayAdapter(Context context,

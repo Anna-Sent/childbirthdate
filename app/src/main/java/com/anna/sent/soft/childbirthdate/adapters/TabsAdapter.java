@@ -23,7 +23,7 @@ import java.util.List;
  * listens to changes in tabs, and takes care of switch to the correct paged in
  * the ViewPager whenever the selected tab changes.
  */
-public class TabsAdapter extends MyFragmentPagerAdapter implements
+public class TabsAdapter extends BaseFragmentPagerAdapter implements
         TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
     private final Context mContext;
     private final TabHost mTabHost;
