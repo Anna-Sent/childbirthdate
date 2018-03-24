@@ -1,5 +1,6 @@
 package com.anna.sent.soft.childbirthdate.actions;
 
+import com.anna.sent.soft.action.EmailActionActivity;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.data.DataImpl;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
@@ -11,6 +12,11 @@ public class EmailDataActionActivity extends EmailActionActivity {
     @Override
     protected String getEmail() {
         return UserEmailFetcher.getEmail(this);
+    }
+
+    @Override
+    protected String getSubject() {
+        return getString(R.string.app_name);
     }
 
     @Override
@@ -35,5 +41,10 @@ public class EmailDataActionActivity extends EmailActionActivity {
         }
 
         return result.toString();
+    }
+
+    @Override
+    protected int getErrorStringResourceId() {
+        return R.string.sendto_app_not_available;
     }
 }
