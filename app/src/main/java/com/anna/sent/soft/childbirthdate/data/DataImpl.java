@@ -28,8 +28,7 @@ public class DataImpl implements Data {
     private Calendar ultrasoundDate = Calendar.getInstance();
     private Calendar firstAppearanceDate = Calendar.getInstance();
     private Calendar firstMovementsDate = Calendar.getInstance();
-    private int menstrualCycleLen, lutealPhaseLen, ultrasoundWeeks,
-            ultrasoundDays, firstAppearanceWeeks;
+    private int menstrualCycleLen, lutealPhaseLen, ultrasoundWeeks, ultrasoundDays, firstAppearanceWeeks;
 
     public DataImpl(Context context) {
         mContext = context;
@@ -155,8 +154,7 @@ public class DataImpl implements Data {
 
         editor.putBoolean(Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND,
                 byMethod[Shared.Calculation.BY_ULTRASOUND - 1]);
-        editor.putBoolean(
-                Shared.Saved.Calculation.EXTRA_ULTRASOUND_IS_EMBRYONIC_AGE,
+        editor.putBoolean(Shared.Saved.Calculation.EXTRA_ULTRASOUND_IS_EMBRYONIC_AGE,
                 isEmbryonicAge);
         saveDate(editor, Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE,
                 ultrasoundDate);
@@ -176,8 +174,7 @@ public class DataImpl implements Data {
                 byMethod[Shared.Calculation.BY_FIRST_MOVEMENTS - 1]);
         saveDate(editor, Shared.Saved.Calculation.EXTRA_FIRST_MOVEMENTS_DATE,
                 firstMovementsDate);
-        editor.putBoolean(
-                Shared.Saved.Calculation.EXTRA_FIRST_MOVEMENTS_IS_FIRST_PREGNANCY,
+        editor.putBoolean(Shared.Saved.Calculation.EXTRA_FIRST_MOVEMENTS_IS_FIRST_PREGNANCY,
                 isFirstPregnancy);
 
         editor.apply();
@@ -187,8 +184,7 @@ public class DataImpl implements Data {
         log("update");
         SharedPreferences settings = Settings.getSettings(mContext);
 
-        updateDate(settings, lastMenstruationDate,
-                Shared.Saved.Calculation.EXTRA_LMP_DATE);
+        updateDate(settings, lastMenstruationDate, Shared.Saved.Calculation.EXTRA_LMP_DATE);
         menstrualCycleLen = settings.getInt(
                 Shared.Saved.Calculation.EXTRA_LMP_MENSTRUAL_CYCLE_LEN,
                 PregnancyCalculator.AVG_MENSTRUAL_CYCLE_LENGTH);
@@ -196,30 +192,24 @@ public class DataImpl implements Data {
                 Shared.Saved.Calculation.EXTRA_LMP_LUTEAL_PHASE_LEN,
                 PregnancyCalculator.AVG_LUTEAL_PHASE_LENGTH);
 
-        updateDate(settings, ovulationDate,
-                Shared.Saved.Calculation.EXTRA_OVULATION_DATE);
+        updateDate(settings, ovulationDate, Shared.Saved.Calculation.EXTRA_OVULATION_DATE);
 
         ultrasoundWeeks = settings.getInt(
                 Shared.Saved.Calculation.EXTRA_ULTRASOUND_WEEKS, 0);
         ultrasoundDays = settings.getInt(
                 Shared.Saved.Calculation.EXTRA_ULTRASOUND_DAYS, 0);
         isEmbryonicAge = settings.getBoolean(
-                Shared.Saved.Calculation.EXTRA_ULTRASOUND_IS_EMBRYONIC_AGE,
-                false);
-        updateDate(settings, ultrasoundDate,
-                Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE);
+                Shared.Saved.Calculation.EXTRA_ULTRASOUND_IS_EMBRYONIC_AGE, false);
+        updateDate(settings, ultrasoundDate, Shared.Saved.Calculation.EXTRA_ULTRASOUND_DATE);
 
-        updateDate(settings, firstAppearanceDate,
-                Shared.Saved.Calculation.EXTRA_FIRST_APPEARANCE_DATE);
+        updateDate(settings, firstAppearanceDate, Shared.Saved.Calculation.EXTRA_FIRST_APPEARANCE_DATE);
         firstAppearanceWeeks = settings.getInt(
                 Shared.Saved.Calculation.EXTRA_FIRST_APPEARANCE_WEEKS, 0);
 
         updateDate(settings, firstMovementsDate,
                 Shared.Saved.Calculation.EXTRA_FIRST_MOVEMENTS_DATE);
-        isFirstPregnancy = settings
-                .getBoolean(
-                        Shared.Saved.Calculation.EXTRA_FIRST_MOVEMENTS_IS_FIRST_PREGNANCY,
-                        false);
+        isFirstPregnancy = settings.getBoolean(
+                Shared.Saved.Calculation.EXTRA_FIRST_MOVEMENTS_IS_FIRST_PREGNANCY, false);
 
         byMethod[Shared.Calculation.BY_LMP - 1] = settings.getBoolean(
                 Shared.Saved.Calculation.EXTRA_BY_LMP, false);
@@ -227,34 +217,28 @@ public class DataImpl implements Data {
                 Shared.Saved.Calculation.EXTRA_BY_OVULATION, false);
         byMethod[Shared.Calculation.BY_ULTRASOUND - 1] = settings.getBoolean(
                 Shared.Saved.Calculation.EXTRA_BY_ULTRASOUND, false);
-        byMethod[Shared.Calculation.BY_FIRST_APPEARANCE - 1] = settings
-                .getBoolean(Shared.Saved.Calculation.EXTRA_BY_FIRST_APPEARANCE,
-                        false);
-        byMethod[Shared.Calculation.BY_FIRST_MOVEMENTS - 1] = settings
-                .getBoolean(Shared.Saved.Calculation.EXTRA_BY_FIRST_MOVEMENTS,
-                        false);
+        byMethod[Shared.Calculation.BY_FIRST_APPEARANCE - 1] = settings.getBoolean(
+                Shared.Saved.Calculation.EXTRA_BY_FIRST_APPEARANCE, false);
+        byMethod[Shared.Calculation.BY_FIRST_MOVEMENTS - 1] = settings.getBoolean(
+                Shared.Saved.Calculation.EXTRA_BY_FIRST_MOVEMENTS, false);
     }
 
     private void saveDate(Editor editor, String extra, Calendar date) {
-        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT,
-                Locale.getDefault());
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
         String value = formatter.format(date.getTime());
         log("save " + value);
         editor.putString(extra, value);
     }
 
-    private void updateDate(SharedPreferences settings, Calendar date,
-                            String extra) {
+    private void updateDate(SharedPreferences settings, Calendar date, String extra) {
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT,
-                    Locale.getDefault());
+            SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
             String value = settings.getString(extra, null);
             Date date1 = formatter.parse(value);
             date.setTime(date1);
             log("restore 1 " + DateUtils.toString(mContext, date));
         } catch (Exception e) {
-            date.setTimeInMillis(settings.getLong(extra,
-                    System.currentTimeMillis()));
+            date.setTimeInMillis(settings.getLong(extra, System.currentTimeMillis()));
             log("restore 2 " + DateUtils.toString(mContext, date));
         }
     }
@@ -312,10 +296,11 @@ public class DataImpl implements Data {
                 R.string.titles1, DateUtils.toString(mContext, ovulationDate));
 
         result[Shared.Calculation.BY_ULTRASOUND - 1] = mContext.getString(
-                isEmbryonicAge ? R.string.titles2_embryonic
-                        : R.string.titles2_gestational, DateUtils.toString(
-                        mContext, ultrasoundDate), new Age(ultrasoundWeeks,
-                        ultrasoundDays).toString(mContext));
+                isEmbryonicAge
+                        ? R.string.titles2_embryonic
+                        : R.string.titles2_gestational,
+                DateUtils.toString(mContext, ultrasoundDate),
+                new Age(ultrasoundWeeks, ultrasoundDays).toString(mContext));
 
         result[Shared.Calculation.BY_FIRST_APPEARANCE - 1] = mContext
                 .getString(R.string.titles3,
@@ -323,9 +308,10 @@ public class DataImpl implements Data {
                         new Age(firstAppearanceWeeks, 0).toString(mContext));
 
         result[Shared.Calculation.BY_FIRST_MOVEMENTS - 1] = mContext.getString(
-                isFirstPregnancy ? R.string.titles4_first_pregnancy
-                        : R.string.titles4_second_pregnancy, DateUtils
-                        .toString(mContext, firstMovementsDate));
+                isFirstPregnancy
+                        ? R.string.titles4_first_pregnancy
+                        : R.string.titles4_second_pregnancy,
+                DateUtils.toString(mContext, firstMovementsDate));
 
         return result;
     }
