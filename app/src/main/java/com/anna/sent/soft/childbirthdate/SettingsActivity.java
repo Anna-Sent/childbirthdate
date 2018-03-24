@@ -85,7 +85,7 @@ public class SettingsActivity extends CbdSettingsActivity {
                     return true;
                 }
             } catch (NumberFormatException e) {
-                MyLog.getInstance().logcat(Log.ERROR, e.toString());
+                MyLog.getInstance().logcat(Log.ERROR, e);
             }
         } else if (key.equals(settingsTheme.getThemeKey())) {
             try {
@@ -98,7 +98,7 @@ public class SettingsActivity extends CbdSettingsActivity {
                     return true;
                 }
             } catch (NumberFormatException e) {
-                MyLog.getInstance().logcat(Log.ERROR, e.toString());
+                MyLog.getInstance().logcat(Log.ERROR, e);
             }
         } else if (key.equals(getString(R.string.pref_sick_list_days_key))) {
             SickListDaysPreference prefDays = (SickListDaysPreference) preference;

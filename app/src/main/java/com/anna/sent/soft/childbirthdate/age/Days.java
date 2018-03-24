@@ -70,7 +70,7 @@ public class Days implements ISetting, Serializable {
             int d = Integer.parseInt(str);
             return new Days(d);
         } catch (Exception e) {
-            MyLog.getInstance().logcat(Log.ERROR, e.toString());
+            MyLog.getInstance().logcat(Log.ERROR, e);
         }
 
         return null;

@@ -34,7 +34,7 @@ public class DataKeeperActivity extends CbdActivity {
     @Override
     public final void onAttachFragment(Fragment fragment) {
         super.onAttachFragment(fragment);
-        log("attach " + fragment.toString());
+        log("attach " + fragment);
         if (fragment instanceof DataClient) {
             DataClient dataClient = (DataClient) fragment;
             dataClient.setData(mConcreteData);

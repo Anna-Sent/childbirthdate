@@ -122,7 +122,7 @@ public class Age implements ISetting, Serializable {
                 int d = Integer.parseInt(tokens[1]);
                 return new Age(w, d);
             } catch (Exception e) {
-                MyLog.getInstance().logcat(Log.ERROR, e.toString());
+                MyLog.getInstance().logcat(Log.ERROR, e);
             }
         }
 
