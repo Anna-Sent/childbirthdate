@@ -32,8 +32,7 @@ public class TabsAdapter extends BaseFragmentPagerAdapter implements
 
     private TabHost.OnTabChangeListener mOnTabChangeListener;
 
-    public TabsAdapter(FragmentActivity activity, TabHost tabHost,
-                       ViewPager pager) {
+    public TabsAdapter(FragmentActivity activity, TabHost tabHost, ViewPager pager) {
         super(activity.getSupportFragmentManager());
         mContext = activity;
         mTabHost = tabHost;
@@ -78,8 +77,7 @@ public class TabsAdapter extends BaseFragmentPagerAdapter implements
     }
 
     @Override
-    public void onPageScrolled(int position, float positionOffset,
-                               int positionOffsetPixels) {
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
     }
 
     @Override
@@ -116,7 +114,7 @@ public class TabsAdapter extends BaseFragmentPagerAdapter implements
     private static class DummyTabFactory implements TabHost.TabContentFactory {
         private final Context mContext;
 
-        public DummyTabFactory(Context context) {
+        DummyTabFactory(Context context) {
             mContext = context;
         }
 

@@ -62,8 +62,7 @@ public class LocalizableSimpleSpinnerItemArrayAdapter extends ArrayAdapter<Local
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        viewHolder.textView.setText(mObjects.get(position).toString(
-                getContext()));
+        viewHolder.textView.setText(mObjects.get(position).toString(getContext()));
 
         return view;
     }

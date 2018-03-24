@@ -9,7 +9,8 @@ public class SettingsParser {
     private static String saveList(List<ISetting> list) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < list.size(); ++i) {
-            result.append(list.get(i).save())
+            result
+                    .append(list.get(i).save())
                     .append(i == list.size() - 1 ? "" : DELIMITER_LIST);
         }
 
