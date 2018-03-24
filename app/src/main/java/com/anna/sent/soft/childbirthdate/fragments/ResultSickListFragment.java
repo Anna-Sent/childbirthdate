@@ -110,11 +110,7 @@ public class ResultSickListFragment extends CbdFragment implements
         boolean showAd = expectedHeightDp < actualHeightDp;
         mAdView = AdUtils.setupAd(getActivity(), R.id.adView_sick_list, R.string.adUnitId, showAd);
 
-        if (getActivity() == null) {
-            log("activity is null");
-            return;
-        }
-
+        //noinspection ConstantConditions
         mTable = getActivity().findViewById(R.id.table_sick_list);
         getActivity().findViewById(R.id.buttonEditDays).setOnClickListener(this);
         getActivity().findViewById(R.id.buttonEditAge).setOnClickListener(this);
