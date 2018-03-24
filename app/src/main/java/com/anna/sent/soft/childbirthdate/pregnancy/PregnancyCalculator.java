@@ -30,24 +30,20 @@ public class PregnancyCalculator {
     public final static int MIN_LUTEAL_PHASE_LEN = 10;
     public final static int MAX_LUTEAL_PHASE_LEN = 20;
 
-    public final static int AVG_PHOLLICULAR_PHASE_LENGTH = AVG_MENSTRUAL_CYCLE_LENGTH
-            - AVG_LUTEAL_PHASE_LENGTH;
+    public final static int AVG_PHOLLICULAR_PHASE_LENGTH = AVG_MENSTRUAL_CYCLE_LENGTH - AVG_LUTEAL_PHASE_LENGTH;
     public final static int GESTATIONAL_AVG_AGE_IN_WEEKS = 40;
     public final static int EMBRYONIC_AVG_AGE_IN_WEEKS = GESTATIONAL_AVG_AGE_IN_WEEKS - 2;
     public final static int GESTATIIONAL_FIRST_TRIMESTER_END_INCLUSIVE_IN_WEEKS = 12;
     public final static int EMBRYONIC_FIRST_TRIMESTER_END_INCLUSIVE_IN_WEEKS = GESTATIIONAL_FIRST_TRIMESTER_END_INCLUSIVE_IN_WEEKS - 2;
     public final static int GESTATIONAL_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS = 28;
     public final static int EMBRYONIC_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS = GESTATIONAL_SECOND_TRIMESTER_END_INCLUSIVE_IN_WEEKS - 2;
-    private final static int MIN_PHOLLICULAR_PHASE_LENGTH = MIN_MENSTRUAL_CYCLE_LEN
-            - MAX_LUTEAL_PHASE_LEN;
-    private final static int MAX_PHOLLICULAR_PHASE_LENGTH = MAX_MENSTRUAL_CYCLE_LEN
-            - MIN_LUTEAL_PHASE_LEN;
+    public final static int MIN_PHOLLICULAR_PHASE_LENGTH = MIN_MENSTRUAL_CYCLE_LEN - MAX_LUTEAL_PHASE_LEN;
+    public final static int MAX_PHOLLICULAR_PHASE_LENGTH = MAX_MENSTRUAL_CYCLE_LEN - MIN_LUTEAL_PHASE_LEN;
     public final static int GESTATIONAL_MAX_AGE_DURATION = GESTATIONAL_AVG_AGE_IN_WEEKS
             * Age.DAYS_IN_WEEK
             - AVG_PHOLLICULAR_PHASE_LENGTH
             + MAX_PHOLLICULAR_PHASE_LENGTH;
-    public final static int EMBRYONIC_MAX_AGE_DURATION = GESTATIONAL_MAX_AGE_DURATION
-            - MIN_PHOLLICULAR_PHASE_LENGTH;
+    public final static int EMBRYONIC_MAX_AGE_DURATION = GESTATIONAL_MAX_AGE_DURATION - MIN_PHOLLICULAR_PHASE_LENGTH;
 
     public static class Factory {
         public static Pregnancy get(Data data, int index) {
@@ -56,8 +52,7 @@ public class PregnancyCalculator {
                     Calendar lastMenstruationDate = data.getLastMenstruationDate();
                     int menstrualCycleLen = data.getMenstrualCycleLen();
                     int lutealPhaseLen = data.getLutealPhaseLen();
-                    return new CorrectedGestationalAge(lastMenstruationDate,
-                            menstrualCycleLen, lutealPhaseLen);
+                    return new CorrectedGestationalAge(lastMenstruationDate, menstrualCycleLen, lutealPhaseLen);
                 case Shared.Calculation.BY_OVULATION:
                     Calendar ovulationDate = data.getOvulationDate();
                     return new EmbryonicAge(ovulationDate);
@@ -78,8 +73,7 @@ public class PregnancyCalculator {
                 case Shared.Calculation.BY_FIRST_MOVEMENTS:
                     Calendar firstMovementsDate = data.getFirstMovementsDate();
                     boolean isFirstPregnancy = data.isFirstPregnancy();
-                    return new GestationalAge(isFirstPregnancy ? 20 : 18, 0,
-                            firstMovementsDate);
+                    return new GestationalAge(isFirstPregnancy ? 20 : 18, 0, firstMovementsDate);
             }
 
             throw new IllegalArgumentException("Unknown calculation method");

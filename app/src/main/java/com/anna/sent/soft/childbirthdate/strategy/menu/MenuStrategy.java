@@ -32,16 +32,14 @@ public class MenuStrategy extends BaseStrategy {
         switch (item.getItemId()) {
             case R.id.sendData:
                 if (mActivity != null) {
-                    Intent sendData = new Intent(mActivity,
-                            EmailDataActionActivity.class);
+                    Intent sendData = new Intent(mActivity, EmailDataActionActivity.class);
                     mActivity.startActivity(sendData);
                 }
 
                 return true;
             case R.id.settings:
                 if (mActivity != null) {
-                    mActivity.startActivity(new Intent(mActivity,
-                            SettingsActivity.class));
+                    mActivity.startActivity(new Intent(mActivity, SettingsActivity.class));
                 }
 
                 return true;

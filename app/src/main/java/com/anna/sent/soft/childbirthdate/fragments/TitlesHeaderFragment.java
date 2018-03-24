@@ -47,7 +47,8 @@ public class TitlesHeaderFragment extends Fragment implements DataClient,
                     Intent intent = new Intent(getActivity(), ResultsActivity.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getActivity(), getString(R.string.errorNotSelectedCalculationMethod), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getString(R.string.errorNotSelectedCalculationMethod), Toast.LENGTH_LONG)
+                            .show();
                 }
 
                 break;

@@ -67,8 +67,7 @@ public abstract class MoveableItemsPreference extends DialogPreference
         ViewGroup viewAddParent = view.findViewById(R.id.lastItem);
 
         // add view 'add' to parent
-        viewAddParent.addView(viewAdd, new LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        viewAddParent.addView(viewAdd, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
         // get list view
         ListView listView = view.findViewById(R.id.listView);
@@ -137,8 +136,7 @@ public abstract class MoveableItemsPreference extends DialogPreference
         SavedState myState = new SavedState(superState);
         myState.value = saveAddValue();
         if (mAdapter != null) {
-            myState.values = SettingsParser.toString(mAdapter.getValues()
-            );
+            myState.values = SettingsParser.toString(mAdapter.getValues());
         } else {
             myState.values = null;
         }
@@ -159,8 +157,7 @@ public abstract class MoveableItemsPreference extends DialogPreference
         super.onRestoreInstanceState(myState.getSuperState());
         restoreAddValue(myState.value);
         if (mAdapter != null) {
-            mAdapter.setItems(SettingsParser.toList(myState.values,
-                    getElement()));
+            mAdapter.setItems(SettingsParser.toList(myState.values, getElement()));
         }
     }
 
@@ -190,7 +187,8 @@ public abstract class MoveableItemsPreference extends DialogPreference
                 return new SavedState[size];
             }
         };
-        public String value;
+
+        private String value;
         private String values;
 
         SavedState(Parcelable superState) {

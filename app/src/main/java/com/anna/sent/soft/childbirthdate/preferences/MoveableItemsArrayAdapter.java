@@ -32,8 +32,8 @@ public class MoveableItemsArrayAdapter extends ArrayAdapter<String> implements O
         return mValues.size();
     }
 
-    @NonNull
     @SuppressWarnings("InflateParams")
+    @NonNull
     @Override
     public View getView(int position, View contentView, @NonNull ViewGroup viewGroup) {
         View view;

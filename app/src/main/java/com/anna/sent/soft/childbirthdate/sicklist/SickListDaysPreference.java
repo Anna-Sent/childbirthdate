@@ -39,8 +39,7 @@ public class SickListDaysPreference extends MoveableItemsPreference {
 
     @Override
     protected void addItem(MoveableItemsArrayAdapter adapter) {
-        Days days = SickListUtils.checkDays(getContext(), mEditText,
-                adapter.getValues());
+        Days days = SickListUtils.checkDays(getContext(), mEditText, adapter.getValues());
         if (days != null) {
             adapter.addItem(days);
             mEditText.setText("");

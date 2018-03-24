@@ -39,7 +39,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
         try {
             getPendingIntent(context, cls).send();
         } catch (CanceledException e) {
-            e.printStackTrace();
+            MyLog.getInstance().report(new RuntimeException("failed to update widgets", e));
         }
     }
 
@@ -57,8 +57,7 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
         //noinspection ConstantConditions
         alarmManager.cancel(operation);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                midnight.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
-                operation);
+                midnight.getTimeInMillis(), AlarmManager.INTERVAL_DAY, operation);
     }
 
     @Override
@@ -71,10 +70,8 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
                     || action.equals(Intent.ACTION_TIMEZONE_CHANGED)
                     || action.equals(Intent.ACTION_DATE_CHANGED)
                     || action.equals(Intent.ACTION_BOOT_COMPLETED)) {
-                AppWidgetManager appWidgetManager = AppWidgetManager
-                        .getInstance(context);
-                int[] appWidgetIds = appWidgetManager
-                        .getAppWidgetIds(new ComponentName(context, getClass()));
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
                 if (appWidgetIds.length > 0) {
                     MyLog.getInstance().logcat(Log.DEBUG, getClass().getSimpleName() + " got action " + action);
 
@@ -95,12 +92,10 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
     }
 
     @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager,
-                         int[] appWidgetIds) {
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // Update each of the widgets with the remote adapter
         for (int appWidgetId : appWidgetIds) {
-            RemoteViews views = getBuilder().buildViews(context,
-                    appWidgetId);
+            RemoteViews views = getBuilder().buildViews(context, appWidgetId);
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
 
@@ -112,14 +107,13 @@ public abstract class MyPregnancyWidget extends AppWidgetProvider {
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
+
         SharedPreferences settings = Settings.getSettings(context);
         Editor editor = settings.edit();
         for (int appWidgetId : appWidgetIds) {
-            editor.remove(Shared.Saved.Widget.EXTRA_CALCULATION_METHOD
-                    + appWidgetId);
+            editor.remove(Shared.Saved.Widget.EXTRA_CALCULATION_METHOD + appWidgetId);
             editor.remove(Shared.Saved.Widget.EXTRA_COUNTDOWN + appWidgetId);
-            editor.remove(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD
-                    + appWidgetId);
+            editor.remove(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD + appWidgetId);
         }
 
         editor.apply();

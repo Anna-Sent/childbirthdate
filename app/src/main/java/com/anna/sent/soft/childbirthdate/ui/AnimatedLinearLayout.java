@@ -25,7 +25,8 @@ public class AnimatedLinearLayout extends LinearLayout {
     }
 
     private int getHeightForAnimation() {
-        int measureSpec = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ? 0
+        int measureSpec = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2
+                ? 0
                 : MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY);
         measure(measureSpec, measureSpec);
         return getMeasuredHeight();
@@ -90,10 +91,10 @@ public class AnimatedLinearLayout extends LinearLayout {
         return getVisibility() == View.VISIBLE;
     }
 
-    public class DropDownAnimation extends Animation {
-        final int targetHeight;
-        final View view;
-        final boolean down;
+    private static class DropDownAnimation extends Animation {
+        private final int targetHeight;
+        private final View view;
+        private final boolean down;
 
         public DropDownAnimation(View view, int targetHeight, boolean down) {
             this.view = view;
@@ -103,8 +104,7 @@ public class AnimatedLinearLayout extends LinearLayout {
         }
 
         @Override
-        protected void applyTransformation(float interpolatedTime,
-                                           Transformation t) {
+        protected void applyTransformation(float interpolatedTime, Transformation t) {
             int newHeight;
             if (down) {
                 newHeight = (int) (targetHeight * interpolatedTime);

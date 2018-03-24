@@ -15,7 +15,6 @@ import com.anna.sent.soft.logging.MyLog;
 import com.anna.sent.soft.utils.ActionBarUtils;
 import com.anna.sent.soft.utils.ActivityUtils;
 
-@SuppressWarnings("deprecated")
 public class SettingsActivity extends CbdSettingsActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {

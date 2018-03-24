@@ -50,8 +50,8 @@ public class ListItemArrayAdapter extends ArrayAdapter<String> implements OnClic
         return mCount;
     }
 
-    @NonNull
     @SuppressWarnings("InflateParams")
+    @NonNull
     @Override
     public View getView(int position, View contentView, @NonNull ViewGroup viewGroup) {
         View view;

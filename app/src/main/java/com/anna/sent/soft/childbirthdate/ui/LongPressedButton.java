@@ -10,16 +10,16 @@ import android.widget.Button;
 public class LongPressedButton extends Button {
     private Listener mListener;
 
-    public LongPressedButton(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+    public LongPressedButton(Context context) {
+        super(context);
     }
 
     public LongPressedButton(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public LongPressedButton(Context context) {
-        super(context);
+    public LongPressedButton(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -37,8 +37,7 @@ public class LongPressedButton extends Button {
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_DPAD_CENTER)
-                || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+        if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
             cancelLongpress();
         }
 
@@ -46,8 +45,7 @@ public class LongPressedButton extends Button {
     }
 
     private void cancelLongpressIfRequired(MotionEvent event) {
-        if ((event.getAction() == MotionEvent.ACTION_CANCEL)
-                || (event.getAction() == MotionEvent.ACTION_UP)) {
+        if (event.getAction() == MotionEvent.ACTION_CANCEL || event.getAction() == MotionEvent.ACTION_UP) {
             cancelLongpress();
         }
     }

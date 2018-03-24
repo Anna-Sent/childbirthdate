@@ -10,7 +10,7 @@ import java.util.Calendar;
  * @author Anna
  */
 public class GestationalAge extends Pregnancy {
-    GestationalAge(Calendar start) {
+    public GestationalAge(Calendar start) {
         super(start);
     }
 
@@ -20,8 +20,7 @@ public class GestationalAge extends Pregnancy {
 
     @Override
     protected int getFullDurationInDays() {
-        return PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS
-                * Age.DAYS_IN_WEEK;
+        return PregnancyCalculator.GESTATIONAL_AVG_AGE_IN_WEEKS * Age.DAYS_IN_WEEK;
     }
 
     @Override

@@ -24,8 +24,7 @@ public class Settings {
                 .getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE));
     }
 
-    public static List<LocalizableObject> getList(Context context,
-                                                  Class<? extends ISetting> cls) {
+    public static List<LocalizableObject> getList(Context context, Class<? extends ISetting> cls) {
         if (cls == Age.class) {
             return getAge(context);
         } else if (cls == Days.class) {
@@ -48,14 +47,12 @@ public class Settings {
     private static List<LocalizableObject> getList(Context context,
                                                    int keyStringRes, String defaultValue, ISetting element) {
         SharedPreferences settings = getSettings(context);
-        String value = settings.getString(context.getString(keyStringRes),
-                defaultValue);
+        String value = settings.getString(context.getString(keyStringRes), defaultValue);
         return SettingsParser.toList(value, element);
     }
 
     @SuppressWarnings("unused")
-    public static void setList(Context context, List<LocalizableObject> list,
-                               Class<? extends ISetting> cls) {
+    public static void setList(Context context, List<LocalizableObject> list, Class<? extends ISetting> cls) {
         if (cls == Age.class) {
             setAge(context, list);
         } else if (cls == Days.class) {
@@ -71,8 +68,7 @@ public class Settings {
         setList(context, R.string.pref_sick_list_age_key, list);
     }
 
-    private static void setList(Context context, int keyStringRes,
-                                List<LocalizableObject> list) {
+    private static void setList(Context context, int keyStringRes, List<LocalizableObject> list) {
         SharedPreferences settings = getSettings(context);
         Editor editor = settings.edit();
         String value = SettingsParser.toString(list);

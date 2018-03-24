@@ -26,8 +26,7 @@ public abstract class Builder {
     private void setOnClickPendingIntent(Context context, RemoteViews views) {
         Intent intent = new Intent(context, ResultsActivity.class);
         intent.putExtra(Shared.Child.EXTRA_IS_STARTED_FROM_WIDGET, true);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = TaskStackBuilder.create(context)
                 .addNextIntentWithParentStack(intent)
@@ -36,8 +35,7 @@ public abstract class Builder {
     }
 
     public RemoteViews buildViews(Context context, int appWidgetId) {
-        RemoteViews views = new RemoteViews(context.getPackageName(),
-                R.layout.my_pregnancy_widget_layout);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.my_pregnancy_widget_layout);
 
         setOnClickPendingIntent(context, views);
 
@@ -45,16 +43,17 @@ public abstract class Builder {
         int calculationMethod = settings.getInt(
                 Shared.Saved.Widget.EXTRA_CALCULATION_METHOD + appWidgetId,
                 Shared.Calculation.UNKNOWN);
-        boolean countdown = settings.getBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN + appWidgetId, false);
-        boolean showCalculationMethod = settings.getBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD + appWidgetId, false);
+        boolean countdown = settings.getBoolean(
+                Shared.Saved.Widget.EXTRA_COUNTDOWN + appWidgetId, false);
+        boolean showCalculationMethod = settings.getBoolean(
+                Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD + appWidgetId, false);
 
         DataImpl data = new DataImpl(context);
         data.update();
 
         Pregnancy p = PregnancyCalculator.Factory.get(data, calculationMethod);
 
-        String[] methodNames = context.getResources().getStringArray(
-                R.array.methodNames);
+        String[] methodNames = context.getResources().getStringArray(R.array.methodNames);
         String calculationMethodString = methodNames[calculationMethod - 1];
         Calendar currentDate = Calendar.getInstance();
         p.setCurrentPoint(currentDate);

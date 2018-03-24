@@ -69,8 +69,7 @@ public abstract class Pregnancy {
     public void setCurrentPoint(Calendar current) {
         currentPoint = (Calendar) current.clone();
         zeroDate(currentPoint);
-        long difference = currentPoint.getTimeInMillis()
-                - startPoint.getTimeInMillis();
+        long difference = currentPoint.getTimeInMillis() - startPoint.getTimeInMillis();
         int days = (int) (difference / (1000L * 3600L * 24L));
         int weeks = days / Age.DAYS_IN_WEEK;
         days = days - weeks * Age.DAYS_IN_WEEK;
@@ -160,8 +159,7 @@ public abstract class Pregnancy {
     }
 
     private int getFullDurationDays() {
-        return getFullDurationInDays() - getFullDurationWeeks()
-                * Age.DAYS_IN_WEEK;
+        return getFullDurationInDays() - getFullDurationWeeks() * Age.DAYS_IN_WEEK;
     }
 
     public int getRestInDays() {

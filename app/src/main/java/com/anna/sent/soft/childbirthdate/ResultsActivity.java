@@ -25,11 +25,12 @@ public class ResultsActivity extends ChildActivity implements OnTabChangeListene
         ViewPager viewPager = findViewById(R.id.pager);
 
         TabsAdapter tabsAdapter = new TabsAdapter(this, tabHost, viewPager);
-        tabsAdapter
-                .addTab(tabHost.newTabSpec(ResultEcdFragment.class.getSimpleName())
-                                .setIndicator(getString(R.string.ecdAndGestationalAge)),
-                        ResultEcdFragment.class, null);
-        tabsAdapter.addTab(tabHost.newTabSpec(ResultSickListFragment.class.getSimpleName())
+        tabsAdapter.addTab(
+                tabHost.newTabSpec(ResultEcdFragment.class.getSimpleName())
+                        .setIndicator(getString(R.string.ecdAndGestationalAge)),
+                ResultEcdFragment.class, null);
+        tabsAdapter.addTab(
+                tabHost.newTabSpec(ResultSickListFragment.class.getSimpleName())
                         .setIndicator(getString(R.string.sick_list)),
                 ResultSickListFragment.class, null);
         tabsAdapter.setOnTabChangeListener(this);

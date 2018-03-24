@@ -20,8 +20,7 @@ public final class EmbryonicAge extends Pregnancy {
 
     @Override
     public int getFullDurationInDays() {
-        return PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS
-                * Age.DAYS_IN_WEEK;
+        return PregnancyCalculator.EMBRYONIC_AVG_AGE_IN_WEEKS * Age.DAYS_IN_WEEK;
     }
 
     @Override

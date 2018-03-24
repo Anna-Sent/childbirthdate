@@ -11,17 +11,16 @@ import com.anna.sent.soft.childbirthdate.R;
 public class CheckableFrameLayout extends FrameLayout implements Checkable {
     private boolean mChecked;
 
-    public CheckableFrameLayout(Context context, AttributeSet attrs,
-                                int defStyle) {
-        super(context, attrs, defStyle);
+    public CheckableFrameLayout(Context context) {
+        super(context);
     }
 
     public CheckableFrameLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CheckableFrameLayout(Context context) {
-        super(context);
+    public CheckableFrameLayout(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
     }
 
     public boolean isChecked() {

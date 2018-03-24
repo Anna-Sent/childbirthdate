@@ -22,8 +22,7 @@ import com.anna.sent.soft.childbirthdate.data.DataImpl;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
-public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements
-        OnClickListener {
+public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements OnClickListener {
     private static final String KEY_CHECKED_RADIO_INDEX = "checkedRadioIndex";
     private final RadioButton[] radio = new RadioButton[Shared.Calculation.METHODS_COUNT];
     private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
@@ -40,17 +39,16 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements
         setContentView(R.layout.my_pregnancy_widget_configure_layout);
         setResult(RESULT_CANCELED);
 
-        // First, get the App Widget ID from the Intent that launched the
-        // Activity:
+        // First, get the App Widget ID from the Intent that launched the Activity:
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
+            mAppWidgetId = extras.getInt(
+                    AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
         if (mAppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
-            Toast.makeText(this, R.string.errorInvalidAppWidgetId,
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.errorInvalidAppWidgetId, Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -60,8 +58,7 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements
         int defaultValue = getDefaultRadioIndex();
         int radioIndex = defaultValue;
         if (savedInstanceState != null) {
-            radioIndex = savedInstanceState.getInt(KEY_CHECKED_RADIO_INDEX,
-                    defaultValue);
+            radioIndex = savedInstanceState.getInt(KEY_CHECKED_RADIO_INDEX, defaultValue);
         }
 
         if (radioIndex != -1) {
@@ -81,10 +78,8 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements
     private void addWidget() {
         int radioIndex = getCheckedRadioIndex();
         if (radioIndex != -1) {
-            // When the configuration is complete, get an instance of the
-            // AppWidgetManager
-            AppWidgetManager appWidgetManager = AppWidgetManager
-                    .getInstance(this);
+            // When the configuration is complete, get an instance of the AppWidgetManager
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
 
             // First
             saveWidgetParams();
@@ -98,16 +93,14 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements
             // Finally, create the return Intent, set it with the Activity
             // result, and finish the Activity:
             Intent resultValue = new Intent();
-            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    mAppWidgetId);
+            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
 
             setResult(RESULT_OK, resultValue);
 
             finish();
         } else {
-            Toast.makeText(this,
-                    getString(R.string.errorNotSelectedCalculationMethod),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.errorNotSelectedCalculationMethod), Toast.LENGTH_LONG)
+                    .show();
         }
     }
 
@@ -115,8 +108,7 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements
 
     private void startTheApplication() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }
@@ -141,11 +133,11 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements
         data.update();
         doCalculation = data.thereIsAtLeastOneSelectedMethod();
         TextView textView = findViewById(R.id.widgetConfigureTextView);
-        textView.setText(doCalculation ? getString(R.string.widgetSpecifyTheMethodOfCalculation)
+        textView.setText(doCalculation
+                ? getString(R.string.widgetSpecifyTheMethodOfCalculation)
                 : getString(R.string.widgetStartTheApplicationToSpecifyNecessaryData));
         RadioGroup radioGroup = findViewById(R.id.radioGroup);
-        String[] methodNames = getResources().getStringArray(
-                R.array.methodNames);
+        String[] methodNames = getResources().getStringArray(R.array.methodNames);
         boolean byMethod[] = data.byMethod();
         for (int i = 0; i < radio.length; ++i) {
             radio[i] = new RadioButton(this);
@@ -158,8 +150,8 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements
         checkBoxCountdown.setVisibility(hasCountdown() && doCalculation ? View.VISIBLE : View.GONE);
 
         checkBoxShowCalculationMethod = findViewById(R.id.checkBoxShowCalculationMethod);
-        checkBoxShowCalculationMethod.setVisibility(hasShowCalculationMethod()
-                && doCalculation ? View.VISIBLE : View.GONE);
+        checkBoxShowCalculationMethod.setVisibility(hasShowCalculationMethod() && doCalculation
+                ? View.VISIBLE : View.GONE);
 
         Button button = findViewById(R.id.widgetConfigureButton);
         button.setText(doCalculation ? getString(R.string.widgetAddWidget) : getString(R.string.widgetStartTheApplication));
@@ -171,15 +163,13 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements
         Editor editor = settings.edit();
 
         int methodIndex = getCheckedRadioIndex() + 1;
-        editor.putInt(Shared.Saved.Widget.EXTRA_CALCULATION_METHOD
-                + mAppWidgetId, methodIndex);
+        editor.putInt(Shared.Saved.Widget.EXTRA_CALCULATION_METHOD + mAppWidgetId, methodIndex);
 
         editor.putBoolean(Shared.Saved.Widget.EXTRA_COUNTDOWN + mAppWidgetId,
                 hasCountdown() && checkBoxCountdown.isChecked());
 
-        editor.putBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD
-                + mAppWidgetId, hasShowCalculationMethod()
-                && checkBoxShowCalculationMethod.isChecked());
+        editor.putBoolean(Shared.Saved.Widget.EXTRA_SHOW_CALCULATION_METHOD + mAppWidgetId,
+                hasShowCalculationMethod() && checkBoxShowCalculationMethod.isChecked());
 
         editor.apply();
     }

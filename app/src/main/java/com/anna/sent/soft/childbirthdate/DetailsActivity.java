@@ -9,8 +9,7 @@ import com.anna.sent.soft.childbirthdate.adapters.DetailsPagerAdapter;
 import com.anna.sent.soft.childbirthdate.base.ChildActivity;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 
-public class DetailsActivity extends ChildActivity implements
-        ViewPager.OnPageChangeListener {
+public class DetailsActivity extends ChildActivity implements ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
     private DetailsPagerAdapter mTabsAdapter;
     private int mIndex = 0;
@@ -29,10 +28,11 @@ public class DetailsActivity extends ChildActivity implements
 
         mViewPager = findViewById(R.id.pager);
         mViewPager.addOnPageChangeListener(this);
-        mTabsAdapter = new DetailsPagerAdapter(this,
-                getSupportFragmentManager());
+        mTabsAdapter = new DetailsPagerAdapter(this, getSupportFragmentManager());
 
-        mIndex = savedInstanceState == null ? 0 : savedInstanceState.getInt(Shared.Titles.EXTRA_POSITION, 0);
+        mIndex = savedInstanceState == null
+                ? 0
+                : savedInstanceState.getInt(Shared.Titles.EXTRA_POSITION, 0);
     }
 
     @Override
