@@ -18,9 +18,8 @@ import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 
 import java.util.Calendar;
 
-public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
-        OnClickListener, NumberPicker.OnValueChangeListener,
-        DatePicker.OnDateChangedListener {
+public class DetailsUltrasoundMethodFragment extends DetailsFragment
+        implements OnClickListener, NumberPicker.OnValueChangeListener, DatePicker.OnDateChangedListener {
     private TextView textViewDiagnosedAge;
     private NumberPicker numberPickerWeeks, numberPickerDays;
     private DatePicker datePicker;
@@ -143,7 +142,7 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment implements
     }
 
     @Override
-    public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
+    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         if (mData != null) {
             Calendar ultrasoundDate = DateUtils.getDate(datePicker);
             mData.setUltrasoundDate(ultrasoundDate);

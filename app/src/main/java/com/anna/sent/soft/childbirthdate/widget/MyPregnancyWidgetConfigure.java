@@ -39,7 +39,7 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements 
         setContentView(R.layout.my_pregnancy_widget_configure_layout);
         setResult(RESULT_CANCELED);
 
-        // First, get the App Widget ID from the Intent that launched the Activity:
+        // First, get the App Widget ID from the Intent that launched the Activity
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             mAppWidgetId = extras.getInt(
@@ -53,7 +53,7 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements 
             return;
         }
 
-        // Perform App Widget configuration.
+        // Perform App Widget configuration
         init();
         int defaultValue = getDefaultRadioIndex();
         int radioIndex = defaultValue;
@@ -91,7 +91,7 @@ public abstract class MyPregnancyWidgetConfigure extends CbdActivity implements 
             MyPregnancyWidget.installAlarms(this, getWidgetProviderClass());
 
             // Finally, create the return Intent, set it with the Activity
-            // result, and finish the Activity:
+            // result, and finish the Activity
             Intent resultValue = new Intent();
             resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
 

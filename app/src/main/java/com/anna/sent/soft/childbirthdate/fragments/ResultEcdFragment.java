@@ -31,8 +31,8 @@ import com.google.android.gms.ads.AdView;
 
 import java.util.Calendar;
 
-public class ResultEcdFragment extends CbdFragment implements
-        DataClient, OnClickListener, OnDateChangedListener, LongPressedButton.Listener {
+public class ResultEcdFragment extends CbdFragment
+        implements DataClient, OnClickListener, OnDateChangedListener, LongPressedButton.Listener {
     private static final String KEY_IS_ANIMATED_ACTIVITY_VISIBLE = "isAnimatedActivityVisible";
     private static final boolean DEFAULT_VALUE_IS_ANIMATED_LAYOUT_VISIBLE = false;
     private static final boolean USE_ANIMATION = true;
@@ -86,8 +86,7 @@ public class ResultEcdFragment extends CbdFragment implements
                 setDate(Calendar.getInstance());
             }
         });
-        LongPressedButton nextDay = getActivity()
-                .findViewById(R.id.buttonNextDay);
+        LongPressedButton nextDay = getActivity().findViewById(R.id.buttonNextDay);
         nextDay.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -102,8 +101,7 @@ public class ResultEcdFragment extends CbdFragment implements
             }
         });
         nextDay.setListener(this);
-        LongPressedButton prevDay = getActivity()
-                .findViewById(R.id.buttonPrevDay);
+        LongPressedButton prevDay = getActivity().findViewById(R.id.buttonPrevDay);
         prevDay.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -156,8 +154,7 @@ public class ResultEcdFragment extends CbdFragment implements
             buttonShowHide.setContentDescription(getString(R.string.collapse));
         } else {
             animatedLayout.hide(withAnimation);
-            textViewOnDate.setText(DateUtils.toString(getActivity(),
-                    DateUtils.getDate(mDatePicker)));
+            textViewOnDate.setText(DateUtils.toString(getActivity(), DateUtils.getDate(mDatePicker)));
             buttonShowHide.setCompoundDrawablesWithIntrinsicBounds(
                     mExpandDrawable, null, null, null);
             buttonShowHide.setContentDescription(getString(R.string.expand));
@@ -223,11 +220,11 @@ public class ResultEcdFragment extends CbdFragment implements
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
+
         if (mAdView != null) {
             mAdView.destroy();
         }
-
-        super.onDestroy();
     }
 
     @Override
@@ -240,8 +237,7 @@ public class ResultEcdFragment extends CbdFragment implements
     private void fillResults() {
         mDate = DateUtils.getDate(mDatePicker);
         mTable.removeAllViews();
-        String[] methodNames = getResources().getStringArray(
-                R.array.methodNames);
+        String[] methodNames = getResources().getStringArray(R.array.methodNames);
         for (int i = 0; i < getData().byMethod().length; ++i) {
             if (getData().byMethod()[i]) {
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -249,8 +245,7 @@ public class ResultEcdFragment extends CbdFragment implements
                 TextView textView = row.findViewById(R.id.textView);
                 textView.setText(methodNames[i]);
 
-                Pregnancy pregnancy = PregnancyCalculator.Factory.get(
-                        getData(), i + 1);
+                Pregnancy pregnancy = PregnancyCalculator.Factory.get(getData(), i + 1);
 
                 fillRows(pregnancy, row);
 

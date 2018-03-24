@@ -1,15 +1,13 @@
 package com.anna.sent.soft.childbirthdate.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 
+import com.anna.sent.soft.childbirthdate.base.CbdFragment;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
-import com.anna.sent.soft.logging.MyLog;
 
-public abstract class DetailsFragment extends Fragment implements DataClient {
+public abstract class DetailsFragment extends CbdFragment implements DataClient {
     protected Data mData;
     private OnDetailsChangedListener mListener;
 
@@ -39,14 +37,6 @@ public abstract class DetailsFragment extends Fragment implements DataClient {
         args.putInt(Shared.Titles.EXTRA_POSITION, index);
         details.setArguments(args);
         return details;
-    }
-
-    private String wrapMsg(String msg) {
-        return getClass().getSimpleName() + ": " + msg;
-    }
-
-    private void log(String msg) {
-        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
     }
 
     public void setOnDetailsChangedListener(OnDetailsChangedListener listener) {

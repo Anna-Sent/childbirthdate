@@ -3,7 +3,6 @@ package com.anna.sent.soft.childbirthdate.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,11 +12,12 @@ import android.widget.Toast;
 
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.ResultsActivity;
+import com.anna.sent.soft.childbirthdate.base.CbdFragment;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.data.DataClient;
 
-public class TitlesHeaderFragment extends Fragment implements DataClient,
-        OnClickListener {
+public class TitlesHeaderFragment extends CbdFragment
+        implements DataClient, OnClickListener {
     private Data mData;
 
     @Override

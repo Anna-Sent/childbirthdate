@@ -16,8 +16,8 @@ import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 
 import java.util.Calendar;
 
-public class DetailsLmpMethodFragment extends DetailsFragment implements
-        OnClickListener, NumberPicker.OnValueChangeListener, DatePicker.OnDateChangedListener {
+public class DetailsLmpMethodFragment extends DetailsFragment
+        implements OnClickListener, NumberPicker.OnValueChangeListener, DatePicker.OnDateChangedListener {
     private DatePicker datePicker;
     private NumberPicker numberPickerMcl, numberPickerLpl;
 
@@ -35,8 +35,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
             return null;
         }
 
-        return inflater
-                .inflate(R.layout.details_lmp_method, container, false);
+        return inflater.inflate(R.layout.details_lmp_method, container, false);
     }
 
     @Override
@@ -118,8 +117,7 @@ public class DetailsLmpMethodFragment extends DetailsFragment implements
     }
 
     @Override
-    public void onDateChanged(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
+    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         if (mData != null) {
             Calendar value = DateUtils.getDate(datePicker);
             mData.setLastMenstruationDate(value);

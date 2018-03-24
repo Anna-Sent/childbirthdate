@@ -42,8 +42,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class ResultSickListFragment extends CbdFragment implements
-        DataClient, OnClickListener, OnItemSelectedListener {
+public class ResultSickListFragment extends CbdFragment
+        implements DataClient, OnClickListener, OnItemSelectedListener {
     private static final String KEY_SPINNER_DAYS_POSITION = "key_spinner_days_position";
     private static final String KEY_SPINNER_AGE_POSITION = "key_spinner_age_position";
     private static final String KEY_OTHER_DAYS = "key_other_days";
@@ -51,8 +51,7 @@ public class ResultSickListFragment extends CbdFragment implements
     private AdView mAdView;
     private TableLayout mTable;
     private Spinner mSpinnerDays, mSpinnerAge;
-    private LocalizableSimpleSpinnerItemArrayAdapter mSpinnerDaysAdapter,
-            mSpinnerAgeAdapter;
+    private LocalizableSimpleSpinnerItemArrayAdapter mSpinnerDaysAdapter, mSpinnerAgeAdapter;
     private int mSpinnerDaysIndex, mSpinnerAgeIndex;
     private List<Days> mTmpDaysList = new ArrayList<>();
     private List<Age> mTmpAgeList = new ArrayList<>();
@@ -170,11 +169,11 @@ public class ResultSickListFragment extends CbdFragment implements
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
+
         if (mAdView != null) {
             mAdView.destroy();
         }
-
-        super.onDestroy();
     }
 
     private void setupSpinner(Spinner spinner, Class<? extends ISetting> cls) {
@@ -331,8 +330,8 @@ public class ResultSickListFragment extends CbdFragment implements
                 .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Days days = SickListUtils.checkDays(
-                                        getActivity(), editTextItem,
+                                Days days = SickListUtils.checkDays(getActivity(),
+                                        editTextItem,
                                         mSpinnerDaysAdapter.getObjects());
                                 if (days != null) {
                                     mTmpDaysList.add(days);

@@ -1,9 +1,7 @@
 package com.anna.sent.soft.childbirthdate.adapters;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +52,8 @@ public class LocalizableSimpleSpinnerItemArrayAdapter extends ArrayAdapter<Local
             viewHolder = new ViewHolder();
             viewHolder.textView = view.findViewById(android.R.id.text1);
 
-            viewHolder.textView.setMinHeight(getItemHeight()); // getListPreferredItemHeight());
+            viewHolder.textView.setMinHeight(getContext().getResources()
+                    .getDimensionPixelSize(R.dimen.height));
             viewHolder.textView.setGravity(Gravity.CENTER_VERTICAL);
 
             view.setTag(viewHolder);
@@ -67,27 +66,6 @@ public class LocalizableSimpleSpinnerItemArrayAdapter extends ArrayAdapter<Local
                 getContext()));
 
         return view;
-    }
-
-    private int getItemHeight() {
-        return getContext().getResources()
-                .getDimensionPixelSize(R.dimen.height);
-    }
-
-    @SuppressWarnings("unused")
-    private int getListPreferredItemHeight() {
-        TypedValue typedValue = new TypedValue();
-        getContext().getTheme().resolveAttribute(
-                android.R.attr.listPreferredItemHeight, typedValue, true);
-
-        int[] attrs = new int[]{android.R.attr.listPreferredItemHeight};
-        int indexOfAttr = 0;
-
-        TypedArray a = getContext().obtainStyledAttributes(typedValue.data, attrs);
-        int size = a.getDimensionPixelSize(indexOfAttr, -1);
-        a.recycle();
-
-        return size;
     }
 
     public List<LocalizableObject> getObjects() {

@@ -2,7 +2,6 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,23 +11,13 @@ import android.widget.NumberPicker;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
-import com.anna.sent.soft.logging.MyLog;
 
 import java.util.Calendar;
 
 public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
-        implements NumberPicker.OnValueChangeListener,
-        DatePicker.OnDateChangedListener {
+        implements NumberPicker.OnValueChangeListener, DatePicker.OnDateChangedListener {
     private DatePicker datePicker;
     private NumberPicker numberPicker;
-
-    private String wrapMsg(String msg) {
-        return getClass().getSimpleName() + ": " + msg;
-    }
-
-    private void log(String msg) {
-        MyLog.getInstance().logcat(Log.DEBUG, wrapMsg(msg));
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -44,8 +33,7 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
             return null;
         }
 
-        return inflater.inflate(R.layout.details_first_appearance_method,
-                container, false);
+        return inflater.inflate(R.layout.details_first_appearance_method, container, false);
     }
 
     @Override
@@ -86,8 +74,7 @@ public class DetailsFirstAppearanceMethodFragment extends DetailsFragment
     }
 
     @Override
-    public void onDateChanged(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
+    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         if (mData != null) {
             Calendar value = DateUtils.getDate(datePicker);
             mData.setFirstAppearanceDate(value);

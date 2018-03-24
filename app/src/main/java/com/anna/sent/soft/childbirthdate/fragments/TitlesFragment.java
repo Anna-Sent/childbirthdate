@@ -21,8 +21,9 @@ import com.anna.sent.soft.childbirthdate.data.DataClient;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
 import com.anna.sent.soft.logging.MyLog;
 
-public class TitlesFragment extends ListFragment implements
-        DetailsFragment.OnDetailsChangedListener, ListItemArrayAdapter.OnCheckedListener, DataClient {
+public class TitlesFragment extends ListFragment
+        implements DetailsFragment.OnDetailsChangedListener, ListItemArrayAdapter.OnCheckedListener,
+        DataClient {
     private static final int REQUEST_POSITION = 1;
     private ListItemArrayAdapter mListAdapter;
     private boolean mDualPane;
@@ -60,12 +61,11 @@ public class TitlesFragment extends ListFragment implements
 
         mDualPane = getResources().getBoolean(R.bool.has_two_panes);
 
-        getListView().setChoiceMode(
-                mDualPane ? ListView.CHOICE_MODE_SINGLE
-                        : ListView.CHOICE_MODE_NONE);
+        getListView().setChoiceMode(mDualPane
+                ? ListView.CHOICE_MODE_SINGLE : ListView.CHOICE_MODE_NONE);
 
-        mSelectedItem = savedInstanceState == null ? 0
-                : savedInstanceState.getInt(Shared.Titles.EXTRA_POSITION, 0);
+        mSelectedItem = savedInstanceState == null
+                ? 0 : savedInstanceState.getInt(Shared.Titles.EXTRA_POSITION, 0);
         log("restore index=" + mSelectedItem);
     }
 
@@ -139,8 +139,7 @@ public class TitlesFragment extends ListFragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_POSITION) {
             if (resultCode == Activity.RESULT_OK) {
-                mSelectedItem = data.getIntExtra(Shared.Titles.EXTRA_POSITION,
-                        mSelectedItem);
+                mSelectedItem = data.getIntExtra(Shared.Titles.EXTRA_POSITION, mSelectedItem);
                 log("got index=" + mSelectedItem);
                 if (mDualPane) {
                     showDetails();

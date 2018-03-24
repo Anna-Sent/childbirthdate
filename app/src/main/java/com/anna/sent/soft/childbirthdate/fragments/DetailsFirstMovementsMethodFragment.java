@@ -33,8 +33,7 @@ public class DetailsFirstMovementsMethodFragment extends DetailsFragment
             return null;
         }
 
-        return inflater.inflate(R.layout.details_first_movements_method,
-                container, false);
+        return inflater.inflate(R.layout.details_first_movements_method, container, false);
     }
 
     @Override
@@ -62,8 +61,7 @@ public class DetailsFirstMovementsMethodFragment extends DetailsFragment
     }
 
     @Override
-    public void onDateChanged(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
+    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         if (mData != null) {
             Calendar value = DateUtils.getDate(datePicker);
             mData.setFirstMovementsDate(value);

@@ -12,8 +12,8 @@ import com.anna.sent.soft.childbirthdate.utils.DateUtils;
 
 import java.util.Calendar;
 
-public class DetailsOvulationMethodFragment extends DetailsFragment implements
-        DatePicker.OnDateChangedListener {
+public class DetailsOvulationMethodFragment extends DetailsFragment
+        implements DatePicker.OnDateChangedListener {
     private DatePicker datePicker;
 
     @Override
@@ -30,8 +30,7 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
             return null;
         }
 
-        return inflater.inflate(R.layout.details_ovulation_method, container,
-                false);
+        return inflater.inflate(R.layout.details_ovulation_method, container, false);
     }
 
     @Override
@@ -56,7 +55,7 @@ public class DetailsOvulationMethodFragment extends DetailsFragment implements
     }
 
     @Override
-    public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
+    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         if (mData != null) {
             Calendar value = DateUtils.getDate(datePicker);
             mData.setOvulationDate(value);
