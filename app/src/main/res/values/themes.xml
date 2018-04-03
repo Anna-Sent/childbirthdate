@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <declare-styleable name="AppTheme">
+    <declare-styleable name="Theme">
         <attr name="menuIconHelp" format="reference" />
         <attr name="menuIconSettings" format="reference" />
         <attr name="menuIconEmail" format="reference" />
@@ -40,7 +40,6 @@
         <item name="iconAdd">@drawable/ic_new_light</item>
         <item name="iconDelete">@drawable/ic_remove_content_light</item>
         <item name="iconEdit">@drawable/ic_edit_light</item>
-        <item name="android:windowActionBar">true</item>
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme" />
@@ -48,5 +47,4 @@
     <style name="AppThemeLight" parent="AppBaseThemeLight" />
 
     <style name="DialogBaseThemeLight" parent="android:Theme.Holo.Light.Dialog" />
-
 </resources>
