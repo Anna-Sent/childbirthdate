@@ -63,7 +63,7 @@ def getSecret(String propertyKey) {
 }
 
 dependencies {
-    implementation 'com.github.Anna-Sentyakova:CommonLibrary:1.0.22'
+    implementation 'com.github.Anna-Sentyakova:CommonLibrary:1.0.23'
 }
 
 apply plugin: 'com.google.gms.google-services'
