@@ -13,7 +13,7 @@ import com.anna.sent.soft.childbirthdate.sicklist.SickListAgePreference;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListDaysPreference;
 import com.anna.sent.soft.logging.MyLog;
 import com.anna.sent.soft.utils.ActionBarUtils;
-import com.anna.sent.soft.utils.ActivityUtils;
+import com.anna.sent.soft.utils.TaskStackBuilderUtils;
 
 public class SettingsActivity extends CbdSettingsActivity {
     @Override
@@ -48,7 +48,6 @@ public class SettingsActivity extends CbdSettingsActivity {
         int value = settingsLanguage.getLanguageId();
         pref.setDefaultValue(String.valueOf(value));
         pref.setValue(String.valueOf(value));
-        settingsLanguage.setLanguageId(value);
         log(pref.getValue() + " " + pref.getEntry());
         pref.setSummary(pref.getEntry());
         pref.setOnPreferenceChangeListener(this);
@@ -81,7 +80,8 @@ public class SettingsActivity extends CbdSettingsActivity {
                 if (value != current) {
                     log("language changed");
                     settingsLanguage.setLanguageId(value);
-                    ActivityUtils.restartActivity(this);
+                    settingsLanguage.setByUser();
+                    TaskStackBuilderUtils.restartFromSettings(this);
                     return true;
                 }
             } catch (NumberFormatException e) {
@@ -94,7 +94,7 @@ public class SettingsActivity extends CbdSettingsActivity {
                 if (value != current) {
                     log("theme changed");
                     settingsTheme.setThemeId(value);
-                    ActivityUtils.restartActivity(this);
+                    TaskStackBuilderUtils.restartFromSettings(this);
                     return true;
                 }
             } catch (NumberFormatException e) {
