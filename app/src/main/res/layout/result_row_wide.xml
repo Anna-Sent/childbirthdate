@@ -8,37 +8,45 @@
     android:gravity="center_vertical"
     android:padding="@dimen/row_padding">
 
-    <TextView
-        android:id="@+id/textView"
-        style="@style/TextViewStyle.Medium"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/emptyString" />
-
     <LinearLayout
-        style="@style/LinearLayoutVerticalStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center">
+        style="@style/LinearLayoutHorizontalStyle"
+        android:layout_margin="@dimen/row_padding"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
 
         <TextView
-            android:id="@+id/result1"
-            style="@style/TextViewStyle.Medium.Red"
+            android:id="@+id/textView"
+            style="@style/TextViewStyle.Medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/emptyString" />
 
+        <LinearLayout
+            style="@style/LinearLayoutVerticalStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/result1"
+                style="@style/TextViewStyle.Medium.Red"
+                android:text="@string/emptyString" />
+
+            <TextView
+                android:id="@+id/result2"
+                style="@style/TextViewStyle.Medium.Blue"
+                android:text="@string/emptyString" />
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/result2"
-            style="@style/TextViewStyle.Medium.Blue"
+            android:id="@+id/message"
+            style="@style/TextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/emptyString" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/message"
-        style="@style/TextViewStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/emptyString" />
 </TableRow>

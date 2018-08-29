@@ -41,7 +41,7 @@
     <string name="additionalInfo">триместр %1$s; повний термін %2$s%3$s</string>
     <string name="positiveRest">; до ПДР залишилося %s</string>
     <string name="zeroRest">; ПДР</string>
-    <string name="negativeRest"/>
+    <string name="negativeRest" />
     <string name="errorInvalidAppWidgetId">Некоректний ідентифікатор віджету</string>
     <string name="widgetSpecifyTheMethodOfCalculation">Задайте кращий метод розрахунку:</string>
     <string name="errorNotSelectedCalculationMethod">Не вибрано спосіб розрахунку</string>
