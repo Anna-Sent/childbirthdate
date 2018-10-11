@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,6 +37,7 @@ import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.shared.Settings;
 import com.anna.sent.soft.childbirthdate.sicklist.SickListUtils;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
+import com.anna.sent.soft.logging.MyLog;
 import com.anna.sent.soft.utils.DisplayUtils;
 import com.google.android.gms.ads.AdView;
 
@@ -85,7 +88,7 @@ public class ResultSickListFragment extends CbdFragment
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.result_sick_list, container, false);
     }
 
@@ -99,7 +102,7 @@ public class ResultSickListFragment extends CbdFragment
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         int initH = 300, rowH = 60;
@@ -227,6 +230,10 @@ public class ResultSickListFragment extends CbdFragment
                 textView.setText(methodNames[i]);
 
                 Pregnancy pregnancy = PregnancyCalculator.Factory.get(getData(), i + 1);
+                if (pregnancy == null) {
+                    MyLog.getInstance().logcat(Log.WARN, "pregnancy is null");
+                    continue;
+                }
 
                 fillRows(pregnancy, age, days, row);
 

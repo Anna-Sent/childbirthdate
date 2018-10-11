@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="adUnitId" translatable="false">ca-app-pub-7437124433510999/1813487660</string>
+    <string name="adMobAppId" translatable="false">ca-app-pub-7437124433510999~7860021261</string>
 </resources>

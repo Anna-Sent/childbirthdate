@@ -2,6 +2,7 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,41 +28,33 @@ public class DetailsUltrasoundMethodFragment extends DetailsFragment
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        if (container == null) {
-            // We have different layouts, and in one of them this
-            // fragment's containing frame doesn't exist. The fragment
-            // may still be created from its saved state, but there is
-            // no reason to try to create its view hierarchy because it
-            // won't be displayed. Note this is not needed -- we could
-            // just run the code below, where we would create and return
-            // the view hierarchy; it would just never be used.
-            return null;
-        }
-
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.details_ultrasound_method, container, false);
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        textViewDiagnosedAge = view.findViewById(R.id.textViewDiagnosedAge);
+        datePicker = view.findViewById(R.id.datePickerUltrasoundDate);
+        radioButtonIsGestationalAge = view.findViewById(R.id.radioIsGestationalAge);
+        radioButtonIsEmbryonicAge = view.findViewById(R.id.radioIsEmbryonicAge);
+        numberPickerWeeks = view.findViewById(R.id.numberPickerUltrasoundWeeks);
+        numberPickerDays = view.findViewById(R.id.numberPickerUltrasoundDays);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //noinspection ConstantConditions
-        textViewDiagnosedAge = getActivity().findViewById(R.id.textViewDiagnosedAge);
-
-        datePicker = getActivity().findViewById(R.id.datePickerUltrasoundDate);
         DateUtils.init(datePicker, this);
 
-        radioButtonIsGestationalAge = getActivity().findViewById(R.id.radioIsGestationalAge);
         radioButtonIsGestationalAge.setOnClickListener(this);
-        radioButtonIsEmbryonicAge = getActivity().findViewById(R.id.radioIsEmbryonicAge);
         radioButtonIsEmbryonicAge.setOnClickListener(this);
 
-        numberPickerWeeks = getActivity().findViewById(R.id.numberPickerUltrasoundWeeks);
         numberPickerWeeks.setMinValue(0);
         numberPickerWeeks.setOnValueChangedListener(this);
 
-        numberPickerDays = getActivity().findViewById(R.id.numberPickerUltrasoundDays);
         numberPickerDays.setMinValue(0);
         numberPickerDays.setMaxValue(Age.DAYS_IN_WEEK - 1);
         numberPickerDays.setOnValueChangedListener(this);

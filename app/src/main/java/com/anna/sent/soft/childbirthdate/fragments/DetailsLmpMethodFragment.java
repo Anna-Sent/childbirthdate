@@ -2,6 +2,7 @@ package com.anna.sent.soft.childbirthdate.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,42 +21,36 @@ public class DetailsLmpMethodFragment extends DetailsFragment
         implements OnClickListener, NumberPicker.OnValueChangeListener, DatePicker.OnDateChangedListener {
     private DatePicker datePicker;
     private NumberPicker numberPickerMcl, numberPickerLpl;
+    private Button button;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        if (container == null) {
-            // We have different layouts, and in one of them this
-            // fragment's containing frame doesn't exist. The fragment
-            // may still be created from its saved state, but there is
-            // no reason to try to create its view hierarchy because it
-            // won't be displayed. Note this is not needed -- we could
-            // just run the code below, where we would create and return
-            // the view hierarchy; it would just never be used.
-            return null;
-        }
-
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.details_lmp_method, container, false);
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        datePicker = view.findViewById(R.id.datePickerLastMenstruationDate);
+        numberPickerMcl = view.findViewById(R.id.numberPickerMenstrualCycleLen);
+        numberPickerLpl = view.findViewById(R.id.numberPickerLutealPhaseLen);
+        button = view.findViewById(R.id.buttonRestoreDefaultValues);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //noinspection ConstantConditions
-        datePicker = getActivity().findViewById(R.id.datePickerLastMenstruationDate);
         DateUtils.init(datePicker, this);
 
-        numberPickerMcl = getActivity().findViewById(R.id.numberPickerMenstrualCycleLen);
         numberPickerMcl.setMinValue(PregnancyCalculator.MIN_MENSTRUAL_CYCLE_LEN);
         numberPickerMcl.setMaxValue(PregnancyCalculator.MAX_MENSTRUAL_CYCLE_LEN);
         numberPickerMcl.setOnValueChangedListener(this);
 
-        numberPickerLpl = getActivity().findViewById(R.id.numberPickerLutealPhaseLen);
         numberPickerLpl.setMinValue(PregnancyCalculator.MIN_LUTEAL_PHASE_LEN);
         numberPickerLpl.setMaxValue(PregnancyCalculator.MAX_LUTEAL_PHASE_LEN);
         numberPickerLpl.setOnValueChangedListener(this);
 
-        Button button = getActivity().findViewById(R.id.buttonRestoreDefaultValues);
         button.setOnClickListener(this);
     }
 

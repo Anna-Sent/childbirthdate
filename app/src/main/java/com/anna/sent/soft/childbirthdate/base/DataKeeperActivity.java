@@ -1,6 +1,7 @@
 package com.anna.sent.soft.childbirthdate.base;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.anna.sent.soft.childbirthdate.data.DataClient;
@@ -11,7 +12,7 @@ public class DataKeeperActivity extends CbdActivity {
     private DataImpl mConcreteData;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         mConcreteData = new DataImpl(this);
         mConcreteData.update();
         super.onCreate(savedInstanceState);

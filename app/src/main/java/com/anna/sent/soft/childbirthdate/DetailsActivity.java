@@ -3,6 +3,7 @@ package com.anna.sent.soft.childbirthdate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 
 import com.anna.sent.soft.childbirthdate.adapters.DetailsPagerAdapter;
@@ -15,7 +16,7 @@ public class DetailsActivity extends ChildActivity implements ViewPager.OnPageCh
     private int mIndex = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getResources().getBoolean(R.bool.has_two_panes)) {
             setResult();

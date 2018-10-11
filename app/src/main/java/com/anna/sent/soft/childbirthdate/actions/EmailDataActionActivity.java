@@ -1,11 +1,14 @@
 package com.anna.sent.soft.childbirthdate.actions;
 
+import android.util.Log;
+
 import com.anna.sent.soft.action.EmailActionActivity;
 import com.anna.sent.soft.childbirthdate.R;
 import com.anna.sent.soft.childbirthdate.data.DataImpl;
 import com.anna.sent.soft.childbirthdate.pregnancy.Pregnancy;
 import com.anna.sent.soft.childbirthdate.pregnancy.PregnancyCalculator;
 import com.anna.sent.soft.childbirthdate.utils.DateUtils;
+import com.anna.sent.soft.logging.MyLog;
 import com.anna.sent.soft.utils.UserEmailFetcher;
 
 public class EmailDataActionActivity extends EmailActionActivity {
@@ -30,6 +33,10 @@ public class EmailDataActionActivity extends EmailActionActivity {
         for (int i = 0; i < byMethod.length; ++i) {
             if (byMethod[i]) {
                 Pregnancy p = PregnancyCalculator.Factory.get(data, i + 1);
+                if (p == null) {
+                    MyLog.getInstance().logcat(Log.WARN, "pregnancy is null");
+                    continue;
+                }
                 result.append(strings1[i]);
                 result.append(": ");
                 result.append(strings2[i]);

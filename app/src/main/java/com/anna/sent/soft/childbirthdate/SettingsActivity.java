@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.anna.sent.soft.childbirthdate.base.CbdSettingsActivity;
@@ -17,7 +18,7 @@ import com.anna.sent.soft.utils.TaskStackBuilderUtils;
 
 public class SettingsActivity extends CbdSettingsActivity {
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setTitle(R.string.settings);

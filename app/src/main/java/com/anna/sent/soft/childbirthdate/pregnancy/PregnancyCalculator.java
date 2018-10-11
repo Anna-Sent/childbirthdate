@@ -1,5 +1,7 @@
 package com.anna.sent.soft.childbirthdate.pregnancy;
 
+import android.support.annotation.Nullable;
+
 import com.anna.sent.soft.childbirthdate.age.Age;
 import com.anna.sent.soft.childbirthdate.data.Data;
 import com.anna.sent.soft.childbirthdate.shared.Shared;
@@ -46,6 +48,8 @@ public class PregnancyCalculator {
     public final static int EMBRYONIC_MAX_AGE_DURATION = GESTATIONAL_MAX_AGE_DURATION - MIN_PHOLLICULAR_PHASE_LENGTH;
 
     public static class Factory {
+
+        @Nullable
         public static Pregnancy get(Data data, int index) {
             switch (index) {
                 case Shared.Calculation.BY_LMP:
@@ -76,7 +80,9 @@ public class PregnancyCalculator {
                     return new GestationalAge(isFirstPregnancy ? 20 : 18, 0, firstMovementsDate);
             }
 
-            throw new IllegalArgumentException("Unknown calculation method");
+            // Возможно при добавлении нового виджета мы попадаем в этот код.
+            // Виджет еще не добавлен, поэтому неизвестно, какой у него метод расчета.
+            return null;
         }
     }
 }

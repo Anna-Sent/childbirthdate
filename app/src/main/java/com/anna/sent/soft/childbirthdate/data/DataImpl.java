@@ -302,10 +302,10 @@ public class DataImpl implements Data {
                 DateUtils.toString(mContext, ultrasoundDate),
                 new Age(ultrasoundWeeks, ultrasoundDays).toString(mContext));
 
-        result[Shared.Calculation.BY_FIRST_APPEARANCE - 1] = mContext
-                .getString(R.string.titles3,
-                        DateUtils.toString(mContext, firstAppearanceDate),
-                        new Age(firstAppearanceWeeks, 0).toString(mContext));
+        result[Shared.Calculation.BY_FIRST_APPEARANCE - 1] = mContext.getString(
+                R.string.titles3,
+                DateUtils.toString(mContext, firstAppearanceDate),
+                new Age(firstAppearanceWeeks, 0).toString(mContext));
 
         result[Shared.Calculation.BY_FIRST_MOVEMENTS - 1] = mContext.getString(
                 isFirstPregnancy

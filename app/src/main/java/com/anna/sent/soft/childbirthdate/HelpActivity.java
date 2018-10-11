@@ -1,6 +1,7 @@
 package com.anna.sent.soft.childbirthdate;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 
 import com.anna.sent.soft.childbirthdate.adapters.HelpPagerAdapter;
@@ -8,7 +9,7 @@ import com.anna.sent.soft.childbirthdate.base.ChildActivity;
 
 public class HelpActivity extends ChildActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setTitle(R.string.help);

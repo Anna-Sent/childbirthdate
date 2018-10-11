@@ -2,6 +2,7 @@ package com.anna.sent.soft.childbirthdate;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 
 import com.anna.sent.soft.childbirthdate.base.DataKeeperActivity;
 import com.anna.sent.soft.childbirthdate.strategy.menu.MenuStrategy;
@@ -9,7 +10,7 @@ import com.anna.sent.soft.childbirthdate.widget.MyPregnancyWidget;
 
 public class MainActivity extends DataKeeperActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);

@@ -52,6 +52,9 @@ public abstract class Builder {
         data.update();
 
         Pregnancy p = PregnancyCalculator.Factory.get(data, calculationMethod);
+        if (p == null) {
+            return views;
+        }
 
         String[] methodNames = context.getResources().getStringArray(R.array.methodNames);
         String calculationMethodString = methodNames[calculationMethod - 1];
@@ -61,17 +64,21 @@ public abstract class Builder {
             int rest = p.getRestInDays();
             countdown = countdown && rest > 0;
 
-            views.setTextViewText(R.id.tv1, countdown ? context
-                    .getString(R.string.widgetTextRestInfo) : context.getString(R.string.widgetTextInfo));
+            views.setTextViewText(R.id.tv1,
+                    countdown
+                            ? context.getString(R.string.widgetTextRestInfo)
+                            : context.getString(R.string.widgetTextInfo));
             views.setViewVisibility(R.id.tv1, hasTV1() ? View.VISIBLE : View.GONE);
 
-            views.setTextViewText(R.id.tv2, countdown ? p.getRestInfo(context) : p.getInfo(context));
+            views.setTextViewText(R.id.tv2,
+                    countdown
+                            ? p.getRestInfo(context)
+                            : p.getInfo(context));
             views.setTextViewText(R.id.tv3, p.getAdditionalInfo(context));
             views.setViewVisibility(R.id.tv3, hasTV3() && !countdown ? View.VISIBLE : View.GONE);
         } else {
             views.setViewVisibility(R.id.tv1, View.GONE);
-            views.setTextViewText(R.id.tv2, context
-                    .getString(R.string.errorIncorrectGestationalAge));
+            views.setTextViewText(R.id.tv2, context.getString(R.string.errorIncorrectGestationalAge));
             Calendar start = p.getStartPoint(), end = p.getEndPoint();
             if (currentDate.before(start)) {
                 views.setTextViewText(
