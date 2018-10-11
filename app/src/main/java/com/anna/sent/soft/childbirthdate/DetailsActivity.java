@@ -2,7 +2,6 @@ package com.anna.sent.soft.childbirthdate;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 
@@ -18,6 +17,11 @@ public class DetailsActivity extends ChildActivity implements ViewPager.OnPageCh
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mIndex = savedInstanceState == null
+                ? getIntent().getIntExtra(Shared.Titles.EXTRA_POSITION, 0)
+                : savedInstanceState.getInt(Shared.Titles.EXTRA_POSITION, 0);
+
         if (getResources().getBoolean(R.bool.has_two_panes)) {
             setResult();
             finish();
@@ -30,15 +34,11 @@ public class DetailsActivity extends ChildActivity implements ViewPager.OnPageCh
         mViewPager = findViewById(R.id.pager);
         mViewPager.addOnPageChangeListener(this);
         mTabsAdapter = new DetailsPagerAdapter(this, getSupportFragmentManager());
-
-        mIndex = savedInstanceState == null
-                ? 0
-                : savedInstanceState.getInt(Shared.Titles.EXTRA_POSITION, 0);
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
         outState.putInt(Shared.Titles.EXTRA_POSITION, mIndex);
     }
 
